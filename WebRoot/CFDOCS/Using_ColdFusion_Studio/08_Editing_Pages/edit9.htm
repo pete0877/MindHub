@@ -1,0 +1,418 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Preserving Code Formats with CodeSweepers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1016357"></a>
+ <H1>Preserving Code Formats with CodeSweepers</H1>
+
+
+
+<p>The CodeSweeper feature automates the task of getting your code properly formatted. It can be very useful in a number of situations:</p><ul>
+<a name="1016359"> </a>
+<li>Visually editing page elements in Design view can change code formatting. You can set CodeSweeper to apply formatting rules when you leave Design view.
+
+<a name="1016360"> </a>
+</li>
+<li>You can painlessly enforce coding styles for multiple developers by simply having them use the same settings.
+<a name="1022130"> </a>
+</li>
+<li>You can easily clean up the code formatting of an existing project as you review the documents.
+</li>
+</ul>
+<p>Studio includes a number of CodeSweepers for you to use. You can also create your own CodeSweepers or edit the existing ones. Studio CodeSweepers include:</p><ul>
+<a name="1028701"> </a>
+<li>HTML and CFML tags (default) -- Formats ColdFusion applications.
+
+<a name="1028702"> </a>
+</li>
+<li>HTML tags only -- Optimized for standard Web pages.
+<a name="1028703"> </a>
+</li>
+<li>My CodeSweeper -- A copy of the default CodeSweeper that you can use for testing. 
+<a name="1028704"> </a>
+</li>
+<li>WDDX Sweeper -- Formats code written in WDDX, for example, the .apd files used to store project information.
+<a name="1028705"> </a>
+</li>
+<li>HTML Tidy -- An independent open source code HTML verifier and formatter that you can use as an alternative to the native CodeSweeper. It also enables the conversion of HTML to an XML-compliant XHTML. See the HTML Tidy settings section below for details.
+</li>
+</ul>
+<p>See the Allaire Developer site for an interesting article on <a href="http://www.allaire.com/Handlers/index.cfm?ID=8205&amp;Method=Full&amp;Cache=Off">CodeSweeper features</a>.</p><a name="1016371"></a>
+ 
+<H2>Setting and using the default CodeSweeper</H2>
+<p>Click the CodeSweeper button from either Edit or Design modes to run the default CodeSweeper on the current document. You can also set the default CodeSweeper to run automatically when you leave Design mode.</p><p><img src="../images/codesweeper_button.gif">
+
+
+</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set the default CodeSweeper:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the Options menu, choose Settings (F8) to see the Settings dialog box.
+
+
+</li>
+<li>Click CodeSweeper to see the CodeSweepers pane.
+
+<p><img src="../images/codesweeper_pane.gif">
+
+
+
+</p></li>
+<li>Select the CodeSweeper that you want to use as the default from the list and click Set as Default.
+
+</li>
+<li>Click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run a CodeSweeper automatically after leaving Design mode:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Settings dialog box (F8), click Design.
+
+
+</li>
+<li>Click Apply CodeSweeper when return from design view.
+
+</li>
+<li>Click OK.
+
+</li>
+</ol>
+<a name="1028606"></a>
+ 
+<H2>Using a CodeSweeper other than the default</H2>
+<p>You can use a CodeSweeper other than the default at any time. Changes are made to the current document only.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use a CodeSweeper other than the default:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the down arrow on the CodeSweeper button, or choose Tools &gt; CodeSweeper and choose from the list of available CodeSweepers.
+
+
+<p>You are notified that the CodeSweeper will format the entire document and 
+cannot be undone.
+</p></li>
+<li>Click Run CodeSweeper.
+
+<p>The document is formatted.
+</p></li>
+</ol>
+<a name="1016374"></a>
+ 
+<H2>Creating, editing, and removing CodeSweepers</H2>
+<p>You can create new CodeSweepers, edit existing CodeSweepers, and remove outdated CodeSweepers using the Settings dialog box (F8).</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a new CodeSweeper:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Settings dialog box (F8).
+
+
+</li>
+<li>Click CodeSweeper to see the CodeSweepers pane.
+
+</li>
+<li>Click New Profile to see the New CodeSweeper Profile dialog box.
+
+<p><img src="../images/new_codesweeper_profile.gif">
+
+
+
+</p></li>
+<li>Enter a name for the CodeSweeper and choose its type: Allaire CodeSweeper or HTML Tidy CodeSweeper.
+
+</li>
+<li>Click OK.
+
+<p>The CodeSweeper is added to the list. 
+</p></li>
+<li>Follow the directions below to edit the CodeSweeper to fulfill your needs.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a CodeSweeper:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Settings dialog box (F8), expand CodeSweeper.
+
+
+</li>
+<li>Expand the node for the type of CodeSweeper you want to edit: Allaire CodeSweepers or HTML Tidy CodeSweepers.
+
+</li>
+<li>Select the CodeSweeper you want to edit to see the CodeSweeper settings.
+
+</li>
+<li>Make any changes to the settings and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove a CodeSweeper:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Settings dialog box (F8), click CodeSweeper.
+
+
+</li>
+<li>Select the CodeSweeper you want to remove from the list on the right and click Remove Profile.
+
+<p>The CodeSweeper is removed without warning.
+</p></li>
+</ol>
+<a name="1028807"></a>
+ 
+<H2>CodeSweeper settings</H2>
+<p>There are three types of CodeSweeper settings:</p><ul>
+<a name="1028995"> </a>
+<li>General settings and Tag-specific settings can be set for each Allaire CodeSweeper. Note that general settings are not global. You can specify different general settings for each CodeSweeper.
+
+<a name="1029001"> </a>
+</li>
+<li>HTML Tidy settings apply to HTML Tidy CodeSweepers only.
+</li>
+</ul>
+<a name="1028987"></a>
+ 
+<H3>General settings</H3>
+<p>You can set the following formatting rules for each Allaire CodeSweeper.</p><ul>
+<a name="1016376"> </a>
+<li>Set case for tag and attribute names. You can choose all upper or lower case or preserve case, which leaves the case unchanged.
+
+<a name="1016377"> </a>
+</li>
+<li>The Format event names setting contains an additional option - Mixed Case -which applies to case-sensitive JavaScript event handler names like OnMouseOver. If this code is correct in your document, select Preserve Case for this setting.
+<a name="1016378"> </a>
+</li>
+<li>Set the use of quotes for values.
+<a name="1016379"> </a>
+</li>
+<li>Trim white space between tags cleans up spacing produced by some code generation tools. It is enabled by default. We recommend leaving it on and disabling it for individual tags as needed.
+<a name="1028951"> </a>
+</li>
+<li>Run in "Silent Mode" to eliminate any alerts the CodeSweeper would generate while it is running. You can use this option to run a CodeSweeper in an unattended situation.
+<a name="1028984"> </a>
+</li>
+<li>Check Write Errors to a Log File to capture any errors found by the CodeSweeper. You can specify a custom location for the log file.
+</li>
+</ul>
+<p>Click the OK button to save these settings.</p><a name="1016382"></a>
+ 
+<H3>Tag-specific settings</H3>
+<p>A wide range of options is available for the individual tags contained in each Allaire CodeSweeper. Note that if you set formatting for the "All Other Tags" entry in the tag list, those rules apply to every tag that appears in a document that is not in the list.</p><ul>
+<a name="1016384"> </a>
+<li>Insert a newline command for start and end tags.
+
+<a name="1016385"> </a>
+</li>
+<li>Set indent by tabs or spaces -- a newline is inserted automatically for each indented line when this option is checked.
+<a name="1016386"> </a>
+</li>
+<li>Enable indenting of nested sub-tags.
+<a name="1016387"> </a>
+</li>
+<li>Override the general trim white space setting by preventing trimming of white space around the selected tag.
+<a name="1016388"> </a>
+</li>
+<li>Leave the selected tag unchanged when invoking CodeSweeper.
+<a name="1016389"> </a>
+</li>
+<li>Strip tag from document -- this is handy for getting rid of superfluous and unwanted tags inserted by code generation tools.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set rules for a tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select a tag from the Tag Specific Settings list in the CodeSweeper Settings dialog box.
+
+
+</li>
+<li>Change the specific settings.
+
+</li>
+<li>Click Update Tag to save the settings for that tag.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Add Tag button in the CodeSweeper Settings dialog box.
+
+
+</li>
+<li>Enter the tag name and click OK.
+
+</li>
+<li>Change tag settings and click Update Tag to save the settings.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove a tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select a tag from the Tag Specific Settings list in the CodeSweeper Settings dialog box.
+
+
+</li>
+<li>Click Remove Tag.
+
+</li>
+<li>Click OK to close the Settings dialog box.
+
+</li>
+</ol>
+<a name="1016400"></a>
+ 
+<H2>HTML Tidy settings</H2>
+<p>The HTML Tidy author's Web site is <a href="http://www.w3.org/People/Raggett/tidy/">http://www.w3.org/People/Raggett/tidy/</a>. You can access this web site from the HTML Tidy Settings pane. Refer to this web site for detailed descriptions of all the HTML Tidy settings in the Settings dialog box.</p><a name="1025770"></a>
+ 
+<H2>Creating a custom profile</H2>
+<p>You can create your own custom configuration text file and save it with a .tdy extension to the your \extensions\Codesweepers folder.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

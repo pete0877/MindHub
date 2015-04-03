@@ -1,0 +1,219 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Managing Client Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin035.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin037.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018949"></a>
+ <H1>Managing Client Variables</H1>
+
+
+
+<p>ColdFusion includes a number of options designed to give you a great deal of flexibility in managing client variables. Client variables in ColdFusion give you the ability to determine the identity of a client visiting your site. Identifying clients and customizing page content for users requires the ability to manage client state. </p><p>ColdFusion allows the following ways of managing client variables:</p><ul>
+<a name="1005315"> </a>
+<li>Using the system Registry to store client variables
+
+<a name="1005332"> </a>
+</li>
+<li>Using browser cookies
+<a name="1005345"> </a>
+</li>
+<li>Using an external data source of your choice
+</li>
+</ul>
+<a name="1004970"></a>
+ 
+<H2>Planning client state management</H2>
+<p>The method you choose to store client variables will depend on a number of factors. Among the most important factors is whether your site is currently using, or will be using server clustering to provide load balancing and fail-over support. In addition, there are a number of other factors to consider:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=3 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Client Variable Storage&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Storage Type</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Advantages</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Disadvantages</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+System registry
+</td><td valign="top"><font face="arial,helvetica" size=-1><ul>
+<li>Simple implementation
+
+</li>
+<li>Good performance
+</li>
+<li>Registry can be exported easily to other systems
+</li>
+<li>Server-side control
+</li>
+</ul>
+</td><td valign="top"><font face="arial,helvetica" size=-1><ul>
+<li>Need to be aware of the registry's maximum size limit as defined in the System Control Panel (Windows NT only)
+
+</li>
+<li>Tied to the host system: Not practical for clustered servers or a round-robin DNS configuration
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Browser cookies
+</td><td valign="top"><font face="arial,helvetica" size=-1><ul>
+<li>Simple implementation
+
+</li>
+<li>Good performance
+</li>
+<li>Can be set to automatically expire
+</li>
+<li>Client-side control
+</li>
+</ul>
+</td><td valign="top"><font face="arial,helvetica" size=-1><ul>
+<li>Users can configure browsers to disallow cookies
+
+</li>
+<li>ColdFusion limits individual cookie data to 4 KB
+</li>
+<li>Netscape Navigator allows only 20 cookies from any one host; ColdFusion uses three cookies to store read-only data, leaving only 17 additional cookies available for use
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+External repository
+</td><td valign="top"><font face="arial,helvetica" size=-1><ul>
+<li>Can use existing data source
+
+</li>
+<li>Portability: Not tied to a single server
+</li>
+<li>OS portability in a mixed environment
+</li>
+</ul>
+</td><td valign="top"><font face="arial,helvetica" size=-1><ul>
+<li>Requires database transaction to read/write variables
+
+</li>
+<li>Somewhat more involved to implement
+</li>
+</ul>
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1005816"></a>
+ 
+<H3>Increasing maximum registry size (Windows NT)</H3>
+<p>Windows NT notifies you if your registry data is approaching the limit defined for registry size in the System Properties dialog. If you receive this message, you can open the System Properties dialog and increase the size of your system registry. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To increase maximum registry size:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the System Control Panel and click the Performance tab. 
+
+
+</li>
+<li>In the Virtual Memory group box, click the Change button to open the Virtual Memory dialog. 
+
+<p><img src="../images/RegSize.gif">
+
+
+
+</p></li>
+<li>At the bottom of the dialog, the current registry size is reported. Specify a new maximum registry size in MB.
+
+</li>
+</ol>
+<a name="1009138"></a>
+ 
+<H3>Checking registry size (UNIX)</H3>
+<p>Unlike Windows NT, ColdFusion for UNIX does not impose limits on the size of the registry. However, it's still a good idea to be aware of the size of your registry. Registry data is stored in the following file:</p><pre>&lt;<em>installdir</em>&gt;/coldfusion/.windu.<em>hostname</em>/windu_reg.dat
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin035.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin037.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

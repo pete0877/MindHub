@@ -1,0 +1,121 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using the CFIMPERSONATE Tag</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 17	:&nbsp;&nbsp;Application Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026105"></a>
+ <H1>Using the CFIMPERSONATE Tag</H1>
+
+
+
+<p>CFIMPERSONATE gives ColdFusion developers a way to execute a segment of code CFIMPERSONATE is useful when you want to briefly grant a type of access that you'd normally withold. Suppose you're an internet service provider (ISP) who hosts ColdFusion development services. You provide a set of custom tags that let your customers add features like hit counters, guest books, and message boards to the ColdFusion applications they create. To provide this type of functionality, you'd also need to provide access to some resources that you'd probably rather keep protected. Using CFIMPERSONATE provides access to these resources in a safe manner by wrapping the functionality in a custom tag. For example, as an ISP, you definitely wouldn't want your customers to access the CFFILE tag on your servers. However, if you provided your customers with a hit counter, you'd need to let them read specific, system-maintained files, in this case, the file that contains number of hits to the customer's homepage. You'd provide the hit-counter in a custom tag that would use the CFFILE tag. To ensure that the custom tag can access the CFFILE tag, it needs a way to impersonate a trusted user while the tag is executing and then to revert back to the non-trusted user once the trusted piece of code has completed execution.</p><p>The CFIMPERSONATE tag has the following required attributes:</p><ul>
+<li>SECURITYCONTEXT-- Describes which security context to use for authentication and authorization. This name matches the security context as defined in the Advanced Security page of the ColdFusion Administrator.
+
+</li>
+<li>USERNAME -- The username of the user to impersonate. 
+</li>
+<li>PASSWORD -- The password of the user to impersonate.
+</li>
+<li>TYPE -- Indicates the type of impersonation to implement, application-level or operating-system-level. Application-level impersonation lets you assume the rights assigned to a ColdFusion user by a specified security context. Operating-system-level impersonation lets you assume the rights assigned to a Windows NT user by a specified Windows NT Domain. (Operating-system-level impersonation is not currently available for UNIX.)
+</li>
+</ul>
+<p>In addition, CFIMPERSONATE has one optional attribute:</p><ul>
+<li>THROWONFAILURE -- Indicates whether ColdFusion throws an exception of type Security if authentication fails. Default is Yes.
+
+</li>
+</ul>
+<a name="1026121"></a>
+ 
+<H3>Example</H3>
+<p>The following example reads a protected file because the ColdFusion user "pfoley" has been granted access to the file by the security context "MyContext." If the user cannot be authenticated, ColdFusion throws a SECURITY exception.</p><pre>&lt;CFIMPERSONATE SECURITYCONTEXT="MyContext"
+    USERNAME="pfoley"
+    PASSWORD="admin"
+    TYPE= "CF"
+    THROWONFAILURE= "Yes"&gt;
+
+    &lt;CFFILE FILE="#readFile#" ACTION="read" VARIABLE="text"&gt; 
+     &lt;CFOUTPUT&gt;
+        The file contains the following text:&lt;BR&gt;#text#&lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+
+&lt;/CFIMPERSONATE&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:02 -->
+</body>
+</html>

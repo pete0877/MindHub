@@ -1,0 +1,217 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Formatting Pages with Cascading Style Sheets</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit9.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019478"></a>
+ <H1>Formatting Pages with Cascading Style Sheets</H1>
+
+
+
+<p>Cascading Style Sheets (CSS) are rapidly becoming a significant component of Web sites because they offer so many advantages in design and content management. The HTML 4.0 specification strongly encourages their use despite the limitations of CSS support in browsers.</p><p>Style sheets can be added at any point in a site's development process, but ideally the design specification for a site will be implemented via style sheets, eliminating the need to code and maintain formatting for individual tags. More significantly, CSS lets developers and content providers focus on organizational and navigation issues by separating formatting from content. As a site's structure evolves, styles can be globally changed, added, and deleted, giving developers greater freedom (and more time!) to achieve design goals. </p><p>A site can be retrofitted with CSS, although this requires deleting tag-based formatting code.</p><p>If you want some practice defining and applying styles, see the <a href="../03_Learning_HTML_and_CSS/tutorial8.htm#469157">&quot;Cascading Style Sheets Tutorial&quot;</a>.</p><a name="1029524"></a>
+ 
+<H2>CSS terminology</H2>
+<p>If you are new to style sheets, the first thing you need to master are the terms you use when working with styles. Style elements apply to HTML elements, but there isn't a one-to-one relationship. </p><p>HTML <em>tags</em> contain <em>attributes</em> with <em>values</em>, such as this sample:</p><pre>&lt;h1 align="center"&gt;&lt;font size="+2" color="green"&gt;Some Text&lt;/font&gt;&lt;/h1&gt;
+</pre><p>The <code>h1</code> and <code>font</code> tags contain attributes whose values set the positioning and the font size and color for the enclosed text.</p><p>Style sheets contain <em>rules </em>that apply to <em>selectors </em>which use <em>declarations</em> to specify the formatting:</p><p>h1 { text-align : center; font-size : larger; color : Green; }</p><p>In this example, the <code>h1</code> selector contains declarations which set the positioning and text size and color. If this is the only rule in effect for <code>h1</code>, then every instance of the &lt;<code>h1&gt;</code> tag will display this formatting.</p><p>Cascading Style Sheets are a sophisticated tool for precisely controlling the look of Web pages, but properly implementing them requires learning some new skills and thinking about document layout in a different way. </p><p>Fortunately, you can start off with simple rules for common page elements and go on to create more complex styles as you become familiar with the techniques. Studio's Style Editor gives you an instant preview of rules as you define them, before you apply them in a document. You can then preview entire pages in a browser to see how your styles interact visually.</p><a name="1023805"></a>
+ 
+<H2>Using the Style Editor</H2>
+<p>HomeSite's style editor, TopStyle Lite, provides a complete interface for designing and implementing Cascading Style Sheets. It is a special version of TopStyle, an application written by Nick Bradbury, the original developer of HomeSite. </p><p>TopStyle Lite contains it's own online help system that covers CSS basics, HomeSite integration, and features like Style Insight and the Style Inspector that make defining, previewing, and applying styles a snap. The help system also includes information about upgrading to the full version of TopStyle from <a href="http://www.bradsoft.com/" target="_blank">Bradbury Software</a>.</p><p>This illustration shows the main components of the TopStyle interface. See the online help for a description of its features and user options.</p><p><img src="../images/topstyle_lite_callout.gif">
+
+
+
+</p><a name="1029844"></a>
+ 
+<H2>A CSS reference</H2>
+<p>The Style Sheets topic in the online HTML Reference contains a lot of useful information on syntax and usage requirements for styles and presents numerous code examples.</p><a name="1029878"></a>
+ 
+<H2>A Style tutorial</H2>
+<p>You may want to work through the procedures in the <a href="../03_Learning_HTML_and_CSS/tutorial8.htm#469157">&quot;Cascading Style Sheets Tutorial&quot;</a> to get some experience with TopStyle. If you complete both the HTML and CSS tutorials, you can compare the results of using tag-based formatting and styles to layout the same sample Web page.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a new style sheet:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Style Editor button on the Tools toolbar to open TopStyle.
+
+
+<p><img src="../images/style_editor_button.gif">
+
+
+
+</p></li>
+<li>Select a CSS Definition from the dropdown list. 
+
+<p>This selection determines which properties and values are available for use in the 
+style rules you create.
+</p></li>
+<li>Click the New Selector button to open the dialog.
+
+</li>
+<li>Select an HTML Element from the list.
+
+<p>Use this dialog to select Class and ID attributes for the selector. You can also define 
+pseudo-classes and pseudo-elements for specialized uses in the style sheet.
+</p></li>
+<li>Click OK to insert the selector in the editor.
+
+</li>
+<li>To add attributes and values to the selector, click on an item in the Properties list of the Style Inspector. A dropdown list displays for properties that take pre-defined values. For other attributes, type in a value.
+
+<p>Formatting changes are shown in the Preview pane. 
+</p></li>
+<li>Repeat these steps to build the style sheet.
+
+<p>To review the structure of the style sheet, click the Selector tab in the Inspector 
+</p></li>
+<li>When the style sheet is completed, save it with the default CSS extension.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a style block to a document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Copy the styles from the Style Editor to the &lt;Head&gt; section.
+
+
+</li>
+<li>Enclose the Style block in &lt;STYLE&gt;&lt;/STYLE&gt; tags.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To link a style sheet to a document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Save the style sheet to the directory you want to use for linking to your documents.
+
+
+</li>
+<li>In Studio, drag the css file into the &lt;Head&gt; section of the document.
+
+</li>
+<li>Click the Browse tab to view the document with the style sheet formatting.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit existing styles:
+</td>
+</tr>
+</table>
+</div><p>You can use the following commands to perform style editing tasks:</p><ul>
+<a name="1019508"> </a>
+<li>Right-click in a &lt;STYLE&gt; block and select Edit Style Block. 
+
+<a name="1019509"> </a>
+</li>
+<li>Right-click on a link to a style sheet and select Edit Linked StyleSheet.
+<a name="1019510"> </a>
+</li>
+<li>Right click on a CSS file in the file list with the CSS extension and select Edit StyleSheet. 
+</li>
+</ul>
+<p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit9.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

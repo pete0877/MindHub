@@ -1,0 +1,145 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ParameterExists</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_186.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_188.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001555"></a>
+ <H1>ParameterExists</H1>
+
+
+
+<p>Returns True if the specified parameter has been passed to the current template or has already been created during execution of the current template. Otherwise returns NO. </p><p>This function is provided for backward compatibility with previous versions of ColdFusion. You should use the function IsDefined instead.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_101.htm#1274656">GetClientVariablesList</a> and <a href="../3_ColdFusion_Functions/lr3_130.htm#999402">IsDefined</a>.
+</p>
+
+<a name="1001559"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ParameterExists</strong>(<em>parameter</em>)
+</PRE><a name="1001561"> </a>
+<h5 class="param"> parameter</h5>
+<p class="param">Any syntactically valid parameter name.</p><a name="1805909"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ParameterExists
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ParameterExists ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+ParameterExists Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;ParameterExists Example&lt;/H3&gt;
+
+&lt;CFIF ParameterExists(FORM.myString)&gt;
+&lt;P&gt;Using ParameterExists, we have shown that the FORM
+field "myString" now exists.  However, this function is
+provided for backward compatibility and
+the function IsDefined should be used instead, as below.
+&lt;/CFIF&gt;
+
+&lt;CFIF IsDefined("FORM.myString")&gt;
+&lt;P&gt;Because the variable FORM.myString has been defined, we
+can now show its contents.  This construction allows us
+to place a form and its resulting action template in the same
+template, while using IsDefined to control the
+flow of template execution.
+&lt;P&gt;The value of "FORM.myString" is 
+  &lt;B&gt;&lt;I&gt;&lt;CFOUTPUT&gt;#FORM.myString#&lt;/CFOUTPUT&gt;&lt;/I&gt;&lt;/B&gt;
+&lt;CFELSE&gt;
+&lt;P&gt;During the first time through this template, the variable
+"FORM.myString" has not yet been defined, so we 
+are not attempting to evaluate it.
+&lt;/CFIF&gt;
+...
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ParameterExists
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_186.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_188.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

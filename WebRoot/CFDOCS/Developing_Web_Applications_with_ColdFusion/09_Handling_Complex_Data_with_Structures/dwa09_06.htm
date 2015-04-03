@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Populating Arrays with Data</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997513"></a>
+ <H1>Populating Arrays with Data</H1>
+
+
+
+<p>One-dimensional arrays can store any values, including queries, structures, and other arrays. You can use a number of functions to populate an array with data, including ArraySet, ArrayAppend, ArrayInsertAt, and ArrayPrepend. These functions are useful for adding data to an existing array. In addition, several basic techniques are important to master:</p><ul>
+<li>Populating an array with ArraySet
+
+</li>
+<li>Populating an array with CFLOOP
+</li>
+<li>Populating an array from a query
+</li>
+</ul>
+<a name="997526"></a>
+ 
+<H2>Populating an array with ArraySet</H2>
+<p>You can use the ArraySet function to populate a 1D array, or one dimension of a multi-dimensional array, with some initial value such as an empty string or 0 (zero). This can be useful if you need to create an array of a certain size, but don't need to add data to it right away. Array indexes need to contain some value, such as an empty string, in order to be referenced.</p><p>Use ArraySet to initialize all elements of an array to some value:</p><pre>ArraySet (arrayname, startrow, endrow, value)
+</pre><p>This example initializes the array myarray, indexes 1 to 100, with an empty string.</p><pre>ArraySet (myarray, 1, 100, "")
+</pre><a name="997536"></a>
+ 
+<H2>Populating an array with CFLOOP</H2>
+<p>A common and very efficient method for populating an array is by creating a looping structure that adds data to an array based on some condition using CFLOOP.</p><p>In the following example, a simple one-dimensional array is populated with the names of the months using a CFLOOP. A second CFLOOP is used to output data in the array to the browser.</p><pre>&lt;CFSET months=ArrayNew(1)&gt;
+
+&lt;CFLOOP INDEX="loopcount" FROM="1" TO="12"&gt;
+
+    &lt;CFSET months[loopcount]=MonthAsString(loopcount)&gt;
+
+&lt;/CFLOOP&gt;
+
+&lt;CFLOOP INDEX="loopcount" FROM="1" TO="12"&gt;
+
+        &lt;CFOUTPUT&gt;
+            #months[loopcount]#&lt;BR&gt;
+        &lt;/CFOUTPUT&gt;
+
+&lt;/CFLOOP&gt;
+</pre><a name="997555"></a>
+ 
+<H2>Using Nested Loops for 2D and 3D Arrays</H2>
+<p>To output values from 2D and 3D arrays, you need to employ nested loops to return array data. With a 1D array, a single CFLOOP is sufficient to output data, as in the example just above. With arrays of dimension greater than one, you need to maintain separate loop counters for each array level.</p><a name="997557"></a>
+ 
+<H3>Nesting CFLOOPs for a 2D array</H3>
+<p>The following example shows how to handle nested CFLOOPs to output data from a 2D array:</p><pre>&lt;P&gt;The values in my2darray are currently:
+
+&lt;CFLOOP INDEX="OuterCounter"
+    FROM="1" TO="#ArrayLen(my2darray)#"&gt;
+
+    &lt;CFLOOP INDEX="InnerCounter" FROM="1"
+        TO="#ArrayLen(my2darray[OuterCounter])#"&gt;
+
+    &lt;CFOUTPUT&gt;
+        &lt;B&gt;[#OuterCounter#][#InnerCounter#]&lt;/B&gt;:
+        #my2darray[OuterCounter][InnerCounter]#&lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+
+    &lt;/CFLOOP&gt;
+
+&lt;/CFLOOP&gt;
+</pre><a name="997574"></a>
+ 
+<H3>Nesting CFLOOPs for a 3D array</H3>
+<p>For 3D arrays, you simply nest an additional CFLOOP:</p><pre>&lt;P&gt;My3darray's values are currently:
+
+&lt;CFLOOP INDEX="Dim1"
+    FROM="1" TO="#ArrayLen(my3darray)#"&gt;
+
+    &lt;CFLOOP INDEX="Dim2" 
+        FROM="1" TO="#ArrayLen(my3darray[Dim1])#"&gt;
+
+        &lt;CFLOOP INDEX="Dim3" FROM="1"
+            TO="#ArrayLen(my3darray[Dim1][Dim2])#"&gt;
+
+        &lt;CFOUTPUT&gt;
+            &lt;B&gt;[#Dim1#][#Dim2#][#Dim3#]&lt;/B&gt;:
+            #my3darray[Dim1][Dim2][Dim3]#&lt;BR&gt;
+        &lt;/CFOUTPUT&gt;
+
+        &lt;/CFLOOP&gt;
+
+    &lt;/CFLOOP&gt;
+
+&lt;/CFLOOP&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

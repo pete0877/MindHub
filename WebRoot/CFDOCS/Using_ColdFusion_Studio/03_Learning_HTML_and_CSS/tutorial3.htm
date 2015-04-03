@@ -1,0 +1,144 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Started</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="485128"></a>
+ <H1>Getting Started</H1>
+
+
+
+<p>This tutorial acquaints you with the basics of using Studio for HTML authoring. Completing the tutorial produces a Web page that looks like the one below. It combines text, color, layout, formatting, and links in an attractive, functional design. The techniques you learn here apply to the major elements of building Web content. </p><p><img src="../images/cfsample_page.gif">
+
+
+</p><a name="505424"></a>
+ 
+<H2>Working in ColdFusion Studio</H2>
+<p>Before beginning this tutorial, you should become familiar with the Studio Workspace. The material presented here assumes a working knowledge of interface elements such as toolbars, the QuickBar, the Files tab, and the Editor. These components are described in <a href="../02_Getting_Started/getstart2.htm#1031627">&quot;Exploring the Studio Workspace&quot;</a>.</p><p>Studio's tag editors and drag-and-drop feature automatically add the correct syntax, such as quotes, brackets, and the equal sign, when inserting code. If you edit the code manually, be sure to maintain these elements in their proper places.</p><a name="498559"></a>
+ 
+<H2>Opening the default template</H2>
+<p>When you first open Studio, it displays a new, untitled document. If you do not see this document, click the New button on the Main toolbar. It looks like this:</p><p><img src="../images/new_doc.gif">
+
+
+</p><a name="502351"></a>
+ 
+<H2>Setting a working directory</H2>
+<p>All the files you need to complete this sample page are in a single directory. If you accepted the defaults when installing Studio, the directory path is <code>Program Files\Allaire\ColdFusion Studio 4.5\Help\Using ColdFusion Studio\03 Learning HTML and CSS\tutorial files</code>. Navigate to this folder in the Universal Files tab. All file operations can now be done without having to change directories.</p><p>We're using a single directory to make the tutorial easier, but when you develop Web content on your own you will want to keep your document files and supporting files (images, media, scripts) in separate folders.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create the tutorial page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open Studio and select the "Untitled" document in the editor.
+
+
+</li>
+<li>Type <em>Archaeology Tours</em> between the <code>&lt;TITLE&gt;&lt;/TITLE&gt;</code> tags to replace "Untitled". 
+
+</li>
+<li>Choose File &gt; Save to open the Save dialog box.
+
+</li>
+<li>Enter <em>tour.htm</em> in the File name text box and save the file in the <code>tutorial files</code> folder.
+
+<p>This step ensures that Studio will correctly determine the file paths when you 
+create links by dragging and dropping links to images and other files.
+</p></li>
+</ol>
+<p>To preview the sample page online, open the <code>tour_html.htm</code> file.</p><p></p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Browsers ignore line breaks, tabs, and spaces in HTML documents. 
+As you build the page, you can add line spacing and indenting to 
+make your code and content more readable. For a full discussion, see 
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm#997347">Chapter 6, &quot;Best Practices for Coding HTML and CFML&quot;</a>.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

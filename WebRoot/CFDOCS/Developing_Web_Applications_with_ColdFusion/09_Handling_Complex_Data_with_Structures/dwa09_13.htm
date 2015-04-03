@@ -1,0 +1,156 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Structure Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1028778"></a>
+ <H1>Structure Functions</H1>
+
+
+
+<p>There are several functions that help you create and manage structures in ColdFusion applications.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Structure Functions&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Function</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>IsStruct
+</PRE></td><td valign="top">
+Returns TRUE if the specified variable is a structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructClear
+</PRE></td><td valign="top">
+Removes all data from the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructCopy
+</PRE></td><td valign="top">
+Returns a new structure with all the keys and values of the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructCount
+</PRE></td><td valign="top">
+Returns the number of keys in the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructDelete
+</PRE></td><td valign="top">
+Removes the specified item from the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructFind
+</PRE></td><td valign="top">
+Returns the value associated with the specified key in the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructInsert
+</PRE></td><td valign="top">
+Inserts the specified key-value pair into the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructIsEmpty
+</PRE></td><td valign="top">
+Indicates whether the specified structure contains data. Returns TRUE if the structure contains no data, and FALSE if it does contain data.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructKeyArray
+</PRE></td><td valign="top">
+Returns an array of keys in the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructKeyExists
+</PRE></td><td valign="top">
+Returns TRUE if the specified key is in the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructKeyList
+</PRE></td><td valign="top">
+Returns a list of keys in the specified structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructNew
+</PRE></td><td valign="top">
+Returns a new structure.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>StructUpdate
+</PRE></td><td valign="top">
+Updates the specified key with the specified value.
+</td></tr>
+
+</table>
+</div>
+</p><p>Note that in all cases, except StructDelete, an exception will be thrown if the referenced key or structure does not exist.</p><p>For more information on these functions, see the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a><em>.</em></p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

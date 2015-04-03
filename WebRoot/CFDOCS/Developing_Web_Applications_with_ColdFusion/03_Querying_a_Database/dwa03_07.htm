@@ -1,0 +1,281 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Writing SQL</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012095"></a>
+ <H1>Writing SQL</H1>
+
+
+
+<p>In between the begin and end CFQUERY tags, write the SQL that you want the database to execute.</p><p>For example, to retrieve data from a database:</p><ul>
+<li>Write a SELECT statement that lists the fields or columns that you want to select for the query.
+
+</li>
+<li>Follow the SELECT statement with a FROM clause that specifies the database tables that contain the columns.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>If you are using ColdFusion Studio, you can use the Query Builder to 
+build SQL statements by graphically selecting the tables, and records 
+within those tables you want to retrieve. See <a href="../../
+Using_Coldfusion_Studio/contents.htm"><em>Using ColdFusion Studio</em></a> for 
+details.
+</td>
+</tr>
+</table>
+</div>
+<br><p>When the database processes the SQL, it creates a data set that is returned to ColdFusion Server. ColdFusion places the data set in memory and assigns it the name that you defined for the query in the begin CFQUERY tag. </p><p>You may reference that data set by name using the CFOUTPUT tag further down on the page.</p><a name="1018867"></a>
+ 
+<H2>Basic SQL Syntax elements</H2>
+<p>The following sections present brief descriptions of the main SQL command elements.</p><a name="1017814"></a>
+ 
+<H3>Statements</H3>
+<p>These keywords identify commonly-used SQL commands:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Basic SQL Statements&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Keyword</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+SELECT
+</td><td valign="top">
+Retrieves the specified records
+</td></tr>
+<tr valign="top"><td valign="top">
+INSERT
+</td><td valign="top">
+Adds a new row
+</td></tr>
+<tr valign="top"><td valign="top">
+UPDATE
+</td><td valign="top">
+Changes values in the specified rows
+</td></tr>
+<tr valign="top"><td valign="top">
+DELETE
+</td><td valign="top">
+Removes the specified rows
+</td></tr>
+
+</table>
+</div>
+</p><a name="1017820"></a>
+ 
+<H3>Statement clauses</H3>
+<p>These keywords are used to refine SQL statements:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Basic SQL Clauses&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Keyword</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+FROM
+</td><td valign="top">
+Names the data source for the operation
+</td></tr>
+<tr valign="top"><td valign="top">
+WHERE
+</td><td valign="top">
+Sets one or more conditions for the operation
+</td></tr>
+<tr valign="top"><td valign="top">
+ORDER BY
+</td><td valign="top">
+Sorts the result set in the specified order.
+</td></tr>
+<tr valign="top"><td valign="top">
+GROUP BY
+</td><td valign="top">
+Groups the result set by the specified select list items.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1017826"></a>
+ 
+<H3>Operators</H3>
+<p>These specify conditions and perform logical and numeric functions:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Basic SQL Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+AND
+</td><td valign="top">
+Both conditions must be met, such as Paris AND Texas
+</td></tr>
+<tr valign="top"><td valign="top">
+OR
+</td><td valign="top">
+At least one condition must be met, such as Smith OR Smyth
+</td></tr>
+<tr valign="top"><td valign="top">
+NOT
+</td><td valign="top">
+Exclude the condition following, such as Paris NOT France
+</td></tr>
+<tr valign="top"><td valign="top">
+=
+</td><td valign="top">
+Equal to
+</td></tr>
+<tr valign="top"><td valign="top">
+&lt;&gt;
+</td><td valign="top">
+Not equal to
+</td></tr>
+<tr valign="top"><td valign="top">
+&lt;
+</td><td valign="top">
+Less than
+</td></tr>
+<tr valign="top"><td valign="top">
+&gt;
+</td><td valign="top">
+Greater than
+</td></tr>
+<tr valign="top"><td valign="top">
+&lt;=
+</td><td valign="top">
+Less than or equal to
+</td></tr>
+<tr valign="top"><td valign="top">
+&gt;=
+</td><td valign="top">
+Greater than or equal to
+</td></tr>
+<tr valign="top"><td valign="top">
++
+</td><td valign="top">
+Addition
+</td></tr>
+<tr valign="top"><td valign="top">
+-
+</td><td valign="top">
+Subtraction
+</td></tr>
+<tr valign="top"><td valign="top">
+/
+</td><td valign="top">
+Division
+</td></tr>
+<tr valign="top"><td valign="top">
+*
+</td><td valign="top">
+Multiplication
+</td></tr>
+
+</table>
+</div>
+</p><a name="1020056"></a>
+ 
+<H2>SQL Notes and Considerations</H2>
+<p>Keep the following in mind when writing SQL in ColdFusion:</p><ul>
+<li>There is a lot more to SQL than what is covered here. It's a good idea to purchase one or several SQL guides that you can refer to.
+
+</li>
+<li>The data source, columns, and tables that you reference must exist in order to perform a successful query.
+</li>
+<li>Some DBMS vendors use non-standard SQL syntax (known as a dialect) in their products. ColdFusion does not validate the SQL in a CFQUERY, so you are free to use any syntax that is supported by your data source. Check your DBMS documentation for non-standard SQL usage.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

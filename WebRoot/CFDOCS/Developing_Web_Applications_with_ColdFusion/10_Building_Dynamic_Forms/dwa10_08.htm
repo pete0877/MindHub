@@ -1,0 +1,196 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Data Grids with CFGRID</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015714"></a>
+ <H1>Creating Data Grids with CFGRID</H1>
+
+
+
+<p>The CFGRID tag allows you to build CFFORM grid controls. A grid control resembles a spreadsheet table and can contain data populated from a CFQUERY or from other sources of data. As with other CFFORM tags, CFGRID offers a wide range of data formatting options as well as the option of validating user selections with a JavaScript validation script.</p><p>You can also do the following with CFGRID:</p><ul>
+<li>Sort data in the grid alphanumerically
+
+</li>
+<li>Update , insert and delete data
+</li>
+<li>Embed images in the grid
+</li>
+</ul>
+<p>When users select grid data and submit the form, ColdFusion passes the selection information as form variables to the application page specified in the CFFORM ACTION attribute.</p><p>Just as the CFTREE tag uses CFTREEITEM, CFGRID uses the CFGRIDCOLUMN tag. You define a wide range of row and column formatting options, as well as a query name, selection options, and so on. You use the CFGRIDCOLUMN tag to define individual columns in the grid.</p><a name="1015733"></a>
+ 
+<H2>Populating a grid from a query</H2>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To populate a grid from a query:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file named <code>grid1.cfm</code> in Studio.
+
+
+</li>
+<li>Edit the file so that it appears as follows:
+
+<pre>&lt;CFQUERY NAME="empdata" DATASOURCE="CompanyInfo"&gt;
+    SELECT * FROM Employees
+&lt;/CFQUERY&gt;
+
+&lt;CFFORM NAME="Form1" ACTION="submit.cfm" METHOD="Post"&gt;
+
+    &lt;CFGRID NAME="employee_grid" QUERY="empdata"
+            SELECTMODE="single"&gt;
+        &lt;CFGRIDCOLUMN NAME="Employee_ID"&gt;
+        &lt;CFGRIDCOLUMN NAME="LastName"&gt;
+        &lt;CFGRIDCOLUMN NAME="Department_ID"&gt;
+    &lt;/CFGRID&gt;
+
+&lt;BR&gt;&lt;INPUT TYPE="Submit" VALUE="Submit"&gt;
+&lt;/CFFORM&gt;
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Use the CFGRIDCOLUMN DISPLAY="No" attribute to hide columns 
+you want to retrieve from a data source but not expose to an end 
+user.
+</td>
+</tr>
+</table>
+</div>
+<br></pre></li>
+<li>Save the file and view it in your browser.
+
+</li>
+</ol>
+<a name="1113988"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFGRID NAME="employee_grid" 
+QUERY="empdata"
+</PRE></td><td valign="top">
+Create a grid named "employee_grid" and popluate it with the results of the query "empdata"
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>SELECTMODE="single"&gt;
+</PRE></td><td valign="top">
+Allow the user to select only one cell.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFGRIDCOLUMN NAME="Employee_ID"&gt;
+</PRE></td><td valign="top">
+Put the contents of the Employee_ID column in the query results in the first column of the grid
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFGRIDCOLUMN NAME="LastName"&gt;
+</PRE></td><td valign="top">
+Put the contents of the LastName column in the query results in the second column of the grid
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFGRIDCOLUMN NAME="Department_ID"&gt;
+</PRE></td><td valign="top">
+Put the contents of the Department_ID column in the query results in the third column of the grid
+</td></tr>
+
+</table>
+</div>
+</H3>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you specify a CFGRID tag with a QUERY attribute defined and no 
+corresponding CFGRIDITEM attributes the default grid that is created 
+contains all the columns in the query.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

@@ -1,0 +1,114 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Default Variables with CFPARAM</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Making Variables Dynamic</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1013945"></a>
+ <H1>Creating Default Variables with CFPARAM</H1>
+
+
+
+<p>Another way to create a variable is to test for its existence and optionally supply a default value if the variable does not already exist. The following shows the syntax of the CFPARAM tag:</p><pre>&lt;CFPARAM NAME="<em>VariableName</em>"
+    TYPE="<em>data_type</em>"
+    DEFAULT="<em>DefaultValue</em>"&gt;
+</pre><p>There are two ways to use the CFPARAM tag, depending on how you want the validation test to proceed.</p><ul>
+<li>Use CFPARAM with only the NAME attribute to test that a required variable exists. If it does not exist, the ColdFusion server stops processing the page.
+
+</li>
+<li>Use CFPARAM with both the NAME and DEFAULT attributes to test for the existence of an optional variable. If the variable exists, processing continues and the value is not changed. If the variable does not exist, it is created and set to the value of the DEFAULT attribute.
+</li>
+</ul>
+<p>The following example shows how to use the CFPARAM tag to check for the existence of an optional variable and to set a default value if the variable does not already exist:</p><pre>&lt;CFPARAM NAME="Form.Contract" DEFAULT="Yes"&gt;
+</pre><a name="1013956"></a>
+ 
+<H3>Example: Testing for variables</H3>
+<p>Using CFPARAM with the NAME variable is a way to clearly define the variables that a page or a custom tag expects to receive before processing can proceed. This can make your code more readable, as well as easier to maintain and to debug.</p><p>For example, the following series of CFPARAM tags indicates that this page expects two form variables named StartRow and RowsToFetch:</p><pre>&lt;CFPARAM NAME="Form.StartRow"&gt;
+&lt;CFPARAM NAME="Form.RowsToFetch"&gt;
+</pre><p>If the page with these tags is called without either one of the form variables, an error occurs and the page stops processing.</p><a name="1013962"></a>
+ 
+<H3>Example: Setting default values</H3>
+<p>In this example, CFPARAM is used to see if optional variables exist. If they do exist, processing continues. If they do not exist, they are created and set to the DEFAULT value.</p><pre>&lt;CFPARAM NAME="Cookie.SearchString" DEFAULT="temple"&gt;
+
+&lt;CFPARAM NAME="Client.Color" DEFAULT="Grey"&gt;
+
+&lt;CFPARAM NAME="ShowExtraInfo" DEFAULT="No"&gt;
+</pre><p>You can also use CFPARAM to set default values for URL and Form variables, instead of using conditional logic.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:44 -->
+</body>
+</html>

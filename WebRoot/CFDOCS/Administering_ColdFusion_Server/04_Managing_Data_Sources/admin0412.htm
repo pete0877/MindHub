@@ -1,0 +1,146 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Microsoft Excel Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0411.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0413.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1096679"></a>
+ <H1>Connecting to Microsoft Excel Databases</H1>
+
+
+
+<p>ColdFusion lets you access Microsoft Access databases Windows NT, via ODBC and OLE DB drivers.</p><a name="1082576"></a>
+ 
+<H2>Configuring Microsoft Excel Options (Windows)</H2>
+<p>If ColdFusion Server is installed on a Windows NT server, you can configure Microsoft access databases as ColdFusion data source using either an ODBC or OLE DB driver. For information about using OLE DB drivers with ColdFusion data sources, see <a href="../04_Managing_Data_Sources/admin043.htm#1080974">&quot;OLE DB Drivers&quot;</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Microsoft Excel Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for Microsoft Excel data sources. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Microsoft Excel ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Workbook/Directory
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The path and filename of the Excel workbook you want to use as the ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Version
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the version number of the Excel workbook you want to use. ColdFusion supports Excel versions 3.4, 4.0, and 5.0. Note that there is no Excel 97/2000 support.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Driver Settings
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Rows to Scan -- The number of rows to scan to determine the data type of each column. The data type is determined given the maximum number of kinds of data found. If data is encountered that does not match the data type guessed for the column, the data type will be returned as a NULL value.
+
+Enter a number from 1 to 16 for the rows to scan. The value defaults to 8; if it is set to 0, all rows are scanned. A number outside the limit will return an error.
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0411.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0413.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

@@ -1,0 +1,194 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFAPPLET</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_015.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_017.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1967355"></a>
+ <H1>CFAPPLET</H1>
+
+
+
+<p>Used in a <a href="../2_ColdFusion_Tags/lr2_040.htm#1968844">CFFORM</a>, CFAPPLET allows you to reference custom Java applets that have been previously registered using the ColdFusion Administrator. </p><p>To register a Java applet, open the ColdFusion Administrator and click the Applets button. </p><a name="1967359"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFAPPLET APPLETSOURCE="applet_name"
+    NAME="form_variable_name"
+    HEIGHT="pixels"
+    WIDTH="pixels"
+    VSPACE="pixels"
+    HSPACE="pixels"
+    ALIGN="alignment"
+    NOTSUPPORTED="text"
+    param_1="value"
+    param_2="value"
+    param_n="value"&gt;
+</PRE><a name="1967361"></a>
+<h4> APPLETSOURCE</h4>
+<p>Required. The name of the registered applet. </p><a name="1967363"></a>
+<h4> NAME</h4>
+<p>Required. The form variable name for the applet. </p><a name="1967365"></a>
+<h4> HEIGHT</h4>
+<p>Optional. The height in pixels.</p><a name="1967367"></a>
+<h4> WIDTH</h4>
+<p>Optional. The width in pixels. </p><a name="1967369"></a>
+<h4> VSPACE</h4>
+<p>Optional. Space above and below applet in pixels. </p><a name="1967371"></a>
+<h4> HSPACE</h4>
+<p>Optional. Space on each side of the applet in pixels. </p><a name="1967373"></a>
+<h4> ALIGN</h4>
+<p>Optional. Alignment. Valid entries are:</p><ul>
+<a name="1967375"> </a>
+<li>Left
+
+<a name="1967376"> </a>
+</li>
+<li>Right
+<a name="1967377"> </a>
+</li>
+<li>Bottom
+<a name="1967378"> </a>
+</li>
+<li>Top
+<a name="1967379"> </a>
+</li>
+<li>TextTop
+<a name="1967380"> </a>
+</li>
+<li>Middle
+<a name="1967381"> </a>
+</li>
+<li>AbsMiddle
+<a name="1967382"> </a>
+</li>
+<li>Baseline
+<a name="1967383"> </a>
+</li>
+<li>AbsBottom
+</li>
+</ul>
+<a name="1967384"></a>
+<h4> NOTSUPPORTED</h4>
+<p>Optional. The text you want to display if the page containing a Java applet-based CFFORM control is opened by a browser that does not support Java or has Java support disabled. For example:</p><pre>NOTSUPPORTED="&lt;B&gt;Browser must support Java to view 
+ColdFusion Java Applets&lt;/B&gt;"
+</pre><p>By default, if no message is specified, the following message appears:</p><pre>&lt;B&gt;Browser must support Java to &lt;BR&gt;
+view ColdFusion Java Applets!&lt;/B&gt;
+</pre><a name="1967391"></a>
+<h4> paramn</h4>
+<p>Optional. The valid name of a registered parameter for the applet. Specify a parameter only if you want to override parameter values already defined for the applet using the ColdFusion Administrator. </p><a name="1967393"></a>
+ 
+<H3>Usage</H3>
+<p>Since Java applets must be pre-registered, the CFAPPLET tag can be very simple, taking the default parameter values as they were registered in the ColdFusion Administrator. You can also override parameters by invoking them directly in the CFAPPLET tag.</p><a name="2045718"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfapplet
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFAPPLET ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFAPPLET Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFAPPLET Example&lt;/H3&gt;
+
+&lt;P&gt;Used in a CFFORM, CFAPPLET allows you to reference
+custom Java applets that have been previously registered
+using the ColdFusion Administrator.
+&lt;P&gt;To register a Java applet, open the ColdFusion Administrator
+and click the "Applets" link under the "extensions" section.
+&lt;P&gt;This example applet copies text that you type into 
+a form.  Type some text, and then click "copy" to see
+the copied text.
+
+&lt;CFFORM ACTION="copytext.cfm"&gt;
+    &lt;CFAPPLET appletsource="copytext" NAME="copytext"&gt;
+&lt;/CFFORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfapplet
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_015.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_017.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

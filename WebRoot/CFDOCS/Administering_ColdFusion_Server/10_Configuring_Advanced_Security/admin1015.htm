@@ -1,0 +1,152 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Securing the ColdFusion Administrator</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1014.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1016.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011711"></a>
+ <H1>Securing the ColdFusion Administrator</H1>
+
+
+
+<p>With ColdFusion Server, you can decentralize administrative responsibility by creating multiple administrators. Overall security is maintained because these additional administrators can control only the resources and policies for which you've given them explicit responsibility. You can assign the following types of administrative access to any user:</p><ul>
+<a name="1020890"> </a>
+<li><strong>Administrator</strong> -- Provides complete read and write access to all ColdFusion Administrator pages.
+
+<a name="1020891"> </a>
+</li>
+<li><strong>Privileged</strong> -- Provides read and write access to all the ColdFusion pages except the Basic and Advanced Security pages; Privileged users have no access at all to the security pages.
+<a name="1020892"> </a>
+</li>
+<li><strong>Restricted</strong> -- Provides read and write access only to the Data sources Administrator pages, the Verify Data Source page, and the Verity Collections page; Restricted users have no access to any other ColdFusion Administrator pages. You can configure Restricted access so that a user only has access to specified data sources
+</li>
+</ul>
+<p>You provide different levels of access to the ColdFusion Administrator with a built-in security context called &quot;ColdFusion Admin.&quot; </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Before you can configure ColdFusion Administrator security, you must 
+know how to create a user directory. If you don't know how to create a 
+user directory, see <a href="../10_Configuring_Advanced_Security/admin109.htm#1011458">&quot;Defining User Directories&quot;</a>. 
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To secure the ColdFusion Administrator:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator and click the Advanced Security link.
+
+
+<p>You see the Advanced Server Security page.
+</p></li>
+<li>Make sure the Use Advanced Server Security checkbox is selected. 
+
+</li>
+<li>Define a user directory that contains the user to whom you want to assign Administrator privileges. (Leave the username and password fields blank when defining the user directory.)
+
+</li>
+<li>Under ColdFusion Administration Security, select the Use ColdFusion Administration Authentication check box.
+
+</li>
+<li>Select the user directory you created in step 3 from the drop-down box.
+
+</li>
+<li>In the Administrator field, type in the name of a user who is defined in the user directory you selected in step 4. This user will have Administrator priveleges for the ColdFusion Administrator.
+
+</li>
+<li>Click the Apply button at the bottom of the screen.
+
+<p>ColdFusion Administrator security is now enabled. When you close the 
+Administrator and try to open it again, you will be prompted for the username and 
+password of the user you specified in step 5. If you log in as a different user, you 
+will NOT see the Advanced Security link in the Administrator. 
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1014.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1016.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

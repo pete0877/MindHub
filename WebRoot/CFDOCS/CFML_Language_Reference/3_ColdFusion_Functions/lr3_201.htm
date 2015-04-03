@@ -1,0 +1,224 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>REFindNoCase</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_200.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_202.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1670747"></a>
+ <H1>REFindNoCase</H1>
+
+
+
+<p>Returns the position of the first occurrence of a regular expression in a string starting from the specified position if the<em> returnsubexpressions </em>parameter is not set to True. Returns 0 if no occurrences are found.The search is case-insensitive.</p><p>Returns the position and length of the first occurrence of a regular expression in a string if the <em>returnsubexpressions </em>parameter is set to True. See the description of the <em>returnsubexpressions</em> parameter and the &quot;Usage&quot; section for details.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>, <a href="../3_ColdFusion_Functions/lr3_093.htm#998598">FindNoCase</a>, <a href="../3_ColdFusion_Functions/lr3_207.htm#1002007">REReplace</a>, and <a href="../3_ColdFusion_Functions/lr3_208.htm#1223436">REReplaceNoCase</a>.
+</p>
+
+<a name="1222667"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>REFindNoCase</strong>(<em>reg_expression</em>, <em>string</em> [, <em>start</em> ] 
+   [, <em>returnsubexpressions</em> ] )
+</PRE><a name="1222669"> </a>
+<h5 class="param"> reg_expression</h5>
+<p class="param">Regular expression used for search. This regular expression can include POSIX-specified character classes (for example, [[:alpha:]], [[:digit:]], [[:upper:]], and [[:lower:]]).</p><a name="1222671"> </a>
+<h5 class="param"> string</h5>
+<p class="param">String being searched.</p><a name="1489460"> </a>
+<h5 class="param"> start</h5>
+<p class="param">Optional. Starting position for the search. Default is 1.</p><a name="1659670"> </a>
+<h5 class="param"> returnsubexpressions</h5>
+<p class="param">Optional. A Boolean value indicating whether a substring is returned. If you set this parameter to TRUE, the function returns a CFML structure composed of two single-element arrays containing the position and length of the first substring that matches the criteria of the search. You can retrieve the position and length of the matching subexpression by using the keys "pos" and "len." If there are no occurrences of the regular expression, the "pos" and the "len" arrays each contain one element that has a value of zero. If you set this parameter to FALSE, a scalar value is returned indicating the position of the first occurrence of a regular expression. The default value of this parameter is FALSE.</p><a name="1674462"></a>
+ 
+<H3>Usage</H3>
+<p>In order to find multiple instances of a substring, you must call REFind more than once, each time with a different starting position. To determine the next starting position for the function, use the <em>returnsubexpressions </em>parameter and add the value returned in the position key to the value in the length key. </p><p>If you do not use parentheses in the regular expression, the <em>returnsubexpressions</em> parameter returns single element arrays that denote the position and length of the first match found in the string. </p><p>If you do use parentheses to denote subexpressions within the regular expression, the <em>returnsubexpressions</em> parameter returns the position and length of the first match of the regular expression in the first element of the respective arrays; the position and length of the first instance of each subexpression within the regular expression are returned in subsequent elements of the arrays.</p><a name="1806672"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="REFindNoCase
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of REFindNoCase ---&gt;
+
+&lt;HTML&gt;
+
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+REFindNoCase Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+
+&lt;H3&gt;REFindNoCase Example&lt;/H3&gt;
+
+&lt;P&gt;This example demonstrates the use of the REFindNoCase function with 
+and without the &lt;i&gt;returnsubexpressions&lt;/i&gt; parameter set to True.&lt;/P&gt; 
+
+&lt;P&gt;If you do not use the &lt;i&gt;returnsubexpressions&lt;/i&gt; parameter, 
+REFindNoCase returns the position of the first occurrence of a regular 
+expression in a string starting from the specified position.  Returns 0 
+if no occurrences are found.
+&lt;/P&gt;
+
+&lt;P&gt;REFindNoCase("a+c+", "abcaaccdd"):    
+&lt;CFOUTPUT&gt;#REFindNoCase("a+c+", "abcaaccdd")#&lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;P&gt;REFindNoCase("a+c*", "abcaaccdd"):    
+&lt;CFOUTPUT&gt;#REFindNoCase("a+c*", "abcaaccdd")#&lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;P&gt;REFindNoCase("[[:alpha:]]+", "abcaacCDD"):    
+&lt;CFOUTPUT&gt;#REFindNoCase("[[:alpha:]]+", "abcaacCDD")#&lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;P&gt;REFindNoCase("[\?&amp;]rep=", "report.cfm?rep=1234&amp;u=5"):
+&lt;CFOUTPUT&gt;#REFindNoCase("[\?&amp;]rep=", "report.cfm?rep=1234&amp;u=5")#&lt;/
+CFOUTPUT&gt;
+&lt;/P&gt;
+&lt;!--- Set startPos to one; returnMatchedSubexpressions = TRUE ---&gt;
+&lt;hr size="2" color="#0000A0"&gt;
+
+&lt;P&gt;If you do use the &lt;i&gt;returnssubexpression&lt;/i&gt; parameter, REFindNoCase 
+returns the position and length of the first occurrence of a regular 
+expression in a string starting from the specified position. The position 
+and length variables are stored in a structure. In order to access the 
+position and length information, you must use the keys &lt;i&gt;pos&lt;/i&gt; and 
+&lt;i&gt;len&lt;/i&gt;, respectively.&lt;/P&gt;
+
+&lt;CFSET teststring ="The cat in the hat hat came back!"&gt;
+&lt;P&gt;The string in which the function is to search is: 
+&lt;CFOUTPUT&gt;&lt;b&gt;#teststring#&lt;/b&gt;&lt;/CFOUTPUT&gt;.&lt;/P&gt;
+&lt;P&gt;The first call to REFindNoCase to search this string is: 
+&lt;b&gt;REFindNoCase("[[:alpha:]]+",testString,1,"TRUE")&lt;/b&gt;&lt;/P&gt;
+&lt;P&gt;This function returns a structure that contains two arrays: pos and 
+len.&lt;/P&gt;
+&lt;P&gt;In order to create this structure you can use a CFSET statement, for 
+example:&lt;/P&gt;
+&amp;lt;CFSET st = REFindNoCase("[[:alpha:]]+",testString,1,"TRUE")&amp;gt;
+&lt;CFSET st = REFindNoCase("[[:alpha:]]+",testString,1,"TRUE")&gt;
+&lt;P&gt;
+    &lt;CFOUTPUT&gt;
+    The number of elements in each array: #ArrayLen(st.pos)#.
+    &lt;/CFOUTPUT&gt;
+&lt;/P&gt;
+&lt;P&gt;&lt;b&gt;The number of elements in the pos and len arrays will always be one 
+if you do not use parentheses to denote subexpressions in the regular 
+expression.&lt;/b&gt;&lt;/P&gt;
+&lt;P&gt;The value of st.pos[1] is: &lt;CFOUTPUT&gt;#st.pos[1]#.&lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;P&gt;The value of st.len[1] is: &lt;CFOUTPUT&gt;#st.len[1]#.&lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;P&gt;
+    &lt;CFOUTPUT&gt;
+    Substring is &lt;b&gt;[#Mid(testString,st.pos[1],st.len[1])#]&lt;/B&gt;
+    &lt;/CFOUTPUT&gt;
+&lt;/P&gt;
+&lt;hr size="2" color="#0000A0"&gt;
+
+&lt;P&gt;However, if you use parentheses to denote subexpressions in the 
+regular expression, you will find that the first element contains the 
+position and length of the first instance of the whole expression. The 
+position and length of the first instance of each subexpression within 
+will be included in additional array 
+elements.&lt;/P&gt;
+
+&lt;P&gt;For example:
+&amp;lt;CFSET st1 = REFindNoCase("([[:alpha:]]+)[ 
+]+(\1)",testString,1,"TRUE")&amp;gt;&lt;/P&gt;
+
+&lt;CFSET st1 = REFindNoCase("([[:alpha:]]+)[ ]+(\1)",testString,1,"TRUE")&gt;
+
+&lt;P&gt;The number of elements in each array is 
+&lt;CFOUTPUT&gt;#ArrayLen(st1.pos)#&lt;/CFOUTPUT&gt;.&lt;/P&gt;
+
+&lt;P&gt;First whole expression match; position is 
+&lt;CFOUTPUT&gt;
+#st1.pos[1]#; length is #st1.len[1]#; 
+whole expression match is 
+&lt;B&gt;[#Mid(testString,st1.pos[1],st1.len[1])#]&lt;/B&gt;
+&lt;/CFOUTPUT&gt;&lt;/P&gt;
+
+&lt;P&gt;Subsequent elements of the arrays provide the position and length of 
+the first instance of each parenthesized subexpression therein.&lt;/P&gt;
+ &lt;CFLOOP index="i" from="2" to="#ArrayLen(st1.pos)#"&gt;
+    &lt;P&gt;&lt;CFOUTPUT&gt;Position is #st1.pos[i]#; Length is #st1.len[i]#; 
+    Substring is &lt;B&gt;[#Mid(testString,st1.pos[i],st1.len[i])#]&lt;/B&gt;
+    &lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;/CFLOOP&gt;&lt;BR&gt;   
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="REFindNoCase
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_200.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_202.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

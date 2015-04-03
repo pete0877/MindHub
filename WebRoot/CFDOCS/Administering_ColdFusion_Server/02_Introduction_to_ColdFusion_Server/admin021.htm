@@ -1,0 +1,163 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Overview of Administering ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin022.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Introduction to ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997349"></a>
+ <H1>Overview of Administering ColdFusion</H1>
+
+
+
+<p>The ColdFusion Administrator is the administrative interface of the ColdFusion Server. ColdFusion Server is the component of the overall ColdFusion Web application development system that processes ColdFusion application pages and returns HTML pages to Web clients. </p><p>The Administrator provides a browser-based interface allowing you to manage server performance, add and configure ColdFusion data sources, schedule pages, manage log files, and so on. For any ColdFusion development project, some level of administration is generally necessary to set up ColdFusion Server for your application. </p><a name="1006253"></a>
+ 
+<H2>Accessing the Administrator</H2>
+<p>All administrative operations are performed using the ColdFusion Administrator, which you can launch from the ColdFusion 4.0 program group in Windows, or by opening the Administrator URL in your browser. If ColdFusion Server is installed locally, you can open the following URL:</p><pre>http://127.0.0.1/CFIDE/Administrator/index.cfm
+</pre><p>To access the Administrator remotely, you open the following URL:</p><pre>http://<em>hostname</em>/CFIDE/Administrator/index.cfm
+</pre><p>Where <em>hostname</em> is the name of the system on which ColdFusion Server is installed. If you are using ColdFusion Administrator security, you will be prompted for a password. If your Web server is providing security, access to the Administrator pages is governed by the permissions defined in your Web server. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Administrator's URL is case sensitive on Solaris and should be used 
+as shown.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1006125"></a>
+ 
+<H2>Initial ColdFusion administration tasks</H2>
+<p>Immediately after installing ColdFusion Server, you'll probably want to perform some of the following configuration tasks:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Initial Adminitration Tasks&nbsp;</strong>
+</th></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>If necessary, configure your Web server for ColdFusion</strong>
+
+If you are using Netscape or Apache Web servers on Solaris, you'll need to perform some 
+initial configuration tasks for ColdFusion. 
+
+
+For more information, see <a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm#999704">Chapter 1, &quot;Installing and Configuring ColdFusion&quot;</a>.
+
+</td></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Add, configure, and verify ColdFusion data sources</strong>
+
+You use the Administrator to create ColdFusion data sources for your applications. You 
+can configure ODBC data sources or employ a native database driver to access your 
+Oracle or Sybase databases (Enterprise Edition only). 
+
+
+For more information about data sources, see <a href="../04_Managing_Data_Sources/admin04.htm#997518">Chapter 4, &quot;Managing Data Sources&quot;</a>.
+
+</td></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+ <strong>Configure Admininstrator email</strong>
+
+ColdFusion error pages include an email address link to the ColdFusion administrator. 
+You'll also need to define a default mail server hostname. Defining the email address of 
+the administrator allows users of your ColdFusion applications to report errors they may 
+encounter. You could, for example, use a messaging service to receive email by pager 
+alerting you to any errors encountered in a ColdFusion application. 
+
+
+For more information, see <a href="../03_Configuring_ColdFusion_Server/admin03.htm#997351">Chapter 3, &quot;Configuring ColdFusion Server&quot;</a>.
+
+</td></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Configure ColdFusion log file options</strong>
+
+ColdFusion produces a number of different log files you can use to monitor server errors 
+and activity. In addition, you can log all email messages sent by ColdFusion to a log file. 
+
+
+For more information, see <a href="../03_Configuring_ColdFusion_Server/admin03.htm#997351">Chapter 3, &quot;Configuring ColdFusion Server&quot;</a>.
+
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin022.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:28 -->
+</body>
+</html>

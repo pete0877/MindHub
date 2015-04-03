@@ -1,0 +1,150 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Starting and Stopping ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin025.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Introduction to ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997820"></a>
+ <H1>Starting and Stopping ColdFusion</H1>
+
+
+
+<p>Normally, ColdFusion services are started during ColdFusion setup and configured to run whenever you start your system. However, if you need to start ColdFusion services, click the Start-Stop icon in the ColdFusion program group. If a password is configured for the Administrator, you will be prompted to enter a password before you can start or stop ColdFusion services. </p><p><img src="../images/startstop.gif">
+
+
+</p><a name="997823"></a>
+ 
+<H2>Windows NT</H2>
+<p>During setup, ColdFusion is installed as a series of system services in Windows NT. Ordinarily, ColdFusion is launched at startup time. To manage how the services are run, use the Services Control Panel in Windows NT. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To prevent ColdFusion from running at startup:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Services Control Panel. 
+
+
+</li>
+<li>Select the ColdFusion Application Server service.
+
+</li>
+<li>Click Stop to halt the service immediately, click Startup to configure startup options for ColdFusion. 
+
+</li>
+</ol>
+<a name="997826"></a>
+ 
+<H2>Solaris</H2>
+<p>Two scripts are provided to start and stop the ColdFusion processes: </p><pre>&lt;installdir&gt;/coldfusion/bin/start
+&lt;installdir&gt;/coldfusion/bin/stop
+</pre><p>These scripts  can only be run as root. In addition, the ColdFusion installation also installs the following scripts to start and stop ColdFusion during system boot and shutdown: </p><pre>/etc/init.d/coldfusion
+/etc/rc1.d/K19coldfusion
+/etc/rc3.d/S25coldfusion
+</pre><a name="997843"></a>
+ 
+<H2>Windows 95 and Windows 98</H2>
+<p>Since Windows 95 and Windows 98 do not have a services architecture, ColdFusion must be run as an ordinary executable. </p><p>When ColdFusion is running in Windows 95 or 98, two icons appear in the system tray: </p><p><img src="../images/systray.gif">
+
+
+</p><p>To halt the ColdFusion service or to access the ColdFusion Administrator, right mouse click the IDE service icon. </p><p>To run ColdFusion at startup, place a shortcut for the ColdFusion icon in the Startup program group.</p><a name="997855"></a>
+ 
+<H2>Stopping ColdFusion</H2>
+<p>Stopping ColdFusion services may be necessary in the following instances:</p><ul>
+<a name="997857"> </a>
+<li>To install a new ODBC driver package
+
+<a name="997858"> </a>
+</li>
+<li>To replace or upgrade your Web server software
+<a name="997859"> </a>
+</li>
+<li>To upgrade or reinstall your ColdFusion program files
+<a name="997860"> </a>
+</li>
+<li>To update or replace database files
+</li>
+</ul>
+<p>The Stop/Start Services page can also be used to restart the ColdFusion Server  after a critical failure or error. The Start-Stop page  is available only from the local workstation. You can move the Start-Stop page to a directory in your Web server document directory. If you do so, you need to make sure the file is secured using your native Web server security.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin025.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:28 -->
+</body>
+</html>

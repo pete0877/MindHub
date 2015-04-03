@@ -1,0 +1,306 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFGRIDCOLUMN</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_042.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_044.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1969546"></a>
+ <H1>CFGRIDCOLUMN</H1>
+
+
+
+<p>Used with <a href="../2_ColdFusion_Tags/lr2_042.htm#1969319">CFGRID</a> in a <a href="../2_ColdFusion_Tags/lr2_040.htm#1968844">CFFORM</a>, you use CFGRIDCOLUMN to specify individual column data in a CFGRID control. Font and alignment attributes used in CFGRIDCOLUMN override any global font or alignment settings defined in CFGRID.</p><a name="1969550"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFGRIDCOLUMN NAME="column_name"
+    HEADER="header"
+    WIDTH="column_width"
+    FONT="column_font"
+    FONTSIZE="size"
+    ITALIC="Yes/No"
+    BOLD="Yes/No"
+    HREF="URL"
+    HREFKEY="column_name"
+    TARGET="URL_target"
+    SELECT="Yes/No"
+    DISPLAY="Yes/No"
+    TYPE="type"
+    HEADERFONT"font_name"
+    HEADERFONTSIZE="size"
+    HEADERITALIC="Yes/No"
+    HEADERBOLD="Yes/No"
+    DATAALIGN="position"
+    HEADERALIGN="position"
+    NUMBERFORMAT="format"&gt;
+</PRE><a name="1969552"></a>
+<h4> NAME</h4>
+<p>Required. A name for the grid column element. If the grid uses a query, the column name must specify the name of a query column. </p><a name="1969554"></a>
+<h4> HEADER</h4>
+<p>Optional. Text for the column header. The value of HEADER is used only when the CFGRID COLHEADERS attribute is Yes (or omitted, since it defaults to Yes). </p><a name="1969556"></a>
+<h4> WIDTH</h4>
+<p>Optional. The width of the column in pixels. By default the column is sized based on the longest column value.</p><a name="1969558"></a>
+<h4> FONT</h4>
+<p>Optional. Font name to use for data in the column. Defaults to browser-specified font.</p><a name="1969560"></a>
+<h4> FONTSIZE</h4>
+<p>Optional. Font size for text in the column. Defaults to browser-specified font size.</p><a name="1969562"></a>
+<h4> ITALIC</h4>
+<p>Optional. Yes or No. Yes presents text in the column in italic. Default is No.</p><a name="1969564"></a>
+<h4> BOLD</h4>
+<p>Optional. Yes or No. Yes presents text in the column in boldface. Default is No.</p><a name="1969566"></a>
+<h4> HREF</h4>
+<p>Optional. URL to associate with the grid item. You can specify a URL that is relative to the current page:</p><pre>../mypage.cfm
+
+</pre><p>Or an absolute URL:</p><pre>http://myserver.com/mydir/mypage.cfm.
+</pre><a name="1969571"></a>
+<h4> HREFKEY</h4>
+<p>Optional. The name of a valid query column when the grid uses a query. The column specified becomes the Key no matter what the select mode is for the grid. </p><a name="1969573"></a>
+<h4> TARGET</h4>
+<p>Optional. The name of the frame in which to open the link specified in HREF.</p><a name="1969575"></a>
+<h4> SELECT</h4>
+<p>Optional. Yes or No. Yes allows end users to select a column in a grid control. When No, the column cannot be edited, even if the CFGRID INSERT or DELETE attributes are enabled. The value of the SELECT attribute is ignored if the CFGRID SELECTMODE attribute is set to Row or Browse. </p><a name="1969577"></a>
+<h4> DISPLAY</h4>
+<p>Optional. Yes or No. Use to hide columns. Default is Yes to display the column. </p><a name="1969579"></a>
+<h4> TYPE</h4>
+<p>Optional. Enter Image, Numeric, or String_NoCase. When TYPE="Image", the grid attempts to display an image corresponding to the value in the column, which can be a built in ColdFusion image name, or an image of your choice in the <code>cfide\classes</code> directory or a subdirectory, referenced with a relative URL. Built-in image names are as follows:</p><ul>
+<a name="1969581"> </a>
+<li>cd
+
+<a name="1969582"> </a>
+</li>
+<li>computer
+<a name="1969583"> </a>
+</li>
+<li>document
+<a name="1969584"> </a>
+</li>
+<li>element
+<a name="1969585"> </a>
+</li>
+<li>folder
+<a name="1969586"> </a>
+</li>
+<li>floppy
+<a name="1969587"> </a>
+</li>
+<li>fixed
+<a name="1969588"> </a>
+</li>
+<li>remote
+</li>
+</ul>
+<p>If an image is larger than the column cell where it is being placed, the images is clipped to fit the cell. </p><p>When TYPE="Numeric", data in the grid can be sorted by the end user as numeric data rather than as simple character text. </p><p>When TYPE="String_NoCase", data in the grid can be sorted by the end user as case insensitive text data like an Excel spreadsheet rather than as case sensitive character text. </p><a name="1969591"></a>
+<h4> HEADERFONT</h4>
+<p>Optional. Font to use for the column header. Defaults to browser-specified font. </p><a name="1969593"></a>
+<h4> HEADERFONTSIZE</h4>
+<p>Optional. Font size to use for the column header in pixels. Defaults to browser-specified font size.</p><a name="1969595"></a>
+<h4> HEADERITALIC</h4>
+<p>Optional. Yes or No. Yes presents column header text in italic. Default is No.</p><a name="1969597"></a>
+<h4> HEADERBOLD</h4>
+<p>Optional. Yes or No. Yes presents header text in boldface. Default is No.</p><a name="1969599"></a>
+<h4> DATAALIGN</h4>
+<p>Optional. Alignment for column data. Valid entries are: Left, Center, or Right. Default is Left.</p><a name="1969601"></a>
+<h4> HEADERALIGN</h4>
+<p>Optional. Alignment for the column header text. Valid entries are: Left, Center, or Right. Default is Left.</p><a name="1969603"></a>
+<h4> NUMBERFORMAT</h4>
+<p>Optional. The format for displaying numeric data in the grid. </p><a name="1969605"></a>
+ 
+<H3>NUMBERFORMAT mask characters</H3>
+<p>Mask characters you can use in the NUMBERFORMAT attribute correspond with those used in the NumberFormat CFML function. For more information about the NumberFormat function, see <a href="../3_ColdFusion_Functions/lr3.htm#996754">Chapter 2, &quot;ColdFusion Functions&quot;</a>.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>NumberFormat Mask Characters&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Character</strong>
+</th><th align="left">
+<strong>Meaning</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+_ (underscore)
+</td><td valign="top">
+Optional digit placeholder. 
+</td></tr>
+<tr valign="top"><td valign="top">
+9
+</td><td valign="top">
+Optional digit placeholder. Same as _, but shows decimal places more clearly. 
+</td></tr>
+<tr valign="top"><td valign="top">
+.
+</td><td valign="top">
+Specifies the location of a mandatory decimal point. 
+</td></tr>
+<tr valign="top"><td valign="top">
+0
+</td><td valign="top">
+Located to the left or right of a mandatory decimal point, to force padding with zeros. 
+</td></tr>
+<tr valign="top"><td valign="top">
+( )
+</td><td valign="top">
+Places parentheses around the mask if the number is less than 0.
+</td></tr>
+<tr valign="top"><td valign="top">
++
+</td><td valign="top">
+Places + in front of positive numbers, - (minus sign) in front of negative numbers.
+</td></tr>
+<tr valign="top"><td valign="top">
+-
+</td><td valign="top">
+Place " " (space) in front of positive, - (minus sign) in front of negative numbers. 
+</td></tr>
+<tr valign="top"><td valign="top">
+,
+</td><td valign="top">
+Separates thousands with commas. 
+</td></tr>
+<tr valign="top"><td valign="top">
+L,C
+</td><td valign="top">
+Specifies left-justify or center-justify a number within the width of the mask column. L or C must appear as the first character of the mask. By default, numbers are right-justified. 
+</td></tr>
+<tr valign="top"><td valign="top">
+$
+</td><td valign="top">
+Places a dollar sign in front of the formatted number. $ must appear as the first character of the mask.
+</td></tr>
+<tr valign="top"><td valign="top">
+^
+</td><td valign="top">
+Separates left from right formatting.
+</td></tr>
+
+</table>
+</div>
+</p><a name="2038013"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfgridcolumn
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the CFGRIDCOLUMN tag in action ---&gt;
+...
+&lt;CFGRID NAME="FirstGrid" WIDTH="450" 
+    QUERY="GetCourses" INSERT="Yes"
+    DELETE="Yes" SORT="Yes" 
+    FONT="Tahoma" BOLD="No" ITALIC="No"
+    APPENDKEY="No" HIGHLIGHTHREF="No" 
+    GRIDDATAALIGN="LEFT"
+    GRIDLINES="Yes" ROWHEADERS="Yes" 
+    ROWHEADERALIGN="LEFT" ROWHEADERITALIC="No"
+    ROWHEADERBOLD="No" COLHEADERS="Yes" 
+    COLHEADERALIGN="LEFT" COLHEADERITALIC="No" 
+    COLHEADERBOLD="No" SELECTCOLOR="Red"
+    SELECTMODE="EDIT" PICTUREBAR="No" 
+    INSERTBUTTON="To insert" DELETEBUTTON="To delete" 
+    SORTASCENDINGBUTTON="Sort ASC" SORTDESCENDINGBUTTON="Sort DESC"&gt;
+    &lt;CFGRIDCOLUMN NAME="Course_ID" DATAALIGN="LEFT" 
+        BOLD="No" ITALIC="No"
+        SELECT="No" DISPLAY="No" 
+        HEADERBOLD="No" HEADERITALIC="No"&gt;
+    &lt;CFGRIDCOLUMN NAME="Dept_ID" HEADER="Department"
+        HEADERALIGN="LEFT" DATAALIGN="LEFT" BOLD="Yes" ITALIC="No"
+        SELECT="Yes" DISPLAY="Yes" HEADERBOLD="No" HEADERITALIC="Yes"&gt;
+    &lt;CFGRIDCOLUMN NAME="CorNumber" HEADER="Course ##"
+        HEADERALIGN="LEFT" DATAALIGN="LEFT" 
+        BOLD="No" ITALIC="No"
+        SELECT="Yes" DISPLAY="Yes" 
+        HEADERBOLD="No" HEADERITALIC="No"&gt;
+    &lt;CFGRIDCOLUMN NAME="CorName" HEADER="Name" 
+        HEADERALIGN="LEFT" DATAALIGN="LEFT" 
+        FONT="Times" BOLD="No" 
+        ITALIC="No" SELECT="Yes"
+        DISPLAY="Yes" HEADERBOLD="No" 
+        HEADERITALIC="No"&gt;
+    &lt;CFGRIDCOLUMN NAME="CorLevel" HEADER="Level" 
+        HEADERALIGN="LEFT" DATAALIGN="LEFT" 
+        BOLD="No" ITALIC="No" SELECT="Yes" 
+        DISPLAY="Yes" HEADERBOLD="No" 
+        HEADERITALIC="No"&gt;
+        ...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfgridcolumn
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_042.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_044.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

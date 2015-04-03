@@ -1,0 +1,185 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CreateDate</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_055.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_057.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997632"></a>
+ <H1>CreateDate</H1>
+
+
+
+<p>Returns a valid date/time object.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a> and <a href="../3_ColdFusion_Functions/lr3_062.htm#997701">CreateODBCDate</a>.
+</p>
+
+<a name="997635"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>CreateDate</strong>(<em>year</em>, <em>month</em>, <em>day</em>)
+</PRE><a name="997637"> </a>
+<h5 class="param"> year</h5>
+<p class="param">Number representing the year in the range 100-9999. Years from 0 to 29 are interpreted as 21<sup>st</sup> century values. Years 30 to 99 are interpreted as 20<sup>th</sup> century values.</p><a name="997638"> </a>
+<h5 class="param"> month</h5>
+<p class="param">Number representing the month of the year, ranging from 1 (January) to 12 (December).</p><a name="997639"> </a>
+<h5 class="param"> day</h5>
+<p class="param">Number representing the day of the month, ranging from 1 to 31.</p><a name="997640"></a>
+ 
+<H3>Usage</H3>
+<p>CreateDate is a subset of <a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a>.</p><p>Time in the returned object is set to 00:00:00.</p><a name="1799698"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="CreateDate
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---------------------------------------------------------
+This example shows how to use CreateDate, CreateDateTime, and 
+createODBCdate 
+-----------------------------------------------------------&gt;
+
+&lt;HTML&gt;
+
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CreateDate Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;basefont face="Arial, Helvetica" size=2&gt;
+&lt;body  bgcolor="#FFFFD5"&gt;
+
+&lt;H3&gt;CreateDate Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.year")&gt;
+Your date value, presented using different CF date functions:
+&lt;CFSET yourDate = CreateDate(FORM.year, FORM.month, FORM.day)&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;UL&gt;
+    &lt;LI&gt;Built with CreateDate: #CreateDate(FORM.year, FORM.month,
+            FORM.day)#
+    &lt;LI&gt;Built with CreateDateTime: #CreateDateTime(FORM.year, FORM.month,
+            FORM.day, 12,13,0)#
+    &lt;LI&gt;Built with CreateODBCDate: #CreateODBCDate(yourDate)#
+    &lt;LI&gt;Built with CreateODBCDateTime: #CreateODBCDateTime(yourDate)#
+&lt;/UL&gt;
+
+&lt;P&gt;The same value can be formatted with dateFormat:
+&lt;UL&gt;
+    &lt;LI&gt;Built with CreateDate: #DateFormat(CreateDate(FORM.year,
+            FORM.month, FORM.day), "mmm-dd-yyyy")#
+    &lt;LI&gt;Built with CreateDateTime: #DateFormat(CreateDateTime(FORM.year,
+            FORM.month, FORM.day, 12,13,0))#
+    &lt;LI&gt;Built with CreateODBCDate: #DateFormat(CreateODBCDate(yourDate),
+            "mmmm d, yyyy")#
+    &lt;LI&gt;Built with CreateODBCDateTime:
+            #DateFormat(CreateODBCDateTime(yourDate), "d/m/yy")#
+&lt;/UL&gt;
+
+
+&lt;/CFOUTPUT&gt;
+
+&lt;/CFIF&gt;
+
+&lt;CFFORM ACTION="createdate.cfm" METHOD="POST"&gt;
+&lt;P&gt;Please enter the year, month and day in integer format for 
+the date value you would like to view:
+&lt;PRE&gt;
+Year    &lt;CFINPUT TYPE="Text" NAME="year" VALUE="1998" VALIDATE="integer"
+  REQUIRED="Yes"&gt;
+Month    &lt;CFINPUT TYPE="Text" NAME="month" VALUE="6" VALIDATE="integer"
+  REQUIRED="Yes"&gt;
+Day    &lt;CFINPUT TYPE="Text" NAME="day" VALUE="8" VALIDATE="integer"
+  REQUIRED="Yes"&gt;
+&lt;/PRE&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" NAME=""&gt; &lt;INPUT TYPE="RESET"&gt;
+&lt;/CFFORM&gt;
+
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="CreateDate
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_055.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_057.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

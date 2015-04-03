@@ -1,0 +1,172 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>What is LDAP?</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 16	:&nbsp;&nbsp;Connecting to LDAP Directories</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1046425"></a>
+ <H1>What is LDAP?</H1>
+
+
+
+<p>LDAP (Lightweight Directory Access Protocol) is a protocol that enables organizations to arrange directory information in a hierarchy. Note that in this case, "directory" refers to a collection of information something like a telephone directory, not a collection of files in a folder on a disk drive.</p><p>An LDAP directory is, in essence, a database, which is usually a hierarchical structure, (although this is not a requirement). It offers performance advantages over conventional databases, and its operations are familiar to database users. LDAP supports a flat, or one-level, structure as readily as multiple levels. The illustration below shows a simplified tree of entries from the root level to the individual level.</p><p><img src="../images/dwa16a.gif" height="206" width="305">
+
+
+</p><p>The complexity and flexibility allowed in this structure is a key to LDAP's success. A directory's structure abstracts the structure of the organization it represents. Properly devising and maintaining this structure is the LDAP server administrator's responsibility. The type, quantity, and accessibility of the information for individual entries will obviously vary widely across organizations and their LDAP servers. </p><a name="1047184"></a>
+ 
+<H2>LDAP attributes</H2>
+<p>Following is a list of the common attributes:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Common LDAP Attributes</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Attribute</strong>
+</th><th align="left">
+<strong>Name</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+c
+</td><td valign="top">
+country
+</td></tr>
+<tr valign="top"><td valign="top">
+st
+</td><td valign="top">
+state or province
+</td></tr>
+<tr valign="top"><td valign="top">
+l
+</td><td valign="top">
+locality
+</td></tr>
+<tr valign="top"><td valign="top">
+o
+</td><td valign="top">
+organization
+</td></tr>
+<tr valign="top"><td valign="top">
+ou
+</td><td valign="top">
+organizational unit
+</td></tr>
+<tr valign="top"><td valign="top">
+cn
+</td><td valign="top">
+common name
+</td></tr>
+<tr valign="top"><td valign="top">
+sn
+</td><td valign="top">
+surname
+</td></tr>
+
+</table>
+</div>
+</p><a name="1047288"></a>
+ 
+<H2>Key Terms</H2>
+<p>Following is a brief description of the LDAP information structure.</p><a name="1047290"></a>
+ 
+<H3>Entry</H3>
+<p>The basic information object of LDAP is the entry. An entry is composed of attributes, each of which has a type defining what information can be contained in the attribute's values and what behaviors the attribute exhibits during processing. Entries are subject to content rules that specify its required and optional attributes. Content rules can be defined in the syntax or on the LDAP server. </p><a name="1047293"></a>
+ 
+<H3>Distinguished name</H3>
+<p>A naming convention for LDAP entries ensures compliance with the protocol regardless of the complexity of directory trees. LDAP name syntax begins at the entry level and specifies each level up to the root. In other words, it proceeds from the individual to the global. The Distinguished Name of an entry locates it in the directory tree. Each Distinguished Name (DN) is made up of Relative Distinguished Names (RDN) that contain one or more of the entry's attributes. As with file systems pathnames and URLs, entering the correct LDAP name format is essential to successful search operations.</p><a name="1047297"></a>
+ 
+<H3>Scope</H3>
+<p>Sets the limits of a search from the starting point of a query. The default is one level below the distinguished name specified in the Start attribute. If, for example, the Start attribute is "ou=support, o=allaire" the level below "support" is searched. You can optionally restrict a query to the level of the Start entry or extend it to the entire subtree. </p><a name="1047300"></a>
+ 
+<H3>Referral</H3>
+<p>While not supported directly in the LDAP2 standard, the ability of an LDAP server to refer a client query to another server is an attractive feature and has been implemented in the Netscape and University of Michigan servers. ColdFusion developers need to be aware of the possibilities for referrals when designing their query forms. You can pass the original login credentials to other servers that you may connect to when resolving a referral.</p><a name="1047285"></a>
+ 
+<H3>References</H3>
+<p>Extensions to the LDAP protocol are ongoing and it is widely supported in the Internet community. Additional material on LDAP is available from these sources:</p><ul>
+<li>The LDAP specification was originally developed at the University of Michigan. Their site <a href="http://www.umich.edu/~dirsvcs/ldap/index.html">http://www.umich.edu/~dirsvcs/ldap/index.html</a> contains a wealth of information and resources.
+
+</li>
+<li>The stated purpose of the Internet Engineering Task Force LDAP Extensions Working Group is to "...define and standardize extensions to the LDAP version 3 protocol and extensions to the use of LDAP on the Internet." Their site is at <a href="http://www.ietf.org/html.charters/ldapext-charter.html">http://www.ietf.org/html.charters/ldapext-charter.html</a>.
+</li>
+<li>The Directory Enabled Networks (DEN) specification, based on LDAP, is under development by a number of vendors, including Microsoft and Cisco Systems. You can follow the progress of this proposed standard at the DEN Ad Hoc Working Group site at <a href="http://murchiso.com/den/">http://murchiso.com/den/</a>.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:59 -->
+</body>
+</html>

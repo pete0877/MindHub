@@ -1,0 +1,111 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Browsers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Installing and Configuring ColdFusion Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998632"></a>
+ <H1>Configuring Browsers</H1>
+
+
+
+<p>Studio makes it easy to view HTML documents and to process CFML application pages. </p><a name="998635"></a>
+ 
+<H2>Internal browser options</H2>
+<p>Open the Settings &gt; Browse dialog (F8) to select a browser for viewing documents in Studio:</p><ul>
+<a name="998638"> </a>
+<li>If Internet Explorer is detected on your system, you can use it as the internal browser. 
+
+<p>Go to <a href="http://www.microsoft.com/downloads/">http://www.microsoft.com/downloads/</a> to get the latest version.
+</p><a name="998640"> </a>
+</li>
+<li>If Netscape's Mozilla NGLayout control is detected, you can choose it. 
+<p>Go to <a href="http://www.mozilla.org/newlayout/">http://www.mozilla.org/newlayout/</a>for information on this open 
+source browser development project.
+</p><a name="1000960"> </a>
+</li>
+<li>A default internal browser is available if you wish to use it. 
+</li>
+</ul>
+<a name="1000961"></a>
+ 
+<H2>External browser options</H2>
+<p>Studio looks for a number of common browsers on your system and generates a list of the ones it finds. Click Options &gt; Configure External Browsers to review and edit the list. You can add and delete browsers and edit their current settings.</p><p>This dialog also offers you choices for how Studio processes documents when you launch an external browser.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:29 -->
+</body>
+</html>

@@ -1,0 +1,110 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Database Basics</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1016701"></a>
+ <H1>Database Basics</H1>
+
+
+
+<p>You don't need a thorough knowledge of databases to develop a data-driven ColdFusion application, but you will need to learn some basic concepts and techniques.</p><p>A database is a structure for storing information. Databases are organized in tables, which are collections of related items. For example, a table might contain the names, street addresses, and phone numbers of individuals. Think of a table as a grid of columns and rows. In this case, one column contains names, a second column contains street addresses, and the third column contains phone numbers. Each row constitutes one data record because the data in that row applies to a unique item, in this case, one individual. Rows are also referred to as records. Columns are also referred to as fields.</p><p><img src="../images/table.gif">
+
+
+</p><p>Data can be organized in multiple tables. This type of data structure is known as a relational database and is the type used for all but the simplest data sets.</p><p><img src="../images/join.gif">
+
+
+</p><p>From this basic description, a few database design rules emerge:</p><ul>
+<li>Each record should contain a unique identifier, known as the primary key.
+
+<p>This could be an employee ID, a part number, or a customer number. This is 
+typically the column used to maintain each record's unique identity among the 
+tables in a relational database. 
+</p></li>
+<li>Once a column has been defined to contain a specific type of information, the data must be entered in that column in a consistent way. 
+<p>This is accomplished by defining a data type for the column, such as allowing 
+only numeric values to be entered in the salary column. 
+</p></li>
+<li>Assessing user needs and incorporating those needs in the database design is essential to a successful implementation. A well-designed database accommodates the changing data needs within an organization.
+</li>
+</ul>
+<p>The best way to familiarize yourself with the capabilities of your database product or DBMS is to review the product documentation.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

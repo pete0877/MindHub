@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFMAIL</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_059.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_061.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1971081"></a>
+ <H1>CFMAIL</H1>
+
+
+
+<p>CFMAIL allows you to send email messages via an SMTP server. </p><p>See also <a href="../2_ColdFusion_Tags/lr2_061.htm#2176757">CFMAILPARAM</a>.</p><a name="1971083"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFMAIL TO="recipient"
+    FROM="sender"
+    CC="copy_to"
+    BCC="blind_copy_to"
+    SUBJECT="msg_subject"
+    TYPE="msg_type"
+    MAXROWS="max_msgs"
+    MIMEATTACH="path"
+    QUERY="query_name"
+    GROUP="query_column"
+    GROUPCASESENSITIVE="yes/no"
+    STARTROW="query_row"
+    SERVER="servername"
+    PORT="port_ID"
+    MAILERID="headerid"
+    TIMEOUT="seconds"&gt;
+</PRE><a name="1971085"></a>
+<h4> TO</h4>
+<p>Required. The name of the recipient(s) of the email message. This can be either a static address (as in, TO="support@allaire.com"), a variable that contains an address (such as, TO="#Form.Email#"), or the name of a query column that contains address information (such as, TO="#EMail#"). In the latter case, an individual email message is sent for every row returned by the query. </p><a name="1971087"></a>
+<h4> FROM</h4>
+<p>Required. The sender of the email message. This attribute may be either static (e.g., FROM="support@allaire.com") or dynamic (as in, FROM="#GetUser.EMailAddress#"). </p><a name="1971089"></a>
+<h4> CC</h4>
+<p>Optional. Indicates additional addresses to copy the email message to; "CC" stands for "carbon copy."</p><a name="2175133"></a>
+<h4> BCC</h4>
+<p>Optional. Indicates additional addresses to copy the email message without listing them in the message header. "BCC" stands for "blind carbon copy."</p><a name="1971091"></a>
+<h4> SUBJECT</h4>
+<p>Required. The subject of the mail message. This field may be driven dynamically on a message-by-message basis. For example, if you want to do a mailing that updates customers on the status of their orders, you might use a subject attribute like SUBJECT="Status for Order Number #Order_ID#". </p><a name="1971093"></a>
+<h4> TYPE</h4>
+<p>Optional. Specifies extended type attributes for the message. Currently, the only valid value for this attribute is "HTML". Specifying TYPE= "HTML" informs the receiving email client that the message has embedded HTML tags that need to be processed. This is only useful when sending messages to mail clients that understand HTML (such as Netscape 2.0 and above email clients).</p><a name="1971098"></a>
+<h4> MAXROWS</h4>
+<p>Optional. Specifies the maximum number of email messages you want to send.</p><a name="1971100"></a>
+<h4> MIMEATTACH</h4>
+<p>Optional. Specifies the path of the file to be attached to the email message. Attached file is MIME-encoded. </p><a name="2349012"></a>
+<h4> QUERY</h4>
+<p>Optional. The name of the CFQUERY from which you want to draw data for message(s) you want to send. Specify this attribute to send more than one mail message, or to send the results of a query within a single message.</p><a name="1971102"></a>
+<h4> GROUP</h4>
+<p>Optional. Specifies the query column to use when you group sets of records together to send as a single email message. For example, if you send a set of billing statements out to your customers, you might group on "Customer_ID." The GROUP attribute, which is case sensitive, eliminates adjacent duplicates in the case where the data is sorted by the specified field. See the Usage section for exceptions.</p><a name="2345518"></a>
+<h4> GROUPCASESENSITIVE</h4>
+<p>Optional. Boolean indicating whether to group with regard to case or not. The default value is YES; case is considered while grouping. If the <em>QUERY</em> attribute specifies a query object that was generated by a case-insensitive SQL query, set the <em>GROUPCASESENSITIVE </em>attribute to NO to keep the recordset intact. </p><a name="1971104"></a>
+<h4> STARTROW</h4>
+<p>Optional. Specifies the row in the query to start from.</p><a name="1971106"></a>
+<h4> SERVER</h4>
+<p>Required. The address of the SMTP server to use for sending messages. The server name specified in the ColdFusion Administrator is used if no server is specified.</p><a name="1971108"></a>
+<h4> PORT</h4>
+<p>The TCP/IP port on which the SMTP server listens for requests. This is almost always 25.</p><a name="1971110"></a>
+<h4> MAILERID</h4>
+<p>Optional. Specifies a mailer ID to be passed in the X-Mailer SMTP header, which identifies the mailer application. The default is Allaire ColdFusion Application Server.</p><a name="1971112"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. The number of seconds to wait before timing out the connection to the SMTP server.</p><a name="2374448"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfmail
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This view-only example shows the use of CFMAIL ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFMAIL Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;CFMAIL Example&lt;/H3&gt;
+&lt;P&gt;This view-only example shows the use of CFMAIL.  If your CFAS mail 
+settings are configured successfully and the comments are removed,
+you will be able to use this code to send simple email.
+&lt;!---  
+&lt;CFIF IsDefined("form.mailto")&gt;
+    &lt;CFIF form.mailto is not "" AND form.mailfrom is not "" AND
+      form.Subject is not ""&gt;
+    &lt;CFMAIL TO="#form.mailto#"
+            FROM="#form.mailFrom#"
+            SUBJECT="#form.subject#"&gt;
+            This message was sent by an
+            automatic mailer built with CFMAIL:
+            ====================================================
+            #form.body#
+    &lt;/CFMAIL&gt;    
+    &lt;H3&gt;Thank you&lt;/H3&gt;
+    &lt;P&gt;Thank you, &lt;CFOUTPUT&gt;#mailfrom#: your message, #subject#, has
+    been sent to #mailto#&lt;/CFOUTPUT&gt;.
+    &lt;/CFIF&gt;    
+&lt;/CFIF&gt;
+&lt;P&gt;
+&lt;FORM ACTION="cfmail.cfm" METHOD="POST"&gt;
+&lt;PRE&gt;
+TO:         &lt;INPUT TYPE="Text" NAME="MailTo"&gt;
+FROM:        &lt;INPUT TYPE="Text" NAME="MailFrom"&gt;
+SUBJECT:    &lt;INPUT TYPE="Text" NAME="Subject"&gt;
+&lt;hr&gt;
+MESSAGE BODY:
+&lt;TEXTAREA NAME="Body" COLS="40" ROWS="5" WRAP="VIRTUAL"&gt;&lt;/TEXTAREA&gt;
+&lt;/PRE&gt;
+&lt;!--- establish required fields ---&gt;
+&lt;INPUT TYPE="Hidden" NAME="MailTo_required" VALUE="You must enter a
+  recipient for this message"&gt;
+&lt;INPUT TYPE="Hidden" NAME="MailFrom_required" VALUE="You must enter a
+  sender for this message"&gt;
+&lt;INPUT TYPE="Hidden" NAME="Subject_required" VALUE="You must enter a
+  subject for this message"&gt;
+&lt;INPUT TYPE="Hidden" NAME="Body_required" VALUE="You must enter some text
+  for this message"&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" NAME=""&gt;
+&lt;/FORM&gt;  ---&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfmail
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_059.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_061.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

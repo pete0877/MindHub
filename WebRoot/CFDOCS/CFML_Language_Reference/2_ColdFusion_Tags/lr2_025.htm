@@ -1,0 +1,189 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFCOOKIE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_024.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_026.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998651"></a>
+ <H1>CFCOOKIE</H1>
+
+
+
+<p>Defines cookie variables, including expiration and security options.</p><a name="998669"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFCOOKIE NAME="cookie_name"
+    VALUE="text"
+    EXPIRES="period"
+    SECURE="Yes/No"
+    PATH="urls"
+    DOMAIN=".domain"&gt;
+</PRE><a name="998831"></a>
+<h4> NAME</h4>
+<p>Required. The name of the cookie variable.</p><a name="998835"></a>
+<h4> VALUE</h4>
+<p>Optional. The value assigned to the cookie variable.</p><a name="998839"></a>
+<h4> EXPIRES</h4>
+<p>Optional. Schedules the expiration of a cookie variable. Can be specified as a date (as in, 10/09/97), number of days (as in, 10, 100), NOW, or NEVER. Using NOW effectively deletes the cookie from the client's browser.</p><a name="998843"></a>
+<h4> SECURE</h4>
+<p>Optional. Indicates the variable has to transmit securely. If the browser does not support Secure Socket Layer (SSL) security, the cookie is not sent.</p><a name="998847"></a>
+<h4> PATH</h4>
+<p>Optional. Specifies the subset of URLs within the specified domain to which this cookie applies:</p><pre>PATH="/services/login"
+</pre><p>Separate multiple entries with a semicolon ( ; ).</p><a name="998851"></a>
+<h4> DOMAIN</h4>
+<p>Specifies the domain for which the cookie is valid and to which the cookie content can be sent. An explicitly specified domain must always start with a dot. This can be a subdomain, in which case the valid domains will be any domain names ending in this string. </p><p>For domain names ending in country codes (such as <code>.jp</code>, <code>.us</code>), the subdomain specification must contain at least three periods, for example, <code>.mongo.stateu.us</code>. In the case of special top level domains, only two periods are needed, as in <code>.allaire.com</code>. </p><p>When specifying a PATH value, you must include a valid DOMAIN.</p><p>Separate multiple entries with a semicolon ( ; ).</p><a name="1125014"></a>
+ 
+<H3>Usage</H3>
+<p>Cookies written with CFCOOKIE do not get written to the <code>cookies.txt</code> file until the browser session ends. Until the browser is closed, the cookie resides in memory. If you do not have an EXPIRES attribute in a CFCOOKIE, the cookie set exists only as long as the client browser is open. When the browser is closed, the cookie expires. It is never written to the <code>cookies.txt</code> file. </p><a name="2035604"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfcookie
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to set a CFCOOKIE variable,
+and also how to delete that variable ---&gt;
+
+&lt;!--- First select a group of users who have entered
+comments into the sample database ---&gt;
+&lt;CFQUERY NAME="GetAolUser" DATASOURCE="cfsnippets"&gt;
+SELECT EMail, FromUser, Subject, Posted
+FROM   Comments
+&lt;/CFQUERY&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFCOOKIE Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;CFCOOKIE Example&lt;/H3&gt;
+
+&lt;!--- if the URL variable delcookie exists,
+set the cookie's expiration date to NOW ---&gt;
+&lt;CFIF IsDefined("url.delcookie") is True&gt;
+    &lt;CFCOOKIE NAME="TimeVisited"
+    VALUE="#Now()#"
+    EXPIRES="NOW"&gt;        
+&lt;CFELSE&gt;
+&lt;!--- Otherwise, loop through the list of visitors,
+and stop when you match the string aol.com in the
+visitor's email address ---&gt;
+
+&lt;CFLOOP QUERY="GetAOLUser"&gt;
+    &lt;CFIF FindNoCase("aol.com", Email, 1) is not 0&gt;
+        &lt;CFCOOKIE NAME="LastAOLVisitor"
+        VALUE="#Email#"
+        EXPIRES="NOW" &gt;        
+    
+    &lt;/CFIF&gt;
+&lt;/CFLOOP&gt;
+
+&lt;!--- If the timeVisited cookie is not set,
+set a value ---&gt;
+
+    &lt;CFIF IsDefined("Cookie.TimeVisited") is False&gt;
+        &lt;CFCOOKIE NAME="TimeVisited"
+        VALUE="#Now()#"
+        EXPIRES="10"&gt;
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+&lt;!--- show the most recent cookie set ---&gt;
+&lt;CFIF IsDefined("Cookie.LastAOLVisitor") is "True"&gt;
+    &lt;P&gt;The last AOL visitor to view this site was
+    &lt;CFOUTPUT&gt;#Cookie.LastAOLVisitor#&lt;/CFOUTPUT&gt;, on
+    &lt;CFOUTPUT&gt;#DateFormat(COOKIE.TimeVisited)#&lt;/CFOUTPUT&gt;
+&lt;!--- use this link to reset the cookies ---&gt;
+&lt;P&gt;&lt;a href="cfcookie.cfm?delcookie=yes"&gt;Hide my tracks&lt;/A&gt;
+
+&lt;CFELSE&gt;
+    &lt;P&gt;No AOL Visitors have viewed the site lately.
+&lt;/CFIF&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfcookie
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_024.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_026.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

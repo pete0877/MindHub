@@ -1,0 +1,151 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Replace</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_203.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_205.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001901"></a>
+ <H1>Replace</H1>
+
+
+
+<p>Returns <em>string</em> with occurrences of <em>substring1</em><em> </em>being replaced with <em>substring2</em> in the specified scope.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>, <a href="../3_ColdFusion_Functions/lr3_206.htm#1001970">ReplaceNoCase</a>, <a href="../3_ColdFusion_Functions/lr3_205.htm#1001938">ReplaceList</a>, and <a href="../3_ColdFusion_Functions/lr3_207.htm#1002007">REReplace</a>.
+</p>
+
+<a name="1001904"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Replace</strong>(<em>string</em>, <em>substring1</em>, <em>substring2</em> [, <em>scope</em> ])
+</PRE><a name="1001906"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string.</p><a name="1001907"> </a>
+<h5 class="param"> substring1</h5>
+<p class="param">String to be replaced.</p><a name="1001908"> </a>
+<h5 class="param"> substring2</h5>
+<p class="param">String that should replace occurrences of substring1.</p><a name="1001909"> </a>
+<h5 class="param"> scope</h5>
+<p class="param">Defines how to complete the replace operation:</p><ul>
+<a name="1138130"> </a>
+<li><code>ONE</code> -- Replace only the first occurrence (default).
+
+<a name="1138131"> </a>
+</li>
+<li><code>ALL</code> -- Replace all occurrences.
+</li>
+</ul>
+<a name="1806868"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Replace
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of Replace ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Replace Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Replace Example&lt;/H3&gt;
+
+&lt;P&gt;The Replace function returns &lt;I&gt;string&lt;/I&gt; with 
+&lt;I&gt;substring1&lt;/I&gt; being replaced by &lt;I&gt;substring2&lt;/I&gt; in
+the specified scope.  This is a case-sensitive search.
+
+&lt;CFIF IsDefined("FORM.MyString")&gt;
+&lt;P&gt;Your original string, &lt;CFOUTPUT&gt;#FORM.MyString#&lt;/CFOUTPUT&gt;
+&lt;P&gt;You wanted to replace the substring &lt;CFOUTPUT&gt;#FORM.MySubstring1#
+  &lt;/CFOUTPUT&gt;
+with the substring &lt;CFOUTPUT&gt;#FORM.MySubstring2#&lt;/CFOUTPUT&gt;.
+&lt;P&gt;The result: &lt;CFOUTPUT&gt;#Replace(FORM.myString,
+FORM.MySubstring1, FORM.mySubString2)#&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+...
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Replace
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_203.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_205.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

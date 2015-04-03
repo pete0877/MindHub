@@ -1,0 +1,302 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Uploading Files</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 14	:&nbsp;&nbsp;Managing Files on the Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997367"></a>
+ <H1>Uploading Files</H1>
+
+
+
+<p>File uploading requires that you create two files:</p><ul>
+<li>An HTML form to enter file upload information
+
+</li>
+<li>An action page containing the file upload code
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an HTML file to specify file upload information:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Specify File to Upload&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;Specify File to Upload&lt;/H2&gt;
+&lt;FORM     ACTION="uploadfileaction.cfm" 
+<span class="codemark">                        ENCTYPE="multipart/form-data" 
+</span>        METHOD="post"&gt;
+&lt;P&gt;Enter the complete path and filename of the file to upload:
+    &lt;INPUT     TYPE="file"
+            NAME="FiletoUpload"
+            SIZE="45"&gt;
+&lt;/P&gt;
+    &lt;INPUT     TYPE="submit"
+            VALUE"Upload"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>uploadfileform.cfm</code> in <code>myapps</code> under the Web root directory.
+
+</li>
+</ol>
+<a name="1057017"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><pre>&lt;FORM     ACTION="uploadfileaction.cfm" 
+        ENCTYPE="multipart/form-data" 
+        METHOD="post"&gt;
+</pre></td><td valign="top">
+Create a form that contains file selection fields for upload by the user.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>    &lt;INPUT     TYPE="file"
+            NAME="FiletoUpload"
+            SIZE="45"&gt;
+</pre></td><td valign="top">
+Allow the user to input a field. (The File input type automatically includes a Browse button to allow the user to look for the file instead of entering the entire path and file name.)
+</td></tr>
+
+</table>
+</div>
+</H3>
+<p>HTML forms can be designed in most browsers to give users the ability to upload files. Setting the HTML INPUT tag type to "file" instructs the browser to prepare to read and transmit a file from the user's system to your server. Setting the ENCTYPE FORM attribute to "multipart/form-data" tells the server that the form submission contains an uploaded file.</p><p>The user can enter a file path or browse the system and pick a file to send.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an action page to upload the file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+</pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Upload File&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;body&gt;
+&lt;H2&gt;Upload File&lt;/H2&gt;
+
+&lt;CFFILE ACTION="UPLOAD"
+        DESTINATION="c:\inetpub\wwwroot\HR\"
+        NAMECONFLICT="Overwrite"
+        FILEFIELD="FiletoUpload"&gt;
+        
+
+&lt;CFOUTPUT&gt;
+You uploaded the file #File.ClientFileName#.#File.ClientFileExt# 
+successfully to
+#File.ServerDirectory#\#File.ServerFileName#.#File.ServerFileExt#.
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Change the following line to point to an appropriate location on your server:
+
+<pre>DESTINATION="c:\inetpub\wwwroot\HR\"
+</pre></li>
+<li>Save the file as <code>uploadfileaction.cfm</code> in <code>myapps</code> under the Web root directory.
+
+</li>
+<li>View <code>uploadfileform.cfm</code> in your browser, enter values and submit the form.
+
+</li>
+<li>The file you specified is uploaded.
+
+</li>
+</ol>
+<a name="1058082"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFFILE ACTION="UPLOAD"
+</PRE></td><td valign="top">
+Prepare to upload a file to the server.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>DESTINATION="c:\inetpub\wwwroot\HR\"
+</pre></td><td valign="top">
+Specify the destination of the file.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>        NAMECONFLICT="Overwrite"
+</pre></td><td valign="top">
+If the file already exists, overwrite it.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>        FILEFIELD="FiletoUpload"&gt;
+</pre></td><td valign="top">
+Specify the name of the file to upload. <strong>Note that you do not enclose the variable in pound signs.</strong>
+</td></tr>
+
+</table>
+</div>
+</H3>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This example performs no error checking and does not incorporate any 
+security measures. Before deploying an application that performs file 
+uploads, be sure to incorporate both error handling and security.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="997418"></a>
+ 
+<H2>Resolving conflicting file names</H2>
+<p>When a file is saved to the server, there is a risk that another file may already exist with the same name. In the event of this occurrence, there are a number of actions you can take using the NAMECONFLICT attribute. For example, you can specify the parameter NAMECONFLICT="MAKEUNIQUE" in the CFFILE tag to create a unique file name while keeping the file extension the same.</p><a name="997429"></a>
+ 
+<H2>Controlling the type of file uploaded</H2>
+<p>For some applications, you might want to restrict the type of file that is uploaded. For example, you may not want to accept graphic files in a document library.</p><p>The ACCEPT attribute is used to restrict the type of file that will be allowed in an upload. When an ACCEPT qualifier is present, the uploaded file's MIME content type must match the criteria specified or an error will occur. ACCEPT takes a comma-separated list of MIME data names, optionally with wildcards.</p><p>A file's MIME type is determined by the browser. Common types, like "image/gif" and "text/plain", are registered in your browser.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Not all browsers support MIME type associations.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="997437"></a>
+ 
+<H3>Example: Restricting file types</H3>
+<p>This CFFILE specification will only save an image file that is in the GIF format:</p><pre>&lt;CFFILE ACTION="Upload"
+    FILEFIELD="UploadFile"
+    DESTINATION="c:\uploads\MyImage.GIF"
+    NAMECONFLICT="OVERWRITE"
+    ACCEPT="image/gif"&gt;
+</pre><p>This CFFILE specification will only save an image file that is either a GIF or a JPEG    :</p><pre>&lt;CFFILE ACTION="Upload"
+    FILEFIELD="UploadFile"
+    DESTINATION="c:\uploads\MyImage.GIF"
+    NAMECONFLICT="OVERWRITE"
+    ACCEPT="image/gif, image/jpeg"&gt;
+</pre><p>This CFFILE specification will only save an image file, but the format doesn't matter:</p><pre>&lt;CFFILE ACTION="Upload"
+    FILEFIELD="UploadFile"
+    DESTINATION="c:\uploads\MyImage.GIF"
+    NAMECONFLICT="OVERWRITE"
+    ACCEPT="image/*"&gt;
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Any file will be saved if ACCEPT is omitted, left empty, or contains "*/*". 
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

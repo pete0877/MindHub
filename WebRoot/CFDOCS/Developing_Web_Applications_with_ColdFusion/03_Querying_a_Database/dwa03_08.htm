@@ -1,0 +1,182 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building Queries</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018933"></a>
+ <H1>Building Queries</H1>
+
+
+
+<p>As discussed earlier in this chapter, you build queries using the CFQUERY tag and SQL.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To query the table:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page.
+
+
+</li>
+<li>Edit the page so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Employee List&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;Employee List&lt;/H1&gt;
+<span class="codemark">&lt;CFQUERY NAME="EmpList" DATASOURCE="CompanyInfo"&gt;
+</span><span class="codemark">    SELECT FirstName, LastName, Salary, Contract
+</span><span class="codemark">    FROM Employees
+</span><span class="codemark">&lt;/CFQUERY&gt;
+</span><strong>&lt;</strong>/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>emplist.cfm</code> in <code>myapps</code> under the Web root directory. For example, the directory path on your machine may be:
+
+<p><code>C:\INETPUB\WWWROOT\myapps</code> on Windows NT
+</p></li>
+<li>Return to your browser and enter the following URL to view <code>EmpList.cfm</code>:
+
+</pre><pre>http://127.0.0.1/myapps/emplist.cfm
+</pre></li>
+<li>View source in the browser.
+
+<p>The ColdFusion EmpList data set is created by ColdFusion Server, but only HTML 
+and text is sent back to the browser. To display the data set on the page, you must 
+code tags and variables to output the data.
+</p></li>
+</ol>
+<a name="1019897"></a>
+ 
+<H3>Code Review</H3>
+<p>The query you just created retrieves data from the CompanyInfo database.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFQUERY NAME="EmpList" 
+DATASOURCE="CompanyInfo"&gt;
+</PRE></td><td valign="top">
+Query the database specified in the CompanyInfo datasource
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>SELECT FirstName, LastName, 
+Salary, Contract
+FROM Employees
+</PRE></td><td valign="top">
+Get information from the FirstName, LastName, Salary, and Contract fields in the Employees table
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;/CFQUERY&gt;
+</PRE></td><td valign="top">
+End the CFQUERY block
+</td></tr>
+
+</table>
+</div>
+</p><a name="1012177"></a>
+ 
+<H2>Query Notes and Considerations</H2>
+<p>When creating queries to retrieve data, keep these guidelines in mind:</p><ul>
+<li>Enter the query NAME and DATASOURCE attributes in the begin CFQUERY tag.
+
+</li>
+<li>Surround attribute settings with double quotes(").
+</li>
+<li>Reference the query data by naming the query in the CFOUTPUT tag later on the page.
+</li>
+<li>Make sure that a data source exists in the ColdFusion Administrator before you reference iit n a CFQUERY tag.
+</li>
+<li>The SQL that you write is sent to the database and performs the actual data retrieval.
+</li>
+<li>Columns and tables that you refer to in your SQL statement must exist, otherwise the query will fail. 
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

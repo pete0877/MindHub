@@ -1,0 +1,181 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>TimeFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_236.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_239.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1002525"></a>
+ <H1>TimeFormat</H1>
+
+
+
+<p>Returns a custom-formatted time value. If no mask is specified, the TimeFormat function returns time value using the <em>hh:mm tt</em> format.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_065.htm#997777">CreateTime</a>, <a href="../3_ColdFusion_Functions/lr3_184.htm#1001277">Now</a>, and <a href="../3_ColdFusion_Functions/lr3_188.htm#1001568">ParseDateTime</a>.
+</p>
+
+<a name="1002528"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>TimeFormat</strong>(<em>time</em> [, <em>mask</em> ])
+</PRE><a name="1002530"> </a>
+<h5 class="param"> time</h5>
+<p class="param">Any date/time value or string convertible to a time value.</p><a name="1002531"> </a>
+<h5 class="param"> mask</h5>
+<p class="param">A set of masking characters determining the format:</p><ul>
+<a name="1138390"> </a>
+<li><code>h</code> -- Hours with no leading zero for single-digit hours. (Uses a 12-hour clock.)
+
+<a name="1138405"> </a>
+</li>
+<li><code>hh</code> -- Hours with a leading zero for single-digit hours. (Uses a 12-hour clock.)
+<a name="1138429"> </a>
+</li>
+<li><code>H</code> -- Hours with no leading zero for single-digit hours. (Uses a 24-hour clock.)
+<a name="1138430"> </a>
+</li>
+<li><code>HH</code> -- Hours with a leading zero for single-digit hours. (Uses a 24-hour clock.)
+<a name="1138431"> </a>
+</li>
+<li><code>m</code> -- Minutes with no leading zero for single-digit minutes
+<a name="1138432"> </a>
+</li>
+<li><code>mm</code> -- Minutes with a leading zero for single-digit minutes
+<a name="1138433"> </a>
+</li>
+<li><code>s</code> -- Seconds with no leading zero for single-digit seconds 
+<a name="1138434"> </a>
+</li>
+<li><code>ss</code> -- Seconds with a leading zero for single-digit seconds 
+<a name="1138435"> </a>
+</li>
+<li><code>t</code> -- Single-character time marker string, such as A or P 
+<a name="1138436"> </a>
+</li>
+<li><code>tt</code> -- Multiple-character time marker string, such as AM or PM 
+</li>
+</ul>
+<a name="1002542"></a>
+ 
+<H3>Usage</H3>
+<p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><a name="1808644"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="TimeFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the various types of output
+possible with TimeFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+TimeFormat Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;CFSET todayDate = #Now()#&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;TimeFormat Example&lt;/H3&gt;
+
+&lt;P&gt;Today's date is &lt;CFOUTPUT&gt;#todayDate#&lt;/CFOUTPUT&gt;.
+
+&lt;P&gt;Using Timeformat, we can display that date/time value
+in a number of different ways:
+&lt;CFOUTPUT&gt;
+&lt;UL&gt;
+    &lt;LI&gt;#TimeFormat(todayDate)#
+    &lt;LI&gt;#TimeFormat(todayDate, "hh:mm:ss")#
+    &lt;LI&gt;#TimeFormat(todayDate, "hh:mm:sst")#
+    &lt;LI&gt;#TimeFormat(todayDate, "hh:mm:sstt")#
+    &lt;LI&gt;#TimeFormat(todayDate, "HH:mm:ss")#
+&lt;/UL&gt;
+    
+&lt;/CFOUTPUT&gt;    
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="TimeFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_236.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_239.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

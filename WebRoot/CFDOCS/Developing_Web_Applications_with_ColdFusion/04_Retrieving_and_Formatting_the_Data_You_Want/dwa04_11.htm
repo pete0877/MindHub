@@ -1,0 +1,195 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building Flexible Search Interfaces</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Retrieving and Formatting the Data You Want</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1017177"></a>
+ <H1>Building Flexible Search Interfaces</H1>
+
+
+
+<p>Frequently, you will want users to optionally enter multiple search criteria.</p><p>Wrap conditional logic around the SQL AND clause to build a flexible search interface. To test for multiple conditions, wrap additional CFIF tags around additional AND clauses.</p><p>For example, to allow users to search for employees by last name, department, or both, you would build a query that looks like this:</p><pre>&lt;CFQUERY NAME="GetEmployees" DATASOURCE="CompanyInfo"&gt; 
+    SELECT  Departments.Department.Name,
+    Employees.FirstName,
+    Employees.LastName,
+    Employees.StartDate,
+    Employees.Salary
+    FROM Departments, Employees
+    WHERE 1=1
+    &lt;CFIF Form.LastName IS NOT ""&gt;
+    AND Employees.LastName = 'Form.LastName'
+    &lt;/CFIF&gt;
+&lt;/CFQUERY&gt;
+</pre><a name="1017940"></a>
+ 
+<H2>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><pre>SELECT  Departments.Department.Name,
+    Employees.FirstName,
+    Employees.LastName,
+    Employees.StartDate,
+    Employees.Salary
+    FROM Departments, Employees
+WHERE 1=1
+</pre></td><td valign="top">
+Retrieve the fields listed from the Departments and Employees tables, joining the tables based on the Department_ID field in each table.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>&lt;CFIF Form.LastName IS NOT ""&gt;
+AND Employees.LastName = 'Form.LastName'
+&lt;/CFIF&gt;
+</pre><PRE>
+</PRE></td><td valign="top">
+But if the user specified a last name in the form, only retrieve the records where the last name is the same as the one the user entered in the form.
+</td></tr>
+
+</table>
+</div>
+</H2>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To build a flexible search interface:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Return to <code>actionpage.cfm</code> in Studio.
+
+
+</li>
+<li>Modify the page so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Retrieving Employee Data Based on Criteria from Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="CompanyInfo"&gt;
+<span class="codemark">SELECT  Departments.Department.Name,
+</span><span class="codemark">Employees.FirstName,
+</span><span class="codemark">Employees.LastName,
+</span><span class="codemark">Employees.StartDate,
+</span><span class="codemark">Employees.Salary
+</span><span class="codemark">FROM Departments, Employees
+</span><span class="codemark">WHERE Departments.Department_ID = Employees.Department_ID
+</span><span class="codemark">&lt;CFIF Form.Department_Name IS NOT ""&gt;
+</span><span class="codemark">AND Departments.Department_Name = 'Form.Department_Name'
+</span><span class="codemark">&lt;/CFQUERY&gt;
+</span>&lt;H4&gt;Employee Data Based on Criteia from Form&lt;/H4&gt;
+&lt;TABLE&gt;
+&lt;TR&gt;
+    &lt;TH&gt;First Name&lt;/TH&gt;
+    &lt;TH&gt;Last Name&lt;/TH&gt;
+</pre><pre>    &lt;TH&gt;Salary&lt;/TH&gt;
+&lt;/TR&gt;
+&lt;CFOUTPUT QUERY="GetEmployees"&gt;
+&lt;TR&gt;
+    &lt;TD&gt;#FirstName#&lt;/TD&gt;
+    &lt;TD&gt;#LastName#&lt;/TD&gt;
+    &lt;TD&gt;#Salary#&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/TABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file.
+
+</li>
+<li>Test the search interface in your browser.
+
+<p>The returned records will not be displayed because you have not entered that code 
+yet, however, you will see the number of records returned if you have debugging 
+enabled. 
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:42 -->
+</body>
+</html>

@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ToBase64</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_238.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_240.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2583123"></a>
+ <H1>ToBase64</H1>
+
+
+
+<p>Returns the Base 64 representation of the <em>string or binary object. Base64 is a format that uses printable characters, allowing binary data to be sent in forms and Email, and stored in a database or file.</em></p><p>
+ See also <a href="../2_ColdFusion_Tags/lr2_030.htm#1968394">CFFILE</a> for information about loading and reading binary data, <a href="../2_ColdFusion_Tags/lr2_103.htm#1974081">CFWDDX</a> for information about serializing and deserializing binary data, and <a href="../3_ColdFusion_Functions/lr3_126.htm#2571594">IsBinary</a> and <a href="../3_ColdFusion_Functions/lr3_240.htm#2583224">ToBinary</a> for checking for binary data and converting a Base 64 object to binary form.
+</p>
+
+<a name="2583644"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ToBase64</strong>(<em>string or binary_object</em>)
+</PRE><a name="2583134"> </a>
+<h5 class="param"> string or binary_object</h5>
+<p class="param">String or binary object that is to be converted to Base 64.</p><a name="2584366"></a>
+ 
+<H3>Usage</H3>
+<p>Base 64 provides 6 bit encoding of 8-bit ASCII characters. Because high ASCII values and binary objects are not safe for transport over internet protocols such as HTTP and SMTP, ColdFusion offers Base 64 as a means to safely send ASCII and binary data over these protocols. </p><p>In addition, Base 64 allows you to store binary objects in a database if you convert the data into Base 64 first.</p><a name="2583136"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ToBase64
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of ToBinary and ToBase64 ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+ToBase64 Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BASEFONT FACE="Arial, Helvetica" SIZE=2&gt;
+&lt;BODY  bgcolor="#FFFFD5"&gt;
+
+&lt;H3&gt;ToBase64 Example&lt;/H3&gt;
+
+&lt;!----------------------------------------------------------------------
+Initialize data.
+-----------------------------------------------------------------------&gt;
+&lt;CFSET charData =""&gt;
+&lt;!----------------------------------------------------------------------
+Create a string of all ASCII characters (32-255) and concatenate them 
+together.
+-----------------------------------------------------------------------&gt;
+&lt;CFLOOP index="data" from="32" to="255"&gt;
+    &lt;CFSET ch=chr(data)&gt;
+    &lt;CFSET charData=charData &amp; ch&gt;
+&lt;/CFLOOP&gt;
+&lt;P&gt;
+The following string is the concatenation of all characters (32 to 255) 
+from the ASCII table.&lt;BR&gt;
+&lt;CFOUTPUT&gt;#charData#&lt;/CFOUTPUT&gt;
+&lt;/P&gt;
+&lt;!----------------------------------------------------------------------
+Create a Base 64 representation of this string.
+-----------------------------------------------------------------------&gt;
+&lt;CFSET data64=toBase64(charData)&gt;
+
+&lt;!----------------------------------------------------------------------
+Convert string to binary.
+-----------------------------------------------------------------------&gt;
+&lt;CFSET binaryData=toBinary(data64)&gt;
+&lt;!----------------------------------------------------------------------
+Convert binary back to Base 64.
+-----------------------------------------------------------------------&gt;
+&lt;CFSET another64=toBase64(binaryData)&gt;
+&lt;!----------------------------------------------------------------------
+Compare another64 with data64 to ensure that they are equal.
+-----------------------------------------------------------------------&gt;
+&lt;CFIF another64 eq data64&gt;
+    &lt;H3&gt;Base 64 representations are identical.&lt;/H3&gt;
+&lt;CFELSE&gt;
+    &lt;H3&gt;Conversion error.&lt;/H3&gt;
+&lt;/CFIF&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ToBase64
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_238.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_240.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

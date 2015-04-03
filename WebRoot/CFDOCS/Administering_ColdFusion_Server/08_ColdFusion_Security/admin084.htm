@@ -1,0 +1,99 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>To Learn More About Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_ColdFusion_Security/admin083.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Configuring_Basic_Security/admin09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;ColdFusion Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1008409"></a>
+ <H1>To Learn More About Security</H1>
+
+
+
+<p>Security at the speed of the Web changes more frequently and over a broader spectrum than can be covered here. Allaire is dedicated to educating its customers about new security information as it becomes available.</p><p>Visit the Allaire Security Zone (http://www.allaire.com/developer/securityzone/) to read Allaire's latest security bulletins and technical briefs that provide information about issues Allaire believes are significant. The Security Zone also contains an extensive list of non-Allaire sites where you can go to learn about everything from security standards and protocols to the most recent security bulletins from companies like Netscape, Microsoft, and Sun.</p><p>To learn how to configure ColdFusion Server with Basic or Advanced Security, continue on to the next two chapters in this book:</p><ul>
+<a name="1008413"> </a>
+<li><a href="../09_Configuring_Basic_Security/admin09.htm#997347">Chapter 9, &quot;Configuring Basic Security&quot;</a>
+
+<a name="1009602"> </a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin10.htm#997347">Chapter 10, &quot;Configuring Advanced Security&quot;</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_ColdFusion_Security/admin083.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Configuring_Basic_Security/admin09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:04 -->
+</body>
+</html>

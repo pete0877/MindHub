@@ -1,0 +1,237 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>DateCompare</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_068.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_070.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997918"></a>
+ <H1>DateCompare</H1>
+
+
+
+<p>Performs a full date/time comparison of two dates. Returns -1 if <em>date1</em> is less than <em>date2</em>; returns 0 if <em>date1</em> is equal to <em>date2</em>; returns 1 if <em>date1</em> is greater than <em>date2</em>. See the description of <em>datePart </em>for information on specifying the precision of the comparison.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a> and <a href="../3_ColdFusion_Functions/lr3_073.htm#998081">DatePart</a>.
+</p>
+
+<a name="997921"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>DateCompare</strong>(<em>date1</em>, <em>date2 </em>[, <em>datePart</em>])
+</PRE><a name="2562572"> </a>
+<h5 class="param"> date1</h5>
+<p class="param">Date/time object in the period from 100 AD to 9999 AD. </p><a name="2562574"> </a>
+<h5 class="param"> date2</h5>
+<p class="param">Date/time object in the period from 100 AD to 9999 AD.</p><a name="1690311"> </a>
+<h5 class="param"> datePart</h5>
+<p class="param">Optional. The precision of the comparison. This parameter can have any of the following values:</p><ul>
+<a name="1690339"> </a>
+<li>s - precise to the second.
+
+<a name="1690343"> </a>
+</li>
+<li>n- precise to the minute.
+<a name="1690344"> </a>
+</li>
+<li>h- precise to the hour.
+<a name="1690345"> </a>
+</li>
+<li>d- precise to the day.
+<a name="1690346"> </a>
+</li>
+<li>m- precise to the month.
+<a name="1690347"> </a>
+</li>
+<li>yyyy- precise to the year.
+</li>
+</ul>
+<p class="param">By default, precision is to the second. </p><a name="997925"></a>
+ 
+<H3>Usage</H3>
+<p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><p>Years from 0 to 29 are interpreted as 21<sup>st</sup> century values. Years 30 to 99 are interpreted as 20<sup>th</sup> century values.</p><a name="1800327"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DateCompare
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of datecompare ---&gt;
+&lt;HTML&gt;
+
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+DateCompare Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;basefont face="Arial, Helvetica" size=2&gt;
+
+&lt;H3&gt;DateCompare Example&lt;/H3&gt;
+
+&lt;P&gt;The datecompare function compares two date/time values.
+
+&lt;CFIF IsDefined("FORM.date1")&gt;
+
+    &lt;CFIF IsDate(FORM.date1) and IsDate(FORM.date2)&gt;
+
+        &lt;CFSET comparison = DateCompare(FORM.date1, FORM.date2, 
+FORM.precision)&gt;
+
+&lt;!--- switch on the variable to give various responses ---&gt;
+        &lt;CFSWITCH EXPRESSION=#comparison#&gt;
+            &lt;CFCASE VALUE="-1"&gt;
+                &lt;H3&gt;&lt;CFOUTPUT&gt;#DateFormat(FORM.date1)# 
+                #TimeFormat(FORM.date1)#&lt;/CFOUTPUT&gt; (Date 1) is
+                earlier than &lt;CFOUTPUT&gt;#DateFormat(FORM.date2)#
+                #TimeFormat(FORM.date2)#&lt;/CFOUTPUT&gt; (Date 2)&lt;/H3&gt;
+                &lt;I&gt;The dates are not equal&lt;/I&gt;
+            &lt;/CFCASE&gt;
+            &lt;CFCASE VALUE="0"&gt;
+                &lt;H3&gt;&lt;CFOUTPUT&gt;#DateFormat(FORM.date1)#
+                #TimeFormat(FORM.date1)#&lt;/CFOUTPUT&gt; (Date 1) is equal
+                to &lt;CFOUTPUT&gt;#DateFormat(FORM.date2)#
+                #TimeFormat(FORM.date2)#&lt;/CFOUTPUT&gt; (Date 2)&lt;/H3&gt;
+                &lt;I&gt;The dates are equal!&lt;/I&gt;
+            &lt;/CFCASE&gt;
+            &lt;CFCASE VALUE="1"&gt;
+                &lt;H3&gt;&lt;CFOUTPUT&gt;#DateFormat(FORM.date1)#
+                #TimeFormat(FORM.date1)#&lt;/CFOUTPUT&gt; (Date 1) is later
+                than &lt;CFOUTPUT&gt;#DateFormat(FORM.date2)#
+                #TimeFormat(FORM.date2)#&lt;/CFOUTPUT&gt; (Date 2)&lt;/H3&gt;
+                &lt;I&gt;The dates are not equal&lt;/I&gt;
+            &lt;/CFCASE&gt;
+            &lt;CFDEFAULTCASE&gt;
+                &lt;H3&gt;This is the default case&lt;/H3&gt;
+            &lt;/CFDEFAULTCASE&gt;
+        &lt;/CFSWITCH&gt;
+
+    &lt;CFELSE&gt;
+        &lt;H3&gt;Please enter two valid date values&lt;/H3&gt;
+
+    &lt;/CFIF&gt;
+
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="datecompare.cfm" METHOD="POST"&gt;
+&lt;hr size="2" color="#0000A0"&gt;
+&lt;P&gt;Date 1
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="date1" VALUE="&lt;CFOUTPUT&gt;#DateFormat(Now())# 
+#TimeFormat(Now())#
+&lt;/CFOUTPUT&gt;"&gt;
+
+&lt;P&gt;Date 2
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="date2" VALUE="&lt;CFOUTPUT&gt;#DateFormat(Now())# 
+#TimeFormat(Now())#
+&lt;/CFOUTPUT&gt;"&gt;
+
+&lt;P&gt;Specify precision to the:
+&lt;BR&gt;&lt;select NAME="precision"&gt;
+            &lt;option VALUE="s"&gt;
+                Second
+            &lt;/OPTION&gt;    
+            &lt;option VALUE="n"&gt;
+                Minute
+            &lt;/OPTION&gt;    
+            &lt;option VALUE="h"&gt;
+                Hour
+            &lt;/OPTION&gt;    
+            &lt;option VALUE="d"&gt;
+                Day
+            &lt;/OPTION&gt;
+            &lt;option VALUE="m"&gt;
+                Month
+            &lt;/OPTION&gt;    
+            &lt;option VALUE="yyyy"&gt;
+                Year
+            &lt;/OPTION&gt;                                                    
+    &lt;/select&gt;
+
+&lt;P&gt;&lt;INPUT TYPE="Submit" VALUE="Compare these dates" NAME=""&gt; 
+&lt;INPUT TYPE="RESET"&gt;
+
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DateCompare
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_068.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_070.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,278 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Populating and Indexing a Collection</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997541"></a>
+ <H1>Populating and Indexing a Collection</H1>
+
+
+
+<p>At this point, the new collection is just an empty shell. To populate the collection with indexed data, you can use either of two methods:</p><ul>
+<li>The CF Administrator
+
+</li>
+<li>The CFINDEX tag
+<p>You can use the Verity Wizard in ColdFusion Studio to create the templates to 
+make yur documents searchable. To run the wizard, click File &gt; New and select 
+the Verity Wizard from the CFML tab of the New Document dialog.
+</p></li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can index and search against Verity collections created outside of 
+ColdFusion by using the EXTERNAL attribute of CFINDEX and 
+CFSEARCH.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1009951"></a>
+ 
+<H2>Selecting an indexing method</H2>
+<p>Use the following guidelines to determine which method to use.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Using the CF Administrator or CFINDEX&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Use the Administrator if</strong>
+</th><th align="left">
+<strong>Use the CFINDEX tag if</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+You want to index document files.
+</td><td valign="top">
+You want to index ColdFusion query results.
+</td></tr>
+<tr valign="top"><td valign="top">
+The collection won't be updated very frequently.
+</td><td valign="top">
+You need to dynamically populate or update a collection from a ColdFusion application page.
+</td></tr>
+<tr valign="top"><td valign="top">
+You want to generate the collection without writing any CFML code.
+</td><td valign="top">
+Your collection needs to be updated frequently.
+</td></tr>
+<tr valign="top"><td valign="top">
+You want to generate a one-time collection.
+</td><td valign="top">
+Your collection needs to be updated by other people.
+</td></tr>
+
+</table>
+</div>
+</p><a name="997566"></a>
+ 
+<H3>Using ColdFusion Administrator</H3>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use ColdFusion Administrator to index a collection:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select a collection name in the Verity Collections box.
+
+
+</li>
+<li>Click Index to open the index page. The selected collection name appears at the top of the page.
+
+</li>
+<li>Enter a single file type or multiple file types separated by commas.
+
+</li>
+<li>Type in the directory path for the collection or click Browse Server and navigate to the directory in which to begin the index.
+
+</li>
+<li>Check the Recursively index subdirectories box if you want to extend the indexing operation to all directories below the selected path.
+
+</li>
+<li>Optionally, you can enter a Return URL to prepend to all indexed files. This allows you to easily create a link to any of the files in the index. A typical entry might be something like<code> http://localhost/wwwroot/</code>.
+
+</li>
+<li>If the International Language Search Pack is installed, you can select one of the supported languages.
+
+</li>
+<li>Click Update to begin the indexing process. The time required to generate the index depends on the number and size of the selected files in the path.
+
+</li>
+</ol>
+<p>As you can see, this interface allows you to easily build a very specific index based on the file extension and path information you enter. In most cases, you do not need to change your server file structures to accommodate the generation of indices.</p><p>In your ColdFusion application, you can populate and search multiple collections, each of which can be designed to focus on a specific group of documents or queries, according to subject, document type, location, or any other logical grouping. Searches can be performed against multiple collections, giving you lots of flexibility in designing your search interface.</p><a name="1214637"></a>
+ 
+<H3>Using CFINDEX</H3>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To select which collection to index:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Select the Collection to Index&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;H2&gt;Pick which index you want to build&lt;/H2&gt;
+
+&lt;FORM METHOD="Post" ACTION="collectionindexaction.cfm"&gt;
+    &lt;P&gt;Enter the collection you want to populate:
+    &lt;INPUT TYPE="text" NAME="IndexColl" SIZE="25" MAXLENGTH="35"&gt;&lt;/P&gt;
+    &lt;P&gt;Enter the location of the files in the collection:
+    &lt;INPUT TYPE="text" NAME="IndexDir" SIZE="50" MAXLENGTH="100"&gt;&lt;/P&gt;
+
+    &lt;INPUT TYPE="submit" NAME="submit" VALUE="Index"&gt; 
+
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>collectionindexform.cfm</code>
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use CFINDEX to index a collection:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Creating Index&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H2&gt;Indexing Complete&lt;/H2&gt;
+
+&lt;CFINDEX COLLECTION="#Form.IndexColl#"
+    KEY="#Form.IndexDir#"
+    ACTION="REFRESH"
+    TYPE="PATH"
+    URLPATH="#Form.IndexDir#"
+    EXTENSIONS=".htm, .html"
+    RECURSE="Yes"
+    LANGUAGE="English"&gt;
+
+&lt;CFOUTPUT&gt;
+    The collection #Form.IndexColl# has been indexed.
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>collectionindexaction.cfm</code>
+
+</li>
+<li>View <code>collectionindexform.cfm</code> in your browser, enter values, and then click Index.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

@@ -1,0 +1,210 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Query Expressions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1218345"></a>
+ <H1>Using Query Expressions</H1>
+
+
+
+<p>When you search a Verity collection, you use the CFSEARCH tag in a ColdFusion application page. Use the CRITERIA attribute to specify the query expression you want to pass to the search engine.</p><p>You can build two types of query expressions: simple and explicit. A simple query expression is typically a word or words. An explicit query expression can employ a number of operators and modifiers to refine the search. Although an explicit query can employ operators and modifiers, all aspects of the search must be explicitly invoked. A simple query expression is somewhat more powerful since it employs operators by default. You can assemble an explicit query expression programmatically or simply pass a simple query expression to the search engine directly from an HTML input form.</p><p>The Verity query language provides many operators and modifiers for composing queries. The following search techniques can be used in searching a Verity collection:</p><ul>
+<li>Word searches
+
+</li>
+<li>Proximity searches
+</li>
+<li>Concept-based
+</li>
+<li>Field searches in which documents are match based on matching predefined custom attributes
+</li>
+<li>Scoring operators
+</li>
+</ul>
+<a name="997813"></a>
+ 
+<H2>Simple query expressions</H2>
+<p>Simple queries allow end users to enter simple, comma-delimited strings and use wildcard characters. You can enter multiple words separated by commas, in which case the comma is treated like a logical OR. If you omit the commas, the query expression is treated as a phrase.</p><p>Ordinarily, operators are employed in explicit query expressions. Operators are normally surrounded by angle brackets &lt; &gt;. However, you can use the AND, OR, and NOT operators in a simple query without using angle brackets.</p><p>A simple query employs the STEM operator and the MANY modifier. STEM searches for words that derive from those entered in the query expression, so that entering "find" will return documents that contain "find," "finding," "finds," etc. The MANY modifier forces the documents returned in the search to be presented in a list based on a relevancy score.</p><a name="997829"></a>
+ 
+<H2>Explicit query expressions</H2>
+<p>Explicit queries can be constructed using a variety of operators, which are described below. Most operators in an explicit query expression are surrounded by angle brackets &lt; &gt;. You can use the AND, OR, and NOT operators without angle brackets.</p><a name="997836"></a>
+ 
+<H2>Expression syntax</H2>
+<p>You can use either simple or explicit syntax when stating simple query syntax. The syntax you use determines whether the search words you enter will be stemmed, and whether the words that are found will contribute to relevance-ranked scoring.</p><a name="997839"></a>
+ 
+<H3>Simple syntax</H3>
+<p>When you use simple syntax, the search engine implicitly interprets single words as if they were modified by the MANY and STEM operators. By implicitly applying the MANY modifier, the search engine calculates each document's score based on the density of the search term in the searched documents. The more frequent the occurrence of a word in a document, the higher the document's score.</p><p>As a result, the search engine ranks documents according to word density as it searches for the word you specify, as well as words that have the same stem. For example, "films," "filmed," and "filming" are stemmed variations of the word "film." To search for documents containing the word "film" and its stem words, you can enter the word "film" without modification. When documents are ranked by relevance, they appear in a list with the most relevant documents at the top.</p><a name="997843"></a>
+ 
+<H3>Explicit syntax</H3>
+<p>When you use explicit syntax, the search engine interprets the search terms you enter as literals. For example, by entering the word "film" (including quotation marks) using explicit syntax, the stemmed versions of the word "film", "films," "filmed," and "filming" are ignored.</p><p>The following table shows all operators available for conducting searches of ColdFusion Verity collections.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Verity Search Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+&lt;
+</td><td valign="top">
+CONTAINS
+</td><td valign="top">
+PHRASE
+</td></tr>
+<tr valign="top"><td valign="top">
+&lt;=
+</td><td valign="top">
+ENDS
+</td><td valign="top">
+SENTENCE
+</td></tr>
+<tr valign="top"><td valign="top">
+=
+</td><td valign="top">
+MATCHES
+</td><td valign="top">
+STARTS
+</td></tr>
+<tr valign="top"><td valign="top">
+&gt;
+</td><td valign="top">
+NEAR
+</td><td valign="top">
+STEM
+</td></tr>
+<tr valign="top"><td valign="top">
+&gt;=
+</td><td valign="top">
+NEAR/N
+</td><td valign="top">
+SUBSTRING
+</td></tr>
+<tr valign="top"><td valign="top">
+Accrue
+</td><td valign="top">
+OR
+</td><td valign="top">
+WILDCARD
+</td></tr>
+<tr valign="top"><td valign="top">
+AND
+</td><td valign="top">
+PARAGRAPH
+</td><td valign="top">
+WORD
+</td></tr>
+
+</table>
+</div>
+</p><a name="997930"></a>
+ 
+<H2>Special characters</H2>
+<p>A number of characters are handled in particular ways by the search engine.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Special Search Characters&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Characters</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+, () [
+</td><td valign="top">
+These characters end a text token.
+</td></tr>
+<tr valign="top"><td valign="top">
+= &gt; &lt;!
+</td><td valign="top">
+These characters also end a text token. They are terminated by an associated end character.
+</td></tr>
+<tr valign="top"><td valign="top">
+' @ ` &lt; {[!
+</td><td valign="top">
+These characters signify the start of a delimited token. They are terminated by an associated end character.
+</td></tr>
+
+</table>
+</div>
+</p><p>A backslash (\) removes special meaning from whatever character follows it. To enter a literal backslash in a query, use two in succession, such as this examples:</p><pre>&lt;FREETEXT&gt;("\"Hello\", said Packard.")
+"backslash (\\)"
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

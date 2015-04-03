@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>StructCount</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_225.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_227.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1257560"></a>
+ <H1>StructCount</H1>
+
+
+
+<p>Returns the number of keys in the specified structure.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_224.htm#1256440">StructClear</a>, <a href="../3_ColdFusion_Functions/lr3_227.htm#1256452">StructDelete</a>, <a href="../3_ColdFusion_Functions/lr3_228.htm#1256491">StructFind</a>, <a href="../3_ColdFusion_Functions/lr3_229.htm#1256537">StructInsert</a>, <a href="../3_ColdFusion_Functions/lr3_230.htm#1256583">StructIsEmpty</a>, <a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>, <a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>, and <a href="../3_ColdFusion_Functions/lr3_235.htm#1256721">StructUpdate</a>.
+</p>
+
+<a name="1257584"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>StructCount</strong>(<em>structure</em>)
+</PRE><a name="1257586"> </a>
+<h5 class="param"> structure</h5>
+<p class="param">Structure to be accessed.</p><a name="1397525"></a>
+ 
+<H3>Usage</H3>
+<p>This function throws an exception if <em>structure</em> does not exist.</p><a name="1807935"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="StructCount
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This view-only example illustrates usage
+      of StructCount. ---&gt;
+&lt;P&gt;This file is similar to addemployee.cfm, which is called
+by StructNew, StructClear, and StructDelete. To test this file,
+copy the StructCount function to the appropriate place
+in addemployee.cfm.
+&lt;!--- 
+&lt;CFSWITCH EXPRESSION="#ThisTag.ExecutionMode#"&gt;
+   &lt;CFCASE VALUE="start"&gt;
+      &lt;CFIF StructIsEmpty(attributes.EMPINFO)&gt;
+        &lt;CFOUTPUT&gt;Error. No employee data was passed.&lt;/CFOUTPUT&gt;
+          &lt;CFEXIT METHOD="ExitTag"&gt;
+      &lt;CFELSE&gt;
+        &lt;CFQUERY NAME="AddEmployee" DATASOURCE="cfsnippets"&gt;
+          INSERT INTO Employees
+              (FirstName, LastName, Email, Phone, Department)
+            VALUES 
+              &lt;CFOUTPUT&gt;
+                (
+                  `#StructFind(attributes.EMPINFO, "firstname")#' ,
+                  `#StructFind(attributes.EMPINFO, "lastname")#' ,
+                  `#StructFind(attributes.EMPINFO, "email")#' ,
+                  `#StructFind(attributes.EMPINFO, "phone")#' ,
+                  `#StructFind(attributes.EMPINFO, "department")#'
+                 )
+             &lt;/CFOUTPUT&gt; 
+         &lt;/CFQUERY&gt;
+      &lt;/CFIF&gt;
+      &lt;CFOUTPUT&gt;&lt;hr&gt;Employee Add Complete
+         &lt;P&gt;#StructCount(attributes.EMPINFO)# columns added.&lt;/CFOUTPUT&gt;
+   &lt;/CFCASE&gt;
+&lt;/CFSWITCH&gt; ---&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="StructCount
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_225.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_227.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

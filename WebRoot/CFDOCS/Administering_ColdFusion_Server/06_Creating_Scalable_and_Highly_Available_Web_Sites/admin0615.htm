@@ -1,0 +1,130 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Other Informational Resources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0614.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1120089"></a>
+ <H1>Other Informational Resources</H1>
+
+
+
+<p>This chapter covers a lot of information about creating scalable and highly available Web sites, and it touches the surface of many important topics that affect your Web applications' ability to scale and perform. To learn more about these and other related topics in greater detail, consult additional resources. </p><p>The following list of technology white papers, books, and other Web sites will get you started.</p><a name="1130475"></a>
+ 
+<H2>White papers</H2>
+<p>The following white papers provide a good balance between introductory and technology-specific information:</p><ul>
+<a name="1130479"> </a>
+<li>Allaire Corporation. &quot;Scalable Web Application Development with ColdFusion,&quot; January, 1999. Acrobat PDF document available for download on the Allaire Web site at http://www.Allaire.com/developer/index.cfm. Click on the White Papers link at the bottom of the page.
+
+<a name="1130484"> </a>
+</li>
+<li>Collaborative Research, Inc., Peter Christy and John Katsaros. &quot;Internet Traffic Management Products,&quot; 1999. Acrobat PDF document available for download on the ITMCenter Web site at http://www.itmcenter.com/PDF/ITMwhitepaper.PDF.
+<a name="1135535"> </a>
+</li>
+<li>Microsoft Corporation. &quot;Microsoft Clustering Architecture.&quot; Available on the Microsoft Web site at http://www.microsoft.com/ntserver/ntserverenterprise/techdetails/prodarch/clustarchit.asp. Also see the following URL for good overview information about clustering: http://www.microsoft.com/ntserver/ntserverenterprise/exec/overview/clustering.asp
+<a name="1130491"> </a>
+</li>
+<li>Cisco Systems. &quot;Cisco DistributedDirector&quot; and &quot;The Effects of Distributing Load Randomly to Servers,&quot; April, 1999. Available for download on the Cisco Web site at http://www.cisco.com/warp/public/cc/cisco/mkt/scale/distr/tech/index.shtml.
+</li>
+</ul>
+<a name="1130498"></a>
+ 
+<H2>Web sites</H2>
+<p>Collaborative Research's Internet Traffic Management Center is a comprehensive Web site dedicated to Web scalability and availability issues, products, and information. </p><p>Here you'll find articles, opinions, industry standards, research data, white papers, books, other Web sites, listings for industry events, and much more.</p><p>You can access this Web site at http://www.itmcenter.com.</p><a name="1135607"></a>
+ 
+<H2>Books</H2>
+<p>The following books provide excellent detailed information on Web scalability, failover, and performance issues:</p><ul>
+<a name="1135621"> </a>
+<li>Derfler, Frank and Steve Rigney. &quot;TCP/IP, A Survival Guide for Users.&quot; New York, New York: A Division of Henry Holt and Company, Inc.: MIS Press, Inc., 1998. ISBN #: 1-55828-5644. Available at your local computer book store. Also see <br>http://www.mispress.com.
+
+<a name="1135622"> </a>
+</li>
+<li>Stallings, William. &quot;High-Speed Networks: TCP/IP and ATM Design Principles.&quot; Prentice Hall, 1997. ISBN #: 0135259657. Available on www.amazon.com.
+<a name="1135642"> </a>
+</li>
+<li>Almedia, Virgilio A.F., and Daniel A. Menasce. &quot;Capacity Planning for Web Performance: Models, Metrics, and Methods.&quot; Prentice Hall, 1998. ISBN #: 0136938221. Available on www.amazon.com.
+<a name="1135654"> </a>
+</li>
+<li>Killelea, Patrick and Linda Mui. &quot;Web Performance Tuning.&quot; O'Reilly &amp; Associates, 1998, ISBN#: 1565923790. Available on www.amazon.com.
+<pre><strong>
+</strong></pre></li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0614.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

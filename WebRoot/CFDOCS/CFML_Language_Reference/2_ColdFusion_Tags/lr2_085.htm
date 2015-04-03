@@ -1,0 +1,195 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFSELECT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_084.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_086.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1972744"></a>
+ <H1>CFSELECT</H1>
+
+
+
+<p>Used inside <a href="../2_ColdFusion_Tags/lr2_040.htm#1968844">CFFORM</a>, CFSELECT allows you to construct a drop-down list box form control. You can populate the drop-down list box from a query, or using the OPTION tag. Use OPTION elements to populate lists. Syntax for the OPTION tag is the same as for its HTML counterpart.</p><a name="1972747"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFSELECT NAME="name"
+    REQUIRED="Yes/No"
+    MESSAGE="text"
+    ONERROR="text"
+    SIZE="integer"
+    MULTIPLE="Yes/No"
+    QUERY="queryname"
+    SELECTED="column_value"
+    VALUE="text"
+    DISPLAY="text"
+    PASSTHROUGH="HTML_attributes"&gt;
+&nbsp;
+&lt;/CFSELECT&gt;
+</PRE><a name="1972749"></a>
+<h4> NAME</h4>
+<p>Required. A name for the form you are creating.</p><a name="1972751"></a>
+<h4> SIZE</h4>
+<p>Optional. Size of the drop-down list box in number of entries. </p><a name="1972753"></a>
+<h4> REQUIRED</h4>
+<p>Optional. Yes or No. If Yes, a list element must be selected when the form is submitted. Default is No.</p><a name="1972755"></a>
+<h4> MESSAGE</h4>
+<p>Optional. Message that appears if REQUIRED="Yes" and no selection is made.</p><a name="1972757"></a>
+<h4> ONERROR</h4>
+<p>Optional. The name of a valid JavaScript function you want to execute in the event of a failed validation. </p><a name="1972759"></a>
+<h4> MULTIPLE</h4>
+<p>Optional. Yes or No. Yes permits selection of multiple elements in the drop-down list box. The default is No.</p><a name="1972761"></a>
+<h4> QUERY</h4>
+<p>Optional. Name of the query to be used to populate the drop-down list box.</p><a name="1972763"></a>
+<h4> SELECTED</h4>
+<p>Optional. Enter a value matching at least one entry in VALUE to preselect the entry in the drop-down list box. </p><a name="1972765"></a>
+<h4> VALUE</h4>
+<p>Optional. The query column value for the list element. Used with the QUERY attribute.</p><a name="1972767"></a>
+<h4> DISPLAY</h4>
+<p>Optional. The query column displayed. Defaults to the value of VALUE. Used with the QUERY attribute.</p><a name="1972769"></a>
+ 
+<H3></H3>
+<a name="1972770"></a>
+<h4> PASSTHROUGH</h4>
+<p>Optional. HTML attributes that are not explicitly supported by CFSELECT. If you specify an attribute and its value, the attribute and its value are passed to the HTML code that is generated for the CFSELECT tag. See the Usage section for more information about specifying values.</p><a name="1972772"></a>
+ 
+<H3>Usage</H3>
+<p>You can add standard and dynamic HTML FORM tag attributes and their values to the CFSELECT tag by using the PASSTHROUGH attribute. These attributes and values are passed directly through ColdFusion to the browser in creating a form. </p><p>If you specify a value in quotation marks, you must escape the quotation marks by doubling them, for example, </p><p>PASSTHROUGH= "readonly= " "YES " " "</p><p>CFSELECT supports the JavaScript <em>onClick</em> event in the same manner as the HTML INPUT tag:</p><pre>&lt;CFSELECT NAME="dept"
+    MESSAGE="You must select a department name"
+    QUERY="get_dept_list"
+    VALUE="dept_name"
+    onClick="JavaScript_function"&gt;
+</pre><a name="2045312"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfselect
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFTREE, CFSELECT and CFGRID in a
+CFFORM. The query takes a list of employees, and uses CFTREE and CFSELECT
+to display the results of the query.  In addition, CFGRID is used
+to show an alternate means of displaying the same data ---&gt;
+
+&lt;!--- set a default for the employeeNames variable ---&gt;
+&lt;CFPARAM NAME="employeeNames" DEFAULT=""&gt;
+
+&lt;!--- if an employee name has been passed from the form,
+set employeeNames variable to this value ---&gt;
+&lt;CFIF IsDefined("form.employeeNames") is not "False"&gt;
+    &lt;CFSET employeeNames = form.employeeNames&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- query the datasource to find the employee information---&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="cfsnippets"&gt;
+SELECT   Emp_ID, FirstName, LastName, EMail, Phone, Department
+FROM     Employees where lastname 
+         &lt;CFIF #employeeNames# is not ""&gt;= '#employeeNames#'&lt;/CFIF&gt;
+&lt;/CFQUERY&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFSELECT Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+
+&lt;H3&gt;CFSELECT Example&lt;/H3&gt;
+
+&lt;!--- Use CFFORM when using other CFINPUT tools ---&gt;
+&lt;CFFORM ACTION="cfselect.cfm" METHOD="POST" ENABLECAB="Yes"&gt;
+
+&lt;!--- Use CFSELECT to present the contents of the query by column ---&gt;
+&lt;H3&gt;CFSELECT Presentation of Data&lt;/H3&gt;
+&lt;H4&gt;Click on an employee's last name and hit "see information for
+this employee" to see expanded information.&lt;/H4&gt;
+&lt;CFSELECT NAME="EmployeeNames" MESSAGE="Select an Employee Name"
+   SIZE="#getEmployees.recordcount#" QUERY="GetEmployees"
+     VALUE="LastName" REQUIRED="No"&gt;
+&lt;OPTION value=""&gt;Select All
+&lt;/CFSELECT&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfselect
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_084.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_086.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

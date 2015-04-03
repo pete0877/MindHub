@@ -1,0 +1,686 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Installing ColdFusion on Solaris</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin014.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Installing and Configuring ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1009709"></a>
+ <H1>Installing ColdFusion on Solaris</H1>
+
+
+
+<p>ColdFusion is distributed as a Solaris package. You can use a number of Solaris package utilities, such as <code>pkgadd</code>, <code>pkgrm</code>, and <code>pkginfo</code> to manage the ColdFusion package file, as well as any other package files on your system.</p><p>This section addresses the following topics related to installing ColdFusion on Solaris:</p><ul>
+<a name="1024421"> </a>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1024391">&quot;Installing ColdFusion&quot;</a>
+
+<a name="1024422"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1024617">&quot;Upgrading from a previous release of ColdFuison&quot;</a>
+<a name="1024429"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1015544">&quot;Uninstalling ColdFusion&quot;</a>
+<a name="1024440"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1016039">&quot;Configuring Web servers for Solaris&quot;</a>
+<a name="1024452"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1027269">&quot;Using scripts to start and stop ColdFusion manually&quot;</a>
+</li>
+</ul>
+<a name="1024391"></a>
+ 
+<H2>Installing ColdFusion</H2>
+<p>Before installing ColdFusion please note the following considerations:</p><ul>
+<a name="1025970"> </a>
+<li>The installation procedure assumes you are installing from a CD. If you purchased and downloaded ColdFusion from the Allaire Online Store, follow the download instructions found there and then follow the install procedure below, substituting the location you downloaded ColdFusion to for references to the CD.
+
+<a name="1024707"> </a>
+</li>
+<li>ColdFusion requires Solaris 2.5.1 or higher.
+<a name="1024688"> </a>
+</li>
+<li>You must be logged in as root to run the <code>pkgadd</code> utility. 
+<a name="1004648"> </a>
+</li>
+<li>There are three versions of the Netscape NSAPI plug-in. The installation script will ask you which version of Netscape you are running if you choose to automatically configure a Netscape server. 
+<a name="1004651"> </a>
+</li>
+<li>By default the package file installs ColdFusion into the <code>/opt</code> directory. If you want to install ColdFusion into a different directory, you must create that directory before running the <code>pkgadd</code> utility. 
+<a name="1004660"> </a>
+</li>
+<li>Note the location and version number of your installed Web server. The <code>pkgadd</code> utility prompts you for this information.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install ColdFusion on Solaris:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Log in as <code>root</code>.
+
+
+</li>
+<li>Load the ColdFusion CD-ROM into your CD drive.
+
+</li>
+<li>Mount the CD-ROM on <code>/cdrom/cdrom0</code> if necessary.
+
+<p>If the Solaris Volume Manager is active, you won't need to mount the CD.
+</p></li>
+<li>Type <code>pkgadd -d /cdrom/cdrom0</code> to start the installation process.
+
+</li>
+<li>Enter <code>cfusion</code> at the prompt and press Enter to select the ColdFusion package. Alternatively, you can just press Enter to accept the default (<code>All</code>), as ColdFusion is the only package available.
+
+</li>
+<li>Enter the ColdFusion registration ID (serial number) when prompted.
+
+<p>You'll find your ColdFusion registration ID on the product box.
+</p></li>
+<li>Enter the name of the directory in which you want to install ColdFusion or accept the default directory.
+
+<p><code>/opt</code> is the default installation directory.
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you specified a directory other than the default, the installation 
+script will create a symbolic link from <code>/opt/coldfusion</code> to wherever 
+you installed ColdFusion.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter the name of the Web server you are running and press Enter or just press Enter if you are running the default Web server (Netscape Enterprise Server).
+
+</li>
+<li>Press Enter to have the installation program automatically configure the Web server.
+
+<p>The program loads the necessary plug-in for Netscape or module for Apache 1.3.x 
+Web servers.
+</p></li>
+<li>When prompted with whether to install ClusterCATS, press Enter to do so.
+
+</li>
+<li>If you want the server on which you are installing ClusterCATS to be able to assume the IP address and HTTP traffic of a failed server in the cluster, press Enter to configure this server with failover services. Otherwise, enter <code>n</code> and press Enter.
+
+<p>Typically, you want all of the servers in your cluster to be configured for failover, 
+particularly if all of the servers have the same processing capacity. However, if you 
+have a mixed server environment with some high capacity servers and several 
+lower capacity servers, you may not want the less powerful machines to accept the 
+additional load of unavailable servers in the cluster.
+</p></li>
+<li>Enter your Web server's document root directory and press Enter.
+
+<p>The default document root directory is determined by the Web server you are 
+using.
+</p></li>
+<li>When asked if you want to install Advanced Security, enter <code>n</code> and press Enter.
+
+<p>You can install Advanced Security at a later time by re-running the pkgadd utility.
+</p></li>
+<li>Enter the password you want to use to access the ColdFusion Administrator, which allows you to configure and modify settings for the ColdFusion Server.
+
+<p>You'll be asked to re-enter the password for verification purposes.
+</p></li>
+<li>Enter the password you want to use to connect to ColdFusion Server when developing applications with ColdFusion Studio.
+
+<p>You'll be asked to re-enter the password for verification purposes.
+</p></li>
+<li>Press Enter to install the ColdFusion documentation.
+
+<p>The documentation is installed in the /<code>cfdocs</code> directory, which resides under the 
+Web root directory.
+</p></li>
+<li>Enter the user name under which ColdFusion will run or press Enter to run under the default user name (<code>nobody</code>).
+
+</li>
+<li>Press Enter to begin the installation.
+
+</li>
+</ol>
+<p>When the installation is complete, a shell script restarts the Web server and starts ColdFusion services. If the ColdFusion services are not started automatically, you can start them manually using the ColdFusion start-up script, which is found in the <code>/etc/inet.d</code> directory. See <a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1027269">&quot;Using scripts to start and stop ColdFusion manually&quot;</a>.</p><a name="1024617"></a>
+ 
+<H2>Upgrading from a previous release of ColdFuison</H2>
+<p>When upgrading from an earlier release of ColdFusion on Solaris, you may need to edit the package installation defaults file before running the pkgadd utility. The package installation defaults file is located in the following location:</p><pre>/var/sadm/install/admin/default
+</pre><p>This file controls the behavior of the Solaris packaging commands. The value of the instance setting may need to be changed from <code>quit</code> or <code>unique</code> to <code>overwrite</code>. Setting the value of the instance to <code>overwrite</code> allows the existing version of ColdFusion to be overwritten by the new version.</p><p>After modifying the package installation defaults file, install your new release of ColdFusion following the steps in <a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1024391">&quot;Installing ColdFusion&quot;</a>.</p><a name="1015544"></a>
+ 
+<H2>Uninstalling ColdFusion</H2>
+<p>Use the <code>pkgrm</code> utility to remove an installed version of ColdFusion.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The uninstall script removes your <code>odbc.ini</code> file and all Verity collections. 
+Therefore, you may want to preserve these items by saving them to a new 
+location before uninstalling ColdFusion. 
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To uninstall ColdFusion:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Log in as root.
+
+
+</li>
+<li>Enter the following command at the prompt:
+
+<p><code>pkgrm cfusion
+</code></p><p>ColdFusion is deleted from your server.
+</p></li>
+</ol>
+<a name="1016039"></a>
+ 
+<H2>Configuring Web servers for Solaris</H2>
+<p>If you run Netscape or Apache Web servers in conjunction with ColdFusion on Solaris, you must perform several Web server configurations for ColdFusion to work properly. This section addresses the following topics:</p><ul>
+<a name="1025141"> </a>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1028167">&quot;Configuring the Netscape Web server&quot;</a>
+
+<a name="1028164"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1001732">&quot;Configuring the Apache Web Server&quot;</a>
+</li>
+</ul>
+<a name="1028167"></a>
+ 
+<H3>Configuring the Netscape Web server</H3>
+<p>The ColdFusion NSAPI plug-in has been tested with Netscape Enterprise Server versions 2.01, 3.0, and 3.5.1, and the Netscape FastTrack Web Server 2.01. The installation script prompts you to automatically configure either of these servers. If you do not want the script to configure the Netscape plug-in, you can configure it manually. See <a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1012650">&quot;To configure the Netscape plugin:&quot;</a>.</p><a name="1025542"></a>
+<h4> Choosing the right plug-in version</h4>
+<p>Netscape plug-ins for ColdFusion are installed in the <code>&lt;installdir&gt;/coldfusion/webserver/nsapi</code> directory. Use the following table to select the proper plug-in file. </p><p></p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=3 rowspan=1><font face="arial,helvetica" size=-1>
+<strong> ColdFusion Plugins for Netscape</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Use this Plugin</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>With this Netscape Server Product</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>With this Version of Solaris </strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+coldfusion2x.so
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Netscape Enterprise Server 2.01
+
+Netscape FastTrack 2.01
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+2.51 or higher
+
+2.6
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+coldfusion3x.so
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Netscape SuiteSpot Enterprise Server 3.0
+
+Netscape FastTrack Server 3.0
+
+Netscape Enterprise Server 3.51
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+2.51
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+coldfusion35.so
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Netscape Enterprise Server 3.51
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+2.6 or higher
+</td></tr>
+
+</table>
+
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Netscape 3.0 servers will not work on Solaris 2.6 with ColdFusion. 
+You should use version 3.51, which Netscape certifies for use on Solaris 
+2.6. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>The following procedure assumes you have the Enterprise 3.0 server installed in <code>/usr/netscape/suitespot</code> on the machine named <code>smurf</code>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure the Netscape plugin:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Copy the appropriate plugin (see table above) to a directory in your server directories. Name it <code>coldfusion.so</code>.
+
+
+<pre>mkdir /usr/netscape/suitespot/plugins/coldfusion
+cp /opt/coldfusion/webserver/nsapi/coldfusion3x.so \
+    /usr/netscape/suitespot/plugins/coldfusion/coldfusion.so
+</pre></li>
+<li>Edit the <code>/usr/netscape/suitespot/https-smurf/config/mime.types</code> file to add a new ColdFusion type. Add the line:
+
+<pre>type=magnus-internal/cold-fusion exts=cfm,dbm
+</pre></li>
+<li>Edit the <code>/usr/netscape/suitespot/https-surf/config/obj.conf </code>file to add new service and init directives. Add all of the following syntax on one line:
+
+<pre>Init fn="load-modules" shlib="/usr/netscape/suitespot/
+plugins/coldfusion/coldfusion.so" funcs="DoCFRequest"
+</pre></li>
+<li>Add the following line in the default Object:
+
+<pre>Service fn="DoCFRequest" method="(GET|POST)" 
+type="magnus-internal/cold-fusion"
+</pre></li>
+<li>Stop and restart the Web server.
+
+<p>If you run the Netscape Server Manager, Netscape's browser-based administrator, 
+you may get a warning about edits to the Netscape configuration files. This is 
+normal. Follow the instructions and click on the Apply button to reload the new 
+configuration files. 
+</p></li>
+<li>Test the setup by accessing the ColdFusion Administrator by entering the following URL in your browser:
+
+<pre>http://localhost/CFIDE/administrator/index.cfm
+</pre><p>If your server does not restart, check to make sure the pathname for the plug-in 
+you specified in the <code>obj.conf</code> file is correct for your installation and that it is on a 
+single line.
+</p></li>
+</ol>
+<a name="1025257"></a>
+<h4> Updates made to Netscape configuration files after installing ClusterCATS</h4>
+<p>If you select the ClusterCATS load balancing and high availability installation option when installing ColdFusion, the ClusterCATS installation process updates the Netscape <code>magnus.conf</code> and <code>obj.conf</code> configuration files.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The sections that the ClusterCATS installation script modifies are 
+enclosed by Start BT and End BT comment blocks.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1025259"></a>
+<h4> obj.conf</h4>
+<pre># Netscape Communications Corporation - obj.conf
+# You can edit this file, but comments and formatting changes
+# might be lost when the admin server makes changes.
+
+#Start BT:  Add Init routines and Entry points
+Init fn=load-modules shlib="&lt;ClusterCATS Install Dir&gt;/btcats/
+teserver.so" 
+funcs="btcats_server_init,btcats_nsapi_AuthTrans,btcats_nsapi_NameTrans,
+btcats_ErrorFixup"
+Init fnInit fn="btcats_server_init"
+#End BT:
+
+Init fn="flex-init" access="/local1/netscape/https-skagway/logs/access" 
+format.access="%Ses-&gt;client.ip% - %Req-&gt;vars.auth-user% [%SYSDATE%] 
+\"%Req-&gt;reqpb.clf-request%\" %Req-&gt;srvhdrs.clf-status% %Req-
+&gt;srvhdrs.content-length%"
+Init fn="load-types" mime-types="mime.types"
+&lt;Object name="default"&gt;
+#Start BT: Entry Points
+NameTrans fn=btcats_nsapi_NameTrans
+AuthTrans fn=btcats_nsapi_AuthTrans
+Error fn=btcats_ErrorFixup reason="BrightTiger"
+#End BT:
+
+NameTrans fn="pfx2dir" from="/ns-icons" dir="/local1/netscape/ns-icons"
+NameTrans fn="pfx2dir" from="/mc-icons" dir="/local1/netscape/ns-icons"
+NameTrans fn="document-root" address="192.168.0.220" root="/local1/
+netscape/root-wrangle"
+NameTrans fn="document-root" address="192.168.0.173" root="/local1/
+netscape/root-kodiak"
+NameTrans fn="document-root" root="/local1/netscape/root-skagway"
+
+PathCheck fn="unix-uri-clean"
+PathCheck fn="check-acl" acl="default"
+PathCheck fn="find-pathinfo"
+PathCheck fn="find-index" index-names="index.html,home.html"
+ObjectType fn="type-by-extension"
+ObjectType fn="force-type" type="text/plain"
+Service method="(GET|HEAD)" type="magnus-internal/imagemap" 
+fn="imagemap"
+Service method="(GET|HEAD)" type="magnus-internal/directory" fn="index-
+common"
+Service method="(GET|HEAD)" type="*~magnus-internal/*" fn="send-file"
+AddLog fn="flex-log" name="access"
+&lt;/Object&gt;
+
+&lt;Object name="cgi"&gt;
+ObjectType fn="force-type" type="magnus-internal/cgi"
+Service fn="send-cgi"
+&lt;/Object&gt;
+</pre><a name="1025301"></a>
+<h4> magnus.conf</h4>
+<pre>ServerRoot /local1/netscape/https-skagway
+ServerID https-skagway
+ServerName skagway.brighttiger.com
+#Start BT:  Remove Address line from magnus.conf.  This will cause
+#the Netscape Server to listen on INADDR_ANY
+#Address 192.168.0.24
+#End BT:
+Port 80
+LoadObjects obj.conf
+RootObject default
+ErrorLog /local1/netscape/https-skagway/logs/errors
+PidLog /local1/netscape/https-skagway/logs/pid
+User root
+MtaHost localhost
+NntpHost name-of-news-server
+DNS off
+Security off
+Ciphers +rc4,+rc4export,+rc2,+rc2export,+des,+desede3
+SSL3Ciphers 
++rsa_rc4_128_md5,+rsa_3des_sha,+rsa_des_sha,+rsa_rc4_40_md5,+rsa_rc2_40_
+md5,-rsa_null_md5
+ACLFile /local1/netscape/httpacl/generated.https-skagway.acl
+ClientLanguage en
+AdminLanguage en
+DefaultLanguage en
+AcceptLanguage off
+RqThrottle 128
+</pre><a name="1001732"></a>
+ 
+<H3>Configuring the Apache Web Server</H3>
+<p>ColdFusion has been tested with Apache version 1.2.x and 1.3. To obtain Apache free of charge, go to the Apache Web site at <a href="http://www.apache.org">http://www.apache.org</a>. </p><p>You can build the ColdFusion module into your Apache Web server binary. This method is efficient because the server does not have to start a new process for every ColdFusion request. This section describes:</p><ul>
+<a name="1026397"> </a>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1005094">&quot;Adding the ColdFusion module to Apache 1.2.x&quot;</a>
+
+<a name="1026402"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm#1017487">&quot;Adding the ColdFusion module to Apache 1.3.x&quot;</a>
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If necessary, consult the Apache ReadMe file for additional information 
+(README.Apache)
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1005094"></a>
+<h4> Adding the ColdFusion module to Apache 1.2.x</h4>
+<p>The ColdFusion module can be found in the installation directory (usually <code>/opt</code>) under the <code>coldfusion/webserver/apache</code> directory. </p><p>The following procedure assumes that your Apache Web server is installed in <code>/usr/local/etc/httpd</code> and you installed ColdFusion in <code>/opt</code>. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add the ColdFusion module:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Copy the module (<code>mod_coldfusion.a</code>) to your Apache source directory. 
+
+
+<pre>cp /opt/coldfusion/webserver/apache/mod_coldfusion.a \
+    /usr/local/etc/httpd/src/mod_coldfusion.a
+</pre></li>
+<li>Edit the <code>/usr/local/etc/httpd/src/Configuration</code> file to contain the following line: 
+
+<pre>Module coldfusion_module mod_coldfusion.a
+</pre></li>
+<li>If you are using the Sun C compiler, edit the <code>EXTRA_LIBS=</code> line to include the C++ library: 
+
+<pre>EXTRA_LIBS=-lC
+</pre><p>If you are using the gcc compiler, you should add the absolute path of the C++ 
+library to this line. You should include the version number of the library and use 
+the highest one available. 
+</p><p>For example: 
+</p>EXTRA_LIBS=/usr/lib/libC.run.so.1
+</pre></li>
+<li>Run the Configure script to regenerate the configuration. 
+
+<pre>./Configure
+</pre></li>
+<li>Run <code>make</code> to build a new Apache httpd executable. 
+
+</li>
+<li>Install the new httpd executable in your installation directory and restart httpd. 
+
+</li>
+</ol>
+<p>You should now be able to access the ColdFusion Administrator with the following URL: </p><pre>http://localhost/CFIDE/administrator/index.cfm 
+</pre><a name="1017487"></a>
+<h4> Adding the ColdFusion module to Apache 1.3.x</h4>
+<p>You can find the ColdFusion module in the installation directory (usually <code>/opt</code>) under the <code>coldfusion/webserver/apache</code> directory. The pre-built module shipped with ColdFusion 4.5 is built with Apache 1.3.6. This module will not work with earlier versions of Apache 1.3.x, and it may not work with later versions if the Apache Group changes the MODULE_MAGIC_NUMBER_MAJOR (src src/include/ap_mmn.h in the Apache source).</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The module has been tested with Apache 1.3.9.
+</td>
+</tr>
+</table>
+</div>
+<br><p>If you have a C compiler (gcc or SUN cc) available, you can build a version of mod_coldfusion.so which should work with any versionof Apache 1.3. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure and add the ColdFusion module:
+</td>
+</tr>
+</table>
+</div><p>In order for the Apache httpd to load the ColdFusion module at startup time, you must have configured the <code>mod_so</code> module. This module is not built into Apache by default. If necessary, consult the Apache documentation for details (README.DSO).</p><p>Configure this module into the Apache build by running the following command:</p><p><code>$ ./configure --enable-module=so &lt;other apache options&gt;<br>$ make<br>$ make install</code></p><p>If you are using gcc to compile Apache, you should include the following environment variables for configure:</p><p><code>$ env LIBS=/usr/lib/libC.so.5 CFLAGS=-fPIC \<br>      ./configure --enable-module=so &lt;other apache options&gt;</code></p><p>Once you have <code>mod_so</code> configured in to your Apache binary, the simplest way to configure the ColdFusion module is to use the apxs program that is included in the Apache distribution.  It is installed by default in <code>&lt;apachedir&gt;/apache/bin</code>.  This is a perl script, so you must have perl installed on your system.  Perl is freely available at http://www.perl.com.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use the apxs program:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Ensure that perl is available in <code>/usr/local/bin/perl</code>.
+
+
+<p>Also, make sure a C compiler is in your PATH.
+</p></li>
+<li>Add the <code>apache/bin</code> directory to your path:
+
+<p><code>csh:
+</code></p><p><code>    set path=($path /usr/ccs/bin /usr/local/apache/bin)
+</code></p><p><code>sh/ksh:
+</code></p><p><code>    PATH=$PATH:/usr/ccs/bin:/usr/local/apache/bin
+</code></p><p><code>    export PATH
+</code></p></li>
+<li>Change to the <code>apache/src</code> directory in the ColdFusion installation.
+
+<p>    <code>cd /opt/coldfusion/webserver/apache/src
+</code></p></li>
+<li>Run the apxs command to build mod_coldfusion.so by entering the following command:
+
+<p><code>    make
+</code></p></li>
+<li>Run the apxs command to add the module to the Apache configuration by entering the following command:
+
+<p><code>    make install
+</code></p></li>
+<li>Restart your Apache server by entering the following command:
+
+<p><code>    apachectl restart
+</code></p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure the Apache module that Allaire provides:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Copy the ColdFusion module to the Apache modules directory:
+
+
+<p><code>cp /opt/coldfusion/webserver/apache/mod_coldfusion.so \ /usr/local/
+apache/libexec
+</code></p></li>
+<li>Edit your httpd.conf file to include the following directive:
+
+<p><code>LoadModule coldfusion_module libexec/mod_coldfusion.so
+</code></p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you have a ClearModuleList directive in httpd.conf, you will need 
+to add the following directive to the AddModule list as stated by the 
+comments in the httpd.conf file: <code>AddModule mod_coldfusion.c
+</code></td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Restart apache.
+
+<p>You should now be able to access the ColdFusion Administrator with the following 
+URL:
+</p><p><code>    http://localhost/CFIDE/administrator/index.cfm
+</code></p></li>
+</ol>
+<a name="1027269"></a>
+ 
+<H2>Using scripts to start and stop ColdFusion manually</H2>
+<p>ColdFusion provides two scripts for starting and stopping ColdFusion processes manually:</p><pre>&lt;installdir&gt;/colfusion/bin/start
+&lt;installdir&gt;/colfusion/bin/stop
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You must be logged in with root privileges to run these scripts.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The ColdFusion installation scripts also installs the following scripts to start and stop ColdFusion during system boot and shutdown:</p><pre>/etc/init.d/coldfusion
+/etc/rc1.d/K19coldfusion
+/etc/rc3.d/S25coldfusion
+</pre><p>ColdFusion runs the following processes on the system:</p><ul>
+<a name="1017436"> </a>
+<li><code>cfexec</code> -- Starts/stops the other processes and manages page scheduling
+
+<a name="1017440"> </a>
+</li>
+<li><code>cfserver</code> -- The application server process
+<a name="1017441"> </a>
+</li>
+<li><code>cfrdsservice</code> -- Provides system support for the Administrator as well as security and debugging services for ColdFusion Studio
+</li>
+</ul>
+<p>The following processes also run if you've installed the ClusterCATS for ColdFusion option:</p><ul>
+<a name="1017445"> </a>
+<li><code>ipaliasd</code> -- Provides IP failover capability for ColdFusion Server
+
+<a name="1025631"> </a>
+</li>
+<li><code>reqmgr</code> -- Processes ClusterCATS operations as root
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin014.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:26 -->
+</body>
+</html>

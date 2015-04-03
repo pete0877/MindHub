@@ -1,0 +1,269 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFSEARCH</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_083.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_085.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1972609"></a>
+ <H1>CFSEARCH</H1>
+
+
+
+<p>Use the CFSEARCH tag to execute searches against data indexed in Verity collections. Collections can be created by calling the <a href="../2_ColdFusion_Tags/lr2_023.htm#1967871">CFCOLLECTION</a> tag, by using the ColdFusion Administrator, or through native Verity indexing tools. Collections are populated with data either with the <a href="../2_ColdFusion_Tags/lr2_053.htm#1970279">CFINDEX</a> tag, or externally, using native Verity indexing tools. Collections must be created and populated before any searches can be executed. </p><a name="1972615"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFSEARCH NAME="search_name"
+    COLLECTION="collection_name"
+    TYPE="criteria"
+    CRITERIA="search_expression"
+    MAXROWS="number"
+    STARTROW="row_number"
+    EXTERNAL="Yes/No"
+    LANGUAGE="language"&gt;
+</PRE><a name="1972617"></a>
+<h4> NAME </h4>
+<p>Required. A name for the search query. </p><a name="1972619"></a>
+<h4> COLLECTION </h4>
+<p>Required. Specifies the logical collection name that is the target of the search operation or an external collection with fully qualified path. Collection names are defined either through the CFCOLLECTION tag or in the ColdFusion Administrator, Verity page.</p><p>Multiple ColdFusion collections can be specified in a comma-separated list: </p><pre>COLLECTION="CFUSER, CFLANG"
+</pre><p>If you are searching an external collection (EXTERNAL="Yes") specify the collection name, including fully qualified path:</p><pre>COLLECTION="e:\collections\personnel"
+</pre><p>If multiple collections are specified in COLLECTION and EXTERNAL is Yes, the specified collections must all be externally generated. You cannot combine internal and external collections in the same search operation. </p><a name="1972626"></a>
+<h4> TYPE </h4>
+<p>Optional. Specifies the criteria type for the search. Valid entries are: </p><ul>
+<a name="1972628"> </a>
+<li>SIMPLE -- By default the STEM and MANY operators are used.
+
+<a name="1972629"> </a>
+</li>
+<li>EXPLICIT -- All operators must be invoked explicitly.
+</li>
+</ul>
+<a name="1972630"></a>
+<h4> CRITERIA </h4>
+<p>Optional. Specifies the criteria for the search following the syntactic rules specified by TYPE. </p><a name="1972632"></a>
+<h4> MAXROWS </h4>
+<p>Optional. Specifies the maximum number of entries for index queries. If omitted, all rows are returned. </p><a name="1972634"></a>
+<h4> STARTROW </h4>
+<p>Optional. Specifies the first row number to be retrieved. Default is 1. </p><a name="1972636"></a>
+<h4> EXTERNAL</h4>
+<p>Optional. Yes or No. Yes indicates that the collection you are searching was created outside of ColdFusion using native Verity indexing tools. The default is No.</p><a name="1972638"></a>
+<h4> LANGUAGE</h4>
+<p>Optional. To use the LANGUAGE attribute you must have the ColdFusion International Search Pack installed. Valid entries are:</p><ul>
+<a name="1972640"> </a>
+<li>English (default)
+
+<a name="1972641"> </a>
+</li>
+<li>German 
+<a name="1972642"> </a>
+</li>
+<li>Finnish 
+<a name="1972643"> </a>
+</li>
+<li>French 
+<a name="1972644"> </a>
+</li>
+<li>Danish 
+<a name="1972645"> </a>
+</li>
+<li>Dutch 
+<a name="1972646"> </a>
+</li>
+<li>Italian 
+<a name="1972647"> </a>
+</li>
+<li>Norwegian 
+<a name="1972648"> </a>
+</li>
+<li>Portuguese 
+<a name="1972649"> </a>
+</li>
+<li>Spanish 
+<a name="1972650"> </a>
+</li>
+<li>Swedish 
+</li>
+</ul>
+<a name="1972651"></a>
+ 
+<H3>Usage</H3>
+<p>In the CRITERIA attribute, if you pass a mixed case entry (mixed upper and lower case), case sensitivity is applied to the search. If you pass all upper or all lower case, case insensitivity is assumed.</p><p>Every search conducted with the CFSEARCH tag returns, as part of the record set, a number of result columns you can reference in your CFOUTPUT:</p><ul>
+<a name="1972654"> </a>
+<li>URL -- Returns the value of the URLPATH attribute defined in the CFINDEX tag used to populate the collection. This value is always empty when you populate the collection with CFINDEX when TYPE="Custom". 
+
+<a name="1972655"> </a>
+</li>
+<li>KEY -- Returns the value of the KEY attribute defined in the CFINDEX tag used to populate the collection.
+<a name="1972656"> </a>
+</li>
+<li>TITLE -- Returns whatever was placed in the TITLE attribute in the CFINDEX operation used to populate the collection, including the titles of PDF and Office documents. If no title was provided in the TITLE attribute, CFSEARCH returns CF_TITLE.
+<a name="1972657"> </a>
+</li>
+<li>SCORE -- Returns the relevancy score of the document based on the search criteria.
+<a name="1972658"> </a>
+</li>
+<li>CUSTOM1 and CUSTOM2 -- Returns whatever was placed in the custom fields in the CFINDEX operation used to populate the collection. 
+<a name="1972659"> </a>
+</li>
+<li>SUMMARY -- Returns the contents of the automatic summary generated by CFINDEX. The default summarization selects the best three matching sentences, up to a maximum of 500 characters.
+<a name="1972660"> </a>
+</li>
+<li>RECORDCOUNT -- Returns the number of records returned in the record set.
+<a name="1972661"> </a>
+</li>
+<li>CURRENTROW -- Returns the current row being processed by CFOUTPUT.
+<a name="1972662"> </a>
+</li>
+<li>COLUMNLIST -- Returns the list of the column names within the record set.
+<a name="1972663"> </a>
+</li>
+<li>RECORDSSEARCHED-- Returns the number of records searched.
+</li>
+</ul>
+<p>You can use these result columns in standard CFML expressions, preceding the result column name with the name of the query: </p><pre>#DocSearch.URL# 
+#DocSearch.KEY#
+#DocSearch.TITLE#
+#DocSearch.SCORE#
+</pre><a name="2045300"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfsearch
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to utilize CFSEARCH 
+to search an existing, populated collection  ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFSEARCH Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;CFSEARCH Example&lt;/H3&gt;
+
+&lt;!--- To index the collection, select the check box
+on the form ---&gt;
+&lt;CFIF IsDefined("form.IndexCollection")&gt;
+&lt;!--- Change KEY and URLPATH to reflect accurate key and URL
+&lt;CFINDEX ACTION="UPDATE" COLLECTION="Snippets"
+   KEY="c:\inetpub\wwwroot\cfdocs\snippets" TYPE="PATH" 
+     TITLE="This is my test" URLPATH="http://127.0.0.1/cfdocs/snippets/"
+       EXTENSIONS=".cfm" RECURSE="Yes"&gt;
+&lt;H3&gt;Collection re-indexed&lt;/H3&gt;
+&lt;/CFIF&gt;
+&lt;CFIF IsDefined("form.source") AND
+IsDefined("form.type") AND IsDefined("form.searchstring")&gt;
+
+&lt;!--- actually conduct the search ---&gt;
+    &lt;CFSEARCH NAME="SearchSnippets"
+    COLLECTION="#form.source#"
+    TYPE="#form.type#"
+    CRITERIA="#form.searchstring#"&gt;
+
+&lt;!--- print out the search results ---&gt;
+    &lt;CFOUTPUT&gt;
+    &lt;H2&gt;#form.type# Search Results&lt;/H2&gt;
+
+    &lt;P&gt;#SearchSnippets.RecordCount# "hit
+      &lt;CFIF SearchSnippets.recordcount is not 1&gt;s&lt;/CFIF&gt;" found 
+        out of #SearchSnippets.RecordsSearched# total record
+          &lt;CFIF SearchSnippets.recordcount is not 1&gt;s&lt;/CFIF&gt;
+            searched.
+    
+    &lt;P&gt;&lt;I&gt;&lt;B&gt;#form.maxrows# records returned ...&lt;/B&gt;&lt;/I&gt;
+    
+    &lt;CFTABLE QUERY="SearchSnippets" MAXROWS="#maxrows#" 
+      STARTROW="1" COLHEADERS HTMLTABLE&gt;
+        &lt;CFCOL HEADER="SCORE" TEXT="#score#"&gt;
+        &lt;CFCOL HEADER="TITLE" 
+          TEXT="&lt;a href='#url#' target='blank'&gt;#title#&lt;/A&gt;"&gt;        
+        &lt;CFCOL HEADER="SUMMARY" TEXT="#summary#"&gt;
+    &lt;/CFTABLE&gt;    
+    &lt;/CFOUTPUT&gt;
+
+&lt;/CFIF&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfsearch
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_083.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_085.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

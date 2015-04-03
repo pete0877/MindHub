@@ -1,0 +1,939 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Before You Install</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1162902"></a>
+ <H1>Before You Install</H1>
+
+
+
+<p>Before you install ClusterCATS and begin creating your server clusters, perform the following pre-installation tasks.</p><ul>
+<a name="1163881"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1079501">&quot;Review the release notes&quot;</a>
+
+<a name="1165951"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1079503">&quot;Verify system requirements&quot;</a>
+<a name="1165952"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1203294">&quot;Configure your primary DNS server&quot;</a>
+<a name="1165956"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1187703">&quot;Configure your Web server's network settings&quot;</a>
+<a name="1165493"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1203402">&quot;Configure ClusterCATS for use across firewalls&quot;</a>
+</li>
+</ul>
+<a name="1079501"></a>
+ 
+<H2>Review the release notes</H2>
+<p>Frequently, users bypass the product release notes and go right to the install program so that they can get the product up and running as soon as possible. However, software issues, incompatibilities, and any workarounds are often discovered and documented just before the software ships, long after the official product documentation has been finished. As such, it's best to review the product release notes before you get started so that you save yourself time and unnecessary frustration.</p><a name="1079503"></a>
+ 
+<H2>Verify system requirements</H2>
+<p>This section describes the platforms on which the ClusterCATS components run and their minimum system requirements.</p><a name="1136744"></a>
+ 
+<H3>ClusterCATS Server system requirements</H3>
+<p>You must install the ClusterCATS Server component on each server in your cluster. Make sure your server meets the minimum system requirements for your platform as described below.</p><a name="1162091"></a>
+<h4> Windows NT system requirements for ClusterCATS Server</h4>
+<ul>
+<a name="1162092"> </a>
+<li>Intel Pentium 200 Mhz or greater CPU
+
+<a name="1162097"> </a>
+</li>
+<li>100 MB of free disk space
+<a name="1162098"> </a>
+</li>
+<li>128 MB of RAM
+<a name="1162099"> </a>
+</li>
+<li>Windows NT operating system v4.0 or greater
+<a name="1162100"> </a>
+</li>
+<li>Windows NT Service Pack 4 or greater
+<a name="1162110"> </a>
+</li>
+<li>Internet Information Server v4.0 or greater or Netscape Enterprise Server v3.5.1
+<a name="1162111"> </a>
+</li>
+<li>Administrative privileges on each server
+<a name="1162112"> </a>
+</li>
+<li>An IP address assigned to each server
+<a name="1162269"> </a>
+</li>
+<li>Correct DNS entries and configurations (see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1203294">&quot;Configure your primary DNS server&quot;</a>).
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ClusterCATS Server does not run on Windows 98 or Windows 95.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ul>
+<a name="1162275"></a>
+<h4> Sun Solaris system requirements for ClusterCATS Server</h4>
+<ul>
+<a name="1162176"> </a>
+<li>Sun SPARC workstation
+
+<a name="1162177"> </a>
+</li>
+<li>100 MB of free disk space
+<a name="1162178"> </a>
+</li>
+<li>128 MB of RAM (more recommended)
+<a name="1162233"> </a>
+</li>
+<li>Solaris operating system v.2.51 or greater with Patch 103582-18 or higher
+<a name="1162245"> </a>
+</li>
+<li>Netscape Enterprise Server v3.5.1 or greater or Apache Web Server v1.3.6 or greater
+<a name="1162182"> </a>
+</li>
+<li>Administrative root privileges on each server
+<a name="1162183"> </a>
+</li>
+<li>An IP address assigned to each server
+<a name="1162184"> </a>
+</li>
+<li>Correct DNS entries and configurations (see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1203294">&quot;Configure your primary DNS server&quot;</a>)
+</li>
+</ul>
+<a name="1162287"></a>
+<h4> Linux system requirements for ClusterCATS Server</h4>
+<ul>
+<a name="1162293"> </a>
+<li>Intel Pentium 200 Mhz or greater
+
+<a name="1162298"> </a>
+</li>
+<li>100 MB of free disk space
+<a name="1162307"> </a>
+</li>
+<li>128 MB of RAM (more recommended)
+<a name="1162312"> </a>
+</li>
+<li>Red Hat operating system v.6.0
+<a name="1162317"> </a>
+</li>
+<li>Apache Web Server v1.3.6 or greater
+<a name="1162324"> </a>
+</li>
+<li>Administrative root privileges on each server
+<a name="1162329"> </a>
+</li>
+<li>An IP address assigned to each server
+<a name="1162334"> </a>
+</li>
+<li>Correct DNS entries and configurations (see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1203294">&quot;Configure your primary DNS server&quot;</a>)
+</li>
+</ul>
+<a name="1162739"></a>
+ 
+<H3>ClusterCATS Explorer system requirements</H3>
+<p>You can install the ClusterCATS Explorer component on a computer separate from the cluster so that you can administer the cluster from a central location, but you don't have to. However, if you do, make sure the computer on which you install this component meets the minimum system requirements.</p><a name="1203261"></a>
+<h4> System requirements for the Windows-based Explorer</h4>
+<p>The Windows-based ClusterCATS Explorer runs from a Windows machine (NT, 98, or 95), regardless of the platform on which you install ClusterCATS Server. Its system requirements are as follows:</p><ul>
+<a name="1162869"> </a>
+<li>Intel Pentium 166 Mhz or greater CPU
+
+<a name="1162875"> </a>
+</li>
+<li>50 MB of free disk space
+<a name="1162876"> </a>
+</li>
+<li>64 MB of RAM
+<a name="1162877"> </a>
+</li>
+<li>Windows NT operating system v4.0 or greater, or Windows 98, or Windows 95
+<a name="1162881"> </a>
+</li>
+<li>Windows NT Service Pack 4 or greater (if running Windows NT)
+<a name="1162882"> </a>
+</li>
+<li>Administrative privileges
+</li>
+</ul>
+<a name="1171847"></a>
+<h4> System requirements for the ClusterCATS Web Explorer</h4>
+<p>Use the ClusterCATS Web Explorer if you have a UNIX-only environment and cannot obtain a Windows machine to run the Explorer. Install the ClusterCATS Web Explorer program on a UNIX server that meets the following requirements:</p><ul>
+<a name="1171860"> </a>
+<li>Sun SPARC workstation
+
+<a name="1171861"> </a>
+</li>
+<li>75 MB of free disk space
+<a name="1171862"> </a>
+</li>
+<li>128 MB of RAM (more recommended)
+<a name="1171863"> </a>
+</li>
+<li>Solaris operating system v.2.51 or greater with Patch 103582-18 or higher
+<a name="1171864"> </a>
+</li>
+<li>Netscape Enterprise Server v3.5.1 or greater or Apache Web Server v1.3.6 or greater
+</li>
+</ul>
+<p>Use a Web browser (Microsoft Internet Explorer 4.0 or greater or Netscape Navigator 3.0 or greater) from a Windows or UNIX machine to access the Web Explorer program you installed on the UNIX box. See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1133296">&quot;Using the ClusterCATS Web Explorer&quot;</a>.</p><a name="1203294"></a>
+ 
+<H2>Configure your primary DNS server</H2>
+<p>When you enter a URL into a Web browser and press Enter, the browser is able to locate the Web site you want to visit because of the name-to-IP address translation that the Internet Domain Name System (DNS) performs. This section reviews two important components of the DNS infrastructure that enable this capability -- primary DNS servers and local DNS servers.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This section assumes that your primary DNS server is already set up 
+correctly. If it is not, consult a DNS configuration book or a DNS 
+consultant to help prepare your DNS server. We recommend that you do 
+not use a Hosts file in a production environment, as it is less reliable than 
+DNS.
+</td>
+</tr>
+</table>
+</div>
+<br><p>This section addresses the following topics:</p><ul>
+<a name="1176647"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1188758">&quot;Understanding local and primary DNS servers&quot;</a>
+
+<a name="1178615"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1207438">&quot;Configuring DNS records on your primary DNS server&quot;</a>
+</li>
+</ul>
+<a name="1188758"></a>
+ 
+<H3>Understanding local and primary DNS servers</H3>
+<p>The two types of DNS servers involved in the name-to-IP mapping translation are primary DNS servers and local DNS servers. </p><p>The primary DNS server is a computer that runs DNS software, which provides the final mapping of your Web site name to the computer that your Web site actually resides on. The primary DNS server may be located anywhere on the Internet, but most reside either in the same physical location as the Web servers or at the ISP that provides the connection between your Web servers and the Internet. </p><p>The primary DNS server contains tables of forward and reverse name translations. For example, forward translation entries (A records) would look like this:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+www1.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+192.168.0.1
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+www2.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+192.168.0.2
+</td></tr>
+
+</table>
+
+</div>
+</p><p>Reverse translation entries (PTR records) are just the opposite and would look like this:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+192.168.0.1
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+www1.company.com
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+192.168.0.2
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+www2.company.com
+</td></tr>
+
+</table>
+
+</div>
+</p><p>It's important that you configure your Web sites to have both forward and reverse DNS entries on your primary DNS server. If you are not responsible for maintaining your primary DNS server, be sure to tell your DNS administrator to add both forward and reverse entries for your explicit Web server names (www1.company.com, www2.company.com, etc.). If both forward <em>and</em> reverse translations aren't configured for each explicit Web server, ClusterCATS won't operate correctly.</p><p>A local DNS server usually resides at the Web hosting facility. The local DNS server stores its own local table of name translations for the Web sites that the browser has visited. If a user enters a URL of a site in a browser that the browser has already visited, it retrieves the host name-to-IP address translation from the local DNS server's table. However, if a user enters a URL for a site that the browser on that computer has never visited, the local DNS server must access the primary DNS server on the Internet to resolve the name-to-IP mapping before the browser can send a request to the appropriate Web server.</p><p>To summarize, primary and local DNS servers work together to resolve name-to-IP address mappings in the following way. </p><ol>
+</li>
+<li>A user enters a Web site URL in his or her browser and presses Enter.
+
+</li>
+<li>The browser checks the local DNS server for the name-to-IP address mapping. The local DNS server typically resides at the facility where the Web servers are hosted.
+
+</li>
+<li>If the local DNS server does not have the mapping, it goes out to the Internet and locates the primary DNS server to look up the name-to-IP address mapping. 
+
+<p>If round-robin DNS is being used, the primary DNS server determines which 
+server in the cluster is next in line to receive the request.
+</p></li>
+<li>The primary DNS server sends back the translation to the local DNS server, which in turn sends it to the user's browser.
+
+</li>
+<li>The browser is now able to send an HTTP request to the correct Web server hosting the site.
+
+</li>
+</ol>
+<p>The following diagram illustrates this process.</p><p><img src="../images/Local_Primary_DNS.gif">
+
+
+</p><a name="1207438"></a>
+ 
+<H3>Configuring DNS records on your primary DNS server</H3>
+<p>You must configure DNS so that both the forward and reverse lookup translation entries are entered and registered correctly with your primary DNS server. To accomplish this, you must define required DNS records (A records and PTR records) for your Web servers on your primary DNS server.</p><p>Besides standard name translations, your primary DNS server can also distribute HTTP requests sequentially across clustered servers using a technique called round-robin DNS. This service allows DNS to return a list of multiple servers back to the browser that requests a name translation.</p><p>Round-robin DNS and ClusterCATS work well together. You don't want to rely on just round-robin DNS for distributing load for your business-critical sites because DNS functionality is limited. In short, DNS is a good load <em>distribution</em> technique, but it cannot <em>manage</em> load because it is unable to react to increases in server traffic. It also cannot detect server failures nor redirect requests among available servers. ClusterCATS compensates for these limitations.</p><p>Allaire recommends that you use round-robin DNS or a hardware load balancing device to distribute requests initially to the Web servers in your cluster. Following the initial distribution, the ClusterCATS load management and failover features automatically take over and ensure that your ColdFusion applications remain up and running.</p><a name="1195319"></a>
+<h4> Using ClusterCATS with round-robin DNS </h4>
+<p>So that ClusterCATS operates effectively with round-robin DNS, you need to ensure that round-robin DNS entries are configured correctly on your primary DNS server. For example, for a single-location server cluster consisting of four servers, you need to configure round-robin DNS across all four servers for the domain name and individual IP addresses for each explicit server name. As an example, your DNS tables on your primary DNS server would look similar to the tables that follow.</p><p></p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong> Forward DNS Entries with Round Robin Enabled&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Host Name</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>IP Address</strong>
+</th></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=4><font face="arial,helvetica" size=-1>
+www.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.1
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.2
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.3
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.4
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+www1.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.1
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+www2.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.2
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+www3.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.3
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+www4.company.com
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.4
+</td></tr>
+
+</table>
+
+</div>
+</p><p></p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong> Reverse DNS Entries for Explicit Server Names&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>IP Address</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Host Name</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.1
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+www1.company.com
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.2
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+www2.company.com
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.3
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+www3.company.com
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+193.168.0.4
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+www4.company.com
+</td></tr>
+
+</table>
+
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>When using round-robin DNS, <em>do not</em> define a reverse mapping (PTR 
+record) for the site name (www.company.com); the cluster will not 
+operate properly if you do. Only define forward mappings (A records) for 
+www.company.com. However, define both A records and PTR records for 
+all of the explicit servers (www1, www2,...) in the cluster. This 
+configuration ensures that requests cycle through the servers 
+sequentially in round-robin fashion.
+</td>
+</tr>
+</table>
+</div>
+<br><p>Round-robin DNS distributes the initial domain-level requests across all four servers. Thereafter, ClusterCATS distributes load to avoid failed or overloaded servers.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure DNS records on your Windows NT DNS server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">On your primary DNS server, click Start&gt;Administrative Tools&gt;DNS Manager.
+
+
+<p>The DNS Manager utility appears.
+</p><p><img src="../images/DNS_manager.gif">
+
+
+
+</p></li>
+<li>Right-click the zone created for your site and choose New Host.
+
+<p>The New Host dialog box appears.
+</p><p><img src="../images/New_host.gif">
+
+
+
+</p></li>
+<li>Enter <code>www</code> in the Host Name field and enter the IP address of a server that will host the site in the Host IP Address field.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Do not enable the Create Associated PTR Record check box. You only 
+want forward mappings associated with the site name and no 
+reverse mappings for round-robin DNS to work properly.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Click Add Host.
+
+</li>
+<li>Repeat steps 3 and 4 for each server hosting the site that will be in your cluster.
+
+</li>
+<li>Click Done to close the New Host dialog box.
+
+<p>Your entries should look similar to the following entries when you're done.
+</p><p><img src="../images/forward_host_names.gif">
+
+
+
+</p></li>
+<li>Right-click the zone for your Web site again and select New Record.
+
+<p>The New Resource Record dialog box appears.
+</p><p><img src="../images/DNS_newrecord.gif">
+
+
+
+</p></li>
+<li>Ensure that the A Record record type is selected from the Record Type list box.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ClusterCATS requires that the explicit servers you use to host your 
+Web site have associated A records defined for them in DNS, not 
+CNAME records.
+</td>
+</tr>
+</table>
+</div>
+<br><p>A Records correlate to Address records for your hosts, CNAME Records correlate to 
+aliases you want to use for your hosts, and PTR records correlate to reverse name 
+translations (IP address to Host name). 
+</p></li>
+<li>Enter the Host name and corresponding IP address for an explicit Web server that will host your Web site in the Host Name and IP Address fields, respectively.
+
+<p>For example, your explicit Host Name entry might be www1 and the IP Address for 
+that server might be 193.168.03.1.
+</p><p><img src="../images/resource_record_filled.gif">
+
+
+
+</p></li>
+<li>Leave the Create Associated PTR Record check box enabled to automatically create the required reverse mapping record (IP address to host name) for each explicit server.
+
+</li>
+<li>Click OK.
+
+</li>
+<li>Repeat steps 6 through 10 for each explicit server hosting the site that will be in your cluster.
+
+<p>The DNS record entries for your site should look similar to the following entries 
+when you're done.
+</p><p><img src="../images/final_explicit_entries.gif">
+
+
+
+</p></li>
+</ol>
+<a name="1176676"></a>
+<h4> To configure DNS records on your UNIX-based DNS server</h4>
+<p>See the operating system documentation that came with your UNIX server for specific procedures about how to define DNS records on your UNIX-based DNS server.</p><a name="1187703"></a>
+ 
+<H2>Configure your Web server's network settings</H2>
+<p>Successful clustering depends highly on whether you've configured your Web server's network settings properly. To understand how specific network configurations affect clustering, let's review important server failover concepts.</p><p>ClusterCATS uses an &quot;IP keep alive&quot; strategy to accomplish transparent server failover when a Web server fails. This process involves each server in the cluster listening for an IP signal from each server. If a server stops emitting the signal, ClusterCATS assumes there is a problem with the server and restricts it from processing any additional requests. The least loaded available server in the cluster assumes the IP address of the restricted server, and all subsequent requests are redirected to the failover server until the restricted server's problems are fixed. This process of moving a Web site IP address from one server to another in the cluster is known as dynamic addressing.</p><p>In order for ClusterCATS to perform dynamic addressing, your Web server must have a specific network name and IP address configured for it. Additionally, it must reference a valid local DNS server so that it can properly translate names to correct IP addresses.</p><p>This section describes the following Web server network configuration procedures:</p><ul>
+<a name="1191912"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1177088">&quot;Configuring your Web server to point to your local DNS server&quot;</a>
+
+<a name="1191916"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1191927">&quot;Configuring ClusterCATS offline maintenance support (NT only)&quot;</a>
+</li>
+</ul>
+<a name="1177088"></a>
+ 
+<H3>Configuring your Web server to point to your local DNS server</H3>
+<p>You must configure each Web server in your cluster to reference your local DNS server so that name to IP address mapping resolutions can occur.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure Windows NT Web servers to reference your DNS server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Settings&gt;Control Panel.
+
+
+</li>
+<li>Open the Network icon.
+
+</li>
+<li>Click the Protocols tab and select the TCP/IP protocol from the list of Network Protocols.
+
+</li>
+<li>Click Properties.
+
+<p>The Microsoft TCP/IP Properties dialog box appears.
+</p><p><img src="../images/TCP_Properties.gif">
+
+
+
+</p></li>
+<li>Click the DNS tab.
+
+<p><img src="../images/DNS_Tab.gif">
+
+
+
+</p></li>
+<li>Enter the name of the server that is hosting the Web application in the Host Name field.
+
+</li>
+<li>Enter the domain name (yourcompany.com) in the Domain Name field.
+
+</li>
+<li>In the DNS Service Search Order area, click Add to enter the IP addresses of your local DNS server(s).
+
+<p>You may have several local DNS servers if you have different subnets on your 
+network. If so, add each IP address individually by clicking the Add button for each 
+server.
+</p></li>
+<li>After adding the IP address(es), use the arrows on the right if applicable to specify the order in which the DNS servers will be accessed.
+
+</li>
+<li>Click OK in all open dialog boxes and close the Windows Control Panel.
+
+</li>
+</ol>
+<a name="1177112"></a>
+<h4> To configure UNIX-based Web servers to reference your DNS server</h4>
+<p>See the UNIX operating system documentation that came with your server for specific procedures about how to configure your Web server to reference your local DNS server.</p><a name="1191927"></a>
+ 
+<H3>Configuring ClusterCATS offline maintenance support (NT only)</H3>
+<p>Before attempting to configure the ClusterCATS offline maintenance support feature, review the first two sections below thoroughly to understand what offline maintenance support is and how static and dynamic IP addresses enable this functionality. Then proceed with the configuration procedures.</p><p>This section describes the following topics:</p><ul>
+<a name="1180594"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1181017">&quot;The ClusterCATS offline maintenance mode defined&quot;</a>
+
+<a name="1180595"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1180600">&quot;Understanding static and dynamic IP address configurations&quot;</a>
+<a name="1180596"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1180691">&quot;Configuring offline maintenance support (Windows NT only)&quot;</a>
+</li>
+</ul>
+<a name="1181017"></a>
+<h4> The ClusterCATS offline maintenance mode defined</h4>
+<p>ClusterCATS provides an offline maintenance feature (available on the Windows NT platform only) that requires you to perform some initial IP address configurations before being able to use the feature. You are not required to configure maintenance addresses in order to use ClusterCATS. However, Allaire <em>highly recommends</em> that you do so because maintenance IP addresses:</p><ul>
+<a name="1194027"> </a>
+<li>Guarantee that you can always access servers in your cluster remotely if they fail or become unavailable. 
+
+<p>Binding a static IP address to the server ensures that you can always access the 
+box even if the Web server on it fails.
+</p><a name="1181476"> </a>
+</li>
+<li>Allows you to perform maintenance and server-update tasks without disconnecting servers from the network. 
+<p>By placing a clustered server in maintenance mode, you can perform necessary 
+software updates or configurations while ensuring that your site remains up 
+and servicing your customers.
+</p><a name="1193654"> </a>
+</li>
+<li>Prevents your site from experiencing long down times on failover recovery.
+<p>Without maintenance addresses your site will experience three to five minutes 
+of downtime on failover recovery due to an automatic system reboot that 
+occurs when a system comes back online following failover.
+</p></li>
+</ul>
+<p>Once you put a server in maintenance mode, all inbound HTTP traffic heading for the affected server is redirected to the most available server in the cluster. After you complete your maintenance tasks and take the server out of maintenance mode, the servers that temporarily assumed the restricted server's IP address and HTTP traffic return the IP address back to the affected server so that it can receive and process HTTP requests.</p><a name="1180600"></a>
+<h4> Understanding static and dynamic IP address configurations</h4>
+<p>Each server that you add to a cluster must have an Internet protocol (IP) address defined for it. Because the Internet operates on a TCP/IP network protocol for sending and receiving packets of data to and from networked computers, you must correctly define your servers' IP addresses so that they can send and receive network data as intended.</p><p>The static address must be assigned to the server itself -- the physical box. You do so by making an entry in the server's IP stack. On Windows servers, you add this IP stack entry using the Network icon in the Windows Control Panel. This Network icon is also commonly referred to as your Network Interface Card (NIC). In addition to assigning the server's static address, you must make sure that the Web sites' static IP addresses that reside on the Web server on this machine get removed from the IP stack (also via the Network icon in the Control Panel). Typically, you or someone else added the Web site IP addresses to the server's IP stack before installing ClusterCATS and creating clusters. You now need to manually remove those IP addresses so that ClusterCATS can <em>dynamically</em> create them in the IP stack according to server load and availability in the cluster.</p><p>Understanding the roles of static and dynamic IP addresses can be confusing, so let's look at an example. Suppose I have a Web site, www.website.com, on my Web server that I created months ago before I acquired and began using ClusterCATS. I now want to cluster several Windows NT servers and configure them for maintenance support. </p><ol>
+</li>
+<li>On one of the servers I plan to cluster, I enter a static IP address for the server in its IP stack (via the NIC) if one doesn't already exist. 
+
+</li>
+<li>I then remove the Web site's IP address from the server's IP stack also via the NIC.
+
+</li>
+<li>I open the appropriate Web server administration utility (Internet Service Manager for IIS; Netscape Enterprise Manager for Netscape) and add my Web site's IP address in the appropriate IP address field for the site's properties.
+
+</li>
+<li>Lastly, I verify that the server's host name listed on the NIC is <em>not</em> the same name that the Web site uses. If it is, I change one because the names must be unique.
+
+<p>Typically, it's easier to change the server's host name so that you don't cause DNS 
+mapping resolution problems for your customers. However, weigh this against 
+how often the server's physical location might change. If you relocate the server at 
+some point from its current location and plug it back into the network, your 
+configuration may no longer work.
+</p></li>
+</ol>
+<p>The following diagram illustrates this process.</p><p><img src="../images/IP_Config.gif">
+
+
+</p><p>See the next section for step-by-step procedures about how to perform these required IP configurations for using the ClusterCATS offline maintenance support feature.</p><a name="1180691"></a>
+<h4> Configuring offline maintenance support (Windows NT only)</h4>
+<p>Configuring offline maintenance support involves the following tasks:</p><ol>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1177970">&quot;Assigning a static IP address to each server's NIC&quot;</a>
+
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1177524">&quot;Removing Web site IP addresses from the NIC&quot;</a>
+
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1178318">&quot;Adding your Web sites' IP addresses to your Web server&quot;</a>
+
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1178440">&quot;Verifying that the server's host name is not the same as the Web site's name&quot;</a>
+
+</li>
+</ol>
+<a name="1177970"></a>
+<h4> Assigning a static IP address to each server's NIC</h4>
+<p>If your cluster consists of Windows NT servers, assign a static IP address to each server's Network Interface Card (NIC) to take advantage of the ClusterCATS offline maintenance support feature.</p><p>The static maintenance IP address that you assign to the NIC is independent of the IP address that the Web sites residing on the Web server use.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a static IP address to your Windows-based Web server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Settings&gt;Control Panel.
+
+
+</li>
+<li>Open the Network icon.
+
+</li>
+<li>Click the Protocols tab and select the TCP/IP protocol from the list of Network Protocols.
+
+</li>
+<li>Click Properties.
+
+<p>The Microsoft TCP/IP Properties dialog box appears.
+</p><p><img src="../images/TCP_Properties.gif">
+
+
+
+</p></li>
+<li>Choose the Specify an IP Address option.
+
+</li>
+<li>Enter an IP address for the server in the IP Address field along with the corresponding Subnet Mask and Default Gateway.
+
+<p>See your network administrator if you don't know this information.
+</p></li>
+<li>Click OK.
+
+</li>
+<li>Verify that you can access your server by its maintenance address using the nslookup command from a command prompt.
+
+<p>For example:
+</p><p><code>nslookup wwwx.company.com
+</code></p><p><code>nslookup nnn.nnn.nnn.nnn
+</code></p><p>where <code>wwwx</code> is the explicit server name and <code>nnn</code> represents the numeric values of 
+that server's IP address.
+</p></li>
+</ol>
+<p>To learn how to put a server in maintenance mode, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1187806">&quot;Putting a cluster member in maintenance mode&quot;</a>.</p><a name="1177524"></a>
+<h4> Removing Web site IP addresses from the NIC</h4>
+<p>Prior to configuring the maintenance IP address, you may have previously bound the IP addresses for your Web sites to the NIC. In order for the ClusterCATS offline maintenance support to work as intended, you need to remove these Web sites' IP addresses from the NIC.</p><p>If you do not want to remove the IP addresses of the Web sites that reside on the Web server from your NIC, ClusterCATS will still function properly but you will not be able to take advantage of the offline capabilities. Removing Web site IP addresses from the NIC is required if you are going to use offline maintenance support.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you use Netscape Enterprise Server as your Web server, you must create 
+the cluster members <em>before</em> you delete the Web site IP addresses from the 
+NIC. For IIS, you create cluster members <em>after</em> you have deleted Web site 
+IP addresses from the NIC.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete Web site IP addresses from the NIC:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Settings&gt;Control Panel to display the Windows Control Panel.
+
+
+</li>
+<li>Open the Network icon, select the Protocols tab, and click Properties.
+
+<p>The Microsoft TCP/IP Properties dialog box appears.
+</p><p><img src="../images/TCP_Properties.gif">
+
+
+
+</p></li>
+<li>Click Advanced.
+
+<p>The Advanced IP Addressing dialog box appears.
+</p><p><img src="../images/Advanced_IPAddress.gif">
+
+
+
+</p></li>
+<li>In the IP address section, select the Web site addresses that you want to remove from the NIC and click Remove.
+
+<p>If there are no IP addresses, then they were not bound to the NIC or they were 
+already removed.
+</p></li>
+<li>Click OK in all open dialog boxes to apply your configuration and to close the Windows Control Panel. 
+
+</li>
+<li>Reboot your system for these changes to take affect.
+
+</li>
+</ol>
+<a name="1178318"></a>
+<h4> Adding your Web sites' IP addresses to your Web server</h4>
+<p>You must assign a unique IP address to each Web Site that you want to participate in a cluster.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc"><strong>To add Web site IP addresses to Windows/IIS:</strong>
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Programs&gt;Windows NT 4.0 Option Pack&gt;Microsoft Internet Information Server&gt;Internet Service Manager.
+
+
+<p>The Microsoft Management Console opens.
+</p><p><img src="../images/MMC.gif">
+
+
+
+</p></li>
+<li>Locate the Web server and expand its tree structure.
+
+</li>
+<li>Right-click the Web site for which you want to configure the IP address and choose Properties.
+
+<p>The Web Site Properties dialog box appears.
+</p><p><img src="../images/MMC_site_properties.gif">
+
+
+
+</p></li>
+<li>Enter the Web site's IP address in the IP Address field.
+
+<p>You must manually enter the address because it won't appear in the drop-down 
+list at this time. ClusterCATS will dynamically add the address to the IP stack once 
+you create the cluster.
+</p></li>
+<li>Click OK on all open dialog boxes to apply your configuration.
+
+</li>
+<li>Repeat the procedure for each Web site that you want to participate in the cluster.
+
+</li>
+</ol>
+<a name="1201301"></a>
+<h4> To add Web site IP addresses to UNIX-based Web servers</h4>
+<p>See the documentation that came with your Web server for specific procedures about how to configure Web site IP addresses on your server.</p><a name="1178440"></a>
+<h4> Verifying that the server's host name is not the same as the Web site's name</h4>
+<p>The last step you must do is check that the server's host name listed on the NIC is <em>not</em> the same name that the Web site uses. If it is, you have to change one because ClusterCATS requires the names to be unique.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To check the server's host name:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Settings&gt;Control Panel to display the Windows Control Panel.
+
+
+</li>
+<li>Open the Network icon, select the Protocols tab, and click Properties.
+
+<p>The Microsoft TCP/IP Properties dialog box appears.
+</p><p><img src="../images/TCP_Properties.gif">
+
+
+
+</p></li>
+<li>Click the DNS tab.
+
+<p><img src="../images/DNS_tab_hostname.gif">
+
+
+
+</p></li>
+<li>Verify that the name that appears in the Host Name field is the name assigned to the server (www1) and not the name of your Web site (most likely, www.). If the names are the same (www.), change one.
+
+<p>Typically, it's easier to change the server's host name so that you don't cause DNS 
+mapping resolution problems for your customers when they type in your site's 
+URL. However, weigh this against how often the server's physical location might 
+change. If you relocate the server at some point from its current location and plug 
+it back into the network, it's possible your configuration may no longer work.
+</p></li>
+</ol>
+<a name="1203402"></a>
+ 
+<H2>Configure ClusterCATS for use across firewalls</H2>
+<p>Many corporate environments today rely on firewalls to securely control access to proprietary knowledge that resides on public Internet sites, internal intranet sites, or private extranet sites. You can configure ClusterCATS to work seamlessly across one or more firewalls. </p><p>If you have multiple, distributed server clusters supporting the same domain, you'll need to open appropriate ports on each firewall to ensure that the server clusters' load balancing and failover features work. For example, if you cluster multiple, distributed Web servers that have a firewall between them, you must open ports 9123 and 9129 on the firewall that separates them to enable server to server communications. Additionally, if you will be managing your cluster from behind another firewall, you must open both ports so that the ClusterCATS Explorer can communicate with the cluster.</p><p>The following diagram illustrates this scenario.</p><p><img src="../images/Firewall.gif">
+
+
+</p><p>As you can see, this scenario involves Company ABC, which has an East Coast and a West Coast group of servers connected to the Internet via several firewalls. The ClusterCATS Explorer resides at the corporate headquarters behind a firewall with a direct connection to the Internet. </p><p>You must open and configure the appropriate communication ports on your firewalls to allow server to server communication in a distributed setting and server to client communication. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You must open both ports on <em>all</em> affected firewalls.
+</td>
+</tr>
+</table>
+</div>
+<br><p>These ports include the following:</p><ul>
+<a name="1164825"> </a>
+<li>Port 9123 (for TCP and UDP access)
+
+<p>Opening port 9123 on your firewall allows multiple, distributed server clusters 
+residing in different locations to communicate with one another across 
+firewalls.
+</p><a name="1164827"> </a>
+</li>
+<li>Port 9129 (for TCP and UDP access)
+<p>Opening port 9129 on a firewall allows the ClusterCATS Explorer to 
+communicate with multiple, distributed server clusters across firewalls.
+</p></li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

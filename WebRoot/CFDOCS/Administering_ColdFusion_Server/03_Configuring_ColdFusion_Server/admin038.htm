@@ -1,0 +1,165 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Enabling External Client State Management</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin037.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin039.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1005158"></a>
+ <H1>Enabling External Client State Management</H1>
+
+
+
+<p>You enable client state management in the ColdFusion Server using the Administrator to specify a data source repository where you want to store client variables. </p><p>Although you can select and use an existing data source to store client variables, Allaire recommends creating a new data source specifically for the purpose of storing client variables. By separating data sources, you can more easily define security options for the data sources used in your ColdFusion environment.</p><p>When creating a new data source for client variables, you do not need to create any tables in the data source. ColdFusion automatically creates the tables necessary to store client variables. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a client variable data source:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator to the Data Sources page. 
+
+
+</li>
+<li>Enter a data source name in the text entry box and click Add.
+
+</li>
+<li>In the Create Data Source page, enter information about the new data source location (path) as well as other options. 
+
+<p>Excel and Text data sources do not appear as valid data sources for use in 
+configuring an external client data source repository. Neither data source type 
+supports the SQL required for the client variable repository. In addition, OLE DB 
+data sources are not supported for use as a client data source repository. 
+</p></li>
+<li>Click Create to create the new data source.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable your client variable data source:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator to the Variables page, which is in the Server group.
+
+
+</li>
+<li>Select the name of the data source you want to use for storing client variables in the drop down list box, and click Add.
+
+</li>
+<li>On the Create Client Variable Storage page, select the options you want.
+
+</li>
+</ol>
+<a name="1011370"></a>
+ 
+<H2>Client variable storage options</H2>
+<p>When you configure a data source for client variable storage, you have several options for configuring the data source:</p><ul>
+<a name="1012558"> </a>
+<li>Purging variables older than a specified number of days
+
+<a name="1012570"> </a>
+</li>
+<li>Configuring global client variable updates
+<a name="1012586"> </a>
+</li>
+<li>Automatically creating tables in the client variable data source
+</li>
+</ul>
+<a name="1011985"></a>
+ 
+<H2>Purge client variables</H2>
+<p>Ordinarily, you don't want to have client variables preserved indefinitely. ColdFusion allows you to set a limit to the length of time a client variable remains active. You can configure your client variable data source to expire client variables after some number of days you specify. </p><p>As an example of how this can be useful, take the case of an online store. A user adds items to his or her shopping basket, the details of which are stored as client variables in a ColdFusion data source, but never completes the transaction, instead, choosing to end the session. You want to be able to easily clear the contents of the shopping cart after some number of days. Enabling ColdFusion to purge clients can help keep your client variables data source from getting cluttered with data you don't need. </p><a name="1012148"></a>
+ 
+<H2>Disable global client variable updates</H2>
+<p>By default ColdFusion updates client variables for every page request. Use this option if you don't want ColdFusion to perform these updates. When updates are disabled, ColdFusion only updates global client variables when they are first created and when they are updated. Since updating global client variables for every page request requires a trip to the data source and back, disabling updates helps to improve the performance of your application pages. </p><a name="1011677"></a>
+ 
+<H2>Create client variable data source tables</H2>
+<p>Use this option to allow ColdFusion to create the tables necessary for client variables when you first configure the data source for this purpose. As you configure other servers in your cluster to use this client variables data source, be sure to disable the option for ColdFusion to create the necessary tables. If you inadvertently enable automatic table generation, ColdFusion generates a SQL error because it tries to create tables that already exist. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin037.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin039.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

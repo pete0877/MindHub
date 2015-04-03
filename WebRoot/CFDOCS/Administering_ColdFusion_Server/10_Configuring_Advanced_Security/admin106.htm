@@ -1,0 +1,137 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Installing Advanced Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin105.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin107.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1024449"></a>
+ <H1>Installing Advanced Security</H1>
+
+
+
+<p>Advanced security is only available with ColdFusion Server Professional and Enterprise editions, and is not installed by default during ColdFusion setup. To use the User security features, you must choose the Advanced Security option when installing ColdFusion 4.0.</p><p>See <a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm#999704">Chapter 1, &quot;Installing and Configuring ColdFusion&quot;</a> for more information about installing ColdFusion Server. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install Advanced Security on Windows NT:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Run the ColdFusion setup program and choose the Advanced Security Services option in the Select Web Server options window.
+
+
+<p>Choosing Advanced Security during the installation procedure causes the 
+Microsoft Active Directory Services Interface (ADSI) Version 2.0 Setup window to 
+appear.
+</p></li>
+<li>Click Yes to install ADSI.
+
+</li>
+<li>Read and accept the licensing agreement, and click OK when the installation finishes.
+
+</li>
+<li>Restart your computer before opening the ColdFusion Administrator.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install Advanced Security on Solaris:
+</td>
+</tr>
+</table>
+</div><p>Installing Advanced Security on Solaris requires an active LDAP data source you can reference during the setup process. See <a href="../10_Configuring_Advanced_Security/admin109.htm#1011458">&quot;Defining User Directories&quot;</a> for information about the restricted-use license of the Netscape Directory Server that ships with ColdFusion Server.</p><p>After you install Advanced security on Solaris, you should disable all caching options whenever you're working in the Advanced Server Security page in the ColdFusion Administrator. Specifically, make sure you disable the following settings: </p><ul>
+<a name="1024666"> </a>
+<li>Load Security Server Policy Store Cache at Startup 
+
+<a name="1024667"> </a>
+</li>
+<li>Use Security Server Policy Store Cache 
+</li>
+</ul>
+<p>After you disable these caching options, make sure you restart ColdFusion Server using the stop and start scripts in the /coldfusion/bin directory. For more information about security cachesettings, see <a href="../10_Configuring_Advanced_Security/admin108.htm#1025528">&quot;Caching Advanced Security Information&quot;</a>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin105.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin107.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

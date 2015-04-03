@@ -1,0 +1,117 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Mapping Out an Application Framework</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1032505"></a>
+ <H1>Mapping Out an Application Framework</H1>
+
+
+
+<p>An important step in designing a ColdFusion application is mapping out its directory structure.</p><p>Before you start building the application, establish a root directory for the application. Application pages may be stored in subdirectories of the root directory.</p><p>When any ColdFusion application page is requested, ColdFusion searches up the page's directory tree for an <code>Application.cfm</code> file. When it is found, the <code>Application.cfm</code> code is logically included at the beginning of that page.</p><p>If it is not found, ColdFusion searches up the directory tree until it finds an <code>Application.cfm</code> file. If more than one <code>Application.cfm</code> file lives in the current directory tree, ColdFusion uses the first one it finds.</p><p>Just as the <code>Application.cfm</code> file is executed before each application page it governs, you can specify a file named <code>OnRequestEnd.cfm</code>, which is executed after each application page in the same application.</p><p>ColdFusion Server looks for the <code>OnRequestEnd.cfm</code> file in the same directory as the <code>Application.cfm</code> file of the current application page. The <code>OnRequestEnd.cfm</code> file will never be executed if it resides in another directory.</p><p>The <code>OnRequestEnd.cfm</code> file will not be executed if there is an error or an exception in the called page, or if the called page executes the CFABORT or CFEXIT tag.</p><p>Just as the <code>Application.cfm</code> file must be spelled with a capital A, you must spell the <code>OnRequestEnd.cfm</code> file with capital O, R, and E.</p><p>Defining a root directory for an application has a number of advantages:</p><ul>
+<li>Development: The application is easier to develop and maintain because the application page files are well organized.
+
+</li>
+<li>Portability: The application can be more easily moved to another server or another part of a server without having to change any code in the application page files.
+</li>
+<li>Application-level Settings: Application pages that fall under the same root directory can share application-level settings and functions.
+</li>
+<li>Security: Application pages that fall under the same directory can share Web server security settings.
+</li>
+</ul>
+<p>You can use a single <code>Application.cfm</code> file for your application, or use different <code>Application.cfm</code> files that govern individual sections of the application.</p><a name="1032518"></a>
+ 
+<H3></H3>
+<p>The directory trees below illustrate two approaches to implementing the Application Framework.</p><ul>
+<li>In the first example, a company named Web Wonders, Inc. uses a single <code>Application.cfm</code> file installed in their application root directory to process all application page requests.
+
+</li>
+<li>The illustration on the right shows how Bandwidth Associates uses the settings in individual <code>Application.cfm</code> files to specify processing for ColdFusion applications at the departmental level. Only the Products application pages are processed using the settings in the root <code>Application.cfm</code> file. The Consulting, Marketing, and Sales directories each has its own <code>Application.cfm</code> file.
+</li>
+</ul>
+<p><img src="../images/dwa12a.gif" height="265" width="340">
+
+
+</p><a name="1032535"></a>
+ 
+<H2>Behavior with CFINCLUDE</H2>
+<p>Only one <code>Application.cfm</code> file is ever processed for each ColdFusion application page. The presence of an <code>Application.cfm</code> file is an implicit CFINCLUDE. If it is present in the directory tree, there is no way not to include it. For this reason, it is the ideal location to set application-level variables.</p><p>When the requested application page has a CFINCLUDE tag pointing to an additional application page, ColdFusion does not initiate another search up the directory tree based on the included application page. This is an important behavior to understand. Upon opening a requested application page, ColdFusion searches for the <code>Application.cfm</code> file only once.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

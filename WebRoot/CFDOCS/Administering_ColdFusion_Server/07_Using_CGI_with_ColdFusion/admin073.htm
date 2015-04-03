@@ -1,0 +1,108 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Limitations of CGI</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Using_CGI_with_ColdFusion/admin072.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Using_CGI_with_ColdFusion/admin074.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Using CGI with ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997394"></a>
+ <H1>Limitations of CGI</H1>
+
+
+
+<p>You can use ColdFusion with a server that does not support one of the APIs and document type mapping. However, you will not be able to use the following features:</p><ul>
+<a name="997398"> </a>
+<li>Document type mapping. This eliminates the need for URLs that reference the ColdFusion executable file (e.g., <code>/cgi-shl/cfml.exe?template=</code>).
+
+<a name="997400"> </a>
+</li>
+<li>Native Web server security. With document type mapping you can put ColdFusion application pages into the Web server's document directory. This enables you to use the Web server's security to protect application pages.
+<a name="997403"> </a>
+</li>
+<li>Relative mappings. When application pages are stored in the Web server document directory, you can use relative URLs to refer to graphics and other files.
+<a name="997404"> </a>
+</li>
+<li>Increased performance. You will not realize the increased performance provided by the Web server APIs. 
+<a name="997405"> </a>
+</li>
+<li>Example applications. The example applications installed with ColdFusion will not work without a server that supports one of the standard APIs.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Using_CGI_with_ColdFusion/admin072.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Using_CGI_with_ColdFusion/admin074.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:03 -->
+</body>
+</html>

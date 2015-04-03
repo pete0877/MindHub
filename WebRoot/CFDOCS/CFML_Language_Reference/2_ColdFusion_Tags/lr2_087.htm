@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFSERVLETPARAM </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_086.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_088.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2292307"></a>
+ <H1>CFSERVLETPARAM </H1>
+
+
+
+<p>The CFSERVLETPARAM is a child of CFSERVLET. It is used to pass data to the servlet. Each CFSERVLETPARAM tag within the CFSERVLET block passes a separate piece of data to the servlet. </p><p>See also <a href="../2_ColdFusion_Tags/lr2_086.htm#2293406">CFSERVLET</a>.</p><a name="2293786"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFSERVLET 
+    ...&gt;
+    &lt;CFSERVLETPARAM 
+    NAME=&quot;servlet parameter name&quot; 
+    VALUE=&quot;servlet parameter value&quot;
+    &gt; 
+    ...
+    &lt;CFSERVLETPARAM 
+    NAME=&quot;servlet attribute name&quot; 
+    VARIABLE=&quot;ColdFusion variable name&quot; 
+    TYPE="INT" or "DOUBLE" or "BOOL" or "DATE" or "STRING"
+    &gt; 
+    ...
+&lt;/CFSERVLET&gt;
+</PRE><a name="2294958"></a>
+<h4> NAME</h4>
+<p>Required. If used with the <em>VALUE</em> attribute, it is the name of the servlet parameter. If used with the <em>VARIABLE </em>attribute, it is the name of the servlet attribute. See the Usage section for details on passing parameters. See the Usage section for details on passing parameters. </p><a name="2294960"></a>
+<h4> VALUE</h4>
+<p>Optional. The value of a name-value pair to be passed to the servlet as a parameter.</p><a name="2295007"></a>
+<h4> VARIABLE</h4>
+<p>Optional. The name of a ColdFusion variable. See the Usage section for details on passing parameters. The value of which will appear in the servlet as an attribute. See the TYPE attribute for a way to pass data type information to the Java servlet.</p><a name="2296131"></a>
+<h4> TYPE</h4>
+<p>Optional. The data type of the ColdFusion variable being passed. By default, ColdFusion usually passes variables as strings; however, to ensure that the data is correctly type on the Java side, you can specify any of the following types: INT, DOUBLE, BOOL, DATE, or STRING. See the Data Types table under Usage for information about how these types map to Java object types. </p><a name="2293524"></a>
+ 
+<H3>Usage</H3>
+<p>There are two different ways that CFSERVLETPARAM can be used to pass information to the servlet: by value or by reference. Depending on the method used, this information appears in the servlet either as a parameter (by value) or attribute (by reference).</p><p>The first passes name-value pairs by value. This method uses the attributes <em>NAME</em> and <em>VALUE </em>to pass a simple name-value string pair to the servlet. The <em>NAME</em> attribute represents the name of the servlet parameter from which the string specified in the <em>VALUE</em> attribute can be retrieved. Although the servlet can use these parameters as input, it cannot change their values in the ColdFusion template.</p><p>The second passes a ColdFusion variable to the servlet by reference. This method uses the attribute <em>VARIABLE </em>to pass the specified ColdFusion variable by reference to the servlet. Within the servlet, the variable data is made available as servlet attributes in the form of Java objects. On the Java side, the data can be manipulated, even changed, and those changes will, in turn, change the value of the associated ColdFusion variable. </p><p>When used in this mode, the <em>NAME </em>attribute represents the name of the servlet attribute that will be created to hold the value of the ColdFusion variable. The <em>VARIABLE</em> attribute represents the name, not the #value#, of a ColdFusion variable. This ability to directly share ColdFusion variables with a servlet is a powerful extension to the servlet API because it allows even complex ColdFusion objects such as structures and result sets to be directly accessed from Java. The following table shows the mapping between ColdFusion data types (specified with the <em>TYPE </em>attribute) and the corresponding Java objects.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Data Types: CF versus Java</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Type </strong>
+</th><th align="left">
+<strong>in Java </strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+INT
+</td><td valign="top">
+java.lang.Integer
+</td></tr>
+<tr valign="top"><td valign="top">
+DOUBLE
+</td><td valign="top">
+java.lang.Double
+</td></tr>
+<tr valign="top"><td valign="top">
+BOOL
+</td><td valign="top">
+java.lang.Bool
+</td></tr>
+<tr valign="top"><td valign="top">
+DATE
+</td><td valign="top">
+java.util.Date
+</td></tr>
+<tr valign="top"><td valign="top">
+STRING
+</td><td valign="top">
+java.lang.String
+</td></tr>
+<tr valign="top"><td valign="top">
+Array
+</td><td valign="top">
+java.util.Vector
+</td></tr>
+<tr valign="top"><td valign="top">
+Structure
+</td><td valign="top">
+java.util.Hashtable
+</td></tr>
+<tr valign="top"><td valign="top">
+CF query 
+
+result set
+</td><td valign="top">
+com.allaire.util.RecordSet
+
+(a WDDX-supplied utility class.)
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You need to have JRun 3.0 in order for the Name/Variable functionality to 
+work. You can download the latest version of JRun at the following URL: 
+<a href="http://www.allaire.com/products/Jrun/
+"></td>
+</tr>
+</table>
+</div>
+<br><p>In addition, in order to return a modified attribute to ColdFusion, thereby changing the value of the ColdFusion variable, you need to call the servlet API <em>setAttribute</em> method from the servlet to reset the value of the attribute.</p><a name="2293820"></a>
+ 
+<H3>Example</H3>
+<PRE>&lt;CFSERVLET  
+    CODE=&quot;MyServletName&quot; 
+<pre>    JRUNPROXY=&quot;236.3.3.4:8083&quot; 
+    TIMEOUT=&quot;300&quot;
+    WRITEOUTPUT=&quot;Yes&quot;
+    DEBUG="Yes"&gt;
+    &lt;CFSERVLETPARAM  NAME=&quot;Param1&quot;  VALUE=&quot;Value1&quot;&gt; 
+    &lt;CFSERVLETPARAM  NAME=&quot;Param2&quot;  VALUE=&quot;Value2&quot;&gt;
+    &lt;CFSERVLETPARAM  NAME=&quot;Attribute1&quot;  VARIABLE=&quot;CFVar1&quot; TYPE="BOOL"&gt;
+    &lt;CFSERVLETPARAM  NAME=&quot;Attribute2&quot;  VARIABLE=&quot;CFVar2&quot;&gt;
+&lt;/CFSERVLET&gt;
+</pre></PRE><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_086.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_088.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

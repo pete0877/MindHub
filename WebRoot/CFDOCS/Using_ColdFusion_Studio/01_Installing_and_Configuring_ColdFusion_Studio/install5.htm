@@ -1,0 +1,275 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Remote Servers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Installing and Configuring ColdFusion Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999102"></a>
+ <H1>Connecting to Remote Servers</H1>
+
+
+
+<p>You will need specific information about a remote server to connect to it, such as host name and user access requirements. If you do not have this information, you will need to get it from the owner of that server, whether it is your IT group, an ISP, or another provider.</p><a name="1001416"></a>
+ 
+<H2>FTP servers</H2>
+<p>The File Transfer Protocol (FTP) is the standard for moving files between nodes on the Internet. All Web servers support FTP and HomeSite provides an interface for connecting to an FTP server.</p><p>When the connection has been established, you can access files on remote servers and maintain Web sites located anywhere on the Internet.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To connect to an FTP server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Locate Allaire FTP &amp; RDS on either the Universal Files tab (use the Drive List) or the Windows Explorer.
+
+
+</li>
+<li>Right-click Allaire FTP &amp; RDS and choose Add FTP Server to see the Configure FTP Server dialog box.
+
+<p><img src="../images/configure_ftp_server.gif">
+
+
+
+</p></li>
+<li>Enter the following information for the server you want to connect to:
+
+<ul>
+<a name="999115"> </a>
+<li><strong>Description</strong> -- A descriptive name that will be displayed in the Universal Files tab and in Windows Explorer.
+
+<a name="999118"> </a>
+</li>
+<li><strong>Host Name</strong> -- The server's domain name, such as <code>allaire.com</code>, or an IP address. Servers that include <code>ftp</code> as part of the domain name require that you enter the complete name, such as ftp.somesite.com. 
+<a name="999120"> </a>
+</li>
+<li><strong>Initial Directory</strong> -- This entry is optional for accounts that default to the root directory of the FTP server, but is required if the account specifies an initial directory. 
+<a name="999122"> </a>
+</li>
+<li><strong>Relative from server-assigned directory</strong> -- Check the box to specify whether the initial directory should be set from the server-assigned user directory or from the server root.
+<a name="999124"> </a>
+</li>
+<li><strong>Username</strong> -- The login name for the account used to access the remote server or "anonymous" for anonymous FTP servers. You will be prompted for a username at login if this field is left blank.
+<a name="999126"> </a>
+</li>
+<li><strong>Password</strong> -- The password for the account used to access the remote server. You will be prompted for a password at login if this field is left blank.
+<a name="999127"> </a>
+</li>
+<li><strong>Root URL</strong> -- Enter the http:// address of the site. This entry allows you to browse files that were opened from the remote server, edited, and saved.
+<a name="999128"> </a>
+</li>
+<li><strong>Remote Port</strong> -- The port used by the FTP server. Use the default 21 unless another is specified by the server administrator or internet service provider.
+<a name="999130"> </a>
+</li>
+<li><strong>Request Timeout</strong> -- Set a value for the amount of time Studio waits for a server connection to complete.
+<a name="999132"> </a>
+</li>
+<li><strong>Assume UTC file times</strong> -- Check this box if you see incorrect date/time information for files on the FTP server. It adjust for servers that use the Universal Coordinated Time format. 
+<a name="999134"> </a>
+</li>
+<li><strong>Disable passive mode</strong> -- Check this box if the server does not use passive connections. 
+</li>
+</ul>
+</li>
+<li>Click OK to close the dialog box and connect to the server.
+
+</li>
+</ol>
+<a name="999136"></a>
+ 
+<H3></H3>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>FTP server connection requirements vary greatly. The instructions 
+above work in the majority of cases. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1001458"></a>
+ 
+<H2>Remote Development Services (RDS)</H2>
+<p>Remote Development Services (RDS) provides a secure connection to the ColdFusion Server environment and is a prerequisite to accessing CF data sources, using server-based browsing, and running the Interactive Debugger.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To connect to an RDS server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Locate Allaire FTP &amp; RDS on either the Universal Files tab (use the Drive List) or the Windows Explorer.
+
+
+</li>
+<li>Right-click Allaire FTP &amp; RDS and choose Add RDS Server to see the Configure RDS Server dialog box.
+
+<p><img src="../images/configure_rds_server.gif">
+
+
+
+</p></li>
+<li>Complete the Remote Host fields in the Configure RDS Server dialog:
+
+<ul>
+<a name="1001464"> </a>
+<li><strong>Description</strong> -- The name that you want to appear in the server list.
+
+<a name="1001467"> </a>
+</li>
+<li><strong>Host Name</strong> -- The server domain name, such as <code>www.allaire.com</code> or an IP address.
+<a name="1001468"> </a>
+</li>
+<li><strong>Port</strong> -- The Web server port. Use the default 80 unless another port is specified by the server administrator or ISP.
+<a name="1001470"> </a>
+</li>
+<li><strong>Use Secure Sockets Layer</strong> (SSL) -- Allows exchanges between Studio and the server to be encrypted via SSL.
+</li>
+</ul>
+</li>
+<li>Complete the ColdFusion RDS Security fields:
+
+<ul>
+<a name="1001474"> </a>
+<li><strong>User Name</strong> -- Required if the server is password-protected. 
+
+<a name="1001476"> </a>
+</li>
+<li><strong>Password</strong> -- Required if the server is password-protected. Open the ColdFusion Administrator Server &gt; Basic Security page to edit or disable the Studio password.
+</li>
+</ul>
+</li>
+<li>Check Prompt for Password to enable these entries.
+
+</li>
+<li>Click OK to complete the dialog.
+
+</li>
+</ol>
+<p>To open a server's configuration dialog, right-click on a server name in the Allaire FTP &amp; RDS list and select Properties.</p><a name="1001454"></a>
+ 
+<H2>Managing remote servers</H2>
+<p>You can easily change server configurations as needed.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view and edit the configuration for a remote server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the server in the Allaire FTP &amp; RDS list and choose Properties from the menu.
+
+
+</li>
+<li>Make any changes necessary to the Configure FTP Server options and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a remote server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the server in the Allaire FTP &amp; RDS list and choose Delete Server from the menu.
+
+
+</li>
+<li>Click Yes when you are asked to confirm that you want to delete the server.
+
+<p>The remote server is removed from the Allaire FTP &amp; RDS list.
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:29 -->
+</body>
+</html>

@@ -1,0 +1,211 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFMODULE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_061.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_063.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1971174"></a>
+ <H1>CFMODULE</H1>
+
+
+
+<p>Use CFMODULE to invoke a custom tag for use in your ColdFusion application pages. CFMODULE can help deal with any custom tag name conflicts that might arise. </p><p>Use the TEMPLATE attribute to name a ColdFusion page containing the custom tag definition, including its path. Use the NAME attribute to refer to the custom tag using a dot notation scheme indicating the location of the custom tag in the ColdFusion installation directory. </p><a name="1971177"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFMODULE TEMPLATE="template"
+    NAME="tag_name"
+    ATTRIBUTECOLLECTION="collection_structure"
+    <em>ATTRIBUTE_NAME1</em>="value"
+    <em>ATTRIBUTE_NAME2</em>="value"
+    ...&gt;
+</PRE><a name="1971179"></a>
+<h4> TEMPLATE</h4>
+<p>Used in place of NAME, defines a path to the application page (.cfm file) implementing the tag. Relative paths are expanded from the current page. Physical paths are not allowed. Absolute paths are expanded using the ColdFusion mappings. </p><a name="1971181"></a>
+<h4> NAME</h4>
+<p>Used in place of TEMPLATE, defines the name of the custom tag in the form "Name.Name.Name... " that uniquely identifies a subdirectory containing the custom tag page under the root directory for CF custom tags. For example:</p><pre>&lt;CFMODULE NAME="Allaire.Forums40.GetUserOptions"&gt; 
+</pre><p>Identifies the page <code>GetUserOptions.cfm</code> in the directory <code>CustomTags\Allaire\Forums40</code> under the root directory of the ColdFusion installation.</p><a name="1971185"></a>
+<h4> ATTRIBUTECOLLECTION</h4>
+<p>Optional. A structure that contains a collection of key-value pairs that represent attribute names and their values. You can specify as many key-value pairs as needed. However, you can specify the ATTRIBUTECOLLECTION attribute only once. See Usage for more information.</p><a name="1971187"></a>
+<h4> ATTRIBUTE_NAME</h4>
+<p>Optional. Attributes you want your custom tag to use. You can use as many attributes as needed to specify the parameters of a custom tag. Each </p><a name="1971189"></a>
+ 
+<H3>Usage</H3>
+<p>You can use ATTRIBUTECOLLECTION and ATTRIBUTE in the same call. </p><p>Within the custom tag code, the attributes passed with ATTRIBUTECOLLECTION are saved as independent attribute values with no indication that the attributes were grouped into a structure by the custom tag's caller.</p><p>Likewise, if the custom tag uses a CFASSOCIATE tag to save its attributes, the attributes passed with ATTRIBUTECOLLECTION are saved as independent attribute values with no indication that the attributes are grouped into a structure by the custom tag's caller.</p><a name="2043641"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfmodule
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFMODULE ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFMODULE Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFMODULE Example&lt;/H3&gt;
+
+&lt;P&gt;
+This example shows the use of CFMODULE to call a sample custom 
+tag inline.
+&lt;/P&gt;
+&lt;P&gt;
+This example makes use of a sample custom tag that has been saved in the 
+file myTag.cfm in the snippets directory. You can also save ColdFusion 
+custom tags in the Cfusion\CustomTags directory. For more information 
+about using Custom Tags, please refer to 
+&lt;i&gt;Developing Web Applications&lt;/i&gt;.
+&lt;/P&gt;
+&lt;!--- show the code in the custom tag---&gt;    
+&lt;P&gt;Here is the code in the custom tag.&lt;/P&gt;
+&lt;CFOUTPUT&gt;#HTMLCodeFormat("&lt;CFSET X = attributes.x&gt;
+&lt;CFSET Y = attributes.y&gt;
+&lt;CFSET A = attributes.value1&gt;
+&lt;CFSET B = attributes.value2&gt;
+&lt;CFSET C = attributes.value3&gt;
+&lt;CFSET caller.result = x + y + a + b + c&gt;")#
+&lt;/CFOUTPUT&gt;
+&lt;!--- end sample tag ---&gt;
+
+&lt;CFSET attrCollection1 = StructNew()&gt;
+&lt;CFSET attrCollection1.value1 = 22&gt;
+&lt;CFSET attrCollection1.value2 = 45&gt;
+&lt;CFSET attrCollection1.value3 = 88&gt;
+
+&lt;!--- Call the tag with CFMODULE with Name---&gt;
+&lt;CFMODULE 
+   Template="..\snippets\myTag.cfm"
+    X="3"
+    attributeCollection=#attrCollection1# 
+    Y="4"&gt;
+
+&lt;!--- show the code ---&gt;
+&lt;P&gt;Here is one way in which to invoke the custom tag, 
+using the TEMPLATE attribute.&lt;/P&gt;
+&lt;CFOUTPUT&gt;#HTMLCodeFormat(    "&lt;CFMODULE
+    Template=""..\snippets\myTag.cfm""
+    X=3
+    attributeCollection=##attrCollection1##
+    Y=4&gt;")#
+&lt;/CFOUTPUT&gt;    
+&lt;P&gt;The result: &lt;CFOUTPUT&gt;#result#&lt;/CFOUTPUT&gt; &lt;/P&gt;    
+
+&lt;!--- Call the tag with CFMODULE with Name---&gt;
+&lt;CFMODULE 
+    NAME="myTag"
+    X="3"
+    attributeCollection=#attrCollection1# 
+    Y="4"&gt;
+
+&lt;!--- show the code ---&gt;
+&lt;P&gt;Here is another way to invoke the custom tag, 
+using the NAME attribute.&lt;/P&gt;
+&lt;CFOUTPUT&gt;#HTMLCodeFormat(    "&lt;CFMODULE
+    NAME='myTag'
+    X=3
+    attributeCollection=##attrCollection1##
+    Y=4&gt;")#
+&lt;/CFOUTPUT&gt;    
+&lt;P&gt;The result: &lt;CFOUTPUT&gt;#result#&lt;/CFOUTPUT&gt;    
+
+&lt;!--- Call the tag using the short cut notation ---&gt;
+&lt;CF_myTag 
+    X="3" 
+    attributeCollection=#attrCollection1# 
+    Y="4"&gt;
+    
+&lt;!--- show the code ---&gt;    
+&lt;P&gt;Here is the short cut to invoking the same tag.&lt;/P&gt;
+&lt;CFOUTPUT&gt;#HTMLCodeFormat(    "&lt;CF_myTag 
+    X=3 
+    attributeCollection=##attrCollection1## 
+    Y=4&gt;")#
+&lt;/CFOUTPUT&gt;    
+&lt;P&gt;The result: &lt;CFOUTPUT&gt;#result#&lt;/CFOUTPUT&gt;&lt;/P&gt;    
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfmodule
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_061.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_063.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

@@ -1,0 +1,163 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating a Query from a Text File</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997435"></a>
+ <H1>Creating a Query from a Text File</H1>
+
+
+
+<p>Using the CFHTTP Get operation, you can create a query object from a delimited text file. This is a powerful means for processing and handling generated text files. Once the query object is created, it is very simple to reference columns in the query and perform other ColdFusion operations on the data.</p><p>Text files are processed in the following manner:</p><ul>
+<li>You specify a delimiter with the DELIMITER attribute. If data in a field includes the delimiter character, it must be quoted or qualified with some other character, which you specify with the TEXTQUALIFIER attribute.
+
+</li>
+<li>The first row of a text file is always interpreted as column headings, so that row is skipped. If the first row doesn't contain column headings, you'll need to use the COLUMNS attribute to specify headings so that you don't lose the first row data. You can also use the COLUMNS attribute to specify alternate heading text. Just make sure that you enter an alternate for every column of data in the text file.
+</li>
+<li>When duplicate column heading names are encountered, ColdFusion adds an underscore character to the duplicate column name to make it unique. For example, if two CustomerID columns are found, the second is renamed "CustomerID_".
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a query from a text file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;!--- The text file consists of six columns ---&gt;
+&lt;!--- separated by commas. ---&gt;
+<code>&lt;!--- The rows are ---&gt;
+</code><code>&lt;!--- OrderID,OrderNum,OrderDate ---&gt;
+</code><code>&lt;!--- ShipDate,ShipName,ShipAddress ---&gt;
+</code><code>&lt;!--- This example accepts the first row ---&gt;
+</code><code>&lt;!--- of the text file as the column names ---&gt;
+</code>
+&lt;CFHTTP METHOD="Get"
+    URL="http://127.0.0.1/orders/june/orders.txt"
+    NAME="juneorders"
+    DELIMITER=","
+    TEXTQUALIFIER=""""&gt;
+
+&lt;CFOUTPUT QUERY="juneorders"&gt;
+    OrderID: #OrderID#&lt;BR&gt;
+    Order Number: #OrderNum#&lt;BR&gt;
+    Order Date: #OrderDate#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- You can substitute different column names ---&gt;
+&lt;!--- by using the COLUMNS attribute ---&gt;
+
+&lt;CFHTTP METHOD="Get"
+    URL="http://127.0.0.1/orders/june/orders.txt"
+    NAME="juneorders"
+
+    COLUMNS="ID, Number,Date"
+    DELIMITER=","
+    TEXTQUALIFIER=""""&gt;
+
+&lt;CFOUTPUT QUERY="juneorders"&gt;
+    Order ID: #ID#&lt;BR&gt;
+    Order Number: #Number#&lt;BR&gt;
+    Order Date: #Date#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre></li>
+<li>Substitue the URL with the location of your text file.
+
+</li>
+<li>Substitue the name of a text file and the column headers to those in your text file.
+
+</li>
+<li>Save the file as <code>querytextfile.cfm</code> in <code>myapps</code> under your Web root directory and view it in your browser.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

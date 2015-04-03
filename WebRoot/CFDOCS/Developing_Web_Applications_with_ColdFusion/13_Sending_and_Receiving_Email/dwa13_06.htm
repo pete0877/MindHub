@@ -1,0 +1,105 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Advanced Sending Options</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 13	:&nbsp;&nbsp;Sending and Receiving Email</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997556"></a>
+ <H1>Advanced Sending Options</H1>
+
+
+
+<p>The ColdFusion implementation of SMTP mail uses a spooled architecture. This means that when a CFMAIL tag is processed in an application page, the messages generated are not sent immediately. Instead, they are spooled to disk and processed in the background. This architecture has two distinct advantages:</p><ol>
+</li>
+<li>End users of your application are not required to wait for SMTP processing to complete before a page returns to them. This is especially useful when a user action causes more than a handful of messages to be sent.
+
+</li>
+<li>Messages sent using CFMAIL are delivered reliably, even in the presence of unanticipated events like power outages or server crashes.
+
+</li>
+</ol>
+<p>In most cases, spooled messages are processed immediately by ColdFusion and delivery occurs almost instantly. If, however, ColdFusion is either extremely busy or has a large existing queue of messages, delivery could occur some time after the request is submitted.</p><a name="997563"></a>
+ 
+<H2>Sending mail as HTML</H2>
+<p>Most newer Internet mail applications are capable of reading and interpreting HTML code in a mail message. The CFMAIL tag allows you to specify the message type as HTML. The TYPE attribute, which only accepts HTML as an argument, informs the receiving email client that the message has embedded HTML tags that need to be processed. This feature is only useful when sending messages to mail clients that understand HTML.</p><a name="998552"></a>
+ 
+<H2>Error logging and undelivered messages</H2>
+<p>All errors that occur during the processing of SMTP messages are logged to the file <code>errors.log</code> in the ColdFusion log directory. Error log entries contain the date and time of the error as well as diagnostic information on why the error occurred.</p><p>All messages not delivered because of an error are written to the <code>\cfusion\mail\undelivr</code> directory. The error log entry corresponding to the undelivered message contains the name of the file written to the <code>undelivr</code> directory.</p><p>See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a> for more information about the mail logging settings in the ColdFusion Administrator.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:56 -->
+</body>
+</html>

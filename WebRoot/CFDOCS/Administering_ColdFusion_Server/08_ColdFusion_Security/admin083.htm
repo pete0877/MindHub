@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Choosing a Level of ColdFusion Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_ColdFusion_Security/admin082.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_ColdFusion_Security/admin084.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;ColdFusion Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1008346"></a>
+ <H1>Choosing a Level of ColdFusion Security</H1>
+
+
+
+<p>The rest of this chapter is designed to help you decide which type of ColdFusion security is right for your particular development needs. Basic and Advanced security are mutually exclusive ColdFusion features. When you install ColdFusion Server, Basic security is turned on by default. If you turn on Advanced security, it automatically overrides all your Basic security settings except one: Tags you protected with Basic security remain protected when you implement Advanced security. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you turn off both Basic and Advanced security, all ColdFusion 
+resources and server administration functions become available to 
+anyone who has access to the server. When you install ColdFusion Server, 
+leave Basic security passwords in place until you've finalized your 
+security plan and are ready to implement it.
+</td>
+</tr>
+</table>
+</div>
+<br><p>As you begin to think about how you'll secure your Web applications, keep these important points in mind:</p><ul>
+<a name="1008351"> </a>
+<li>Security is never absolute. Technology is fast-evolving and the Web is, by nature, an environment that favors openness and access over privacy and security. You should regularly review your security plans to make sure your company hasn't outgrown them.
+
+<a name="1008352"> </a>
+</li>
+<li>No single security model is perfect for every application or development environment. For example, an intranet deployed only to employees from a server behind your company's firewall and an e-commerce site on the Web would have very different security plans. When they plan applications, ColdFusion developers must weigh the costs and benefits of the various security alternatives in the context of the project requirements.
+<a name="1008353"> </a>
+</li>
+<li>Trust is perhaps the most important concept to consider when you're planning any security strategy. When users decide whether or not to download something from the Web, it usually depends on if they trust the site. The site can engender trust in any number of ways, by providing a digital certificate, for instance. Similarly, how open you choose to make your ColdFusion environment depends on whether or not all your users are trusted. Generally speaking, the level of trust is inversely proportional to the level of security you need to implement. If trust is high -- for example, if your development group consists of five people and they all access the ColdFusion server over a LAN -- then you can probably manage with a less secure environment. However, if trust is lower -- for example, if you're an Internet Service Provider (ISP) hosting a development site -- then you'll need to implement a more complex and restrictive security plan. The more public the application or development environment, the lower the level of trust.
+</li>
+</ul>
+<p>Basic security covers all phases of application development and deployment. Basic security is a good solution for trusted users because it offers them a single access level -- complete control. Consider implementing Basic security if you have legacy systems or other security models in place. </p><p>Basic security also requires very little support from the ColdFusion Server administrator: You'll want to choose a password that can't be easily guessed and change it regularly, but aside from that, Basic security won't require much of your time. Developers, on the other hand, will need to spend more time writing their applications; granular run-time access security is possible with Basic security, but involves custom development. </p><p>Advanced Security, on the other hand, allows you a great deal of flexibility and control, but requires more time and greater effort to set up and maintain than Basic security. Depending on how you implement it, Advanced Security can also affect performance when developers try to access resources from ColdFusion studio or when users try to run ColdFusion applications.</p><p>The following sections examine the effects of Basic and Advanced security on application development and deployment, and on administrative access to ColdFusion Server. Remember that when you select Basic or Advanced security, you're making a global choice that affects all aspects of ColdFusion. You can't, for instance, select Basic security for server administration and Advanced security for RDS. This section is organized by major task simply to help you prioritize your security concerns and then select the type of ColdFusion security that best meets the majority of your needs.</p><a name="1008359"></a>
+ 
+<H2>Developing Applications</H2>
+<p>Basic and Advanced security both restrict access to ColdFusion servers from ColdFusion Studio. You can restrict access by developers who connect to ColdFusion servers over a local area network as well as by developers who use RDS to access ColdFusion servers.</p><a name="1008362"></a>
+ 
+<H3>Developing Applications with Basic Security</H3>
+<p>Basic security for application development hinges on the protection of a single password per server. As long as you change the password frequently and your users keep it secret, you shouldn't have to worry about unauthorized access to the directories and resources on your ColdFusion server. Before you choose Basic security, it's imperative that you understand the security liabilities of this model:</p><ul>
+<a name="1008364"> </a>
+<li><strong>Password vulnerability</strong><strong> </strong>-- If the password is lost, hacked, or stolen, server security is compromised. See <a href="../08_ColdFusion_Security/admin082.htm#1008342">&quot;Data Encryption&quot;</a> for information about protecting communications, including password transmissions, between your server and clients.
+
+<a name="1008368"> </a>
+</li>
+<li><strong>Generalized access control</strong><strong> </strong>-- Remote developers have access either to all files and data sources, or none. Basic security doesn't let you protect individual directories or resources.
+</li>
+</ul>
+<p>Basic security is a good choice to protect ColdFusion resources if your company consists of a single development group or several small groups all physically located at the same site. Because these developers can be considered highly-trusted users, Basic security can still make sense when they are away from the office and are using RDS to develop applications remotely.</p><p>When you use Basic security to restrict access to a ColdFusion server, developers can access all files and mapped network drives on the server with a single password. This same password provides remote access to the server through RDS.</p><a name="1008371"></a>
+ 
+<H3>Developing Applications with Advanced Security</H3>
+<p>Advanced security is the ideal choice for administrators who need to meet the security challenges posed by remote or hosted ColdFusion application development. Unlike Basic security, which gives all developers the same level of access to all ColdFusion resources, Advanced security lets you customize access control for individual developers and development groups. </p><p>Using Advanced security requires more planning and configuration than using Basic security, but the benefits you'll see in streamlined development processes are well worth the time you'll invest. With Advanced security, you must specify the data sources and directories you want to protect, and then grant explicit access to these resources to specific groups or individual users. Protected resources can't be accessed by anyone to whom you haven't given permissions. Advanced security provides even further granularity by letting you explicitly specify the following on a group-by-group basis:</p><ul>
+<a name="1008374"> </a>
+<li>The types of SQL commands that can be perform against a data source
+
+<a name="1008375"> </a>
+</li>
+<li>Read and write access to files
+<a name="1008376"> </a>
+</li>
+<li>The types of actions allowed by CFML tags
+<a name="1008377"> </a>
+</li>
+<li>Delete, optimize, purge, search, and update access to search collections
+</li>
+</ul>
+<p>Because Advanced security uses your existing LDAP directories, NT domains, or ODBC data sources to authenticate ColdFusion developers, you never have to maintain redundant user lists. Advanced security automatically inherits any changes you make to your LDAP directories, NT domains, and data sources.</p><a name="1008379"></a>
+ 
+<H2>Deploying Applications</H2>
+<p>Web applications present new security challenges for IT managers, administrators, and application developers. Basic security leaves the bulk of runtime security implementation to application developers. Advanced security makes it easier for developers to authenticate users and authorize application access, because Advanced security separates group membership and user logon maintenance from security policy specification.</p><a name="1008381"></a>
+ 
+<H3>Deploying Applications with Basic Security</H3>
+<p>Basic security lets you disable execution of CFML tags that could prevent security hazards if they were used in a ColdFusion application, because they could be used to upload, delete, or otherwise manipulate files on the ColdFusion server. ColdFusion displays an error when it encounters a disabled tag in an application.</p><p>Besides the ability to restrict CFML tags, Basic security provides no runtime security for ColdFusion applications. When Basic security is implemented, the responsibility for securing applications falls mainly to the application developers. For example, developers must authenticate end-users of their applications by creating customized user directories. Developers can also integrate existing user directories, like NT domains, by using any of the custom extension mechanisms supported by ColdFusion, including CFX tags, and COM or CORBA objects. Similarly, developers must custom-build all access privileges into all their applications.</p><a name="1008384"></a>
+ 
+<H3>Deploying Applications with Advanced Security</H3>
+<p>Advanced security lets ColdFusion developers authenticate users and match protected resources with authorized users. Advanced security builds consistent, standardized authentication right into the ColdFusion server engine, making it easier for developers to control all aspects of access to their applications.</p><p>When Advanced security is implemented, developers don't need to create customized directories or databases to authenticate users; Advanced Security can automatically authenticate users against existing LDAP directories, NT domains, or ODBC data sources. Advanced security also makes it easier to enforce access rights for authenticated users and groups. You can expressly grant or forbid run-time access to ColdFusion Applications, CFML tags, collections, components, Data sources, Files, Directories, and Custom Tags on a user-by-user or group-by-group basis. For example, you could use Advanced security to:</p><ul>
+<a name="1008387"> </a>
+<li>Restrict sensitive CFML tags like &lt;CFREGISTRY&gt; so they can be used only by members of the NT Domain Administrators group of the local domain. 
+
+<a name="1008388"> </a>
+</li>
+<li>Make a sensitive search collection available only to your company's Human Resources staff. No matter which applications use the collection, it would only ever be available to this one group.
+<a name="1008389"> </a>
+</li>
+<li>Make CORBA or COM objects that work with a company's financial information available only to the departments and Web applications that require them
+</li>
+</ul>
+<p>In the Enterprise edition of ColdFusion, Advanced security also lets you run applications in a security sandbox, which assigns security permissions to any applications running from a specified directory tree. Unlike other Advanced security features, Security sandboxes automatically enforce control over resources without additional coding to autehnticate and authorize users. Security sandboxes eliminate the risk that one application will access another application's resources, and are most useful to hosted sites where multiple ColdFusion applications are deployed on the same server.</p><a name="1008391"></a>
+ 
+<H2>Securing the ColdFusion Administrator</H2>
+<p>The ColdFusion Administrator is a powerful tool that lets you perform administrative tasks like managing server performance, adding and configuring ColdFusion data sources, scheduling pages, and managing log files. You can secure the Administrator with either Basic or Advanced Security. Just as with application development and deployment, the level of security that controls administrative access depends on the level of trust. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can access the ColdFusion Administrator either locally or remotely. 
+Because the ColdFusion Administrator is a Web-based interface, it 
+inherits the level of encryption you set on the Web server on which 
+ColdFusion is installed. If the Administrator is installed on a Web server 
+that encrypts Web connections, information sent to the server during 
+remote server administration is automatically encrypted.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1008395"></a>
+ 
+<H3>Securing the Administrator with Basic Security</H3>
+<p>When Basic security is implemented, you enter a password to access to the ColdFusion Administrator. (Note that the ColdFusion Administrator password is separate from the RDS security password.) Anyone who knows the administrative password can gain access to all the functionality of the ColdFusion Administrator. This situation may be desirable if you're implementing ColdFusion in a small group where no one person is a designated administrator and everyone pitches in with administrative tasks. </p><p>The liabilities of using Basic security to protect the ColdFusion Administrator are similar to those discussed in <a href="../08_ColdFusion_Security/admin083.htm#1008362">&quot;Developing Applications with Basic Security&quot;</a>:</p><ul>
+<a name="1008401"> </a>
+<li><strong>Password vulnerability</strong><strong> </strong>-- If the administrative password is lost, hacked, or stolen, server security is compromised. See <a href="../08_ColdFusion_Security/admin082.htm#1008342">&quot;Data Encryption&quot;</a> for information about protecting communications, including password transmissions, between your server and clients.
+
+<a name="1008405"> </a>
+</li>
+<li><strong>Generalized access control</strong><strong> </strong>-- Anyone who knows the administrative password has full access to the ColdFusion Administrator. Users who are not familiar with the Administrator could unwittingly cause problems by changing administrative settings. 
+</li>
+</ul>
+<a name="1008406"></a>
+ 
+<H3>Securing the Administrator with Advanced Security</H3>
+<p>When Advanced security is implemented, you have complete control over who can access the ColdFusion Administrator. Additionally, you can decentralize ColdFusion server management by assigning varying degrees of administrative access to a select number of users. If you manage ColdFusion servers for a large, diverse organization or for hosted sites, you'll likely find that the ability to delegate server management tasks helps you run your operation more efficiently. See <a href="../10_Configuring_Advanced_Security/admin1015.htm#1011711">&quot;Securing the ColdFusion Administrator&quot;</a> in <a href="../10_Configuring_Advanced_Security/admin10.htm#997347">Chapter 10, &quot;Configuring Advanced Security&quot;</a> for more information.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_ColdFusion_Security/admin082.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_ColdFusion_Security/admin084.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:04 -->
+</body>
+</html>

@@ -1,0 +1,138 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Components</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Introduction_to_ColdFusion/dwa01_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Introduction_to_ColdFusion/dwa01.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Introduction_to_ColdFusion/dwa01_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Introduction to ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1013179"></a>
+ <H1>ColdFusion Components</H1>
+
+
+
+<p>ColdFusion applications rely on several core components:</p><ul>
+<li>ColdFusion Studio
+
+</li>
+<li>ColdFusion application pages
+</li>
+<li>ColdFusion Server
+</li>
+<li>ColdFusion Administrator
+</li>
+<li>ODBC data sources and other data sources
+</li>
+</ul>
+<p>ColdFusion application pages look somewhat like HTML pages, but, as you will see, are much more dynamic and powerful. You will probably want to use ColdFusion Studio to create the application pages, although you can use the editor of your choice. ColdFusion Server processes the ColdFusion application pages. For example, you may access a data source from your application pages. </p><p>In addition to the core components, as you become more familiar with ColdFusion and build more complex applications, you can use ColdFusion Extensions to extend its capabilities. </p><a name="1012741"></a>
+ 
+<H2>ColdFusion Studio</H2>
+<p>ColdFusion Studio is the development environment for ColdFusion Server. It offers visual development tools, including dynamic page previews using your Web browser, an interactive debugger, a query builder, an expression builder, project management and source control tools, and many other productivity enhancements. To learn more about ColdFusion Studio, see <a href="../../Using_Coldfusion_Studio/contents.htm"><em>Using ColdFusion Studio</em></a>.</p><a name="1012744"></a>
+ 
+<H2>ColdFusion application pages</H2>
+<p>Application pages are the functional parts of a ColdFusion application, including the user interface pages and forms that handle data input and format data output. They can contain ColdFusion tags (CFML), HTML tags, CFScript, JavaScript, and anything else you can normally embed in an ordinary HTML page. The default file extension used for ColdFusion application pages is .CFM.</p><a name="1012747"></a>
+ 
+<H3>CFML</H3>
+<p>CFML is a tag-based server scripting language that encapsulates complex processes such as connecting to databases and LDAP servers, and sending email. The core of the ColdFusion development platform language is more than 70 server-side tags and more than 200 functions.</p><a name="1012891"></a>
+ 
+<H2>ColdFusion Server</H2>
+<p>ColdFusion Server listens for requests from the Web server to process ColdFusion application pages. It runs as a service under Windows NT and as a process under UNIX. For information on installing and configuring ColdFusion Server, refer to <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a>.</p><a name="1013101"></a>
+ 
+<H2>ColdFusion Administrator</H2>
+<p>You use the Administrator to configure various ColdFusion Server options, including:</p><ul>
+<li>ColdFusion data sources
+
+</li>
+<li>Debugging output
+</li>
+<li>Server settings
+</li>
+<li>Application security
+</li>
+<li>Server clustering
+</li>
+<li>Scheduling page execution
+</li>
+<li>Directory mapping
+</li>
+</ul>
+<p>See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a ><em> </em>for details on using the Administrator.</p><a name="1013126"></a>
+ 
+<H2>Data sources</H2>
+<p>ColdFusion applications may interact with any database that supports the ODBC standard. However, ColdFusion is not limited to ODBC data sources. You can also retrieve data using OLE-DB, native database drivers, or directory servers that support the Lightweight Directory Access Protocol (LDAP). Data can also be retrieved from mail servers that support the Post Office Protocol (POP), and which is indexed in Verity collections.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Introduction_to_ColdFusion/dwa01_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Introduction_to_ColdFusion/dwa01.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Introduction_to_ColdFusion/dwa01_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:40 -->
+</body>
+</html>

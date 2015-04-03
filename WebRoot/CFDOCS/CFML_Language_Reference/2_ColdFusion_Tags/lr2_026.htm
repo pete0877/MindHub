@@ -1,0 +1,221 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFDIRECTORY</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_025.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_027.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1788755"></a>
+ <H1>CFDIRECTORY</H1>
+
+
+
+<p>Use the CFDIRECTORY tag to handle all interactions with directories. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The ColdFusion Server Basic security settings may prevent 
+CFDIRECTORY<em> </em>from executing. These settings are managed using the 
+ColdFusion Administrator Basic Security page. In order for 
+CFDIRECTORY to execute, it needs to be enabled on the Basic Security 
+page. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>If you write ColdFusion applications designed to run on a server that is used by multiple customers, you need to consider the security of the files and directories that could be uploaded or otherwise manipulated by CFDIRECTORY. Please refer to <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a ><em> </em>for more information about securing ColdFusion tags.</p><a name="999023"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFDIRECTORY ACTION="directory action"
+    DIRECTORY="directory name"
+    NAME="query name"
+    FILTER="list filter"
+    MODE="permission"
+    SORT="sort specification"
+    NEWDIRECTORY="new directory name"&gt;
+</PRE><a name="999170"></a>
+<h4> ACTION</h4>
+<p>Optional. Defines the action to be taken with directory(ies) specified in DIRECTORY. Valid entries are: </p><ul>
+<a name="999201"> </a>
+<li>List (default)
+
+<a name="999210"> </a>
+</li>
+<li>Create
+<a name="999219"> </a>
+</li>
+<li>Delete
+<a name="999228"> </a>
+</li>
+<li>Rename. 
+</li>
+</ul>
+<a name="999174"></a>
+<h4> DIRECTORY</h4>
+<p>Required for all ACTIONs. The name of the directory you want the action to be performed against.</p><a name="999178"></a>
+<h4> NAME</h4>
+<p>Required for ACTION="List". Ignored for all other actions. Name of output query for directory listing.</p><a name="999182"></a>
+<h4> FILTER</h4>
+<p>Optional for ACTION="List". Ignored for all other actions. File extension filter to be applied to returned names, for example: <code>*.cfm</code>. Only one mask filter can be applied at a time.</p><a name="999186"></a>
+<h4> MODE</h4>
+<p>Optional. Used with ACTION="Create" to define the permissions for a directory on Solaris or HP-UX. Ignored in Windows. Valid entries correspond to the octal values (not symbolic) of the UNIX <code>chmod</code> command. Permissions are assigned for owner, group, and other, respectively. For example:</p><pre>MODE=644
+</pre><p>Assigns all, owner read/write permission, group and other read/write permissions.</p><pre>MODE=666
+</pre><p>Assigns read/write permissions for owner, group, and other.</p><pre>MODE=777
+</pre><p>Assigns read, write, and execute permissions for all. </p><a name="999190"></a>
+<h4> SORT</h4>
+<p>Optional for ACTION="List". Ignored for all other actions. List of query columns to sort directory listing by. Any combination of columns from query output can be specified in comma separated list. ASC or DESC can be specified as qualifiers for column names. ASC is the default. For example:</p><pre>SORT="dirname ASC, filename2 DESC, size, datelastmodified"
+</pre><a name="999194"></a>
+<h4> NEWDIRECTORY</h4>
+<p>Required for ACTION="Rename". Ignored for all other actions. The new name of the directory specified in the DIRECTORY attribute.</p><a name="999329"></a>
+ 
+<H3>ACTION=LIST</H3>
+<p>
+ When using the ACTION=LIST, CFDIRECTORY returns five result columns you can reference in your CFOUTPUT: 
+</p>
+
+<ul>
+<a name="999343"> </a>
+<li>Name - Directory entry name. 
+
+<a name="999356"> </a>
+</li>
+<li>Size - Size of directory entry.
+<a name="999369"> </a>
+</li>
+<li>Type - File type: File or Dir for File or Directory. 
+<a name="999382"> </a>
+</li>
+<li>DateLastModified - Date an entry was last modified.
+<a name="999395"> </a>
+</li>
+<li>Attributes - File attributes, if applicable. 
+<a name="999408"> </a>
+</li>
+<li>Mode - (Solaris and HP-UX only) The octal value representing the permissions setting for the specified directory. For information about octal values, refer to the UNIX man pages for the <code>chmod</code> shell command. 
+</li>
+</ul>
+<p>You can use the following result columns in standard CFML expressions, preceding the result column name with the name of the query:</p><pre>#mydirectory.Name#
+#mydirectory.Size#
+#mydirectory.Type#
+#mydirectory.DateLastModified#
+#mydirectory.Attributes#
+#mydirectory.Mode#
+</pre><a name="2035616"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfdirectory
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!----------------------------------------------------------------------
+This example shows the use of CFDIRECTORY to display the contents of the 
+snippets directory in CFDOCS. 
+-----------------------------------------------------------------------&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFDIRECTORY Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFDIRECTORY Example&lt;/H3&gt;
+
+&lt;!--- use CFDIRECTORY to give the contents of the
+snippets directory, order by name and size 
+(you may need to modify this path) ---&gt;
+&lt;CFDIRECTORY DIRECTORY="c:\inetpub\wwwroot\cfdocs\snippets"
+    NAME="myDirectory"
+    SORT="name ASC, size DESC"&gt;
+&lt;!--- Output the contents of the CFDIRECTORY as a CFTABLE ---&gt;    
+&lt;CFTABLE QUERY="myDirectory"&gt;
+    &lt;CFCOL HEADER="NAME:"
+            TEXT="#Name#"&gt;
+    &lt;CFCOL HEADER="SIZE:"
+            TEXT="#Size#"&gt;
+&lt;/CFTABLE&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfdirectory
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_025.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_027.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

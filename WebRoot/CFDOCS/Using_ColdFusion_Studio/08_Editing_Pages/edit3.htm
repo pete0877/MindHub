@@ -1,0 +1,114 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working in Edit Mode</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1028152"></a>
+ <H1>Working in Edit Mode</H1>
+
+
+
+<p>Edit mode is where you do most of your editing and code writing.</p><a name="1026061"></a>
+ 
+<H2>Selecting code and text blocks</H2>
+<p>You can use the mouse and standard Windows keyboard commands to highlight sections of a document or use these shortcuts to quickly select and edit tag blocks:</p><ul>
+<a name="1026063"> </a>
+<li>To select an entire code block, press Shift+Ctrl and double-click in either the start or end tag.
+
+<a name="1026064"> </a>
+</li>
+<li>To select a range of code and text, click at the start of the selection, then press Shift and click at the end of the selection.
+<a name="1026065"> </a>
+</li>
+<li>Ctrl + double-click to select a tag.
+</li>
+</ul>
+<a name="1030396"></a>
+ 
+<H2>Saving text to the multiple-entry clipboard </H2>
+<p>This feature allows you to copy multiple text block and store them as separate entries in the Windows Clipboard. Entries can be pasted in later as needed. You must perform at least one copy command to activate this feature.</p><a name="1030398"></a>
+ 
+<H3>Setting the clip entry limit </H3>
+<p>By default, the clipboard window stores a maximum of 36 entries. This can be changed in the Settings &gt; Editor &gt; Maximum clipboard entries. When the maximum number of clipboard entries is reached, the next copy operation deletes the oldest clipboard entry and adds the new copied text to the bottom of the clipboard entry window.</p><p>Three buttons are available on the Edit toolbar for this feature:</p><p>Show Clipboard</p><p>Displays a drop-down window of previously copied clip icons. As you move the mouse over the clip icons, a hint window displays the first few lines of the clip's text. Click on a an icon to paste the clip into the editor at the current cursor position.</p><p>Paste All</p><p>Pastes all of the current clips into the editor at the current position. Clips are pasted in the order in which they were copied.</p><p>Clear Clipboard</p><p>Deletes all current clips from memory.</p><a name="1030407"></a>
+ 
+<H3>Customizing clipboard commands</H3>
+<p>The clipboard buttons can be added to custom toolbars using the Options &gt; Customize menu command. The buttons are located in the Edit toolbutton section. </p><p>Keyboard shortcuts can be assigned to these features, as well. The shortcut descriptions are <em>Show clipboard</em>, <em>Paste all</em>, and <em>Clear clipboard</em>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

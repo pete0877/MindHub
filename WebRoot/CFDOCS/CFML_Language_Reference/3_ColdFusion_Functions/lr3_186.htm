@@ -1,0 +1,149 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ParagraphFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_185.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_187.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001531"></a>
+ <H1>ParagraphFormat</H1>
+
+
+
+<p>Returns <em>string</em> with converted single newline characters (CR/LF sequences) into spaces and double newline characters into HTML paragraph markers (&lt;P&gt;).</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_223.htm#1002489">StripCR</a>.
+</p>
+
+<a name="1001534"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ParagraphFormat</strong>(<em>string</em>)
+</PRE><a name="1001536"> </a>
+<h5 class="param"> string</h5>
+<p class="param">String being converted to the HTML paragraph format.</p><a name="1001537"></a>
+ 
+<H3>Usage</H3>
+<p>ParagraphFormat is useful for displaying data entered into TEXTAREA fields.</p><a name="1805858"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ParagraphFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This shows ParagraphFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+ParagraphFormat Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;ParagraphFormat Example&lt;/H3&gt;
+
+&lt;P&gt;Enter some text into this textarea, and
+see it returned as HTML.
+
+&lt;CFIF IsDefined("FORM.myTextArea")&gt;
+&lt;P&gt;Your text area, formatted
+&lt;P&gt;&lt;CFOUTPUT&gt;#ParagraphFormat(FORM.myTextArea)#&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- use #Chr(10)##Chr(13)# to simulate a line feed/carriage
+return combination; i.e, a return ---&gt;
+&lt;FORM ACTION="paragraphformat.cfm" METHOD="POST"&gt;
+&lt;textArea NAME="MyTextArea" cols="35" ROWS=8&gt;
+This is sample text and you see how it 
+scrolls&lt;CFOUTPUT&gt;#Chr(10)##Chr(13)#&lt;/CFOUTPUT&gt;
+From one line &lt;CFOUTPUT&gt;#Chr(10)##Chr(13)##Chr(10)##Chr(13)#&lt;/CFOUTPUT&gt;
+  to the next
+&lt;/textArea&gt;
+&lt;INPUT TYPE="Submit" NAME="Show me the HTML version"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ParagraphFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_185.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_187.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

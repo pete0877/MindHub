@@ -1,0 +1,117 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Validating Code</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Testing and Maintaining  Web Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000148"></a>
+ <H1>Validating Code</H1>
+
+
+
+<p>Studio's code validation feature can be used to check and report on syntax errors in HTML (including browser extensions), CFML, and SMIL. Double-click on an error message to highlight it in the document.</p><p>Open the Options &gt; Settings (F8) Validation pane to select the validation levels for the current document. Click the Validator Settings button to review and change validation rules in the Validator Configuration dialog box.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run the validator:
+</td>
+</tr>
+</table>
+</div><ul>
+<a name="1012200"> </a>
+<li>Click the Validate current document toolbutton or select Tools &gt; Validate Document (Shift + F6). The Validation Results pane displays either a "No errors or warnings" message or lists the syntax errors it found.
+
+<p><img src="../images/validate_current_doc_button.gif">
+
+
+
+</p><a name="1012201"> </a>
+</li>
+<li>Click the Tag validation icon on the Editor toolbar or Choose Tools &gt; Validate Current Tag (F6) to check the selected tag.
+<p><img src="../images/tag_validation_button.gif">
+
+
+
+</p></li>
+</ul>
+<p>Support for the CSE Validator, used in previous releases of Studio, has been extended. You can enable it for document level validation (HTML only) by checking the Use CSE HTML Validator box in the Validation tab.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:54 -->
+</body>
+</html>

@@ -1,0 +1,249 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>WddxSerializer Object</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../4_WDDX_JavaScript_Objects/lr4_002.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;WDDX JavaScript Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997375"></a>
+ <H1>WddxSerializer Object</H1>
+
+
+
+<p>The WddxSerializer object includes functions that serialize any JavaScript data structure.</p><p>The only function that developers typically call is serialize.</p><a name="1015891"></a>
+ 
+<H2>serialize</H2>
+<p>Creates a WDDX packet for a passed WddxRecordset instance.</p><a name="1015900"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>serialize</strong>( <em>rootobj</em> )
+</PRE><a name="1016473"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxSerializer object.</p><a name="1016482"> </a>
+<h5 class="param"> rootobj</h5>
+<p class="param">JavaScript data structure to be serialized.</p><a name="1016501"></a>
+ 
+<H3>Return value</H3>
+<p>String. Returns the serialized WDDX packet if the function succeeds and a null value if an error occurs.</p><a name="1016510"></a>
+ 
+<H3>Usage</H3>
+<p>Call this function to serialize the data in a WddxRecordset instance.</p><a name="1015923"></a>
+ 
+<H3>Example</H3>
+<p>This example illustrates a JavaScript function that you can call to serialize a WddxRecordset instance. The function copies serialized data to a form field for display:</p><pre>function serializeData(data, formField)
+  {
+    wddxSerializer = new WddxSerializer();
+    wddxPacket = wddxSerializer.serialize(data);
+    if (wddxPacket != null)
+    {
+      formField.value = wddxPacket;
+    }
+    else
+    {
+      alert("Couldn't serialize data");
+    }
+  }
+</pre><a name="1016048"></a>
+ 
+<H2>serializeVariable</H2>
+<p>Serializes a property of a structure. If an object is not a string, number, array, Boolean, or a date, WddxSerializer treats it as a structure.</p><a name="1016695"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>serializeVariable</strong>( <em>name</em>, <em>obj</em> )
+</PRE><a name="1016697"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxSerializer object.</p><a name="1016714"> </a>
+<h5 class="param"> name</h5>
+<p class="param">Property to be serialized.</p><a name="1016723"> </a>
+<h5 class="param"> obj</h5>
+<p class="param">Instance name of the value to be serialized.</p><a name="1016643"></a>
+ 
+<H3>Return value</H3>
+<p>Boolean. Returns True if serialization was successful and False if an error occurs.</p><a name="1016054"></a>
+ 
+<H3>Usage</H3>
+<p>Internal. You do not typically call this function.</p><a name="1016056"></a>
+ 
+<H3>Example</H3>
+<p>This example is from the WddxSerializer serializeValue function:</p><pre>...
+// Some generic object; treat it as a structure
+      this.write("&lt;struct&gt;");
+      for (prop in obj)
+      {
+        bSuccess = this.serializeVariable(prop, obj[prop]);
+        if (! bSuccess)
+        {
+          break;
+        }
+      }
+      this.write("&lt;/struct&gt;");
+...
+</pre><a name="1016073"></a>
+ 
+<H2>serializeValue</H2>
+<p>Recursively serializes all eligible data in a passed instance. Data that can be serialized includes:</p><ul>
+<a name="1016860"> </a>
+<li>String
+
+<a name="1016872"> </a>
+</li>
+<li>Number
+<a name="1016897"> </a>
+</li>
+<li>Boolean
+<a name="1016905"> </a>
+</li>
+<li>Date
+<a name="1016884"> </a>
+</li>
+<li>Array
+<a name="1016891"> </a>
+</li>
+<li>Recordset
+<a name="1021052"> </a>
+</li>
+<li>Any JavaScript object
+</li>
+</ul>
+<p>This function serialize null values as empty strings.</p><a name="1016075"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>serializeValue</strong>( <em>obj</em> )
+</PRE><a name="1016928"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxSerializer object.</p><a name="1016077"> </a>
+<h5 class="param"> obj</h5>
+<p class="param">Instance name of the WddxRecordset object to be serialized.</p><a name="1016666"></a>
+ 
+<H3>Return value</H3>
+<p>Boolean. Returns True if <em>obj</em> was serialized successfully and False if an error occurs.</p><a name="1016079"></a>
+ 
+<H3>Usage</H3>
+<p>Internal. You do not typically call this function.</p><a name="1017005"></a>
+ 
+<H3>Example</H3>
+<p>This example is from the WddxSerializer serialize function:</p><pre>...
+this.wddxPacket = "";
+this.write("&lt;wddxPacket version='1.0'&gt;&lt;header/&gt;&lt;data&gt;");
+bSuccess = this.serializeValue(rootObj);
+this.write("&lt;/data&gt;&lt;/wddxPacket&gt;");
+
+if (bSuccess)
+{
+    return this.wddxPacket;
+}
+else
+{
+    return null;
+}
+...
+</pre><a name="1015985"></a>
+ 
+<H2>write</H2>
+<p>Appends data to the serialized data stream.</p><a name="1017045"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>write</strong>( <em>str</em> )
+</PRE><a name="1017047"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxSerializer object.</p><a name="1015989"> </a>
+<h5 class="param"> str</h5>
+<p class="param">String to be copied to the serialized data stream.</p><a name="1017137"></a>
+ 
+<H3>Return value</H3>
+<p>String. Returns the updated serialized data stream.</p><a name="1015991"></a>
+ 
+<H3>Usage</H3>
+<p>Internal. You do not typically call this function.</p><a name="1015993"></a>
+ 
+<H3>Example</H3>
+<p>This example is from the WddxSerializer serializeValue function:</p><pre>...
+else if (typeof(obj) == "number")
+{
+  // Number value
+  this.write("&lt;number&gt;" + obj + "&lt;/number&gt;");
+}
+else if (typeof(obj) == "boolean")
+{
+  // Boolean value
+  this.write("&lt;boolean value='" + obj + "'/&gt;");
+}
+...
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../4_WDDX_JavaScript_Objects/lr4_002.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:40:19 -->
+</body>
+</html>

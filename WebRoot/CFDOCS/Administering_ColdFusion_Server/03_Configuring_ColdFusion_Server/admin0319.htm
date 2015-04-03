@@ -1,0 +1,196 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Debug Settings in the ColdFusion Administrator</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0318.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0320.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997602"></a>
+ <H1>Debug Settings in the ColdFusion Administrator</H1>
+
+
+
+<p>ColdFusion can provide important debugging information for every application page requested by a browser. When enabled, debugging output is shown in a block following normal page output.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>By default, when you enable any of these options, debug output becomes 
+visible to all users. You can, however, restrict debug output by using the 
+Restrict debug output to selected IP address form at the bottom of the 
+Debug Settings page.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Debugging page of the ColdFusion Administrator provides these output options:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Debug Settings in ColdFusion Administrator&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Setting</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enable performance monitoring
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Allow the NT Performance Monitor application to display information about the current ColdFusion Server. On platforms that do not support the NT Performance Monitor, a command line utility, CFSTAT, is provided to display the same information. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enable CFML stack trace
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Generate information in CFCATCH.TAGCONTEXT about the tags that were executing when ColdFusion detected a CFML structured exception. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Show variables
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Display the names and values of all CGI, URL, form, and cookie variables. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Show processing time
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Display the time, in milliseconds, it took the ColdFusion Server to process the page request. The detail view shows the time it takes to process each page used to compose the final page.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Show SQL and data source name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Display the data source name and the SQL statement in database query errors messages.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Show query information
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Display the number of records, processing time, and SQL statement for each query executed.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Display the template path in error messages
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Display the template's file name. The template's file name is useful for debugging, but may be a security hazard because it displays information about a server's file structure. 
+</td></tr>
+
+</table>
+
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>By default, when you enable any of these options, debug output becomes 
+visible to all users. You can, however, restrict debug output to a selected 
+IP address.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To restrict debug output to a specific IP number:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Enter the IP number you want to receive debug output, and click Add. Debug output will be visible only to the specified IP address. 
+
+
+</li>
+<li> To disable debug output to a specific IP address, select the address and click Remove.
+
+</li>
+</ol>
+<p>If debugging output options have been selected and no IP address specified, debug output will be displayed to all users.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>There are also important runtime debugging options available in 
+ColdFusion Studio. For more information about these options, such as 
+setting breakpoints, see <a href="../../
+Developing_Web_Applications_with_ColdFusion/
+contents.htm"><em>Developing Web Applications with ColdFusion</em>.</a
+></td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0318.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0320.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

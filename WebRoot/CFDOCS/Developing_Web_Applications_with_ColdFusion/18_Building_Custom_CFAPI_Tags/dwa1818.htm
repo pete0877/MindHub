@@ -1,0 +1,369 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CCFXRequest Class</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019577"></a>
+ <H1>CCFXRequest Class</H1>
+
+
+
+<p>Abstract class that represents a request made to a ColdFusion Extension (CFX). An instance of this class is passed to the main function of your extension DLL. The class provides several interfaces that may be used by the custom extension, including functions for reading and writing variables, returning output, creating and using queries, and throwing exceptions.</p><a name="1019580"></a>
+ 
+<H2>Class Members</H2>
+<pre>virtual BOOL AttributeExists( LPCSTR lpszName )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019685">CCFXRequest::AttributeExists</a> checks to see whether the attribute was passed to 
+the tag.
+</p>virtual LPCSTR GetAttribute( LPCSTR lpszName )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019731">CCFXRequest::GetAttribute</a> retrieves the value of the passed attribute.
+</p>virtual CCFXStringSet* GetAttributeList()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019749">CCFXRequest::GetAttributeList</a> retrieves a list of all attribute names passed to the 
+tag.
+</p>virtual CCFXQuery* GetQuery()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019785">CCFXRequest::GetQuery</a> retrieves the query that was passed to the tag.
+</p>virtual LPCSTR GetSetting( LPCSTR lpszSettingName )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019801">CCFXRequest::GetSetting</a> retrieves the value of a custom tag setting.
+</p>virtual void Write( LPCSTR lpszOutput )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019885">CCFXRequest::Write</a> writes text output back to the user.
+</p>virtual void SetVariable( LPCSTR lpszName, LPCSTR lpszValue )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019850">CCFXRequest::SetVariable</a> sets a variable in the template that contains this tag.
+</p>virtual CCFXQuery* AddQuery( LPCSTR lpszName, CCFXStringSet* pColumns )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019662">CCFXRequest::AddQuery</a> adds a query to the template that contains this tag.
+</p>virtual BOOL Debug()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019715">CCFXRequest::Debug</a> checks whether the tag contains the <code>DEBUG</code> attribute.
+</p>virtual void WriteDebug( LPCSTR lpszOutput )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019899">CCFXRequest::WriteDebug</a> writes text output into the debug stream.
+</p>virtual CCFXStringSet* CreateStringSet()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019699">CCFXRequest::CreateStringSet</a> allocates and returns a new <code>CCFXStringSet 
+</code>instance.
+</p>virtual void ThrowException( LPCSTR lpszError, LPCSTR lpszDiagnostics )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019866">CCFXRequest::ThrowException</a> throws an exception and ends processing of this 
+request.
+</p>virtual void ReThrowException( CCFXException* e )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019816">CCFXRequest::ReThrowException</a> re-throws an exception that has been caught.
+</p>virtual void SetCustomData( LPVOID lpvData )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019836">CCFXRequest::SetCustomData</a> sets custom (tag specific) data to carry along with 
+the request.
+</p>virtual LPVOID GetCustomData()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019769">CCFXRequest::GetCustomData</a> gets the custom (tag specific) data for the request.
+</p><a name="1019662"></a>
+ 
+<H2>CCFXRequest::AddQuery</H2>
+<pre><strong>CCFXQuery* CCFXRequest::AddQuery(LPCSTR</strong> <em>lpszName</em>, <strong>CCFXStringSet*</strong> 
+<em>pColumns</em>)
+</pre><p>Adds a query to the calling template. This query can then be accessed by CFML tags (for example, <code>CFOUTPUT</code> or <code>CFTABLE</code>) within the template. Note that after calling <code>AddQuery</code>, the query exists but is empty (that is, it has 0 rows). To populate the query with data, you should call the <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019460">CCFXQuery::AddRow</a> and <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019539">CCFXQuery::SetData</a> functions.</p><p>Returns a pointer to the query that was added to the template (an object of class <code>CCFXQuery</code>). You are not responsible for freeing the memory allocated for the returned query (it will be freed automatically by ColdFusion after the request is completed).</p><pre>lpszName
+</pre><p>Name of query to add to the template (must be unique).
+</p>pColumns
+</pre><p>List of columns names to be used in the query.
+</p><a name="1019676"></a>
+<h4> Example</h4>
+<p>The following example adds a query named 'People' to the calling template. The query has two columns ('FirstName' and 'LastName') and two rows:</p><pre>// Create a string set and add the column names to it
+CCFXStringSet* pColumns = pRequest-&gt;CreateStringSet() ;
+int iFirstName = pColumns-&gt;AddString( "FirstName" ) ;
+int iLastName = pColumns-&gt;AddString( "LastName" ) ;
+&nbsp;
+// Create a query that contains these columns
+CCFXQuery* pQuery = pRequest-&gt;AddQuery( "People", pColumns ) ;
+&nbsp;
+// Add data to the query
+int iRow ;
+iRow = pQuery-&gt;AddRow() ;
+pQuery-&gt;SetData( iRow, iFirstName, "John" ) ;
+pQuery-&gt;SetData( iRow, iLastName, "Smith" ) ;
+iRow = pQuery-&gt;AddRow() ;
+pQuery-&gt;SetData( iRow, iFirstName, "Jane" ) ;
+pQuery-&gt;SetData( iRow, iLastName, "Doe" ) ;
+</pre><a name="1019685"></a>
+ 
+<H2>CCFXRequest::AttributeExists</H2>
+<pre>BOOL CCFXRequest::AttributeExists(LPCSTR <em>lpszName</em>)
+</pre><p>Checks to see whether the attribute was passed to the tag. Returns TRUE if the attribute is available; otherwise, returns FALSE.</p><pre>lpszName
+</pre><p>Name of the attribute to check (case insensitive).
+</p><a name="1019690"></a>
+<h4> Example</h4>
+<p>The following example checks to see if the user passed an attribute named DESTINATION to the tag and throws an exception if the attribute was not passed:</p><pre>if ( pRequest-&gt;AttributeExists("DESTINATION")==FALSE )
+{
+    pRequest-&gt;ThrowException(
+        "Missing DESTINATION parameter",
+        "You must pass a DESTINATION parameter in "
+        "order for this tag to work correctly." ) ;
+}
+</pre><a name="1019699"></a>
+ 
+<H2>CCFXRequest::CreateStringSet</H2>
+<pre><strong>CCFXStringSet* CCFXRequest::CreateStringSet(void)
+</strong></pre><p>Allocates and returns a new instance. Note that string sets should always be created using this function as opposed to directly using the 'new' operator.</p><p>Returns an object of <a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019917">CCFXStringSet Class</a>. You are not responsible for freeing the memory allocated for the returned string set (it will be freed automatically by ColdFusion after the request is completed).</p><a name="1019706"></a>
+<h4> Example</h4>
+<p>The following example creates a string set and adds 3 strings to it:</p><pre>CCFXStringSet* pColors = pRequest-&gt;CreateStringSet() ;
+pColors-&gt;AddString( "Red" ) ;
+pColors-&gt;AddString( "Green" ) ;
+pColors-&gt;AddString( "Blue" ) ;
+</pre><a name="1019715"></a>
+ 
+<H2>CCFXRequest::Debug</H2>
+<pre>BOOL CCFXRequest::Debug(void) 
+</pre><p>Checks whether the tag contains the <code>DEBUG</code> attribute. You should use this function to determine whether or not you need to write debug information for this request. (See the <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019899">CCFXRequest::WriteDebug</a> tag for details on writing debug information.)</p><p>Returns <code>TRUE</code> if the tag contains the <code>DEBUG</code> attribute; otherwise, returns <code>FALSE</code>.</p><a name="1019722"></a>
+<h4> Example</h4>
+<p>The following example checks to see whether the <code>DEBUG</code> attribute is present, and if it is, it writes a brief debug message:</p><pre>if ( pRequest-&gt;Debug() )
+{
+        pRequest-&gt;WriteDebug( "Top secret debug info" ) ;
+}
+</pre><a name="1019731"></a>
+ 
+<H2>CCFXRequest::GetAttribute</H2>
+<pre>LPCSTR CCFXRequest::GetAttribute(LPCSTR <em>lpszName</em>)
+</pre><p>Retrieves the value of the passed attribute. Returns an empty string if the attribute does not exist. (Use <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019685">CCFXRequest::AttributeExists</a> to test whether an attribute was passed to the tag.)</p><p>Returns the value of the attribute passed to the tag. If no attribute of that name was passed to the tag, an empty string is returned.</p><pre>lpszName
+</pre><p>Name of the attribute to retrieve (case insensitive).
+</p><a name="1019740"></a>
+<h4> Example</h4>
+<p>The following example retrieves an attribute named <code>DESTINATION</code> and writes its value back to the user:</p><pre>LPCSTR lpszDestination = pRequest-&gt;GetAttribute("DESTINATION") ;
+pRequest-&gt;Write( "The destination is: " ) ;
+pRequest-&gt;Write( lpszDestination ) ;
+</pre><a name="1019749"></a>
+ 
+<H2>CCFXRequest::GetAttributeList</H2>
+<pre><strong>CCFXStringSet* </strong>CCFXRequest::GetAttributeList(void)
+</pre><p>Retrieves a list of all attribute names passed to the tag. To retrieve the value of an individual attribute, you should use <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019731">CCFXRequest::GetAttribute</a>.</p><p>Returns an object of class <a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019917">CCFXStringSet Class</a> that contains a list of all attributes passed to the tag.</p><p>You are not responsible for freeing the memory allocated for the returned string set (it will be freed automatically by ColdFusion after the request is completed).</p><a name="1019760"></a>
+<h4> Example</h4>
+<p>The following example retrieves the list of attributes and then iterates over the list, writing each attribute and its value back to the user.</p><pre>LPCSTR lpszName, lpszValue ;
+CCFXStringSet* pAttribs = pRequest-&gt;GetAttributeList() ;
+int nNumAttribs = pAttribs-&gt;GetCount() ;
+&nbsp;
+for( int i=1; i&lt;=nNumAttribs; i++ )
+{
+        lpszName = pAttribs-&gt;GetString( i ) ;
+        lpszValue = pRequest-&gt;GetAttribute( lpszName ) ;
+        pRequest-&gt;Write( lpszName ) ;
+        pRequest-&gt;Write( " = " ) ;
+        pRequest-&gt;Write( lpszValue ) ;
+        pRequest-&gt;Write( "&lt;BR&gt;" ) ;
+}
+</pre><a name="1019769"></a>
+ 
+<H2>CCFXRequest::GetCustomData</H2>
+<pre>LPVOID CCFXRequest::GetCustomData(void)
+</pre><p>Gets the custom (tag specific) data for the request. This member is typically used from within subroutines of your tag implementation to extract tag specific data from within the request.</p><p>Returns a pointer to the custom data or returns <code>NULL</code> if no custom data has been set during this request using <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019836">CCFXRequest::SetCustomData</a>.</p><a name="1019776"></a>
+<h4> Example</h4>
+<p>The following example retrieves a pointer to a request specific data structure of hypothetical type MYTAGDATA:</p><pre>void DoSomeGruntWork( CCFXRequest* pRequest )
+{
+        MYTAGDATA* pTagData =
+            (MYTAGDATA*)pRequest-&gt;GetCustomData() ;
+&nbsp;
+        ... remainder of procedure ...
+}
+</pre><a name="1019785"></a>
+ 
+<H2>CCFXRequest::GetQuery</H2>
+<pre><strong>CCFXQuery* CCFXRequest::GetQuery(void)
+</strong></pre><p>Retrieves the query that was passed to the tag. To pass a query to a custom tag, you use the <code>QUERY</code> attribute. This attribute should be set to the name of an existing query (created using the CFQUERY tag or another custom tag). The <code>QUERY</code> attribute is optional and should only be used by tags that need to process an existing data set.</p><p>Returns an object of the <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019411">CCFXQuery Class</a> that represents the query that was passed to the tag. If no query was passed to the tag, <code>NULL</code> is returned. You are not responsible for freeing the memory allocated for the returned query (it will be freed automatically by ColdFusion after the request is completed).</p><a name="1019792"></a>
+<h4> Example</h4>
+<p>The following example retrieves the query that was passed to the tag. If no query was passed, an exception is thrown:</p><pre>CCFXQuery* pQuery = pRequest-&gt;GetQuery() ;
+if ( pQuery == NULL )
+{
+        pRequest-&gt;ThrowException(
+            "Missing QUERY parameter",
+            "You must pass a QUERY parameter in "
+            "order for this tag to work correctly." ) ;
+}
+</pre><a name="1019801"></a>
+ 
+<H2>CCFXRequest::GetSetting</H2>
+<pre>LPCSTR CCFXRequest::GetSetting(LPCSTR <em>lpszSettingName</em>)
+</pre><p>Retrieves the value of a global custom tag setting. Custom tag settings are stored within the CustomTags section of the ColdFusion Registry key.</p><p>Returns the value of the custom tag setting. If no setting of that name exists, an empty string is returned.</p><pre>lpszSettingName
+</pre><p>Name of the setting to retrieve (case insensitive).
+</p><a name="1019807"></a>
+<h4> Example</h4>
+<p>The following example retrieves the value of a setting named 'VerifyAddress' and uses the returned value to determine what actions to take next:</p><pre>LPCSTR lpszVerify = pRequest-&gt;GetSetting("VerifyAddress") ;
+BOOL bVerify = atoi(lpszVerify) ;
+if ( bVerify == TRUE )
+{
+        // Do address verification...
+}
+</pre><a name="1019816"></a>
+ 
+<H2>CCFXRequest::ReThrowException</H2>
+<pre>void CCFXRequest::ReThrowException(<strong>CCFXException*</strong> <em>e</em>)
+</pre><p>Re-throws an exception that has been caught within an extension procedure. This function is used to avoid having C++ exceptions thrown by DLL extension code propagate back into ColdFusion. You should catch ALL C++ exceptions that occur in your extension code and then either re-throw them (if they are of the <a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm#1019366">CCFXException Class</a>) or create and throw a new exception pointer using <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019866">CCFXRequest::ThrowException</a>.</p><pre>e
+</pre><p>An existing CCFXException that has been caught.
+</p><a name="1019827"></a>
+<h4> Example</h4>
+<p>The following code demonstrates the correct way to handle exceptions in ColdFusion Extension DLL procedures:</p><pre>try
+{
+&nbsp;
+        ...Code that could throw an exception...
+&nbsp;
+}
+catch( CCFXException* e )
+{
+        ...Do appropriate resource cleanup here...
+&nbsp;
+        // Re-throw the exception
+        pRequest-&gt;ReThrowException( e ) ;
+}
+catch( ... )
+{
+        // Something nasty happened
+&nbsp;
+        pRequest-&gt;ThrowException(
+            "Unexpected error occurred in CFX tag", "" ) ;
+}
+</pre><a name="1019836"></a>
+ 
+<H2>CCFXRequest::SetCustomData</H2>
+<pre>void CCFXRequest::SetCustomData(LPVOID <em>lpvData</em>)
+</pre><p>Sets custom (tag specific) data to carry along with the request. You should use this function to store request specific data that you want to pass along to procedures within your custom tag implementation.</p><pre>lpvData
+</pre><p>Pointer to custom data.
+</p><a name="1019841"></a>
+<h4> Example</h4>
+<p>The following example creates a request-specific data structure of hypothetical type MYTAGDATA and stores a pointer to the structure in the request for future use:</p><pre>void ProcessTagRequest( CCFXRequest* pRequest )
+{
+        try
+        {
+            MYTAGDATA tagData ;
+            pRequest-&gt;SetCustomData( (LPVOID)&amp;tagData ) ;
+&nbsp;
+        ... remainder of procedure ...
+}
+</pre><a name="1019850"></a>
+ 
+<H2>CCFXRequest::SetVariable</H2>
+<pre>void CCFXRequest::SetVariable(LPCSTR <em>lpszName</em>, LPCSTR <em>lpszValue</em>)
+</pre><p>Sets a variable in the calling template. If the variable name specified already exists in the template, its value is replaced. If it does not already exist, a new variable is created. The values of variables created using <code>SetVariable</code> can be accessed in the same manner as other template variables (e.g., #MessageSent#).</p><pre>lpszName
+</pre><p>Name of variable.
+</p>lpszValue
+</pre><p>Value of variable.
+</p><a name="1019857"></a>
+<h4> Example</h4>
+<p>The following example sets the value of a variable named <code>'MessageSent'</code> based on the success of an operation performed by the custom tag:</p><pre>BOOL bMessageSent ;
+&nbsp;
+...attempt to send the message...
+&nbsp;
+if ( bMessageSent == TRUE )
+{
+        pRequest-&gt;SetVariable( "MessageSent", "Yes" ) ;
+}
+else
+{
+        pRequest-&gt;SetVariable( "MessageSent", "No" ) ;
+}
+</pre><a name="1019866"></a>
+ 
+<H2>CCFXRequest::ThrowException</H2>
+<pre>void CCFXRequest::ThrowException(LPCSTR <em>lpszError</em>, LPCSTR 
+<em>lpszDiagnostics</em>)
+</pre><p>Throws an exception and ends processing of this request. You should call this function when you encounter an error that does not allow you to continue processing the request. Note that this function is almost always combined with the <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019816">CCFXRequest::ReThrowException</a> to provide protection against resource leaks in extension code.</p><pre>lpszError
+</pre><p>Short identifier for error.
+</p>lpszDiagnostics
+</pre><p>Error diagnostic information.
+</p><a name="1019876"></a>
+<h4> Example</h4>
+<p>The following example throws an exception indicating that an unexpected error occurred while processing the request:</p><pre>char buffError[512] ;
+wsprintf( buffError,
+        "Unexpected Windows NT error number %ld "
+        "occurred while processing request.", GetLastError() ) ;
+&nbsp;
+pRequest-&gt;ThrowException( "Error occurred", buffError ) ;
+</pre><a name="1019885"></a>
+ 
+<H2>CCFXRequest::Write</H2>
+<pre>void CCFXRequest::Write(LPCSTR <em>lpszOutput</em>)
+</pre><p>Writes text output back to the user.</p><pre>lpszOutput
+</pre><p>Text to output.
+</p><a name="1019890"></a>
+<h4> Example</h4>
+<p>The following example creates a buffer to hold an output string, fills the buffer with data, and then writes the output back to the user:</p><pre>CHAR buffOutput[1024] ;
+wsprintf( buffOutput, "The destination is: %s",
+        pRequest-&gt;GetAttribute("DESTINATION") ) ;
+pRequest-&gt;Write( buffOutput ) ;
+</pre><a name="1019899"></a>
+ 
+<H2>CCFXRequest::WriteDebug</H2>
+<pre>void CCFXRequest::WriteDebug(LPCSTR <em>lpszOutput</em>)
+</pre><p>Writes text output into the debug stream. This text is only displayed to the end-user if the tag contains the <code>DEBUG</code> attribute. (For more information, see <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019715">CCFXRequest::Debug</a>.)</p><pre>lpszOutput
+</pre><p>Text to output.
+</p><a name="1019907"></a>
+<h4> Example</h4>
+<p>The following example checks to see whether the DEBUG attribute is present, and if it is, it writes a brief debug message:</p><pre>if ( pRequest-&gt;Debug() )
+{
+        pRequest-&gt;WriteDebug( "Top secret debug info" ) ;
+}
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

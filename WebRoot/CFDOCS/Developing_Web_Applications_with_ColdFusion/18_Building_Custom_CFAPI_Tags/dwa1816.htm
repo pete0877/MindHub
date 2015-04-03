@@ -1,0 +1,135 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CCFXException Class</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1815.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019366"></a>
+ <H1>CCFXException Class</H1>
+
+
+
+<p>Abstract class that represents an exception thrown during the processing of a ColdFusion Extension (CFX) procedure.</p><p>Exceptions of this type can be thrown by <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019577">CCFXRequest Class</a>, <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019411">CCFXQuery Class</a>, and <a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019917">CCFXStringSet Class</a>. Your ColdFusion Extension code must therefore be written to handle exceptions of this type. (See the <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019866">CCFXRequest::ThrowException</a> and <a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019816">CCFXRequest::ReThrowException</a> tags for details on doing this correctly.)</p><a name="1019384"></a>
+ 
+<H2>Class members</H2>
+<pre>virtual LPCSTR GetError()
+</pre><p>The <a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm#1019396">CCFXException::GetError</a> function returns a general error message.
+</p>virtual LPCSTR GetDiagnostic()
+</pre><p>The <a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm#1019399">CCFXException::GetDiagnostics</a> function returns detailed error information.
+</p><a name="1019396"></a>
+ 
+<H2>CCFXException::GetError</H2>
+<p>This function provides basic user output for exception that occur during processing.</p><a name="1019399"></a>
+ 
+<H2>CCFXException::GetDiagnostics</H2>
+<p>This function provides detailed user output for exception that occur during processing.</p><p>Example</p><p>This code block shows how both functions work with ThrowException and ReThrowException.</p><pre>// Write output back to the user here...
+pRequest-&gt;Write( "Hello from CFX_FOO2!" ) ;
+pRequest-&gt;ThrowException("User Error", "You goof'd...");
+
+// Output optional debug info
+if ( pRequest-&gt;Debug() )
+{
+    pRequest-&gt;WriteDebug( "Debug info..." ) ;
+}
+}
+
+// Catch Cold Fusion exceptions &amp; re-raise them
+catch( CCFXException* e )
+{
+// This is how you would pull the error information
+LPCTSTR strError = e-&gt;GetError();
+LPCTSTR strDiagnostic = e-&gt;GetDiagnostics();
+
+pRequest-&gt;ReThrowException( e ) ;
+}
+
+// Catch ALL other exceptions and throw them as
+// Cold Fusion exceptions (DO NOT REMOVE! --
+// this prevents the server from crashing in
+// case of an unexpected exception)
+catch( ... )
+{
+    pRequest-&gt;ThrowException(
+        "Error occurred in tag CFX_FOO2",
+        "Unexpected error occurred while processing tag." ) ;
+}
+}
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1815.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

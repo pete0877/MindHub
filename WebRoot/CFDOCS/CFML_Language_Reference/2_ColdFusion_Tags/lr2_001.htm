@@ -1,0 +1,468 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Alphabetical List of ColdFusion Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_002.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1033350"></a>
+ <H1>Alphabetical List of ColdFusion Tags</H1>
+
+
+
+<p>The ColdFusion Markup Language (CFML) consists of a set of tags you use in your ColdFusion pages to interact with data sources, manipulate data, and display output. Using CFML tags is very simple; tag syntax is much like HTML element syntax.</p><p>The following table provides brief descriptions of each CFML tag.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1><p>
+ CFML Tag Summary&nbsp;
+</p>
+
+</th></tr>
+<tr valign="top"><th align="left"><p>
+ CFML Tag
+</p>
+
+</th><th align="left"><p>
+ Description
+</p>
+
+</th></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_015.htm#1967273">CFABORT</a>
+</td><td valign="top">
+Stops processing of a ColdFusion page at the tag location.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_016.htm#1967355">CFAPPLET</a>
+</td><td valign="top">
+Embeds Java applets in a CFFORM.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_017.htm#1967438">CFAPPLICATION</a>
+</td><td valign="top">
+Defines application name, activates client variables.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_018.htm#1967592">CFASSOCIATE</a>
+</td><td valign="top">
+Enables sub-tag data to be saved with the base tag.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_019.htm#1967620">CFAUTHENTICATE</a>
+</td><td valign="top">
+Authenticates a user and sets the security context for an application.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_020.htm#1967679">CFBREAK</a>
+</td><td valign="top">
+Breaks out of a CFML looping construct.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_021.htm#1967743">CFCACHE</a>
+</td><td valign="top">
+Caches ColdFusion pages.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_022.htm#1967810">CFCOL</a>
+</td><td valign="top">
+Defines table column header, width, alignment, and text.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_023.htm#1967871">CFCOLLECTION</a>
+</td><td valign="top">
+Creates and administers Verity collections.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_024.htm#1967951">CFCONTENT</a>
+</td><td valign="top">
+Defines the content type and, optionally, the filename of a file to be downloaded by the current page.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_025.htm#998651">CFCOOKIE</a>
+</td><td valign="top">
+Defines and sets cookie variables.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_026.htm#1788755">CFDIRECTORY</a>
+</td><td valign="top">
+Performs typical directory-handling tasks from within your ColdFusion application.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_027.htm#1968064">CFERROR</a>
+</td><td valign="top">
+Displays customized HTML error pages when errors occur.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_028.htm#2257999">CFEXECUTE</a>
+</td><td valign="top">
+Executes any developer-specified process on the server machine.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_029.htm#2262521">CFEXIT</a>
+</td><td valign="top">
+Aborts processing of currently executing CFML custom tag.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_030.htm#1968394">CFFILE</a>
+</td><td valign="top">
+Performs typical file-handling tasks from within your ColdFusion application.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_040.htm#1968844">CFFORM</a>
+</td><td valign="top">
+Builds an input form and performs client-side input validation.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_041.htm#1969005">CFFTP</a>
+</td><td valign="top">
+Permits FTP file operations. 
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_042.htm#1969319">CFGRID</a>
+</td><td valign="top">
+Used in CFFORM to create a grid control for tabular data.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_043.htm#1969546">CFGRIDCOLUMN</a>
+</td><td valign="top">
+Used in CFFORM to define the columns used in a CFGRID.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_044.htm#1969699">CFGRIDROW</a>
+</td><td valign="top">
+Used with CFGRID to define a grid row.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_045.htm#1969726">CFGRIDUPDATE</a>
+</td><td valign="top">
+Performs updates directly to ODBC data source from edited grid data. 
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_046.htm#1969785">CFHEADER</a>
+</td><td valign="top">
+Generates HTTP headers.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_047.htm#1969816">CFHTMLHEAD</a>
+</td><td valign="top">
+Writes text, including HTML, to the HEAD section of a specified page.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_048.htm#1969849">CFHTTP</a>
+</td><td valign="top">
+Used to perform GET and POST to upload files or post a form, cookie, query, or CGI variable directly to a specified server.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_049.htm#1970188">CFHTTPPARAM</a>
+</td><td valign="top">
+Used with CFHTTP to specify parameters necessary for a CFHTTP POST operation.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_050.htm#2132119">CFIF&#32;CFELSEIF&#32;CFELSE</a>
+</td><td valign="top">
+Used to create IF-THEN-ELSE constructs.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_051.htm#2223974">CFIMPERSONATE</a>
+</td><td valign="top">
+Allows you to impersonate a user defined in a security context defined in Advanced Security. 
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_052.htm#2221641">CFINCLUDE</a>
+</td><td valign="top">
+Embeds references to ColdFusion pages.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_053.htm#1970279">CFINDEX</a>
+</td><td valign="top">
+Used to create Verity search indexes.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_054.htm#1970387">CFINPUT</a>
+</td><td valign="top">
+Used in CFFORM to create input elements such as radio buttons, checkboxes, and text entry boxes.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_055.htm#1970480">CFINSERT</a>
+</td><td valign="top">
+Inserts records in an ODBC data source.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_056.htm#1970616">CFLDAP</a>
+</td><td valign="top">
+Provides access to LDAP directory servers.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_057.htm#1015330">CFLOCATION</a>
+</td><td valign="top">
+Opens a ColdFusion page or HTML file.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_058.htm#1970785">CFLOCK</a>
+</td><td valign="top">
+Ensures data integrity and synchronizes the execution of CFML code.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_059.htm#1015414">CFLOOP</a>
+</td><td valign="top">
+Repeats a set of instructions based on a set of conditions.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_060.htm#1971081">CFMAIL</a>
+</td><td valign="top">
+Assembles and posts an email message.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_061.htm#2176757">CFMAILPARAM</a>
+</td><td valign="top">
+Attaches a file or adds a header to an email message. 
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_062.htm#1971174">CFMODULE</a>
+</td><td valign="top">
+Invokes a custom tag for use in your ColdFusion application pages. 
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_063.htm#1971284">CFOBJECT</a>
+</td><td valign="top">
+Creates and uses COM, CORBA, or JAVA objects.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_067.htm#2171447">CFOUTPUT</a>
+</td><td valign="top">
+Displays output of database query or other operation.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_068.htm#1971479">CFPARAM</a>
+</td><td valign="top">
+Defines a parameter and its initial default value.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_069.htm#1971615">CFPOP</a>
+</td><td valign="top">
+Retrieves messages from a POP mail server.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_070.htm#2322770">CFPROCESSINGDIRECTIVE</a>
+</td><td valign="top"><p>Suppresses extraneous white space, and other output. </p></td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_071.htm#1971886">CFPROCPARAM</a>
+</td><td valign="top">
+Specifies parameter information for a stored procedure.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_072.htm#1972013">CFPROCRESULT</a>
+</td><td valign="top">
+Specifies a result set name that other ColdFusion tags use to access the result set from a stored procedure.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_073.htm#1019524">CFQUERY</a>
+</td><td valign="top">
+Passes SQL to a database.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_074.htm#2191756">CFQUERYPARAM</a>
+</td><td valign="top">
+Reads, writes, and deletes keys and values in the system registry.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_075.htm#2313933">CFREGISTRY</a>
+</td><td valign="top">
+Reads, writes, and deletes keys and values in the system registry. 
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_080.htm#2271468">CFREPORT</a>
+</td><td valign="top">
+Embeds a Crystal Reports report.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_081.htm#2272750">CFRETHROW</a>
+</td><td valign="top">
+Rethrows the currently active exception.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_082.htm#2555996">CFSCHEDULE</a>
+</td><td valign="top">
+Schedules page execution with option to produce static pages.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_083.htm#2555374">CFSCRIPT</a>
+</td><td valign="top">
+Encloses a set of CFScript statements.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_084.htm#1972609">CFSEARCH</a>
+</td><td valign="top">
+Executes searches against data indexed in Verity collections using CFINDEX.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_085.htm#1972744">CFSELECT</a>
+</td><td valign="top">
+Used in CFFORM to create a drop-down list box form element.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_086.htm#2293406">CFSERVLET</a>
+</td><td valign="top">
+Executes a Java servlet on a JRun engine.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_087.htm#2292307">CFSERVLETPARAM</a>
+</td><td valign="top">
+Used to pass data to the Java servlet. CFSERVLETPARAM is a child tag of CFSERVLET.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_088.htm#1021820">CFSET</a>
+</td><td valign="top">
+Defines a variable.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_089.htm#2322258">CFSETTING</a>
+</td><td valign="top">
+Define and control a variety ColdFusion settings.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_091.htm#2209441">CFSILENT</a>
+</td><td valign="top">
+Suppresses all output that is produced by the CFML within the tag's scope.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_092.htm#2311619">CFSLIDER</a>
+</td><td valign="top">
+Used in CFFORM to create a slider control element.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_093.htm#1973038">CFSTOREDPROC</a>
+</td><td valign="top">
+Specifies database connection information and identifies the stored procedure to be executed.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_094.htm#2132151">CFSWITCH&#32;CFCASE&#32;CFDEFAULTCASE</a>
+</td><td valign="top">
+Evaluates a passed expression and passes control to the CFCASE tag that matches the expression result.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_095.htm#1973144">CFTABLE</a>
+</td><td valign="top">
+Builds a table.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_096.htm#1973223">CFTEXTINPUT</a>
+</td><td valign="top">
+Places a single-line text entry box in a CFFORM.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_097.htm#1973379">CFTHROW</a>
+</td><td valign="top">
+Raises a developer-specified exception.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_098.htm#1973470">CFTRANSACTION</a>
+</td><td valign="top">
+Groups CFQUERYs into a single transaction; performs rollback processing.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_099.htm#1973540">CFTREE</a>
+</td><td valign="top">
+Used in CFFORM to create a tree control element.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_100.htm#1973697">CFTREEITEM</a>
+</td><td valign="top">
+Used with CFTREE to populate a tree control element in a CFFORM.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_101.htm#1973845">CFTRY&#32;CFCATCH</a>
+</td><td valign="top">
+Allows developers to catch and process exceptions in ColdFusion pages.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_102.htm#1973958">CFUPDATE</a>
+</td><td valign="top">
+Updates rows in a database data source.
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_103.htm#1974081">CFWDDX</a>
+</td><td valign="top">
+Serializes and de-serializes CFML data structures to the XML-based WDDX format.
+</td></tr>
+
+</table>
+</div>
+    </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_002.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

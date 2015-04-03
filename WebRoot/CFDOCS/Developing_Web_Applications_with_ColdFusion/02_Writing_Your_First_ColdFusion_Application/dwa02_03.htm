@@ -1,0 +1,124 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Writing Code</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Writing Your First ColdFusion Application</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012001"></a>
+ <H1>Writing Code</H1>
+
+
+
+<p>Although you can code your application pages using NotePad or any HTML editor, this manual will use ColdFusion Studio because it affords many features that make ColdFusion development easier. See <a href="../../Using_Coldfusion_Studio/contents.htm"><em>Using ColdFusion Studio</em></a> for details. If you haven't already done so, you should install ColdFusion Studio.</p><p>From a coding perspective, the major difference between a static HTML page and a ColdFusion application page is that ColdFusion pages contain ColdFusion Markup Language (CFML). CFML is a markup language that's very similar in syntax to HTML so Web developers find it intuitive.</p><p>Unlike HTML which defines how things are displayed and formatted on the client, CFML identifies specific operations that are performed by ColdFusion Server.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a ColdFusion application page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ColdFusion Studio.
+
+
+</li>
+<li>Select File &gt; New and select the Default Template for your new page.
+
+</li>
+<li>Edit the file so that it appears as below:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Call Department&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;STRONG&gt;Call Department&lt;/STRONG&gt;
+&lt;CFSET Department="Sales"&gt;
+&lt;CFOUTPUT&gt;
+I'd like to talk to someone in #Department#.
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

@@ -1,0 +1,138 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Find</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_091.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_093.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998560"></a>
+ <H1>Find</H1>
+
+
+
+<p>Returns the first index of an occurrence of a <em>substring</em> in a <em>string</em> from a specified starting position. Returns 0 if <em>substring</em><em> </em>is not in <em>string</em>. The search is case-sensitive. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_093.htm#998598">FindNoCase</a>, <a href="../3_ColdFusion_Functions/lr3_053.htm#997538">Compare</a>, <a href="../3_ColdFusion_Functions/lr3_094.htm#998636">FindOneOf</a>, <a href="../3_ColdFusion_Functions/lr3_200.htm#1001808">REFind</a>, and <a href="../3_ColdFusion_Functions/lr3_204.htm#1001901">Replace</a>.
+</p>
+
+<a name="998563"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Find</strong>(<em>substring</em>, <em>string</em> [, <em>start</em> ])
+</PRE><a name="998565"> </a>
+<h5 class="param"> substring</h5>
+<p class="param">String being sought.</p><a name="998566"> </a>
+<h5 class="param"> string</h5>
+<p class="param">String being searched.</p><a name="998567"> </a>
+<h5 class="param"> start</h5>
+<p class="param">Starting position for the search.</p><a name="1801563"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Find
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>...
+&lt;!--- depending upon the action desired,  perform
+different function ---&gt;
+&lt;CFSWITCH EXPRESSION="#tag#"&gt;
+    &lt;CFCASE VALUE="find"&gt;
+        &lt;CFSET TheAction = Find(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFCASE&gt;
+    &lt;CFCASE VALUE="findNoCase"&gt;
+        &lt;CFSET TheAction = FindNoCase(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFCASE&gt;    
+    &lt;CFCASE VALUE="findOneof"&gt;
+        &lt;CFSET TheAction = FindOneOf(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFCASE&gt;    
+    &lt;CFDEFAULTCASE&gt;
+        &lt;CFSET TheAction = Find(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFDEFAULTCASE&gt;
+&lt;/CFSWITCH&gt;
+...
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Find
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_091.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_093.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

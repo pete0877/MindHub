@@ -1,0 +1,129 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>The Complete Style Block Code</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial9.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Getting_the_Most_from_the_Help_System/help.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="480791"></a>
+ <H1>The Complete Style Block Code</H1>
+
+
+
+<p>Before you insert your style block into the document, compare it to the completed code here to make sure you've got everything.</p><p></p><pre>&lt;STYLE&gt;
+
+BODY {
+    background : url("image1.jpg");
+    color : Green;
+}
+HR {
+    width : 80%;
+    color : Black;
+}
+.bold {
+    font-weight : bold;
+}
+P.red {
+    color : Red;
+    text-align : center;
+    font-family : Arial;
+    font-size : x-large;
+}
+TABLE {
+    padding : 3px;
+    border : thin;
+    border-style : solid;
+}
+TD.top {
+    text-align : center;
+    font-weight : bold;
+    background-color : Yellow;
+    border-left : thin solid;
+    border-bottom : thin solid;
+}
+TD.bottom {
+    text-align : center;
+    font-weight : bold;
+    background-color : Lime;
+    border-left : thin solid;
+}
+
+&lt;/STYLE&gt;    
+</pre><p>When your style block is completed, copy it from the Style Editor and paste it inside the &lt;STYLE&gt;&lt;/STYLE&gt; tags in the &lt;HEAD&gt; section of the tour2.htm file. Save the file and click the Browse tab.</p><p>It looks pretty close to the original, doesn't it? If you want to really dig into style sheet coding, you can try to get the page to display properly in Netscape Navigator!</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial9.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Getting_the_Most_from_the_Help_System/help.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

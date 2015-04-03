@@ -1,0 +1,353 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Writing a Java CFX</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa189.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1014977"></a>
+ <H1>Writing a Java CFX</H1>
+
+
+
+<p>To create a Java CFX, you simply create a class which implements the <code>CustomTag</code> interface. This interface contains one method, <code>processRequest</code>, which is passed <code>Request</code> and <code>Response</code> objects that are then used to do the work of the tag. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a Java CFX:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new source file in your editor.
+
+
+</li>
+<li>Enter the code, for example, the code below illustrates the creation of a very simple Java CFX named <code>SimpleJavaCFX</code> that writes a text string back to the calling page: 
+
+<pre>import com.allaire.cfx.* ;
+
+public class HelloColdFusion implements CustomTag
+{
+   public void processRequest( Request request, Response response )
+        throws Exception
+   {
+        String strName = request.getAttribute( "NAME" ) ;
+        response.write( "Hello, " + strName ) ;
+   }
+}
+</pre></li>
+<li>Save the file as <code>HelloColdFusion.java</code> in the <code>classes</code> subdirectory 
+
+</li>
+<li>Compile the java source file into a class file using the java compiler. If you are using the command line tools bundled with the JDK, you do this using the following command line, which you execute from within the <code>classes</code> directory: 
+
+<pre>javac -classpath cfx.jar HelloColdFusion.java
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The above command will only work if the java compiler (<code>javac.exe</code>) 
+is in your path. If it is not in your path, specify the fully qualified 
+path, for example:
+</td>
+</tr>
+</table>
+</div>
+<br></pre><p><code>c:\jdk12\bin\javac</code> on Windows NT, or <code>/usr/java/bin/java</code>c on Solaris
+</p></li>
+</ol>
+<p>If you receive errors during compilation, check the source code to make sure you have entered it correctly. If no errors occur, you have just successfully written your first Java CFX! </p><p>As you can see, implementing the basic <code>CustomTag</code> interface is very straightforward. This is all a Java class has to do to be callable from a CFML page. </p><a name="1015931"></a>
+ 
+<H2>Processing Requests </H2>
+<p>Implementing a Java CFX requires interaction with the <code>Request</code> and <code>Response</code> objects passed to the <code>processRequest</code> method. In addition, CFXs that need to work with ColdFusion queries will also interface with the <code>Query</code> object. The <code>com.allaire.cfx </code>package, located in the <code>classes/cfx.jar</code> archive contains the <code>Request</code>, <code>Response</code>, and <code>Query</code> objects.</p><p>A basic overview of each of these object types is provided below. To see a complete example Java CFX that uses <code>Request</code>, <code>Response</code>, and <code>Query</code> objects, see the <a href="../18_Building_Custom_CFAPI_Tags/dwa189.htm#1014993">&quot;ZipBrowser Example&quot;</a>.</p><a name="1015934"></a>
+ 
+<H3>Request Object </H3>
+<p>Passed to the <code>processRequest</code> method of the <code>CustomTag</code> interface. Provides methods for retrieving attributes passed to the tag, including queries, and reading global tag settings.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Methods Used by Request Object </strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Method</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+attributeExists
+</td><td valign="top">
+Checks if the attribute was passed to this tag
+</td></tr>
+<tr valign="top"><td valign="top">
+getAttribute
+</td><td valign="top">
+Retrieves the value of the passed attribute
+</td></tr>
+<tr valign="top"><td valign="top">
+getIntAttribute
+</td><td valign="top">
+Retrieves the value of the passed attribute as an integer
+</td></tr>
+<tr valign="top"><td valign="top">
+getAttributeList
+</td><td valign="top">
+Retrieves a list of all attributes passed to the tag
+</td></tr>
+<tr valign="top"><td valign="top">
+getQuery
+</td><td valign="top">
+Retrieves the query that was passed to this tag, if any
+</td></tr>
+<tr valign="top"><td valign="top">
+getSetting
+</td><td valign="top">
+Retrieves the value of a global custom tag setting
+</td></tr>
+<tr valign="top"><td valign="top">
+debug
+</td><td valign="top">
+Checks if the tag contains the DEBUG attribute
+</td></tr>
+
+</table>
+</div>
+</p><a name="1015975"></a>
+ 
+<H3>Response Object </H3>
+<p>Passed to the <code>processRequest</code> method of the <code>CustomTag</code> interface. Provides methods for writing output, generating queries, and setting variables within the calling page. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Methods Used by Response Object </strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Method</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>write
+</PRE></td><td valign="top">
+Outputs text into the calling page
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>setVariable
+</PRE></td><td valign="top">
+Sets a variable in the calling page
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>addQuery
+</PRE></td><td valign="top">
+Adds a query to the calling page
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>writeDebug
+</PRE></td><td valign="top">
+Outputs text into the debug stream
+</td></tr>
+
+</table>
+</div>
+</p><a name="1016004"></a>
+ 
+<H3>Query Object </H3>
+<p>Provides an interface for working with ColdFusion queries, including methods for retrieving name, row count, and column names as well as methods for getting and setting data elements..<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Methods Used by Query Object </strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Method</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>getName
+</PRE></td><td valign="top">
+Retrieves the name of the query
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>getRowCount
+</PRE></td><td valign="top">
+Retrieves the number of rows in the query
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>getColumns
+</PRE></td><td valign="top">
+Retrieves the names of the query columns
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>getData
+</PRE></td><td valign="top">
+Retrieves a data element from the query
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>addRows
+</PRE></td><td valign="top">
+Adds a new row to the query
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>setData
+</PRE></td><td valign="top">
+Sets a data element within the query
+</td></tr>
+
+</table>
+</div>
+</p><p>For detailed reference information on each of these interfaces see the <a href="../18_Building_Custom_CFAPI_Tags/dwa1820.htm#1020100">&quot;Java CFX Reference&quot;</a>.</p><a name="1015292"></a>
+ 
+<H2>Java CFX Class Loading</H2>
+<p>Each Java CFX class has its own associated <code>ClassLoader</code> which loads it and any dependent classes also located in the <code>classes</code> directory. When Java CFXs are reloaded after a change, a new <code>ClassLoader</code> is associated with the freshly loaded class. This special behavior is similar to the way Java servlets are handled by the Java Web Server and other servlet engines, and is required in order to implement automatic class reloading.</p><p>However, this behavior can cause subtle problems when attempting to perform casts on instances of classes loaded from a different <code>ClassLoader</code>. The cast will fail even though the objects are apparently of the same type. This is because the object was created from a different <code>ClassLoader</code> and is therefore technically not of the same type.</p><p>To solve this problem, only perform casts to class or interface types that are loaded via the standard Java class path, that is, classes not located in the <code>classes</code> directory. This works because classes loaded from outside of the <code>classes</code> directory are always loaded using the system <code>ClassLoader</code> and will therefore have a consistent runtime type.</p><a name="1017500"></a>
+ 
+<H2>Automatic Class Reloading</H2>
+<p>You can determine how the server treats changed Java CFX class files by using the <code>RELOAD</code> (?) . The allowable values for the <code>RELOAD</code> attribute are as follows:.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Allowable Values of RELOAD Attribute&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Value</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+<code>Auto</code>
+</td><td valign="top">
+Automatically reload Java CFX and dependent classes within the <code>classes</code> directory whenever the CFX class file changes. Does not reload if a dependent class file changes without the CFX class file changing as well.
+</td></tr>
+<tr valign="top"><td valign="top">
+<code>Always</code>
+</td><td valign="top">
+Always reload Java CFX and dependent classes within the <code>classes</code> directory. Ensures a reload even if a dependent class changes, but the CFX class file itself does not change.
+</td></tr>
+<tr valign="top"><td valign="top">
+<code>Never</code>
+</td><td valign="top">
+Never reload Java CFX classes. Load them once per server lifetime.
+</td></tr>
+
+</table>
+</div>
+</p><p>The default value is <code>RELOAD=Auto</code>. This is appropriate for most applications. Use <code>RELOAD="Always"</code> during the development process when you want to ensure that you always have the latest class files, even when only a dependent class has changed. Use <code>RELOAD="Never"</code> to increase performance by skipping the check for changed classes.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The <code>RELOAD</code> attribute applies only to class files located in the <code>classes</code> 
+directory. Classes located on the Java class path are loaded once per 
+server lifetime and can only be reloaded by stopping and restarting 
+ColdFusion Server.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1017529"></a>
+ 
+<H3>Disabling Automatic Reloading for Deployment</H3>
+<p>Automatic class reloading is an essential feature for iterative development and testing. However, because it must continually check to see whether Java CFX class files have changed, performance may decrease slightly. Therefore, when you move from development into deployment, Allaire ecommends that you globally disable automatic class reloading. You can do this by modifying the <code>coldfusion.cfx.class.reload</code> setting of the <code>config/jvm.init</code> file as follows:</p><pre>coldfusion.cfx.class.reload=no
+</pre><p>For additional details on modifying JVM configuration file settings, see <a href="../18_Building_Custom_CFAPI_Tags/dwa1811.htm#1018053">&quot;Java Customization and Configuration&quot;</a>.</p><a name="1015732"></a>
+ 
+<H2>Life cycle of Java CFXs</H2>
+<p>A new instance of the Java CFX object is created for each invocation of the <code>Java CFX </code>tag. This means that it is safe to store per-request instance data within the members of your <code>CustomTag</code> object. If you wish to store data and/or objects that are accessible to all instances of your <code>CustomTag</code> you should use static data members.</p><a name="1017377"></a>
+ 
+<H2>Calling the CFX from a ColdFusion Template</H2>
+<p>You call Java CFXs from within ColdFusion templates by using the name of the CFX. The following CFML template calls the <code>HelloColdFusion</code> custom tag:</p><pre>&lt;HTML&gt;
+&lt;BODY&gt;
+<span class="codemark">&lt;CFX_HelloColdFusion NAME="Les"&gt;
+</span>&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To test the CFX<code>:
+</code></td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new source file in your editor and enter the code displayed above.
+
+
+</li>
+<li>Save the file in a directory configured to serve ColdFusion templates. For example, you might save the file as c:\inetpub\wwwroot\cfdocs\testjavacfx.cfm on Windows NT or /home/docroot/cfdocs/testjavacfx.cfm on UNIX.
+
+</li>
+<li>Request the template from your web browser using the appropriate URL, for example
+
+</pre><pre>http://localhost/cfdocs/testjavacfx.cfm
+</pre></li>
+</ol>
+<p>ColdFusion processes the template and returns a page that displays the text "Hello, Robert." If an error is returned instead, check the source code to make sure you have entered it correctly.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa189.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

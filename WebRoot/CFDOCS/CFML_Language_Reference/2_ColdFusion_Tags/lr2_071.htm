@@ -1,0 +1,244 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFPROCPARAM</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_070.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_072.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1971886"></a>
+ <H1>CFPROCPARAM</H1>
+
+
+
+<p>The CFPROCPARAM tag is nested within a <a href="../2_ColdFusion_Tags/lr2_093.htm#1973038">CFSTOREDPROC</a> tag. You use it to specify parameter information, including type, name, value, and length.</p><a name="1971891"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFPROCPARAM TYPE="IN/OUT/INOUT"
+    VARIABLE="variable name"
+    DBVARNAME="DB variable name"
+    VALUE="parameter value"
+    CFSQLTYPE="parameter datatype"
+    MAXLENGTH="length"
+    SCALE="decimal places" 
+    NULL="yes/no"&gt;
+</PRE><a name="1971893"></a>
+<h4> TYPE</h4>
+<p>Optional. Indicates whether the passed variable is an input, output or input/output variable. Default is IN.</p><a name="1971895"></a>
+<h4> VARIABLE</h4>
+<p>Required for OUT and INOUT parameters. This is the ColdFusion variable name that you use to reference the value that the output parameter represents after the call is made to the stored procedure.</p><a name="1971897"></a>
+<h4> DBVARNAME</h4>
+<p>Required if named notation is desired. This is the parameter name. This corresponds to the name of the parameter in the stored procedure.</p><a name="1971899"></a>
+<h4> VALUE</h4>
+<p>Required for IN and INOUT parameters. This corresponds to the actual value that ColdFusion passes to the stored procedure.</p><a name="1971901"></a>
+<h4> CFSQLTYPE</h4>
+<p>Required. This is the SQL type that the parameter (any type) will be bound to. The CFSQLTypes are as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+CF_SQL_BIGINT
+</td><td valign="top">
+CF_SQL_IDSTAMP
+</td><td valign="top">
+CF_SQL_SMALLINT
+</td></tr>
+<tr valign="top"><td valign="top">
+CF_SQL_BIT
+</td><td valign="top">
+CF_SQL_INTEGER
+</td><td valign="top">
+CF_SQL_TIME
+</td></tr>
+<tr valign="top"><td valign="top">
+CF_SQL_CHAR
+</td><td valign="top">
+CF_SQL_LONGVARCHAR
+</td><td valign="top">
+CF_SQL_TIMESTAMP
+</td></tr>
+<tr valign="top"><td valign="top">
+CF_SQL_DATE
+</td><td valign="top">
+CF_SQL_MONEY
+</td><td valign="top">
+CF_SQL_TINYINT
+</td></tr>
+<tr valign="top"><td valign="top">
+CF_SQL_DECIMAL
+</td><td valign="top">
+CF_SQL_MONEY4
+</td><td valign="top">
+CF_SQL_VARCHAR
+</td></tr>
+<tr valign="top"><td valign="top">
+CF_SQL_DOUBLE
+</td><td valign="top">
+CF_SQL_NUMERIC
+</td><td valign="top">
+&nbsp;
+</td></tr>
+<tr valign="top"><td valign="top">
+CF_SQL_FLOAT
+</td><td valign="top">
+CF_SQL_REAL
+</td><td valign="top">
+&nbsp;
+</td></tr>
+
+</table>
+</div>
+</p><a name="1971946"></a>
+<h4> MAXLENGTH</h4>
+<p>Optional. Maximum length of the parameter.</p><a name="1971948"></a>
+<h4> SCALE</h4>
+<p>Optional. Number of decimal places of the parameter.</p><a name="1971950"></a>
+<h4> NULL</h4>
+<p>Optional. Specify Yes or No. Indicates whether the parameter is passed as a NULL. If you specify Yes, the tag ignores the VALUE attribute.</p><a name="1971952"></a>
+ 
+<H3>Usage</H3>
+<p>Use this tag to identify stored procedure parameters and their data type. Code one CFPROCPARAM tag for each parameter. The parameters you code vary, based on parameter type and DBMS. Additionally, the order in which you code CFPROCPARAM tags matters, depending on whether the stored procedure was coded using positional notation or named notation:</p><ul>
+<a name="1971954"> </a>
+<li>Positional notation -- Order is very important if the stored procedure was defined using positional notation. ColdFusion passes these parameters to the stored procedure in the order in which they are defined.
+
+<a name="1971955"> </a>
+</li>
+<li>Named notation -- If named notation is used, the DBVarName for the parameter must correspond to the variable name in the stored procedure on the server.
+</li>
+</ul>
+<p>Output variables will be scoped with the name of the VARIABLE attribute that was passed to the tag. </p><a name="2045117"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfprocparam
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>...
+&lt;!--- The following view-only example executes a Sybase stored procedure
+       that returns three result sets, two of which we want. The
+       stored procedure returns the status code and one output
+       parameter, which we display. We use named notation
+       for the parameters. ---&gt;
+&lt;!--- CFSTOREDPROC tag ---&gt;
+&lt;CFSTOREDPROC PROCEDURE="foo_proc"
+    DATASOURCE="MY_SYBASE_TEST"    USERNAME="sa"
+    PASSWORD=""    DBSERVER="scup"    DBNAME="pubs2"
+    RETURNCODE="YES"    DEBUG&gt;
+&lt;!--- CFPROCRESULT tags ---&gt;
+&lt;CFPROCRESULT NAME = RS1&gt;
+&lt;CFPROCRESULT NAME = RS3 RESULTSET = 3&gt;
+&lt;!---  CFPROCPARAM tags ---&gt;
+&lt;CFPROCPARAM TYPE="IN"
+    CFSQLTYPE=CF_SQL_INTEGER
+        VALUE="1"    DBVARNAME=@param1&gt;
+        
+&lt;CFPROCPARAM TYPE="OUT"    CFSQLTYPE=CF_SQL_DATE
+    VARIABLE=FOO DBVARNAME=@param2&gt;
+&lt;!--- Close the CFSTOREDPROC tag ---&gt;
+&lt;/CFSTOREDPROC&gt;
+&lt;CFOUTPUT&gt;
+The output param value: '#foo#'
+&lt;br&gt;
+&lt;/CFOUTPUT&gt;
+&lt;h3&gt;The Results Information&lt;/h3&gt;
+&lt;CFOUTPUT QUERY = RS1&gt;#NAME#,#DATE_COL#
+&lt;br&gt;
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;
+&lt;CFOUTPUT&gt;
+&lt;hr&gt;
+&lt;P&gt;Record Count: #RS1.RecordCount# &gt;p&gt;Columns: #RS1.ColumnList#
+&lt;hr&gt;
+&lt;/CFOUTPUT&gt; 
+&lt;CFOUTPUT QUERY=RS3&gt;#col1#,#col2#,#col3#
+&lt;br&gt;
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;
+&lt;CFOUTPUT&gt;
+&lt;hr&gt;
+&lt;P&gt;Record Count: #RS3.RecordCount# &lt;P&gt;Columns: #RS3.ColumnList#
+&lt;hr&gt;
+The return code for the stored procedure is:
+  '#CFSTOREDPROC.STATUSCODE#'&lt;br&gt;
+&lt;/CFOUTPUT&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfprocparam
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_070.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_072.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

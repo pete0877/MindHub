@@ -1,0 +1,110 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating an Array</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1028212"></a>
+ <H1>Creating an Array</H1>
+
+
+
+<p>In ColdFusion, you declare an array by assigning a variable name to the new array as follows:</p><pre>&lt;CFSET mynewarray=ArrayNew(<em>x</em>)&gt;
+</pre><p>where <em>x</em> is the number of dimensions (from 1 to 3) in the array you want to create. </p><p>Once created, you can add data to the array, in this case using a form variable:</p><pre>&lt;CFSET mynewarray[3]=Form.emailaddress&gt;
+</pre><p>Data in an array is referenced by index number, in the following manner:</p><pre>#My1DArray[<em>index1</em>]#&lt;BR&gt;
+#My2DArray[<em>index1</em>][<em>index2</em>]#&lt;BR&gt;
+#My3DArray[index1][index2][index3]#
+</pre><a name="1028270"></a>
+ 
+<H2>Multidimensional Arrays</H2>
+<p>ColdFusion supports dynamic multidimensional arrays. When you declare an array with the ArrayNew function, you can specify up to three dimensions. However, you can increase an array's dimensions by nesting arrays as array elements:</p><pre>&lt;CFSET myarray=ArrayNew(1)&gt;
+&lt;CFSET myotherarray=ArrayNew(2)&gt;
+&lt;CFSET biggerarray=ArrayNew(3)&gt;
+
+&lt;CFSET biggerarray[1][1][1]=myarray&gt;
+&lt;CFSET biggerarray[1][1][1][10]=<em>some_value</em>&gt;
+&lt;CFSET biggerarray[2][1][1]=myotherarray&gt;
+&lt;CFSET biggerarray[2][1][1][4][2]=<em>some_value</em>&gt;
+
+&lt;CFSET biggestarray=ArrayNew(3)&gt;
+&lt;CFSET biggestarray[3][1][1]=biggerarray&gt;
+&lt;CFSET biggestarray[2][1][1][2][3][1]=<em>some_value</em>&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

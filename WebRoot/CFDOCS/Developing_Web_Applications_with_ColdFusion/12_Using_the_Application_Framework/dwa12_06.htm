@@ -1,0 +1,90 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Managing Client State in a Clustered Environment</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1035948"></a>
+ <H1>Managing Client State in a Clustered Environment</H1>
+
+
+
+<p>To maintain your ColdFusion Web application's state in a clustered environment, you can use server-side client variables that get stored in a common, back-end repository that all Web servers in a multi-server clustered environment can access. Even though all state information will be stored in client variables in the repository, a mechanism must be used to identify specific client requests. This is typically accomplished by dropping a client-side identifier, such as a cookie, on the user's machine.</p><p>ColdFusion 4.5 provides several client variable attributes in the CFApplication tag that allow you to maintain application state across a cluster when using server-side client variables. These attributes enable client variable management and set CFID and CFTOKEN cookies at the domain level (for example, .allaire.com). If ID and token combinations already exist on each host in the cluster, ColdFusion migrates the host-level cookies on each cluster member to the single, common domain-level cookie. Following the setting or migration of host-level cookies to a domain-level cookie, ColdFusion creates a new cookie (CFMAGIC) that tells ColdFusion that domain cookies have been set.</p><p>This domain-level cookie allows a ColdFusion application to maintain specific client information across a server cluster.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

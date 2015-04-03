@@ -1,0 +1,158 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating an HTML Insert Form</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Updating Your Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011961"></a>
+ <H1>Creating an HTML Insert Form</H1>
+
+
+
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an insert form:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Edit the page so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Insert Data Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;Insert Data Form&lt;/H2&gt;
+&lt;FORM ACTION="insertdata.cfm" METHOD="Post"&gt;
+    Employee ID: 
+    &lt;INPUT TYPE="text" NAME="Employee_ID" SIZE="4" MAXLENGTH="4"&gt;&lt;BR&gt;
+    First Name: 
+    &lt;INPUT TYPE="text" NAME="FirstName" SIZE="35" MAXLENGTH="50"&gt;&lt;BR&gt;
+    Last Name: 
+    &lt;INPUT TYPE="text" NAME="LastName" SIZE="10" MAXLENGTH="10"&gt;&lt;BR&gt;
+    Department Number: 
+    &lt;INPUT TYPE="text" NAME="Department_ID" SIZE="4" 
+MAXLENGTH="4"&gt;&lt;BR&gt;
+    Start Date: 
+    &lt;INPUT TYPE="text" NAME="StartDate" SIZE="16" MAXLENGTH="16"&gt;&lt;BR&gt;
+    Salary: 
+    &lt;INPUT TYPE="text" NAME="Salary" SIZE="10" MAXLENGTH="10"&gt;&lt;BR&gt;
+    Contractor: 
+    &lt;INPUT TYPE="checkbox" name="Contract" value="Yes" 
+checked&gt;Yes&lt;BR&gt;&lt;BR&gt;
+    &lt;INPUT TYPE="reset" NAME="ResetForm" VALUE="Clear Form"&gt;
+    &lt;INPUT TYPE="submit" NAME="SubmitForm" VALUE="Insert Data"&gt;
+&lt;/FORM&gt;
+    &lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>insertform.cfm</code> in the <code>myapps</code> directory.
+
+</li>
+<li>View <code>insertform.cfm</code> in a browser. 
+
+</li>
+</ol>
+<a name="1011969"></a>
+ 
+<H2>Data Entry Form Notes and Considerations</H2>
+<p>Creating data entry fields for an HTML form is very simple: </p><ul>
+<li>You need only create the HTML form fields for each database field into which you want to insert data. 
+
+</li>
+<li>The names of your form fields must be identical to the names of your database fields.
+</li>
+<li>You can use the full range of HTML input controls, including list boxes, radio buttons, checkboxes, and multi-line text boxes in your forms. 
+</li>
+<li>ColdFusion uses the NAME attribute to map HTML form fields to the corresponding database fields and inserts the data entered by the user into the appropriate database fields.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:45 -->
+</body>
+</html>

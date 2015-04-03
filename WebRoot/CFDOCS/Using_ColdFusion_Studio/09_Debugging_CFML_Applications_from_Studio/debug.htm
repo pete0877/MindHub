@@ -1,0 +1,103 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Debugging CFML Applications from Studio</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="1043474"></a>
+<H1>Chapter 9	<br>
+Debugging CFML Applications from Studio</H1>
+
+<p>Debugging information reported from the ColdFusion Application Server is often adequate for simple templates, but complex development tasks require a more powerful and immediate debugging interface.</p><p>Studio's Interactive Debugger runs against dynamic pages on the ColdFusion Server. You can set breakpoints and step through the code to isolate and correct problems.</p><p>A tabbed debug window gives you views of breakpoints, variables, recordsets, tag and page hierarchies, and page output. From these panes, you can set watches, change, disable, and delete breakpoints, and evaluate variables and expressions.</p><p>For information on setting server-side debugging, see the ColdFusion Administrator Debugging Options section in <a href="../../administering_coldfusion_server/contents.htm"><em>Administering ColdFusion Server</em></a><em>.</em></p><p>For information on debugging ColdFusion Applications, see <a href="../../developing_web_applications_with_coldfusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p><a name="1022296"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../09_Debugging_CFML_Applications_from_Studio/debug2.htm#1039854">Interactive Debugger Overview</a>
+
+</li>
+<li><a href="../09_Debugging_CFML_Applications_from_Studio/debug3.htm#1024780">Configuring RDS from the Debugger</a>
+</li>
+<li><a href="../09_Debugging_CFML_Applications_from_Studio/debug4.htm#1022710">Creating RDS Mappings</a>
+</li>
+<li><a href="../09_Debugging_CFML_Applications_from_Studio/debug5.htm#1026901">Specifying Server Mappings</a>
+</li>
+<li><a href="../09_Debugging_CFML_Applications_from_Studio/debug6.htm#1022959">Running the Interactive Debugger</a>
+</li>
+<li><a href="../09_Debugging_CFML_Applications_from_Studio/debug7.htm#1039880">Debugger Shortcut Keys</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

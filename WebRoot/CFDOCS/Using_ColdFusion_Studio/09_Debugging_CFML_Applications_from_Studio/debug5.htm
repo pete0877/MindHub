@@ -1,0 +1,126 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Specifying Server Mappings</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Debugging CFML Applications from Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026901"></a>
+ <H1>Specifying Server Mappings</H1>
+
+
+
+<p>The debugger relies on these mappings to communicate the correct file paths of all files with breakpoints to the ColdFusion server. You create these mappings in the Mappings pane of the Remote Development Settings dialog box.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To specify server and file mappings for debugging:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose Debug &gt; Development Mappings to open the Mappings pane of the Remote Development Settings dialog box.
+
+
+</li>
+<li>In the ColdFusion Server list box at the top of the dialog box, choose the ColdFusion server against which you'll run the debugging session.
+
+</li>
+<li>In the Studio Path box, enter the file path ColdFusion Studio uses for the page you're debugging. Click Add.
+
+<p>If you're debugging against a local server, the Studio and ColdFusion Server paths 
+are the same. So if you chose <em>localhost</em>, for example, in the ColdFusion Server list 
+box above, the CF Server Path is the same as the Studio path you just entered.
+</p></li>
+<li>If you're debugging against a remote server, enter the CF Server Path.
+
+<p>The CF Server path needs to be the same as the alias or virtual mapping your web 
+server uses to access the file.
+</p></li>
+<li>Specify the Browser Path, or URL, of the application and click Add.
+
+</li>
+<li>Click OK.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

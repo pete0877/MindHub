@@ -1,0 +1,162 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFABORT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_014.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_016.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1967273"></a>
+ <H1>CFABORT</H1>
+
+
+
+<p>The CFABORT tag stops processing of a page at the tag location. ColdFusion simply returns everything that was processed before the CFABORT tag. CFABORT is often used with conditional logic to stop processing a page because of a particular condition.</p><a name="1967275"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFABORT SHOWERROR="text"&gt;
+</PRE><a name="1967277"></a>
+<h4> SHOWERROR</h4>
+<p>Optional. Specify the error you want to display when CFABORT executes. This error message appears in the standard ColdFusion error page. </p><a name="1967279"></a>
+ 
+<H3>Usage</H3>
+<p>When combining CFABORT and<a href="../2_ColdFusion_Tags/lr2_027.htm#1968064"> CFERROR</a>, remember that CFERROR is meant to redirect output to a specified page. CFABORT is intended to halt processing immediately. </p><p>If the CFABORT tag does not contain a SHOWERROR attribute value, processing stops immediately and the page contents are shown all the way up to the line containing the CFABORT tag. </p><p>When using CFABORT with SHOWERROR by itself (that is without defining an error page using CFERROR) page processing stops once the CFABORT tag is reached and the message defined in SHOWERROR is displayed to the client. </p><p>If you have a page in which you've defined both an error page using CFERROR and a CFABORT tag using the SHOWERROR attribute, ColdFusion redirects output to the error page specified in the CFERROR tag.</p><a name="2017850"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfabort
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- this example demonstrates the use of CFABORT
+to stop the processing of a CFLOOP.  Note that in the second example, 
+where CFABORT is used, the result never appears ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFABORT Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgcolor=FFFFFF&gt;
+
+&lt;H1&gt;CFABORT Example&lt;/H1&gt;
+
+&lt;P&gt;
+&lt;H3&gt;Example A: Let the instruction complete itself&lt;/H3&gt;
+&lt;!--- first, set a variable  ---&gt;
+&lt;CFSET myVariable = 3&gt;
+&lt;!--- now, perform a loop that increments this value ---&gt;
+&lt;CFLOOP FROM="1" TO="4" INDEX="Counter"&gt;
+    &lt;CFSET myVariable = myVariable + 1&gt;
+&lt;/CFLOOP&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;P&gt;    The value of myVariable after incrementing through the loop
+    #Counter# times is: #myVariable#
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- reset the variable and show the use of CFABORT ---&gt;
+&lt;H3&gt;Example B: Use CFABORT to halt the instruction&lt;/H3&gt;
+
+&lt;CFSET myVariable = 3&gt;
+&lt;!--- now, perform a loop that increments this value ---&gt;
+&lt;CFLOOP FROM="1" TO="4" INDEX="Counter"&gt;
+    &lt;!--- on the second time through the loop, CFABORT ---&gt;
+    &lt;CFIF Counter is 2&gt;
+        &lt;CFABORT&gt;
+    &lt;!--- the processing is stopped, and subsequent operations
+    are not carried out by the CFAS ---&gt;    
+    &lt;CFELSE&gt;
+    &lt;CFSET myVariable = myVariable + 1&gt;
+    &lt;/CFIF&gt;    
+&lt;/CFLOOP&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;P&gt;    The value of myVariable after incrementing through the loop
+    #counter# times is: #myVariable#
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfabort
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><a name="1967336"></a>
+ 
+<H3></H3>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_014.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_016.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

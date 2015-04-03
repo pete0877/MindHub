@@ -1,0 +1,111 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Best Practices in Coding</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1042625"></a>
+ <H1>Best Practices in Coding</H1>
+
+
+
+<p>Writing clear, coherent code is important for the maintainability and extensibility of any application. Best practices in coding include using and adhering to style guides, commenting your code, and color-coding your code for easier readability.</p><a name="1043163"></a>
+ 
+<H2>Style Guide</H2>
+<p>You can use any style that suits you to code HTML or CFML pages. The key to writing clean code that's easy to reuse and update is to follow a style guide and keep your code consistent -- especially if you're working on a team, where someone else will be editing or adding to your code. </p><p>Refer to <a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm#997347">Chapter 6, &quot;Best Practices for Coding HTML and CFML&quot;</a> for general coding guidelines for creating web pages and applications.</p><a name="1043177"></a>
+ 
+<H2>Commenting code</H2>
+<p>Commenting code well ensures that future developers, including yourself, know what your existing code does and how it works. </p><ul>
+<a name="1043164"> </a>
+<li>HTML requires that code comments be enclosed in these brackets: &lt;!-- --&gt;
+
+<a name="1043166"> </a>
+</li>
+<li>CFML comments require two additional dashes: &lt;!--- ---&gt;
+<a name="1051736"> </a>
+</li>
+<li>Comments in JavaScript and Cascading Style Sheets (CSS) must be enclosed by forward slash and asterisks: /* <code>your comment</code> */
+</li>
+</ul>
+<a name="1043168"></a>
+ 
+<H2>Color-coding tags</H2>
+<p>Studio installs a default color-coding schemes for HTML, CFML, VTML, SQL, and a host of scripting languages. This makes it easier to scan complex code. The color schemes are grouped by file extensions. </p><p>You can change color schemes and font styles using the Color Coding pane in the Settings dialog box (F8).</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

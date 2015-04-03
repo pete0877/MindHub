@@ -1,0 +1,308 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working With Projects</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012566"></a>
+ <H1>Working With Projects</H1>
+
+
+
+<p>Now that you have an understanding of what a project is, it is time to learn how to work with them. The procedures in this section show you how to:</p><ul>
+<a name="1013705"> </a>
+<li>Create, open, edit, close, and delete projects
+
+<a name="1013719"> </a>
+</li>
+<li>Open all documents in a project
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a new project:
+</td>
+</tr>
+</table>
+</div><p>When you create a new project, you must specify a folder to hold the .apf file. This folder must already exist somewhere on your computer. If the existing folder has files and subfolders, you can choose to add them to the project.</p><ol>
+<li class="first">If you don't have an existing folder that you want to place the .apf file in, create one using Windows Explorer.
+
+
+</li>
+<li>In Studio, click the Projects tab to display the project tools.
+
+</li>
+<li>Click the New Project button or choose Project &gt; New Project.
+
+<p><img src="../images/new_project_button.gif">
+
+
+
+</p><p>You see the New Project dialog box.
+</p><p><img src="../images/new_project.gif">
+
+
+
+</p></li>
+<li>Enter a name for the project in the Project Name box.
+
+</li>
+<li>Enter the directory where you want the .apf file saved in the Location box or click the Browse button to locate the directory using the Select Directory dialog box.
+
+<p><img src="../images/browse.gif">
+
+
+
+</p></li>
+<li>If the directory you specified in the Location box has files and subfolders that you would like to have included in your project, leave the Add all files in subfolders option enabled.
+
+<p>If you do not want to include files and subfolders from the Location folder in your 
+project, deselect the Add all files in subfolders option.
+</p></li>
+<li>If you want to limit the files that are included in your project to certain types, click the File Types drop-down list and choose the file types that you want included. Alternatively, you can enter the file extensions for the types you want included, separated by a semi-colon.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you did not opt to have files and subfolders included in your 
+project, this option will have no effect.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Click OK.
+
+<p>The project is displayed in the Projects tab. An .apf file is added to the location you 
+specified in step 5.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open an existing project:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose the project's name from the Recent Projects drop-down list.
+
+
+<p>OR
+</p></li>
+<li>Click the Open Project button or choose Project &gt; Open Project to see the Open dialog box.
+
+<p>Locate and select the .apf file for the project you want to open. (To open a Studio 
+4.0 project, you must locate the .apj file.)
+</p><p>Click Open to display the project in the Projects tab.
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can also open a project by double-clicking the .apf file in the 
+Windows Explorer.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a project:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the project in the Folder list and choose Properties to see the Edit Project Properties dialog box.
+
+
+<p><img src="../images/edit_project_properties.gif">
+
+
+
+</p><p>On the General tab, you can see the folder that contains the project's .apf file. You 
+cannot alter the settings on the General tab.
+</p><p>On the Deployment tab, you can specify how the project will be uploaded to the 
+Web server. See <a href="../11_Deploying_Projects/deployment.htm#997350">Chapter 11, &quot;Deploying Projects&quot;</a> for more 
+information on uploading and setting deployment options.
+</p></li>
+<li>Change any options and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To close a project:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the project and choose Close Project from the menu or choose Project &gt; Close Project.
+
+
+<p>The project is no longer displayed in the Projects tab. You can open the project 
+again using any of the methods described above.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a project:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the project and choose Delete Project from the menu or choose Project &gt; Delete Project.
+
+
+<p>You are asked to confirm that you want the project deleted.
+</p></li>
+<li>Click Yes.
+
+<p>The project is removed from the Projects tab and the .apf file is deleted from your 
+computer.
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Removing a project has no effect on the actual files in the mapped 
+directories. You are only removing the .apf file.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open all documents in a project:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the project and choose Open All Documents in Project from the menu.
+
+
+<p>All of the text-based files in the entire project are opened in the Editor window, 
+with a tab for each file.
+</p><p>You are asked how to deal with any files that are not text-based. 
+</p></li>
+<li>Choose from one of these three options:
+
+<ul>
+<a name="1015615"> </a>
+<li>Open the file in its associated program (based on the file's extension).
+
+<a name="1015616"> </a>
+</li>
+<li>Open the file in the Editor window anyway if possible.
+<a name="1015617"> </a>
+</li>
+<li>Skip the file.
+</li>
+</ul>
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

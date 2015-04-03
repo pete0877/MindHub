@@ -1,0 +1,108 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Interaction of CFScript with CFML</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 20	:&nbsp;&nbsp;Extending ColdFusion Pages with CFML Scripting</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997852"></a>
+ <H1>Interaction of CFScript with CFML</H1>
+
+
+
+<p>You enclose CFScript regions inside &lt;CFSCRIPT&gt; and &lt;/CFSCRIPT&gt; tags. No other CFML tags are allowed inside a CFSCRIPT region.</p><p>A CFSCRIPT tag block must contain at least one CFScript statement, and comments are not considered statements. If there are no statements, you should comment out the entire CFSCRIPT block (including its enclosing &lt;CFSCRIPT&gt; and &lt;/CFSCRIPT&gt; blocks) with CFML comment tags.</p><p>You can read and write ColdFusion variables inside CFScript, as shown in this example:</p><pre>&lt;CFOUTPUT QUERY="employees"&gt;
+
+    &lt;CFSCRIPT&gt;
+    //`testres' is a column in the "employees" query
+
+    if( testres EQ 1 )
+        result="positive";
+    else
+        result="negative";
+
+    &lt;/CFSCRIPT&gt;
+
+&lt;!--- The variable result takes its
+    value from the script region ---&gt;
+
+Test for #name# is #result#.
+
+&lt;/CFOUTPUT&gt;
+</pre><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:06 -->
+</body>
+</html>

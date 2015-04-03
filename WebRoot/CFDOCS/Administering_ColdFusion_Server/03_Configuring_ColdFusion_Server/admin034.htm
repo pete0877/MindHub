@@ -1,0 +1,126 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Caching Settings</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin033.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin035.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1063055"></a>
+ <H1>Caching Settings</H1>
+
+
+
+<p>The Administrator Caching Settings page contains several configuration options you can set or enable to cache templates, queries, and data sources.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Caching Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Template cache size
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Use this option to specify how much memory you want to reserve for caching ColdFusion pages. For best performance, assuming your server has enough memory, you should set this value to the total number of kilobytes of all your active ColdFusion pages. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Trusted cache
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Allows ColdFusion to use cached application pages (templates) without first checking to see if they've been changed. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Limit database connection inactive time
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Use this option to limit the amount of time ColdFusion allows a cached dtabse connection to remain inactive. This option is ignored if the option to maintain database connections has not been enabled for an individual data source.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Limit maximum number of cached queries
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Limits the maximum number of cached queries that the server will maintain. Cached queries allow for retrieval of result sets from memory rather than through a database transaction. The maximum number of cached queries allowed at any given time is 100. When this value is reached, the oldest query is dropped from the cache and replaced with the specified query. 
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin033.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin035.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

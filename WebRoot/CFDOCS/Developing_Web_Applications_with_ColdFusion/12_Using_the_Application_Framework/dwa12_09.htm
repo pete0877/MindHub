@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Application and Session Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1035081"></a>
+ <H1>Application and Session Variables</H1>
+
+
+
+<p>In ColdFusion, you use variables to work around the Web's inherent statelessness. Session and application variables are persistent variable "scopes." You access these variables by prefacing the variable name with the scope name, for example: <em>Session.MyVariable</em> or <em>Application.MyVariable</em>. And because they are persistent, you can pass values between pages with a minimum of effort.</p><a name="1026223"></a>
+ 
+<H2>Enabling application and session variables</H2>
+<p>Session and application variables are similar in operation to client variables. Like client variables, they are enabled with the CFAPPLICATION tag. However, unlike client variables, which are stored in the system registry, a data source, or a cookie, application and session variables are always stored in the ColdFusion server's memory. This method offers obvious performance advantages. In addition, you can set time-out values for these variables either with CFAPPLICATION, or by specifying time-outs in the ColdFusion Administrator. You can also simply disable application and session variables entirely.</p><p>For information on setting time-outs for variables, See <a href="../../">Administering_Coldfusion_Server/contents.htm<em>Administering ColdFusion Server</em></a >.</p><a name="1026235"></a>
+ 
+<H2>Differentiating client, session, and application variables</H2>
+<p>This table shows the relationships among client, session, and application variables.:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=6 rowspan=1>
+<strong>Kinds of Variables&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Variable Type</strong>
+</th><th align="left">
+<strong>Application Names</strong>
+</th><th align="left">
+<strong>Client IDs</strong>
+</th><th align="left">
+<strong>Client Mgmt</strong>
+</th><th align="left">
+<strong>Session Mgmt</strong>
+</th><th align="left">
+<strong>Time-out</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Client
+</td><td valign="top">
+Optional
+</td><td valign="top">
+Required
+</td><td valign="top">
+Required
+</td><td valign="top">
+n/a
+</td><td valign="top">
+Optional
+</td></tr>
+<tr valign="top"><td valign="top">
+Session
+</td><td valign="top">
+Optional
+</td><td valign="top">
+Required
+</td><td valign="top">
+Required
+</td><td valign="top">
+Required
+</td><td valign="top">
+Optional
+</td></tr>
+<tr valign="top"><td valign="top">
+Application
+</td><td valign="top">
+Required
+</td><td valign="top">
+n/a
+</td><td valign="top">
+n/a
+</td><td valign="top">
+n/a
+</td><td valign="top">
+Optional
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ColdFusion does not attempt to automatically evaluate application and 
+session variables. You must use variable prefixes with these variables, as 
+in Session.variablename or Application<em>.</em>variablename.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

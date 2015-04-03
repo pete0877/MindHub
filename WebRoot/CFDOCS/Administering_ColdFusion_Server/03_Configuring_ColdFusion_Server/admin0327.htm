@@ -1,0 +1,197 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Listener Module Command Line Options</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0326.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1038135"></a>
+ <H1>Listener Module Command Line Options</H1>
+
+
+
+<p>The Network Listener Module (NLM) executable, <code>cfdist</code> (<code>cfdist.exe</code> on Windows NT) takes the following command line options at startup. Of these options, you'll probably only use the -p option on a regular basis.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Listener Module Command Line Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-v
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Verbose. This option prints out confirmation of the command line options in use, and on what port the program is running. It also prints information about each connection that comes in. This can be useful to confirm that requests are, indeed, reaching the remote computer. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-p<em>nnnn</em>
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Port number where <em>nnnn</em> is the port number. If no port number is specified, the program automatically selects an unused port on which to run. In most cases, you use this option to guarantee that you're using the same port as the remote Web server.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-i
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Interactive. Run from a command line not as a daemon/service. In order for verbose commentary to appear on the terminal, you must be running in interactive mode. Aside from the display of debugging output, however, there is no difference in operation between running the program from a command line or running it as a daemon/service.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-r
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Reuse. (UNIX Only) If the specified port appears to be in use, try to use it anyway. Sometimes TCP/IP connections don't get closed down immediately. In those cases the connections can take a few minutes to timeout and close down. Unfortunately, these lingering connections will prevent the program from restarting on the same port because it thinks that port is in use. To overcome this and allow you to restart without waiting or switching to another port, you can use this option. Be careful, however, not to use this option indiscriminately as it could result in multiple versions of the listener running at the same time. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-k<em>xxxx</em>
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Key for encryption. (where <em>xxxx</em> is the string used as the key) The key may be any string of printable ASCII chars up to 127 characters long. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-sINSTALL
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Setup, install-mode. (NT Only) Install the process as an NT service. Its service name will be ColdFusion NetListener.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+-sREMOVE
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Setup, remove-mode. (NT Only) Uninstall the service. 
+</td></tr>
+
+</table>
+
+</div>
+</p><p>The program will print out a list of available options along with a brief description of their purpose anytime you enter an unknown option at the command line. </p><a name="1038153"></a>
+ 
+<H2>Using the INI file to specify startup options</H2>
+<p>It is also possible to specify startup options for the listener in an INI file. This INI file is similar to the INI file required on the Web server side, but is available on the ColdFusion engine side as a convenience (since all the required information may be supplied as command line options at startup time.) Below is a template for this INI file. If used, it must be placed in the root directory of your ColdFusion installation (on the machine hosting the ColdFusion engine), and it must be named <code>cfdist.ini</code>. To enhance security, this INI file may be optionally set to be automatically deleted after being read at startup.</p><pre>;------------------------------------------------------------------
+;
+; Sample INI file for CFDist (AKA the "ColdFusion Listener Module").
+;
+; Place this file in the root directory of your ColdFusion installation.
+; It must be named "cfdist.ini"
+;
+; !IMPORTANT! * All values (the strings on the right hand side of 
+;               the equals sign) must be quoted using double 
+;               quotes. 
+;             * All info is case insensitive..
+;             * Lines beginning with a semicolon are treated as 
+;               comments and are ignored.
+;
+
+; Use this to specify the port at which to listen for incoming ColdFusion
+; requests
+;
+; Valid values: a valid port number (integer).
+;
+PORT = "1234"
+
+; Use this to specify that the data sent between the machine running
+; the Web server and the machine running this program be encrypted.
+;
+; Valid values: Yes, No.
+;
+ENCRYPTION = "YES"
+
+; Use this to specify the key used to encrypt the data.
+;
+; Valid values: any string of up to 127 ASCII chars.
+;
+KEY = "doglips"
+
+; Use this to have this INI file be deleted after it is read at 
+; startup. (This is a security feature as it keeps your key from
+; being read by others.)
+;
+; Valid values: Yes, No.
+;
+DELETE = "NO"
+
+; Use this to write a message to the ColdFusion "remote.log" confirming 
+that
+; remoting is active and what startup parameters (except the encryption
+; key) were used.
+;
+; Valid values: Yes, No.
+;
+MESSAGE = "YES"
+;
+;--------------------------------------------------------------------
+</pre><p>The listener also writes various informative messages to the <code>remote.log</code> file in the log subdirectory of your ColdFusion installation (on the machine hosting the ColdFusion engine.)</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0326.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

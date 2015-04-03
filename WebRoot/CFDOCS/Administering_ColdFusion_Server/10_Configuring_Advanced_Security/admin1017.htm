@@ -1,0 +1,420 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>An Example of ColdFusion Studio Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1016.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1018.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1031854"></a>
+ <H1>An Example of ColdFusion Studio Security</H1>
+
+
+
+<p>This example shows you how to limit ColdFusion Studio access to a specific set of files and/or data sources on a remote server based on username/password authentication. </p><p>For this example, assume you are responsible for two development groups, Mars and Venus. Each group needs separate access rules for source files and data sources its current projects. To provide this access, you will:</p><ol>
+</li>
+<li>Enable Advanced Security.
+
+</li>
+<li>Specify a user directory for security authentication.
+
+</li>
+<li>Add a security context for RDS security.
+
+</li>
+<li>Specify the file and data source resources to protect.
+
+</li>
+<li>Add a policy for each group of resources/users that you want to give access to the protected set of resources 
+
+</li>
+<li>To each Policy add the resources that can be accessed by that policy 
+
+</li>
+<li>To each Policy add the users or groups you want to have access to the policy resources 
+
+</li>
+<li>Enable ColdFusion Studio security and associate the RDS security context you created with the ColdFusion Studio security. 
+
+</li>
+</ol>
+<p>The following sections detail these steps.</p><a name="1018948"></a>
+ 
+<H2>Enabling Advanced Security</H2>
+<p>Before you can configure anything, you need to turn on ColdFusion Advanced security. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable Advanced Security:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator and click the Advanced Security link.
+
+
+<p>You see the Advanced Server Security page.
+</p></li>
+<li>Select the Use Advanced Server Security check box. 
+
+</li>
+</ol>
+<a name="1018953"></a>
+ 
+<H2>Specifying a User Directory</H2>
+<p>Once you enable Advanced security, you must select a user directory to use for authenticating users when they try to access files, directories, or data sources from ColdFusion Studio. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To specify a user directory:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Advanced Server Security page click the User Directories button. You can specify either LDAP or Windows NT directory services. For an NT user directory, enter the server name in the form: <em>domain_name/server_name</em>. 
+
+
+</li>
+<li>Enter the server name or a TCP/IP address for the LDAP option. If you specifiy an LDAP directory you can fill out the Lookup Start field with <strong>uid</strong><em>=</em> and the Lookup End field with <em>,</em><strong>ou</strong><em>=ou_name,</em><strong>o</strong><em>=org_name</em>. If you leave the Lookup fields blank then the ColdFusion Studio User will have to enter their entire distinguished name rather than just their user name.
+
+</li>
+</ol>
+<a name="1018958"></a>
+ 
+<H2>Defining a security context</H2>
+<p>The security context is a container for the rules and policies that apply to specific users and groups. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a security context:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Advanced Server Security page and click the Security Contexts button.
+
+
+</li>
+<li>Enter RDSSecurity as the security context name and click Add.
+
+</li>
+<li>In the New Security Context page, enter "Mars and Venus development teams" as the description of the security context. 
+
+</li>
+<li>Select the Files and Data Sources check boxes. 
+
+</li>
+<li>Click Add.
+
+</li>
+</ol>
+<a name="1018964"></a>
+ 
+<H2>Specifying resources to protect</H2>
+<p>When you add a resource to protect, no one is authorized to access that resource until you give permission by adding the resource to a policy and then adding users and groups to that policy. In this example, we want the Mars team to only have access to the <code>mars_dsn</code> and the Venus team to only have access to the <code>venus_dsn</code>. So you need to add three resources to protect.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add data sources to the RDSService security context:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Advanced Server Security page, click Resources.
+
+
+<p>You see the Resource View page.
+</p></li>
+<li>If the RDSSecurity context is not already current, select it from the Current Security Context drop-down box. 
+
+</li>
+<li>In the Resource Browser, select DATASOURCE and then click the Add Resource button at the bottom of the page.
+
+<p>You see the Add Resource dialog. 
+</p></li>
+<li>Enter the * (asterisk) wildcard to protect all data sources and click OK.
+
+<p>You see the Resource View page again. Now, you'll specify directories to limit 
+access to for each development group.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add directories to the RDSService security context:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Resource Browser, select FILE and then click the Add Resource button at the bottom of the page.
+
+
+<p>You see the Add Resource dialog. 
+</p></li>
+<li>Enter c:\ to protect all files on the C:\ drive and click OK.
+
+</li>
+<li>Repeat steps 1 and 2 to protect the following directories:
+
+<p>c:\development
+</p><p>c:\development\mars\*
+</p><p>c:\development\venus\*
+</p></li>
+</ol>
+<p>Now that you've explicitly protected all the directories and sub directories and files of interest, move on to defining policies.</p><a name="1018984"></a>
+ 
+<H2>Adding policies</H2>
+<p>Now that you've selected the resources to protect, add two policies, one named MARS and one named VENUS. At the bottom of the Resource View page, you see the Policy Editor for the resource you just specified</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add policies:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Add Policy.
+
+
+</li>
+<li>Enter MARS as the name for the new policy and click OK.
+
+</li>
+<li>Write a description of the policy and click OK.
+
+<p>You see the Resource View page again, showing the policy you just created. 
+</p></li>
+<li>Select all the check boxes to protect all actions.
+
+<p>Now you can add users to the policy.
+</p></li>
+</ol>
+<a name="1018989"></a>
+ 
+<H2>Granting access privileges</H2>
+<p>For the moment, no one is authorized to access any files or data sources in the RDSService security context. All of these resources have been protected with the wildcard rule and no one has been granted permission to access them. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To allow a set of users access to these resources:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the Policy page, select the MARS policy. From the MARS policy page, click the Rules button. Notice no rules are currently members of the policy. 
+
+
+</li>
+<li>Click the Add/Remove Button. The rule list is a multi select list so you can select all the rules and add them all at once. For MARS we want to add the following rules:
+
+<ul>
+<a name="1018994"> </a>
+<li>MARS_DSN
+
+<a name="1018995"> </a>
+</li>
+<li>MARS_R_DIRECTORY
+<a name="1018996"> </a>
+</li>
+<li>MARS_W_DIRECTORY
+<a name="1018997"> </a>
+</li>
+<li>MARS_R_FILES
+<a name="1018998"> </a>
+</li>
+<li>MARS_W_FILES
+<a name="1018999"> </a>
+</li>
+<li>C_R_FILE
+<a name="1019000"> </a>
+</li>
+<li>C_W_FILE
+<a name="1019001"> </a>
+</li>
+<li>C_DEVELOPMENT_R_FILE
+<a name="1019002"> </a>
+</li>
+<li>C_DEVELOPMENT_W_FILE. 
+<p>Now the MARS policy has access rights to the <code>mars_dsn</code> and all files in the 
+<code>c:\development\mars</code> directory and sub directories. 
+</p></li>
+</ul>
+</li>
+<li>For VENUS we want to add the following rules:
+
+<ul>
+<a name="1019005"> </a>
+<li>VENUS_DSN 
+
+<a name="1019006"> </a>
+</li>
+<li>VENUS_R_DIRECTORY
+<a name="1019007"> </a>
+</li>
+<li>VENUS_W_DIRECTORY
+<a name="1019008"> </a>
+</li>
+<li>VENUS_R_FILES
+<a name="1019009"> </a>
+</li>
+<li>VENUS_W_FILES
+<a name="1019010"> </a>
+</li>
+<li>C_R_FILE
+<a name="1019011"> </a>
+</li>
+<li>C_W_FILE
+<a name="1019012"> </a>
+</li>
+<li>C_DEVELOPMENT_R_FILE
+<a name="1019013"> </a>
+</li>
+<li>C_DEVELOPMENT_W_FILE. 
+<p>Now the VENUS policy has access rights to the <code>venus_dsn</code> and all files in the 
+<code>c:\development\venus</code> directory and sub directories. 
+</p></li>
+</ul>
+</li>
+</ol>
+<p>Notice we did not add any of the wildcard rules named ALL_ , which protect all data sources and files. The policies only have access to the resources explicitly defined in their member rules. However, the policies have rules, but users still don't have access. The next step is assigning users and groups to the policies.</p><a name="1019016"></a>
+ 
+<H2>Assigning users/groups to policies</H2>
+<p>The last step in defining security for this example, is to add users and groups to the policies you created.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add users and groups to policies:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the Policy page select the MARS policy and click the Users button. The Users page indicates that no users are currently assigned to the policy. If you have defined multiple user directories, select the directory in the list box that you want to add users from, and then click the Add/Remove button. 
+
+
+</li>
+<li>Now you see a list of User Groups and a entry field. To add individual users enter the name in the entry field and click Add. To add groups select the group(s) and click Add. For our example, let's assume all the MARS developer's are in a MARS group which you add to the policy. Now all members of this group can access the resources that are members of the MARS policy. 
+
+</li>
+<li>Now do the same for the VENUS directory. 
+
+</li>
+</ol>
+<p>Okay now each group of users has access to the resources which are members of that policy. If a user is a member of both policies then she has access to the members of both policies.</p><a name="1019023"></a>
+ 
+<H2>Enable ColdFusion Studio Security</H2>
+<p>The last step is to actually enable Studio Security in the Administrator so that users trying to access ColdFusion Server resources from Studio will be properly authenticated before access is granted. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable ColdFusion Studio security:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">On the Advanced Security page click the &quot;Use ColdFusion Studio Authentication&quot; checkbox 
+
+
+</li>
+<li>Select the RDSService security context in the list box.
+
+</li>
+<li>Select the &quot;Use Security Server Cache&quot; check box on the Advanced Server Security page to improve the performance of the authentication process.
+
+</li>
+</ol>
+<p>Now when a user authenticates from ColdFusion Studio to this RDS host the users will only see the data sources and files that they are authorized to see. If they are not a member of either group they will not see any data sources or files.</p><p>The first time Studio users open the files or data sources, performance will seem slow, depending on how many data sources and files/directories must be checked. However if security server caching is enabled, response will be much quicker the next time remote files or data sources are checked. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1016.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1018.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

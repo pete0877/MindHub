@@ -1,0 +1,155 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ArraySort</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_031.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_033.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997013"></a>
+ <H1>ArraySort</H1>
+
+
+
+<p>Returns the specified array with elements numerically or alphanumerically sorted.</p><a name="997015"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ArraySort</strong>(<em>array</em>, <em>sort_type</em> [, <em>sort_order</em> ])
+</PRE><a name="997017"> </a>
+<h5 class="param"> array</h5>
+<p class="param">Name of the array you want to sort. </p><a name="997018"> </a>
+<h5 class="param"> sort_type</h5>
+<p class="param">The type of sort to execute. Sort type can be:</p><ul>
+<a name="1133722"> </a>
+<li><code>numeric</code> -- Sorts numerically
+
+<a name="1133723"> </a>
+</li>
+<li><code>text</code> -- Sorts text alphabetically, uppercase before lowercase
+<a name="1133724"> </a>
+</li>
+<li><code>textnocase</code> -- Sorts text alphabetically; case is ignored
+</li>
+</ul>
+<a name="997023"> </a>
+<h5 class="param"> sort_order</h5>
+<p class="param">The sort order you want to enforce:</p><ul>
+<a name="1133736"> </a>
+<li><code>asc</code> -- (Default) Ascending sort order
+
+<a name="1133735"> </a>
+</li>
+<li><code>desc</code> -- Descending sort order
+</li>
+</ul>
+<a name="1798641"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ArraySort
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ArraySort ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ArraySort Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFQUERY NAME="GetEmployeeNames" DATASOURCE="cfsnippets"&gt;
+SELECT FirstName, LastName FROM Employees
+&lt;/CFQUERY&gt;
+&lt;!--- create an array ---&gt;
+&lt;CFSET myArray = ArrayNew(1)&gt;
+&lt;!--- loop through the query and append these names
+successively to the last element ---&gt;
+&lt;CFLOOP query="GetEmployeeNames"&gt;
+    &lt;CFSET temp= ArrayAppend(myArray, "#FirstName# #LastName#")&gt;
+&lt;/CFLOOP&gt;
+&lt;!--- show the resulting array as a list ---&gt;
+&lt;CFSET myList=ArrayToList(myArray, ",")&gt;
+&lt;!--- sort that array descending alphabetically ---&gt;
+&lt;CFSET myAlphaArray = ArraySort(myArray, "textnocase", "desc")&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ArraySort
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_031.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_033.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

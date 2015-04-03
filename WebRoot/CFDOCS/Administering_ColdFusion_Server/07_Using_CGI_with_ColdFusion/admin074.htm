@@ -1,0 +1,99 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Referencing Application Pages with CGI</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Using_CGI_with_ColdFusion/admin073.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Using CGI with ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997411"></a>
+ <H1>Referencing Application Pages with CGI</H1>
+
+
+
+<p>ColdFusion includes a CGI script (<code>cfml.exe</code>) that is executed by your Web server whenever a user submits a form or clicks a link that references it. The CGI script communicates with the ColdFusion Application Server. </p><a name="997419"></a>
+ 
+<H2>URLs and the cfml.exe script</H2>
+<p>You are probably familiar with using URLs to refer to documents and images on the Web (e.g., <code>http://www.myserver.com/homepage.htm</code>). URLs also support an extended syntax that allows you to call CGI programs and pass them parameters. </p><p>To invoke <code>cfml.exe</code> from a URL, specify the logical path to the executable on your server along with a <code>template</code> parameter indicating which application page file to use in processing the request.</p><p>To pass parameters to the script, you append a "?" to it and then specify a list of parameters in a 'key=value' format (delimited by the &amp; character). </p><p>For example, to call the script and tell it to use an application page file called <code>myquery.cfm</code>, you would use the syntax:</p><pre>/<em>cgi-shl</em>/cfml.exe?template=myquery.cfm
+</pre><p>You can call the same application page with an additional parameter <code>Employee_ID=346</code> using the syntax:</p><pre>/<em>cgi-shl</em>/cfml.exe?template=myquery.cfm&amp;Employee_ID=346
+</pre><p>The <code>cgi-shl</code> entry italicized in the preceding examples represents the path to your Web server's CGI directory. Your server's CGI path may be different from this (other common paths are <code>cgi-bin</code> and <code>scripts</code>). You should consult your Web server's documentation to determine the appropriate path and (if necessary) use this path instead of <code>cgi-shl</code>.</p><p>One good way to verify that your server is able to access <code>cfml.exe</code> is to create a simple form without input fields that has an ACTION that calls the <code>cfml.exe</code> script with no arguments (for example, <code>ACTION="/cgi-shl/cfml.exe"</code>). If the script is accessible, your server returns an error message that indicates an application page was not specified. If <code>cfml.exe</code> is not accessible, your server returns an error message that indicates it cannot find the script.</p><a name="1001381"></a>
+ 
+<H2>Application page references</H2>
+<p>The reference to the file <code>myquery.cfm</code> in the above example contains no path information. You may be wondering how ColdFusion determines where on your system to locate this file.</p><p>If you place ColdFusion application pages in the <code>cfdocs</code> directory, you can reference them using only their base name. For example, if a file called <code>myquery.cfm</code> is in the <code>cfdocs</code> directory, you need only specify <code>myquery.cfm</code> to refer to it.</p><p>If you create subdirectories within the <code>cfdocs</code> directory, you can reference application pages within them using their subdirectory names. For example, if you put <code>myquery.cfm</code> in a subdirectory called <code>sales</code>, you would use <code>/sales/myquery.cfm</code> to refer to it. The URL reference to this file would then be:</p><pre>/cgi-shl/cfml.exe?template=/sales/myquery.cfm
+</pre><p>To simplify URLs for your users, you can create mappings that point to directories. These mappings work like your Web server's document mappings, but they only refer to application pages. Define mappings on the Mappings page of the ColdFusion Administrator.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Using_CGI_with_ColdFusion/admin073.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:03 -->
+</body>
+</html>

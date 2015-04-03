@@ -1,0 +1,102 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Caching Advanced Security Information</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin107.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin109.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025528"></a>
+ <H1>Caching Advanced Security Information</H1>
+
+
+
+<p>Caching Advanced Security information can greatly improve performance within your ColdFusion applications. The ColdFusion Administrator provides the following Advanced security caches:</p><ul>
+<a name="1025530"> </a>
+<li><strong>Security Server Policy Store Cache</strong> caches Advanced security information.  You can load this cache at startup. By default, it is notified of administrative changes to the policy store once every minute.  The information stored in this cache is used to determine if a user is authorized for a resource.  When this information is cached, ColdFusion doesn't have to make database calls to determine this. The result is that performance is greatly improved without requiring a lot of information to be cached . Using this cache provides the most noticeable performance improvements with Advanced security.
+
+<a name="1025531"> </a>
+</li>
+<li><strong>Security Server Authorization Cache</strong> caches each unique isAuthorized call. Since each isAuthorized call is tied to the user who made the call, the number of cached entries grows quickly in an application that has many users. Because the high overhead of this cache can dampen its performance improvements, you're better off using the Security Server Policy Store Cache if you anticipate heavy usage of your protected applications. 
+<a name="1025532"> </a>
+</li>
+<li><strong>ColdFusion Server Cache</strong> caches isAuthorized and isProtected requests. The advantage of using this cache is it operates in the ColdFusion App server process space so there is no interprocess call for cached request. 
+</li>
+</ul>
+<p>To learn how to configure Advanced security caches, see <a href="../10_Configuring_Advanced_Security/admin107.htm#1011425">&quot;Setting Up a Security Server&quot;</a>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin107.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin109.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

@@ -1,0 +1,120 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CGI vs. Web Server APIs</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Using_CGI_with_ColdFusion/admin073.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Using CGI with ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997368"></a>
+ <H1>CGI vs. Web Server APIs</H1>
+
+
+
+<p>The Common Gateway Interface (CGI) was introduced as a standard protocol for extending the functionality of Web servers with additional applications. Most CGI applications are simple executables that are launched every time they are requested. ColdFusion uses a more robust architecture. The ColdFusion Application Server runs as a multi-threaded system service and handles all of the complicated processing. The Application Server communicates with the Web server either through a very small CGI executable referred to as the stub (<code>cfml.exe</code>) or through a native Web server API. </p><p>As Web servers have developed, each vendor has introduced and implemented an application programming interface (API) for their server. The native Web server APIs offer additional features and significantly increased performance. Instead of launching a CGI executable, servers supporting an API communicate directly with the ColdFusion application server through a DLL. </p><p>In addition to introducing server APIs, many server vendors have created document type mapping, so that individual document extensions can be associated with a process. This makes it possible to create ColdFusion application pages that are stored directly in the Web server's root directory. </p><p>ColdFusion supports the following major native Web server APIs: </p><ul>
+<a name="997380"> </a>
+<li>Netscape API (NSAPI) 
+
+<a name="997382"> </a>
+</li>
+<li>Internet Server API (ISAPI)
+<a name="997384"> </a>
+</li>
+<li>Website API (WSAPI) 
+<a name="1000341"> </a>
+</li>
+<li>Apache API
+</li>
+</ul>
+<p>These APIs and document type mapping are supported by these servers: </p><ul>
+<a name="997386"> </a>
+<li>Netscape Enterprise and FastTrack Servers
+
+<a name="997387"> </a>
+</li>
+<li>Microsoft IIS (all versions)
+<a name="997388"> </a>
+</li>
+<li>WebSite (1.1 and Pro)
+<a name="1000347"> </a>
+</li>
+<li>Apache
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Using_CGI_with_ColdFusion/admin073.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:03 -->
+</body>
+</html>

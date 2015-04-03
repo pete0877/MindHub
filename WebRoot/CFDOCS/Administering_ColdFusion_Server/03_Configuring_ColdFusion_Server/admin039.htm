@@ -1,0 +1,194 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Migrating Client Variable Data</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin038.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0310.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018407"></a>
+ <H1>Migrating Client Variable Data</H1>
+
+
+
+<p>If you need to migrate your client variable data to another data source, you need to know the structure of the database tables used to store this information. Client variables stored externally use two small database tables with the following simple structure. Data types shown in these tables are those used for a Microsoft Access database. Your database may require different data types.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>CDATA</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Column</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Data Type</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+cfid
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+char(20)
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+app
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+char(64)
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+data
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+memo
+</td></tr>
+
+</table>
+
+</div>
+</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>CGLOBAL</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Column</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Data Type</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+cfid
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+char(20)
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+data
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+memo
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+lvisit
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+date
+</td></tr>
+
+</table>
+
+</div>
+ </p><a name="1020984"></a>
+ 
+<H2>Creating client variable tables</H2>
+<p>You can use the following example ColdFusion page as a model for creating client variable database tables in your own database. Not all databases support the same column data type names, so you may have to alter some data types for your database. Refer to your database documentation for the proper data type. </p><a name="1021230"></a>
+ 
+<H2>Sample table creation page</H2>
+<pre>&lt;!---- Create the Client variable storage 
+tables in a datasource. This example applies 
+to Microsoft Access databases ---&gt;
+
+&lt;CFQUERY NAME="data1" DATASOURCE="#DSN#"&gt;
+CREATE TABLE CDATA
+(
+    cfid char(20),
+    app char(64),
+    data memo
+)
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME="data2" DATASOURCE="#DSN#"&gt; 
+    CREATE UNIQUE INDEX id1 
+    ON CDATA (cfid,app)
+&lt;/CFQUERY&gt;
+   
+&lt;CFQUERY NAME="global1" DATASOURCE="#DSN#"&gt;
+CREATE TABLE CGLOBAL
+(
+    cfid char(20),
+    data memo,
+    lvisit date
+)
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME="global2" DATASOURCE="#DSN#"&gt; 
+    CREATE INDEX id2 
+    ON CGLOBAL (cfid)
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME="global2" DATASOURCE="#DSN#"&gt; 
+    CREATE INDEX id3 
+    ON CGLOBAL (lvisit)
+&lt;/CFQUERY&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin038.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0310.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

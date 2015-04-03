@@ -1,0 +1,115 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Handling Complex Data with Structures</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa0810.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="997353"></a>
+<H1>Chapter 9	<br>
+Handling Complex Data with Structures</H1>
+
+<p>ColdFusion supports dynamic multidimensional arrays. This chapter explains the basics of creating and handling arrays. It also provides several examples showing how arrays can enhance your ColdFusion application code.</p><p>ColdFusion also supports structures for managing lists of key-value pairs. This chapter explains the basics of creating and working with structures.</p><a name="997355"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_02.htm#997363">About Arrays</a>
+
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_03.htm#1028212">Creating an Array</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_04.htm#997424">Basic Array Techniques</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_05.htm#997461">Referencing Elements in Dynamic Arrays</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_06.htm#997513">Populating Arrays with Data</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_07.htm#997599">Populating an Array from a Query</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_08.htm#997644">Array Functions</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_09.htm#1028642">About Structures</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_10.htm#1028694">Creating and Using Structures</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_11.htm#1028755">Structure Example</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_12.htm#1028763">Using Structures as Associative Arrays</a>
+</li>
+<li><a href="../09_Handling_Complex_Data_with_Structures/dwa09_13.htm#1028778">Structure Functions</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa0810.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

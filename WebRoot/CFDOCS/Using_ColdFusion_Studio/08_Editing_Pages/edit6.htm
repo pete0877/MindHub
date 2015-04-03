@@ -1,0 +1,108 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Tag Editors</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018685"></a>
+ <H1>Tag Editors</H1>
+
+
+
+<p>Editors are tag-specific dialog boxes that contain the attributes and values of the selected tag. Online help is available in each editor. </p><p>Because tag editors are written in Allaire's Visual Tools Markup Language (VTML), developers can change the display properties and content of existing editors and create editors for custom tags. For information on working in VTML, see <a href=" ../../customizing_the_development_environment/vtml.htm">Customizing_the_Development_Environment</a>.</p><p>To open the editor for a tag, do any of the following:</p><ul>
+<a name="1018783"> </a>
+<li>Click a tag icon on the QuickBar.
+
+<a name="1018875"> </a>
+</li>
+<li>Right-click in a tag and select Edit Tag.
+<a name="1018788"> </a>
+</li>
+<li>Place the cursor inside a tag and press Ctrl + F4.
+<a name="1023748"> </a>
+</li>
+<li>Choose Tags &gt; Edit Current Tag.
+</li>
+</ul>
+<p>Click the Toggle Embedded Help button in a tag editor to view syntax and usage help. </p><p><img src="../images/embedded_help.gif">
+
+
+</p><p>Right-click on an event handler in a tag, such as OnLoad, and select Navigate to Function to highlight the function in the script block.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

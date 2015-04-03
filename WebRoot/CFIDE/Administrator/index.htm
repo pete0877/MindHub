@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+	<TITLE>ColdFusion Administrator</TITLE>
+</HEAD>
+<!--- General page formating is controled by this template --->
+
+<frameset rows="*,0" frameborder="0" border=0 framespacing="0" border="0" frame="0">
+
+	<FRAME NAME="AdminNavigation" 
+		SRC="index.cfm" 
+		BORDER="0" 
+		MARGINHEIGHT="0" 
+		MARGINWIDTH="0" 
+		FRAMESPACING=0
+		FRAMEBORDER="No"
+		SCROLLING="AUTO">
+	<FRAME NAME="AdminNavigation" 
+		SRC="right.htm" 
+		BORDER="0" 
+		MARGINHEIGHT="0" 
+		MARGINWIDTH="0" 
+		FRAMESPACING=0
+		FRAMEBORDER="No"
+		SCROLLING="no">
+
+	<NOFRAMES>
+		<BODY>
+			<TABLE Height="100%" Width="100%" Border="0">
+				<TR>
+					<TD Align="CENTER" VAlign="CENTER">
+						The ColdFusion Administrator requires a browser that supports frames.<BR>
+						Please obtain a browser that is HTML 3.0-compliant or better.<BR>
+					</TD>
+				</TR>
+			</TABLE>
+		<!--- This closes the page formating template --->
+<CFINCLUDE TEMPLATE="formatting/footer.cfm">
+</BODY>
+	</NOFRAMES>
+
+</FRAMESET>
+
+</HTML>

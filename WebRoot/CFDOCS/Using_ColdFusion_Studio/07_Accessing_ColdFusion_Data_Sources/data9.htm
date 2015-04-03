@@ -1,0 +1,158 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Running and Editing Queries</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Accessing ColdFusion  Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997499"></a>
+ <H1>Running and Editing Queries</H1>
+
+
+
+<p>You can do a lot of work with SQL statements after building them.</p><a name="997502"></a>
+ 
+<H2>Running a query</H2>
+<p>You can test your SQL code in SQL Builder before inserting it in a page. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run a query in the SQL Builder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Run Query button.
+
+
+<p><img src="../images/run_query_button.gif">
+
+
+
+</p></li>
+<li>You are prompted to enter values for any CFML variables in the query.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>When you click the Run Query button, the SQL statement is actually 
+processed. If you run an INSERT, UPDATE, or DELETE statement, the 
+changes you coded in the SQL statement are made in the data source.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="997514"></a>
+ 
+<H2>Editing queries</H2>
+<p>If you save a query, you can edit it later. Pages that contain the edited query are not automatically updated, so you will need to re-insert the query for the changes to take effect.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a query:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the query folder for the data source you want to use.
+
+
+</li>
+<li>Double-click on the query you want to edit.
+
+</li>
+<li>Make changes in the Table pane and the Properties pane.
+
+</li>
+<li>Save the new query.
+
+</li>
+</ol>
+<a name="997521"></a>
+ 
+<H3>Note</H3>
+<p>The interactions among the SQL Builder panes differ somewhat. If you write a query in the SQL pane and save it, the code is not reflected in the Properties or Table panes. If you take an action, such as adding a table, in the Properties or Table panes, the SQL pane is refreshed with the SQL generated from these panes.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:45 -->
+</body>
+</html>

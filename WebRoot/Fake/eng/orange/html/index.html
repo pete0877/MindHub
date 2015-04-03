@@ -1,0 +1,76 @@
+<!-- filename: workspace.html -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Login</title>
+	<link rel="STYLESHEET" type="text/css" href="../style.css">
+	<script language="JavaScript1.2">
+		function OnLogin()
+		{
+			var strErrors = '';
+			if (document.f.vu.value == '')
+				strErrors += '\n* Missing [User] entry';
+			if (document.f.vp.value == '')
+				strErrors += '\n* Missing [Password] entry';
+
+			if (strErrors != '')
+			{
+				alert('Following problems were found: ' + strErrors);
+				return;
+			}
+
+			document.f.submit();
+		}
+	</script>
+</head>
+
+<body class="page" background="../image/loginbackground.gif">
+
+<br><p>
+<br><p>
+<br><p>
+<br><p>
+<div align="center">
+
+<form action="/webapi/process.aspx" name="f">
+
+<input type=hidden name="vf" value="login">
+<input type=hidden name="venvid" value="fake">
+<input type=hidden name="vilurl" value="eng/orange/html/invalidlogin.html">
+
+
+<table bgcolor="#ECDCA4" border="1" bordercolor="#000000" bordercolordark="#000000" bordercolorlight="#000000" cellspacing="0" cellpadding="10">
+	<tr>
+		<td>
+			<table width=250>
+				<tr>
+					<td><h1>MindHub Login</h1></td>
+					<td align="right"><img src="../image/loginlogo.gif" border=0 alt="MindHub"></td>
+				</tr>
+			</table>
+
+			<table border=0>
+			<tr>
+				<td class="guiformitemlabel">User:</td>
+				<td class="guiformiteminput"><input class="guiforminput" type="text" name="vu"></td>
+			</tr>
+			<tr>
+				<td class="guiformitemlabel">Password:</td>
+				<td class="guiformiteminput"><input class="guiforminput" type="text" name="vp"></td>
+			</tr>
+			<tr>
+				<td colspan=2><div align="center"><button class="guiformbutton" value="Login" onClick="OnLogin();">Login</button></div></td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+
+
+</div>
+
+</body>
+</html>
+

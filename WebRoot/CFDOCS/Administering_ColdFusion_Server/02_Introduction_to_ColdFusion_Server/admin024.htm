@@ -1,0 +1,141 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Services on Windows NT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin023.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin025.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Introduction to ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998642"></a>
+ <H1>ColdFusion Services on Windows NT</H1>
+
+
+
+<p>By default, ColdFusion employs four separate services under Windows NT. The following table explains the purpose of each one. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>ColdFusion Services on Windows NT</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Service</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Purpose</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Bright Tiger Service
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Manages ColdFusion Server load-balancing and failover. 
+
+For more information about clustering, which enables load-balancing and failover in ColdFusion, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm#1151116">Chapter 6, &quot;Creating Scalable and Highly Available Web Sites&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ColdFusion Application Server
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The main ColdFusion Server service. ColdFusion pages cannot be processed if this service is not running.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ColdFusion Executive
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Polls the ColdFusion Application Server service and automatically restarts the ColdFusion Application Server if it is not running.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ColdFusion RDS
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The ColdFusion Remote Development Service provides security, directory and file browsing, and debugging services for ColdFusion Studio. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+SiteMinder Authentication Service
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Only present if you chose the advanced security option during ColdFusion setup. Provides user authentication services for advanced security.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+SiteMinder Authorization Service
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Only present if you chose the advanced security option during ColdFusion setup. Provides access authorization services for advanced security. 
+</td></tr>
+
+</table>
+
+</div>
+</p><p>You can use the Windows NT Services Control Panel to view and manage these and other Windows NT services. </p><p><img src="../images/servicescpl.gif">
+
+
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin023.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin025.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:28 -->
+</body>
+</html>

@@ -1,0 +1,278 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFLOCK Examples</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_14.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1027401"></a>
+ <H1>CFLOCK Examples</H1>
+
+
+
+<p>The following examples show how to use CFLOCK in a variety of situations.</p><a name="1027403"></a>
+ 
+<H3>Example with Application, Server, and Session Variables</H3>
+<p>This example shows how CFLOCK can be used to guarantee the consistency of data updates to variables in the Application, Server, and Session scopes. </p><p>The following sample code might be part of the <code>Application.cfm</code> file.</p><pre><code>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Define Session and Application Variables&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;H3&gt;CFAPPLICATION Example&lt;/H3&gt;
+
+&lt;P&gt;CFAPPLICATION defines scoping for a
+ColdFusion applicationand enables or disables
+the storing of client and/or session variables.
+This tag is placed in the Application.cfm file
+for the current application.
+
+&lt;CFAPPLICATION NAME="ETurtle" 
+    SESSIONTIMEOUT=CreateTimeSpan("60")
+    SESSIONMANAGEMENT="yes"&gt;
+
+&lt;!--- Initialize the session and application 
+variables that will be used by E-Turtleneck. Use
+the session lock for the session variables.
+The member variable sessionID creates the
+session name for you. ---&gt;
+
+&lt;CFLOCK SCOPE="Session" 
+    TIMEOUT="30" TYPE ="Exclusive"&gt;
+    &lt;CFIF NOT IsDefined("session.size")&gt;
+        &lt;CFSET session.size = ""&gt;
+    &lt;/CFIF&gt;
+    &lt;CFIF NOT IsDefined("session.color")&gt;
+        &lt;CFSET session.color = ""&gt;
+    &lt;/CFIF&gt;
+&lt;/CFLOCK&gt;
+
+&lt;!--- Use the application lock for the
+application variable. This variable keeps
+track of the total number of turtlenecks sold.
+The application lock should have the same name
+as specified in the CFAPPLICATION tag. ---&gt;
+
+</code>&lt;CFLOCK Scope="Application" 
+    TIMEOUT="30"
+    TYPE="Exclusive"&gt;
+    &lt;CFIF NOT IsDefined("application.number")&gt;
+        &lt;CFSET application.number = 1&gt;
+    &lt;/CFIF&gt;
+&lt;/CFLOCK&gt;
+
+&lt;CFLOCK SCOPE="Application" 
+    TIMEOUT="30" 
+    TYPE ="ReadOnly"&gt;
+    &lt;CFOUTPUT&gt;
+    E-Turtleneck is proud to say that we have sold
+    #application.number# turtlenecks to date.
+    &lt;/CFOUTPUT&gt;
+&lt;/CFLOCK&gt;
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>In general, you should limit lock scopes. When locking variables, queries, 
+and arrays (anything other than structures), you can copy to a local 
+variable in the CFLOCK block, then reference the local variable.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The remaining sample code would appear inside the application page where customers place orders.</p><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFLOCK Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFLOCK Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("form.submit")&gt;
+
+&lt;!--- Lock session variables ---&gt;
+&lt;CFLOCK SCOPE="Session"
+    TIMEOUT="30" TYPE="ReadOnly"&gt;
+    &lt;CFOUTPUT&gt;Thank you for shopping E-Turtleneck.
+    Today you have chosen a turtleneck in size
+    &lt;B&gt;#form.size#&lt;/B&gt; and in the color &lt;B&gt;#form.color#&lt;/B&gt;.
+    Your order number is #session.sessionID#.
+    &lt;/CFOUTPUT&gt;
+&lt;/CFLOCK&gt;
+
+&lt;!--- Lock session variables to assign form values to them.
+To lock session variables, you should get the session ID
+with the sessionID member variable. ---&gt;
+
+&lt;CFLOCK SCOPE="Session"
+    TIMEOUT="30" 
+    TYPE="Exclusive"&gt;
+    &lt;CFPARAM Name=session.size Default=#form.size#&gt;
+    &lt;CFPARAM Name=session.color Default=#form.color#&gt;
+&lt;/CFLOCK&gt;
+
+&lt;!--- Lock application variable application.number to
+find the total number of turtlenecks sold. If you don't 
+know the name of the application, you can use the member 
+variable applicationName to find it.---&gt;
+
+&lt;CFLOCK SCOPE="Application"
+    TIMEOUT="30" TYPE="Exclusive"&gt;
+    &lt;CFSET application.number=application.number + 1&gt;
+&lt;/CFLOCK&gt;
+
+&lt;!--- Show the form only if it has not been submitted. ---&gt;
+&lt;CFELSE&gt;
+&lt;FORM ACTION="cflock.cfm" METHOD="Post"&gt;
+
+&lt;P&gt; Congratulations! You have just selected
+the longest wearing, most comfortable turtleneck
+in the world. Please indicate the color and size
+you want to buy.&lt;/P&gt;
+
+&lt;TABLE CELLSPACING="2" CELLPADDING="2" BORDER="0"&gt;
+&lt;TR&gt;
+&lt;TD&gt;Select a color.&lt;/TD&gt;
+&lt;TD&gt;&lt;SELECT TYPE="Text" NAME="color"&gt;
+        &lt;OPTION&gt;red
+        &lt;OPTION&gt;white
+        &lt;OPTION&gt;blue
+        &lt;OPTION&gt;turquoise
+        &lt;OPTION&gt;black
+        &lt;OPTION&gt;forest green
+        &lt;/SELECT&gt;
+    &lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;
+    &lt;TD&gt;Select a size.&lt;/TD&gt;
+    &lt;TD&gt;&lt;SELECT TYPE="Text" NAME="size"&gt;
+        &lt;OPTION&gt;small
+        &lt;OPTION&gt;medium
+        &lt;OPTION&gt;large
+        &lt;OPTION&gt;xlarge
+        &lt;/SELECT&gt;
+    &lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;
+    &lt;TD&gt;&lt;/TD&gt;
+    &lt;TD&gt;&lt;INPUT TYPE="Submit" NAME="submit" VALUE="Submit"&gt;
+    &lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/FORM&gt;
+&lt;/CFIF&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><a name="1027410"></a>
+ 
+<H3>Example of synchronizing access to a file system</H3>
+<p>The following example demonstrates how to use CFLOCK to synchronize access to a file system. The CFLOCK tag protects a CFFILE tag from attempting to append data to a file already open for writing by the same tag executing on another request.</p><p>Note that if an append operation takes more that one minute, a request waiting to obtain an exclusive lock to the critical section may time out. Also, note the use of a dynamic value for the NAME attribute to allow protection of a file with any given name.</p><pre><code>&lt;CFLOCK NAME=#FileName# TIMEOUT=60 TYPE="Exclusive"&gt;
+    &lt;CFFILE ACTION="Append"
+        FILE=#FileName#
+        OUTPUT=#TextToAppend#&gt;
+&lt;/CFLOCK&gt;
+</code></pre><a name="1027414"></a>
+ 
+<H3>Example of protecting ColdFusion Extensions</H3>
+<p>This example illustrates how a custom tag wrapper can be built around CFXs that are not thread-safe. The wrapper simply forwards attributes to the non thread-safe CFX that is used inside a CFLOCK tag. An anonymous lock is used here because this is the only place from which the CFX will be invoked.</p><pre><code>&lt;CFPARAM NAME="Attributes.AttributeOne" Default=""&gt;
+&lt;CFPARAM NAME="Attributes.AttributeTwo" Default=""&gt;
+&lt;CFPARAM NAME="Attributes.AttributeThree" Default=""&gt;
+
+&lt;CFLOCK TIMEOUT=10 TYPE="Exclusive"&gt;
+    &lt;CFX_NOT_THREAD_SAFE AttributeOne=#Attributes.AttributeOne#
+        AttributeTwo=#Attributes.AttributeTwo#
+        AttributeThree=#Attributes.AttributeThree#&gt;
+&lt;/CFLOCK&gt;
+</code></pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This example assumes that this is the only instance this CFX is used in the 
+application. To lock a non-thread safe CFX that used multiple times in an 
+application, used named locking rather than anonymous locking, 
+specifying the same name for each lock.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027417"></a>
+ 
+<H3>For more information</H3>
+<p>See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a>  for more information on using CFLOCK.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_14.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

@@ -1,0 +1,266 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using the Extensions Pages</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0317.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0319.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1033609"></a>
+ <H1>Using the Extensions Pages</H1>
+
+
+
+<p>Use the ColdFusion Administrator Extensions pages to register Java applets and CFX tags, custom tags built with C++.</p><a name="1039080"></a>
+ 
+<H2>Managing CFX tags</H2>
+<p>The CFX Tags page in the ColdFusion Administrator is used to Register and manage ColdFusion custom tags built with C++. </p><p>ColdFusion allows you to build extensions or custom tags in two ways:</p><ul>
+<a name="1033534"> </a>
+<li>Using C++ to code DLLs (Windows) or shared objects (Solaris) that provide a custom tag you can use in your application pages.
+
+<a name="1033535"> </a>
+</li>
+<li>Using CFML to create custom tags you invoke in your application pages.
+</li>
+</ul>
+<p>To use a CFX tag you must first register it with ColdFusion. This process simply tells ColdFusion where to find the required DLL when it attempts to process the CFX tag in an application page. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>A wide variety of custom tags of both types is available from the <a href="http://
+www.allaire.com/taggallery">ColdFusion Tag Gallery</a>. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1033615"></a>
+ 
+<H2>CFX tag samples</H2>
+<p>Source code and compiled versions of two sample CFX tags are installed with ColdFusion (you can register and use them in your application pages). You must first compile this code before registering the DLLs or shared objects in the ColdFusion Administrator. These examples can be found in <code>opt/coldfusion/cfx/examples</code> (Solaris) and <code>cfusion\cfx\examples</code> (Windows). </p><p>The two CFX tag examples installed with ColdFusion are as follows:</p><ul>
+<a name="1033635"> </a>
+<li><code>directorylist</code> -- Returns a directory listing.
+
+<a name="1033912"> </a>
+</li>
+<li><code>ntuser_db</code> -- (Windows NT only) Allows you to modify Windows NT user permissions.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register a CFX tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the CFX Tags page in the ColdFusion Administrator.
+
+
+</li>
+<li>Enter a name for the CFX tag you are adding. Tag names must be prefixed with <code>CFX_</code>.
+
+</li>
+<li>Click Add to open the New CFX Tag page.
+
+</li>
+<li>Enter the path to the library you want to use or browse your system to locate the library you want to use. 
+
+</li>
+<li>Enter the procedure that implements the tag. The procedure name must correspond with an existing procedure in the DLL or shared object you've specified. Procedure names are case-sensitive. 
+
+</li>
+<li>Click Keep library loaded to prevent reloading the library into memory each time a referenced page is accessed.
+
+</li>
+<li>Enter a description and click Add to finish. 
+
+</li>
+</ol>
+<a name="1038944"></a>
+ 
+<H2>Registering a Java applet</H2>
+<p>The Applets page in ColdFusion allows you to register Java applets for use in ColdFusion forms with the CFAPPLET tag. Registering the applet before using it in ColdFusion applications allows you to encapsulate the applet in a simple, easy-to-use interface. The CFAPPLET tag you use to place the applet can be used to override any parameters you define in the Administrator Registered Applets page. </p><p>Before you can use CFAPPLET to place a Java applet in your CFFORM, you must register the applet in the ColdFusion Administrator. </p><a name="1038950"></a>
+ 
+<H3>Applets Administrator page</H3>
+<p>You can use the CFAPPLET tag to place Java applets in a CFFORM. However, before you can use the tag you need to register your applet using the ColdFusion Administrator. Once your applet is registered with ColdFusion, using the CFAPPLET tag in your code is very simple since all parameters are predefined in the Administrator. Since parameters are predefined in the Administrator, you only need to specify parameter values you want to override for a particular instance. With CFAPPLET, you could enter just the applet source and the form variable name you want to use:</p><pre>&lt;CFAPPLET APPLETSOURCE="Calculator"
+    NAME="calc_value"&gt;
+</pre><p>You can define all other parameters when you register the applet in the Administrator. Using the HTML APPLET tag, you'd have to invoke all the applet's parameters every time you wanted to use it in an page. </p><p>The new Registered Applets page in the ColdFusion Administrator allows you to register Java applets you want to place in your ColdFusion pages with the CFAPPLET tag.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register a Java applet:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Install the Java class files and any other files required for the class. You'll need to specify the codebase argument when registering the applet, so take note of the installed path. 
+
+
+</li>
+<li>In the ColdFusion Administrator, open the Register New Applet page by clicking the Applets button. 
+
+</li>
+<li>Enter the necessary information. Each field corresponds to values you would enter in the HTML APPLET tag. 
+
+</li>
+<li>Enter the parameter name and value pairs required for your applet. If necessary, you may need to refer to whatever documentation exists for your applet. 
+
+</li>
+<li>When you're done, click Create.
+
+</li>
+</ol>
+<p>Applet registration fields are explained in the following table. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Java Applet Registration Fields&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Field</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Codebase
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the base URL of the applet: the directory that contains the applet components. The applet class files must be located within the Web browser root directory. Example:
+<PRE>http://<em>servername</em>/classes
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Code
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+This is the name of the file that contains the applet subclass. The filename is relative to the codebase URL. The *.class file extension is not required.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Method
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the method name in the applet that returns a string value. You use this method name in the NAME attribute of the CFAPPLET tag to populate a form variable with the method's value. If the applet has no method, leave this field blank.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Height
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter a measurement in pixels for the vertical space for the applet. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Width
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter a measurement in pixels for the horizontal space for the applet.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Vspace
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter a measurement in pixels for the space above and below the applet.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Hspace
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter a measurement in pixels for the space on each side of the applet.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Align
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Choose the alignment you want. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Java Not Supported Message
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+This message is displayed by browsers that do not support Java applets. If you want to override this message, you specify a different message in the CFAPPLET tag NOTSUPPORTED attribute. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Parameter Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter a name for a required applet parameter. Your Java applet will typically provide the parameter name needed to use the applet. Enter each parameter in a separate parameter field.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Value
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+For every parameter you enter, define a default value. Your applet documentation will provide guidelines on valid entries. 
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0317.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0319.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

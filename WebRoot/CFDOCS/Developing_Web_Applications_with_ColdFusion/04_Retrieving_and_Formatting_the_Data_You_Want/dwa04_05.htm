@@ -1,0 +1,206 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Action Pages</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Retrieving and Formatting the Data You Want</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1013126"></a>
+ <H1>Creating Action Pages</H1>
+
+
+
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an action page for the form:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+</pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Retrieving Employee Data Based on Criteia from Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="CompanyInfo"&gt;
+    SELECT FirstName, LastName, Salary
+    FROM Employees
+    WHERE LastName='#Form.LastName#'
+&lt;/CFQUERY&gt;
+&lt;H4&gt;Employee Data Based on Criteria from Form&lt;/H4&gt;
+&lt;CFOUTPUT query="GetEmployees"&gt;
+#FirstName#
+#LastName#
+#Salary#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>actionpage.cfm</code> within the <code>myapps</code> directory. 
+
+</li>
+<li>View <code>formpage.cfm</code> in your browser.
+
+</li>
+<li>Enter data for the LastName form control and submit it.
+
+</li>
+<li>Return to the form in your browser.
+
+</li>
+<li>Reset the values.
+
+</li>
+<li>Do not check the checkbox and submit the form again. 
+
+<p>An error occurs when the checkbox does not pass to the action page. 
+</p><p>You will receive errors if you submit the form without checking the checkbox form 
+controls. You will learn how to apply conditional logic to your action page to 
+compensate for this HTML limitation in <a href="../05_Making_Variables_Dynamic/dwa05_04.htm#1013927">&quot;Testing for a variable's existence&quot; on 
+page 51</a>.
+</p></li>
+</ol>
+<a name="1016794"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFQUERY NAME="GetEmployees" 
+DATASOURCE="CompanyInfo"&gt;
+</PRE></td><td valign="top">
+Query the datasource CompanyInfo and name the query GetEmployees.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>SELECT FirstName, LastName, Salary
+FROM Employees
+WHERE LastName='#Form.LastName#'
+</pre></td><td valign="top">
+Retrieve the FirstName, LastName, and Salary fields from the Employees table, but only if the value of the LastName field matches what the user entered in the LastName text box in the form on <code>formpage.cfm</code>.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFOUTPUT query="GetEmployees"&gt;
+</PRE></td><td valign="top">
+Display results of the GetEmployees query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>#FirstName#
+#LastName#
+#Salary#&lt;BR&gt;
+</PRE></td><td valign="top">
+Display the value of the FirstName, LastName, and Salary fields for a record, starting with the first record, then go to the next line. Keep displaying the records that match the criteria you specified in the SELECT statement, followed by a line break, until you run out of records
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;/CFOUTPUT&gt;
+</PRE></td><td valign="top">
+Close the CFOUTPUT block
+</td></tr>
+
+</table>
+</div>
+</H3>
+<a name="1013156"></a>
+ 
+<H2>Form Variable Notes and Considerations</H2>
+<p>When using form variables, keep the following guidelines in mind:</p><ul>
+<li>A form variable's scope is the action page.
+
+</li>
+<li>Prefix form variables with "form."<em> </em>when referencing them on the action page.
+</li>
+<li>Surround variable values with pound signs (#) for output.
+</li>
+<li>Checkboxes and radio buttons are only passed to the action page if an option is selected.
+</li>
+<li>Form variables for checkboxes and radio buttons generate errors on action pages if nothing is selected for the form controls.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:42 -->
+</body>
+</html>

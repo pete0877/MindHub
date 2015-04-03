@@ -1,0 +1,166 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFSERVLET</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_085.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_087.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2293406"></a>
+ <H1>CFSERVLET</H1>
+
+
+
+<p>Executes a Java servlet on a JRun engine. This tag is used in conjunction with the <a href="../2_ColdFusion_Tags/lr2_087.htm#2292307">CFSERVLETPARAM</a> tag, which passes data to the servlet. </p><a name="2293408"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFSERVLET 
+    CODE="class name of servlet"
+    JRUNPROXY="proxy server"
+    TIMEOUT="timeout in seconds"
+    WRITEOUTPUT="Yes/No"
+    DEBUG="Yes/No"&gt;
+    &lt;CFSERVLETPARAM 
+    NAME=&quot;parameter name&quot; 
+    VALUE=&quot;value&quot; 
+    &gt; 
+    ...
+&lt;/CFSERVLET&gt;
+</PRE><a name="2292819"></a>
+<h4> CODE</h4>
+<p>Required. The class name of the Java servlet to execute.</p><a name="2292597"></a>
+<h4> JRUNPROXY</h4>
+<p>Optional. Specifies a remote machine where the JRun engine is executing. By default, the JRun engine is assumed to be on the host running ColdFusion. To indicate the name of a remote host, specify the IP address of the remote host followed by a colon and the port number at which JRun is listening. By default, JRun listens at port 8081.</p><a name="2292601"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. Specifies how many seconds JRun should wait for the servlet to complete before timing out.</p><a name="2292603"></a>
+<h4> WRITEOUTPUT</h4>
+<p>Optional. Boolean specifying if the text output of the tag should appear as inline text on the generated page or if it should be returned inside a ColdFusion variable for further processing . The default value, YES, means output is returned as text to appear inline on the generated page. Setting it to NO means no visible text is returned but, instead, the text is returned as the value of the CFSERVLET.OUTPUT variable. See the CFSERVLET Variables table under Usage for more information.</p><a name="2295355"></a>
+<h4> DEBUG</h4>
+<p>Optional. Boolean specifying whether additional information about the JRun connection status and activity is to be written to the JRun error log. The error log is in <em>JRunHome</em>/jsm-default/logs/stderr.log. Reading this log is helpful for debugging server-side problems.<em> </em>The default is No.</p><a name="2292557"></a>
+ 
+<H3>Usage</H3>
+<p>The syntax of the CFSERVLET tag is designed to be consistent with the HTML markup &lt;SERVLET&gt; and &lt;PARAM&gt; used by some web servers to invoke Java servlets from .shtml pages in what is known as SSI, Server-Side Includes. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>CFSERVLET Variables</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Variable Name</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+CFSERVLET<em>.</em>Output
+</td><td valign="top">
+Inline text output of the servlet is directed to this structure if the <em>WRITEOUTPUT</em> attribute is set to No.
+</td></tr>
+<tr valign="top"><td valign="top">
+CFSERVLET<em>.servletResponseHeaderName</em>
+</td><td valign="top">
+The CFSERVLET return structure also contains the values of any response headers returned by the servlet. To access a response header, specify its name in <em>servletResponseHeaderName.</em>
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The servlet must exist somewhere in the class path of the JRun engine 
+executing the servlet. The JRun "servlet" subdirectory is a good location 
+since it is already in JRun's class path and because classes in this directory 
+are automatically reloaded by JRun if they change.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="2292584"></a>
+ 
+<H3>Example</H3>
+<PRE>&lt;CFSERVLET  CODE=&quot;MyServletName&quot; 
+<pre>    JRUNPROXY=&quot;236.3.3.4:8083&quot; 
+    TIMEOUT=&quot;300&quot;
+    WRITEOUTPUT=&quot;YES&quot;&gt;
+    &lt;CFSERVLETPARAM  NAME=&quot;Param1&quot;  VALUE=&quot;Value1&quot;&gt; 
+    &lt;CFSERVLETPARAM  NAME=&quot;Param2&quot;  VALUE=&quot;Value2&quot;&gt;
+    &lt;CFSERVLETPARAM  NAME=&quot;Attribute1&quot;  VARIABLE=&quot;CFVar1&quot;&gt;
+    &lt;CFSERVLETPARAM  NAME=&quot;Attribute2&quot;  VARIABLE=&quot;CFVar2&quot;&gt;
+&lt;/CFSERVLET&gt;
+</pre></PRE>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_085.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_087.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

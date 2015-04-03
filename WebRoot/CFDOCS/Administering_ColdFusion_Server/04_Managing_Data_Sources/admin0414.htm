@@ -1,0 +1,533 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Oracle 7.3/8.0 Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0413.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0415.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1092518"></a>
+ <H1>Connecting to Oracle 7.3/8.0 Databases</H1>
+
+
+
+<p>You can configure Oracle 7.3/8.0 ColdFusion data sources for both Windows NT and UNIX using ODBC and native drivers. </p><a name="1092636"></a>
+ 
+<H2>Configuring Oracle 7.3/8.0 Options (Windows)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a Windows NT server, you can configure an Oracle data source using a Native driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Drivers: Oracle 7.3 and 8.0 Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion Native driver options for Oracle 7.3 and 8.0 native driver data sources on either Windows NT or UNIX.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Oracle 8.0 Native Database Driver Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Host String
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the database alias you created using the Oracle Net8 Easy Config utility. To find the database alias for the database you want to connect to, you can use the Oracle Net8 Easy Config utility. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1082142"></a>
+ 
+<H2>Configuring Oracle 7.3/8.0 Options (UNIX)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a Windows NT server, you can configure an Oracle data source using a Native driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Drivers: Oracle 7.3 and 8.0 Options (UNIX)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion Native driver options for Oracle 7.3 and 8.0 native driver data sources on either Windows NT or UNIX.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Oracle 8.0 Native Database Driver Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Host String
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the database alias you created using the Oracle Net8 Easy Config utility. To find the database alias for the database you want to connect to, you can use the Oracle Net8 Easy Config utility. 
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC Drivers: MERANT Oracle 7 and Oracle 8 Options (UNIX)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion driver options for the MERANT Oracle 7 and MERANT Oracle 8.0 ODBC driver s on UNIX.</p><p>The following table describes ColdFusion ODBC options for MERANT Oracle 7 and MERANT Oracle 8 ODBC drivers.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT Oracle 7 and Oracle 8 ODBC Database Driver Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Connect String
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+ The client connection string designating the server and database you want to access.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Performance
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Include REMARKS in Catalog Functions -- Specifies whether the result column REMARKS for the catalog functions SQLTables and SQLColumns and COLUMN_DEF for the catalog function SQLColumns have meaning for Oracle.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Customization
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enable scrollable cursors -- Enables scrollable cursors for the data source. Both Keyset and Static cursors are enabled.
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1081722"></a>
+ 
+<H2>Connecting to Oracle 7 and 8.0 Databases (UNIX)</H2>
+<p>Before ColdFusion applications can connect to Oracle 7 and 8.0 databases, you must install the Oracle client software. </p><p>You'll need to modify the <code>/opt/coldfusion/bin/start</code> script to include the ORACLE_HOME environment variable and add the <code>$ORACLE_HOME/lib</code> directory to the <code>LD_LIBRARY_PATH</code>. See <a href="../04_Managing_Data_Sources/admin0414.htm#1081748">&quot;The /opt/coldfusion/bin/start Script&quot;</a> for an example.</p><ul>
+<a name="1081728"> </a>
+<li>Make sure you can connect to the Oracle server from Solaris with sql*plus before you try to connect from ColdFusion.
+
+<a name="1081729"> </a>
+</li>
+<li>Make sure you have the Oracle listener running
+<a name="1081730"> </a>
+</li>
+<li>Make sure you have a <code>tnsnames.ora</code> file set up. For oracle 7.3 it is in the <code>/var/opt/oracle</code> directory.
+</li>
+</ul>
+<p>Here is an example of a <code>tnsnames.ora</code> file:</p><pre>scup=
+    (DESCRIPTION=
+        (ADDRESS=
+            (PROTOCOL=TCP)
+            (HOST=scup)
+            (PORT=1521))
+        (CONNECT_DATA=(SID=WG73)))
+</pre><p>The first line above, where it says &quot;scup&quot; is what the connect string name should be set to in the ColdFusion Administrator.</p><p>The <strong>HOST=scup</strong> line could also say the ip address, as in HOST=205.185.22.33.</p><p>The <strong>PORT=1521</strong> line is the port the tcp listener is assigned to. You can look at the /etc/services file of the UNIX machine where the Oracle server resides to find out what it is.</p><p>The <strong>SID=WG73</strong> is the identifier for the database. See your Oracle administrator. These settings are set when the database is installed.</p><p>When you've completed all the steps in this section, you will need to stop and restart ColdFusion services to reload the <code>odbc.ini</code> file.</p><a name="1081748"></a>
+ 
+<H3>The /opt/coldfusion/bin/start Script </H3>
+<pre>#!/bin/sh
+# start - setup environment and run ColdFusion servers
+# This script should be run as root.
+# Run as root, we are able to start the system registry deamon
+# and then change to the ColdFusion userid to start the servers
+# Set during install
+CFHOME=/opt/coldfusion
+CFUSER=nobody
+# Sybase Open Client directory
+SYBASE=/work/sybclient11.1;export SYBASE
+# Oracle SQL *Net RDBMS directory
+# See CFHOME/odbc/src/oracle for script to build library
+ORACLE_HOME=/opt/oracle7;export ORACLE_HOME
+# Set library search path
+#
+# NOTE: Add your database client library directory to the FRONT of this 
+list
+#
+# Example: 
+LD_LIBRARY_PATH=$ORACLE_HOME/lib:$SYBASE/lib:/usr/dt/lib:/lib:/usr/
+openwin/lib:$CFHOME/lib
+# This is the list of variables that ColdFusion will see
+# Add any special Database environment varaibles here
+VAR_LIST="LD_LIBRARY_PATH CFHOME SYBASE ORACLE_HOME INFORMIXDIR 
+INFORMIXSERVER II_SYSTEM"
+#==========================================================
+# You should not need to touch anything below this point
+#==========================================================
+</pre><a name="1081775"></a>
+ 
+<H3>Troubleshooting</H3>
+<p>If ColdFusion is unable to establish a connection to the Oracle 7.3 driver, try the following workarounds:</p><ul>
+<a name="1081777"> </a>
+<li>You may need to move the location of the ORACLE_HOME/lib to the end of the LD_LIBRARY_PATH in the start script. Make sure that the $ORACLE_HOME directory has a /lib directory below it. In that lib directory there should be a libclntsh.so file.
+
+<a name="1081778"> </a>
+</li>
+<li>Make sure that the listener port number is the the right one you are pointing to in <code>tnsnames.ora</code> file. 
+<a name="1081779"> </a>
+</li>
+<li>Check in <code>$ORACLE_HOME/lib</code> directory for the existence of the <code>libclntsh.so</code> file. If it does not exist you need to reinstall the oracle client software.
+<a name="1081780"> </a>
+</li>
+<li>Oracle 7.1 users must build the Oracle client shared library (<code>libclntsh.so</code> for Solaris) before the Oracle driver can be used. Run the <code>genclntsh</code> script found in the <code>odbc/src/oracle</code> directory to build the library. 
+</li>
+</ul>
+<a name="1092777"></a>
+ 
+<H3>What to do if the connection test fails</H3>
+<p>If the basic information you entered in the Oracle Net8 Easy Config is correct, but the connection test fails, then a visit to your local Oracle 8 DBA is probably necessary. The first thing to do is check the basic connection information: hostname, SID, username, and password. You can do this using the Net8 Easy Config utility or by directly inspecting the <code>tnsnames.ora</code> file. </p><p>In addition, on UNIX, make sure you have the Oracle client library and <code>ORACLE_HOME</code> defined in the <code>coldfusion/bin/start</code> script. </p><p>In some cases, connection problems can be solved by clearing your system of the Oracle 8 Client and reinstalling it. Unfortunately, Oracle does not provide an uninstaller for the Oracle 8 Client; you must uninstall manually.</p><a name="1081782"></a>
+ 
+<H2>Connecting to Oracle 8.0.x through ODBC (UNIX)</H2>
+<p>To use Oracle 8.0x databases with ColdFusion on UNIX, you need to build the <code>libclntsh.so</code> shared object file. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To build a version of libclntsh.so for Oracle 8.0.x:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the shell, set ORACLE_HOME, CFHOME, and LD_LIBRARY_PATH as set in the start script. 
+
+
+<p>ORACLE_HOME should be set to the location of the Oracle client libraries. 
+CFHOME should be set to the location of your ColdFusion application server. 
+LD_LIBRARY_PATH needs to be set the same as in your start script. 
+</p><p>For example:
+</p><pre>CFHOME=/opt/coldfusion;export CFHOME
+ORACLE_HOME=/opt/oracle8;export ORACLE_HOME
+LD_LIBRARY_PATH=/lib:/usr/dt/lib:/usr/openwin/lib:$CFHOME/
+lib:$ORACLE_HOME/lib;export LD_LIBRARY_PATH 
+</pre></li>
+<li>From <code>$CFHOME/odbc/src/oracle</code> run the script<code>./genclntsh8</code>. 
+
+</li>
+</ol>
+<p>The script will generate an new <code>libclntsh.so</code> in CFHOME and place it in <code>$CFHome/lib</code>. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Oracle 8 users will have the original <code>libclntsh.so</code> library in the 
+<code>$ORACLE_HOME/lib</code> directory. Therefore when creating the 
+<code>LD_LIBRAY_PATH</code> in the <code>$CFHOME/bin/start</code> script, the <code>$CFHOME/lib</code> 
+directory, containing the correct library, must be on the 
+LD_LIBRARY_PATH before <code>$ORACLE_HOME/lib</code>. Otherwise, the original 
+Oracle version will be loaded, resulting in an error.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1081580"></a>
+ 
+<H2>Troubleshooting the Oracle 7.3 Native Driver (Windows)</H2>
+<p>When using the Oracle 7.3 Native Driver on Windows 95/98 or Windows NT you may get this error: </p><pre>Error Diagnostic Information 
+Oracle Error Code = 0 
+Internal error: The data access manager failed to initialize the Oracle 
+environment. 
+
+The error occurred while processing an element with a general identifier 
+of (CFQUERY), occupying document position (3:1) to (3:50). 
+</pre><p>You may experience this problem with the Oracle 7.3 Native Driver. This can happen in several situations. Either you cannot verify the connection or you get this error when running a CFQUERY. The most likely cause of this problem is a duplicate copy of the <code>OCIW32.DLL</code> file. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To diagnose and fix the problem
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Make sure that SQL*Net 7.3.4.0 or higher is installed on your server. 
+
+
+</li>
+<li>Make sure that <code>y</code>our <code>winnt\system32</code> directory contains the file <code>ociw32.dll</code>. 
+
+<ul>
+<a name="1081089"> </a>
+<li>If you have a copy in <code>winnt\system32</code>, rename it and then stop and start the ColdFusion services. 
+
+<a name="1081090"> </a>
+</li>
+<li>If you do not have a copy in <code>winnt\system32</code>, search your hard drive for the file. If you find a copy anywhere other than <code>orant\bin</code> or <code>cfusion\bin</code> rename the file then restart ColdFusion services.
+</li>
+</ul>
+</li>
+</ol>
+<a name="1081439"></a>
+ 
+<H2>Configuring the Oracle 8 Client (Windows, UNIX)</H2>
+<p>This section includes the typical configuration steps you need to perform to use the Oracle 8 native database driver on either UNIX or Windows NT. These procedures were written using version 8.0.4.0.0 of the Oracle 8 Client. </p><p>Before you get started, make sure you have the following information handy:</p><ul>
+<a name="1081442"> </a>
+<li>The name of the host system where the Oracle database resides.
+
+<a name="1081444"> </a>
+</li>
+<li>The System Identifier (SID) for your Oracle 8 database.
+<a name="1081445"> </a>
+</li>
+<li>A login ID and password for connecting to the Oracle 8 database.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use the ColdFusion native driver for Oracle 8:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Install the required client software 
+
+
+</li>
+<li>Use the SQL Net Easy Configuration utility to create a database alias. The UNIX version of this utility can be found in <code>$ORACLE_HOME/bin/net8wiz.sh</code>. 
+
+</li>
+<li>Create the data source in the ColdFusion Administrator, Native Drivers page. 
+
+</li>
+<li>Edit the <code>coldfusion/bin/start</code> script to include the following values:
+
+<ul>
+<a name="1081452"> </a>
+<li>The database variable <code>ORACLE_HOME</code>
+
+<a name="1081453"> </a>
+</li>
+<li>The library path set in <code>LD_LIBRARY_PATH</code>
+</li>
+</ul>
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Installing the Oracle 8 Client
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Install the Oracle 8 Client software. 
+
+
+</li>
+<li>Select the Database administrator or Application user option in the following dialog. In this example, we chose Application user. 
+
+</li>
+<li>Step through options involving stopping Oracle services that may be running on your system, and choosing whether to install online documentation. 
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Running the Oracle Net8 Easy Config utility
+</td>
+</tr>
+</table>
+</div><p>This step creates a database alias you use to reference the Oracle database when creating the data source in the ColdFusion Administrator. The process of creating the database alias writes all of the database connection information to a configuration file called <code>tnsnames.ora</code>. </p><ol>
+<li class="first">Open the Oracle Net8 Easy Config utility. The icon is found in your Oracle for Windows NT program group. OnUNIX, this utility is found in <code>$ORACLE_HOME/bin/net8wiz.sh</code>.
+
+
+</li>
+<li>Enter a New Service Name and click Next. 
+
+<p><img src="../images/or8.gif">
+
+
+
+</p></li>
+<li>In the resulting dialog, select TCP/IP as the networking protocol to connect with and use the Oracle 8 database you want to use in your ColdFusion application. 
+
+</li>
+<li>In the dialog that appears, you now need to enter the host name of the server where the Oracle 8 database resides. We took the default for the port number.
+
+<p><img src="../images/or8007.gif">
+
+
+
+</p></li>
+<li>After entering a hostname, you enter the Database SID, which identifies your specific Oracle database instance. The default is ORCL, but your database SID might be different. See your database administrator (DBA) for this information. 
+
+</li>
+<li>In the next dialog, you test the database service you have created. To test the connection to the Oracle database, you'll need to enter a valid username and password for accessing the Oracle database. If you don't have this information, see your DBA. 
+
+<p>Now you need to create the data source in ColdFusion.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Creating the data source in ColdFusion:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator to the Data sources, Native Drivers page. 
+
+
+</li>
+<li>Enter a data source name and select the Oracle 8 native driver from the drop down list. 
+
+</li>
+<li>When you click Add, ColdFusion opens the configuration page for the data source. Here you enter information that tells ColdFusion where to find the database. The options that are most important for a successful connection are:
+
+<ul>
+<a name="1081484"> </a>
+<li>Host string -- Enter the exact database alias you created using the Oracle Net8 Easy Config utility.
+
+<a name="1081485"> </a>
+</li>
+<li>ColdFusion Login username and password -- These options appear when you click the CF Settings button. The username and password are the same as those used in the Oracle Net8 Easy Config connection test. If you don't know what the username and password should be, see your Oracle 8 DBA. 
+<p>You may want to avoid setting a username and password here for security 
+reasons. If you don't set a name and password, each CFML database call must 
+specifically define a username and password.
+</p></li>
+</ul>
+</li>
+<li>Once you have created the data source, open the Verify Data Source page in the Administrator to verify that ColdFusion can connect to the Oracle 8 database. 
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0413.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0415.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

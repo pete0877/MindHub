@@ -1,0 +1,206 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Advanced Security Basics</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin102.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin104.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1023975"></a>
+ <H1>Advanced Security Basics</H1>
+
+
+
+<p>All types of Advanced Security implement the following four elements. You may recognize these terms if you're at all familiar with discussions of Web, Java, or distributed application security:</p><ul>
+<a name="1011154"> </a>
+<li>User directories
+
+<a name="1011155"> </a>
+</li>
+<li>Resources
+<a name="1011156"> </a>
+</li>
+<li>Policies
+<a name="1011157"> </a>
+</li>
+<li>Security contexts
+</li>
+</ul>
+<p>This section introduces these elements and describes how they work together to build your Advanced Security framework. For detailed, hands-on instructions for actually implementing an Advanced Security framework, see <a href="../10_Configuring_Advanced_Security/admin105.htm#1011253">&quot;Creating an Advanced Security Framework&quot;</a>.</p><a name="1011162"></a>
+ 
+<H2>User Directories</H2>
+<p>User directories provide a listing of user information, such as the user's name, login password, and the names of any groups to which the user belongs. ColdFusion Advanced Security lets you incorporate any of the following industry-standard user directories:</p><ul>
+<a name="1011164"> </a>
+<li>Lightweight Directory Access Protocol (LDAP) directory
+
+<a name="1011165"> </a>
+</li>
+<li>Windows NT domain 
+<a name="1011166"> </a>
+</li>
+<li>ODBC data source
+</li>
+</ul>
+<p>A user directory authenticates users but doesn't authorize them: In and of itself, a directory can tell you if someone is a valid user of the system, but can't assign ColdFusion security permissions to the user. When you create a security context, you select users and groups from a user directory and then individually assign them access rights to ColdFusion resources. ColdFusion developers then include code in their applications that checks if a user has rights to a resource.</p><p>Because ColdFusion uses your existing LDAP directories, NT domains, or data sources, you don't have to create and maintain redundant user directories just to develop or deploy ColdFusion applications. Using existing NT or LDAP provides an added bonus: User groups to whom you assign security priveleges automatically inherit changes to group membership; no additional maintenance is required. For example, suppose your company's NT Domain contains a user group called BigDev. You've used Advanced Security to give the BigDev group access to a number of custom tags. Your company hires a new developer to work in the BigDev group. When the new developer is added to the BigDev group in your company's NT domain, she's automatically granted access to the custom tags because of her user group affiliation.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Netscape Directory Server is bundled with ColdFusion to provide an 
+LDAP user directory in case you aren't already using NT domains or LDAP 
+directories.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1011171"></a>
+ 
+<H2>Resources</H2>
+<p>A ColdFusion resource that you want to protect is the core of Advanced security. Selecting a resource to protect doesn't specify how to protect it or which users can access it; you're simply telling ColdFusion the name and, if applicable, the acton of the resource you intend to secure. For example, you can control</p><ul>
+<a name="1011173"> </a>
+<li>Write access to all the files in the directory c:\directory
+
+<a name="1011174"> </a>
+</li>
+<li>Which actions of the CFML tag are restricted
+<a name="1011175"> </a>
+</li>
+<li>Inserts and updates for a specific Access database. 
+</li>
+</ul>
+<p>Resources are not secured until you specifically choose to protect them. You can secure the following types of resources:</p><ul>
+<a name="1011177"> </a>
+<li>Applications
+
+<a name="1011178"> </a>
+</li>
+<li>Verity Collections
+<a name="1011179"> </a>
+</li>
+<li>Components
+<a name="1011180"> </a>
+</li>
+<li>ColdFusion Tags
+<a name="1011181"> </a>
+</li>
+<li>ColdFusion Functions
+<a name="1011182"> </a>
+</li>
+<li>Custom Tags
+<a name="1011183"> </a>
+</li>
+<li>Data Sources
+<a name="1011184"> </a>
+</li>
+<li>Files and Directories
+<a name="1011185"> </a>
+</li>
+<li>User Objects
+<a name="1021273"> </a>
+</li>
+<li>Users
+</li>
+</ul>
+<a name="1011186"></a>
+ 
+<H2>Policies</H2>
+<p>After you specify a resource to protect, you need to create a policy that gives access rights to a set of users. A policy matches resources to users or user groups, that is, it grants a group of users access to specified resources. <img src="../images/RulePlusUser.gif">
+
+
+</p><p>For example, you can create a policy that gives members of a team complete access to three data sources that the team uses regularly. You could also create a policy that specifies the system administrator as the only user who can use the CFFILE tag's WRITE action.</p><p>If you specify a resource to protect but do not include it in any policy, the resource is fully protected within the Security Context -- in other words, no users have access to those resources.</p><a name="1011194"></a>
+ 
+<H2>Security Contexts</H2>
+<p>A security context is a container for logically-related groups of policies. </p><p><img src="../images/Context.gif">
+
+
+</p><p>You can create and implement as many security contexts as your application or development environment requires:</p><ul>
+<a name="1011201"> </a>
+<li>You can reuse a single security context, implementing it across several applications. 
+
+<a name="1011202"> </a>
+</li>
+<li>If you are deploying a more complex application, you may need to create more than one security context for that application alone.
+<a name="1011203"> </a>
+</li>
+<li>If you're managing a fairly small, homogeneous group of developers, you can use a single security context for an entire ColdFusion application server.
+<a name="1011204"> </a>
+</li>
+<li>You can create a separate security context for each of your development groups. This approach is recommended if you you administer a hosted development environment or if your developers access ColdFusion resources remotely.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin102.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin104.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

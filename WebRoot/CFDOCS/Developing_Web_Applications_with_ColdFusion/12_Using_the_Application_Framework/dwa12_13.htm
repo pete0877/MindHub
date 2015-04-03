@@ -1,0 +1,125 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Default Variables and Constants</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_14.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026958"></a>
+ <H1>Default Variables and Constants</H1>
+
+
+
+<p>It is often useful to set default variables and application-level constants in the <code>Application.cfm</code> file. For example you may want to designate:</p><ul>
+<li>A data source you're using
+
+</li>
+<li>A domain name
+</li>
+<li>Style settings such as fonts or colors
+</li>
+<li>Other important application-level variables
+</li>
+</ul>
+<a name="1026964"></a>
+ 
+<H3>Example: Application.cfm</H3>
+<p>The following example shows a complete <code>Application.cfm</code> file for the sample Products application:</p><pre>&lt;!--- Set application name and enable client 
+variables option, with client variables stored in 
+a data source called mycompany ---&gt;
+
+&lt;CFAPPLICATION NAME="Products"
+    CLIENTMANAGEMENT="Yes"
+    CLIENTSTORAGE="mycompany"&gt;
+
+&lt;!--- Install custom error pages ---&gt;
+
+&lt;CFERROR TYPE="REQUEST"
+    TEMPLATE="requesterr.cfm"
+    MAILTO="admin@company.com"&gt;
+
+&lt;CFERROR TYPE="VALIDATION" 
+    TEMPLATE="validationerr.cfm"&gt;
+
+&lt;!--- Set application constants ---&gt;
+
+&lt;CFSET HomePage="http://www.mycompany.com"&gt;
+&lt;CFSET PrimaryDataSource="CompanyDB"&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_14.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

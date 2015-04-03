@@ -1,0 +1,114 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Scheduling a ColdFusion Page</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin051.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin053.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Scheduling and Static Page Generation</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997365"></a>
+ <H1>Scheduling a ColdFusion Page</H1>
+
+
+
+<p>The ColdFusion Administrator allows you to schedule the execution of application pages. To access the scheduling facility, open the Administrator and click the Scheduler button.</p><p>The scheduling facility has two parts: </p><ul>
+<a name="998993"> </a>
+<li>Scheduler Settings page -- Where you specify how often ColdFusion checks for newly scheduled tasks.
+
+<a name="999000"> </a>
+</li>
+<li>The Scheduled Tasks page -- Where you define new tasks or change existing scheduled tasks. 
+</li>
+</ul>
+<p>There are three areas you define in scheduling an event:</p><ol>
+<li class="first">The start/end date and interval.
+
+
+</li>
+<li>The URL of the file you want to execute.
+
+</li>
+<li>Publishing information if you want to save output to a file. This is the mechanism you use for creating static HTML pages by processing a ColdFusion page. 
+
+</li>
+</ol>
+<a name="997367"></a>
+ 
+<H3>Note</H3>
+<p>In the Operation list box on the Scheduled Tasks page, HTTPRequest is currently the only operation supported. Later releases of ColdFusion may add additional operations to this list box.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin051.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin053.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

@@ -1,0 +1,349 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Registering CFXs</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1813.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1815.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018860"></a>
+ <H1>Registering CFXs</H1>
+
+
+
+<p>To use a CFX tag in your ColdFusion applications, first register it in the Extensions, CFX Tags page in the ColdFusion Administrator.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register the tag in the CF Administrator:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the CF Administrator, open the Extensions &gt; CFX Tags page.
+
+
+</li>
+<li>Enter <code>CFX_MyNewTag</code> in the Tag name and, optionally, a description.
+
+</li>
+<li>Select the type of tag (either C++ or Java).
+
+</li>
+<li>Click Add to open the New CFX Tag page.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register a C++ CFX:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the CF Administrator, open the Extensions &gt; CFX Tags page.
+
+
+</li>
+<li>Enter <code>CFX_MyNewTag</code> in the Tag name and, optionally, a description.
+
+</li>
+<li>Select the type of tag (either C++ or Java).
+
+</li>
+<li>Click Add to open the New CFX Tag page.
+
+</li>
+<li>If the Server library (DLL) field is empty, enter the file path.
+
+</li>
+<li>Accept the default Procedure entry.
+
+</li>
+<li>Un-check the Keep library loaded box while developing the tag. When the tag is ready for production use, you can check this option to keep the DLL in memory for improved performance.
+
+</li>
+<li>Click Add.
+
+</li>
+</ol>
+<p>You can now call the tag from a ColdFusion template.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register a Java CFX:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the CF Administrator, open the Extensions &gt; CFX Tags page.
+
+
+</li>
+<li>Enter <code>CFX_MyNewTag</code> in the Tag name and, optionally, a description.
+
+</li>
+<li>Select the type of tag (either C++ or Java).
+
+</li>
+<li>Click Add to open the New CFX Tag page.
+
+</li>
+<li>Enter the Class name.
+
+</li>
+<li>Click Add.
+
+</li>
+</ol>
+<p>You can now call the tag from a ColdFusion template.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change a CFX tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the tag you want to change in the Registered CFX Tags list.
+
+
+</li>
+<li>Make changes as needed on the Edit CFX Tag page.
+
+</li>
+<li>Click Apply to save the changes.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a CFX tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the tag you want to delete in the Registered CFX Tags list.
+
+
+</li>
+<li>Click Delete on the Edit CFX Tag page. The tag is removed from the list but is not deleted from the system.
+
+</li>
+</ol>
+<p>On <strong>Windows NT only, </strong>the Visual C++ Custom Tag Wizard automatically registers custom tags so that they can be tested and debugged.</p><a name="1013450"></a>
+ 
+<H2>Distribution</H2>
+<p>If you are distributing a custom tag, you may want to automatically register the custom tag during the setup process by writing the registration entries directly into the Registry. The location, key, and value names to write are as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Registration Entries for C++ CFXs</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Entry</strong>
+</th><th align="left">
+<strong>Value</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE><strong>Hive
+</strong></PRE></td><td valign="top">
+<code>HKEY_LOCAL_MACHINE</code>
+</td></tr>
+<tr valign="top"><td valign="top"><PRE><strong>Key
+</strong></PRE></td><td valign="top">
+<code>SOFTWARE\Allaire\ColdFusion\CurrentVersion\CustomTags\</code>TagName
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>LibraryPath
+</PRE></td><td valign="top">
+The full path to the DLL (Windows NT) or shared object (Solaris) that implements the custom tag.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ProcedureName
+</PRE></td><td valign="top">
+The name of the procedure to call for processing tag requests.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Description
+</PRE></td><td valign="top">
+A description of the tag's functionality for browsing by end users.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CacheLibrary
+</PRE></td><td valign="top">
+Indicates whether to keep the DLL or shared object loaded in RAM (1 or 0).
+</td></tr>
+
+</table>
+</div>
+</p><p><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Registration Entries for Java CFXs</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Entry</strong>
+</th><th align="left">
+<strong>Value</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE><strong>Hive
+</strong></PRE></td><td valign="top">
+<code>HKEY_LOCAL_MACHINE</code>
+</td></tr>
+<tr valign="top"><td valign="top"><PRE><strong>Key
+</strong></PRE></td><td valign="top">
+<code>SOFTWARE\Allaire\ColdFusion\CurrentVersion\CustomTags\</code>TagName
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ClassName
+</PRE></td><td valign="top">
+The name of the Class to call.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Description
+</PRE></td><td valign="top">
+A description of the tag's functionality for browsing by end users.
+</td></tr>
+
+</table>
+</div>
+</p><p>You can create a file containing this information by using the Regedit utility to export the registry entry from a machine on which the custom tag is already installed.</p><p>On Windows NT, use Regedit to import custom tags to the registry. The ColdFusion regedit utility (in the bin) performs the same function on UNIX. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To import a C++ custom tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Export the custom tag's registry entry by using the Regedit utility. This creates a file similar to the following:
+
+
+<pre>REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Allaire\ColdFusion\CurrentVersion\ 
+CustomTags\CFX_TEST]
+"LibraryPath"="C:\\cfusion\\cfx\\CFX_TEST\\test.dll"
+"ProcedureName"="ProcessTagRequest"
+"Description"="Sample CFX tag."
+"CacheLibrary"="1"
+</pre></li>
+<li>In the install script, import the registry entry by including the following command in the install script:
+
+<pre><code>regedit </code><em>importfilename
+</em></pre></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To import a Java custom tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Export the custom tag's registry entry by using the Regedit utility. This creates a file similar to the following:
+
+
+<pre>REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Allaire\ColdFusion\CurrentVersion\ 
+CustomTags\CFX_TEST]
+"ClassName"="ProcessTagRequest"
+"Description"="Sample CFX tag."
+</pre></li>
+<li>In the install script, import the registry entry by including the following command in the install script:
+
+<pre><code>regedit </code><em>importfilename
+</em></pre></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1813.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1815.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

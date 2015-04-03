@@ -1,0 +1,296 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Sybase System 11 data sources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0416.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0418.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1091581"></a>
+ <H1>Connecting to Sybase System 11 data sources</H1>
+
+
+
+<p>Connections to Sybase System 11 databases are supported on both Windows and UNIX operating systems. On Windows, ColdFusion uses native drivers and on UNIX, ColdFusion uses both native and ODBC drivers to connect to Informix databases. ColdFusion 4.5 supports Informix 7.3 and higher.</p><a name="1091583"></a>
+ 
+<H2>Configuring Sybase System 11 Options (Windows)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a Windows NT server, you can configure Sybase System 11 ColdFusion data sources using a native driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Driver: Sybase System 11 (Windows)
+</td>
+</tr>
+</table>
+</div><p>To connect to Sybase System 11 databases on both Windows and UNIX, you must first install the Sybase client software, Sybase Open Client version 11.1.0 with Update 11.1.1 applied. Follow these steps to use the native driver:</p><ol>
+<li class="first">Install the Sybase Open Client version 11.1.0 (with Update 11.1.1 applied) client software. 
+
+
+</li>
+<li>Verify the connection to the database using a tool like Sybase SQL Advantage.
+
+</li>
+<li>Create the data source in the ColdFusion Administrator, Native Drivers page. 
+
+</li>
+</ol>
+<p>The following table describes ColdFusion options for the Sybase System 11 and Sybase Adaptive Server 11.5 data sources. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information about adding data sources to ColdFusion.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Sybase System 11/Adaptive Server 11.5 Native Database Driver Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the name of the server hosting the Sybase System 11 database.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Default Database
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the name of the default database to use on the specified server. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1091884"></a>
+ 
+<H2>Configuring Sybase System 11 Options (UNIX)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a UNIX server, you can configure Sybase System 11 ColdFusion data sources using either native or ODBC drivers.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Driver: Sybase System 11 (UNIX)
+</td>
+</tr>
+</table>
+</div><p>ColdFusion native drivers are the same for both Windows NT and UNIX. To see ColdFusion options for the Sybase System 11 native driver, see the table in <a href="../04_Managing_Data_Sources/admin0417.htm#1091586">&quot;Native Driver: Sybase System 11 (Windows)&quot;</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Sybase System 11 (UNIX)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion options for the MERANT Sybase System 11 ODBC driver. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information about adding data sources to ColdFusion. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT Sybase System 11 ODBC Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the database to which you want to connect.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the server containing the Sybase tables you want to access. If not supplied, the initial default is the server name in the DSQUERY environment variable. On UNIX, the name of a server from your $SYBASE/interfaces file.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Workstation ID
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The workstation ID used by the client.
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=3><font face="arial,helvetica" size=-1>
+Performance
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Row Limit -- The number of rows the driver retrieves from the server for a fetch. Enabling this option can increase performance by reducing network traffic.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Create stored procedures -- This option determines whether stored procedures are created on the server for every call to SQLPrepare. When enabled, stored procedures are created for every call to SQLPrepare. This setting can result in bad performance when processing static statements.
+
+When disabled, the driver does not create stored procedures. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Disable database cursors for Select statements -- Determines whether database cursors are used for Select statements. In some cases performance degradation can occur when performing large numbers of sequential Select statements because of the amount of overhead associated with creating database cursors.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Customization
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enable Password Encryption from Open Client Library to Server -- Determines whether password encryption can be performed from the Open Client Library to the server.
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1092070"></a>
+ 
+<H2>Tips for Connecting to Sybase System 11 (UNIX)</H2>
+<p>Keep the following in mind when you create Sybase ColdFusion data sources:</p><ul>
+<a name="1092072"> </a>
+<li>You can set up the Sybase data source using the ColdFusion Administrator Data sources page.
+
+<a name="1092073"> </a>
+</li>
+<li>You will need Sybase Open Client version 11.1.0 with Update 11.1.1 applied on your server. This software does not ship with ColdFusion.
+<a name="1092074"> </a>
+</li>
+<li>Check that the SYBASE environment variable is set up in the <code>/opt/coldfusion/start</code> script. Also check that the LD_LIBRARY_PATH has the $SYBASE/lib directory in the beginning of its path. See <a href="../04_Managing_Data_Sources/admin0417.htm#1092083">&quot;The /opt/coldfusion/bin/start script&quot;</a> for an example.
+<a name="1092075"> </a>
+</li>
+<li>Set up an entry in the interfaces file for the particular database you want to connect to. The interfaces file is in the $SYBASE directory, for example, <code>/opt/sybase</code> or <code>/work/sybase</code> or wherever the Sybase client software was installed. You can use a Sybase utility called <code>sybinit</code> on UNIX to update this file.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If the Sybase database is on the same server as ColdFusion make sure the 
+$SYBASE environment variable that you set up in the ColdFusion start 
+script is pointing to the Sybase client directory and not the Sybase server 
+directory. Both of these directories contain an interfaces file.
+</td>
+</tr>
+</table>
+</div>
+<br><p>When you've completed all the steps in this section, you will need to stop and restart ColdFusion services to reload the <code>odbc.ini</code> file.</p><a name="1092083"></a>
+ 
+<H3>The /opt/coldfusion/bin/start script</H3>
+<pre>#!/bin/sh
+# start - setup environment and run Cold Fusion servers
+# This script should be run as root.
+# Run as root, we are able to start the system registry deamon
+# and then change to the Cold Fusion userid to start the servers
+# Set during install
+
+CFHOME=/opt/coldfusion
+CFUSER=nobody
+
+# Sybase Open Client directory
+
+SYBASE=/work/sybclient11.1;export SYBASE
+
+#II_SYSTEM=/home
+# Set library search path
+# NOTE: Add your database client library directory to the FRONT 
+# of this list
+# Example: 
+# LD_LIBRARY_PATH=$SYBASE/lib:/usr/dt/lib:/lib:/usr/openwin/lib:
+# $CFHOME/lib
+
+LD_LIBRARY_PATH=$SYBASE/lib:/usr/dt/lib:/lib:/usr/openwin/lib:$CFHOME/
+lib
+
+# This is the list of variables that Cold Fusion will see
+# Add any special Database environment varaibles here
+
+VAR_LIST=""LD_LIBRARY_PATH CFHOME SYBASE ORACLE_HOME INFORMIXDIR 
+INFORMIXSERVER II_SYSTEM""
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0416.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0418.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

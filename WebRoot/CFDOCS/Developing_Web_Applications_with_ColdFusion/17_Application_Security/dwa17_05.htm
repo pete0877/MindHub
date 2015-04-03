@@ -1,0 +1,107 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Advanced Security in Application Pages</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 17	:&nbsp;&nbsp;Application Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025668"></a>
+ <H1>Using Advanced Security in Application Pages</H1>
+
+
+
+<p>Advanced security makes it easier for developers to enforce application security. After your administrator sets up the appropriate security contexts for your application, you can start using ColdFusion security tags and functions to authenticate users and see if they've been authorized for the part of the application they're trying to access.</p><p>This section describes how to use security tags and functions to authenticate users and provide or withhold resources according to the security context's rules. </p><ul>
+<li>Include CFAUTHENTICATE on any application page where you want to authenticate users -- that is, to make sure users are who they say they are. (You can also use CFAUTHENTICATE your application's <code>Application.cfm</code> file.) Pass the authentication information to subsequent pages where you want to test for authentication.
+
+<p>ColdFusion sets a cookie, CFAUTH, to contain authentication information. If 
+you choose not to use this cookie, you must check authentication for each 
+request.
+</p></li>
+<li>Use the IsAuthenticated function to check if the current user is authenticated.
+</li>
+<li>Use the IsAuthorized function to check if the user is authorized to access resources. This function lets developers offer or deny access to protected resources based on a user's authorization level, which is determined by already-established security contexts.
+</li>
+<li>Use the CFIMPERSONATE tag wherever you want to provide a greater level of access than is otherwise assigned to a particular user.
+</li>
+</ul>
+<p>Read the section <a href="../17_Application_Security/dwa17_10.htm#998190">&quot;Example of User Authentication and Authorization&quot;</a> to see code examples that show how these tags functions work in ColdFusion applications.</p><p>To learn about syntax and usage for the CFAUTHENTICATE and CFIMPERSONATE tags, and the IsAuthenticated and IsAuthorized functions, See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a>.</p><a name="1025850"></a>
+ 
+<H3>Encrypting application pages</H3>
+<p>For an added measure of security, you can encrypt strings in your applications using the Encrypt and Decrypt functions. See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for descriptions of these functions.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:02 -->
+</body>
+</html>

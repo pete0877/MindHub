@@ -1,0 +1,45 @@
+<style type="text/css"> .normal  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-size : 12px;
+ 	line-height : 16px;
+ }
+ 
+ a  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-size : 12px;
+ 	line-height : 16px;
+ }
+ 
+ b  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-style : normal;
+ font-weight :  bold; }
+ 
+ h2  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-style : normal;
+ 	font-size : 18px;
+ 	font-weight : bold;
+ }
+
+h3  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-style : normal;
+ 	font-size : 14px;
+ 	font-weight : bold;
+ margin-bottom :  0; }
+
+ p  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-size : 12px;
+ 	line-height : 16px;
+}
+ 
+li  {
+ 	font-family : Helvetica, sans-serif, Arial;
+ 	font-size : 12px;
+ 	line-height : 16px;
+ padding-top :  2px; 
+}
+
+ </style>

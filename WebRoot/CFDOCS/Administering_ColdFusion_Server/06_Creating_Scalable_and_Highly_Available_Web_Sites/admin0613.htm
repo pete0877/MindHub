@@ -1,0 +1,1264 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Administering UNIX-based Clusters</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0614.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1039395"></a>
+ <H1>Administering UNIX-based Clusters</H1>
+
+
+
+<p>The ClusterCATS Explorer was originally created for the Windows platform. Consequently, administrators in a UNIX environment either must obtain a Windows machine (NT, 98, or 95) to run the Windows-based ClusterCATS Explorer, or they can install and use the cross-platform Web-based Explorer together with ClusterCATS server utilities. </p><p>This section addresses the following topics:</p><ul>
+<a name="1039397"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1133296">&quot;Using the ClusterCATS Web Explorer&quot;</a>
+
+<a name="1128230"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1171709">&quot;Using the ClusterCATS server utilities&quot;</a>
+</li>
+</ul>
+<a name="1133296"></a>
+ 
+<H2>Using the ClusterCATS Web Explorer</H2>
+<p>ColdFusion Enterprise includes the ClusterCATS Web Explorer. It allows administrators in UNIX-only environments to use a graphical, cross-platform, Web-based utility to create, configure, and administer ClusterCATS clusters. You can only install the Web Explorer on UNIX servers.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Web Explorer, like its Windows counterpart, is quite robust and lets 
+you configure and administer clusters easily. However, it does not 
+contain the identical functionality provided by the Windows-based 
+ClusterCATS Explorer. The Web Explorer does not let you do the 
+following:
+</td>
+</tr>
+</table>
+</div>
+<br><ul>
+<a name="1151697"> </a>
+<li>install and run the Explorer on an NT server; it runs only from UNIX servers
+
+<a name="1203500"> </a>
+</li>
+<li>create and administer NT servers that have security enabled
+<a name="1186877"> </a>
+</li>
+<li>set or modify load thresholds via a <em>graphical</em> display
+<a name="1151702"> </a>
+</li>
+<li>monitor the amount of load hitting the server via a <em>graphical</em> display; the server's load statistics are only displayed textually on the Cluster Member List and Server Properties pages
+<a name="1151703"> </a>
+</li>
+<li>integrate ClusterCATS with Cisco LocalDirector
+<p>If you require any of these capabilities, you should obtain a Windows machine 
+and use the Windows-based ClusterCATS Explorer.
+</p></li>
+</ul>
+<p>This section explains how to perform the following tasks using the ClusterCATS Web Explorer:</p><ul>
+<a name="1151727"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1151767">&quot;Configuring the communications port on your Web server&quot;</a>
+
+<a name="1151807"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1151840">&quot;Opening the Web Explorer&quot;</a>
+<a name="1151728"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1152188">&quot;Creating clusters&quot;</a>
+<a name="1151729"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1152351">&quot;Adding cluster members&quot;</a>
+<a name="1152546"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1179352">&quot;Deleting cluster members&quot;</a>
+<a name="1151741"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1205050">&quot;Configuring server load thresholds&quot;</a>
+<a name="1151742"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1152839">&quot;Configuring the ColdFusion probe&quot;</a>
+<a name="1151743"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1153188">&quot;Configuring session-aware load balancing&quot;</a>
+<a name="1151747"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1171677">&quot;Integrating ClusterCATS with a load balancing product&quot;</a>
+<a name="1151744"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1153478">&quot;Configuring alarm notifications&quot;</a>
+<a name="1151745"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1153611">&quot;Configuring administration e-mail support&quot;</a>
+<a name="1151746"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1153884">&quot;Configuring administrator authentication&quot;</a>
+<a name="1151748"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1154048">&quot;Changing cluster members' state&quot;</a>
+<a name="1151749"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1154326">&quot;Restricting cluster members&quot;</a>
+</li>
+</ul>
+<a name="1151767"></a>
+ 
+<H3>Configuring the communications port on your Web server</H3>
+<p>Before you can open and use the ClusterCATS Web Explorer, you must ensure that a communications port is configured to listen for HTTP requests on the Netscape or Apache Web server on which you installed ClusterCATS. You can only access the ClusterCATS Web Explorer through the defined communications port on your Web server. You configure this user-defined port using the Netscape Enterprise Server Administrator -- not the ColdFusion Administrator.</p><p>By default, Netscape Enterprise Server will assign your Web server a random, six-digit communication port number. You can either use this assigned number or change it to something easier to remember, like port 81.</p><p>If you are not familiar with configuring your Web server's communications ports, see the Netscape Enterprise Server Administrator online Help for instructions.</p><a name="1151840"></a>
+ 
+<H3>Opening the Web Explorer</H3>
+<ol>
+</li>
+<li>Open a browser.
+
+</li>
+<li>Enter the following URL in the browser's address field and press Enter:
+
+<pre>http://hostname:12345/admin-serv/btweb/index.html
+</pre><p>where <code>hostname</code> is the name of the Web server on which you installed ClusterCATS 
+and <code>:12345</code> is the communication port number that the Web server has been 
+configured to listen for HTTP requests.
+</p><p>The Enter Network Password dialog box appears.
+</p><p><img src="../images/WE_NES_login.gif">
+
+
+
+</p></li>
+<li>Enter your user name and password in the appropriate fields and click OK.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The default user name and password is <code>admin</code>.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The ClusterCATS Web Explorer opens.
+</p><p><img src="../images/WE_default.gif">
+
+
+
+</p></li>
+</ol>
+<a name="1152188"></a>
+ 
+<H3>Creating clusters</H3>
+<ol>
+</li>
+<li>From within the open Web Explorer, click the Create New Cluster link.
+
+<p>The Create New Cluster page appears.
+</p><p><img src="../images/WE_create_new_cluster.gif">
+
+
+
+</p></li>
+<li>Enter a unique name for the cluster in the Cluster Name field.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Make your cluster names logically consistent with their purpose. For 
+example, Sales Web, Customer Support Web, and so on. 
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter the fully qualified host name (for example, doc.allaire.com) in the Web Server Name field for the first server you want to be a member of this cluster.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You cannot create an empty cluster; you must specify a Web server 
+that will be part of the cluster.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter <code>GoColdFusion</code> in the License Key field and click OK.
+
+<p>The cluster is created and appears in the Cluster Member List page.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+</ol>
+<a name="1152351"></a>
+ 
+<H3>Adding cluster members</H3>
+<ol>
+</li>
+<li>Open the ClusterCATS Web Explorer if it's not already opened.
+
+</li>
+<li>Click the Add Server link.
+
+<p>The Add Server page appears.
+</p><p><img src="../images/WE_addserver.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name (for example, doc.allaire.com) in the Web Server Name field.
+
+</li>
+<li>Click OK to add the cluster member to the existing cluster.
+
+</li>
+</ol>
+<a name="1179352"></a>
+ 
+<H3>Deleting cluster members</H3>
+<ol>
+</li>
+<li>Open the ClusterCATS Web Explorer if it's not already open.
+
+</li>
+<li>Click the Delete Server link.
+
+<p>The Delete Server page appears.
+</p><p><img src="../images/WE_deleteserver.gif">
+
+
+
+</p></li>
+<li>Select the cluster member you want to delete from the Web Server Name drop-down box and click OK.
+
+<p>A message appears telling you that the selected server has been deleted. 
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you delete the last cluster member in a cluster, the cluster is also 
+deleted and you are returned to the default page of the ClusterCATS 
+Web Explorer. If you want to delete a cluster, you must delete all of its 
+members.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<a name="1205050"></a>
+ 
+<H3>Configuring server load thresholds</H3>
+<p>For each cluster member, you configure a Peak load threshold and a Gradual Redirection threshold. The Peak load threshold represents the maximum load the server can handle before its performance degrades significantly or becomes unavailable. The Gradual Redirection threshold represents the point at which HTTP requests will begin to be redirected to other less loaded members in a cluster so that the server's performance does not degrade or become unavailable. </p><p>By default the Peak load threshold is 90% and the Gradual Redirection threshold is 70%. If you want to modify the threshold settings for one or more of your cluster members, perform the following procedures.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure Peak and Gradual Redirection thresholds:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of the server for which you want to configure load thresholds in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Server Attributes link.
+
+<p>The Connect to Server page appears.
+</p><p><img src="../images/WE_connectserver.gif">
+
+
+
+</p></li>
+<li>Select the server you want to connect to from the Web Server Name drop-down box and click OK.
+
+<p>The selected server's Properties page appears.
+</p><p><img src="../images/WE_server_properties.gif">
+
+
+
+</p></li>
+<li>Click the Administration link under Server Attributes.
+
+<p>The Server Administration page appears for the selected server.
+</p><p><img src="../images/WE_server_admin.gif">
+
+
+
+</p></li>
+<li>Enter new values in the Standard and Gradual Load Threshold fields and click OK.
+
+<p>If you want the server to be able to handle as much load as possible, set both 
+threshold values close to one another. However, if you want redirection to occur 
+well in advance of the server nearing its Peak threshold, set the values farther 
+apart. To achieve the desired effect described in the latter scenario, it's best to set a 
+differential of at least 10% between the two threshold values.
+</p></li>
+</ol>
+<a name="1152839"></a>
+ 
+<H3>Configuring the ColdFusion probe</H3>
+<p>ClusterCATS load balances and provides failover support for your ColdFusion applications in two ways. First, it automatically interprets and reacts to the load metric that the ColdFusion Server generates. Second, ClusterCATS lets you create ColdFusion application probes that periodically test the health and operation of the sites that the ColdFusion Server processes.</p><p>The probe is a high availability feature that verifies that the ColdFusion Server is running properly on your clustered servers. It periodically tests a specific ColdFusion URL over periodic intervals and verifies its validity against a user-defined string that is contained in the returned page.</p><p>If the validation test succeeds, inbound HTTP requests will continue to be sent to the server for which a probe exists. However, if the test fails (the URL fails, times out, or does not return the user-specified string in the page accessed), ClusterCATS restricts the server and redirects requests to other available servers in the cluster. The restricted server will become available as soon as the probe returns a valid value.</p><p>Additionally, if the ColdFusion Server ever hangs or fails, ClusterCATS automatically attempts to recover the failed service. Once the ColdFusion service is recovered, the probe will automatically restart the ColdFusion Server and send HTTP traffic to the server.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure the ColdFusion probe:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of the server for which you want to configure the ColdFusion probe in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Server Attributes link.
+
+<p>The Connect to Server page appears.
+</p><p><img src="../images/WE_connectserver.gif">
+
+
+
+</p></li>
+<li>Select the server you want to connect to from the Web Server Name drop-down box and click OK.
+
+<p>The selected server's Properties page appears.
+</p><p><img src="../images/WE_server_properties.gif">
+
+
+
+</p></li>
+<li>Click the ColdFusion Probe link.
+
+<p>The ColdFusion Application Probe page appears.
+</p><p><img src="../images/WE_CFprobe.gif">
+
+
+
+</p></li>
+<li>Leave the Web Server, Pathname, and Working Directory fields as they are unless you installed ColdFusion to a directory other than the default installation directory.
+
+</li>
+<li>In the Startup Parameters field, enter the actual URL of the site you want the probe to access (cabernet.allaireqa.com in the screen above) followed by a text string that appears on a page within the site you are probing (cfprobe.cfm in the screen above).
+
+</li>
+<li>Also in the Startup Parameter field, do not modify the RESTART explicit parameter if you want the probe to automatically restart the ColdFusion Server on detecting a failure. However, remove it if you do not want ClusterCATS to be able to automatically restart the ColdFusion Server upon detecting a failure.
+
+</li>
+<li>If you want longer intervals for how often the probe checks the ColdFusion Server and for how much time can pass without a response from the ColdFusion Server before a failure is registered, change the Timeout and Frequency values to longer durations.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Don't set the Timeout and Frequency interval values too low (below 
+60 seconds) because if the intervals are extremely narrow, they may 
+cause the ColdFusion Server to reboot inadvertently (due to network 
+congestion, for example) rather than detecting an actual failure on 
+the ColdFusion Server. Allaire recommends you set your Timeout 
+and Frequency intervals to 120 seconds.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Click Register to create the probe.
+
+</li>
+</ol>
+<a name="1153188"></a>
+ 
+<H3>Configuring session-aware load balancing</H3>
+<p>Sometimes referred to as a &quot;sticky&quot; session, session-aware load balancing guarantees that users won't get bumped from the server on which they started their session until the session is complete, regardless of the load thresholds that have been defined for the affected server.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Session-aware load balancing may not work if you've used absolute 
+hyperlinks in an applicati. Absolute hyperlinks route the HTTP 
+request back to the cluster entry point and redirect requests according to 
+the current load threshold without regard to the state of the requesting 
+client. To avoid this inadvertent loss of state, be sure to use only relative 
+linking in your applicati.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure session-aware load balancing:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of the server for which you want to configure session-aware load balancing in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Administration link under Cluster Attributes.
+
+<p>The Cluster Administration page appears.
+</p><p><img src="../images/WE_cluster_admin.gif">
+
+
+
+</p></li>
+<li>Enable the Session-Aware Load Balancing check box and click OK.
+
+<p>Session-aware load balancing is now enabled for the selected cluster.
+</p></li>
+</ol>
+<a name="1171677"></a>
+ 
+<H3>Integrating ClusterCATS with a load balancing product</H3>
+<p>You can configure ClusterCATS to work in conjunction with a third-party hardware load balancing device or load balancing software product to provide more comprehensive load balancing and failover support for your server clusters.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You cannot integrate ClusterCATS with Cisco LocalDirector using the 
+Web Explorer. This capability is only available in the Windows-based 
+ClusterCATS Explorer.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To integrate your clusters with a load balancing product:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of the server you want to integrate with another load balancing product in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Administration link under Cluster Attributes.
+
+<p>The Cluster Administration page appears.
+</p><p><img src="../images/WE_cluster_admin.gif">
+
+
+
+</p></li>
+<li>In the Load Balancing Product field, enter the URL of the Web site for which the load balancing product has been set up to manage HTTP traffic.
+
+</li>
+<li>Click OK.
+
+<p>ClusterCATS and the load balancing device will now work together to manage 
+HTTP requests being sent to your servers.
+</p></li>
+</ol>
+<a name="1153478"></a>
+ 
+<H3>Configuring alarm notifications</H3>
+<p>The ClusterCATS alarm notification feature provides you with instant feedback about critical events that take place within a cluster. Once the event triggers the alarm, you are notified by e-mail. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure administrator alarm notifications:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of a server for which you want to configure administrator alarm notifications in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Alarm Notification link.
+
+<p>The Alarm Notification page appears.
+</p><p><img src="../images/WE_alarm_notify.gif">
+
+
+
+</p></li>
+<li>Enter the e-mail address of the person you want to be notified about the occurrence of an event in that event's corresponding field.
+
+<p>If you want multiple people to receive e-mail notification about the same event, 
+separate each e-mail address with a comma.
+</p></li>
+<li>Enter the name of the default SMTP mail server to which your mail is delivered in the Default SMTP Host field and click OK.
+
+<p>The e-mail addresses you specified will now receive e-mail notification if the 
+corresponding events occur.
+</p></li>
+</ol>
+<a name="1153611"></a>
+ 
+<H3>Configuring administration e-mail support</H3>
+<p>The ClusterCATS e-mail support functionality makes it possible for you to receive vital statistics about your cluster using designated e-mail accounts in your organization. There are two types of administration e-mail support that you can set up: Report e-mail and Support e-mail.</p><p>Report e-mail lets you know each day how your server clusters are functioning. It reports on the following information:</p><ul>
+<a name="1155051"> </a>
+<li>Cluster name and IP address of each server in the cluster
+
+<a name="1155052"> </a>
+</li>
+<li>Files -- total number of files in the Web servers root directory
+<a name="1155053"> </a>
+</li>
+<li>Disk space -- total amount of disk space used and remaining on the system drive that contains the Web server's root directory
+<a name="1155054"> </a>
+</li>
+<li>Log files -- size of log files
+</li>
+</ul>
+<p>Support e-mail sends an automatic e-mail nightly to Allaire's Technical Support team that contains basic configuration information about your cluster. This information enables Allaire to provide optimal support by understanding your environment when you call a Technical Support representative. Support e-mail can contain the following information:</p><ul>
+<a name="1155058"> </a>
+<li>Cluster name and the number of servers it contains
+
+<a name="1155059"> </a>
+</li>
+<li>Statistics for each server, including failover, redirection, and database statistics.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure administrator Report and Support e-mail:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of a server for which you want to configure administrator e-mail support in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Support link.
+
+<p>The Cluster Support page appears.
+</p><p><img src="../images/WE_cluster_support.gif">
+
+
+
+</p></li>
+<li>Enter in the Support E-mail field the e-mail address of the person at your organization that should receive a copy of the e-mail that is sent nightly to Allaire's Technical Support.
+
+<p>If more than one person should receive the e-mail, separate the e-mail addresses 
+with commas.
+</p></li>
+<li>Enter in the Report e-mail field the e-mail address of the person at your organization that should receive daily reports about your clusters.
+
+<p>Again, if more than one person should receive the e-mail, separate the e-mail 
+addresses with commas.
+</p></li>
+<li>Enter the name of the mail server through which mail is delivered in the SMTP Gateway field and click OK.
+
+<p>The ClusterCATS Report and Support e-mail options are enabled.
+</p></li>
+</ol>
+<a name="1153884"></a>
+ 
+<H3>Configuring administrator authentication</H3>
+<p>Using the Web Explorer, you can configure two administration security modes, one of which keeps unauthorized users from accessing a cluster and its content. When authentication is enabled for a specific cluster, only authorized users will be able to access and administer that cluster using their ClusterCATS Web Explorer.</p><p>If you are going to use the Local User Authentication mode, you must first create user accounts on each server in the cluster for the individuals you want to be able to administer the cluster members using the ClusterCATS Web Explorer.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure authentication modes for your clusters:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of the server for which you want to configure administrator authentication in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Authentication link.
+
+<p>The Cluster Authentication page appears.
+</p><p><img src="../images/WE_cluster_authenticate.gif">
+
+
+
+</p></li>
+<li>Select either Disabled or Local User from the Authentication drop-down box.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Disabled authentication mode is the default setting. It provides no 
+security challenge and allows anyone to access the server using the 
+Web Explorer. Local User authentication lets users who have 
+accounts on the servers access and administer those servers using 
+the Web Explorer.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>If using Local User authentication, enter a valid user name and password and click OK.
+
+<p>ClusterCATS requires you to enter a valid user name and password after selecting 
+the type of authentication you are using so that you don't inadvertently lock 
+yourself out of the cluster.
+</p></li>
+</ol>
+<a name="1154048"></a>
+ 
+<H3>Changing cluster members' state</H3>
+<p>All cluster members are added to a cluster in Active state by default. In Active state, ClusterCATS provides availability and failover services to your Web resources. From time to time, you may want to turn off these load balancing and failover services to help you troubleshoot problems or when you need to add additional servers to the cluster. To do this, you can change the cluster's state from Active to Passive. In the Passive state, clusters do not actively manage load nor protect against resource failures. Any HTTP requests sent or directed to a server that is in the Passive state are passed directly to that server without any ClusterCATS processing.</p><p>After you have added and configured all members that will be in the cluster, you need to change each server's state from Passive to Active.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change a cluster member's state from Active to Passive:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of the server that you want to activate in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Server Attributes link under Other.
+
+<p>The Connect to Server page appears.
+</p><p><img src="../images/WE_connectserver.gif">
+
+
+
+</p></li>
+<li>Select the server you want to connect to from the Web Server Name drop-down box and click OK.
+
+<p>The selected server's Properties page appears.
+</p><p><img src="../images/WE_server_properties.gif">
+
+
+
+</p></li>
+<li>Click the Administration link.
+
+<p>The Server Administration page appears for the selected server.
+</p><p><img src="../images/WE_server_admin.gif">
+
+
+
+</p></li>
+<li>Select Active or Passive from the State drop-down box and click OK.
+
+<p>If you selected Passive, the ClusterCATS load balancing and failover capabilities 
+are now disabled for the selected server. If you selected Active, ClusterCATS will 
+now actively monitor and load balance HTTP requests across the cluster.
+</p></li>
+</ol>
+<a name="1154326"></a>
+ 
+<H3>Restricting cluster members</H3>
+<p>ClusterCATS lets you restrict a cluster member from receiving any HTTP requests by enabling a configuration option. You may want to do this for a variety of reasons, including server maintenance, server software updates, and as a load management method.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To restrict an active cluster member from receiving HTTP requests:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open ClusterCATS Web Explorer if it's not already open.
+
+
+</li>
+<li>Click the Show Cluster link.
+
+<p>The Show Cluster page appears.
+</p><p><img src="../images/WE_show_cluster.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified host name of a server that you want to restrict in the Web Server Name field and click OK.
+
+<p>The Cluster Member List page appears.
+</p><p><img src="../images/WE_memberlist.gif">
+
+
+
+</p></li>
+<li>Click the Server Attributes link under Other.
+
+<p>The Connect to Server page appears.
+</p><p><img src="../images/WE_connectserver.gif">
+
+
+
+</p></li>
+<li>Select the server you want to connect to from the Web Server Name drop-down box and click OK.
+
+<p>The selected server's Properties page appears.
+</p><p><img src="../images/WE_server_properties.gif">
+
+
+
+</p></li>
+<li>Click the Administration link.
+
+<p>The Server Administration page appears for the selected server.
+</p><p><img src="../images/WE_server_admin.gif">
+
+
+
+</p></li>
+<li>Select Restricted from the Restriction Status drop-down box and click OK.
+
+<p>The selected server will no longer participate in the cluster and will not receive 
+HTTP requests until you change its status back to Unrestricted.
+</p></li>
+</ol>
+<a name="1171709"></a>
+ 
+<H2>Using the ClusterCATS server utilities</H2>
+<p>ColdFusion Enterprise ships with the following server utilities for configuring, administering, and troubleshooting your ClusterCATS clusters:</p><ul>
+<a name="1133353"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039412">&quot;btadmin utility&quot;</a>
+
+<a name="1133358"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039514">&quot;bt-start and bt-stop utilities&quot;</a>
+<a name="1133369"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039525">&quot;btcfgchk utility&quot;</a>
+<a name="1133375"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039601">&quot;hostinfo utility&quot;</a>
+<a name="1133376"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039618">&quot;sniff utility&quot;</a>
+</li>
+</ul>
+<p>These server utilities work on both Windows and UNIX platforms.</p><a name="1039412"></a>
+ 
+<H3>btadmin utility</H3>
+<p>You can use the btadmin utility to:</p><ul>
+<a name="1039414"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039418">&quot;Start and stop daemons&quot;</a>
+
+<a name="1141264"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1141221">&quot;Configure ClusterCATS options&quot;</a>
+<a name="1039415"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039447">&quot;Enable and disable options&quot;</a>
+<a name="1039417"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1133856">&quot;Show and reset clusters&quot;</a>
+<a name="1133448"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1134003">&quot;Display btadmin online help&quot;</a>
+</li>
+</ul>
+<a name="1039418"></a>
+<h4> Start and stop daemons</h4>
+<p>Use the following command-line syntax for starting and stopping daemons:</p><pre>btadmin [start/stop/restart <em>daemon</em>] 
+    [configure <em>option</em>]
+</pre><p>You can start and stop the following daemons with btadmin:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Starting and Stopping daemons with btadmin</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Daemon</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+appmgr
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Application manager daemon
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+failover
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Failover daemon
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ns-httpd
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+HTTP daemon
+</td></tr>
+
+</table>
+
+</div>
+</p><p>Following are examples of how you start and stop daemon processes with the btadmin utility:</p><pre>btadmin start appmgr
+btadmin stop failover
+btadmin restart ns-httpd
+</pre><a name="1141221"></a>
+<h4> Configure ClusterCATS options</h4>
+<p>Use the following command-line syntax for configuring ClusterCATS options:</p><pre>btadmin [configure <em>option</em>]
+</pre><p>You can configure the following ClusterCATS options using the btadmin utility:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Configuring Bright Tiger options with btadmin</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+btcats
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Bright Tiger ClusterCATS server
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+failover
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Server failover (ipaliasd)
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+load
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Load Balancing preference
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+nsroot
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Configure new Netscape Server root directory (used when Netscape Server is moved).
+</td></tr>
+
+</table>
+
+</div>
+</p><p>The following example shows you how to configure a ClusterCATS option using the btadmin utility:</p><pre>btadmin configure btcats
+</pre><a name="1039447"></a>
+<h4> Enable and disable options</h4>
+<p>Use the following command-line syntax for enabling and disabling ClusterCATS options:</p><p><code>btadmin [enable/disable option]</code></p><p>You can enable or disable the following ClusterCATS options with btadmin: </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Enabling and Disabling options with btadmin</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+btcats
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Bright Tiger ClusterCATS server
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+failover
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Server failover (ipaliasd)
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ns-httpd
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+HTTP daemon
+</td></tr>
+
+</table>
+
+</div>
+</p><p>Below are examples of how you enable and disable ClusterCATS options with the btadmin utility:</p><pre>btadmin enable btcats
+btadmin disable failover
+</pre><a name="1133856"></a>
+<h4> Show and reset clusters</h4>
+<p>You can display the ClusterCATS configuration settings currently enabled using the btadmin utility. For example:</p><pre>btadmin show
+</pre><p>You can also reinitialize your cluster configuration settings on the current server using the btadmin utility:</p><pre>btadmin reset
+</pre><a name="1134003"></a>
+<h4> Display btadmin online help</h4>
+<p>To get help about the btadmin utility's features, use the following command-line syntax:</p><pre>btadmin help
+</pre><a name="1039514"></a>
+ 
+<H3>bt-start and bt-stop utilities</H3>
+<p>The bt-start-server and bt-stop-server utilities start and stop a Netscape Enterprise or Apache Web server. </p><p>Use the following syntax to start and stop a Netscape or Apache Web server:</p><pre>bt-start-server
+bt-stop-server [-f]
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Use the -f option to stop the Web server without being prompted for 
+confirmation. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1039525"></a>
+ 
+<H3>btcfgchk utility</H3>
+<p>The btcfgchk utility is a network management tool that displays information about your IP and DNS configurations. Use it to analyze and troubleshoot your servers and network.</p><p>To run the btcfgchk utility, enter the following command-line syntax:</p><pre>/&lt;bt-installdir&gt;/program/btcfgchk
+</pre><p>The following sample output shows how btcfgchk displays configuration information for a system with one network adapter and two IP addresses:</p><pre>btcfgchk FQHN is hartford.brighttiger.com 
+El90x1 [PRIMARY]:
+
+hartford.brighttiger.com        192.168.0.31
+255.255.255.0
+hartford.brighttiger.com
+
+hartford1.brighttiger.com       192.168.0.32
+255.255.255.0
+hartford1.brighttiger.com
+</pre><a name="1039539"></a>
+<h4> btcfgchk DNS error reporting</h4>
+<p>The btcfgchk utility reports on DNS configuration problems. ClusterCATS requires that your DNS be configured with correct forward and reverse mappings. A forward mapping translates the host name to an IP address. Conversely, a reverse mapping translates an IP address to its host name. ClusterCATS expects the mapping to be one-to-one (one host name to one IP Address).</p><p></p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>btcfgchk DNS error reporting&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Error</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Explanation</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Host name does not map to a single IP address 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The main host name for this system is not mapping to one IP address. Possible problems are:
+<ul>
+<li>The main host name of the system could not be resolved to any IP address. 
+
+
+Your fully qualified host name is the combination of the host name and the domain name. Make sure no typos appear in these names in your DNS definitions, both on the DNS server and on each cluster member's DNS definition. 
+
+To verify that the host name is correct, enter the following command at a command-line prompt:
+</li>
+</ul>
+<PRE>nslookup &lt;fully qualified hostname&gt;
+</PRE><ul>
+<li>The host name is a round-robin DNS name. Run the ClusterCATS hostinfo utility to see if more than one IP address is configured for the domain.
+
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+No adapter associated with host name found 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+btcfgchk is unable to find the primary network adapter. The primary network adapter should be the network adapter containing the IP address of the main host name.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Duplicate Primary Adapter 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+btcfgchk found two network adapters with the same IP address. Use the <code>ifconfig -a </code>command to see information about your adapter.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Name lookup for &lt;hostname&gt; failed 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+btcfgchk was not able to determine the IP address for the specified host. Your DNS server may be down. Use nslookup to see if it can contact your DNS server.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+&lt;IP address 1&gt; reverse maps to &lt;hostname&gt; which then forward maps to &lt;IP address 2&gt; 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+btcfgchk did a lookup on &lt;IP address 1&gt; and found a host name to which it is mapped. It then attempted to verify that this host name maps back to the IP address specified, and the verification failed. 
+
+There is likely an issue with your DNS configuration. Use the ClusterCATS hostinfo utility to gather more information on how the names and IP address are configured.
+<PRE>hostinfo &lt;IP address 1&gt;
+hostinfo &lt;hostname returned from initial hostinfo&gt;
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Error looking up &lt;hostname&gt; by name 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+ClusterCATS could not resolve the given host name to an IP address. Use nslookup to look up the host name in DNS.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Host name a round-robin name, or does not map to configured IP address 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The host name maps to more than one IP address (round-robin DNS) or maps to an IP address not found on this machine. Use the ClusterCATS hostinfo utility to check the host name DNS configuration:
+<PRE>hostinfo &lt;hostname&gt;
+
+If you see more than one IP address listed, then round-robin DNS is being used. If you see one IP address, check to see if that address is configured on this machine. You can use the <code>ipconfig/all</code> command to view all IP addresses on this machine.
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Host name not found in any reverse mapping
+
+Probable forward mapping misconfiguration for &lt;hostname&gt;
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+For each IP address found on the system, an attempt was made to find the corresponding host name. None of the IP addresses on the system reverse mapped to the system's main fully qualified host name. The problem is either:
+<ul>
+<li>The host name maps to the wrong IP address.
+
+</li>
+<li>The IP address that the host name maps to does not have an entry in the DNS table for the reverse map. Consequently, nslookup does not return the hostname.
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Probable round robin configuration for &lt;hostname&gt;
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The host name does not map to a single IP address. Use the hostinfo tool to determine to which IP address it maps.
+</td></tr>
+
+</table>
+
+</div>
+<strong></strong></p><a name="1039601"></a>
+ 
+<H3>hostinfo utility</H3>
+<p>The hostinfo utility is a network management tool that displays information about a specified domain name. Use it to analyze and troubleshoot problems you are having with DNS mappings to a particular domain. </p><p>To run the hostinfo utility, enter the following command-line syntax:</p><pre>#cd &lt;btinstall-dir&gt;/program/
+</pre><p>Set the default directory to the Programs Directory under Bright Tiger.</p><pre>#&lt;btinstall-dir&gt;/program&gt; hostinfo <em>domain_name</em> 
+</pre><p>The following sample output from the hostinfo utility provides information about a set of round-robin DNS host names.</p><pre>##&lt;btinstall-dir&gt;/program&gt; hostinfo www.brighttiger.com
+Information for host 'www.brighttiger.com':
+
+FQHN: www.brighttiger.com
+Primary Address: 0.0.0.0
+Domain: .brighttiger.com
+Aliases: btWeb1.brighttiger.com 
+    btWeb2.brighttiger.com
+    www.brighttiger.com 
+Addresses: 444.87.27.76 444.87.27.77
+</pre><p>The hostinfo utility displays the domain name, the primary IP address, and any IP aliases. If the primary IP address is set to 0.0.0.0, the domain is using round-robin DNS. The round robin names will appear under the Alias section of the DNS table and the round-robin addresses appear under the Addresses section.</p><a name="1039618"></a>
+ 
+<H3>sniff utility</H3>
+<p>The sniff utility is a network management tool that displays the packets that a specific Network Interface Card (NIC) is hearing. </p><p>To run the sniff utility, enter the following command-line syntax:</p><pre>#/&lt;btinstall-dir&gt;/program/sniff
+</pre><p>Below is sample output from the sniff utility:</p><pre>Mail Test Environment Variables:
+   BTMailHost,     BTSender,       BTRecipients,   BTSubject,    BTText
+ Packet Test Environment Variables:
+   BTPort,         BTMcastTTL,     BTUcastCount,   BTBcastCount, 
+BTMcastCount
+   BTSendInterval, BTDoLocalBind,  BTUcastAddress, BTBcastAddress
+   BTMcastAddress, BTLocalAddress, BTSendSize,     BTRecvSize
+   BTConsole,      BTLogFile,      BTSystem
+
+ Press keys at run-time:
+  d - dump sniff configuration information
+  H - display this and more help
+  h - display this help
+  l - run load balance test thread
+  m - run mail test thread
+  p - toggle packet dump display
+  q, &lt;ESC&gt;, &lt;ENTER&gt; - quit all active threads and exit
+  r - run UDP listener thread
+  s - run packet test thread
+  x - execute system command
+
+Use the "r" command within sniff to listen to intra-cluster packets:
+Listen Thread thread running on 'any' interface...
+
+[ SrvHello    @ Tue Jun 30 17:01:57 1998] 192.168.0.213
+boston1.brighttiger.com          (192.168.0.118  ) (255.255.255.0  )
+sales_automation   Mcast V1.2    Available   2/90
+[[ SrvHello    @ Tue Jun 30 17:01:57 1998] 192.168.0.213
+somewhere.brighttiger.com        (192.168.0.213  ) (255.255.255.0  )<strong>
+</strong></pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0614.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

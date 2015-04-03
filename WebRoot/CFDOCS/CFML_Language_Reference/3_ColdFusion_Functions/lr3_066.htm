@@ -1,0 +1,143 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CreateTimeSpan</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_065.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_067.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997810"></a>
+ <H1>CreateTimeSpan</H1>
+
+
+
+<p>Creates a date/time object for adding and subtracting other date/time objects.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a>, <a href="../3_ColdFusion_Functions/lr3_068.htm#1642959">DateAdd</a>, and <a href="../3_ColdFusion_Functions/lr3_070.htm#1649018">DateConvert</a>.
+</p>
+
+<a name="997813"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>CreateTimeSpan</strong>(<em>days</em>, <em>hours</em>, <em>minutes</em>, <em>seconds</em>)
+</PRE><a name="997815"> </a>
+<h5 class="param"> days</h5>
+<p class="param">Number representing the number of days.</p><a name="997816"> </a>
+<h5 class="param"> hours</h5>
+<p class="param">Number representing the number of hours.</p><a name="997817"> </a>
+<h5 class="param"> minutes</h5>
+<p class="param">Number representing the number of minutes.</p><a name="997818"> </a>
+<h5 class="param"> seconds</h5>
+<p class="param">Number representing the number of seconds.</p><a name="997819"></a>
+ 
+<H3>Usage</H3>
+<p>The CreateTimeSpan function creates a special date/time object that should only be used to add and subtract from other date/time objects or with the <a href="../2_ColdFusion_Tags/lr2_073.htm#1019524">CFQUERY</a> CACHEDWITHIN attribute.</p><a name="1800179"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="CreateTimeSpan
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to CreateTimeSpan ---&gt;
+...
+&lt;CFIF IsDefined("FORM.year")&gt;
+
+&lt;!--- set variables for the date and for the time span ---&gt;
+&lt;CFSET yourDate = CreateDateTime(FORM.year, FORM.month, FORM.day,
+    FORM.hour, FORM.minute, FORM.second)&gt;
+&lt;CFSET yourTimeSpan = CreateTimeSpan(FORM.tsday,
+    FORM.tshour, FORM.tsminute, FORM.tssecond)&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;P&gt;Your original date value: #yourDate#
+&lt;P&gt;The date of your timespan, formatted:
+
+&lt;!--- output the results of the form ---&gt;
+&lt;P&gt;#yourTimeSpan# days &lt;CFIF yourTimeSpan LTE 0&gt;before
+  your&lt;CFELSE&gt;after your&lt;/CFIF&gt; original date:
+&lt;BR&gt;#DateFormat(yourDate + yourTimeSpan)#
+ #TimeFormat(yourDate + yourTimeSpan)#
+&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+...
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="CreateTimeSpan
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_065.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_067.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

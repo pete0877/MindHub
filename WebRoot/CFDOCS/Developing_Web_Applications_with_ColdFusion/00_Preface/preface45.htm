@@ -1,0 +1,110 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Welcome to ColdFusion</title>
+</head>
+
+<body>
+
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../contents.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/preface452.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+ 
+
+<br>
+<a name="1014852"></a>
+<H1>Preface 	<br>
+Welcome to ColdFusion</H1>
+
+<p>This manual describes the process of developing Web applications using ColdFusion. In the first six chapters, you can follow the instructions presented to learn how to create basic ColdFusion applications. Then, chapters seven through 17 cover various topics of interest in enhancing your applications. Finally, chapters 18 through 21 explain how to extend ColdFusion's capabilities.</p><p>Because of the power and flexibility of ColdFusion, you can create many different types of Web applications of varying complexity. As you become more familiar with the material presented in this manual, and begin to develop your own applications, you will want to refer to the <em>CFML Language Reference</em> for details about various tags and functions. </p><a name="1013171"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../00_Preface/preface452.htm#1007995">Intended Audience</a>
+
+</li>
+<li><a href="../00_Preface/preface453.htm#1015613">Welcome to the ColdFusion 4.5 Web Application Server</a>
+</li>
+<li><a href="../00_Preface/preface454.htm#1015619">Products and System Requirements</a>
+</li>
+<li><a href="../00_Preface/preface455.htm#1015650">New Features in ColdFusion 4.5</a>
+</li>
+<li><a href="../00_Preface/preface456.htm#1015698">Developer Resources</a>
+</li>
+<li><a href="../00_Preface/preface457.htm#1015741">About ColdFusion Documentation</a>
+</li>
+<li><a href="../00_Preface/preface458.htm#1015798">Getting Answers</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../contents.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/preface452.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:39 -->
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Querying a Database</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="996797"></a>
+<H1>Chapter 3	<br>
+Querying a Database</H1>
+
+<p>This chapter describes how to retrieve data from a database, work with query data, and enable debugging in ColdFusion applications. You will learn how to use the ColdFusion Administrator to set up a data source and enable debugging, use the CFQUERY tag to query a data source, and use the CFOUTPUT tag to output the query results to a Web page.</p><a name="1011921"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../03_Querying_a_Database/dwa03_02.htm#1011983">Publishing Dynamic Data</a>
+
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_03.htm#1016701">Database Basics</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_04.htm#1016669">Understanding Data Sources</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_05.htm#1012022">Adding Data Sources</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_06.htm#1012062">Retrieving Data</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_07.htm#1012095">Writing SQL</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_08.htm#1018933">Building Queries</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_09.htm#1012262">Outputting Query Data</a>
+</li>
+<li><a href="../03_Querying_a_Database/dwa03_10.htm#1021042">Getting Information About Query Results</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

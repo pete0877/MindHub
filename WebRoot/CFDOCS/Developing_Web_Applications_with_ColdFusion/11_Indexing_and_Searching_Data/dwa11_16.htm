@@ -1,0 +1,151 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Managing Collections</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1216886"></a>
+ <H1>Managing Collections</H1>
+
+
+
+<p>As with any data source, the maintenance requirements of a Verity collection are dictated by the amount, frequency, and type of changes that occur in the records. You can run maintenance routines directly from either the CFCOLLECTION or CFINDEX tags or via the Administrator Verity page. For more information on this topic, see the Allaire Knowledge Base article, "Maintaining Collections" (ID# 1080) on our Web site at <a href="http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm">http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm</a>.</p><p>The easiest way to perform collection management tasks is to create a ColdFusion template that runs the operations, then add the task on the Administrator Scheduler page. The page presents a wide range of scheduling options.</p><a name="1216889"></a>
+ 
+<H2>Maintenance options</H2>
+<p>Choose an option based on the following function descriptions.</p><ul>
+<li><strong>Repair</strong> -- Runs internal Verity routines to fix corrupted records. If you suspect a collection has become corrupted, it is probably safest to re-populate it.
+
+</li>
+<li><strong>Optimize</strong> -- Packs the indexed data for better performance. This is similar to database optimization. This procedure can be used as part of routine maintenance. The Optimize action is deprecated for CFINDEX except to maintain legacy code; the CFCOLLECTION tag is recommended instead. For more information on this command, see the Allaire Knowledge Base article, "How To Optimize Your Verity Collection" (ID# 416) on our Web site at <a href="http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm">http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm</a>.
+</li>
+<li><strong>Purge</strong> -- Removes all data from a collection.
+</li>
+<li><strong>Delete</strong> (when used as a CFINDEX ACTION) -- Deletes the specified KEY value, or comma-separated values, from the collection.
+</li>
+<li><strong>Delete</strong> (when used on the Administrator Verity page or in CFCOLLECTION) -- Deletes the entire collection.
+</li>
+<li><strong>Update</strong> -- Re-populates the collection with changed records and new records and adds a key if one is not part of the collection. This operation does not delete records that have been deleted from the data source. To update a collection from the Administrator Verity main page, select a collection on the list, click Index, then click Update on the index page.
+</li>
+<li><strong>Refresh</strong> (CFINDEX ACTION only) -- Deletes all data and re-populates the collection.
+</li>
+</ul>
+<a name="1216898"></a>
+ 
+<H2>Securing a collection</H2>
+<p>A couple of possible scenarios for restricting access to a Verity collection are:</p><ul>
+<li>The ColdFusion Administrator may need to specify developer access to collections.
+
+</li>
+<li>A public site may need to limit user access to collections.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To restrict access to a collection, follow these steps:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Advanced Server Security page of the ColdFusion Administrator and click the Use Advanced Server Security box.
+
+
+</li>
+<li>Click the Security Contexts button.
+
+</li>
+<li>Enter a name for the secured collection and click Add.
+
+</li>
+<li>Optionally enter a description for the secured collection.
+
+</li>
+<li>Click Collections on the Enable Security for Resource Types list.
+
+</li>
+<li>Click Apply.
+
+</li>
+</ol>
+<p>You can then develop an appropriate authentication interface to allow access to the secured collection. </p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

@@ -1,0 +1,163 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListContains</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_143.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_145.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999698"></a>
+ <H1>ListContains</H1>
+
+
+
+<p>Returns the index of the first item that contains the specified substring. The search is case-sensitive. If the substring is not found in any of the list items, it returns zero (0).</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_145.htm#999748">ListContainsNoCase</a> and <a href="../3_ColdFusion_Functions/lr3_147.htm#999824">ListFind</a>.
+</p>
+
+<a name="999701"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListContains</strong>(<em>list</em>, <em>substring</em> [, <em>delimiters</em> ])
+</PRE><a name="999703"> </a>
+<h5 class="param"> list</h5>
+<p class="param">List being searched.</p><a name="999704"> </a>
+<h5 class="param"> substring</h5>
+<p class="param">String being sought in elements of list.</p><a name="999705"> </a>
+<h5 class="param"> delimiters</h5>
+<p class="param">Set of delimiters used in list.</p><a name="1803784"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListContains
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---------------------------------------------------------------------- 
+This example shows differences between ListContains and ListFind
+-----------------------------------------------------------------------&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;ListContains&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;!----------------------------------------------------------------------
+Create a list composed of the items one, two, three.
+-----------------------------------------------------------------------&gt;
+&lt;CFSET aList="one"&gt;
+&lt;CFSET aList=ListAppend(aList, "two")&gt;
+&lt;CFSET aList=ListAppend(aList, "three")&gt;
+&lt;P&gt;
+Here is the list: &lt;B&gt;&lt;CFOUTPUT&gt;#aList#&lt;/CFOUTPUT&gt;&lt;/B&gt;
+&lt;P&gt;
+ListContains checks for the existence of a substring "wo" in the items in 
+the list.
+&lt;BR&gt;ListContains&lt;BR&gt;
+&lt;CFOUTPUT&gt;
+The substring "wo" is in &lt;B&gt;Item #ListContains(aList, "wo")#&lt;/B&gt; of the 
+list.
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;
+ListFind cannot check for substrings within items; therefore, in the 
+following code where ListFind in used in place of ListContains, it will 
+not find the substring "wo" in the list.
+&lt;BR&gt;ListFind&lt;BR&gt;
+&lt;CFOUTPUT&gt;
+The substring "wo" is in &lt;b&gt;Item #ListFind(aList, "wo")#&lt;/b&gt; of the list.
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;
+However, if you specify the entire string &lt;B&gt;two&lt;/B&gt;, both ListContains 
+and ListFind will find it in the second item in the list.
+&lt;BR&gt;ListContains&lt;BR&gt;
+&lt;CFOUTPUT&gt;
+The string "two" is in &lt;b&gt;Item #ListContains(aList, "two")#&lt;/b&gt; of the 
+list.
+&lt;/CFOUTPUT&gt;
+&lt;BR&gt;ListFind&lt;BR&gt;
+&lt;CFOUTPUT&gt;
+The string "two" is in &lt;b&gt;Item #ListFind(aList, "two")#&lt;/b&gt; of the list.
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListContains
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_143.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_145.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

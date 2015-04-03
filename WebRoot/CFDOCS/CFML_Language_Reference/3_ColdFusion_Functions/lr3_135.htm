@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>IsQuery</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_134.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_136.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999512"></a>
+ <H1>IsQuery</H1>
+
+
+
+<p>Returns TRUE if<em> value </em>is a query.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_193.htm#1679723">QueryAddRow</a>.
+</p>
+
+<a name="999515"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>IsQuery</strong>(<em>value</em>)
+</PRE><a name="999517"> </a>
+<h5 class="param"> value</h5>
+<p class="param">Query variable.</p><a name="1803383"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsQuery
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- Shows an example of IsQuery and IsSimpleValue ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+IsQuery Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;IsQuery Example&lt;/H3&gt;
+
+&lt;!--- define a variable called "getEmployees" ---&gt;
+&lt;CFPARAM NAME="getEmployees" DEFAULT="#Now()#"&gt;
+
+&lt;P&gt;Before the query is run, the value of GetEmployees is
+&lt;CFOUTPUT&gt;#getEmployees#&lt;/CFOUTPUT&gt;
+
+&lt;CFIF IsSimpleValue(getEmployees)&gt;
+&lt;P&gt;getEmployees is currently a simple value
+&lt;/CFIF&gt;
+&lt;!--- make a query on the snippets datasource ---&gt;
+&lt;RY NAME="getEmployees" DATASOURCE="cfsnippets"&gt;
+SELECT *
+FROM employees
+&lt;/CFQUERY&gt; 
+
+&lt;P&gt;After the query is run, GetEmployees contains a number of
+rows that look like this (display limited to three rows):
+&lt;CFOUTPUT QUERY="GetEmployees" MaxRows="3"&gt;
+&lt;PRE&gt;#Emp_ID# #FirstName# #LastName#&lt;/PRE&gt;
+&lt;/CFOUTPUT&gt;
+&lt;CFIF IsQuery(getEmployees)&gt;
+GetEmployees is no longer a simple value, but the name of a query
+&lt;/CFIF&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsQuery
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_134.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_136.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

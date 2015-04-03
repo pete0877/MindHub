@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFOBJECT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_062.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_064.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1971284"></a>
+ <H1>CFOBJECT</H1>
+
+
+
+<p>The CFOBJECT tag allows you to call methods in COM, CORBA, and JAVA objects.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ColdFusion administrators can disable the CFOBJECT tag in the 
+ColdFusion Administrator Basic Security page. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>On UNIX, COM objects are not currently supported by CFOBJECT.</p><a name="1971288"></a>
+ 
+<H3>CFOBJECT topics</H3>
+<ul>
+<a name="1971292"> </a>
+<li><a href="../2_ColdFusion_Tags/lr2_064.htm#1971322">CFOBJECT Type="COM"</a>
+
+<a name="1971296"> </a>
+</li>
+<li><a href="../2_ColdFusion_Tags/lr2_065.htm#2070915">CFOBJECT Type="CORBA"</a>
+<a name="2242808"> </a>
+</li>
+<li><a href="../2_ColdFusion_Tags/lr2_066.htm#2242835">CFOBJECT Type="JAVA"</a>
+</li>
+</ul>
+<a name="1971297"></a>
+ 
+<H2>CFOBJECT TYPE attributes</H2>
+<p>Depending on the value you assign to the TYPE attribute of CFOBJECT, there are several additional attributes you can set. This table shows which attributes you can use with each CFOBJECT TYPE. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Attributes Used with CFOBJECT TYPEs&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>TYPE</strong>
+</th><th align="left">
+<strong>Attributes</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+COM
+</td><td valign="top">
+ACTION <br>CLASS <br>NAME <br>CONTEXT <br>SERVER
+</td></tr>
+<tr valign="top"><td valign="top">
+CORBA
+</td><td valign="top">
+ACTION <br>CONTEXT <br>CLASS <br>NAME <br>LOCALE
+</td></tr>
+<tr valign="top"><td valign="top">
+JAVA
+</td><td valign="top">
+ACTION <br>TYPE <br>CLASS <br>NAME 
+</td></tr>
+
+</table>
+</div>
+</p><p>Sections that follow describe these values and attributes in greater detail. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_062.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_064.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

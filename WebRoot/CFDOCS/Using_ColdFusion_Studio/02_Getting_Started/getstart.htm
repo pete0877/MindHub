@@ -1,0 +1,109 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Started</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="1031680"></a>
+<H1>Chapter 2	<br>
+Getting Started</H1>
+
+<p>This chapter provides you with a tour of ColdFusion Studio and pointers on how to customize the interface for your work style. </p><p>A big part of getting started is establishing access to your files and configuring browsers, and we'll step you through the basics of those tasks.</p><a name="1031074"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../02_Getting_Started/getstart2.htm#1031627">Exploring the Studio Workspace</a>
+
+</li>
+<li><a href="../02_Getting_Started/getstart3.htm#1025193">Customizing the Workspace</a>
+</li>
+<li><a href="../02_Getting_Started/getstart4.htm#1012705">Taking Shortcuts</a>
+</li>
+<li><a href="../02_Getting_Started/getstart5.htm#1020793">Working in the Resources Area</a>
+</li>
+<li><a href="../02_Getting_Started/getstart6.htm#1034660">Viewing Documents in Edit, Browse, and Design modes</a>
+</li>
+<li><a href="../02_Getting_Started/getstart7.htm#1013541">Tracking Your Work in the Results window</a>
+</li>
+<li><a href="../02_Getting_Started/getstart8.htm#1017663">Organizing Toolbars</a>
+</li>
+<li><a href="../02_Getting_Started/getstart9.htm#1027852">Managing Files</a>
+</li>
+<li><a href="../02_Getting_Started/getstart10.htm#1012640">Downloading Web pages</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:30 -->
+</body>
+</html>

@@ -1,0 +1,100 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Debugging C++ CFXs</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1013430"></a>
+ <H1>Debugging C++ CFXs</H1>
+
+
+
+<p>Once a debug session is configured, you can run your custom tag from within the debugger, set breakpoints, single-step, and so on.</p><a name="1013432"></a>
+ 
+<H3>On Windows NT</H3>
+<p>Custom tags can easily be debugged within the Visual C++ environment. To debug a tag, open the Build Settings dialog and click the Debug tab. Set the Executable for debug session setting to the full path to the ColdFusion Engine (such as, <code>c:\cfusion\bin\cfserver.exe</code>) and set the program arguments setting to <code>-DEBUG</code>.</p><a name="1013434"></a>
+ 
+<H3>On UNIX</H3>
+<a name="1013435"></a>
+<h4> Solaris</h4>
+<p>You can debug custom tags on UNIX using the dbx debugger. You should shut down ColdFusion using the stop script.</p><p>Set the environment variables, including <code>LD_LIBRARY_PATH</code> and <code>CFHOME</code> as they are set in the start script. You should then be able to run the cfserver executable under the dbx debugger and set break points in your CFX code. You may need to set a break point in main ("stop in main") so dbx loads the symbols for your CFX before you can set breakpoints in your code.</p><a name="1013438"></a>
+<h4> HP-UX 10.20</h4>
+<p>You can debug custom tags on UNIX using HP's DDE debugger. You should shut down ColdFusion using the stop script.</p><p>Set the environment variables, including <code>SHLIB_PATH</code> and <code>CFHOME</code> as they are set in the start script. You should then be able to run the cfserver executable under the DDE debugger and set break points in your CFX code. You may need to set a break point in main ("stop in main") so the debugger loads the symbols for your CFX before you can set breakpoints in your code.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

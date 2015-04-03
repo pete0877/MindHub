@@ -1,0 +1,112 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building Text Entry Boxes</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998361"></a>
+ <H1>Building Text Entry Boxes</H1>
+
+
+
+<p>The CFTEXTINPUT tag is similar to the HTML INPUT=text tag. With CFTEXTINPUT, however, you can also specify font and alignment options, as well as enable input validation methods using either a JavaScript or the VALIDATE attribute in CFTEXTINPUT.</p><p>The following example shows a basic CFTEXTINPUT control. This example validates a date entry, which means that a user must enter a valid date in the form <em>mm/dd/yy</em>. For a complete list of validation formats, refer to the <em>CFML Language Reference</em>.</p><pre>&lt;BR&gt;Please enter a date:
+&lt;CFFORM NAME="Form1"
+    ACTION="cfform_submit.cfm"
+    METHOD="Post"&gt;
+
+    &lt;CFTEXTINPUT NAME="entertext"
+        VALUE="mm/dd/yy"
+        MAXLENGTH="10"
+</pre><PRE><span class="codemark">        VALIDATE="date"
+</span><pre>        FONT="Trebuchet MS"&gt;
+
+    &lt;BR&gt;
+
+    &lt;INPUT TYPE="Submit"
+            VALUE="Submit"&gt;
+
+&lt;/CFFORM&gt;
+</pre></PRE><a name="1103759"></a>
+ 
+<H2>CFTEXTINPUT form variable</H2>
+<p>The value of the form variable passed from a CFTEXTINPUT control to a ColdFusion application page is determined by the entry in the CFTEXTINPUT control. The form variable is passed as:</p><pre>textinput_name=textinput_value
+</pre><p>In the example just above, the form variable would have been passed as:</p><pre>entertext=textinput_value
+</pre><p>So in the destination application page, the form variable is referenced as #entertext#</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

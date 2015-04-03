@@ -1,0 +1,288 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating a Collection</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1216571"></a>
+ <H1>Creating a Collection</H1>
+
+
+
+<p>The Verity engine performs searches against <em>collections.</em> A collection is a special database created by Verity that contains pointers to the indexed data that you specify for that collection. ColdFusion's Verity implementation supports collections of three basic data types:</p><ul>
+<li>Text files such as HTML pages and CFML templates.
+
+</li>
+<li>Binary documents (see the Supported File Types list).
+</li>
+<li>Result sets returned from CFQUERY, CFLDAP, and CFPOP queries.
+</li>
+</ul>
+<p>You can build a collection from individual documents or an entire directory tree. Collections can be stored anywhere, so you have a lot of flexibility in accessing indexed data. This adds enormous value to any content-rich Web site.</p><p>ColdFusion provides twodifferent ways to create a Verity collection. You can:</p><ul>
+<li>Make selections on the ColdFusion Administrator Verity page
+
+</li>
+<li>Code the CFCOLLECTION tag
+</li>
+</ul>
+<a name="1099371"></a>
+ 
+<H2>Using the ColdFusion Administrator to create a collection</H2>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a new collection:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator Verity page. 
+
+
+<p>If you checked the option to install the ColdFusion Documentation, the 
+documentation collection is listed by default. The Verity engine is used to search 
+our online documents.
+</p></li>
+<li>In the Add a Collection section, enter a name for the collection.
+
+</li>
+<li>Enter a path for the location of the new collection. 
+
+<p>By default, new collections are added to <code>\Cfusion\Verity\Collections\</code>.
+</p></li>
+<li>If you have an International Language Search Pack installed, you can select a language for the collection from the drop-down list.
+
+</li>
+<li>Click Create a new collection, then click Apply. 
+
+<p>When the collection is created, the name and full path of the new collection 
+appear in the Verity Collections list at the top of the page.
+</p></li>
+</ol>
+<p>You can easily enable access to a collection on the network by creating a local reference (an alias) for that collection. It only needs to be a valid Verity collection; it doesn't matter whether it was created within ColdFusion or another tool.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add an existing collection:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Add a Collection section, enter the collection alias.
+
+
+</li>
+<li>Enter the full path to the collection.
+
+</li>
+<li>Select Language if needed.
+
+</li>
+<li>Click Map an existing collection.
+
+</li>
+<li>Click Apply.
+
+</li>
+</ol>
+<p>If the collection is subsequently moved, the alias path must be updated. The Delete command, when used on a mapped collection, only deletes the alias.</p><a name="1102068"></a>
+ 
+<H2>Creating a collection with the CFCOLLECTION tag</H2>
+<p>Creating and maintaining collections from a CFML application eliminates the need to access the ColdFusion Administrator. This can be an advantage when you need to schedule these tasks or to allow users to perform them without exposing the Administrator to users.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a simple collection form page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Collection Creation Input Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;Specify a collection&lt;/H2&gt;
+&lt;FORM ACTION="collectioncreateaction.cfm" METHOD="POST"&gt;
+    &lt;P&gt;Collection name: &lt;INPUT TYPE="text" NAME="CollectionName" 
+SIZE="25"&gt;&lt;/P&gt;
+    &lt;P&gt;What do you want to do with the collection?&lt;/P&gt;
+    &lt;INPUT TYPE="radio" 
+        NAME="CollectionAction" 
+        VALUE="Create" checked&gt;Create&lt;BR&gt;
+    &lt;INPUT TYPE="radio" 
+        NAME="CollectionAction" 
+        VALUE="Repair"&gt;Repair&lt;BR&gt;
+    &lt;INPUT TYPE="radio" 
+        NAME="CollectionAction" 
+        VALUE="Optimize"&gt;Optimize&lt;BR&gt;
+    &lt;/P&gt;
+    &lt;INPUT TYPE="submit" 
+        NAME="submit" 
+        VALUE="Submit"&gt; 
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>collectioncreateform.cfm</code>.
+
+</li>
+</ol>
+<p>Note that this file simply shows how the form variables are used and does not perform error checking.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a collection action page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;CFCOLLECTION&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;Collection creation&lt;/H2&gt;
+
+&lt;CFOUTPUT&gt;
+
+    &lt;CFSWITCH EXPRESSION=#FORM.CollectionAction#&gt;
+        &lt;CFCASE VALUE="Create"&gt;
+            &lt;CFCOLLECTION ACTION="Create"
+            COLLECTION="#FORM.CollectionName#"
+            PATH="C:\CFUSION\Verity\Collections\"&gt;
+            &lt;P&gt;The collection #FORM.CollectionName# is created.
+        &lt;/CFCASE&gt;
+
+        &lt;CFCASE VALUE="Repair"&gt;
+            &lt;CFCOLLECTION ACTION="REPAIR"
+            COLLECTION="#FORM.CollectionName#"&gt;
+            &lt;P&gt;The collection #FORM.CollectionName# is repaired.
+        &lt;/CFCASE&gt;
+
+        &lt;CFCASE VALUE="Optimize"&gt;
+            &lt;CFCOLLECTION ACTION="OPTIMIZE"
+            COLLECTION="#FORM.CollectionName#"&gt;
+            &lt;P&gt;The collection #FORM.CollectionName# is optimized.
+        &lt;/CFCASE&gt;
+
+        &lt;CFCASE VALUE="Delete"&gt;
+            &lt;CFCOLLECTION ACTION="DELETE"
+            COLLECTION="#FORM.CollectionName#"&gt;
+            &lt;P&gt;Collection deleted.
+        &lt;/CFCASE&gt;
+    &lt;/CFSWITCH&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>collectioncreateaction.cfm</code>.
+
+</li>
+<li>View the file <code>collectioncreateform.cfm</code> in your browser, enter values and submit the form.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

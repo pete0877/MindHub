@@ -1,0 +1,105 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using CFOBJECT to Invoke Component Objects</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1824.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="998202"></a>
+<H1>Chapter 19	<br>
+Using CFOBJECT to Invoke Component Objects</H1>
+
+<p>The CFOBJECT tag is used to invoke objects created by component technologies. This includes COM/DCOM, CORBA, Java, and EJB objects.</p><a name="998204"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_02.htm#998723">Component Object Overview</a>
+
+</li>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_03.htm#998215">Invoking Component Objects</a>
+</li>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_04.htm#998244">Getting Started with COM/DCOM</a>
+</li>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa195.htm#1000821">Creating and Using COM Objects</a>
+</li>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa196.htm#999116">Getting Started with CORBA</a>
+</li>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa197.htm#998326">Calling a CORBA Object</a>
+</li>
+<li><a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa198.htm#1006848">Calling Java Objects</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1824.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

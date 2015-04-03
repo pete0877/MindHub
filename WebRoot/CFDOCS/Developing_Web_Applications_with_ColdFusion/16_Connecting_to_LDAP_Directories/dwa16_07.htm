@@ -1,0 +1,434 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Updating an LDAP Directory</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 16	:&nbsp;&nbsp;Connecting to LDAP Directories</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1046528"></a>
+ <H1>Updating an LDAP Directory</H1>
+
+
+
+<p>Entries can be added, modified, and deleted. Remote administration of an LDAP server is one possible using one of these options.</p><p>The following example runs a cycle of LDAP actions by first adding a new record, then querying the LDAP directory and generating a form for the output, and finally deleting the new record.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a new record:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;!--- add a new record (Joe Smith) ---&gt;
+
+&lt;CFLDAP
+    SERVER="myserver"
+    USERNAME="uid=kvaughan, ou=People, o=airius.com"
+    PASSWORD="bribery"
+    ACTION="ADD"
+    ATTRIBUTES="objectclass=top, person, organizationalPerson
+        inetOrgPerson; cn=Joe Smith; 
+        sn=Smith; mail=jSmith@airius.com;
+        telephonenumber=+1 408 555 2128; ou=Human Resources"
+        DN="uid=jSmith, ou=People, o=airius.com"&gt;
+
+&lt;!--- query the LDAP server ---&gt;
+
+&lt;CFLDAP Name="AriusList"
+    SERVER="myserver"
+    ACTION="QUERY"
+    ATTRIBUTES="cn,mail,telephonenumber"
+    SCOPE="SUBTREE"
+    FILTER="ou=Human Resources"
+    SORT="cn ASC"
+    START="o=airius.com"&gt;
+
+&lt;!--- generate a form page for query output ---&gt;
+
+&lt;H3&gt; Human Resources Directory for Arius&lt;/H3&gt;
+
+&lt;CFFORM ACTION="ariusform_action.cfm"&gt;
+
+    &lt;CFGRID NAME="ariusgrid" width="350" query="AriusList" 
+        insert="No" delete="No" sort="no" bold="No" italic="No"
+        appendkey="No" highlighthref="No" griddataalign="LEFT"
+        gridlines="no" rowheaders="no" rowheaderalign="LEFT"
+        rowheaderitalic="No" rowheaderbold="No" colheaders="yes"
+        colheaderalign="LEFT" colheaderitalic="No" 
+colheaderbold="yes"
+        selectmode="BROWSE" picturebar="no"&gt;
+
+        &lt;CFGRIDCOLUMN NAME="cn" HEADER="Name"&gt;
+        &lt;CFGRIDCOLUMN NAME="mail" HEADER="eMail Address"&gt;
+        &lt;CFGRIDCOLUMN NAME="telephonenumber" HEADER="Phone"&gt;
+    &lt;/CFGRID&gt;&lt;BR&gt;
+
+&lt;/CFFORM&gt;
+
+&lt;!---delete record ---&gt;
+
+&lt;CFLDAP
+    SERVER="myserver"
+    USERNAME="uid=kvaughan, ou=People, o=airius.com"
+    PASSWORD="bribery"
+    ACTION="DELETE"
+    DN="uid=jSmith, ou=People, o=airius.com"&gt;
+</pre></li>
+<li>Change <code>myserver</code> to a valid LDAP server.
+
+</li>
+<li>Change the <code>uid</code> to a valid user id.
+
+</li>
+<li>Save the page as <code>ldapadd.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To modify a record by adding an attribute:
+</td>
+</tr>
+</table>
+</div><p>This example illustrates modifying a record by adding an attribute value to the existing values. This is a necessary step to overcome the limitations of the MODIFY attribute.</p><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;!--- modify a record, preserving 
+    other existing attributes ---&gt;
+
+&lt;!--- You must include the existing attribute
+values plus the new one you want to add. In this
+case we are adding a unique member gfarmer to
+the Accounting Managers. If we did not include 
+the existing the existing unique members scarter 
+and tmorris then they would no longer be unique
+members. The modify really is doing a replace on 
+this attribute. For the next release of ColdFusion 
+we will provide an option to just update the attribute.
+Multiple values for a single attribute are separated 
+by a comma.  If a single attribute value contains a 
+comma you must escape it by adding an extra comma. For 
+example the uniquemember value uid=scarter,ou=groups,
+o=airius.com must be entered as uid=scarter,,ou=groups,,
+o=airius.com Be careful when you do this modify or you 
+can remove attribute values you did not intend to! ---&gt;
+
+&lt;!--- ATTRIBUTES="uniquemember=uid=scarter,,ou=People,,o=airius.com, 
+uid=tmorris,,ou=People,,o=airius.com, 
+uid=gfarmer,,ou=People,,o=airius.com" ---&gt;
+
+&lt;CFLDAP SERVER="myserver"
+    ACTION="Modify"
+    USERNAME="uid=kvaughan, ou=People, o=airius.com"
+    PASSWORD="bribery"
+    ATTRIBUTES="uniquemember=uid=scarter,,ou=People,,o=airius.com,
+        uid=tmorris,,ou=People,,o=airius.com,
+        id=gfarmer,,ou=People,,o=airius.com"
+        DN="cn=Accounting Managers, ou=groups; o=airius.com"&gt;
+</pre></li>
+<li>Change <code>myserver</code> to a valid LDAP server.
+
+</li>
+<li>Change the <code>uid</code> to a valid user id.
+
+</li>
+<li>Save the page as <code>ldapaddattr.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert or update an entry:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;!--- If the update parameter is sent
+    then run this update ---&gt;
+&lt;!--- If the insert parameter is sent
+    then run this insert ---&gt;
+
+&lt;CFIF IsDefined(rename_dn)&gt;
+
+    &lt;CFLDAP Name="CustomerRename"
+        SERVER="myserver"
+        USERNAME="cn=Directory Manager,
+            o=Ace Industry, c=US"
+        PASSWORD="testldap"
+        ACTION="MODIFYDN"
+        ATTRIBUTES=#new_dn#
+        DN=#rename_dn#&gt;
+
+&lt;CFELSE&gt;
+
+    &lt;CFIF IsDefined(dn)&gt;
+    &lt;CFSET #UPDATE_ATTRS#=#mailtag# &amp; #email# &amp; ";" &amp; 
+        #phonetag# &amp; #Phone#&gt;
+
+        &lt;CFLDAP Name="CustomerModify"
+            SERVER="myserver"
+            USERNAME="cn=Directory Manager,
+                o=Ace Industry, c=US"
+            PASSWORD="testldap"
+            ACTION="MODIFY"
+            ATTRIBUTES=#UPDATE_ATTRS#
+            DN=#dn#&gt;
+
+&lt;CFELSE&gt;
+
+&lt;!--- If the insert parameter is sent
+    then run this insert ---&gt;
+
+    &lt;CFIF IsDefined(Distinguished_Name)&gt;
+    &lt;CFSET #ADD_ATTRS# = "objectclass=top,
+        person,organizationalPerson,inetOrgPerson;" &amp;
+        #fullnametag# &amp;
+        #Fullname# &amp;
+        ";" &amp; 
+        #surnametag# &amp;
+        #Surname# &amp;
+        ";" &amp;
+        #mailtag# &amp;
+        #Email# &amp;
+        ";" &amp;
+        #phonetag# &amp;
+        #Phone#&gt;
+
+        &lt;CFLDAP Name="CustomerAdd"
+            SERVER="myserver"
+            USERNAME="cn=Directory Manager,
+                o=Ace Industry, c=US"
+            PASSWORD="testldap"
+            ACTION="Add"
+            ATTRIBUTES=#ADD_ATTRS#
+            DN=#Distinguished_Name#&gt;
+
+    &lt;/CFIF&gt;
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- Use CFLDAP to retrieve the common
+name and distinguished name for all employees
+that have a surname that contains ens and a common
+name that is &gt; K. Search starts in the country US
+and organization Ace Industry.---&gt;
+
+&lt;CFLDAP Name="EntryList"
+    SERVER="myserver"
+    ACTION="Query"
+    ATTRIBUTES="dn,cn, sn"
+    SCOPE="SUBTREE"
+    SORT="sn ASC"
+    FILTER="(&amp;(sn=*ens*)(cn&gt;=K))"
+    START="o=Ace Industry, c=US"
+    MAXROWS=50
+    TIMEOUT=30&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;LDAP Directory Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;P&gt;To modify the attributes of an entry,
+select the entry and click the &lt;B&gt;Update&lt;/B&gt;
+button. To create a new entry, click the
+&lt;B&gt;Add&lt;/B&gt; button.
+
+&lt;CFFORM NAME="MyForm"
+    ACTION="ldap_update.cfm"
+    TARGET="Lower"&gt;
+
+    &lt;CFSELECT NAME="dn"
+        SIZE="5"
+        REQUIRED="Yes"
+        QUERY="EntryList"
+        Value="dn"
+        Display="cn"&gt;
+    &lt;/CFSELECT&gt;
+
+    &lt;INPUT TYPE="Submit" VALUE="Update..."&gt;
+
+&lt;/CFFORM&gt;
+
+&lt;FORM ACTION="ldap_add.cfm"
+    METHOD="Post"
+    TARGET="Lower"&gt;
+
+    &lt;INPUT TYPE="Submit" VALUE="Add..."&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Change <code>myserver</code> to a valid LDAP server.
+
+</li>
+<li>Change the <code>uid</code> to a valid user id.
+
+</li>
+<li>Save the page as <code>ldapchangeattr.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete an entry:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;!--- If the delete parameter is sent
+then run this update ---&gt;
+&lt;CFIF IsDefined(dn)&gt;
+    &lt;CFLDAP Name="LDAPDelete"
+        SERVER="myserver"
+        USERNAME="cn=Directory Manager,
+            o=Ace Industry, c=US"
+        PASSWORD="testldap"
+        ACTION="Delete"
+        DN=#dn#&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- Use CFLDAP to retrieve the common name
+and distinguished name for all employees that
+have a surname that contains ens and a common
+name that is &gt; K. Search starts in the country
+US and organization Ace Industry. ---&gt;
+
+&lt;CFLDAP Name="EntryList"
+    SERVER="myserver"
+    ACTION="Query"
+    ATTRIBUTES="dn,cn, sn"
+    SCOPE="SUBTREE"
+    SORT="cn ASC"
+    FILTER="(cn&gt;=A)"
+    START="o=Ace Industry, c=US"
+    TIMEOUT=30&gt;
+</pre></li>
+<li>Change <code>myserver</code> to a valid LDAP server.
+
+</li>
+<li>Change the <code>uid</code> to a valid user id.
+
+</li>
+<li>Save the page as <code>ldapdeleteattr.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+<a name="1046620"></a>
+ 
+<H2>Creating searchable CFLDAP output</H2>
+<p>An example of building and searching a Verity collection from LDAP data can be found in <a href="../11_Indexing_and_Searching_Data/dwa11_10.htm#1218384">&quot;Indexing CFLDAP Query Results&quot;</a>.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:59 -->
+</body>
+</html>

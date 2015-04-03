@@ -1,0 +1,157 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Implementing Server Sandbox Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1013.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1015.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011629"></a>
+ <H1>Implementing Server Sandbox Security</H1>
+
+
+
+<p>ColdFusion Server Enterprise edition supports server sandbox security for hosted sites. This security feature, controlled by the ColdFusion administrator of a hosted site, offers runtime security based on directory access at a hosted site. See <a href="../10_Configuring_Advanced_Security/admin104.htm#1011231">&quot;Securing Applications with a Security Sandbox&quot;</a> to learn about security sanbox concepts.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If both user security and server sandbox security are enabled, sandbox 
+security takes precedence.
+</td>
+</tr>
+</table>
+</div>
+<br><p>In order to implement server sandbox security, you must use the ColdFusion Administrator to:</p><ol>
+</li>
+<li>Set up the security server. See <a href="../10_Configuring_Advanced_Security/admin107.htm#1011425">&quot;Setting Up a Security Server&quot;</a> for more information.
+
+</li>
+<li>Set up user directories to authenticate against an NT domain, an LDAP directory, or an ODBC data source. See <a href="../10_Configuring_Advanced_Security/admin109.htm#1011458">&quot;Defining User Directories&quot;</a> for more information.
+
+</li>
+<li>Create a security context for the application. See <a href="../10_Configuring_Advanced_Security/admin1010.htm#1011544">&quot;Defining a Security Context&quot;</a> for more information.
+
+</li>
+<li>Specify individual resources to protect and set up policies that match secured resources with authorized users and groups.. See <a href="../10_Configuring_Advanced_Security/admin1011.htm#1011569">&quot;Specifying Resources to Protect&quot;</a> for more information.
+
+</li>
+<li>On the ColdFusion Administrator's Advanced Server Security page, select the Use Security Sandbox Settings check box and then click the Security Sandboxes button at the bottom of the page.
+
+<p>You see the Registered Security Sandboxes page.
+</p></li>
+<li>In the Security Sandbox box, enter a fully qualified path (using forward slashes) for the directory whose contents you want to protect. 
+
+</li>
+<li>Select the type of sandbox to create from the Type drop-down:
+
+<ul>
+<a name="1030976"> </a>
+<li>Choosing Operating System protects OS-level resources based on priveleges assigned through a Windows NT domain.
+
+<a name="1030992"> </a>
+</li>
+<li>Choosing Security Context protects ColdFusion resources based on priveleges assigned through a security context.
+</li>
+</ul>
+</li>
+<li>Click Add.
+
+<p>You see the New Sandbox page, with the path you entered in step 6 already in the 
+Location box.
+</p></li>
+<li>Specify a Windows NT Domain or a security context:
+
+<ul>
+<a name="1031023"> </a>
+<li>If you chose Operating System in step 7, enter the NT Domain to authenticate against in the NT Domain box.
+
+<a name="1031024"> </a>
+</li>
+<li>If you chose Security Context in step 7, select an existing security context from the Security Context drop-down.
+</li>
+</ul>
+</li>
+<li>Enter the username and password for the user whose priveledges you want applied to the sandbox. This user must be a member of the security context or NT Domain you selected in step 9.
+
+</li>
+<li>Click Apply to register the sandbox.
+
+</li>
+</ol>
+<p>Now any ColdFusion user who tries to access the resources in the new sandbox will have the same rights to those resources as the user you specified in step 10.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1013.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1015.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

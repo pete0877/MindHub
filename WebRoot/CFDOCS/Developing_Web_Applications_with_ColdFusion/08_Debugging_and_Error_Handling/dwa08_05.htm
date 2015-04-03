@@ -1,0 +1,150 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Generating Custom Error Messages (CFERROR) </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1027602"></a>
+ <H1>Generating Custom Error Messages (CFERROR) </H1>
+
+
+
+<p>ColdFusion displays error pages that can help you to debug your application. There are four types of errors in ColdFusion:</p><ul>
+<li><strong>REQUEST</strong> -- Request errors occur when a application page is requested and there is an error in the page's code.
+
+</li>
+<li><strong>VALIDATION</strong> -- Validation errors occur when a user violates the form field validation rules during a form submittal.
+</li>
+<li><strong>EXCEPTION </strong>-- Exception errors handle exceptions. 
+</li>
+<li><strong>MONITOR</strong> -- Sets up an exception monitor.
+</li>
+</ul>
+<p>By default, ColdFusion returns a standard page for these errors. But you may want to customize the error pages that are returned, to make them consistent with the look and feel of your application. Custom error pages also allow you to control the error information that users see, as well as offering work-arounds or ways for users to report the errors.</p><p>You set the custom error application pages with the CFERROR tag. You can set the custom error application pages page-by-page, but because custom error pages generally apply to an entire application, it is more efficient to include the CFERROR tag in the <code>Application.cfm</code> file. After you create a custom error page, you must include the CFERROR tag in your application's <code>Application.cfm</code> page. See <a href="../12_Using_the_Application_Framework/dwa12_02.htm#1025843">&quot;Understanding the Web Application Framework&quot;</a> for more information.</p><p>For information on the syntax of the CFERROR tag, see the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a>.</p><a name="1027614"></a>
+ 
+<H2>Creating an error application page</H2>
+<p>The error application page is a file that includes HTML and the parameters associated with the error. The error application page cannot use any CFML tags.</p><p>The parameters associated with an error depend on the type of error. All the error parameters use the Error prefix (for example, <code>Error.Diagnostics</code>).</p><p>See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for more information on the error variables and on using the CFERROR tag.</p><p>The following examples show the two types of custom error pages.</p><a name="1027622"></a>
+ 
+<H3>Example of a request error</H3>
+<p>The following example shows a custom error page for a request error:</p><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Products - Error&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;H2&gt;Sorry&lt;/H2&gt;
+
+&lt;P&gt;An error occurred when you requested this page.
+Please email the Webmaster to report this error. 
+We will work to correct the problem and apologize
+for the inconvenience.&lt;/P&gt;
+
+&lt;TABLE BORDER=1&gt;
+&lt;TR&gt;&lt;TD&gt;&lt;B&gt;Error Information&lt;/B&gt; &lt;BR&gt;
+    #Error.DateTime# &lt;BR&gt;
+    #Error.Template# &lt;BR&gt;
+    #Error.RemoteAddress# &lt;BR&gt;
+    #Error.HTTPReferer#
+&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;
+
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><a name="1027626"></a>
+ 
+<H3>Example of a validation error</H3>
+<p>The following example shows a custom error page for a validation error.</p><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Products - Error&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;H2&gt;Oops&lt;/H2&gt;
+
+&lt;P&gt;You failed to complete all the fields
+in the form. The following problems occurred:&lt;/P&gt;
+
+#Error.InvalidFields#
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

@@ -1,0 +1,115 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Registering Data Sources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Accessing ColdFusion  Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1003368"></a>
+ <H1>Registering Data Sources</H1>
+
+
+
+<p>A set of ODBC drivers and sample data is installed with all versions of ColdFusion. Native database drivers are installed with the Enterprise version and OLE-DB drivers are installed with the Professional and Enterprise versions. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register a data source:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator.
+
+
+</li>
+<li>Select the ODBC or native drivers page under the data sources heading. 
+
+</li>
+<li>Name the data source, select the appropriate driver, and click Add.
+
+</li>
+</ol>
+<p>To test the connection, click Verify. A help message displays if the test connection fails.</p><p>For more information on managing data sources, see <a href="../../administering_coldfusion_server/contents.htm"><em>Administering ColdFusion Server</em></a>.</p><a name="1030900"></a>
+ 
+<H2>Accessing Allaire Spectra data sources</H2>
+<p>Allaire Spectra data sources registered in the ColdFusion Administrator are viewable in Studio. Select a data source from the dropdown list in the top pane of the Database tab to see the database schema.</p><p>The SQL Builder, available on the Tools menu, gives you a visual interface for selecting tables and writing and testing SQL statements for your applications. You can copy completed SQL code blocks directly into your applications or insert them as part of a CFQUERY tag.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:45 -->
+</body>
+</html>

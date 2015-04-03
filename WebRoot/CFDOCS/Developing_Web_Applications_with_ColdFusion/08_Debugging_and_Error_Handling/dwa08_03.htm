@@ -1,0 +1,110 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFML Code Validation</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1020851"></a>
+ <H1>CFML Code Validation</H1>
+
+
+
+<p>The ColdFusion Application Server features two modes of attribute checking for processing application pages: strict and relaxed. Allaire recommends that you always use the strictest possible level of CFML validation. To enable strict validation, open the ColdFusion Administrator Server Settings page and check the "Enable Strict Attribute Validation" box.</p><p>The code validator inspects all code before execution begins. In addition, attribute validation is generally performed at p-code time and not at execution. The exceptions to this rule are tags with a "switch" attribute, such as ACTION= or METHOD=, for which the value is provided at runtime. These instances are validated at runtime. There are two implications:</p><ul>
+<li>There will be a slight performance penalty due to runtime attribute validation.
+
+</li>
+<li>The CFML syntax checker will not be able to detect an invalid attribute combination -- in this case because it does not execute the CFML page it checks.
+</li>
+</ul>
+<p>Although dynamically providing an action can save a few lines of code, you should avoid this practice in the interest of a more complete validation and faster application performance.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>If a commercially purchased custom tags fails to run, try turning off the 
+"Enforce Strict Attribute Validation" setting in the ColdFusion 
+Administrator. If the tag continues to generate errors, you should contact 
+the tag's vendor.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The CFML Syntax checker application page is:</p><pre><em>webroot</em><code>/cfdocs/cfmlsyntaxcheck.cfm</code>.
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

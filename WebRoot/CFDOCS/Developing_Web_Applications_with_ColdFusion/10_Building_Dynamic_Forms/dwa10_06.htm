@@ -1,0 +1,181 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Structuring Tree Controls</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015578"></a>
+ <H1>Structuring Tree Controls</H1>
+
+
+
+<p>Tree controls built with CFTREE can be very complex. Knowing how to specify the relationship between multiple CFTREEITEM entries will help you handle even the most labyrinthine of CFTREE constructs.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The following tree examples all use the result set from folllowing query. 
+To run any of the tree examples, insert the query into your test template:
+</td>
+</tr>
+</table>
+</div>
+<br><pre>&lt;!--- CFQUERY with an ORDER BY clause ---&gt;
+&lt;CFQUERY NAME="deptquery" DATASOURCE="CompanyInfo"&gt;
+    SELECT Department_ID, FirstName + ' ' + LastName
+    AS FullName
+    FROM EMPLOYEES
+    ORDER BY Department_ID
+&lt;/CFQUERY&gt;
+</pre><a name="1126927"></a>
+ 
+<H3>Example: One-level tree control</H3>
+<p>This example consists of a single root and a number of individual items:</p><pre>&lt;CFFORM NAME="form1" ACTION="submit.cfm"&gt;
+    &lt;CFTREE NAME="tree1"&gt;
+        &lt;CFTREEITEM VALUE="FullName"
+        QUERY="deptquery"
+        QUERYASROOT="Department"&gt;
+    &lt;/CFTREE&gt;
+
+&lt;BR&gt;&lt;INPUT TYPE="submit" VALUE="Submit"&gt;
+&lt;/CFFORM&gt;
+</pre><a name="1015596"></a>
+ 
+<H3>Example: Multi-level tree control</H3>
+<p>When populating a CFTREE, you manipulate the structure of the tree by specifying a TREEITEM parent. In this example, every TREEITEM, except the top level, specifies a parent. The PARENT attribute allows your CFTREE to show the relationships between elements in the tree control.</p><pre>&lt;CFFORM NAME="form1" ACTION="cfform_submit.cfm"
+    METHOD="Post"&gt;
+&lt;CFTREE NAME="tree1" HSCROLL="no" VSCROLL="no"
+    BORDER="no"&gt;
+    &lt;CFTREEITEM VALUE="Divisions"&gt;
+    &lt;CFTREEITEM VALUE="Development" 
+        PARENT="Divisions" IMG="folder"&gt;
+    &lt;CFTREEITEM VALUE="Product One" 
+        PARENT="Development"&gt;
+    &lt;CFTREEITEM VALUE="Product Two" 
+        PARENT="Development"&gt;
+    &lt;CFTREEITEM VALUE="GUI" 
+        PARENT="Product Two" IMG="document"&gt;
+    &lt;CFTREEITEM VALUE="Kernel" 
+        PARENT="Product Two" IMG="document"&gt;
+    &lt;CFTREEITEM VALUE="Product Three" 
+        PARENT="Development"&gt;
+    &lt;CFTREEITEM VALUE="QA" 
+        PARENT="Divisions" IMG="folder"&gt;
+    &lt;CFTREEITEM VALUE="Product One"
+        PARENT="QA"&gt;
+    &lt;CFTREEITEM VALUE="Product Two" PARENT="QA"&gt;
+    &lt;CFTREEITEM VALUE="Product Three"
+        PARENT="QA"&gt;
+    &lt;CFTREEITEM VALUE="Support"
+        PARENT="Divisions" IMG="fixed"&gt;
+    &lt;CFTREEITEM VALUE="Product Two"
+        PARENT="Support"&gt;
+    &lt;CFTREEITEM VALUE="Sales"
+        PARENT="Divisions" IMG="cd"&gt;
+    &lt;CFTREEITEM VALUE="Marketing"
+        PARENT="Divisions" IMG="document"&gt;
+    &lt;CFTREEITEM VALUE="Finance"
+        PARENT="Divisions" IMG="element"&gt;
+&lt;/CFTREE&gt;
+
+&lt;/CFFORM&gt;
+</pre><a name="1015627"></a>
+ 
+<H2>Image names in a CFTREE</H2>
+<p>When you use the TYPE="Image" attribute, ColdFusion attempts to display an image corresponding to the value in the column, which can be a built-in ColdFusion image name, or an image of your choice in the <code>cfide\classes</code> directory or subdirectory, referenced with a relative URL.</p><p>The built-in image names are:</p><ul>
+<li>cd
+
+</li>
+<li>computer
+</li>
+<li>document
+</li>
+<li>element
+</li>
+<li>folder
+</li>
+<li>floppy
+</li>
+<li>fixed
+</li>
+<li>remote
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

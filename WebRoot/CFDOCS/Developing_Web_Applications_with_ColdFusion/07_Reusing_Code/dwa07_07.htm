@@ -1,0 +1,243 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Passing Attribute Values between Custom Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Reusing Code</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026379"></a>
+ <H1>Passing Attribute Values between Custom Tags</H1>
+
+
+
+<p>Because custom tags are individual templates, variables and other data aren't automatically shared between a custom tag and the calling template. To pass data, you define attributes for the custom tag, just as in standard CFML coding.</p><p>To pass data from the calling template to the custom tag, use the ATTRIBUTES scope. Conversely, to pass values back to the calling template, use the CALLER scope. You can also access variables already set on the calling page in the custom tag by simply prefixing the variable with the 'CALLER.' prefix.</p><p><img src="../images/customtag.gif">
+
+
+</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a custom tag:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page (the calling page) in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Enter Name&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;!--- Enter a name, which could also be done in a form ---&gt;
+&lt;!--- This example simply uses a cfset ---&gt;
+<span class="codemark">&lt;CFSET NameYouEntered="Smith"&gt;
+</span>
+&lt;!--- display the current name ---&gt;
+&lt;CFOUTPUT&gt;
+Before you leave this page, you're #NameYouEntered#.&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- go to the custom tag ---&gt;
+<span class="codemark">&lt;CF_GETMD NAME="#NameYouEntered#"&gt;
+</span>&lt;!--- come back from custom tag ---&gt;
+
+
+&lt;!--- display the results of the custom tag ---&gt;
+&lt;CFOUTPUT&gt;
+You are now #DOCTOR#.
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>callingpage.cfm</code>.
+
+</li>
+<li>Create another new page (the custom tag) in Studio.
+
+</li>
+<li>Enter the following code:
+
+</pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;GetMD Custom Tag&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;!--- get the value of the varible NAME from the calling page ---&gt;
+&lt;!--- put the text "Doctor " in front of the name ---&gt;
+&lt;!--- create a variable called DOCTOR, make its value "Doctor NAME" -
+--&gt;
+&lt;!--- and make its scope CALLER so that you can pass it back to the 
+calling page ---&gt;
+
+&lt;CFPARAM VALUE="Attributes.Name" DEFAULT="Who"
+
+&lt;CFSET CALLER.DOCTOR="Doctor " &amp; "#ATTRIBUTES.NAME#"&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>getmd.cfm</code>.
+
+</li>
+<li>Open the file <code>callingpage.cfm</code> in your browser.
+
+</li>
+</ol>
+<p>The calling page uses the <code>getmd</code> custom tag and displays the results.</p><a name="1028216"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFSET NameYouEntered="Smith"&gt;
+</PRE></td><td valign="top">
+In the calling page, create a variable NameYouEntered and assign it the value "Smith."
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CF_GETMD NAME="#NameYouEntered#"&gt;
+</PRE></td><td valign="top">
+In the calling page, call the getMD custom tag and pass it the NAME parameter whose value is the value of the variable NameYou Entered.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFPARAM VALUE="Attributes.Name" 
+DEFAULT="Who"
+</PRE></td><td valign="top">
+Assign the value "Who" to Name if it has no value.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFSET CALLER.DOCTOR="Doctor " &amp; 
+"#ATTRIBUTES.NAME#"&gt;
+</PRE></td><td valign="top">
+See below. (It is helpful to look at this code from right to left.)
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>#ATTRIBUTES.NAME#
+</PRE></td><td valign="top">
+Get the value of the variable NAME from the calling page
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFSET DOCTOR="Doctor " &amp; 
+"#ATTRIBUTES.NAME#"&gt;
+</PRE></td><td valign="top">
+Create a variable called DOCTOR, make its value "Doctor NAME"
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFSET CALLER.DOCTOR="Doctor " &amp; 
+"#ATTRIBUTES.NAME#"&gt;
+</PRE></td><td valign="top">
+Make the variable's scope CALLER so that you can pass it back to the calling page
+</td></tr>
+
+</table>
+</div>
+</H3>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Be careful not to overwrite variables that might already exist on the 
+calling page. You should adopt a naming convention to minimize the 
+chance of overwriting variables. For example, prefix the returned variable 
+with <em>customtagname</em>_, with customtagname<em> </em>being the name of the 
+custom tag.
+</td>
+</tr>
+</table>
+</div>
+<br><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Data pertaining to the HTTP request or to the current application is 
+visible. This includes the variables in FORM, URL, CGI, COOKIES, 
+SERVER, APPLICATION, SESSION, and CLIENT scopes.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Request scope<strong> </strong>is<strong> </strong>a reserved variable/scope that allows you to store data pertaining to the complete hierarchy of custom tags used in a single page request. It is a structure named "request." The variable is available to all templates: base, includes, and custom tags. Collaborating custom tags that are not nested in a single tag can exchange data via the request structure. You should assign a unique name for each variable. You should store data in structures nested inside the request scope.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:46 -->
+</body>
+</html>

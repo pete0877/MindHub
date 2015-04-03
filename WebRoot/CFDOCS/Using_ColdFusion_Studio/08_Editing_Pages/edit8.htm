@@ -1,0 +1,156 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Visual Editing in Design Mode</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1016127"></a>
+ <H1>Visual Editing in Design Mode</H1>
+
+
+
+<p>Studio provides an optional visual editing view, called Design View, which lets you edit HTML code while seeing how the results would look in a browser.</p><p>The Design view is most useful for placing images on a page and for creating complex tables and forms without having to code the tags. The code for these elements is generated automatically and is updated as changes are made.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Design view feature requires Microsoft's Internet Explorer 4.01 or 
+later. If you don't have this browser installed, or if you don't intend to use 
+the Design view, you can disable it in the Design pane of the Settings 
+dialog box (F8).
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a page in Design view:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">With a document open in the Editor pane, save your changes then click the Design tab. The Design view opens, showing a browser view of the document that you can also use to edit text, styles, and graphics.
+
+
+</li>
+<li>Use the Design view toolbars to edit text, change styles, add colors, or create HTML tables and form elements.
+
+</li>
+<li>If you've opened Design view and now prefer to cancel any changes, click the Cancel Design View button to discard all changes and return to the Edit view.
+
+<p><img src="../images/cancel_design_button.gif">
+
+
+
+</p></li>
+<li>Use the Edit and Browse tabs to return to the Edit and Browse modes.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To convert Microsoft Word and Excel content:
+</td>
+</tr>
+</table>
+</div><p>You can convert content such as lists, tables, and worksheet cells into their equivalent HTML formatting by copying from Microsoft Word and Excel. </p><ol>
+<li class="first">Select the content in Word or Excel.
+
+
+</li>
+<li>Paste the selection into the Design window at the location you want it to appear on the page.
+
+</li>
+<li>Edit the new content visually. For example, you can click on a table border and drag a handle to resize it.
+
+</li>
+<li>To work directly with the code, switch to the Editor.
+
+</li>
+</ol>
+<p>To explore this feature, you can experiment with inserting different types of content from Office documents and other Windows applications. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

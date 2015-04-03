@@ -1,0 +1,248 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Input Validation with JavaScript</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015398"></a>
+ <H1>Input Validation with JavaScript</H1>
+
+
+
+<p>In addition to native ColdFusion input validation using the VALIDATE attribute of the CFINPUT and CFTEXTINPUT tags, the following tags support the ONVALIDATE attribute , which allows you to specify a JavaScript function to handle your CFFORM input validation:</p><ul>
+<li>CFINPUT
+
+</li>
+<li>CFSLIDER
+</li>
+<li>CFTEXTINPUT
+</li>
+<li>CFTREE
+</li>
+</ul>
+<a name="1015408"></a>
+ 
+<H2>JavaScript objects passed to the validation routine</H2>
+<p>The following JavaScript objects are passed by ColdFusion to the JavaScript function you specify in the ONVALIDATE attribute:</p><ul>
+<li>form_object
+
+</li>
+<li>input_object
+</li>
+<li>object_value
+</li>
+</ul>
+<a name="1015414"></a>
+ 
+<H2>Handling failed validation</H2>
+<p>The ONERROR attribute allows you to specify a JavaScript function you want to execute in the event of a failed validation. For example, if you specify a JavaScript function to handle input validation in the ONVALIDATE attribute you can also specify a JavaScript function in the ONERROR attribute to handle a failed validation, which returns a false value. ONERROR is available in the following CFFORM tags:</p><ul>
+<li>CFINPUT
+
+</li>
+<li>CFSELECT
+</li>
+<li>CFSLIDER
+</li>
+<li>CFTEXTINPUT
+</li>
+<li>CFTREE
+</li>
+</ul>
+<p>When you specify a JavaScript routine in the ONERROR attribute, ColdFusion passes the following JavaScript objects to the specified routine:</p><ul>
+<li>form_object
+
+</li>
+<li>input_object
+</li>
+<li>object_value
+</li>
+<li>error message text
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use JavaScript to validate form data:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Edit the page so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;JavaScript Validation&lt;/TITLE&gt;
+
+<span class="codemark">&lt;SCRIPT&gt;
+</span>&lt;!--
+
+function testbox(form) {
+<span class="codemark">Ctrl = form.inputbox1;
+</span><span class="codemark">if (Ctrl.value == "" || Ctrl.value.indexOf ('@', 0) == -1) {
+</span><span class="codemark">return (false);
+</span><span class="codemark">} else
+</span><span class="codemark">return (true);
+</span><span class="codemark">} 
+</span>
+//--&gt;
+&lt;/SCRIPT&gt;
+
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;JavaScript validation test&lt;/H2&gt;
+
+&lt;P&gt;Please enter your email address:&lt;/P&gt;
+&lt;CFFORM NAME="UpdateForm"
+    ACTION="update.cfm" &gt;
+
+    &lt;CFINPUT TYPE="text"
+        NAME="inputbox1"
+        REQUIRED="YES"
+<span class="codemark">ONVALIDATE="testbox"
+</span>    MESSAGE="Sorry, invalid entry."
+    SIZE="10"
+    MAXLENGTH="10"&gt;
+
+&lt;INPUT TYPE="Submit" VALUE=" Update... "&gt;
+&lt;/CFFORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>validjs.cfm</code>.
+
+</li>
+<li>View <code>validjs.cfm</code> in your browser.
+
+<p>When you enter an invalid email address, an error appears. Even if you enter a 
+valide email address, and Error 404 appears because you haven't created the 
+action page <code>update.cfm</code>.
+</p></li>
+</ol>
+<a name="1118111"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;SCRIPT&gt;
+&lt;!--
+
+function testbox(form) {
+    Ctrl = form.inputbox1;
+    if (Ctrl.value == "" || Ctrl.value.indexOf 
+('@', 0) == -1) {
+    return (false);
+    } else
+        return (true);
+} 
+
+//--&gt;
+&lt;/SCRIPT&gt;
+</PRE></td><td valign="top">
+JavaScript code to test for valid entry in text box.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ONVALIDATE="testbox"
+</PRE></td><td valign="top">
+Text box control parameter that calls the JavaScript test.
+</td></tr>
+
+</table>
+</div>
+</H3>
+<p>See the following Web site for information on JavaScript validation scripts:</p><ul>
+<li><a href="http://www.dannyg.com/javascript">http://www.dannyg.com/javascript</a>
+
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

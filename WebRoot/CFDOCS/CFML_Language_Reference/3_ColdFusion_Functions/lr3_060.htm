@@ -1,0 +1,126 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CORBA</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_059.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_061.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2722406"></a>
+ <H1>CORBA</H1>
+
+
+
+<p>CreateObject allows you to call methods in CORBA objects. These CORBA objects must already have been defined and registered for use.</p><a name="2722408"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>CreateObject</strong>("CORBA", <em>class</em>, <em>context</em>, <em>locale</em>, ) 
+</PRE><a name="2746566"></a>
+<h4> class</h4>
+<p>Required. Specifies different information, depending on the CONTEXT specification:</p><ul>
+<a name="2746568"> </a>
+<li>If CONTEXT is IOR -- Specifies the name of a file that contains the string version of the IOR. ColdFusion must be able to read this file at all times; it should be local to ColdFusion server or on the network in an open, accessible location.
+
+<a name="2746569"> </a>
+</li>
+<li>If CONTEXT is NameService -- Specifies a period-delimited naming context for the naming service, such as Allaire.Department.Doc.empobject.
+</li>
+</ul>
+<a name="2728632"></a>
+<h4> context</h4>
+<p>Required. Specifies one of the following:</p><ul>
+<a name="2722413"> </a>
+<li>"IOR" -- ColdFusion uses the Interoperable Object Reference (IOR) to access the CORBA server.
+
+<a name="2722414"> </a>
+</li>
+<li>"NameService" -- ColdFusion uses the naming service to access server. "NameService" is only valid with the InitialContext of a VisiBroker Orb.
+</li>
+</ul>
+<a name="2722421"></a>
+<h4> locale</h4>
+<p>Optional. Sets arguments for a call to init_orb(..). Use of this attribute is specific to VisiBroker orbs, and is currently available on C++, Version 3.2. The value should be of the form:</p><p>
+ " -ORBagentAddr 199.99.129.33   -ORBagentPort 19000"
+</p>
+
+<pre>
+</pre><p>Note that each type-value pair has to start with a leading "-".</p><a name="2722426"></a>
+ 
+<H3>Usage</H3>
+<p>ColdFusion Enterprise version 4.0 and above supports CORBA through the Dynamic Invocation Interface (DII). To use CreateObject with CORBA objects, you need to know either the name of the file containing a string version of the IOR or the object's naming context in the naming service. You also need to know the object's attributes, method names and method signatures.</p><p>User-defined types (for example, structures) are not supported.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_059.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_061.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

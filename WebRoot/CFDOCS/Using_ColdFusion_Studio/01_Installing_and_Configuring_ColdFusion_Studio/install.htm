@@ -1,0 +1,101 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Installing and Configuring ColdFusion Studio</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="997347"></a>
+<H1>Chapter 1	<br>
+Installing and Configuring ColdFusion Studio</H1>
+
+<p>This chapter covers the installation process and describes using the Initial Configuration Wizard to preserve settings from the previous version of Studio. </p><p>Configuring Web browsers and connecting to remote servers are critical parts of setting up a productive environment for Web development and we walk you through these procedures.</p><a name="998362"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../01_Installing_and_Configuring_ColdFusion_Studio/install2.htm#998380">Installing Studio</a>
+
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion_Studio/install3.htm#998414">Importing Settings from a Previous Version</a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion_Studio/install4.htm#998632">Configuring Browsers</a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm#999102">Connecting to Remote Servers</a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion_Studio/install6.htm#998646">Setting up Web Server Page Processing</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:29 -->
+</body>
+</html>

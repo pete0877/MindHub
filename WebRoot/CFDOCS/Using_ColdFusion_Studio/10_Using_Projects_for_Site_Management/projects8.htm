@@ -1,0 +1,121 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Additional Project Features</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1016163"></a>
+ <H1>Additional Project Features</H1>
+
+
+
+<p>There are additional project features that are described in other sections of this manual. These features and their related sections are listed in the table below.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Feature</strong>
+</th><th align="left">
+<strong>Section</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Verifying links in a project
+</td><td valign="top">
+<a href="../12_Testing_and_Maintaining_Web_Pages/test6.htm#1000162">&quot;Verifying Page Links&quot;</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+Using Find and Replace across entire projects
+</td><td valign="top">
+<a href="../12_Testing_and_Maintaining_Web_Pages/test3.htm#1010273">&quot;Using Find and Replace&quot;</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+Setting source control for a project
+</td><td valign="top">
+<a href="../10_Using_Projects_for_Site_Management/projects9.htm#1019001">&quot;Working in a Source Control System&quot;</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+Deploying (uploading) projects
+</td><td valign="top">
+<a href="../11_Deploying_Projects/deployment.htm#997350">Chapter 11, &quot;Deploying Projects&quot;</a>
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

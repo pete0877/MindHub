@@ -1,0 +1,119 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Scalable and Highly Available Web Sites</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin057.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin061.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="1151116"></a>
+<H1>Chapter 6	<br>
+Creating Scalable and Highly Available Web Sites</H1>
+
+<p>This chapter describes the concepts involved in achieving scalable and highly available ColdFusion Web applications. The latter half describes ColdFusion's built-in clustering technology, ClusterCATS, which provides intelligent load balancing and failover capabilities. It includes procedures that explain how to create, optimize, and administer your ClusterCATS server clusters.</p><a name="1067883"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin061.htm#1067887">What is Scalability?</a>
+
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1056062">Issues Affecting Successful Scalability Implementations</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1064937">What is Web Site Availability?</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1065606">Techniques for Creating Scalable &amp; Highly Available Sites</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm#1067495">Introducing ClusterCATS for ColdFusion</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm#1072008">ClusterCATS for ColdFusion Components</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1162902">Before You Install</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm#1203339">Installing ClusterCATS</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1084777">Creating Clusters</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1080561">Configuring Load Balancing &amp; High Availability Features</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1184863">Performing Common Cluster Administration Tasks</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039395">Administering UNIX-based Clusters</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0614.htm#1120085">Troubleshooting</a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0615.htm#1120089">Other Informational Resources</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin057.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin061.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

@@ -1,0 +1,135 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring ColdFusion Server</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin026.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin031.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="997351"></a>
+<H1>Chapter 3	<br>
+Configuring ColdFusion Server</H1>
+
+<p>This section explains basic ColdFusion administration tasks. </p><a name="1000324"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../03_Configuring_ColdFusion_Server/admin031.htm#1014665">The ColdFusion Administrator</a>
+
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin032.htm#1036767">Starting and Stopping ColdFusion</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin033.htm#1036697">The Server Settings Page</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin035.htm#1056496">Configuring Administrator Security</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin036.htm#1018949">Managing Client Variables</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin037.htm#1016727">State Management and Server Clustering</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin038.htm#1005158">Enabling External Client State Management</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin039.htm#1018407">Migrating Client Variable Data</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0310.htm#1020463">Enabling Application and Session Variables</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0312.htm#1059602">Locking Variables</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0313.htm#1059606">ColdFusion Java Settings</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0315.htm#1019070">ColdFusion Version Information</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0316.htm#1016865">The ColdFusion Logging Page</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0317.htm#1018027">Mapping Directories</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0318.htm#1039080">Managing CFX tags</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0319.htm#997602">Debug Settings in the ColdFusion Administrator</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0320.htm#997621">Configuring Administrator Mail</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0321.htm#997954">Indexing Data with Verity</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0322.htm#1033257">Verity Supported File Types</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0323.htm#1039233">Repairing, Optimizing, Purging, and Deleting Collections</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0324.htm#1002888">Configuring Server-Side Source Control</a>
+</li>
+<li><a href="../03_Configuring_ColdFusion_Server/admin0325.htm#1052402">Using ColdFusion in a Distributed Configuration</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin026.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin031.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

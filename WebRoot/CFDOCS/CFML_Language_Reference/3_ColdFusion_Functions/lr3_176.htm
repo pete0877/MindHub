@@ -1,0 +1,182 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>LSTimeFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_175.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_177.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001001"></a>
+ <H1>LSTimeFormat</H1>
+
+
+
+<p>Returns a custom-formatted time value using the locale convention. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_173.htm#1038684">LSParseDateTime</a>. 
+</p>
+
+<a name="1001004"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>LSTimeFormat</strong>(<em>time</em> [, <em>mask</em> ])
+</PRE><a name="1001006"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any date/time value or string convertible to a time value.</p><a name="1001007"> </a>
+<h5 class="param"> mask</h5>
+<p class="param">A set of masking characters determining the format:</p><ul>
+<a name="1137829"> </a>
+<li><code>h</code> -- Hours with no leading zero for single-digit hours. (Uses a 12-hour clock.)
+
+<a name="1137839"> </a>
+</li>
+<li><code>hh</code> -- Hours with a leading zero for single-digit hours. (Uses a 12-hour clock.)
+<a name="1137840"> </a>
+</li>
+<li><code>H</code> -- Hours with no leading zero for single-digit hours. (Uses a 24-hour clock.)
+<a name="1137841"> </a>
+</li>
+<li><code>HH</code> -- Hours with a leading zero for single-digit hours. (Uses a 24-hour clock.)
+<a name="1137842"> </a>
+</li>
+<li><code>m</code> -- Minutes with no leading zero for single-digit minutes
+<a name="1137843"> </a>
+</li>
+<li><code>mm</code> -- Minutes with a leading zero for single-digit minutes
+<a name="1137844"> </a>
+</li>
+<li><code>s</code> -- Seconds with no leading zero for single-digit seconds 
+<a name="1137845"> </a>
+</li>
+<li><code>ss</code> -- Seconds with a leading zero for single-digit seconds 
+<a name="1137846"> </a>
+</li>
+<li><code>t</code> -- Single-character time marker string, such as A or P. Ignored by some locales.
+<a name="1137847"> </a>
+</li>
+<li><code>tt</code> -- Multiple-character time marker string, such as AM or PM 
+</li>
+</ul>
+<a name="1001018"></a>
+ 
+<H3>Usage</H3>
+<p>When passing date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object returning undesired results.</p><a name="1805386"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSTimeFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This shows LSTimeFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;LSTimeFormat Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;LSTimeFormat Example&lt;/H3&gt;
+
+&lt;P&gt;LSTimeFormat returns a time value using
+the locale convention.  
+
+&lt;!--- loop through a list of possible locales and
+show time values  ---&gt;
+&lt;CFLOOP LIST="#Server.Coldfusion.SupportedLocales#"
+INDEX="locale" DELIMITERS=","&gt;
+    &lt;CFSET oldlocale = SetLocale(locale)&gt;
+
+    &lt;CFOUTPUT&gt;&lt;P&gt;&lt;B&gt;&lt;I&gt;#locale#&lt;/I&gt;&lt;/B&gt;&lt;BR&gt;
+    #LSTimeFormat(Now())#&lt;BR&gt;
+    #LSTimeFormat(Now(), `hh:mm:ss')#&lt;BR&gt;    
+    #LSTimeFormat(Now(), `hh:mm:sst')#&lt;BR&gt;    
+    #LSTimeFormat(Now(), `hh:mm:sstt')#&lt;BR&gt;    
+    #LSTimeFormat(Now(), `HH:mm:ss')#&lt;BR&gt;    
+        &lt;Hr noshade&gt;
+    &lt;/CFOUTPUT&gt;
+
+&lt;/CFLOOP&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSTimeFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_175.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_177.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

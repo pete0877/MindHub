@@ -1,0 +1,138 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>The Projects Tab</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012097"></a>
+ <H1>The Projects Tab</H1>
+
+
+
+<p>Projects are managed through the options you see on the Projects tab. To display the the project options, click the Projects tab at the bottom of the Resources window.</p><p>The following illustration shows the features on the Projects tab:</p><p><img src="../images/projects_full_tab_callout.gif">
+
+
+</p><ul>
+<a name="1012141"> </a>
+<li><strong>Recent Projects </strong>-- Display a list of recent projects that you can open.
+
+<a name="1012235"> </a>
+</li>
+<li>Project -- Displays the name of the project and acts as the project tree root.
+<a name="1013356"> </a>
+</li>
+<li><strong>Project Folders </strong>-- Displays the folders that you created to hold the files in your project.
+<a name="1012239"> </a>
+</li>
+<li><strong>Resources </strong>-- Displays the files in your project, organized by file type.
+<a name="1012255"> </a>
+</li>
+<li><strong>Deployment Servers </strong>-- Displays a list of Web servers to which you can upload your project.
+<a name="1017630"> </a>
+</li>
+<li><strong>Deployment Scripts</strong><strong> </strong>-- Displays a list of scripts that can be run in order to deploy the current project to its Web server(s).
+<a name="1012244"> </a>
+</li>
+<li><strong>Project Files </strong>-- Displays a list of files that exist in the current folder.
+<a name="1012266"> </a>
+</li>
+<li><strong>Open Project </strong>-- Allows you to open any project on your local or remote drives.
+<a name="1012275"> </a>
+</li>
+<li><strong>New Project </strong>-- Allows you to create a new, empty project.
+<a name="1016669"> </a>
+</li>
+<li><strong>Deploy Project:</strong> Opens the Deployment Wizard, which allows you to upload your project to the Web server.
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Project Files list that is displayed in the bottom pane of the 
+Projects tab can be treated very similarly to the file list that is 
+displayed as part of the Universal Files tab. In other words, you can 
+drag and drop files or open files for editing from this list.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>IIf</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_117.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_119.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2596842"></a>
+ <H1>IIf</H1>
+
+
+
+<p>The function evaluates its <em>condition</em> as a Boolean. If the result is TRUE, it returns the value of Evaluate(<em>string_expression1</em>); otherwise, it returns the value of Evaluate(<em>string_expression2</em>).</p><p>Prior to using IIf, please read the Usage section and Note carefully. The IIf function is primarily intended for the conditional processing of dynamic expressions.</p><p>For general conditional processing, see <a href="../2_ColdFusion_Tags/lr2_050.htm#2132119">CFIF&#32;CFELSEIF&#32;CFELSE</a>. </p><p>For error handling, see <a href="../2_ColdFusion_Tags/lr2_101.htm#1973845">CFTRY&#32;CFCATCH</a>. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_080.htm#998318">DE</a> and <a href="../3_ColdFusion_Functions/lr3_088.htm#998444">Evaluate</a>.
+</p>
+
+<a name="2596860"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>IIf</strong>(<em>condition</em>, <em>string_expression1</em>, <em>string_expression2</em>)
+</PRE><a name="2596862"> </a>
+<h5 class="param"> condition</h5>
+<p class="param">Any expression that can be evaluated as a Boolean.</p><a name="2596864"> </a>
+<h5 class="param"> string_expression1</h5>
+<p class="param">Valid string expression to be evaluated and returned if condition is TRUE.</p><a name="2596866"> </a>
+<h5 class="param"> string_expression2</h5>
+<p class="param">Valid string expression to be evaluated and returned if condition is FALSE.</p><a name="2596868"></a>
+ 
+<H3>Usage</H3>
+<p>The IIf function is a shortcut for the following construct:</p><pre>&lt;CFIF condition&gt;
+    &lt;CFSET result=Evaluate(string_expression1)&gt;
+&lt;CFELSE&gt;
+    &lt;CFSET result=Evaluate(string_expression2)&gt;
+&lt;/CFIF&gt;
+</pre><p>returning <em>result</em>.</p><p>The expressions <em>string_expression1</em> and <em>string_expression2</em> must be string expressions, so that they do not get evaluated immediately as the arguments of IIf. For example:</p><pre>IIf(y is 0, DE("Error"), x/y)
+</pre><p>will generate error if y=0 because the third argument is the value of x/0 (not a valid expression).</p><p>Remember that ColdFusion evaluates <em>string_expression1</em> and <em>string_expression2</em>. To return the string itself instead of evaluate the expression, use the <a href="../3_ColdFusion_Functions/lr3_080.htm#998318">DE</a> (delay evaluation) function.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you use pound signs (#) in either <em>string_expression1</em> or 
+<em>string_expression2</em>, ColdFusion evaluates the part of the expression that 
+is in pound signs first. By misusing pound signs, you can skew the results 
+of the IIf function. In particular, if you use pound signs around the whole 
+expression in <em>string_expression1, </em>it can cause the function to fail with the 
+error 'Error Resolving Parameter' if there is an undefined variable in<em> 
+string_expression1</em>. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>For example, &quot;LocalVar&quot; is undefined, however, the following logic functions as you would expect if you do not use pound signs around &quot;LocalVal&quot;:</p><pre>&lt;CFOUTPUT&gt;
+#IIf(IsDefined(&quot;LocalVar&quot;), &quot;LocalVar&quot;, DE(&quot;The variable is not 
+defined.&quot;))#
+&lt;/CFOUTPUT&gt;
+</pre><p>The output is:</p><pre>The variable is not defined.
+</pre><p>Whereas, the pound signs around &quot;LocalVar&quot; in the following code cause it to fail with the error message 'Error Resolving Parameter', because ColdFusion never has a chance to evaluate the original condition IsDefined(&quot;LocalVar&quot;).</p><pre>&lt;CFOUTPUT&gt;
+#IIf(IsDefined(&quot;LocalVar&quot;), DE(&quot;#LocalVar#&quot;), DE(&quot;The variable is not 
+defined.&quot;))#
+&lt;/CFOUTPUT&gt;
+</pre><p>The error message would be:</p><pre>Error resolving parameter <strong>LOCALVAR
+</strong></pre><p>The DE function has no impact on the evaluation of LocalVal, since the pound signs cause it to be evaluated immediately.</p><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="<strong>Examples</strong>IIf
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows IIf ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+IIf Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;IIf Function&lt;/H3&gt;
+
+&lt;P&gt;IIf evaluates a condition, then  performs an Evaluate on 
+string expression 1 or string expression 2 depending on the 
+Boolean outcome &lt;I&gt;(TRUE = run expression 1; FALSE = run
+expression 2)&lt;/I&gt;.
+&lt;/P&gt;
+
+&lt;P&gt;The result of the expression 
+IIf( Hour(Now()) GT 12, 
+  DE("It is afternoon or evening"), 
+    DE("It is morning"))
+is:&lt;BR&gt;
+&lt;CFOUTPUT&gt;
+#IIf( Hour(Now()) GT 12, 
+  DE("It is afternoon or evening"), 
+    DE("It is morning"))#
+&lt;/CFOUTPUT&gt;
+&lt;/P&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IIf
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_117.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_119.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

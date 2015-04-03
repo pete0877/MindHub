@@ -1,0 +1,173 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Date and Time Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_004.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_006.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2083422"></a>
+ <H1>Date and Time Functions<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_056.htm#997632">CreateDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_073.htm#998081">DatePart</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_131.htm#999416">IsLeapYear</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_074.htm#998151">Day</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_133.htm#999488">IsNumericDate</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_062.htm#997701">CreateODBCDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_075.htm#998178">DayOfWeek</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_181.htm#1001191">Minute</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_063.htm#997725">CreateODBCDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_076.htm#998205">DayOfWeekAsString</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_182.htm#1001222">Month</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_064.htm#997751">CreateODBCTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_077.htm#998235">DayOfYear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_183.htm#1001253">MonthAsString</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_065.htm#997777">CreateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_078.htm#998263">DaysInMonth</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_184.htm#1001277">Now</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_066.htm#997810">CreateTimeSpan</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_079.htm#998290">DaysInYear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_188.htm#1001568">ParseDateTime</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_069.htm#997918">DateCompare</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_095.htm#998674">FirstDayOfMonth</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_191.htm#1001635">Quarter</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_070.htm#1649018">DateConvert</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_113.htm#1654667">GetTimeZoneInfo</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_214.htm#1002182">Second</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_071.htm#1661330">DateDiff</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_115.htm#999021">Hour</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_248.htm#1002709">Week</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_072.htm#998022">DateFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_128.htm#999364">IsDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_250.htm#2599462">XMLFormat</a>
+</td></tr>
+
+</table>
+</div>
+</H1>
+
+
+
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_004.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_006.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

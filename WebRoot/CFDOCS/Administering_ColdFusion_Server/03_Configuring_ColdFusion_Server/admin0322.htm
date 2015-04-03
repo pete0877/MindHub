@@ -1,0 +1,259 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Verity Supported File Types</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0321.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0323.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1033257"></a>
+ <H1>Verity Supported File Types</H1>
+
+
+
+<p>The ColdFusion Verity implementation supports a wide array of document types. This means you can index Web pages, ColdFusion applications, and many binary document types and produce search results that include summaries of these documents. </p><p>The following table lists the supported document types.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Supported Document Types&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Documents</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Versions</strong>
+</th></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Text files</strong>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+HTML, CFML, DBM, SGML, XML, 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+N/A
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ANSI, ASCII, Plain Text
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+N/A
+</td></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Word processors</strong>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Adobe Acrobat (PDF) 
+
+Adobe FrameMaker (MIF)
+
+Aplix Words 
+
+Corel WordPerfect for Windows
+
+Corel WordPerfect for Macintosh
+
+Lotus AMI Pro 
+
+Lotus AMI Pro Write Plus
+
+Lotus Word Pro
+
+Microsoft Office
+
+MS Rich Text Format (RTF) 
+
+MS Word for Windows 
+
+MS Word for DOS 
+
+MS Word for Macintosh 
+
+MS Notepad, WordPad 
+
+MS Write, MS Works
+
+XYWrite
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+All
+
+All
+
+4.2
+
+5.x 6, 7, 8
+
+2, 3
+
+2, 3
+
+all
+
+96, 97
+
+95, 97
+
+1.x, 2.0
+
+2, 6, 95, 97
+
+4, 5, 6
+
+4.0, 5.0, 6.0
+
+all 
+
+all
+
+4.12
+</td></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Spreadsheets</strong>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Corel QuattroPro
+
+Lotus 1-2-3 for DOS/Windows
+
+Lotus 1-2-3 for OS/2
+
+MS Excel 
+
+MS Works
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+7, 8
+
+2.0, 3.0, 4.0, 5.0, '96, '97
+
+2
+
+3, 4, 5, '95, '97
+
+all
+</td></tr>
+<tr valign="top"><td valign="top" colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Presentation </strong>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Corel Presentations 
+
+Lotus Freelance
+
+MS PowerPoint
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+7.0, 8.0
+
+96, 97
+
+4.0, 95, 97
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an index of data from a directory:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a collection in the Administrator. 
+
+
+</li>
+<li>If not already selected in the list of collections, select the collection you want to populate and click Index.
+
+</li>
+<li>Edit the list of file extensions, if necessary.
+
+</li>
+<li>Enter a directory path you want to index in the form: 
+
+</li>
+<li>Enter a URL to return for documents returned in a search operation against this collection. For example, if you are indexing the ColdFusion documentation directory and subdirectories, the directory you index could be <code>c:\inetpub\wwwroot\cfdocs</code>. You would enter the return URL as:
+
+<pre><code>http://</code><em>my_server</em><code>/cfdocs/
+</code></pre></li>
+<li>Click Index. ColdFusion populates the collection with data from the specified directory.
+
+</li>
+</ol>
+<p>Note that Verity collections, including those that index query data, can be created using the CFCOLLECTION tag, and can be populated using the CFINDEX tag in your ColdFusion application pages. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0321.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0323.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

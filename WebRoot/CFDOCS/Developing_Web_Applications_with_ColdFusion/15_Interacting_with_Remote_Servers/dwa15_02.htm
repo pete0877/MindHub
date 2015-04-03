@@ -1,0 +1,102 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using CFHTTP to Interact with the Web</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000556"></a>
+ <H1>Using CFHTTP to Interact with the Web</H1>
+
+
+
+<p>The CFHTTP tag is one of the more powerful tags in the CFML tag set. You can use one of two methods to interact with a remote server using the CFHTTP tag: Get or Post. The Get method is a one-way transaction in which CFHTTP retrieves an object. By comparison, the Post method is a two-way transaction in which CFHTTP passes variables to a ColdFusion page or CGI program which then returns data, usually processing what was received.</p><a name="997364"></a>
+ 
+<H2>Allaire Alive</H2>
+<p>A video titled, "Creating Web Agents" is available at <a href="http://alive.allaire.com">http://alive.allaire.com</a>. It gives an overview of HTTP and covers the use of CFHTTP for creating automated processes such as:</p><ul>
+<li>Search agents
+
+</li>
+<li>Transaction agents
+</li>
+<li>Messaging agents
+</li>
+</ul>
+<p>The video is part of Allaire Alive, an educational service that offers Web videos on topics specific to ColdFusion development and application deployment as well as broader industry issues. The titles are available free for online viewing or download.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

@@ -1,0 +1,152 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFREPORT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_079.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_081.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2271468"></a>
+ <H1>CFREPORT</H1>
+
+
+
+<p>CFREPORT runs a predefined Crystal Reports report. </p><a name="2271470"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFREPORT REPORT="report_path"
+    ORDERBY="result_order"
+    USERNAME="username"
+    PASSWORD="password"
+    FORMULA="formula"&gt;
+&nbsp;
+&lt;/CFREPORT&gt;
+</PRE><a name="2271472"></a>
+<h4> REPORT</h4>
+<p>Required. Specifies the path of the report. Store your Crystal Reports files in the same directories that you store your ColdFusion page files.</p><a name="2271474"></a>
+<h4> ORDERBY</h4>
+<p>Optional. Orders results according to your specifications.</p><a name="2271476"></a>
+<h4> USERNAME</h4>
+<p>Optional. The username required for entry into the database from which the report is created. Overrides the default settings for the data source in the ColdFusion Administrator.</p><a name="2271478"></a>
+<h4> PASSWORD</h4>
+<p>Optional. The password that corresponds to a username required for database access. Overrides the default settings for the data source in the ColdFusion Administrator.</p><a name="2271480"></a>
+<h4> FORMULA</h4>
+<p>Optional. Specifies one or more named formulas. Terminate each formula specification with a semicolon. Use the following format:</p><pre>FORMULA="formulaname1='formula1';formulaname2='formula2';"
+
+</pre><p>If you need to use a semi-colon as part of a formula, you must escape it by typing the semi-colon twice (;;), for example:</p><pre>FORMULA="Name1='Val_1a;;Val_1b';Name2='Val2';"
+</pre><a name="2271486"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfreport
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This view-only example shows the use of CFREPORT ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFREPORT Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFREPORT Tag&lt;H3&gt;
+&lt;P&gt;CFREPORT allows reports from the Crystal Reports Professional 
+report writer to be displayed through a ColdFusion interface.  
+The CFREPORT tag requires the name of the report to run; 
+CFREPORT can also pass information to the report
+file being displayed to change the output conditions.
+
+&lt;P&gt;This example would run a report called 
+&quot;monthlysales.rpt " and pass it an optional filter condition to
+show only the information for a certain subset of the report.
+
+&lt;CFREPORT REPORT='/reports/monthlysales.rpt'&gt;
+          {Departments.Department} = `International'
+&lt;/CFREPORT&gt;
+
+&lt;P&gt;Substitute your own report files and filters for this code 
+and CFREPORT can place your existing Crystal Reports into web pages.
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfreport
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_079.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_081.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

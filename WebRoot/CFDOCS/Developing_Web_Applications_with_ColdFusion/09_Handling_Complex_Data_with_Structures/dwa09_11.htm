@@ -1,0 +1,194 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Structure Example</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1028755"></a>
+ <H1>Structure Example</H1>
+
+
+
+<p>Structures are particularly useful for grouping together a set of variables under a single name. In the following example files, structures are used to collect information from a form, <code>structinsert.cfm</code>, and to submit that information to a custom tag at <code>addemployee.cfm</code>.</p><p>These example files show how you can use a structure to pass information to a custom tag, named CF_ADDEMPLOYEE.</p><a name="1028758"></a>
+ 
+<H3>Example file structinsert.cfm</H3>
+<pre><code>&lt;!--- This example shows how to use the StructInsert
+      function. It calls the CF_ADDEMPLOYEE custom tag,
+      which uses the addemployee.cfm file. ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Add New Employees&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H1&gt;Add New Employees&lt;/H1&gt;
+
+&lt;!--- Establish parameters for first time through ---&gt;
+
+&lt;CFPARAM NAME="FORM.firstname" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.lastname" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.email" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.phone" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.department" DEFAULT=""&gt;
+
+&lt;!--- If all form fields are passed, create structure
+    named employee and add values ---&gt;
+
+&lt;CFIF #FORM.FIRSTNAME# EQ ""&gt;
+ &lt;P&gt;Please fill out the form.
+&lt;CFELSE&gt;
+  &lt;CFOUTPUT&gt;
+   &lt;CFSCRIPT&gt;
+     employee=StructNew();
+     StructInsert(employee, "firstname", "#FORM.firstname#");
+     StructInsert(employee, "lastname", "#FORM.lastname#");
+     StructInsert(employee, "email", "#FORM.email#");
+     StructInsert(employee, "phone", "#FORM.phone#");
+     StructInsert(employee, "department", "#FORM.department#");
+  &lt;/CFSCRIPT&gt; 
+</code>
+  &lt;P&gt;First name is #StructFind(employee, "firstname")#&lt;/P&gt;
+<code>  &lt;P&gt;Last name is #StructFind(employee, "lastname")#&lt;/P&gt;
+  &lt;P&gt;EMail is #StructFind(employee, "email")#&lt;/P&gt;
+  &lt;P&gt;Phone is #StructFind(employee, "phone")#&lt;/P&gt;
+  &lt;P&gt;Department is #StructFind(employee, "department")#&lt;/P&gt;
+  &lt;/CFOUTPUT&gt;
+
+  &lt;!--- Call the custom tag that adds employees ---&gt;
+
+  &lt;CF_ADDEMPLOYEE EMPINFO="#employee#"&gt;
+&lt;/CFIF&gt;
+
+&lt;HR&gt;
+&lt;FORM ACTION="structinsert.cfm" METHOD="Post"&gt;
+&lt;P&gt;First Name:&amp;nbsp;
+&lt;INPUT NAME="firstname" TYPE="text" HSPACE="30" MAXLENGTH="30"&gt;
+&lt;P&gt;Last Name:&amp;nbsp;
+&lt;INPUT NAME="lastname" TYPE="text" HSPACE="30" MAXLENGTH="30"&gt;
+&lt;P&gt;EMail:&amp;nbsp;
+</code>&lt;INPUT NAME="email" TYPE="text" HSPACE="30" MAXLENGTH="30"&gt;
+&lt;P&gt;Phone<code>:&amp;nbsp;
+</code>&lt;INPUT NAME="phone" TYPE="text" HSPACE="20" MAXLENGTH="20"&gt;
+&lt;P&gt;Department<code>:&amp;nbsp;
+</code>&lt;INPUT NAME="department" TYPE="text" HSPACE="30" MAXLENGTH="30"&gt;
+
+&lt;P&gt;
+&lt;INPUT TYPE="Submit" VALUE="OK"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><a name="1028760"></a>
+ 
+<H3>Example file addemployee.cfm</H3>
+<pre><code>&lt;P&gt;This file is an example of a custom tag used
+to add employees. Employee information is passed
+through the employee structure (the EMPINFO attribute).
+In UNIX, you must also add the Emp_ID.
+
+&lt;CFSWITCH EXPRESSION="#ThisTag.ExecutionMode#"&gt;
+    &lt;CFCASE VALUE="start"&gt;
+        &lt;CFIF StructIsEmpty(attributes.EMPINFO)&gt;
+        &lt;CFOUTPUT&gt;Error. No employee data was passed.&lt;/CFOUTPUT&gt;
+            &lt;CFEXIT METHOD="ExitTag"&gt;
+        &lt;CFELSE&gt;
+        &lt;!--- Add the employee ---&gt;
+        &lt;!--- In UNIX, you must also add the Emp_ID ---&gt;
+
+        &lt;CFQUERY NAME="AddEmployee" DATASOURCE="cfsnippets"&gt;
+            INSERT INTO Employees
+            (FirstName, LastName, Email, Phone, Department)
+            VALUES
+            &lt;CFOUTPUT&gt;
+            (
+            '#StructFind(attributes.EMPINFO, "firstname")#' ,
+            '#StructFind(attributes.EMPINFO, "lastname")#' ,
+            '#StructFind(attributes.EMPINFO, "email")#' ,
+            '#StructFind(attributes.EMPINFO, "phone")#' ,
+            '#StructFind(attributes.EMPINFO, "department")#'
+             )
+            &lt;/CFOUTPUT&gt; 
+        &lt;/CFQUERY&gt;
+        &lt;/CFIF&gt;
+    &lt;CFOUTPUT&gt;&lt;HR&gt;Employee Add Complete&lt;/CFOUTPUT&gt;
+    &lt;/CFCASE&gt;
+&lt;/CFSWITCH&gt;
+</code></pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

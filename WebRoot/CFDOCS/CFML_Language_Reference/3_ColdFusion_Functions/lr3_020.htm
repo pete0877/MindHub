@@ -1,0 +1,186 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ArrayAvg</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_019.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_021.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="996808"></a>
+ <H1>ArrayAvg</H1>
+
+
+
+<p>Returns the average of the values in the specified array.</p><a name="996810"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ArrayAvg</strong>(<em>array</em>)
+</PRE><a name="996812"> </a>
+<h5 class="param"> array</h5>
+<p class="param">Name of the array containing values you want to average.</p><a name="1798073"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ArrayAvg
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of ArrayAvg ---&gt;
+
+&lt;!--------------------------------------------------------------------- 
+This following six lines of code keep track of the form fields that can 
+be dynamically generated on the screen. It uses the Fieldnames variable
+with the ListLen function to determine the number of fields on the form. 
+-----------------------------------------------------------------------&gt;
+      
+&lt;CFSET FormElem = 2&gt;
+    &lt;CFIF Isdefined("Form.Submit")&gt;
+        &lt;CFIF Form.Submit is "More"&gt;
+            &lt;CFSET FormElem = ListLen(Form.Fieldnames)&gt;
+        &lt;/CFIF&gt;
+    &lt;/CFIF&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ArrayAvg Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ArrayAvg Example&lt;/H3&gt;
+&lt;P&gt;
+This example uses ArrayAvg to find the average of the numbers that you 
+enter into an array.&lt;BR&gt;  
+If you would like to enter more than two numbers press the &lt;b&gt;more&lt;/b&gt; 
+button.
+&lt;/P&gt;
+
+&lt;FORM ACTION="arrayavg.cfm" METHOD="post"&gt;
+
+&lt;!--------------------------------------------------------------------- 
+The following code initially creates two fields and then adds fields
+if the user presses the MORE button. Note that FormElem is initialized to
+two at the beginning of this code to indicate that the form has two 
+fields. 
+-----------------------------------------------------------------------&gt;
+      
+&lt;INPUT TYPE="submit" NAME="submit" VALUE="more"&gt;
+
+&lt;table cellspacing="2" cellpadding="2" border="0"&gt;
+&lt;CFLOOP index="LoopItem" from="1" to="#FormElem#"&gt;
+    &lt;tr&gt;
+        &lt;CFOUTPUT&gt;
+            &lt;th align="left"&gt;Number #LoopItem#&lt;/th&gt;
+            &lt;td&gt;&lt;INPUT TYPE="text" NAME="number#LoopItem#"&gt;&lt;/td&gt;
+        &lt;/CFOUTPUT&gt;
+    &lt;/tr&gt;
+&lt;/CFLOOP&gt;
+&lt;/table&gt;
+
+&lt;INPUT TYPE="submit" NAME="submit" VALUE="get the average"&gt;
+&lt;/FORM&gt;
+
+
+&lt;!--- create an array ---&gt;
+
+&lt;CFIF IsDefined("FORM.submit")&gt;
+    &lt;CFSET myNumberArray = ArrayNew(1)&gt;
+    &lt;CFSET Count = 1&gt;
+    &lt;CFLOOP index="ListItem" list="#Form.Fieldnames#"&gt;
+         &lt;CFIF Left(ListItem,3) is "Num"&gt;
+            &lt;CFSET myNumberArray[Count] = Val(Evaluate("number#Count#"))&gt;
+            &lt;CFSET count = IncrementValue(Count)&gt;
+        &lt;/CFIF&gt; 
+    &lt;/CFLOOP&gt;
+        
+    &lt;CFIF Form.Submit is "get the average"&gt;    
+        &lt;!--- use ArrayAvg to get the average of the two numbers ---&gt;
+        &lt;P&gt;The average of the numbers that you entered is
+        &lt;CFOUTPUT&gt;#ArrayAvg(myNumberArray)#.&lt;/CFOUTPUT&gt;
+    &lt;CFELSE&gt;
+        &lt;CFOUTPUT&gt;Try again. You must enter at least two numeric 
+values.&lt;/CFOUTPUT&gt;
+    &lt;/CFIF&gt;    
+&lt;/CFIF&gt;    
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ArrayAvg
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_019.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_021.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

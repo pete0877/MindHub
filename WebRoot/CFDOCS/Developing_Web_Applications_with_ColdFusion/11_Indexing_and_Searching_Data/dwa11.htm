@@ -1,0 +1,121 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Indexing and Searching Data</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_13.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="997352"></a>
+<H1>Chapter 11	<br>
+Indexing and Searching Data</H1>
+
+<p>You can provide a full-text search capability for documents and data sources on a ColdFusion site by enabling the Verity search engine.</p><a name="1035751"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_02.htm#1131318">Searching a ColdFusion Web Site</a>
+
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_03.htm#1103035">Supported File Types</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_04.htm#997471">Support for International Languages</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_05.htm#1216614">Steps in Creating a Searchable Data Source</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_06.htm#1216571">Creating a Collection</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_07.htm#997541">Populating and Indexing a Collection</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_08.htm#1201520">Building a Search Interface</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_09.htm#1220495">Indexing database query results</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_10.htm#1218384">Indexing CFLDAP Query Results</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_11.htm#1218392">Indexing CFPOP Query Results</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_12.htm#1218345">Using Query Expressions</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_13.htm#1215718">Composing Search Expressions</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_14.htm#998033">Searching with Wildcards</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_15.htm#1035205">Operators and Modifiers</a>
+</li>
+<li><a href="../11_Indexing_and_Searching_Data/dwa11_16.htm#1216886">Managing Collections</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_13.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

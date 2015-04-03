@@ -1,0 +1,188 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to ASCII Text Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0412.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0414.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1082562"></a>
+ <H1>Connecting to ASCII Text Databases</H1>
+
+
+
+<p>ColdFusion lets you access ASCII text databases on both Windows NT and UNIX, via ODBC drivers.</p><a name="1082732"></a>
+ 
+<H2>Configuring Microsoft Text options (Windows)</H2>
+<p>If ColdFusion Server is installed on a Windows NT server, you can configure ASCII text files as ColdFusion data sources using an ODBC driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Microsoft Text Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for data sources you create with the Microsoft Text driver.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Microsoft Text ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Directory
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The directory where the text files are found. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Extensions List
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Lists the file name extensions of the text files on the data source. To use all files in the directory, enter *.*. To use only those files with certain extensions, add each extension you want to use. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1082802"></a>
+ 
+<H2>Configuring Microsoft Text ODBC options (UNIX)</H2>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: MERANT Text Driver Options (Solaris)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for data sources created with the MERANT Text driver.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT Text ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Directory
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The directory where the text files are found. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Extensions List
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Lists the file name extensions of the text files on the data source. To use all files in the directory, enter *.*. To use only those files with certain extensions, add each extension you want to use. 
+</td></tr>
+
+</table>
+
+</div>
+ </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0412.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0414.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

@@ -1,0 +1,163 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Exception handling example</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa0810.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1021284"></a>
+ <H1>Exception handling example</H1>
+
+
+
+<p>The following example shows CFTRY and CFCATCH, using a sample data source called <em>company</em> and a sample included file, <code>includeme.cfm</code>.</p><p>If an exception occurs during the CFQUERY statement's execution, the application page flow switches to the CFCATCH TYPE="Database" exception handler. It then resumes with the next statement after the CFTRY block, once the CFCATCH TYPE="Database" handler completes.</p><p>Similarly, the CFCATCH TYPE="MissingInclude" block handles exceptions raised by the CFINCLUDE tag. Any unknown, but possibly recoverable, exceptions are handled by the CFCATCH TYPE="Any" block.</p><pre><code>&lt;!--- Wrap code you want to check in a CFTRY block ---&gt;
+</code>
+</pre><PRE><span class="codemark">&lt;CFTRY&gt;
+</span><pre>    &lt;CFQUERY NAME="test" DATASOURCE="company"&gt;
+        SELECT DepartmentID, FirstName, LastName
+        FROM employees
+        WHERE employeeID=#EmpID#
+    &lt;/CFQUERY&gt;
+
+    &lt;HTML&gt;
+    &lt;HEAD&gt;
+        &lt;TITLE&gt;Test CFTRY/CFCATCH&lt;/TITLE&gt;
+    &lt;/HEAD&gt;
+
+    &lt;BODY&gt;
+    &lt;HR&gt;
+    &lt;CFINCLUDE TEMPLATE="includeme.cfm"&gt;
+    &lt;CFOUTPUT QUERY="test"&gt;
+    &lt;P&gt;Department: #DepartmentID#
+    &lt;P&gt;Last Name: #LastName#
+    &lt;P&gt;First Name: #FirstName#
+    &lt;/CFOUTPUT&gt;
+
+    &lt;HR&gt;
+
+<code>&lt;!--- Use CFCATCH to test for missing included files. ---&gt;
+</code><code>&lt;!---     Print Message and Detail error messages. ---&gt;
+</code>&lt;!--- Block executes only if a MissingInclude exception is thrown. ---&gt;
+
+<span class="codemark">    &lt;CFCATCH TYPE="MissingInclude"&gt;
+</span>        &lt;H1&gt;Missing Include File&lt;/H1&gt;
+        &lt;CFOUTPUT&gt;
+        &lt;UL&gt;
+        &lt;LI&gt;&lt;B&gt;Message:&lt;/B&gt; #CFCATCH.Message#
+        &lt;LI&gt;&lt;B&gt;Detail:&lt;/B&gt; #CFCATCH.Detail#
+        &lt;LI&gt;&lt;B&gt;File name:&lt;/B&gt; #CFCATCH.MissingFilename#
+        &lt;/UL&gt;
+        &lt;/CFOUTPUT&gt;
+<span class="codemark">    &lt;/CFCATCH&gt;
+</span>
+<code>&lt;!--- Use CFCATCH to test for database errors.---&gt;
+</code><code>&lt;!---     Print error messages. ---&gt;
+</code>&lt;!--- Block executes only if a Database exception is thrown. ---&gt;
+
+
+<span class="codemark">    &lt;CFCATCH TYPE="Database"&gt;
+</span>    &lt;H1&gt;Database Error&lt;/H1&gt;
+    &lt;CFOUTPUT&gt;
+    &lt;UL&gt;
+    &lt;LI&gt;&lt;B&gt;Message:&lt;/B&gt; #CFCATCH.Message#
+    &lt;LI&gt;&lt;B&gt;Native error code:&lt;/B&gt; #CFCATCH.NativeErrorCode#
+    &lt;LI&gt;&lt;B&gt;SQLState:&lt;/B&gt; #CFCATCH.SQLState#
+    &lt;LI&gt;&lt;B&gt;Detail:&lt;/B&gt; #CFCATCH.Detail#
+    &lt;/UL&gt;
+    &lt;/CFOUTPUT&gt;
+<span class="codemark">    &lt;/CFCATCH&gt;
+</span>
+<code>&lt;!--- Use CFCATCH with TYPE="Any" ---&gt;
+</code><code>&lt;!--- to find unexpected exceptions. ---&gt;
+</code>
+<span class="codemark"><code>    &lt;CFCATCH TYPE="Any"&gt;
+</code></span><code>    &lt;H1&gt;Other Error: #CFCATCH.Type#&lt;/H1&gt;
+</code>
+<code>    &lt;CFOUTPUT&gt;
+</code><code>    &lt;UL&gt;
+</code><code>    &lt;LI&gt;&lt;B&gt;Message:&lt;/B&gt; #CFCATCH.message#
+</code><code>    &lt;LI&gt;&lt;B&gt;Detail:&lt;/B&gt; #CFCATCH.Detail#
+</code><code>    &lt;/UL&gt;
+</code><code>    &lt;/CFOUTPUT&gt;
+</code><span class="codemark"><code>    &lt;/CFCATCH&gt;
+</code></span></pre><span class="codemark"><code>&lt;/CFTRY&gt;
+</code></span></pre><pre><code>    &lt;/BODY&gt;
+</code><code>    &lt;/HTML&gt;
+</code></pre></PRE>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa0810.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

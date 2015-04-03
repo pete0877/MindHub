@@ -1,0 +1,313 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFTEXTINPUT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_095.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_097.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1973223"></a>
+ <H1>CFTEXTINPUT</H1>
+
+
+
+<p>The CFTEXTINPUT form custom control allows you to place a single-line text entry box in a <a href="../2_ColdFusion_Tags/lr2_040.htm#1968844">CFFORM</a>. In addition to input validation, the tag gives you control over all font characteristics. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>CFTEXTINPUT incorporates a Java applet, so a browser must be Java-
+enabled for CFTEXTINPUT to work properly.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1973228"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFTEXTINPUT NAME="name"
+    VALUE="text"
+    REQUIRED="Yes/No"
+    RANGE="min_value, max_value"
+    VALIDATE="data_type"
+    ONVALIDATE="script_name"
+    MESSAGE="text"
+    ONERROR="text"
+    SIZE="integer"
+    FONT="font_name"
+    FONTSIZE="integer"
+    ITALIC="Yes/No"
+    BOLD="Yes/No"
+    HEIGHT="integer"
+    WIDTH="integer"
+    VSPACE="integer"
+    HSPACE="integer"
+    ALIGN="alignment"
+    BGCOLOR="color"
+    TEXTCOLOR="color"
+    MAXLENGTH="integer"
+    NOTSUPPORTED="text"&gt;
+</PRE><a name="1973230"></a>
+<h4> NAME</h4>
+<p>Required. A name for the CFTEXTINPUT control.</p><a name="1973232"></a>
+<h4> VALUE</h4>
+<p>Optional. Initial value that appears in the text control.</p><a name="1973234"></a>
+<h4> REQUIRED</h4>
+<p>Optional. Yes or No. If Yes, the user must enter or change text. Default is No.</p><a name="1973236"></a>
+<h4> RANGE</h4>
+<p>Optional. Enter a minimum value, maximum value range separated by a comma. Valid only for numeric data. </p><a name="1973238"></a>
+<h4> VALIDATE</h4>
+<p>Optional. Valid entries are:</p><ul>
+<a name="1973240"> </a>
+<li>date -- Verifies US date entry in the form <em>mm/dd/yy</em>. 
+
+<a name="1973241"> </a>
+</li>
+<li>eurodate -- Verifies valid European date entry in the form <em>dd/mm/yyyy</em>. 
+<a name="1973242"> </a>
+</li>
+<li>time <strong>--</strong> Verifies a time entry in the form <em>hh:mm:ss</em>. 
+<a name="1973243"> </a>
+</li>
+<li>float -- Verifies a floating point entry. 
+<a name="1973244"> </a>
+</li>
+<li>integer -- Verifies an integer entry. 
+<a name="1973245"> </a>
+</li>
+<li>telephone -- Verifies a telephone entry. Telephone data must be entered as ###-###-####. The hyphen separator (-) can be replaced with a blank. The area code and exchange must begin with a digit between 1 and 9.
+<a name="1973246"> </a>
+</li>
+<li>zipcode -- (U.S. formats only) Number can be a 5-digit or 9-digit zip in the form #####-####. The hyphen separator (-) can be replaced with a blank.
+<a name="1973247"> </a>
+</li>
+<li>creditcard -- Blanks and dashes are stripped and the number is verified using the mod10 algorithm.
+<a name="1973248"> </a>
+</li>
+<li>social_security_number -- Number must be entered as ###-##-####. The hyphen separator (-) can be replaced with a blank.
+</li>
+</ul>
+<a name="1973249"></a>
+<h4> ONVALIDATE</h4>
+<p>Optional. The name of a valid JavaScript function used to validate user input. The form object, input object, and input object value are passed to the specified routine, which should return TRUE if validation succeeds and FALSE otherwise. When used, the VALIDATE attribute is ignored.</p><a name="1973251"></a>
+<h4> MESSAGE</h4>
+<p>Optional. Message text to appear if validation fails.</p><a name="1973253"></a>
+<h4> ONERROR</h4>
+<p>Optional. The name of a valid JavaScript function you want to execute in the event of a failed validation. </p><a name="1973255"></a>
+<h4> SIZE</h4>
+<p>Optional. Number of characters displayed before horizontal scroll bar appears.</p><a name="1973257"></a>
+<h4> FONT</h4>
+<p>Optional. Font name for text.</p><a name="1973259"></a>
+<h4> FONTSIZE</h4>
+<p>Optional. Font size for text.</p><a name="1973261"></a>
+<h4> ITALIC</h4>
+<p>Optional. Enter Yes for italicized text, No for normal text. Default is No.</p><a name="1973263"></a>
+<h4> BOLD</h4>
+<p>Optional. Enter Yes for boldface text, No for medium text. Default is No.</p><a name="1973265"></a>
+<h4> HEIGHT</h4>
+<p>Optional. Height value of the control, in pixels.</p><a name="1973267"></a>
+<h4> WIDTH</h4>
+<p>Optional. Width value of the control, in pixels. </p><a name="1973269"></a>
+<h4> VSPACE</h4>
+<p>Optional. Vertical spacing of the control, in pixels.</p><a name="1973271"></a>
+<h4> HSPACE</h4>
+<p>Optional. Horizontal spacing of the control, in pixels. </p><a name="1973273"></a>
+<h4> ALIGN</h4>
+<p>Optional. Alignment value. Valid entries are:</p><ul>
+<a name="1973275"> </a>
+<li>Top
+
+<a name="1973276"> </a>
+</li>
+<li>Left
+<a name="1973277"> </a>
+</li>
+<li>Bottom
+<a name="1973278"> </a>
+</li>
+<li>Baseline
+<a name="1973279"> </a>
+</li>
+<li>TextTop
+<a name="1973280"> </a>
+</li>
+<li>AbsBottom
+<a name="1973281"> </a>
+</li>
+<li>Middle
+<a name="1973282"> </a>
+</li>
+<li>AbsMiddle
+<a name="1973283"> </a>
+</li>
+<li>Right
+</li>
+</ul>
+<a name="1973284"></a>
+<h4> BGCOLOR</h4>
+<p>Optional. Background color of the control. Valid entries are:</p><ul>
+<a name="1973286"> </a>
+<li>black
+
+<a name="1973287"> </a>
+</li>
+<li>magenta
+<a name="1973288"> </a>
+</li>
+<li>cyan
+<a name="1973289"> </a>
+</li>
+<li>orange
+<a name="1973290"> </a>
+</li>
+<li>darkgray
+<a name="1973291"> </a>
+</li>
+<li>pink
+<a name="1973292"> </a>
+</li>
+<li>gray
+<a name="1973293"> </a>
+</li>
+<li>white
+<a name="1973294"> </a>
+</li>
+<li>lightgray
+<a name="1973295"> </a>
+</li>
+<li>yellow
+</li>
+</ul>
+<p>A hex value can also be entered in the form: </p><pre>BGCOLOR="##<em>xxxxxx</em>"
+</pre><p>Where <em>x </em>is 0-9 or A-F. Use either two pound signs or no pound signs.</p><a name="1973299"></a>
+<h4> TEXTCOLOR</h4>
+<p>Optional. Text color for the control. See BGCOLOR for color options.</p><a name="1973301"></a>
+<h4> MAXLENGTH</h4>
+<p>Optional. The maximum length of text entered.</p><a name="1973303"></a>
+<h4> NOTSUPPORTED</h4>
+<p>Optional. The text you want to display if the page containing a Java applet-based CFFORM control is opened by a browser that does not support Java or has Java support disabled. For example:</p><pre>NOTSUPPORTED="&lt;B&gt; Browser must support Java to
+view ColdFusion Java Applets&lt;/B&gt;"
+</pre><p>By default, if no message is specified, the following message appears:</p><pre>&lt;B&gt;Browser must support Java to &lt;BR&gt;
+view ColdFusion Java Applets!&lt;/B&gt;
+</pre><a name="2045392"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cftextinput
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFTEXTINPUT ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFTEXTINPUT Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+
+&lt;H3&gt;CFTEXTINPUT Example&lt;/H3&gt;
+
+CFTEXTINPUT can be used to provide simple validation for text
+fields in CFFORM and to have control over font information
+displayed in CFFORM input boxes for text.  For example, the field
+provided below must not
+be blank, and provides a client-side message upon erring.
+
+&lt;CFFORM ACTION="cftextinput.cfm" METHOD="POST" ENABLECAB="Yes"&gt;
+
+&lt;CFIF IsDefined("form.myInput")&gt;
+&lt;H3&gt;You entered &lt;CFOUTPUT&gt;#form.myInput#&lt;/CFOUTPUT&gt; into the text box
+  &lt;/H3&gt;
+&lt;/CFIF&gt;
+
+&lt;CFTEXTINPUT NAME="myInput" FONT="Courier" FONTSIZE=12 
+  VALUE="Look, this text is red!" TEXTCOLOR="FF0000" 
+    MESSAGE="This field must not be blank" REQUIRED="Yes"&gt;
+
+&lt;INPUT TYPE="Submit" NAME="" VALUE="submit"&gt;
+&lt;/CFFORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cftextinput
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_095.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_097.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

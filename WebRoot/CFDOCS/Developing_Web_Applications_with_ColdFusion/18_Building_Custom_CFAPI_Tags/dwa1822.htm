@@ -1,0 +1,310 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Interface Query</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1821.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1823.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1021050"></a>
+ <H1>Interface Query</H1>
+
+
+
+<p>public abstract interface Query</p><p>Interface to a query used or created by a CustomTag. A query contains tabular data organized by named columns and rows<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Method Summary</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>int
+</PRE></td><td valign="top"><PRE>addRow() 
+</PRE></td><td valign="top">
+Adds a new row to the query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>int
+</PRE></td><td valign="top"><PRE>getColumnIndex(String name) 
+</PRE></td><td valign="top">
+Retrieves the index of a column given its name.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>String[]
+</PRE></td><td valign="top"><PRE>getColumns() 
+</PRE></td><td valign="top">
+Retrieves a list of the column names contained in the query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>String
+</PRE></td><td valign="top"><PRE>getData(int iRow, int iCol) 
+</PRE></td><td valign="top">
+Retrieves a data element from a row and column of the query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>String
+</PRE></td><td valign="top"><PRE>getName() 
+</PRE></td><td valign="top">
+Retrieves the name of the query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>int
+</PRE></td><td valign="top"><PRE>getRowCount() 
+</PRE></td><td valign="top">
+Retrieves the number of rows in the query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>void
+</PRE></td><td valign="top"><PRE>setData(int iRow, int iCol, 
+String data) 
+</PRE></td><td valign="top">
+Sets a data element within a row and column of the query.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1020592"></a>
+ 
+<H2>Method Detail</H2>
+<a name="1021125"></a>
+ 
+<H3>getName</H3>
+<pre>public String getName()
+</pre><p>Retrieves the name of the query. 
+</p><p>The following example retrieves the name of the query and writes it back to the 
+user: 
+</p><pre>   Query query = request.getQuery() ;
+   response.write( "The query name is: " + query.getName() ) ; 
+</pre><a name="1020598"></a>
+<h4> Returns: </h4>
+<p>The name of the query.
+</p><a name="1020603"></a>
+ 
+<H3>getRowCount</H3>
+<pre>public int getRowCount()
+</pre><p>Retrieves the number of rows in the query. 
+</p><p>The following example retrieves the number of rows in a query and writes it back 
+to the user: 
+</p><pre>   Query query = request.getQuery() ;
+   int rows = query.getRowCount() ;
+   response.write( "The number of rows in the query is " 
+                      + Integer.toString(rows) ) ; 
+</pre><a name="1020611"></a>
+<h4> Returns: </h4>
+<p>The number of rows contained in the query.
+</p><a name="1020616"></a>
+ 
+<H3>getColumnIndex</H3>
+<pre><code>public int getColumnIndex(String name)
+</code></pre><p>Retrieves the index of a column given its name. 
+</p><p>The following example retrieves the index of the EMAIL column and uses it to 
+output a list of the addresses contained in the column:
+</p><pre>   // Get the index of the EMAIL column
+   int iEMail = query.getColumnIndex( "EMAIL" ) ;
+
+   // Iterate over the query and output list of addresses
+   int nRows = query.getRowCount() ;
+   for( int iRow=1; iRow&lt;=nRows; iRow++ )
+   {
+      response.write( query.getData( iRow, iEMail ) + "&lt;BR&gt;" ) ;
+   } 
+</pre><a name="1020629"></a>
+<h4> Parameters: </h4>
+<p><code>name</code> -- Name of column to get index of (lookup is case insensitive) 
+</p><a name="1020631"></a>
+<h4> Returns: </h4>
+<p>The index of the column (returns -1 if no such column exists). 
+</p><a name="1020633"></a>
+<h4> See Also: </h4>
+<pre>getColumns, getData
+</pre><a name="1020638"></a>
+ 
+<H3>getColumns</H3>
+<pre>public String[] getColumns()
+</pre><p>Retrieves a list of the column names contained in the query. 
+</p><p>The following example retrieves the array of columns and then iterates over the 
+list, writing each column name back to the user: 
+</p><pre>   // Get the list of columns from the query
+   String[] columns = query.getColumns() ;
+   int nNumColumns = columns.length ;                    
+
+   // Print the list of columns to the user
+   response.write( "Columns in query: " ) ;
+   for( int i=0; i&lt;nNumColumns; i++ )
+   {
+      response.write( columns[i] + " " ) ;
+   } 
+</pre><a name="1020652"></a>
+<h4> Returns: </h4>
+<p>An array of strings containing the names of the columns in the query.
+</p><a name="1020657"></a>
+ 
+<H3>getData</H3>
+<pre>public String getData(int iRow,
+                      int iCol)
+               throws IndexOutOfBoundsException
+</pre><p>Retrieves a data element from a row and column of the query. Row and column 
+indexes begin with 1. You can determine the number of rows in the query by 
+calling     getRowCount. You can determine the columns in the query by calling     
+getColumns. 
+</p><p>The following example iterates over the rows of the query and writes the data back 
+to the user in a simple, space-delimited format: 
+</p><pre>   int iRow, iCol ;
+   int nNumCols = query.getColumns().length ;
+   int nNumRows = query.getRowCount() ;
+   for ( iRow=1; iRow&lt;=nNumRows; iRow++ )
+   {
+      for ( iCol=1; iCol&lt;=nNumCols; iCol++ )
+      {
+         response.write( query.getData( iRow, iCol ) + " " ) ;
+      }
+      response.write( "&lt;BR&gt;" ) ;
+   } 
+</pre><a name="1020674"></a>
+<h4> Parameters: </h4>
+<p><code>iRow</code> -- Row to retrieve data from (1-based) 
+</p><p><code>iCol</code> -- Column to retrieve data from (1-based) 
+</p><a name="1020677"></a>
+<h4> Returns: </h4>
+<p>The value of the requested data element. 
+</p><a name="1020679"></a>
+<h4> Throws: </h4>
+<p><code>IndexOutOfBoundsException</code> - If an invalid index is passed to the method. 
+</p><a name="1020681"></a>
+<h4> See Also: </h4>
+<pre>setData,     addRow
+</pre><a name="1020686"></a>
+ 
+<H3>addRow</H3>
+<pre>public int addRow()
+</pre><p>Adds a new row to the query. Call this method each time you want to append a row 
+to the query. 
+</p><p>The following example demonstrates the addition of 2 rows to a query that has 3 
+columns ('City', 'State', and 'Zip'): 
+</p><pre>   // Define column indexes
+   int iCity = 1, iState = 2, iZip = 3 ;
+      
+   // First row
+   int iRow = query.addRow() ;
+   query.setData( iRow, iCity, "Minneapolis" ) ;
+   query.setData( iRow, iState, "MN" ) ;
+   query.setData( iRow, iZip, "55345" ) ;
+
+   // Second row
+   iRow = query.addRow() ;
+   query.setData( iRow, iCity, "St. Paul" ) ;
+   query.setData( iRow, iState, "MN" ) ;
+   query.setData( iRow, iZip, "55105" ) ; 
+</pre><a name="1020704"></a>
+<h4> Returns: </h4>
+<p>The index of the row that was appended to the query. 
+</p><a name="1020706"></a>
+<h4> See Also: </h4>
+<pre>setData,     getData
+</pre><a name="1020711"></a>
+ 
+<H3>setData</H3>
+<pre>public void setData(int iRow,
+                    int iCol,
+                    String data)
+             throws IndexOutOfBoundsException
+</pre><p>Sets a data element within a row and column of the query. Row and column 
+indexes begin with 1. Before calling setData for a given row you should be sure to 
+call     addRow and use the return value as the row index for your call to setData. 
+</p><p>The following example demonstrates the addition of 2 rows to a query that has 3 
+columns ('City', 'State', and 'Zip'): 
+</p><pre>   // Define column indexes
+   int iCity = 1, iState = 2, iZip = 3 ;
+      
+   // First row
+   int iRow = query.addRow() ;
+   query.setData( iRow, iCity, "Minneapolis" ) ;
+   query.setData( iRow, iState, "MN" ) ;
+   query.setData( iRow, iZip, "55345" ) ;
+
+   // Second row
+   iRow = query.addRow() ;
+   query.setData( iRow, iCity, "St. Paul" ) ;
+   query.setData( iRow, iState, "MN" ) ;
+   query.setData( iRow, iZip, "55105" ) ; 
+</pre><a name="1020732"></a>
+<h4> Parameters: </h4>
+<p><code>iRow</code> -- Row of data element to set (1-based) 
+</p><p><code>iCol</code> -- Column of data element to set (1-based) 
+</p><p><code>data</code> -- New value for data element 
+</p><a name="1020736"></a>
+<h4> Throws: </h4>
+<p><code>IndexOutOfBoundsException</code> -- If an invalid index is passed to the method. 
+</p><a name="1020738"></a>
+<h4> See Also: </h4>
+<pre>getData,     addRow
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1821.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1823.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

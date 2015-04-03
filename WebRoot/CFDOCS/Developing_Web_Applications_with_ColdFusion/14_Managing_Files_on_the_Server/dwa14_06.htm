@@ -1,0 +1,127 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Moving, Renaming, Copying, and Deleting Server Files</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 14	:&nbsp;&nbsp;Managing Files on the Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997625"></a>
+ <H1>Moving, Renaming, Copying, and Deleting Server Files</H1>
+
+
+
+<p>With CFFILE, you can create application pages to manage files on your Web server. You can use the tag to move files from one directory to another, rename files, copy a file, or delete a file.</p><p>The examples below show static values for many of the attributes. However, the value of all or part of any attribute in a CFFILE tag can be a dynamic parameter. This makes CFFILE a very powerful tool.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Examples of moving, renaming, copying, and deleting server files</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Action</strong>
+</th><th align="left">
+<strong>Example code</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Move a file
+</td><td valign="top"><PRE>&lt;CFFILE ACTION="Move"
+    SOURCE="c:\files\upload\KeyMemo.doc"
+    DESTINATION="c:\files\memo\"&gt;
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Rename a file
+</td><td valign="top"><pre>&lt;CFFILE ACTION="Rename"
+    SOURCE="c:\files\memo\KeyMemo.doc"
+    DESTINATION="c:\files\memo\OldMemo.doc"&gt;
+</pre></td></tr>
+<tr valign="top"><td valign="top">
+Copy a file
+</td><td valign="top"><pre>&lt;CFFILE ACTION="Copy"
+    SOURCE="c:\files\upload\KeyMemo.doc"
+    DESTINATION="c:\files\backup\"&gt;
+</pre></td></tr>
+<tr valign="top"><td valign="top">
+Delete a file
+</td><td valign="top"><pre>&lt;CFFILE ACTION="Delete"
+    FILE="c:\files\upload\oldfile.txt"&gt;
+</pre></td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

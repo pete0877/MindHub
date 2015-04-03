@@ -1,0 +1,13 @@
+
+TD.Data {
+	font-family:Arial,Helvetica,Geneva,Sans Serif;
+	font-size:9pt;
+    border-right-style:solid;
+    border-right-width:1px;
+    border-right-color:#EEEEEE;
+}
+
+TD.DataNoBorder {
+	font-family:Arial,Helvetica,Geneva,Sans Serif;
+    font-size:9pt;
+}

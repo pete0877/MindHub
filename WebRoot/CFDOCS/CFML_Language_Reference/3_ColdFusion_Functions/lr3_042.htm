@@ -1,0 +1,139 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>BitMaskClear</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_041.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_043.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997197"></a>
+ <H1>BitMaskClear</H1>
+
+
+
+<p>Returns <em>number</em> bitwise cleared with <em>length </em>bits beginning from <em>start</em>.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_043.htm#997230">BitMaskRead</a> and <a href="../3_ColdFusion_Functions/lr3_044.htm#997263">BitMaskSet</a>.
+</p>
+
+<a name="997200"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>BitMaskClear</strong>(<em>number</em>, <em>start</em>, <em>length</em>)
+</PRE><a name="997202"> </a>
+<h5 class="param"> number</h5>
+<p class="param">Long integer to be masked.</p><a name="997203"> </a>
+<h5 class="param"> start</h5>
+<p class="param">Integer specifying the starting bit for masking.</p><a name="997204"> </a>
+<h5 class="param"> length</h5>
+<p class="param">Integer specifying the length of mask.</p><a name="997205"></a>
+ 
+<H3>Usage</H3>
+<p>Parameters <em>start</em> and <em>length</em> must be in the range from 0 to 31. </p><p>Bit functions operate on 32-bit integers.</p><a name="1799095"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="BitMaskClear
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows BitMaskClear ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;BitMaskClear Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;BitMaskClear Example&lt;/H3&gt;
+
+&lt;P&gt;Returns number bitwise cleared with
+length bits beginning from start.
+
+&lt;P&gt;BitMaskClear(255, 4, 4): &lt;CFOUTPUT&gt;#BitMaskClear(255, 4, 4)#
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;BitMaskClear(255, 0, 4): &lt;CFOUTPUT&gt;#BitMaskClear(255, 0, 4)#
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;BitMaskClear(128, 0, 7): &lt;CFOUTPUT&gt;#BitMaskClear(128, 0, 7)#
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="BitMaskClear
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_041.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_043.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

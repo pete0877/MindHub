@@ -1,0 +1,139 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListToArray</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_158.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_160.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1706563"></a>
+ <H1>ListToArray</H1>
+
+
+
+<p>Converts the specified list into an array. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_035.htm#997073">ArrayToList</a>. 
+</p>
+
+<a name="1706569"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListToArray</strong>(<em>list</em> [, <em>delimiter</em> ])
+</PRE><a name="1706571"> </a>
+<h5 class="param"> list</h5>
+<p class="param">Name of the list variable that contains the elements to be used to build an array. You can define a list variable with a CFSET statement. The items in the list must be separated by commas or otherwise delimited.</p><a name="1706573"> </a>
+<h5 class="param"> delimiter</h5>
+<p class="param">Specify the character(s) used to delimit elements in the list. Default is comma ( , ). </p><a name="1804497"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListToArray
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ListToArray ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ListToArray Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ListToArray Example&lt;/H3&gt;
+
+&lt;!--- Find a list of users who wrote messages ---&gt;
+&lt;CFQUERY NAME="GetMessageUser" DATASOURCE="cfsnippets"&gt;
+SELECT    Username, Subject, Posted
+FROM    Messages
+&lt;/CFQUERY&gt;
+
+&lt;CFSET myList = ValueList(GetMessageUser.UserName)&gt;
+&lt;P&gt;My list is a list with &lt;CFOUTPUT&gt;#ListLen(myList)#&lt;/CFOUTPUT&gt;
+  elements.
+&lt;CFSET myArrayList = ListToArray(myList)&gt;
+&lt;P&gt;My array list is an array with &lt;CFOUTPUT&gt;#ArrayLen(myArrayList)#
+  &lt;/CFOUTPUT&gt; elements.
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListToArray
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_158.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_160.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

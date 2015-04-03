@@ -1,0 +1,212 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>GetLocale</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_105.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_107.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2646194"></a>
+ <H1>GetLocale</H1>
+
+
+
+<p>Returns the locale for the current request. Locales are determined by the native operating system. </p><p>A locale is an encapsulation of the set of attributes that govern the display and formatting of international date, time, number, and currency values.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_215.htm#1002208">SetLocale</a>. 
+</p>
+
+<a name="1603906"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>GetLocale</strong>()
+</PRE><a name="1603908"></a>
+ 
+<H3>Locale support</H3>
+<p>ColdFusion can be expected to support the following locales with a default Windows NT installation. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Locales Supported by ColdFusion</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Dutch (Belgian)
+</td><td valign="top">
+French (Canadian)
+</td><td valign="top">
+Norwegian (Bokmal)
+</td></tr>
+<tr valign="top"><td valign="top">
+Dutch (Standard)
+</td><td valign="top">
+French (Standard)
+</td><td valign="top">
+Norwegian (Nynorsk)
+</td></tr>
+<tr valign="top"><td valign="top">
+English (Australian)
+</td><td valign="top">
+French (Swiss)
+</td><td valign="top">
+Portuguese (Brazilian)
+</td></tr>
+<tr valign="top"><td valign="top">
+English (Canadian)
+</td><td valign="top">
+German (Austrian)
+</td><td valign="top">
+Portuguese (Standard)
+</td></tr>
+<tr valign="top"><td valign="top">
+English (New Zealand)
+</td><td valign="top">
+German (Standard)
+</td><td valign="top">
+Spanish (Mexican)
+</td></tr>
+<tr valign="top"><td valign="top">
+English (UK)
+</td><td valign="top">
+German (Swiss)
+</td><td valign="top">
+Spanish (Modern)
+</td></tr>
+<tr valign="top"><td valign="top">
+English (US)
+</td><td valign="top">
+Italian (Standard)
+</td><td valign="top">
+Spanish (Standard)
+</td></tr>
+<tr valign="top"><td valign="top">
+French (Belgian)
+</td><td valign="top">
+Italian (Swiss)
+</td><td valign="top">
+Swedish
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The variable Server.ColdFusion.SupportedLocales is initialized at startup 
+with a comma-delimited list of the locales that ColdFusion and the 
+operating system support. GetLocale( ) will return an entry from that list. 
+SetLocale will fail if called with a locale name not on that list.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1802124"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetLocale
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows GetLocale ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;GetLocale Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;GetLocale Example&lt;/H3&gt;
+
+&lt;P&gt;GetLocale returns the locale for the current 
+request.  Locales are determined by the native
+operating system.
+
+&lt;P&gt;A locale is an encapsulation of the set of attributes
+that govern the display and formatting of international
+date, time, number, and currency values.
+
+&lt;P&gt;The locale for this system is &lt;CFOUTPUT&gt;#GetLocale()#&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetLocale
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_105.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_107.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Answers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Welcome to ColdFusion Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1060124"></a>
+ <H1>Getting Answers</H1>
+
+
+
+<p>One of the best ways to solve particular programming problems is to tap into the vast expertise of the ColdFusion developer community on the <a href="http://forums.allaire.com">Allaire Forums</a>. Other ColdFusion developers on the forum can help you figure out how to do just about anything with ColdFusion. The search facility can also help you search messages going back 12 months, allowing you to learn how others have solved a problem you may be facing. The Forums is a great resource for learning ColdFusion, but it's also a great place to see the ColdFusion developer community in action.</p><a name="1060128"></a>
+ 
+<H2>Contacting Allaire</H2>
+<p>&nbsp;</p><a name="1060132"></a>
+ 
+<H3>Corporate headquarters</H3>
+<p>Allaire Corporation<br>One Alewife Center<br>Cambridge, MA 02140</p><p>Tel: 617.761.2000<br>Fax: 617.761.2001</p><p><a href="http://www.allaire.com">http://www.allaire.com</a></p><a name="1060137"></a>
+ 
+<H3>Technical support</H3>
+<p>Telephone support is available Monday through Friday 8 A.M. to 8 P.M. Eastern time (except holidays)</p><p>Toll Free: 888.939.2545 (U.S. and Canada)</p><p>Tel: 617.761.2100 (outside U.S. and Canada)</p><p>For complete details about Allaire Product Support options, please refer to the Allaire Support pages on the Allaire web site: <a href="http://www.allaire.com/support">http://www.allaire.com/support</a>.</p><p>Postings to the ColdFusion Support Forum (<a href="http://forums.allaire.com">http://forums.allaire.com</a>) can be made any time.</p><a name="1060145"></a>
+ 
+<H3>Sales</H3>
+<p>Toll Free:<strong> </strong>888.939.2545</p><p>Tel: 617.761.2100<br>Fax: 617.761.2101</p><p>Email: sales@allaire.com</p><p>Online Store: <a href="http://www.allaire.com/store">http://www.allaire.com/store</a> </p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:29 -->
+</body>
+</html>

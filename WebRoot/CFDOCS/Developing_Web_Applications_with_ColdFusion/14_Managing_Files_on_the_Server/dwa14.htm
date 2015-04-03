@@ -1,0 +1,105 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Managing Files on the Server</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="999238"></a>
+<H1>Chapter 14	<br>
+Managing Files on the Server</H1>
+
+<p>The CFFILE, CFDIRECTORY, and CFCONTENT tags handle browser/server file management tasks. To perform server-to-server operations, use the CFFTP tag.</p><a name="999338"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_02.htm#999251">Using CFFILE</a>
+
+</li>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_03.htm#997367">Uploading Files</a>
+</li>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_04.htm#997467">Setting File and Directory Attributes</a>
+</li>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_05.htm#997492">Evaluating the Results of a File Upload</a>
+</li>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_06.htm#997625">Moving, Renaming, Copying, and Deleting Server Files</a>
+</li>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_07.htm#999230">Reading, Writing, and Appending to a Text File</a>
+</li>
+<li><a href="../14_Managing_Files_on_the_Server/dwa14_08.htm#999447">Performing Directory Operations</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

@@ -1,0 +1,145 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>DeleteClientVariable</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_083.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_085.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998398"></a>
+ <H1>DeleteClientVariable</H1>
+
+
+
+<p>Deletes the client variable specified by <em>name</em>. Returns a Boolean TRUE when variable is successfully deleted, even if variable did not previously exist. To test for the existence of a variable, use IsDefined.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_101.htm#1274656">GetClientVariablesList</a>.
+</p>
+
+<a name="998401"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>DeleteClientVariable</strong>("<em>name</em>")
+</PRE><a name="998403"> </a>
+<h5 class="param"> name</h5>
+<p class="param">Name of a client variable to be deleted, surrounded by double quotes.</p><a name="998404"></a>
+ 
+<H3>Usage</H3>
+<p>If the client variable specified by <em>name</em> does not exist, an error is returned.</p><a name="1801186"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DeleteClientVariable
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This view-only example shows DeleteClientVariable ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;DeleteClientVariable Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;!--- this example is view only ---&gt;
+&lt;H3&gt;DeleteClientVariable Example&lt;/H3&gt;
+
+&lt;P&gt;This view-only example deletes a client variable called
+"User_ID", if it exists in the list of client variables
+returned by GetClientVariablesList().
+&lt;P&gt;This example requires the existance of an Application.cfm file
+and that client management be in effect.
+&lt;!--- 
+&lt;CFSET client.somevar=""&gt;
+&lt;CFSET client.user_id=""&gt;
+&lt;P&gt;Client variable list:&lt;CFOUTPUT&gt;#GetClientVariablesList()#&lt;/CFOUTPUT&gt;
+&lt;CFIF ListFindNoCase(GetClientVariablesList(), "User_ID") is not 0&gt;
+&lt;!--- delete that variable 
+    &lt;CFSET temp = DeleteClientVariable("User_ID")&gt;
+    &lt;P&gt;Was variable "User_ID" Deleted? &lt;CFOUTPUT&gt;#temp#&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;P&gt;Amended Client variable list:&lt;CFOUTPUT&gt;#GetClientVariablesList()#
+  &lt;/CFOUTPUT&gt;
+---&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DeleteClientVariable
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_083.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_085.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

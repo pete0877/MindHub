@@ -1,0 +1,149 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ZipBrowser Example </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa188.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1810.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1014993"></a>
+ <H1>ZipBrowser Example </H1>
+
+
+
+<p>The following example illustrates the use of the <code>Request</code>, <code>Response</code>, and <code>Query</code> objects. The example uses the <code>java.util.zip</code> package to implement a Java CFX called <code>ZipBrowser,</code> which is a zip file browsing tag. </p><p>The fully qualified path of the zip archive to browse is specified using the <code>ARCHIVE</code> attribute. The name of the query to return to the calling page is specified using the <code>NAME</code> attribute. The query returned contains three columns: Name, Size, and Compressed.</p><p>For example, to query an archive at the path <code>c:\logfiles.zip</code> for its contents and to output the results you would use the following CFML code:</p><pre>&lt;CFX_ZipBrowser
+      ARCHIVE="c:\logfiles.zip"
+      NAME="LogFiles" &gt;
+
+&lt;CFOUTPUT QUERY="LogFiles"&gt;
+#Name#,  #Size#, #Compressed# &lt;BR&gt;
+&lt;/CFOUTPUT&gt;        
+</pre><p>The Java implementation of <code>ZipBrowser</code> is as follows:</p><pre>import com.allaire.cfx.* ;
+import java.util.Hashtable ;
+import java.io.FileInputStream ;
+import java.util.zip.* ;
+
+public class ZipBrowser implements CustomTag 
+{
+   public void processRequest( Request request, Response response ) 
+      throws Exception
+   {
+      // validate that required attributes were passed
+      if (  !request.attributeExists( "ARCHIVE" ) ||
+            !request.attributeExists( "NAME" ) )
+      {
+         throw new Exception( 
+            "Missing attribute (ARCHIVE and NAME are both " +
+            "required attributes for this tag)" ) ;
+      }
+     // get attribute values
+      String strArchive = request.getAttribute( "ARCHIVE" ) ;      
+      String strName = request.getAttribute( "NAME" ) ;       
+   
+    // create a query to use for returning the list of files
+      String[] columns = { "Name", "Size", "Compressed" } ;
+      int iName = 1, iSize = 2, iCompressed = 3 ;
+      Query files = response.addQuery( strName, columns ) ;  
+      
+    // read the zip file and build a query from its contents
+      ZipInputStream zin = 
+         new ZipInputStream( new FileInputStream(strArchive) ) ;     
+      ZipEntry entry ;
+      while ( ( entry = zin.getNextEntry()) != null )
+      {
+         // add a row to the results
+         int iRow = files.addRow() ;
+         
+         // populate the row with data
+         files.setData( iRow, iName, 
+            entry.getName() ) ;
+         files.setData( iRow, iSize, 
+            String.valueOf(entry.getSize()) ) ;
+         files.setData( iRow, iCompressed, 
+            String.valueOf(entry.getCompressedSize()) ) ;
+         
+         // finish up with entry
+         zin.closeEntry() ;
+      }
+
+      // close the archive
+      zin.close() ;
+   }    
+}
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa188.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1810.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

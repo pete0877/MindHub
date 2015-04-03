@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to OpenIngress Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin047.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0410.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1094641"></a>
+ <H1>Connecting to OpenIngress Databases</H1>
+
+
+
+<p>ColdFusion lets you access Computer Associates OpenIngress databases from UNIX, via ODBC drivers.</p><a name="1092984"></a>
+ 
+<H2>Configuring OpenIngress Options (UNIX)</H2>
+<p>If ColdFusion Server is installed on a Solaris server, you can configure OpenIngress as a ColdFusion data source using an ODBC driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: MERANT OpenIngress 1.x/2.x Options (Solaris)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for OpenIngress data sources. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT OpenIngres 1.x/2.x ODBC Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A short description of the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name, including the full path, of the database to which you want to connect.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the virtual node that you defined using the OpenIngres NETU utility. This virtual node tells OpenIngres which system to call, how to call it, and the user's name and password.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+OpenIngres Options ID
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The flags allowed on the OpenIngres SQL command line. Examples are:
+<ul>
+<li>-l (locks the database exclusively)
+
+</li>
+<li>-u (logs on as username)
+</li>
+<li>+w or -w (waits/doesn't wait for the database if someone has already opened it exclusively)
+</li>
+<li>+U or -U (enables/disables user updating system tables and locks the database exclusively)
+</li>
+<li>+Y or -Y (enables/disables user updating system tables but does not lock the database exclusively)
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=5><font face="arial,helvetica" size=-1>
+Performance
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Repeated Cache Size -- Determines whether all Update and Insert statements are to be run as repeated statements. This attribute improves the performance of applications that repeat the same set of SQL statements.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Long Data Buffer -- An integer value that specifies, in 1024-byte multiples, the maximum amount of data that will be transferred to the client for unbound long data result columns.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Optimize SELECT statements as repeated queries -- Determines whether the driver optimizes Select statements or runs them as repeated queries.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+User Select Loops instead of Cursors -- Enables the retrieval of multiple rows using the Select loop model instead of cursors.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Substitute parameters for hard coded values in repeated statements -- Determines whether the driver substitutes parameters for hard coded values in repeated statements. This option is convenient in applications that do not use dynamic parameters.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enable OpenSQL
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Lets you access data sources using OpenSQL.
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin047.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0410.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

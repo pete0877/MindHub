@@ -1,0 +1,253 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFCOLLECTION</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_022.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_024.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1967871"></a>
+ <H1>CFCOLLECTION</H1>
+
+
+
+<p>The CFCOLLECTION tag allows you to create and administer Verity collections.</p><a name="1967873"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFCOLLECTION ACTION="action"
+    COLLECTION="collection"
+    PATH="implementation directory"
+    LANGUAGE="language"&gt;
+</PRE><a name="1967875"></a>
+<h4> ACTION</h4>
+<p>Required. Specifies the action to perform:</p><ul>
+<a name="1967877"> </a>
+<li>CREATE -- Creates a new collection using the specified path and optionally specified language.
+
+<a name="1967878"> </a>
+</li>
+<li>REPAIR -- Fixes data corruption in the collection.
+<a name="1967879"> </a>
+</li>
+<li>DELETE -- Destroys the collection.
+<a name="1967880"> </a>
+</li>
+<li>OPTIMIZE -- Purges and reorganizes data for efficiency.
+<a name="1967881"> </a>
+</li>
+<li>MAP -- Assigns an alias to an existing Verity collection.
+</li>
+</ul>
+<a name="1967882"></a>
+<h4> COLLECTION</h4>
+<p>Required. Specifies a collection name or an alias if the ACTION is MAP.</p><a name="1967884"></a>
+<h4> PATH</h4>
+<p>Required for CREATE and MAP. Specifies a path to the Verity collection. The effect of the PATH attribute depends on the ACTION that you specify.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>ACTION</strong>
+</th><th align="left">
+<strong>What happens?</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>CREATE
+</PRE></td><td valign="top">
+CFCOLLECTION creates a directory for the use of Verity. The directory path is composed of the directory path specified in the PATH attribute with the name specified in the COLLECTION attribute appended to it. Thus, the full directory path is "<em>path_name\collection_name\</em>." For example, if the path name is "C:\Col\," and the collection name is "myCollection," the full directory path is "C:\Col\myCollection\."
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>MAP
+</PRE></td><td valign="top">
+The MAP action provides a name with which ColdFusion can reference an existing collection. This name is specified with the COLLECTION attribute. It is an alias for the collection, which can be used in CFINDEX, and to re-instate a collection after you have re-installed ColdFusion. The directory path specified with the PATH attribute is the full path name of the Verity directory. Therefore, to reference the directory created in the previous example, specify "C:\Col\myCollection\." 
+</td></tr>
+
+</table>
+</div>
+</p><a name="1967886"></a>
+<h4> LANGUAGE</h4>
+<p>Optional for CREATE. To use the LANGUAGE attribute you must have the ColdFusion International Search Pack installed. Valid entries are:</p><ul>
+<a name="1967888"> </a>
+<li>English (default)
+
+<a name="1967889"> </a>
+</li>
+<li>German 
+<a name="1967890"> </a>
+</li>
+<li>Finnish 
+<a name="1967891"> </a>
+</li>
+<li>French 
+<a name="1967892"> </a>
+</li>
+<li>Danish 
+<a name="1967893"> </a>
+</li>
+<li>Dutch 
+<a name="1967894"> </a>
+</li>
+<li>Italian 
+<a name="1967895"> </a>
+</li>
+<li>Norwegian 
+<a name="1967896"> </a>
+</li>
+<li>Portuguese 
+<a name="1967897"> </a>
+</li>
+<li>Spanish 
+<a name="1967898"> </a>
+</li>
+<li>Swedish 
+</li>
+</ul>
+<a name="1967899"></a>
+ 
+<H3>Usage</H3>
+<p>
+ CFCOLLECTION works at the collection level only. To add content to a collection, use <a href="../2_ColdFusion_Tags/lr2_053.htm#1970279">CFINDEX</a>.
+</p>
+
+<p>
+ Note the following regarding mapped collections:
+</p>
+
+<ul>
+<a name="1967905"> </a>
+<li>Mapping allows you to assign an alias to a Verity collection created by a tool other than ColdFusion.
+
+<a name="1967906"> </a>
+</li>
+<li>The ACTION, COLLECTION, and PATH attributes are required.
+<a name="1967907"> </a>
+</li>
+<li>The path must point to a valid Verity collection; mapping does not validate the path.
+<a name="1967908"> </a>
+</li>
+<li>Deleting a mapped collection unregisters the alias; the base collection is not deleted.
+</li>
+</ul>
+<a name="2035563"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfcollection
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the basic functionality
+of the CFCOLLECTION tag (create, repair, optimize, delete) ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;CFCOLLECTION&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;CFCOLLECTION&lt;/h3&gt;
+
+&lt;!--- see if a collection name has been specificied ... ---&gt;
+&lt;CFIF IsDefined("form.CollectionName") AND
+IsDefined("form.CollectionAction")&gt;
+    &lt;CFIF form.CollectionName is not ""&gt;
+        &lt;CFOUTPUT&gt;
+        &lt;CFSWITCH EXPRESSION=#FORM.CollectionAction#&gt;
+          &lt;CFCASE VALUE="Create"&gt;
+            &lt;CFCOLLECTION ACTION="CREATE"
+             COLLECTION="#FORM.CollectionName#"
+             PATH="C:\CFUSION\Verity\Collections\"&gt;
+            &lt;H3&gt;Collection created.&lt;/H3&gt;
+          &lt;/CFCASE&gt;
+          &lt;CFCASE VALUE="Repair"&gt;
+            &lt;CFCOLLECTION ACTION="REPAIR"
+             COLLECTION="#FORM.CollectionName#"&gt;
+            &lt;H3&gt;Collection repaired.&lt;/H3&gt;
+          &lt;/CFCASE&gt;
+          &lt;CFCASE VALUE="Optimize"&gt;
+            &lt;CFCOLLECTION ACTION="OPTIMIZE"
+             COLLECTION="#FORM.CollectionName#"&gt;
+            &lt;H3&gt;Collection optimized.&lt;/H3&gt;
+          &lt;/CFCASE&gt;
+          &lt;CFCASE VALUE="Delete"&gt;
+            &lt;CFCOLLECTION ACTION="DELETE"
+             COLLECTION="#FORM.CollectionName#"&gt;
+           &lt;H3&gt;Collection deleted.&lt;/H3&gt;
+          &lt;/CFCASE&gt;
+        &lt;/CFSWITCH&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfcollection
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_022.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_024.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

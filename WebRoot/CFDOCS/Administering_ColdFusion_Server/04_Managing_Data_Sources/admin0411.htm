@@ -1,0 +1,185 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Microsoft Access Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0410.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0412.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1080818"></a>
+ <H1>Connecting to Microsoft Access Databases</H1>
+
+
+
+<p>ColdFusion lets you access Microsoft Access databases Windows NT, via ODBC and OLE DB drivers.</p><a name="1082296"></a>
+ 
+<H2>Configuring Microsoft Access Options (Windows)</H2>
+<p>If ColdFusion Server is installed on a Windows NT server, you can configure Microsoft access databases as ColdFusion data source using either an ODBC or OLE DB driver. For information about using OLE DB drivers with ColdFusion data sources, see <a href="../04_Managing_Data_Sources/admin043.htm#1080974">&quot;OLE DB Drivers&quot;</a>.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>OLE DB and ODBC connections to Access function programmatically 
+identically, but OLE DB connections under load prove to be substantially 
+more robust than ODBC. Wherever possible, you should use OLE DB 
+connections to Access data sources instead of ODBC connections.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Microsoft Access Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for Microsoft Access data sources. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Microsoft Access ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database File
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Click the Browse button to select a database file for a file-based ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+System Database
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Specify a database file to make it accessible to the system or any user, rather than the local user. Note that Access data sources created with ColdFusion and specified as a Database File are automatically created as System ODBC Databases. 
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=2><font face="arial,helvetica" size=-1>
+Driver Settings
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Page Timeout -- The length of time in milliseconds before a request for a ColdFusion page times out. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Buffer Size -- The total number of bytes ColdFusion uses to cache application pages. To optimize ColdFusion performance, enter a value.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Default Login
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A username/password combination ColdFusion uses to access the data source. If your ODBC data source requires a username or password, enter them here. To verify your data source, you need to enter login information here. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1096757"></a>
+ 
+<H2>Access Connectivity Tips (Windows)</H2>
+<p>Regardless of whether you use OLE DB or ODBC connections, the following suggestions will improve your Access database connectivity:</p><ul>
+<a name="1096684"> </a>
+<li>On the Server Settings page in the ColdFusion Administrator, set Limit Simultaneous Requests to 5-7 per processor. 
+
+<a name="1096685"> </a>
+</li>
+<li>On the ODBC Data Sources page in the ColdFusion Administrator, modify the following ColdFusion settings for each ODBC Access data source:
+<p>Buffer Size = 0 (ODBC only) 
+</p><p>Page Timeout = 600 (ODBC only) 
+</p><p>Uncheck Maintain Database Connections 
+</p><a name="1096689"> </a>
+</li>
+<li>Install the latest ODBC or OLE DB Drivers from Microsoft on your ColdFusion Server. You can find these drivers at http://www.microsoft.com/data/. 
+<a name="1096431"> </a>
+</li>
+<li>Cycle the ColdFusion services each night using the \cfusion\bin\cycle.bat file. 
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0410.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0412.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

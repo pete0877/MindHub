@@ -1,0 +1,482 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Clusters</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1084777"></a>
+ <H1>Creating Clusters</H1>
+
+
+
+<p>If you've performed the tasks described in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1162902">&quot;Before You Install&quot;</a> and you've successfully installed ClusterCATS, you're ready to begin creating your server clusters. </p><p>This section explains:</p><ul>
+<a name="1088470"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1088427">&quot;Creating clusters with the Cluster Setup Wizard&quot;</a>
+
+<a name="1088479"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1085508">&quot;Creating clusters manually&quot;</a> 
+</li>
+</ul>
+<a name="1088427"></a>
+ 
+<H2>Creating clusters with the Cluster Setup Wizard</H2>
+<p>The ClusterCATS Explorer includes a Cluster Setup Wizard that makes creating and configuring clusters easy. The Wizard walks you through a series of online screens that let you define and configure required load balancing and high availability features for your server clusters.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>While you can create server clusters manually using the ClusterCATS 
+Explorer menu options, it's easier and quicker to create and configure 
+them completely using the Cluster Setup Wizard. If you use the Wizard 
+initially, you can always modify the configuration of your server clusters 
+at anytime after you have created them. To modify the settings you've 
+configured using the Wizard, follow the procedures described in 
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1080561">&quot;Configuring Load Balancing &amp; High Availability Features&quot;</a>.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a server cluster using the Cluster Setup Wizard:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Programs&gt;ColdFusion Server 4.5&gt;ClusterCATS for ColdFusion Explorer.
+
+
+<p>The ClusterCATS Explorer opens.
+</p><p><img src="../images/CC_Explorer.gif">
+
+
+
+</p></li>
+<li>Choose Cluster Setup Wizard from the Configure menu. Alternatively, you can click the Cluster Setup Wizard icon <img src="../images/Wizard_icon.gif">
+
+
+that appears in the tool bar.
+
+<p>The Create New Cluster dialog box appears.
+</p><p><img src="../images/New_cluster.gif">
+
+
+
+</p></li>
+<li>Enter a name for your cluster and <code>GoColdFusion</code> in the License Key field and click Next.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Make your cluster names logically consistent with their purpose. For 
+example, Sales Web, Customer Support Web, and so on. Also, the 
+License Key field is case-sensitive, so enter the key exactly as shown 
+in step 3.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The List of Web Servers dialog box appears.
+</p><p><img src="../images/Server_list_dialog.gif">
+
+
+
+</p></li>
+<li>Click Add to add available Web servers to your cluster.
+
+<p>The Add New Server dialog box appears.
+</p><p><img src="../images/Add_New_Server.gif">
+
+
+
+</p></li>
+<li>Enter the fully qualified TCP/IP host name of a Web server in the New Web Server Name field (for example, doc.allaire.com).
+
+</li>
+<li>If you are <em>not</em> configuring this Web server for offline maintenance support, go to step 9. However, if you already configured this Web server with a maintenance IP address as described in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1191927">&quot;Configuring ClusterCATS offline maintenance support (NT only)&quot;</a>, go to step 7.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Offline maintenance support is only available on NT server clusters. 
+You can only set the maintenance support option when creating a 
+cluster or adding a cluster member to a cluster. You cannot configure 
+or modify this option after you have created and added the cluster 
+member to the cluster.
+</td>
+</tr>
+</table>
+</div>
+<br><p>If you need help configuring the maintenance IP address, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1177970">&quot;Assigning a static IP 
+address to each server's NIC&quot;</a>.
+</p></li>
+<li>Select the ClusterCATS Maintenance Support check box to enable support for offline maintenance.
+
+</li>
+<li>Enter the fully qualified host name of the maintenance address (for example, serv1.yourcompany.com) in the Maintenance Address field. 
+
+</li>
+<li>Click OK.
+
+</li>
+<li>Repeat steps 4 through 9 for each Web server you want to add to the cluster and then click Next to proceed.
+
+<p>The Load Management dialog box appears.
+</p><p><img src="../images/Load_manage.gif">
+
+
+
+</p></li>
+<li>If you want to use the default load threshold settings, click Next and go to step <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1085351">14</a>. However, if you don't want to use the defaults, select the server and click Configure to configure new peak and gradual redirect load thresholds for that cluster member.
+
+<p>The Load Thresholds dialog box appears.
+</p><p><img src="../images/Load_threshold.gif">
+
+
+
+</p></li>
+<li>Enter new numerical values (not higher than 100%) in the Peak and Gradual Redirect fields and click OK.
+
+<p>Be sure to keep your Peak threshold below 100% to accommodate ColdFusion's 
+processing needs. Set your Gradual Redirection threshold to be 10% - 30% lower 
+than your Peak threshold. Any larger differential will degrade overall performance.
+</p></li>
+<li>Click Next.
+
+<p>The Alert Notification dialog box appears.
+</p><p><img src="../images/Alert_notification.gif">
+
+
+
+</p></li>
+<li>Enter the name of your outbound SMTP mail server in the SMTP Mail Server field and the e-mail address for a recipient of cluster alerts in the E-mail Address field. If multiple people will receive different alerts for different types of notification events, go to step <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1085364">15</a>. Otherwise, click Next and proceed to step <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1085376">17</a>. 
+
+</li>
+<li>If you want to configure different types of alerts to go to different people, click Details in the Alert Notification dialog box.
+
+<p>The Alarm Notification dialog box appears.
+</p><p><img src="../images/Alarm_notification.gif">
+
+
+
+</p></li>
+<li>Click an alert event and enter the e-mail address of the recipient. 
+
+<p>If you want the same person to receive the majority of alerts, click Propagate to 
+automatically fill each event's Recipient column with the same e-mail address. You 
+can then manually change the few recipients that are different. If there are 
+multiple recipients for the same alert event, separate your e-mail address entries 
+with commas. Click OK to return to the Alarm Notifications dialog box and then 
+Click Next to proceed.
+</p><p>The Session State Management dialog box appears.
+</p><p><img src="../images/Session_state.gif">
+
+
+
+</p></li>
+<li>If your server cluster supports a site that needs to maintain persistent state on the same Web server during a user session, leave the Yes option selected to enable session-aware load balancing. Otherwise, select No and click Next.
+
+<p>The Load Balancing Device dialog box appears.
+</p><p><img src="../images/Load_balancing.gif">
+
+
+
+</p></li>
+<li>If you are using a hardware-based load balancing device in addition to ClusterCATS to manage and distribute load, enter the name of the Web site that this device supports (for example, www.yourcompany.com) and click Next.
+
+</li>
+<li>Click Finish.
+
+<p>ClusterCATS creates the cluster you just configured and displays it in the 
+ClusterCATS Explorer's left pane.
+</p><p><img src="../images/Created_cluster.gif">
+
+
+
+</p></li>
+</ol>
+<p>Congratulations -- y ou've just created your cluster, added servers to it, and configured each server with load balancing and high availability capabilities using the Wizard. See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1168806">&quot;Configuring cluster administration security&quot;</a> to learn how to secure your cluster environment.</p><a name="1085508"></a>
+ 
+<H2>Creating clusters manually</H2>
+<p>If you do not want to create your clusters using the Cluster Setup Wizard, you can create them manually. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create clusters manually using the ClusterCATS Explorer:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Programs&gt;ColdFusion 4.5&gt;ClusterCATS for ColdFusion.
+
+
+<p>The ClusterCATS Explorer opens.
+</p><p><img src="../images/CC_Explorer.gif">
+
+
+
+</p></li>
+<li>Choose New Cluster from the Cluster Manager menu. Alternatively, you can right-click the Cluster Manager icon and select New Cluster or click the New Cluster button <img src="../images/Wizard_icon.gif">
+
+
+that appears in the tool bar.
+
+<p>The Create New Cluster dialog box appears.
+</p><p><img src="../images/Create_new_cluster.gif">
+
+
+
+</p></li>
+<li>Enter a unique name for the cluster in the Cluster Name field and enter <code>GoColdFusion</code> in the License Key field. 
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Make your cluster names logically consistent with their purpose. For 
+example, Sales Web, Customer Support Web, and so on. Also, the 
+License Key field is case-sensitive, so enter the key exactly as shown 
+in step 3.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter the fully qualified host name (for example, doc.allaire.com) in the Web Server Name field for the first server you want to be a member of this cluster.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You cannot create an empty cluster; you must specify a Web server 
+that will be part of the cluster. This first server that you add to the 
+cluster is known as the Admin Manager. The remaining steps guide 
+you in configuring the Admin Manager.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>If you are <em>not</em> configuring this Web server for offline maintenance support, go to step 8. However, if you already configured this Web server with a maintenance IP address as described in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1191927">&quot;Configuring ClusterCATS offline maintenance support (NT only)&quot;</a>, go to step 6.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Offline maintenance support is only available on Windows NT server 
+clusters. You can only set the maintenance support option when 
+creating a cluster or adding a cluster member to a cluster. You cannot 
+configure or modify this option after you have created and added the 
+cluster member to the cluster.
+</td>
+</tr>
+</table>
+</div>
+<br><p>If you need help in configuring the maintenance IP address, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1177970">&quot;Assigning a static 
+IP address to each server's NIC&quot;</a>.
+</p></li>
+<li>Select the ClusterCATS Maintenance Support check box to enable support for offline maintenance.
+
+</li>
+<li>Enter the fully qualified host name of the maintenance address (for example, serv1.yourcompany.com) in the Maintenance Address field. 
+
+</li>
+<li>Click OK
+
+<p>Your cluster appears below the Cluster Manager icon in the ClusterCATS Explorer 
+left pane. 
+</p><p><img src="../images/Created_cluster.gif">
+
+
+
+</p><p>To manually add additional cluster members to it, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1088950">&quot;Adding and deleting 
+cluster members&quot;</a>.
+</p></li>
+</ol>
+<a name="1088950"></a>
+ 
+<H3>Adding and deleting cluster members</H3>
+<p>You add servers to and delete servers from a cluster one at a time using the ClusterCATS Explorer.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc"><strong>To add a cluster member to a cluster:</strong>
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select the cluster to which you want to add a server.
+
+
+</li>
+<li>Choose New&gt;Cluster Member from the Cluster menu. Alternatively, you can click the Add tool bar button <img src="../images/Cluster_add_icon.gif">
+
+
+or right mouse click the cluster icon and choose New&gt;Cluster Member. 
+
+<p>The Add New Server to Cluster dialog box appears.
+</p><p><img src="../images/Add_New_Server.gif">
+
+
+
+</p></li>
+<li>In the Web Server Name field, enter the fully qualified TCP/IP host name of the Web server (for example, doc.allaire.com).
+
+</li>
+<li>If you are <em>not</em> configuring this Web server for offline maintenance support, go to step 7. However, if you already configured this Web server with a maintenance IP address as described in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1191927">&quot;Configuring ClusterCATS offline maintenance support (NT only)&quot;</a>, go to step 5.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can only set the maintenance support option when creating a 
+cluster or adding a cluster member to a cluster. You cannot configure 
+or modify this option after you have created and added the cluster 
+member to the cluster.
+</td>
+</tr>
+</table>
+</div>
+<br><p>If you need help in configuring the maintenance IP address, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1177970">&quot;Assigning a static 
+IP address to each server's NIC&quot;</a>. Offline maintenance support is only 
+available on Windows NT servers.
+</p></li>
+<li>Select the ClusterCATS Maintenance Support check box to enable support for offline maintenance.
+
+</li>
+<li>Enter the fully qualified host name of the maintenance address (for example, serv1.yourcompany.com) in the Maintenance Address field. 
+
+</li>
+<li>Click OK.
+
+</li>
+<li>Repeat steps <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm#1088955">2</a> through 7 to add additional servers to the cluster manually.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc"><strong>To delete a member from a cluster:</strong>
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select the server you want to remove from the cluster.
+
+
+</li>
+<li>Choose Delete from the Server menu. Alternatively, you can right-click the server name and choose Delete. 
+
+<p>The selected server is deleted from the cluster you selected.
+</p></li>
+</ol>
+<a name="1088978"></a>
+ 
+<H3>Deleting a cluster</H3>
+<p>To delete an entire cluster, individually delete each member from the cluster using the procedure above. When the last cluster member has been removed, the cluster itself is deleted.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You must delete the Admin Manager, which is the first server you added 
+to the cluster, last to delete the cluster. You can determine which server is 
+the Admin Manager by right clicking on the cluster icon and choosing 
+Configure&gt;Administration. The cluster's Properties dialog box appears 
+displaying the Administration tab. The server designated as the Admin 
+Manager will be the active entry in the drop-down list.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListDeleteAt</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_145.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_147.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999790"></a>
+ <H1>ListDeleteAt</H1>
+
+
+
+<p>Returns <em>list</em> with element deleted at the specified position.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_150.htm#999929">ListGetAt</a>, <a href="../3_ColdFusion_Functions/lr3_157.htm#1000141">ListSetAt</a>, and <a href="../3_ColdFusion_Functions/lr3_153.htm#1000034">ListLen</a>.
+</p>
+
+<a name="999793"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListDeleteAt</strong>(<em>list</em>, <em>position</em> [, <em>delimiters</em> ])
+</PRE><a name="999795"> </a>
+<h5 class="param"> list</h5>
+<p class="param">Any list.</p><a name="999796"> </a>
+<h5 class="param"> position</h5>
+<p class="param">Positive integer indicating the position of the element being deleted. The starting position in a list is denoted by the number 1, not 0.</p><a name="999797"> </a>
+<h5 class="param"> delimiters</h5>
+<p class="param">Set of delimiters used in list.</p><a name="1803864"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListDeleteAt
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ListDeleteAt ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ListDeleteAt Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ListDeleteAt Example&lt;/H3&gt;
+
+&lt;!--- First, query to get some values for our list ---&gt;
+&lt;CFQUERY NAME="GetParkInfo" DATASOURCE="cfsnippets"&gt;
+SELECT     PARKNAME,CITY,STATE
+FROM  PARKS
+WHERE PARKNAME LIKE `CH%'
+&lt;/CFQUERY&gt;
+&lt;CFSET temp = ValueList(GetParkInfo.ParkName)&gt;
+&lt;CFSET deleted_item = ListGetAt(temp, "3", ",")&gt;
+&lt;CFOUTPUT&gt;
+&lt;P&gt;The original list: #temp#
+&lt;/CFOUTPUT&gt;
+&lt;!--- now, delete the third item from the list ---&gt;
+&lt;CFSET temp2 = ListDeleteAt(Temp, "3", ",")&gt;
+&lt;CFOUTPUT&gt;
+&lt;P&gt;The changed list: #temp2#
+&lt;BR&gt;&lt;I&gt;Note that &lt;B&gt;#deleted_item#&lt;/B&gt; is not longer present
+at position three of the list.&lt;/I&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListDeleteAt
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_145.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_147.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

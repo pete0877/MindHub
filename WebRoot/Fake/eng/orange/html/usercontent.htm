@@ -1,0 +1,79 @@
+<!-- filename: usercontent.html -->
+
+<table width="100%" class="guiformtable" cellpadding="0" cellspacing="0">
+	<tr class="guiformheaderrow">
+		<td class="guiformheadercell">Attribute</td>
+		<td class="guiformheadercell">Value</td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">First Name: </td>
+		<td class="guiformiteminput"><% UIText(".TUser.FirstNameTxt", "guiforminput", 50, 50, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Middle Name:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.MiddleNameTxt", "guiforminput", 50, 50, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Last Name:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.LastNameTxt", "guiforminput", 50, 50, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Title:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.TitleTxt", "guiforminput", 60, 100, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Email Address:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.EmailTxt", "guiforminput", 60, 100, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Work Phone:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.WorkPhoneTxt", "guiforminput", 30, 30, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Mobile Phone:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.MobilePhoneTxt", "guiforminput", 30, 30, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Home Phone:</td>
+		<td class="guiformiteminput"><% UIText(".TUser.HomePhoneTxt", "guiforminput", 30, 30, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Comments:</td>
+		<td class="guiformiteminput"><% UITextArea(".TUser.CommentsTxt", "guiforminput", 40, 6, guif, "", "", "guiforminputro") %></td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Preferred Language:</td>
+		<td class="guiformiteminput">
+			<% UIDropDown(".TUser.LangCd", "guiforminput", 3, guif, "", "", "guiforminputro") %>
+		</td>
+	</tr>
+
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Preferred Web Style:</td>
+		<td class="guiformiteminput">
+			<% UIDropDown(".TUser.StyleCd", "guiforminput", 2, guif, "", "", "guiforminputro") %>
+		</td>
+	</tr>
+	
+	<tr class="guiformitemrow">
+		<td class="guiformitemlabel">Security Levels Granted:</td>
+		<td class="guiformiteminput">
+			<table>
+				<% ListSecurityLevels(.tuser.objid, "securitylevelitem.htm") %>
+			</table>
+		</td>
+	</tr>	
+	
+</table>
+
+

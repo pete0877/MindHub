@@ -1,0 +1,263 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFTREEITEM</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_099.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_101.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1973697"></a>
+ <H1>CFTREEITEM</H1>
+
+
+
+<p>Use CFTREEITEM to populate a tree control created with <a href="../2_ColdFusion_Tags/lr2_099.htm#1973540">CFTREE</a> with individual elements. You can use the IMG values supplied with ColdFusion or reference your own icons. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>CFTREEITEM incorporates a Java applet, so a browser must be Java-
+enabled for CFTREE to work properly.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1973702"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFTREEITEM VALUE="text"
+    DISPLAY="text"
+    PARENT="parent_name"
+    IMG="filename"
+    IMGOPEN="filename"
+    HREF="URL"
+    TARGET="URL_target"
+    QUERY="queryname"
+    QUERYASROOT="Yes/No"
+    EXPAND="Yes/No"&gt;
+</PRE><a name="1973704"></a>
+<h4> VALUE</h4>
+<p>Required. Value passed when the CFFORM is submitted. When populating a CFTREE with data from a CFQUERY, columns are specified in a comma-separated list:</p><pre>VALUE="dept_id,emp_id"
+</pre><a name="1973707"></a>
+<h4> DISPLAY</h4>
+<p>Optional. The label for the tree item. Default is VALUE. When populating a CFTREE with data from a CFQUERY, display names are specified in a comma-separated list:</p><pre>DISPLAY="dept_name,emp_name"
+</pre><a name="1973710"></a>
+<h4> PARENT</h4>
+<p>Optional. Value for tree item parent.</p><a name="1973712"></a>
+<h4> IMG</h4>
+<p>Optional. Image name or filename for the tree item. When populating a CFTREE with data from a CFQUERY, images or filenames for each level of the tree are specified in a comma-separated list.</p><p>The default image name is "Folder. " A number of images are supplied and can be specified using only the image name (no file extension):</p><ul>
+<a name="1973715"> </a>
+<li>cd
+
+<a name="1973716"> </a>
+</li>
+<li>computer
+<a name="1973717"> </a>
+</li>
+<li>document
+<a name="1973718"> </a>
+</li>
+<li>element
+<a name="1973719"> </a>
+</li>
+<li>folder
+<a name="1973720"> </a>
+</li>
+<li>floppy
+<a name="1973721"> </a>
+</li>
+<li>fixed
+<a name="1973722"> </a>
+</li>
+<li>remote
+</li>
+</ul>
+<p>Use commas to separate image names corresponding to tree level, for example:</p><pre>IMG="folder,document"
+IMG=",document
+</pre><p>To specify your own custom image, specify the path and file extension:</p><pre>IMG="../images/page1.gif"
+</pre><a name="1973728"></a>
+<h4> IMGOPEN</h4>
+<p>Optional. Icon displayed with open tree item. You can specify the icon filename using a relative path. As with IMG, you can use an image supplied with ColdFusion.</p><a name="1973730"></a>
+<h4> HREF</h4>
+<p>Optional. URL to associate with the tree item or a query column for a tree that is populated from a query. If HREF is a query column, then the HREF value is the value populated by the query. If HREF is not recognized as a query column, it is assumed that the HREF text is an actual HTML HREF. </p><p>When populating a CFTREE with data from a CFQUERY, HREFs can be specified in a comma-separated list</p><pre>HREF="http://dept_server,http://emp_server"
+</pre><a name="1973734"></a>
+<h4> TARGET</h4>
+<p>Optional. Target attribute for HREF URL. When populating a CFTREE with data from a CFQUERY, targets are specified in a comma-separated list:</p><pre>TARGET="FRAME_BODY,_blank"
+</pre><a name="1973737"></a>
+<h4> QUERY</h4>
+<p>Optional. Query name used to generate data for the tree item.</p><a name="1973739"></a>
+<h4> QUERYASROOT</h4>
+<p>Optional. Yes or No. Defines specified query as the root level. As in Example 1, this option prevents having to create an additional parent CFTREEITEM. </p><a name="1973741"></a>
+<h4> EXPAND</h4>
+<p>Optional. Yes or No. Yes expands tree to show tree item children. No keeps tree item collapsed. Default is Yes.</p><a name="2045629"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cftreeitem
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFTREEITEM in a CFFORM.
+The query takes a list of employees, and uses CFTREE and CFSELECT
+to display the results of the query.  In addition, CFGRID is used
+to show an alternate means of displaying the same data ---&gt;
+
+&lt;!--- set a default for the employeeNames variable ---&gt;
+&lt;CFPARAM NAME="employeeNames" DEFAULT=""&gt;
+
+&lt;!--- if an employee name has been passed from the form,
+set employeeNames variable to this value ---Auto&gt;
+&lt;CFIF IsDefined("form.employeeNames")&gt;
+    &lt;CFSET employeeNames = form.employeeNames&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- query the datasource to find the employee information---&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="cfsnippets"&gt;
+SELECT   Emp_ID, FirstName, LastName, EMail, Phone, Department
+FROM     Employees where lastname 
+         &lt;CFIF #employeeNames# is not ""&gt;= '#employeeNames#'&lt;/CFIF&gt;
+&lt;/CFQUERY&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFTREE Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFTREEITEM Example&lt;/H3&gt;
+
+&lt;!--- Use CFFORM when using other CFINPUT tools ---&gt;
+&lt;CFFORM ACTION="cftreeitem.cfm" METHOD="POST" ENABLECAB="Yes"&gt;
+
+&lt;!--- Use CFSELECT to present the contents of the query by column ---&gt;
+&lt;H3&gt;CFSELECT Presentation of Data&lt;/H3&gt;
+&lt;H4&gt;Click on an employee's last name and hit "see information for
+this employee" to see expanded information.&lt;/H4&gt;
+&lt;CFSELECT NAME="EmployeeNames" MESSAGE="Select an Employee Name"
+    SIZE="#getEmployees.recordcount#" QUERY="GetEmployees"
+    VALUE="LastName" REQUIRED="No"&gt;
+    &lt;OPTION value=""&gt;Select All
+&lt;/CFSELECT&gt;
+
+&lt;INPUT TYPE="Submit" NAME="" VALUE="see information for this employee"&gt;
+
+&lt;!--- showing the use of CFTREE ---&gt;
+&lt;!--- Use CFTREE for an expanded presentation of the data ---&gt;
+&lt;!--- Loop through the query to create each branch of the CFTREE ---&gt;
+&lt;H3&gt;CFTREE Presentation of Data&lt;/H3&gt;
+&lt;H4&gt;Click on the folders to "drill down" and reveal information.&lt;/H4&gt;
+&lt;P&gt;CFTREEITEM is used to create the "branches" of the tree.
+&lt;P&gt;
+&lt;CFTREE NAME="SeeEmployees" HEIGHT="150" WIDTH="240" 
+    FONT="Arial Narrow" BOLD="No" 
+    ITALIC="No" BORDER="Yes" 
+    HSCROLL="Yes" VSCROLL="Yes" 
+    REQUIRED="No" COMPLETEPATH="No" 
+    APPENDKEY="Yes" HIGHLIGHTHREF="Yes"&gt;
+&lt;CFLOOP QUERY="GetEmployees"&gt;
+    &lt;CFTREEITEM VALUE="#Emp_ID#" PARENT="SeeEmployees" EXPAND="No"&gt;
+    &lt;CFTREEITEM VALUE="#LastName#" DISPLAY="Name" 
+        PARENT="#Emp_ID#" QUERYASROOT="No" 
+        EXPAND="No"&gt;
+    &lt;CFTREEITEM VALUE="#LastName#, #FirstName#" 
+        PARENT="#LastName#" EXPAND="No" 
+        QUERYASROOT="No"&gt;
+    &lt;CFTREEITEM VALUE="#Department#" DISPLAY="Department"
+        PARENT="#Emp_ID#" QUERYASROOT="No" 
+        EXPAND="No"&gt;
+    &lt;CFTREEITEM VALUE="#Department#" PARENT="#Department#" 
+        EXPAND="No" QUERYASROOT="No"&gt;
+    &lt;CFTREEITEM VALUE="#Phone#" DISPLAY="Phone" 
+        PARENT="#Emp_ID#" QUERYASROOT="No" 
+        EXPAND="No"&gt;
+    &lt;CFTREEITEM VALUE="#Phone#" PARENT="#Phone#" 
+        EXPAND="No" QUERYASROOT="No"&gt;
+    &lt;CFTREEITEM VALUE="#Email#" DISPLAY="Email" 
+        PARENT="#Emp_ID#" QUERYASROOT="No" 
+        EXPAND="No"&gt;
+    &lt;CFTREEITEM VALUE="#Email#" PARENT="#Email#" 
+        EXPAND="No" QUERYASROOT="No"&gt;
+&lt;/CFLOOP&gt;
+&lt;/CFTREE&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cftreeitem
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_099.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_101.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

@@ -1,0 +1,184 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>DatePart</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_072.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_074.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998081"></a>
+ <H1>DatePart</H1>
+
+
+
+<p>Returns the specified part of a date as an integer.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_068.htm#1642959">DateAdd</a> and <a href="../3_ColdFusion_Functions/lr3_070.htm#1649018">DateConvert</a>.
+</p>
+
+<a name="998084"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>DatePart</strong>(<em>datepart</em>, <em>date</em>)
+</PRE><a name="998086"> </a>
+<h5 class="param"> datepart</h5>
+<p class="param">One of the following strings:</p><ul>
+<a name="1136412"> </a>
+<li><code>yyyy</code> -- Year
+
+<a name="1136511"> </a>
+</li>
+<li><code>q</code> -- Quarter
+<a name="1136512"> </a>
+</li>
+<li><code>m</code> -- Month
+<a name="1136513"> </a>
+</li>
+<li><code>y</code> -- Day of year
+<a name="1136514"> </a>
+</li>
+<li><code>d</code> -- Day
+<a name="1136515"> </a>
+</li>
+<li><code>w </code>-- Weekday
+<a name="1136516"> </a>
+</li>
+<li><code>ww</code> -- Week
+<a name="1136517"> </a>
+</li>
+<li><code>h</code> -- Hour
+<a name="1136518"> </a>
+</li>
+<li><code>n</code> -- Minute
+<a name="1136519"> </a>
+</li>
+<li><code>s</code> -- Second
+</li>
+</ul>
+<a name="1035696"> </a>
+<h5 class="param"> date</h5>
+<p class="param">Any date.</p><a name="998098"></a>
+ 
+<H3>Usage</H3>
+<p>Years from 0 to 29 are interpreted as 21<sup>st</sup> century values. Years 30 to 99 are interpreted as 20<sup>th</sup> century values.</p><p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><a name="1800667"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DatePart
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows information available from DatePart ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+DatePart Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;CFSET todayDate = Now()&gt;
+&lt;BODY&gt;
+&lt;H3&gt;DatePart Example&lt;/H3&gt;
+
+&lt;P&gt;Today's date is &lt;CFOUTPUT&gt;#todayDate#&lt;/CFOUTPUT&gt;.
+
+&lt;P&gt;Using datepart, we can extract an integer representing
+the various dateparts from that value
+&lt;CFOUTPUT&gt;
+&lt;UL&gt;
+    &lt;LI&gt;year: #DatePart("yyyy", todayDate)#
+    &lt;LI&gt;quarter: #DatePart("q", todayDate)#
+    &lt;LI&gt;month: #DatePart("m", todayDate)#
+    &lt;LI&gt;day of year: #DatePart("y", todayDate)#
+    &lt;LI&gt;day: #DatePart("d", todayDate)#
+    &lt;LI&gt;weekday: #DatePart("w", todayDate)#
+    &lt;LI&gt;week: #DatePart("ww", todayDate)#
+    &lt;LI&gt;hour: #DatePart("h", todayDate)#
+    &lt;LI&gt;minute: #DatePart("n", todayDate)#
+    &lt;LI&gt;second: #DatePart("s", todayDate)#
+&lt;/UL&gt;    
+&lt;/CFOUTPUT&gt;    
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DatePart
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_072.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_074.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

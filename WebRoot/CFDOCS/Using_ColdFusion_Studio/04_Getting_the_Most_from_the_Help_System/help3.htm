@@ -1,0 +1,132 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Embedded Dialog Box Help</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Getting_the_Most_from_the_Help_System/help2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Getting_the_Most_from_the_Help_System/help.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Getting_the_Most_from_the_Help_System/help4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Getting the Most from the  Help System</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1005426"></a>
+ <H1>Using Embedded Dialog Box Help</H1>
+
+
+
+<p>Several of Studio's dialog boxes have embedded help that provides context-sensitive syntax and usage information. These dialog boxes include:</p><ul>
+<a name="1005619"> </a>
+<li>Tag Editor (right-click a tag and choose Edit Tag from the menu)
+
+<a name="1005481"> </a>
+</li>
+<li>Tag Chooser (right-click in the Editor window and choose Insert Tag)
+<a name="1005496"> </a>
+</li>
+<li>Expression Builder (right-click in the Editor window and choose Insert Expression)
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use embedded dialog box help:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Toggle Embedded Help button to see the embedded help in a window at the bottom of the dialog box.
+
+
+<p><img src="../images/embedded_help.gif">
+
+
+
+</p></li>
+<li>To see the embedded help in a separate window, click the Show help in separate window button.
+
+<p><img src="../images/show_help_separate_window.gif">
+
+
+
+</p></li>
+</ol>
+<a name="1004587"></a>
+ 
+<H3>Creating help files for custom tag editors</H3>
+<p>Using Allaire's Visual Tools Markup Language (VTML), you can change a tag editor's interface or create a new editor. You can also add your own help text to editors. See ../../customizing_the_development_environment/vtml.htmCustomizing the Development Environment/a for details.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Getting_the_Most_from_the_Help_System/help2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Getting_the_Most_from_the_Help_System/help.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Getting_the_Most_from_the_Help_System/help4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

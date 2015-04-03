@@ -1,0 +1,137 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Basic Runtime Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Configuring_Basic_Security/admin095.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Configuring_Basic_Security/admin09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Configuring Basic Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1023482"></a>
+ <H1>Configuring Basic Runtime Security</H1>
+
+
+
+<p>Basic security lets you disable execution of seven CFML tags that could present security hazards. You can, however, specify a special directory, called the Unsecured Tags Directory; this is the only directory from which ColdFusion will execute tags you disable with Basic security. Tags you disable with Basic security remain disabled if you switch to Advanced security.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To restrict tag execution
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator and click the Basic Security link.
+
+
+<p>You see the Basic Server Security Page.
+</p></li>
+<li>Under Tag Restrictions, remove the check mark from the check box that appears in front of each tag you want to disable. You can block execution of the following tags:
+
+<ul>
+<a name="1023484"> </a>
+<li>CFDIRECTORY
+
+<a name="1023485"> </a>
+</li>
+<li>CFFILE
+<a name="1023486"> </a>
+</li>
+<li>CFCONTENT
+<a name="1023487"> </a>
+</li>
+<li>CFOBJECT
+<a name="1023488"> </a>
+</li>
+<li>CFREGISTRY
+<a name="1023606"> </a>
+</li>
+<li>CFSECURITYADMIN
+<a name="1023607"> </a>
+</li>
+<li>CFEXECUTE    
+</li>
+</ul>
+</li>
+<li>To specify a directory from which otherwise blocked tags can be executed, enter a fully qualified path (using forward slashes) in the Unsecured Tags Directory field. By default, this is the directory in which the ColdFusion Administrator is installed.
+
+</li>
+</ol>
+<p>ColdFusion displays an error message when it encounters a restricted tag in an application. For more information about these tags, see to the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a>. </p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Configuring_Basic_Security/admin095.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Configuring_Basic_Security/admin09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:04 -->
+</body>
+</html>

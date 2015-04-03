@@ -1,0 +1,220 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Evaluating the Results of a File Upload</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 14	:&nbsp;&nbsp;Managing Files on the Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997492"></a>
+ <H1>Evaluating the Results of a File Upload</H1>
+
+
+
+<p>After a file upload is completed, you can retrieve status information using file upload variables. This status information includes a wide range of data about the file, such as the file's name and the directory where it was saved.</p><p>Although you can use either the File or CFFILE prefix, for file uplodad status variables, CFFILE is preferred, for example, <code>CFFILE.ClientDirectory</code>. (The <code>File</code> prefix is retained for backward compatibility.) The file status variables can be used anywhere that ColdFusion variables are used.</p><p>The following file upload status variables are available after an upload.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>File Upload Variables&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Parameter</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+AttemptedServerFile
+</td><td valign="top">
+Initial name ColdFusion used attempting to save a file, for example, <code>myfile.txt</code>. See "<a href="../14_Managing_Files_on_the_Server/dwa14_03.htm#997418">Resolving conflicting file names</a>" above.
+</td></tr>
+<tr valign="top"><td valign="top">
+ClientDirectory
+</td><td valign="top">
+Directory location of the file uploaded from the client's system.
+</td></tr>
+<tr valign="top"><td valign="top">
+ClientFile
+</td><td valign="top">
+Name of the file uploaded from the client's system, such as <code>myfile.txt</code>.
+</td></tr>
+<tr valign="top"><td valign="top">
+ClientFileExt
+</td><td valign="top">
+Extension of the uploaded file on the client's system without a period, for example, <code>txt</code> not.<code>txt</code>.
+</td></tr>
+<tr valign="top"><td valign="top">
+ClientFileName
+</td><td valign="top">
+Filename without an extension of the uploaded file on the client's system.
+</td></tr>
+<tr valign="top"><td valign="top">
+ContentSubType
+</td><td valign="top">
+MIME content subtype of the saved file, such as <code>gif</code> for <code>image/gif</code>.
+</td></tr>
+<tr valign="top"><td valign="top">
+ContentType
+</td><td valign="top">
+MIME content type of the saved file, such as <code>image</code> for <code>image/gif</code>.
+</td></tr>
+<tr valign="top"><td valign="top">
+DateLastAccessed
+</td><td valign="top">
+Date and time the uploaded file was last accessed.
+</td></tr>
+<tr valign="top"><td valign="top">
+FileExisted
+</td><td valign="top">
+Indicates (Yes or No) whether or not the file already existed with the same path.
+</td></tr>
+<tr valign="top"><td valign="top">
+FileSize
+</td><td valign="top">
+Size of the uploaded file.
+</td></tr>
+<tr valign="top"><td valign="top">
+FileWasAppended
+</td><td valign="top">
+Indicates (Yes or No) whether or not ColdFusion appended the uploaded file to an existing file.
+</td></tr>
+<tr valign="top"><td valign="top">
+FileWasOverwritten
+</td><td valign="top">
+Indicates (Yes or No) whether or not ColdFusion overwrote a file. 
+</td></tr>
+<tr valign="top"><td valign="top">
+FileWasRenamed
+</td><td valign="top">
+Indicates (Yes or No) whether or not the uploaded file was renamed to avoid a name conflict.
+</td></tr>
+<tr valign="top"><td valign="top">
+FileWasSaved
+</td><td valign="top">
+Indicates (Yes or No) whether or not ColdFusion saved a file. 
+</td></tr>
+<tr valign="top"><td valign="top">
+OldFileSize
+</td><td valign="top">
+Size of a file that was overwritten in the file upload operation.
+</td></tr>
+<tr valign="top"><td valign="top">
+ServerDirectory
+</td><td valign="top">
+Directory of the file actually saved on the server.
+</td></tr>
+<tr valign="top"><td valign="top">
+ServeFile
+</td><td valign="top">
+Filename of the file actually saved on the server.
+</td></tr>
+<tr valign="top"><td valign="top">
+ServerFileExt
+</td><td valign="top">
+Extension of the uploaded file on the server, without a period, for example, <code>txt</code> not.<code>txt</code>.
+</td></tr>
+<tr valign="top"><td valign="top">
+ServerFileName
+</td><td valign="top">
+Filename, without an extension, of the uploaded file on the server.
+</td></tr>
+<tr valign="top"><td valign="top">
+TimeCreated
+</td><td valign="top">
+Time the uploaded file was created.
+</td></tr>
+<tr valign="top"><td valign="top">
+TimeLastModified
+</td><td valign="top">
+Date and time of the last modification to the uploaded file.
+</td></tr>
+
+</table>
+</div>
+</p><p>Use the File prefix to refer to these variables, for example, #CFFILE.FileExisted#. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>File status variables are read-only. They are set to the results of the most 
+recent CFFILE operation. If two CFFILE tags execute, the results of the 
+first are overwritten by the subsequent CFFILE operation.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

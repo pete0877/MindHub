@@ -1,0 +1,142 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>DayOfYear</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_076.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_078.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998235"></a>
+ <H1>DayOfYear</H1>
+
+
+
+<p>Returns the ordinal for the day of the year.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_074.htm#998151">Day</a>, <a href="../3_ColdFusion_Functions/lr3_075.htm#998178">DayOfWeek</a>, <a href="../3_ColdFusion_Functions/lr3_076.htm#998205">DayOfWeekAsString</a>, <a href="../3_ColdFusion_Functions/lr3_078.htm#998263">DaysInMonth</a>, <a href="../3_ColdFusion_Functions/lr3_079.htm#998290">DaysInYear</a>, and <a href="../3_ColdFusion_Functions/lr3_095.htm#998674">FirstDayOfMonth</a>.
+</p>
+
+<a name="998238"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>DayOfYear</strong>(<em>date</em>)
+</PRE><a name="998240"> </a>
+<h5 class="param"> date</h5>
+<p class="param">Any date.</p><a name="998241"></a>
+ 
+<H3>Usage</H3>
+<p>DayofYear is aware of leap years.</p><p>Years from 0 to 29 are interpreted as 21<sup>st</sup> century values. Years 30 to 99 are interpreted as 20<sup>th</sup> century values.</p><p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><a name="1800862"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DayOfYear
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- shows the value of the DayOfYear function ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+DayOfYear Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;DayOfYear Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.year")&gt;
+More information about your date:
+&lt;CFSET yourDate = CreateDate(FORM.year, FORM.month, FORM.day)&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;P&gt;Your date, #DateFormat(yourDate)#.
+&lt;BR&gt;It is #DayofWeekAsString(DayOfWeek(yourDate))#, day
+  #DayOfWeek(yourDate)# in the week.
+&lt;BR&gt;This is day #Day(yourDate)# in the month of
+  #MonthAsString(Month(yourDate))#, which has
+    #DaysInMonth(yourDate)# days.
+&lt;BR&gt;We are in week #Week(yourDate)# of #Year(yourDate)# (day
+  #DayofYear(yourDate)# of #DaysinYear(yourDate)#).  
+&lt;BR&gt;&lt;CFIF IsLeapYear(Year(yourDate))&gt;This is a leap year
+    &lt;CFELSE&gt;This is not a leap year&lt;/CFIF&gt;
+&lt;/CFOUTPUT&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DayOfYear
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_076.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_078.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

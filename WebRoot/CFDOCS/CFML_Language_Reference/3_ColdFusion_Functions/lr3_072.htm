@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>DateFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_071.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_073.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998022"></a>
+ <H1>DateFormat</H1>
+
+
+
+<p>Returns a formatted date/time value. If no mask is specified, DateFormat function returns date value using the <em>dd-mmm-yy </em>format.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_184.htm#1001277">Now</a>, <a href="../3_ColdFusion_Functions/lr3_056.htm#997632">CreateDate</a>, and <a href="../3_ColdFusion_Functions/lr3_188.htm#1001568">ParseDateTime</a>.
+</p>
+
+<a name="998025"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>DateFormat</strong>(<em>date</em> [, <em>mask</em> ])
+</PRE><a name="998027"> </a>
+<h5 class="param"> date</h5>
+<p class="param">Date/time object in the period from 1601 AD to 9999 AD.</p><a name="1032083"> </a>
+<h5 class="param"> mask</h5>
+<p class="param">Set of characters that are used to show how ColdFusion should display the date:</p><ul>
+<a name="1134410"> </a>
+<li><code>d</code> -- Day of the month as digits with no leading zero for single-digit days. 
+
+<a name="1134628"> </a>
+</li>
+<li><code>dd</code> -- Day of the month as digits with a leading zero for single-digit days. 
+<a name="1134629"> </a>
+</li>
+<li><code>ddd</code> -- Day of the week as a three-letter abbreviation. 
+<a name="1134630"> </a>
+</li>
+<li><code>dddd</code> -- Day of the week as its full name. 
+<a name="1134631"> </a>
+</li>
+<li><code>m</code> -- Month as digits with no leading zero for single-digit months. 
+<a name="1134632"> </a>
+</li>
+<li><code>mm</code> -- Month as digits with a leading zero for single-digit months. 
+<a name="1134633"> </a>
+</li>
+<li><code>mmm</code> -- Month as a three-letter abbreviation. 
+<a name="1134634"> </a>
+</li>
+<li><code>mmmm</code> -- Month as its full name. 
+<a name="1134635"> </a>
+</li>
+<li><code>y</code> -- Year as last two digits with no leading zero for years less than 10. 
+<a name="1134636"> </a>
+</li>
+<li><code>yy</code> -- Year as last two digits with a leading zero for years less than 10. 
+<a name="1134637"> </a>
+</li>
+<li><code>yyyy</code> -- Year represented by four digits. 
+<a name="1134638"> </a>
+</li>
+<li><code>gg</code> -- Period/era string. Currently ignored, but reserved for future use.
+</li>
+</ul>
+<a name="998041"></a>
+ 
+<H3>Usage</H3>
+<p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>On UNIX, there is a switch that provides fast date-time parsing. If you 
+have enabled this switch, you must refer to dates in expressions in the 
+following order: month, day, and year. For example: 
+</td>
+</tr>
+</table>
+</div>
+<br><pre>&lt;CFIF &quot;11/23/1998&quot; GT &quot;11/15/1998&quot;&gt;
+</pre><p>If this switch is set, the default date format returned by the DateFormat() function cannot be parsed in an expression. However, if you specify a mask, indicating the correct order, such as, mm/dd/yyyy, the date returned by this function can be parsed.</p><p>The Fast Date/Time Parsing switch is set on the ColdFusion Administrator Server Settings page. Please refer to <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a ><em> </em>for more information about ColdFusion settings.</p><a name="1800616"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DateFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the various types of output
+possible with DateFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+DateFormat Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;CFSET todayDate = Now()&gt;
+&lt;BODY&gt;
+&lt;H3&gt;DateFormat Example&lt;/H3&gt;
+
+&lt;P&gt;Today's date is &lt;CFOUTPUT&gt;#todayDate#&lt;/CFOUTPUT&gt;.
+
+&lt;P&gt;Using DateFormat, we can display that date in a number of 
+different ways:
+&lt;CFOUTPUT&gt;
+&lt;UL&gt;
+    &lt;LI&gt;#DateFormat(todayDate)#
+    &lt;LI&gt;#DateFormat(todayDate, "mmm-dd-yyyy")#
+    &lt;LI&gt;#DateFormat(todayDate, "mmmm d, yyyy")#
+    &lt;LI&gt;#DateFormat(todayDate, "mm/dd/yyyy")#
+    &lt;LI&gt;#DateFormat(todayDate, "d-mmm-yyyy")#    
+    &lt;LI&gt;#DateFormat(todayDate, "ddd, mmmm dd, yyyy")#    
+    &lt;LI&gt;#DateFormat(todayDate, "d/m/yy")#
+&lt;/UL&gt;    
+    
+&lt;/CFOUTPUT&gt;    
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DateFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_071.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_073.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

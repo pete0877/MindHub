@@ -1,0 +1,99 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{3DCEF774-81D3-411E-9960-9423CAA03EB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTD", "TestDrivers\ServerTD\ServerTD.csproj", "{F4808004-3CCD-429F-9C0D-CD723901C6FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{FB36633C-9CB8-4272-A2AD-31645771DB51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{72CD70C1-8C9A-40DB-82B5-E233E02B30B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseWebModules", "BaseWebModules\BaseWebModules.csproj", "{C0165095-B1CA-4FE8-B6D7-2949ADCE310C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseAppModules", "BaseAppModules\BaseAppModules.csproj", "{2C789AE1-CBB7-4356-ABA7-313D148A676E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "http://localhost/WebAPI/WebAPI.csproj", "{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 8
+		SccProjectName0 = \u0022$/MindHub/Dev/MindHub\u0022,\u0020FAAAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SolutionUniqueID = {66A5EFA9-AE17-4075-BCCC-B2B691D958B0}
+		SccProjectUniqueName1 = Engine\\Engine.csproj
+		SccLocalPath1 = .
+		CanCheckoutShared = false
+		SccProjectFilePathRelativizedFromConnection1 = Engine\\
+		SccProjectUniqueName2 = TestDrivers\\ServerTD\\ServerTD.csproj
+		SccProjectName2 = \u0022$/MindHub/Dev/MindHub/TestDrivers/ServerTD\u0022,\u0020NDAAAAAA
+		SccLocalPath2 = TestDrivers\\ServerTD
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = Server\\Server.csproj
+		SccProjectName3 = \u0022$/MindHub/Dev/MindHub/Server\u0022,\u0020HDAAAAAA
+		SccLocalPath3 = Server
+		CanCheckoutShared = false
+		SccProjectUniqueName4 = Common\\Common.csproj
+		SccProjectName4 = \u0022$/MindHub/Dev/MindHub/Common\u0022,\u0020CEAAAAAA
+		SccLocalPath4 = Common
+		CanCheckoutShared = false
+		SccProjectUniqueName5 = BaseWebModules\\BaseWebModules.csproj
+		SccProjectName5 = \u0022$/MindHub/Dev/MindHub/BaseWebModules\u0022,\u0020AJAAAAAA
+		SccLocalPath5 = BaseWebModules
+		CanCheckoutShared = false
+		SccProjectUniqueName6 = http://localhost/WebAPI/WebAPI.csproj
+		SccProjectName6 = \u0022$/MindHub/Dev/MindHub/WebAPI\u0022,\u0020KIAAAAAA
+		SccLocalPath6 = http://localhost/WebAPI/
+		CanCheckoutShared = false
+		SccProjectEnlistmentChoice6 = 2
+		SccProjectUniqueName7 = BaseAppModules\\BaseAppModules.csproj
+		SccProjectName7 = \u0022$/MindHub/Dev/MindHub/BaseAppModules\u0022,\u0020ZLAAAAAA
+		SccLocalPath7 = BaseAppModules
+		CanCheckoutShared = false
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+		{3DCEF774-81D3-411E-9960-9423CAA03EB1}.0 = {72CD70C1-8C9A-40DB-82B5-E233E02B30B0}
+		{F4808004-3CCD-429F-9C0D-CD723901C6FC}.0 = {72CD70C1-8C9A-40DB-82B5-E233E02B30B0}
+		{F4808004-3CCD-429F-9C0D-CD723901C6FC}.1 = {3DCEF774-81D3-411E-9960-9423CAA03EB1}
+		{FB36633C-9CB8-4272-A2AD-31645771DB51}.0 = {72CD70C1-8C9A-40DB-82B5-E233E02B30B0}
+		{FB36633C-9CB8-4272-A2AD-31645771DB51}.1 = {3DCEF774-81D3-411E-9960-9423CAA03EB1}
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{3DCEF774-81D3-411E-9960-9423CAA03EB1}.Debug.ActiveCfg = Debug|.NET
+		{3DCEF774-81D3-411E-9960-9423CAA03EB1}.Debug.Build.0 = Debug|.NET
+		{3DCEF774-81D3-411E-9960-9423CAA03EB1}.Release.ActiveCfg = Release|.NET
+		{3DCEF774-81D3-411E-9960-9423CAA03EB1}.Release.Build.0 = Release|.NET
+		{F4808004-3CCD-429F-9C0D-CD723901C6FC}.Debug.ActiveCfg = Debug|.NET
+		{F4808004-3CCD-429F-9C0D-CD723901C6FC}.Debug.Build.0 = Debug|.NET
+		{F4808004-3CCD-429F-9C0D-CD723901C6FC}.Release.ActiveCfg = Release|.NET
+		{F4808004-3CCD-429F-9C0D-CD723901C6FC}.Release.Build.0 = Release|.NET
+		{FB36633C-9CB8-4272-A2AD-31645771DB51}.Debug.ActiveCfg = Debug|.NET
+		{FB36633C-9CB8-4272-A2AD-31645771DB51}.Debug.Build.0 = Debug|.NET
+		{FB36633C-9CB8-4272-A2AD-31645771DB51}.Release.ActiveCfg = Release|.NET
+		{FB36633C-9CB8-4272-A2AD-31645771DB51}.Release.Build.0 = Release|.NET
+		{72CD70C1-8C9A-40DB-82B5-E233E02B30B0}.Debug.ActiveCfg = Debug|.NET
+		{72CD70C1-8C9A-40DB-82B5-E233E02B30B0}.Debug.Build.0 = Debug|.NET
+		{72CD70C1-8C9A-40DB-82B5-E233E02B30B0}.Release.ActiveCfg = Release|.NET
+		{72CD70C1-8C9A-40DB-82B5-E233E02B30B0}.Release.Build.0 = Release|.NET
+		{C0165095-B1CA-4FE8-B6D7-2949ADCE310C}.Debug.ActiveCfg = Debug|.NET
+		{C0165095-B1CA-4FE8-B6D7-2949ADCE310C}.Debug.Build.0 = Debug|.NET
+		{C0165095-B1CA-4FE8-B6D7-2949ADCE310C}.Release.ActiveCfg = Release|.NET
+		{C0165095-B1CA-4FE8-B6D7-2949ADCE310C}.Release.Build.0 = Release|.NET
+		{2C789AE1-CBB7-4356-ABA7-313D148A676E}.Debug.ActiveCfg = Debug|.NET
+		{2C789AE1-CBB7-4356-ABA7-313D148A676E}.Debug.Build.0 = Debug|.NET
+		{2C789AE1-CBB7-4356-ABA7-313D148A676E}.Release.ActiveCfg = Release|.NET
+		{2C789AE1-CBB7-4356-ABA7-313D148A676E}.Release.Build.0 = Release|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Debug.ActiveCfg = Debug|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Debug.Build.0 = Debug|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Release.ActiveCfg = Release|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

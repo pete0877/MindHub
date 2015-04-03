@@ -1,0 +1,140 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>YesNoFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_251.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1002763"></a>
+ <H1>YesNoFormat</H1>
+
+
+
+<p>Returns Boolean data as YES or NO. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_126.htm#2571594">IsBinary</a> and <a href="../3_ColdFusion_Functions/lr3_132.htm#999452">IsNumeric</a>.
+</p>
+
+<a name="1002766"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>YesNoFormat</strong>(<em>value</em>)
+</PRE><a name="1002768"> </a>
+<h5 class="param"> value</h5>
+<p class="param">Any number or Boolean value.</p><a name="1002769"></a>
+ 
+<H3>Usage</H3>
+<p>The YesNoFormat function returns all non-zero values as YES and zero values as NO.</p><a name="1809068"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="YesNoFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the YesNoFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;YesNoFormat Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;YesNoFormat Example&lt;/H3&gt;
+
+&lt;P&gt;The YesNoFormat function returns all non-zero values
+as "YES" and zero values as "NO".
+
+&lt;CFOUTPUT&gt;
+&lt;UL&gt;
+    &lt;LI&gt;YesNoFormat(1):    #YesNoFormat(1)#
+    &lt;LI&gt;YesNoFormat(0):    #YesNoFormat(0)#
+    &lt;LI&gt;YesNoFormat("1123"):    #YesNoFormat("1123")#
+    &lt;LI&gt;YesNoFormat("No"):    #YesNoFormat("No")#
+    &lt;LI&gt;YesNoFormat(TRUE):    #YesNoFormat(TRUE)#
+&lt;/UL&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="YesNoFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_251.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

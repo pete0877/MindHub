@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFCACHE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_020.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_022.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1967743"></a>
+ <H1>CFCACHE</H1>
+
+
+
+<p>CFCACHE allows you to speed up pages considerably in cases where the dynamic content doesn't need to be retrieved each time a user accesses the page. To accomplish this, it creates temporary files that contain the static HTML returned from a particular run of the ColdFusion page.</p><p>You can use CFCACHE for simple URLs and URLs that contain URL parameters.</p><a name="1967746"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFCACHE 
+    ACTION="action"
+    PROTOCOL="protocol name"
+    TIMEOUT="timeout date-time"
+    DIRECTORY="directory name for map file"
+    CACHEDIRECTORY="directory name for cached pages"
+    EXPIREURL="wildcarded URL reference"
+    PORT= "port-number"&gt;
+</PRE><a name="1967748"></a>
+<h4> ACTION</h4>
+<p>Optional. Specifies one of the following:</p><ul>
+<a name="1967750"> </a>
+<li>CACHE -- Specifies server-side caching. The default is CACHE. 
+
+<a name="1967751"> </a>
+</li>
+<li>FLUSH -- Refresh the cached page. If you specify FLUSH, you can also specify the DIRECTORY and EXPIREURL attributes.
+<a name="2324440"> </a>
+</li>
+<li>CLIENTCACHE --Specifies browser caching. 
+<a name="2324447"> </a>
+</li>
+<li>OPTIMAL--Specifies optimal caching through a combination of server-side and browser caching. 
+</li>
+</ul>
+<p>See the Usage section for more information.</p><a name="1967752"></a>
+<h4> PROTOCOL</h4>
+<p>Optional. Specifies the protocol used to create pages from cache. Specify either HTTP:// or HTTPS://. The default is HTTP://.</p><a name="1967754"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. DateTime that specifies the oldest acceptable cached page. If the cached page is older than the specified datetime, ColdFusion refreshes the page. By default, ColdFusion uses all cached pages. For example, if you want a cached file to be no older than 4 hours, code the following:</p><pre>&lt;CFCACHE TIMEOUT="#DateAdd("h", "-4", Now() )#"&gt;
+</pre><a name="1967757"></a>
+<h4> DIRECTORY</h4>
+<p>Optional. Used with ACTION=FLUSH. Specifies the fully qualified path of a directory containing the cfcache.map to be used when ACTION=FLUSH. The default is the directory of the current page.</p><a name="2324472"></a>
+<h4> CACHEDIRECTORY</h4>
+<p>Optional. Specifies the fully qualified path of the directory where the pages are to be cached. The default is the directory of the current page.</p><a name="1967759"></a>
+<h4> EXPIREURL</h4>
+<p>Optional. Used with ACTION=FLUSH. EXPIREURL takes a wildcarded URL reference that ColdFusion matches against all mappings in the cfcache.map file. The default is to flush all mappings. For example, "foo.cfm" matches "foo.cfm"; "foo.cfm?*" matches "foo.cfm?x=5" and "foo.cfm?x=9".</p><a name="1967762"></a>
+<h4> PORT</h4>
+<p>Optional. The port number of the web server from which the page is being requested. The port number defaults to 80. The port number is useful because the CFCACHE code calls CFHTTP. If the port number is specified correctly in the internal call to CFHTTP, the URL of each retrieved document is resolved to preserve links. </p><a name="1967764"></a>
+ 
+<H3>Usage</H3>
+<p>In its simplest form, all you need to do is code &lt;CFCACHE&gt; at the top of a page for it to be cached. </p><p>With the ACTION attribute, you can specify server-side caching, browser caching, or a combination of server-side and browser caching. The advantage of browser caching is that it takes no ColdFusion resources because the browser stores the pages in its own cache, thus, improving performance. The advantage of using a combination of the two forms of caching is that it optimizes performance; if the browser cache times out, the server can retrieve the cached data from its own cache.</p><p>In addition to the cached files themselves, CFCACHE uses a mapping file to control caching. It is named cfcache.map and uses a format similar to a Windows INI file. The mapping of a URL with parameters is stored as follows. Assume a directory "c:\InetPub\wwwroot\dir1" that has a CFM file called "foo.cfm", which can be invoked with or without URL parameters. The cfcache.map file entries for foo.cfm will look like this:</p><pre> [foo.cfm]
+Mapping=C:\InetPub\wwwroot\dir1\CFCBD.tmp
+SourceTimeStamp=08/31/1999 08:59:04 AM
+
+[foo.cfm?x=5]
+Mapping=C:\InetPub\wwwroot\dir1\CFCBE.tmp
+SourceTimeStamp=08/31/1999 08:59:04 AM
+
+[foo.cfm?x=9]
+Mapping=C:\InetPub\wwwroot\dir1\CFCBF.tmp
+SourceTimeStamp=08/31/1999 08:59:04 AM
+</pre><p>The cfcache.map file in a given directory stores mappings for that directory only. Any time the timestamp of the underlying page changes, ColdFusion updates the cache file for that URL only. ColdFusion uses the SourceTimeStamp field to determine if the currently cached file is up to date or needs to be rebuilt.</p><p>You can refresh the cache in the following ways:</p><ul>
+<a name="1967780"> </a>
+<li>TIMEOUT attribute -- ColdFusion tests the timestamp of the cached file against the TIMEOUT attribute. If the cached file's timestamp is older than TIMEOUT, the old file is deleted and a new one created. You can use fixed dates if necessary, but it's preferable to use relative dates. This is the preferred technique and it works for seconds, hours, days, weeks, years, etc.
+
+<a name="1967781"> </a>
+</li>
+<li>ACTION=FLUSH -- You use ACTION=FLUSH to force the clean up of cached files. It can take two attributes, DIRECTORY and EXPIREURL.
+<a name="1967782"> </a>
+</li>
+<li>Manually -- Manually or programmatically (using CFFILE) delete the .tmp files. This is not recommended.
+</li>
+</ul>
+<p>Note the following regarding CFCACHE:</p><ul>
+<a name="1967784"> </a>
+<li>CFCACHE requires that ColdFusion Server "simultaneous requests" be greater than 1. When a cache file is generated, the requested page requires two connections to satisfy the request. When a cached file is found, only one request is required.
+
+<a name="1967785"> </a>
+</li>
+<li>Debug settings have no effect on CFCACHE unless the template explicitly turns it on. When generating a cached file, CFCACHE uses <code>&lt;CFSETTING SHOWDEBUGOUTPUT="NO"&gt;</code>.
+<a name="1967786"> </a>
+</li>
+<li>ColdFusion does not cache pages that are dependent on anything other than URL parameters.
+<a name="2014323"> </a>
+</li>
+<li>To use CFCACHE with the Secure Sockets Layer (SSL), specify <code>PROTOCOL="http://"</code>. If you need to use SSL, you must run ColdFusion as a desktop application. Please note, however, Allaire strongly recommends that you run the ColdFusion Server as a service. For more details about using SSL, see Knowledge Base article #1096 at <a href="http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm">http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm</a>.
+<a name="2014331"> </a>
+</li>
+<li>If a template returns an error for any reason, the error page gets cached.
+</li>
+</ul>
+<a name="2035543"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfcache
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example will produce as many cached files as there
+    are possible URL parameter permutations. ---&gt;
+&lt;CFCACHE TIMEOUT="#DateAdd("h", "-4", Now() )#"&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFCACHE Example&lt;/TITLE&gt; 
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;CFCACHE Example&lt;/H1&gt;
+
+&lt;H3&gt;This is a test of some simple output&lt;/H3&gt;
+&lt;CFPARAM NAME="URL.x" DEFAULT="no URL parm passed" &gt;
+&lt;CFOUTPUT&gt;The value of URL.x = # URL.x #&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfcache
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_020.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_022.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

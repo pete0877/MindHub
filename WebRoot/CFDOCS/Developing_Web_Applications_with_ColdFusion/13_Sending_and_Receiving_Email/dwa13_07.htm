@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Receiving Email Messages</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 13	:&nbsp;&nbsp;Sending and Receiving Email</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997611"></a>
+ <H1>Receiving Email Messages</H1>
+
+
+
+<p>CFPOP, the Post Office Protocol tag, expands the ColdFusion developer's ability to add Internet mail client features and email consolidation to applications. While a conventional mail client provides an adequate interface for personal mail, there are many cases where an alternative interface to some mailboxes is desirable. CFPOP is a tool to develop targeted mail clients to suit the specific needs of a wide range of applications.</p><p>Use CFPOP in applications when you want to receive email. Here are two instances where implementing POP mail makes sense:</p><ul>
+<li>If your site has generic mailboxes that are read by more than one person (<em>sales@yourcompany.com</em>), it may be more efficient to construct a ColdFusion mail front-end to supplement individual user mail clients.
+
+</li>
+<li>In many applications, the processing of mail can be automated when the mail is formatted to serve a particular purpose. For example, when subscribing to a list server.
+</li>
+</ul>
+<p>See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a><em> </em> for more information on CFPOP syntax and variables.</p><a name="1025483"></a>
+ 
+<H2>Using CFPOP</H2>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To implement the CFPOP tag in your ColdFusion application:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose which mail boxes you want to access within your ColdFusion application.
+
+
+</li>
+<li>Determine what mail message components you need to process: message header, message body, attachments, etc.
+
+</li>
+<li>Decide if you need to store the retrieved messages in a database.
+
+</li>
+<li>Decide if you need to delete messages from the POP server once you've retrieved them.
+
+</li>
+<li>Incorporate the CFPOP tag in your application and create a user interface for accessing a given mailbox.
+
+</li>
+<li>Build an application page to handle the output. Retrieved messages can include ASCII characters that do not display properly in the browser.
+
+<p>You use the CFOUTPUT tag with the HTMLCodeFormat and HTMLEditFormat 
+functions to control output to the browser. Note the use of these functions in the 
+examples.
+</p></li>
+</ol>
+<a name="1026044"></a>
+ 
+<H2>CFPOP query variables</H2>
+<p>Two variables are returned for each CFPOP query that provide record number information:</p><ul>
+<li>RecordCount: The total number of records returned by the query.
+
+</li>
+<li>CurrentRow: The current row of the query being processed by CFOUTPUT in a query-driven loop.
+</li>
+</ul>
+<p>You can reference these properties in a CFOUTPUT tag by prefixing the query variable with the query name in the NAME attribute of CFPOP:</p><pre>&lt;CFOUTPUT&gt;
+This operation returned #Sample.RecordCount# messages.
+&lt;/CFOUTPUT&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:56 -->
+</body>
+</html>

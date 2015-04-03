@@ -1,0 +1,394 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using the Deployment Wizard</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Deploying_Projects/deployment5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Deploying Projects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1017590"></a>
+ <H1>Using the Deployment Wizard</H1>
+
+
+
+<p>You can use the Deployment Wizard to deploy a project directly to the host servers or to create a deployment script that you can run whenever you want. Deployment scripts offer the benefit that they can be modified to do additional tasks during the course of deployment (for example, file compression or custom logging).</p><a name="1016594"></a>
+ 
+<H2>Deploying directly</H2>
+<p>When you deploy a project directly, you are copying the files to the host server(s) at the time of deployment.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To deploy a project directly:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the project you want to deploy in the Projects tab.
+
+
+</li>
+<li>From the Projects menu, choose Deployment Wizard to see the Deployment Script Wizard window.
+
+<p><img src="../images/deployment_script_wizard.gif">
+
+
+
+</p></li>
+<li>Click Deploy Directly then click Next.
+
+</li>
+<li>To deploy to a local or network path:
+
+<ul>
+<a name="1019201"> </a>
+<li>Click Local/Network Deployment, click Next, then click Finish.
+
+</li>
+</ul>
+</li>
+<li>To deploy to a remote server:
+
+<ul>
+<a name="1019214"> </a>
+<li>Click Remote RDS/FTP Deployment and click Next.
+
+<a name="1019187"> </a>
+</li>
+<li>Select the server(s) you want to deploy to and click Next.
+<a name="1019196"> </a>
+</li>
+<li>Click Finish.
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Your Deployment Servers are selected automatically in the server 
+list. Any remote servers that have been mapped to in the Universal 
+Files tab are also included in this list. You can deploy your project to 
+any of these servers, however, only information for the Deployment 
+Servers is included in the .apf file for the project.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Results window opens automatically and displays the results of your 
+deployment on the Deployment tab.
+</p></li>
+</ul>
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view the results of a deployment:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the View menu, choose Results (Shift+CTRL+L) to see the Results window.
+
+
+</li>
+<li>Click the Deployment tab at the bottom of the Results window.
+
+<p>The Results window tells you the status for each file in your project along with the 
+amount of time the deployment took. 
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can also view the results of a deployment by looking at the 
+Deployment.log file in the Studio 4.5 directory.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<a name="1017665"></a>
+ 
+<H2>Using deployment scripts</H2>
+<p>You can create a deployment script that can be run at any time. Deployment scripts are based on the VTOM model and can be generated in either JScript or VBScript (see ../../scripting_the_visual_tools_object_model/vtom.htmScripting the Visual Tools Object Model/afor more information on VTOM). The most powerful benefit of scripts is that, once they have been generated, they can be modified with custom code and saved.</p><p>There are three types of scripts that can be generated:</p><ul>
+<a name="1017558"> </a>
+<li><strong>Project-wide upload script</strong>
+
+<p>The Project-wide Upload Script generates a script that is identical in 
+functionality to deploying the project directly. During a project-wide upload, 
+the project is opened, uploaded, then closed.
+</p><a name="1017575"> </a>
+</li>
+<li><strong>File-by-file deployment script</strong>
+<p>The File-by-File Deployment Script creates a script that uploads each of the 
+project files individually. During a file-by-file upload, the project is opened, 
+each file is uploaded individually, then the project is closed.
+</p><a name="1017576"> </a>
+</li>
+<li><strong>Project element iterator script</strong>
+<p>The Project Element Iterator Script generates a script that performs a file-by-file 
+upload with a set of nested loops, or iterations. The script iterates through each 
+server, then each folder, then each file. Programmers who wish to do so can 
+insert code in between the loops to add custom functionality during uploading.
+</p></li>
+</ul>
+<a name="1018747"></a>
+ 
+<H3>Choosing a deployment script</H3>
+<p>The following section gives you some information about choosing the type of deployment script that will work best for you.</p><p>The Project-wide Upload Script is the most inflexible script. It works well in the case where you do not want to add custom code during the processing of deployment. You can still add custom code before and after deployment, however, with the Project-wide Upload Script, you are depending on Studio's deployment engine to perform all of the deployment tasks for you.</p><p>The File-by-File Deployment Script offers somewhat more flexibility. After generating a File-by-File Deployment Script, you can edit the script to deploy only a specified set of files. You can also add custom code during the course of deployment. The File-by-File Deployment Script is dependent, however, on the files existing in the project. If a file is included in the script but deleted from the project, then the script will run but the project will be out of date.</p><p>The Project Element Iterator Script is the most powerful script because it is not tied to specific servers or folders. This means that the script will continue to run regardless of project editing. The Project Element Iterator Script dynamically traverses the project folders runtime to appropriate the files to upload. When using a Project Element Iterator Script, the only thing you cannot change for a project is its name.</p><a name="1017918"></a>
+ 
+<H3>Working with deployment scripts</H3>
+<p>Once you have a created a script, you can open and edit it, run it, remove it, or change its properties.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a deployment script:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the project for which you want to generate a script.
+
+
+</li>
+<li>Click the Deploy Project button or choose Project &gt; Deployment Wizard to see the Deployment Wizard window.
+
+</li>
+<li>Click Generate Deployment Script then click Next.
+
+</li>
+<li>Enter a name for the script in the Deployment Task Name box.
+
+</li>
+<li>Choose the language for your script, VBScript or JScript, from the Script Language Options.
+
+</li>
+<li>A pathname based on the project name is automatically entered for the script in the Save Script to File box. You can change it by entering a new pathname or clicking the Browse button to use the Save As dialog box.
+
+</li>
+<li>If you want to see the script in the Studio Editor window, leave Open script in editor after generation selected.
+
+</li>
+<li>Click Next.
+
+</li>
+<li>Choose the type of script you want to generate-Project Element Iterator Script, File-by-File Deployment Script, Project-wide Upload Script-and click Next.
+
+</li>
+<li>To deploy to a local or network path:
+
+<ul>
+<a name="1019448"> </a>
+<li>Click Local/Network Deployment, click Next, then click Finish.
+
+</li>
+</ul>
+</li>
+<li>To deploy to a remote server:
+
+<ul>
+<a name="1019450"> </a>
+<li>Click Remote RDS/FTP Deployment and click Next.
+
+<a name="1019451"> </a>
+</li>
+<li>Select the server(s) you want to deploy to and click Next.
+<a name="1019452"> </a>
+</li>
+<li>Click Finish.
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Your Deployment Servers are selected automatically in the server 
+list. Any remote servers that have been mapped to in the Universal 
+Files tab are also included in this list. You can deploy your project to 
+any of these servers, however, only information for the Deployment 
+Servers is included in the .apf file for the project.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The script is generated and, if you chose to do so, opened in the Editor window.
+</p></li>
+</ul>
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open a deployment script for editing:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Expand Deployment Scripts.
+
+
+</li>
+<li>Right-click the script you would like to open for editing and choose Open Script from the menu.
+
+<p>The script is opened in the Editor window. You can customize the script by editing 
+it, then saving it.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run a deployment script:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Expand Deployment Scripts.
+
+
+</li>
+<li>Right-click the script you want to run and choose Run Script from the menu.
+
+<p>The Results window opens and informs you of the status of your deployment.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove a deployment script:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Expand Deployment Scripts.
+
+
+</li>
+<li>Right-click the script you want to remove and choose Remove Script from the menu.
+
+<p>You are asked to confirm that you want the script deleted.
+</p></li>
+<li>Click Yes.
+
+<p>The script is removed from the Deployment Scripts list.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a script's properties:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Expand Deployment Scripts.
+
+
+</li>
+<li>Right-click the script whose properties you want to edit and choose Properties from the menu.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The only property you can edit for a script is its description.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter a new description for the script and click OK.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Deploying_Projects/deployment5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:53 -->
+</body>
+</html>

@@ -1,0 +1,105 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>COM</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_058.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_060.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2722320"></a>
+ <H1>COM</H1>
+
+
+
+<p>CreateObject allows you to create and use COM (Component Object Model) objects. Any automation server object type that is currently registered on a machine can be invoked. You can use a utility like Microsoft's OLEView to browse COM objects. OLEView, as well as information about COM and DCOM, can be found at Microsoft's OLE Development web site <a href="http://www.microsoft.com/oledev/"><code>http://www.microsoft.com/oledev/</code></a>.</p><p>To create COM objects, you need to know the program ID or filename of the object, the methods and properties available through the IDispatch interface, and the arguments and return types of the object's methods. The OLEView utility can give you this information for most COM objects. </p><a name="2725940"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>CreateObject</strong>("COM", <em>class</em>, <em>context</em>, , <em>serverName</em>) 
+</PRE><a name="2722329"></a>
+<h4> class</h4>
+<p>Required. Enter the component ProgID for the object you want to invoke.</p><a name="2722333"></a>
+<h4> context</h4>
+<p>Optional. "InProc", "Local", or "Remote". Uses Registry setting when not specified.</p><a name="2722335"></a>
+<h4> serverName</h4>
+<p>Required when CONTEXT="Remote". Enter a valid server name using UNC (Universal Naming Convention) or DNS (Domain Name Server) conventions, in one of the following forms: </p><pre>SERVER="\\lanserver"
+SERVER="lanserver"
+SERVER="http://www.servername.com"
+SERVER="www.servername.com"
+SERVER="127.0.0.1"
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_058.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_060.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

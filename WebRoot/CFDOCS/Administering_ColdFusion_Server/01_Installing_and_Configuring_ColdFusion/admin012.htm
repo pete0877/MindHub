@@ -1,0 +1,421 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Installing ColdFusion on Windows</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin011.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Installing and Configuring ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1029041"></a>
+ <H1>Installing ColdFusion on Windows</H1>
+
+
+
+<p>This section addresses the following topics about installing ColdFusion on Windows:</p><ul>
+<a name="1022520"> </a>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm#999889">&quot;Verifying that a Web server is running&quot;</a>
+
+<a name="1022529"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm#1019107">&quot;Installing ColdFusion&quot;</a>
+<a name="1022530"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm#1023603">&quot;Uninstalling ColdFusion&quot;</a>
+<a name="1022531"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm#1023844">&quot;Performing Windows-specific configurations&quot;</a>
+</li>
+</ul>
+<a name="999889"></a>
+ 
+<H2>Verifying that a Web server is running</H2>
+<p>Before installing ColdFusion, check that your Web server is installed and running. You can do this by loading a page in your Web browser using the HTTP protocol. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To check that your Web server is running:
+</td>
+</tr>
+</table>
+</div><p>Do one of the following actions:</p><ul>
+<a name="1019135"> </a>
+<li>Enter the URL for a Web page or site in your browser's Address field and press Enter. 
+
+<p>For example, if the file myindex.htm is in your Web document root directory, load 
+the page in your browser using the localhost URL:
+</p><pre>http://127.0.0.1/myindex.htm
+</pre><p>If your Web server is not running, you'll receive an error message. 
+</p><a name="1019222"> </a>
+</li>
+<li>You can also check the Services icon in the Windows Control Panel or open your Web server administration utility to determine if your Web server is started or stopped.
+</li>
+</ul>
+<a name="1019107"></a>
+ 
+<H2>Installing ColdFusion</H2>
+<p>The installation procedure assumes you are installing from a CD. If you purchased and downloaded ColdFusion from the Allaire Online Store, follow the download instructions found there. Then follow the install procedure below, skipping step 2.</p><p>We recommend that you close all open applications before running the Setup program. This will ensure proper installation of the ODBC 3.0 drivers.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Because of a problem in the way Verity handles indexing, ColdFusion 
+must be installed to a directory path that contains no spaces in the path 
+name. This restriction is necessary so that ColdFusion can properly 
+access Verity collections. 
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install ColdFusion on Windows:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Log in to your system using the administrator's account or an account that is part of the Administrator's group.
+
+
+</li>
+<li>Insert the ColdFusion Server v4.5 CD into your CD drive or access it from your network jukebox (Enterprise users).
+
+</li>
+<li>Click Start&gt;Run to display the Run dialog box.
+
+<p><img src="../images/Run_dialog.gif">
+
+
+
+</p></li>
+<li>Enter the path where the ColdFusion Setup.exe resides or click Browse to drill down to it.
+
+</li>
+<li>Click OK.
+
+<p>The ColdFusion v4.5 Setup program starts and displays the ColdFusion Setup 
+Welcome page.
+</p><p><img src="../images/CF_Install_Welcome.gif">
+
+
+
+</p></li>
+<li>Click Next in the Welcome and Software License Agreement dialog boxes.
+
+<p>The User Information dialog box appears after the Software License Agreement 
+dialog box.
+</p><p><img src="../images/CF_Install_UserInfo.gif">
+
+
+
+</p></li>
+<li>Enter your name, company, and ColdFusion serial number in the User Information dialog box and click Next.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You'll find your ColdFusion serial number on the product box.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Choose Destination Directory dialog box appears next.
+</p><p><img src="../images/CF_Install_Destination.gif">
+
+
+
+</p></li>
+<li>Accept or change the default destination folder and click Next.
+
+<p>The Select Web Server dialog box appears.
+</p><p><img src="../images/CF_Install_WS.gif">
+
+
+
+</p><p>If your Web server is already installed, the ColdFusion Setup program will 
+automatically detect it.
+</p></li>
+<li>If your Web server is not one of the ones listed, select the Other option and click Next. Otherwise, just click Next.
+
+<p>The Select Web Server Document Directory dialog box appears next.
+</p><p><img src="../images/CF_Install_WSDocDir.gif">
+
+
+
+</p></li>
+<li>Either accept the Web server's default document directory or enter a different location for the default directory and click Next.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ColdFusion documentation and example code are installed in a 
+subdirectory below the Web server's document directory.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Select Install Options dialog box appears.
+</p><p><img src="../images/CF_Install_Option.gif">
+
+
+
+</p></li>
+<li>Accept the default install options or select those that you want and click Next.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>By default, Load Balancing and High Availability and Advanced 
+Security Services are not installed. However, you can install either of 
+them later by re-running the Setup program. For explicit instructions 
+about installing the Load Balancing and High Availability services, 
+see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm#1203339">&quot;Installing ClusterCATS&quot;</a>. To install Advanced 
+Security, see <a href="../10_Configuring_Advanced_Security/admin106.htm#1024449">&quot;Installing Advanced Security&quot;</a>.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Select Administrator Password dialog box appears next.
+</p><p><img src="../images/CF_Install_Password.gif">
+
+
+
+</p></li>
+<li>Enter a password you will use to access the ColdFusion Administrator in the Password and Confirm fields and press Next.
+
+<p>The Select ColdFusion Studio Password dialog box appears.
+</p><p><img src="../images/CF_Install_StudioPswrd.gif">
+
+
+
+</p></li>
+<li>Enter a password in the Password and Confirm fields that you will use to access the ColdFusion Server when developing applications with ColdFusion Studio and press Next.
+
+</li>
+<li>Click Next or OK in the remaining dialog boxes to begin copying the ColdFusion files to the server.
+
+<p>If your system has a previous version of ColdFusion, the setup wizard replaces 
+ColdFusion program files but does not remove or change any existing application 
+pages (template files) that may be present. 
+</p><p>ColdFusion updates the Windows registry and the ColdFusion services start. If you 
+chose to install the ODBC Desktop Drivers, a warning screen appears. Close all 
+open applications before installing the drivers.
+</p></li>
+<li>Click Finish to complete the installation.
+
+</li>
+<li>To verify your installation, click Start&gt;Programs&gt;ColdFusion Server 4.5&gt;ColdFusion Administrator to open the ColdFusion Administrator. Alternatively, you can enter the following URL into your browser:
+
+<pre>http://<em>hostname</em>/CFIDE/Administrator/index.cfm
+</pre><p>where <em>hostname</em> is the name of the server hosting ColdFusion. 
+</p></li>
+</ol>
+<p>If ColdFusion is not properly installed after following the steps above, please call Allaire Customer Service for assistance. </p><a name="1023603"></a>
+ 
+<H2>Uninstalling ColdFusion</H2>
+<p>If you need to remove an installed version of ColdFusion, run the ColdFusion Uninstall Utility to make sure all of the program files and registry settings are removed completely from your system.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To uninstall ColdFuison:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Programs&gt;ColdFusion Server&gt;Uninstall ColdFusion.
+
+
+<p>The InstallShield Uninstall program starts and displays the following confirmation 
+dialog box.
+</p><p><img src="../images/CF_Uninstall_confirm.gif">
+
+
+
+</p></li>
+<li>Click Yes to delete all ColdFusion program files and components from your system. Otherwise, click No to abort the uninstall.
+
+<p>If you clicked Yes, the InstallShield Uninstall program automatically removes 
+ColdFusion program files and registry settings from your system.
+</p></li>
+</ol>
+<a name="1023844"></a>
+ 
+<H2>Performing Windows-specific configurations</H2>
+<p>After installing ColdFusion, you may need to perform the following configurations:</p><ul>
+<a name="1024026"> </a>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm#1000842">&quot;Configuring the Apache Web server for ColdFusion&quot;</a>
+
+<a name="1024036"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin012.htm#1023935">&quot;Changing the ColdFusion user account&quot;</a>
+</li>
+</ul>
+<a name="1000842"></a>
+ 
+<H3>Configuring the Apache Web server for ColdFusion</H3>
+<p>To configure the Apache Web Server v1.3.6 for use with ColdFusion, you need to:</p><ul>
+<a name="1009913"> </a>
+<li>Get a copy of the Apache Web server from the Apache HTTP Server Project Web site at <a href="http://www.apache.org/">http://www.apache.org/</a>.
+
+<a name="1019453"> </a>
+</li>
+<li>Read the Apache documentation on support for Win32 platforms: <a href="http://www.apache.org/docs/windows.html">http://www.apache.org/docs/windows.html</a>.
+<a name="1019492"> </a>
+</li>
+<li>Copy an Apache module to your Apache modules directory. 
+<a name="1009925"> </a>
+</li>
+<li>Add a line to a configuration file.
+</li>
+</ul>
+<p>The following procedure assumes that your Apache Web server is installed in <code>c:\Apache</code>. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure Apache for ColdFusion: 
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">If a version of the Apache Web server is running, shut down the Web server.
+
+
+</li>
+<li>Copy the <code>cfusion\bin\ApacheModuleColdFusion.dll</code> module to your Apache modules directory. 
+
+<p>For example: <code>c:\Apache\modules\ApacheModuleColdFusion.dll</code>. 
+</p></li>
+<li>Edit the Apache configuration file (<code>c:\Apache\conf\httpd.conf</code>) to contain the following line:
+
+<pre>LoadModule coldfusion_module 
+    modules/ApacheModuleColdFusion.dll
+</pre></li>
+<li>Restart the Apache Web server.
+
+</li>
+</ol>
+<a name="1023935"></a>
+ 
+<H3>Changing the ColdFusion user account</H3>
+<p>By default, ColdFusion runs under the host System account. However, ColdFusion application pages may not have the access rights needed to interact with remote data sources, other application pages, COM objects, and so on when running under this account. Therefore, you may need to run ColdFusion under a specific account that provides the necessary access rights.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change the ColdFusion user account:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Settings&gt;Control Panel&gt;Services.
+
+
+<p>The Services dialog box appears.
+</p><p><img src="../images/Services_dialog.gif">
+
+
+
+</p></li>
+<li>Select the ColdFusion Application Server service and click Startup.
+
+<p>The Service Properties dialog box appears.
+</p><p><img src="../images/servicesdlg.gif">
+
+
+
+</p><p>Use this dialog to set startup options for the ColdFusion Application Server 
+service. 
+</p></li>
+<li>In the Log On As section, click the This Account radio button and enter the appropriate account information.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin011.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:26 -->
+</body>
+</html>

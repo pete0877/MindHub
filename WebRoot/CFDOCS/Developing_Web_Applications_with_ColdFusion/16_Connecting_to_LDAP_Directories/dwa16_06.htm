@@ -1,0 +1,214 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Querying an LDAP Directory</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 16	:&nbsp;&nbsp;Connecting to LDAP Directories</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1046520"></a>
+ <H1>Querying an LDAP Directory</H1>
+
+
+
+<p>CFLDAP allows you to search an LDAP directory and output the results of your query on a page. You can sort query results and return them to the browser or perform further processing with CFOUTPUT, CFREPORT, and related tags.</p><a name="1047516"></a>
+ 
+<H3>Search Filters</H3>
+<p>A search string of the form <em>attribute operator value</em> defines the filter syntax. The default filter, objectclass=*, returns all entries for the attribute.</p><p>The following table lists the filter operators. Note the prefix notation for the Boolean operators.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>CFLDAP Filter Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Example</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+= 
+</td><td valign="top">
+o=allaire - organization name equals allaire
+</td></tr>
+<tr valign="top"><td valign="top">
+~= 
+</td><td valign="top">
+o~=alliare - organization name approximates allaire
+</td></tr>
+<tr valign="top"><td valign="top">
+&gt;= 
+</td><td valign="top">
+st&gt;=ma - names appearing after "ma" in an alphabetical state attribute list 
+</td></tr>
+<tr valign="top"><td valign="top">
+&lt;= 
+</td><td valign="top">
+st&lt;=ma - names appearing before "ma" in an alphabetical state attribute list 
+</td></tr>
+<tr valign="top"><td valign="top">
+*
+</td><td valign="top">
+o=alla* - organization names starting with "alla"
+
+o=*aire - organization names ending with "aire"
+
+o=all*aire - organization names starting with "all and " ending with "aire"
+</td></tr>
+<tr valign="top"><td valign="top">
+&amp;
+</td><td valign="top">
+(&amp;(o=allaire)(co=usa)) - organization name = "allaire" AND country = "usa"
+</td></tr>
+<tr valign="top"><td valign="top">
+| 
+</td><td valign="top">
+(|(o=allaire)(sn=allaire)) - organization name = "allaire" OR surname = "allaire"
+</td></tr>
+<tr valign="top"><td valign="top">
+!
+</td><td valign="top">
+(!(STREET=*)) - all entries that do NOT contain a StreetAddress attribute
+</td></tr>
+
+</table>
+</div>
+</p><p>Although sophisticated search criteria can be constructed from these filter operators, performance may degrade if the LDAP server is slow to process the synchronous search routines supported by CFLDAP. The TIMEOUT and MAXROWS attributes can be used to control query performance.</p><p>The following uses CFLDAP to retrieve the name and telephone numbers for US organizations with a common name that starts with 'A' through 'E'. The search starts in the country: US. The filter is a regular expression that limits the search to expressions of any length that begin with "A," "B," "C," "D," or "E."</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To query an LDAP directory:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;CFLDAP NAME="OrgList"
+    SERVER="ldap.itd.umich.edu"
+    ACTION="QUERY"
+    ATTRIBUTES="o,st,telephoneNumber"
+    SCOPE="ONELEVEL"
+    FILTER="(|(o=A*)(o=B*)(o=C*)(o=D*)(o=E*))"
+    MAXROWS=200
+    SORT="o"
+    START="c=US"&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;LDAP Directory Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+
+&lt;H3&gt;US Organizations beginning with 
+    the letter 'A' thru 'E':&lt;/H3&gt;
+
+&lt;CFFORM NAME="GridForm" ACTION="org_query.cfm"&gt;
+
+    &lt;CFGRID NAME="grid_one"
+        QUERY="OrgList"
+        HEIGHT=250
+        WIDTH=620
+        HSPACE=20
+        VSPACE="6"&gt;
+
+        &lt;CFGRIDCOLUMN NAME="o"
+            HEADER="Organization" WIDTH=380&gt;
+        &lt;CFGRIDCOLUMN NAME="st"
+            HEADER="State" WIDTH=100&gt;
+        &lt;CFGRIDCOLUMN NAME="telephoneNumber"
+            HEADER="Phone ##" WIDTH=150&gt;
+    &lt;/CFGRID&gt;
+
+&lt;/CFFORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>ldapadd.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:59 -->
+</body>
+</html>

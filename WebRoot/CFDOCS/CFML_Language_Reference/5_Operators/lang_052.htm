@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Elements of ColdFusion Expressions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_053.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;ColdFusion Expressions: Operators and Other Constructs</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2672617"></a>
+ <H1>Elements of ColdFusion Expressions</H1>
+
+
+
+<p>The following objects can be used to build expressions:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Objects Used to Build ColdFusion Expressions</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Type</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><p>Integers</p></td><td valign="top"><p>Numbers with no decimal point.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Real numbers</p></td><td valign="top"><p>Numbers with a decimal part. Also known as floating point numbers.</p><p>The range of ColdFusion numbers is approximately &plusmn;10300, or &plusmn;1 with 300 zeros after it. Most operations are accurate to 12 digits after the decimal point.</p><p>ColdFusion supports scientific notation.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Strings</p></td><td valign="top"><p>Text values, which can be enclosed in single (') or double (") quotes. Strings length is limited only by the amount of available memory on the ColdFusion server.</p><p>To use a single quote inside a string that is single quoted, <em>escape</em> the single quote by using two single quotes. You can similarly escape a double quote inside a double quote-enclosed string.</p><p>To insert a pound sign in a string, the pound sign must be escaped, or doubled,</p></td></tr>
+<tr valign="top"><td valign="top"><p>Boolean values</p></td><td valign="top"><p>The result of a logical operation. Their value can be either TRUE or FALSE. The numerical value of TRUE is 1. The numerical value of FALSE is 0. When converted to a string, TRUE becomes &quot;YES&quot; and FALSE becomes &quot;NO&quot;.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Date values</p></td><td valign="top"><p>Date-and-time values identify a date and time in the range 100AD to 9999AD. If no time part is specified, time is set to 12:00am.</p><p>You can also directly enter a date object in any of the following formats:</p><pre>"October 30, 1999"
+"Oct 30, 1999"
+"Oct. 30, 1999"
+"10/30/99"
+"1999-30-10"
+</pre></td></tr>
+<tr valign="top"><td valign="top"><p>Time values</p></td><td valign="top"><p>You can directly enter a date-and-time object in any of the following formats:</p><pre>"October 30, 1999 02:34:12"
+"October 30, 1999 2:34a"
+"October 30, 1999 2:34am"
+"October 30, 1999 02:34am"
+"October 30, 1999 2am"
+</pre><p>The time part of the object is accurate to the second.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Lists</p></td><td valign="top"><p>Lists are a special kind of string, made up of elements separated by delimiters. </p><p>You specify the allowable delimiters for a list by [HOW?] A list can have more than one delimiting character. The default delimiting character, used by all list processing functions is a comma: &quot;,&quot;. White space is not considered a delimiter. However, when using lists where elements may be separated by white space as well as other delimiters, be sure to add the white space characters to the delimiters. Delimiters before the first element and after the last element are ignored.</p><p>The structure of lists is flat - that is, lists cannot be nested into one another. Also, lists can contain no &quot;empty&quot; elements. A list can be empty, however. The empty list is equivalent to the empty string "".</p></td></tr>
+<tr valign="top"><td valign="top"><p>Structures</p></td><td valign="top"><p>You can use structures to create and maintain key-value pairs, to refer to related string values as a unit rather than individually, or to create associative arrays.</p><p>For more information about structures, see <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Arrays</p></td><td valign="top"><p>Arrays are tables of objects or data that can be indexed. Although the ArrayNew function only supports creating up to three-dimensional arrays, there is no limit on array size or maximum dimension. </p><p>Elements stored in an array are referenced as follows:</p><p>&lt;CFSET myarray[1][2]=Now()&gt;</p><p>For more information about arrays, see <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Queries</p></td><td valign="top"><p>ColdFusion queries can be referenced as objects by assigning a query to a variable:</p><pre>&lt;CFQUERY NAME=myquery
+    DATASOURCE=mydata
+    SELECT * FROM CUSTOMERS
+&lt;/CFQUERY&gt;
+
+&lt;CFSET myquery2=myquery&gt;
+</pre><p>In this case (unlike the same operation with arrays) the query is <em>not</em> copied. Instead, both names point to the record set data so that if you make changes to the table referenced in the query, the original query and the query object myquery2 will both reflect those changes.</p><p>Queries and variables cannot have the same name at the same time in the same application page. </p></td></tr>
+<tr valign="top"><td valign="top"><p>COM objects</p></td><td valign="top"><p>COM (Component Object Model) objects are non-visual components that encapsulate specific functionality you can invoke in your application pages. ActiveX, OCX, CORBA, and ADO objects are examples of COM objects.</p><p>COM objects generally contain methods, like functions, you can use to execute certain operations:</p><pre>&lt;CFSET temp=Mailer.SendMail()&gt;
+</pre><p>COM objects also generally contain properties you can read and write using ColdFusion variables:</p><pre>&lt;CFSET Mailer.FromName=Form.fromname&gt;
+</pre><p>Properties can be invoked on either side of an assignment.</p><p>For more information about COM objects, see <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p></td></tr>
+<tr valign="top"><td valign="top"><p>Variables</p></td><td valign="top">
+When variables are used in ColdFusion expressions, the value stored in the variable is returned. The values can be one of the previously described basic objects: numbers, strings, Boolean values, date-and-time objects, or lists.
+</td></tr>
+
+</table>
+</div>
+</p><a name="2672699"></a>
+ 
+<H2>Notes on date-and-time values</H2>
+<p>There are a variety of ways in which a date-and-time value can be entered in ColdFusion. You can use the functions that create date-and-time objects using various criteria. (See Chapter 2 </a>for information about date-and-time functions.)</p><a name="2672705"></a>
+ 
+<H3>21st century dates</H3>
+<p>Two-digit years from 00 to 29 are treated as 21st century dates; 30 to 99 are treated as 20th century dates.</p><pre>"October 30, 2015"
+"October 30, 15"
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Internally to ColdFusion, date-and-time values are represented on a time 
+line as a subset of the real numbers. This is done for efficiency in 
+evaluation and because it directly mimics the method used by many 
+popular database systems, including Microsoft Access. One day is equal 
+to the difference between two successive integers. The time portion of 
+the date-and-time value is stored in the fractional part of the real 
+number.
+</td>
+</tr>
+</table>
+</div>
+<br><p>Thus, arithmetic operations can be used to manipulate date-and-time values. For example, Now() + 1 will evaluate to tomorrow at the same time. However, we strongly discourage ColdFusion developers from using this potentially troublesome method of manipulating date-and-time objects. Date-and-time manipulation routines should be used instead.</p><a name="2672713"></a>
+ 
+<H3>Fast date/time dates in UNIX</H3>
+<p>On UNIX, there is a switch that provides fast date-time parsing. If you have enabled this switch, you must refer to dates in expressions in the following order: month, day, and year. For example:</p><pre>&lt;CFIF &quot;11/23/1998&quot; GT &quot;11/15/1998&quot;&gt;
+</pre><p>If this switch is set, the default date format returned by the DateFormat() function cannot be parsed in an expression. However, if you specify a mask, indicating the correct order, such as, mm/dd/yyyy, the date returned by this function can be a parsed.</p><p>The Fast Date/Time Parsing switch is set on the ColdFusion Administrator Server Settings page. Refer to <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a> for more information about ColdFusion settings.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Complex objects, such as arrays, structures, queries, and COM objects 
+are passed to custom tags surrounded by pound signs (#).
+</td>
+</tr>
+</table>
+</div>
+<br><a name="2672723"></a>
+ 
+<H2>Notes on using variables</H2>
+<p>Variable names must begin with a letter that can be followed by any number of letters, numbers, or the underscore character &quot;_&quot;. For example, TheVariable_1 and TheVariable_2 are valid variable names, while 1stVariable and WhatAVariable! are not.</p><p>Sometimes variable names can begin with a qualifier that itself is a variable name. The qualifier name of a variable is separated from the qualified name with a period character (.). For example, Form.MyVariable is a valid qualified variable name. The qualifier, in this case &quot;Form,&quot; signifies that we are interested in the form variable MyVariable, as opposed to, for example, the client variable MyVariable (Client.MyVariable). Qualifiers are also known as scopes. Thus MyVariable is said to belong to the Form scope.</p><p>In some cases, a variable must have pounds signs around it to allow ColdFusion to distinguish it from string or HTML text and to insert its value as opposed to its name. For more information on how to use pound signs in expressions see <a href="../5_Operators/lang_056.htm#2673587">Pound Signs</a>.</p><a name="2672731"></a>
+ 
+<H3>Functions</H3>
+<p>Because ColdFusion functions return basic objects, such as numbers, strings, Boolean values, date-and-time objects, lists, arrays, structures, queries, and COM objects, their results are basic expression terms.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_053.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:40:20 -->
+</body>
+</html>

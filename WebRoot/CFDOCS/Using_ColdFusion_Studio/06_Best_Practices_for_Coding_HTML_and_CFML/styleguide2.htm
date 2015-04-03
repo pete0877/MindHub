@@ -1,0 +1,350 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>General Style Guidelines</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Best Practices for Coding HTML and CFML</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1046720"></a>
+ <H1>General Style Guidelines</H1>
+
+
+
+<p>This section offers some general guidelines for writing clean code. It also shows you how to use Allaire HomeSite or ColdFusion Studio to control your code style:</p><ul>
+<a name="1046722"> </a>
+<li>Set standards for your site 
+
+<a name="1046723"> </a>
+</li>
+<li>Reuse common code 
+<a name="1046724"> </a>
+</li>
+<li>Indent your code 
+<a name="1046725"> </a>
+</li>
+<li>Set line length and word wrapping 
+<a name="1046726"> </a>
+</li>
+<li>Keep capitalization consistent 
+<a name="1046727"> </a>
+</li>
+<li>Add comments to your code 
+<a name="1046728"> </a>
+</li>
+<li>Watch your URLs 
+<a name="1046729"> </a>
+</li>
+<li>Use special characters carefully 
+</li>
+</ul>
+<a name="1046732"></a>
+ 
+<H2>Set standards for your site</H2>
+<ul>
+<a name="1046733"> </a>
+<li>Establish a style guide for your site and stick to it. Make it available to all developers, authors, content editors, and freelancers. 
+
+<a name="1046734"> </a>
+</li>
+<li>Do not overlap tag sets:
+<p>    Wrong: <code>&lt;H1&gt;&lt;A HREF="travel.html"&gt;</code>My travel diary<code>&lt;/H1&gt;&lt;/A&gt;
+</code></p><p>    Right: <code>&lt;H1&gt;&lt;A HREF="travel.html"&gt;</code>My travel diary<code>&lt;/A&gt;&lt;/H1&gt;</code> 
+</p><a name="1046737"> </a>
+</li>
+<li>Decide on a central location for images. 
+<a name="1046738"> </a>
+</li>
+<li>Create a production checklist. Every time you upload a page or deploy a whole site, run through a basic production pass: run the spell checker, validate the HTML, check your links. Naturally the more complex the application, the more QA you'll need to do. 
+<a name="1046739"> </a>
+</li>
+<li>Include a way for users to offer feedback and report broken links or script errors. This can be as simple as providing an email link to the Webmaster or content producer. 
+<a name="1046740"> </a>
+</li>
+<li>Always include descriptive page titles. Remember that text in the <code>&lt;TITLE&gt;</code> tag appears in users' bookmarks or favorites lists when they bookmark your page. It also appears in the list of titles returned in a Verity search collection or by an Internet search engine. 
+</li>
+</ul>
+<a name="1046743"></a>
+ 
+<H2>Reuse common code</H2>
+<ul>
+<a name="1046744"> </a>
+<li>Use the Code Snippets feature in Allaire HomeSite or ColdFusion Studio to store code for headers, footers, corporate logos, navigation bars, etc. 
+
+<a name="1046745"> </a>
+</li>
+<li>Use Custom Templates to enforce corporate or site-wide page styles. (Choose Save &gt; Save As Template to save a page as a custom template.) 
+<a name="1046746"> </a>
+</li>
+<li>Reuse common code to reduce errors and make common page elements easier to create and update. 
+<a name="1047374"> </a>
+</li>
+<li>Use the Code Templates feature as a typing shortcut. This feature lets you set up abbreviations for text you type frequently. 
+</li>
+</ul>
+<a name="1047376"></a>
+ 
+<H2>Indent your code</H2>
+<ul>
+<a name="1047377"> </a>
+<li>Use white space and indent your code to set off logical code chunks.
+
+<p>    This is particularly useful to show the organization of nested tags that contain<br>
+    many attributes or additional tags. Use the Edit &gt; Indent and Unindent<br>
+    commands to adjust the indentation of selected text and tags. 
+</p><a name="1046753"> </a>
+</li>
+<li>The default tab size in Allaire HomeSite and ColdFusion Studio is 4 spaces. To change it, choose Options &gt; Settings or press F8 to open the Settings dialog box. On the Editor pane, you can adjust the Tab Width and control whether tabs are inserted as spaces. 
+<a name="1046754"> </a>
+</li>
+<li>On any given tag's Tag Editor dialog box (F4) you can choose to output that tag's code all on one line or indented. 
+</li>
+</ul>
+<a name="1046757"></a>
+ 
+<H2>Set line length and word wrapping</H2>
+<ul>
+<a name="1046758"> </a>
+<li>Keep line lengths below 80 characters -- at 80 characters, some editors start line wrapping. 
+
+<a name="1046759"> </a>
+</li>
+<li>Choose Options &gt; Word Wrap or click the Word Wrap icon on the Editor toolbar to wrap long lines in the Editor pane. 
+</li>
+</ul>
+<a name="1046762"></a>
+ 
+<H2>Keep capitalization consistent</H2>
+<p>In HTML and CFML, it doesn't matter how you capitalize tags, attributes, and values. But it does help to choose one style and be consistent.</p><ul>
+<a name="1046764"> </a>
+<li>Some developers find it helpful to use uppercase for tag and attribute names, and mixed-case or lowercase for attribute values.
+
+<p><code>    &lt;FONT FACE="Arial Black" SIZE="+2" COLOR="#FFFFFF"&gt;My Title&lt;/FONT&gt; 
+</code></p><a name="1046767"> </a>
+</li>
+<li>It's a good idea to keep your web applications case-consistent. You may want to run it on another platform later. Use lowercase for filenames. Keep in mind that UNIX is case-sensitive. 
+<a name="1046768"> </a>
+</li>
+<li>To change the capitalization of all tags in a file, choose Edit &gt; Convert Tag Case.
+</li>
+</ul>
+<p>In HomeSite or Studio, you can use the Options &gt; Settings dialog box (F8) to control the capitalization and appearance of your code in these ways: </p><ul>
+<a name="1046770"> </a>
+<li>Use lowercase for all inserted tags (HTML tab).
+
+<p><code>    &lt;img src="images/logo.gif" height=1 width=1 vspace=2 border=0&gt; 
+</code></p><a name="1046772"> </a>
+</li>
+<li>Force filenames to be lowercase for all &lt;A&gt; and &lt;IMG&gt; tags (HTML tab):
+<p><code>    &lt;a href="directions.htm"&gt;</code>How to Find Us<code>&lt;/a&gt; 
+</code></p><a name="1046774"> </a>
+</li>
+<li>When editing tags, return the output on a single line in the editor (HTML tab).
+<p><code>    &lt;CFFORM NAME="form1" ACTION="submit.cfm" METHOD="Post"&gt; 
+</code></p><a name="1047354"> </a>
+</li>
+<li>Choose the color scheme used to display different HTML and CFML tags (Color Coding tab). 
+</li>
+</ul>
+<a name="1047356"></a>
+ 
+<H2>Add comments to your code</H2>
+<p>If the art of writing is rewriting, the art of maintaining a web site is reusing code wisely. Comments help immensely -- especially if someone other than you will update, inherit, or reuse your code.</p><ul>
+<a name="1046781"> </a>
+<li>Add comments to show other developers or authors how your code works or where they need to insert content. Comments also help to remind yourself how/why you did something. This makes updates and working in a team much easier. 
+
+<a name="1046782"> </a>
+</li>
+<li>Make sure the comments explain what you are trying to do, rather than stating what the code does.
+<p>    Good: <br>
+<code>    &lt;!--- Move to next decile ---&gt; <br>
+    &lt;CFSET x=x+10&gt; <br>
+</code>
+</p><p>    Not so good: <br>
+<code>    &lt;!--- Increase x ---&gt; <br>
+    &lt;CFSET x=x+10&gt; 
+</code></p><a name="1046789"> </a>
+</li>
+<li>Comments can be brief or span many lines. 
+<a name="1046790"> </a>
+</li>
+<li>Remember to update and sign your comments as you rewrite or add code. 
+<a name="1046791"> </a>
+</li>
+<li>If you're writing straight HTML, use HTML comments (&lt;!-- --&gt;). If you're writing CFML code, be sure to use the CFML comment tag (&lt;!--- ---&gt;). 
+<a name="1046792"> </a>
+</li>
+<li>To add the HTML comment tag to the QuickBar, choose Options &gt; Customize Toolbars, drag the Comment tool icon to the QuickBar, and click OK. The CFML Comment tag appears on the CFML Basic toolbar. 
+<a name="1046793"> </a>
+</li>
+<li>Keep in mind that in HTML files, comments are visible to end users who view the source of your documents. CFML comments are not visible to end-users, so these comments afford a greater degree of privacy. 
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ColdFusion comments add white space to your pages; in ColdFusion 
+applicati, use the CFSETTING tag to prevent this.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1046797"></a>
+ 
+<H2>Watch your URLs</H2>
+<ul>
+<a name="1046798"> </a>
+<li>Keep URLs short. Make them descriptive of site structure, where possible. 
+
+<a name="1046799"> </a>
+</li>
+<li>It's a good idea to keep your web applications case-consistent. You may want to run it on another platform later. Keep in mind that UNIX is case-sensitive. 
+<a name="1046800"> </a>
+</li>
+<li>You may want to use all lowercase because some users may need to type your URL exactly as configured. 
+<a name="1046801"> </a>
+</li>
+<li>Use the URLEncodedFormat function if you are passing dynamic parameters that may contain spaces. This prevents the server from truncating the URL at the first space. See the <em>CFML Language Reference</em><em> </em>for more information.
+</li>
+</ul>
+<a name="1046804"></a>
+ 
+<H2>Use special characters carefully</H2>
+<ul>
+<a name="1046805"> </a>
+<li>Be careful with special characters in web content. The web uses only a portion of available character sets. Avoid unexpected substitutions or mistakes by using character entities for special characters. For example, AT&amp;T should be written as AT&amp;amp;T. 
+
+<a name="1046806"> </a>
+</li>
+<li>In HomeSite or Studio, choose View &gt; Special Characters to show the Special Characters pane, which offers a quick way to add character entities to your documents. 
+</li>
+</ul>
+<p>The following tables shows a few of the most-commonly used character entities. The Special Characters pane has a more complete selection. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Special Characters</strong>
+</th><th align="left">
+<strong>HTML Character Entities</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Greater-than/angle bracket &gt; 
+</td><td valign="top">
+&amp;gt;
+</td></tr>
+<tr valign="top"><td valign="top">
+Less-than/angle bracket &lt; 
+</td><td valign="top">
+&amp;lt;
+</td></tr>
+<tr valign="top"><td valign="top">
+Ampersand &amp;
+</td><td valign="top">
+&amp;amp;
+</td></tr>
+<tr valign="top"><td valign="top">
+Quotation mark "
+</td><td valign="top">
+&amp;quot;
+</td></tr>
+<tr valign="top"><td valign="top">
+Non-breaking space 
+</td><td valign="top">
+&amp;nbsp;
+</td></tr>
+<tr valign="top"><td valign="top">
+Copyright symbol &#169;
+</td><td valign="top">
+&amp;copy;
+</td></tr>
+<tr valign="top"><td valign="top">
+Trademark symbol <font size="-1"><sup>TM</sup></font>
+</td><td valign="top">
+&amp;trade;
+</td></tr>
+<tr valign="top"><td valign="top">
+Registration symbol &#174;
+</td><td valign="top">
+&amp;reg;
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:44 -->
+</body>
+</html>

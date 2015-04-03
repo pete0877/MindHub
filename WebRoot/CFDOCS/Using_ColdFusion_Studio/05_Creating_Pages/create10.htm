@@ -1,0 +1,215 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Inserting Tags from the QuickBar</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create9.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1021611"></a>
+ <H1>Inserting Tags from the QuickBar</H1>
+
+
+
+<p>When you click on a QuickBar icon, it either inserts the tag directly into the document or opens a dialog box for tags that require attributes. Each dialog box is tag-specific; it only displays supported attributes. </p><p>You can easily customize the QuickBar display and organize toolbuttons.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To move a QuickBar tab:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click and hold on the drag bar -- the double lines located at the left end of the tab -- of the tab you want to move.
+
+
+</li>
+<li>Drag the toolbar to the new position. To place the toolbar on a workspace border, drag it to the edge of the border until the toolbar border changes to thin lines.
+
+</li>
+<li>Release the mouse button when the toolbar is in its new location.
+
+</li>
+<li>To return a toolbar to its previous location, double-click on its title bar.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To organize QuickBar tabs:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click in the QuickBar and select the tabs you want displayed.
+
+
+</li>
+<li>Right-click in the QuickBar and select Organize QuickBar.
+
+</li>
+<li>Use the up and down arrows to set the tab order.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To customize QuickBar tabs:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click in the QuickBar and select Customize.
+
+
+</li>
+<li>Double-click on a toolbar name in the Visible Toolbars list.
+
+</li>
+<li>Drag and drop items from the Toolbuttons list onto the selected toolbar.
+
+</li>
+<li>Click the Add Separator button to add a vertical bar next to the last icon.
+
+</li>
+<li>Check the Show keyboard shortcuts in toolbutton hints option to display the key combination when you hover the mouse pointer over a toolbutton.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a toolbar:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Add Toolbar in the Customize dialog box.
+
+
+</li>
+<li>Enter a name for the new toolbar and click OK to add the toolbar to the Toolbars list.
+
+</li>
+<li>Select the new toolbar from the list and add toolbuttons as needed.
+
+</li>
+<li>Use the Organize QuickBar dialog box to determine the placement of the toolbar on the QuickBar.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a custom toolbutton:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Add Custom Button to open the Custom Toolbutton dialog box.
+
+
+</li>
+<li>Click the radio button to select an action for the toolbutton. 
+
+</li>
+<li>Complete the entries for the selected action.
+
+</li>
+<li>Click OK to add the new toolbutton to the selected toolbar.
+
+</li>
+</ol>
+<p>You can always return to the original QuickBar configuration by clicking the Reset to Defaults button.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create9.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

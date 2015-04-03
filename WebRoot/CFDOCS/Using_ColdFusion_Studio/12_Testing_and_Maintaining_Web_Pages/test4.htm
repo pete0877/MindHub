@@ -1,0 +1,117 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Checking Spelling </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Testing and Maintaining  Web Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999951"></a>
+ <H1>Checking Spelling </H1>
+
+
+
+<p>You can check the spelling of your document content and, optionally, code syntax, by using either the internal spell checker or the Microsoft Office spell checker, which is enabled if Office 95 or later is detected during installation. Use the Spelling pane in the Options &gt; Settings dialog box (F8) to set options.</p><p>You can download additional dictionaries for international languages and legal and medical terms from the <a href="http://www.allaire.com/developer/gallery/index.cfm?ObjectID=6791">Allaire Web site</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run the spell checker:
+</td>
+</tr>
+</table>
+</div><ul>
+<a name="1000024"> </a>
+<li>Click the Spell check tool button or select Tools &gt; Spell Check (F7) or Spell Check All. You can select commands from the Spell dialog box for words not found in the dictionary.
+
+<p><img src="../images/spell_check_button.gif">
+
+
+
+</p><a name="1010125"> </a>
+</li>
+<li>Click the Mark spelling errors tool button or select Tools &gt; Mark Spelling Errors (Ctrl + F7) to toggle the display of misspellings. Right-click on a highlighted word and select from the Spelling suggested word list. 
+<p><img src="../images/mark_spell_errors_button.gif">
+
+
+
+</p></li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:54 -->
+</body>
+</html>

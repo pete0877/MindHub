@@ -1,0 +1,162 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Adding Data Sources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012022"></a>
+ <H1>Adding Data Sources</H1>
+
+
+
+<p>You add data sources in the ColdFusion Administrator to define connection requirements for database access.</p><p><img src="../images/DWA5_0.gif">
+
+
+</p><p>When you add a data source, you assign it a name so that you can reference it within tags such as CFQUERY on application pages to query databases. During a query, the data source tells ColdFusion which database to connect to and what parameters to use for the connection.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a data source:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Start the ColdFusion Administrator. On Windows, Select Start &gt; Programs &gt; ColdFusion Server &gt; ColdFusion Administrator. On UNIX, enter the URL <code>hostname/CFIDE/administrator</code> in your browser.
+
+
+<p>The Administrator prompts you for a password if you assigned one to the 
+ColdFusion Server during install.
+</p></li>
+<li>Enter a password to gain access to the Administrator.
+
+</li>
+<li>Choose ODBC under the Data Sources heading on the left menu. 
+
+</li>
+<li>Name the data source <code>CompanyInfo</code>.
+
+</li>
+<li>Select Microsoft Access Driver (*.mdb) from the dropdown box to describe the ODBC driver.
+
+</li>
+<li>Choose Add.
+
+</li>
+<li>In the Database File field, enter the full path of the <code>company.mdb</code> Access database and click OK. 
+
+</li>
+<li>Choose Create to create the <code>CompanyInfo</code> data source. 
+
+<p>The data source is added to the data source list. 
+</p></li>
+<li>Locate <code>CompanyInfo</code> in the data source list. 
+
+</li>
+<li>Choose Verify to run the verification test on the data source. 
+
+<p>If the data source was created, you should see this message: 
+</p><pre>The connection to the data source was verified successfully.
+</pre></li>
+</ol>
+
+<div>
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/Note.gif" WIDTH=25 HEIGHT=28  align="middle" border="0" alt="Note"></td>
+<td class="note" width="45">Note:</td><td valign="top">For more information about managing data sources, See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a><em>.</em></td></tr></table></div><a name="1015225"></a>
+ 
+<H2>Data Source Notes and Considerations</H2>
+<p>When adding data sources to ColdFusion Server, keep these guidelines in mind:</p><ul>
+<li>Data source names should be all one word and begin with a letter.
+
+</li>
+<li>Data source names can contain only letters, numbers and the underscore.
+</li>
+<li>Data source names should not contain special characters.
+</li>
+<li>Although data source names are not case-sensitive, you should use a consistent capitalization scheme.
+</li>
+<li>A data source must exist in the ColdFusion Administrator before you use it on an application page to retrieve data.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

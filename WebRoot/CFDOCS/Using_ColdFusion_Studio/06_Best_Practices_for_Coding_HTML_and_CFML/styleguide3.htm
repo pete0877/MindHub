@@ -1,0 +1,204 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFML Coding Style Guide</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Best Practices for Coding HTML and CFML</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1047393"></a>
+ <H1>CFML Coding Style Guide</H1>
+
+
+
+<p>In addition to the general coding guidelines above, keep the following suggestions in mind when coding your ColdFusion application pages:</p><ul>
+<a name="1047538"> </a>
+<li>Pay attention to naming conventions for variables and form fields 
+
+<a name="1047396"> </a>
+</li>
+<li>Use scopes, or qualifiers, for variables 
+<a name="1047397"> </a>
+</li>
+<li>Use pound signs where needed 
+<a name="1047398"> </a>
+</li>
+<li>Follow style conventions for writing custom tags and extensions 
+</li>
+</ul>
+<a name="1047401"></a>
+ 
+<H2>Pay attention to naming conventions for variables and form fields</H2>
+<p>When naming ColdFusion variables and form fields, note these guidelines:</p><ul>
+<a name="1047403"> </a>
+<li>Variables must begin with a letter, which can be followed by any number of letters, numbers, or the underscore character. 
+
+<a name="1047404"> </a>
+</li>
+<li>Variables must be all one word. 
+<a name="1047405"> </a>
+</li>
+<li>Do not use spaces or special characters in variable names.
+<p>    For example, UserName_1, UserName2, and User_Name are valid, but 1stUser,<br>
+    WhatAName!, and User-Name are not.
+</p><a name="1047407"> </a>
+</li>
+<li>For field names and variables, use descriptive names, not abbreviations. It will be much easier for others to read your code, and for you to remember how it works yourself, when you revisit it months later. 
+<a name="1047408"> </a>
+</li>
+<li>Note that queries and variables cannot have the same name in the same ColdFusion application page. 
+<a name="1047409"> </a>
+</li>
+<li>Although ColdFusion variables are not case-sensitive, keep capitalization consistent in order to keep your code consistent. 
+<a name="1047410"> </a>
+</li>
+<li>In writing queries and forms, match your form field names with the corresponding database field name.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If the text in form fields in your ColdFusion applications might contain 
+special characters (&gt; &lt; " &amp;), use the CFML function HTMLCodeFormat or 
+EditFormat to make sure that these special characters are escaped.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1047415"></a>
+ 
+<H2>Use scopes, or qualifiers, for variables</H2>
+<p>ColdFusion distinguishes between identically-named parameters from different sources using prefixes for each source, or scopes. For example, client variables use the prefix Client.variable.name.</p><ul>
+<a name="1047417"> </a>
+<li>Use scopes, or qualifiers, to modify variable names and further define the variable. For example, Form.MyVariable specifies the form variable MyVariable, just as Client.MyVariable specifies a client variable. 
+
+<a name="1047418"> </a>
+</li>
+<li>Qualify variables only when required, or when the potential for ambiguity exists, such as when you're running queries against form fields that may have the same names. 
+<a name="1047419"> </a>
+</li>
+<li>If you do not qualify variables, ColdFusion uses the following order of operations to determine how to output variables: Ordinary variables first, followed by CGI, File, URL, Form, Cookie, and Client variables.
+<p>    Note that ColdFusion does not attempt to automatically evaluate Application<br>
+    and Session variables. You must use variable prefix scopes with these variables.
+</p><a name="1047421"> </a>
+</li>
+<li>Qualification not only makes your code more readable, it also makes it execute slightly faster. 
+</li>
+</ul>
+<p>For more information, see <em>Developing Web Applications with ColdFusion</em>.</p><a name="1047425"></a>
+ 
+<H2>Use pound signs (#) where needed</H2>
+<ul>
+<a name="1047426"> </a>
+<li>In CFML pound signs are used to distinguish expressions from plain text. 
+
+<a name="1047427"> </a>
+</li>
+<li>In CFOUTPUT and CFQUERY tags, enclose variables and functions in pound signs: 
+<p><code>    &lt;CFOUTPUT&gt;</code> The value is <code>#Form.MyTextField#</code>.<br>
+    <code>&lt;/CFOUTPUT&gt;<br>
+</code>    <code>&lt;CFOUTPUT&gt; </code>The name is <code>#FirstName# #LastName#.&lt;/CFOUTPUT&gt;<br>
+</code>    <code>&lt;CFOUTPUT&gt;Cos(0) is #Cos(0)#&lt;/CFOUTPUT&gt;</code> 
+</p><p>In this example, the SQL statement calls for single quotes to enclose a text string, 
+the value represented by the form variable #FORM.LastName#. 
+</p><p>    <code>&lt;CFQUERY NAME="Search" DATASOURCE="Company" &gt;<br>
+</code>    <code>Select * From Employees<br>
+</code>    <code>Where LastName='#FORM.LastName#'<br>
+</code>    <code>&lt;/CFQUERY&gt;
+</code></p><p>Note that pound signs are necessary only where you need to distinguish 
+expressions from text, for example, when variables are embedded in text strings: 
+</p><p>    <code>&lt;CFSET A="Hello, #name#" &gt;</code> 
+</p><p>Note that pound signs are necessary only where you need to distinguish variables from text, 
+for example, when variables are embedded in text strings: <code>&lt;CFSET A="Hello, #name#"&gt;</code> 
+</p><a name="1047439"> </a>
+</li>
+<li>In CFSET statements, do not overuse pound signs. For example, do not use <code>&lt;CFSET #x#=#Cos(0)#+1&gt;; instead, use &lt;CFSET x=Cos(0)+1&gt;</code> 
+<a name="1047440"> </a>
+</li>
+<li>Similarly, <code>&lt;CFSET FullName=FirstName &amp; " " &amp; LastName&gt;</code> is the same thing as <code>&lt;CFSET FullName="#FirstName# #LastName#"&gt;</code>. 
+<a name="1047441"> </a>
+</li>
+<li>Pound signs are required when variables are used as arguments for parameters in ColdFusion tags such as CFOUTPUT, CFMAIL, and CFQUERY. 
+<a name="1047442"> </a>
+</li>
+<li>Because # signs serve as formatting codes in ColdFusion, you need to take special measures when you include # signs in a CFOUTPUT section. To include a pound sign that is not used as a field delimiter, use two consecutive pound signs (##). 
+</li>
+</ul>
+<p>For detailed information on specific CFML functions and tags, see the <em>CFML Language Reference</em>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:44 -->
+</body>
+</html>

@@ -1,0 +1,208 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to dBase Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin049.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0411.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1093340"></a>
+ <H1>Connecting to dBase Databases</H1>
+
+
+
+<p>ColdFusion lets you access dBase databases from both Windows NT and UNIX, via ODBC drivers.</p><a name="1069841"></a>
+ 
+<H2>Configuring dBase Options (Windows)</H2>
+<p>If ColdFusion Server is installed on a Windows NT server, you can configure Microsoft SQL Server as a ColdFusion data source using any either an ODBC or OLE DB driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Microsoft dBase and FoxPro Driver Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for dBase data sources. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Microsoft dBase Driver and Microsoft FoxPro driver ODBC Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Directory
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The path dBase database you want to use as an ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Version
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter the version number of the dBase or FoxPro database you want to use. ColdFusion supports dBase versions III, IV, and 5.0 and FoxPro versions 
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=2><font face="arial,helvetica" size=-1>
+Driver Settings
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Collating Sequence -- Select the collating sequence you want to use. The collating sequence determines the sequence in which the fields are sorted.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Page Timeout -- Specifies the period of time, in tenths of a second, that a page (if not used) remains in the buffer before being removed.
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1069915"></a>
+ 
+<H2>Configuring Inprise dBase Options (UNIX)</H2>
+<p>If ColdFusion Server is installed on a Solaris server, you can configure dBase as a ColdFusion data source using an ODBC driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: MERANT dBase/FoxPro Options (Solaris)
+</td>
+</tr>
+</table>
+</div><p>You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT dBase/FoxPro Driver ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A short description of the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Directory
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name, including the complete path, of the database file you want to use as the ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Version
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The version number of the dBase/FoxPro database you want to use. 
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=2><font face="arial,helvetica" size=-1>
+Driver Settings
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Use lowercase file extension (.dbf) -- Specifies whether lowercase file extensions are accepted. If enabled, lowercase extensions are accepted. If disabled, only uppercase extensions are accepted.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Use international collating sequence -- Determines the order in which records are retrieved when you issue a Select statement with an Order By clause. 
+
+If you don't set this option, the driver automatically uses the ASCII sort order. This order sorts items alphabetically with uppercase letters preceding lowercase letters. For example, &quot;A, b, C&quot; would be sorted as &quot;A, C, b.&quot; 
+
+If you do set this option, the driver uses the international sort order as defined by your operating system. This sort order is always alphabetic, regardless of case; the letters from the previous example would be sorted as &quot;A, b, C.&quot;
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin049.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0411.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

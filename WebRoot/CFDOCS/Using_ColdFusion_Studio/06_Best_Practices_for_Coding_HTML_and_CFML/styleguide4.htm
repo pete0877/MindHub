@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Coding Custom Tags and Extensions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Best Practices for Coding HTML and CFML</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1047446"></a>
+ <H1>Coding Custom Tags and Extensions</H1>
+
+
+
+<p>ColdFusion Extensions (CFXs) are an open XML-based framework for extending ColdFusion with new server components and connectivity to enterprise systems using COM, CORBA, C/C++, VBScript, JavaScript, or CFML.</p><a name="1047448"></a>
+ 
+<H2>Allaire's Developer Exchange</H2>
+<p>The Allaire Developer's Exchange, formerly the Tag Gallery, is a public collection of tools and extensions (written in CFML or with C++ using the ColdFusion API) that can be used in dynamic web applications.</p><p>Custom Tags should adhere to the coding styles you adopt for CFML and HTML, but there are some additional guidelines that you can follow to enhance their usability for both developers and end users.</p><p>Remember to comment your code and indent it -- both of these steps will help other developers use and understand your code more easily. Following a few basic style guidelines will also help others learn from the custom code you post.</p><a name="1047452"></a>
+ 
+<H2>Comment your code</H2>
+<p>If you're creating a ColdFusion Custom Tag that you intend to share with other developers, include the following information in a comment at the top of your code: </p><ul>
+<a name="1047454"> </a>
+<li>author's name and email address 
+
+<a name="1047455"> </a>
+</li>
+<li>date 
+<a name="1047456"> </a>
+</li>
+<li>description of the tag 
+<a name="1047457"> </a>
+</li>
+<li>usage notes 
+<a name="1047458"> </a>
+</li>
+<li>list of attributes, descriptions of how they work, whether they are required, etc. 
+<a name="1047459"> </a>
+</li>
+<li>dependencies and assumptions 
+<a name="1047460"> </a>
+</li>
+<li>list of changes this tag will make to the CALLER template 
+<a name="1047461"> </a>
+</li>
+<li>chronological list of changes, including date, developer's name, and a description of the change 
+</li>
+</ul>
+<a name="1047462"></a>
+ 
+<H2>Custom tag names</H2>
+<p>The naming convention for custom CFML tags built using other CFML tags is CF_TagName. Unique, descriptive names make it easy for you and others to find the right tag. For example, the tag name CF_MyTag invokes the file MyTag.cfm. </p><p>To avoid ambiguity, the following naming convention should be observed for CFML tags: </p><ul>
+<a name="1047465"> </a>
+<li>Native tags: <code>CFTagName</code> 
+
+<a name="1047466"> </a>
+</li>
+<li>CFX tags: <code>CFX_TagName</code> 
+<a name="1047467"> </a>
+</li>
+<li>Shorthand invocation: <code>CF_TagName</code> 
+<a name="1047468"> </a>
+</li>
+<li>Shared tags: <code>&lt;CFMODULE Name="path.TagName" &gt; CF_TagName</code> 
+<a name="1047469"> </a>
+</li>
+<li>Application-specific tags: <code>&lt;CFMODULE template="path/TagName.cfm" &gt; CF_TagName</code> 
+</li>
+</ul>
+<a name="1047471"></a>
+ 
+<H2>Defining attributes</H2>
+<p>As the creator of the custom tag, you have the responsibility to specify a syntax for the tag's functionality. CFML custom tags support both required and optional attributes. Attributes are defined as name-value pairs. Custom tag attributes conform to CFML coding standards: </p><ul>
+<a name="1047473"> </a>
+<li>Attributes are case-insensitive. 
+
+<a name="1047474"> </a>
+</li>
+<li>Attributes may be listed in any order within a tag. 
+<a name="1047475"> </a>
+</li>
+<li>Attribute=value pairs for a tag must be separated by a space. 
+<a name="1047476"> </a>
+</li>
+<li>Passed values that contain spaces must be enclosed in double-quotes. 
+</li>
+</ul>
+<a name="1047477"></a>
+ 
+<H2>Protect variables in the CALLER scope</H2>
+<p>Custom tags should never arbitrarily create (or overwrite) hard-coded variables in the CALLER scope. They should allow the caller to specify the variable to be created.</p><a name="1047479"></a>
+ 
+<H2>Provide useful error handling</H2>
+<p>Custom tags should return error codes and allow the caller to determine whether or not to abort. They should not call CFABORT directly.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:44 -->
+</body>
+</html>

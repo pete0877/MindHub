@@ -1,0 +1,300 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Supported File Types</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1103035"></a>
+ <H1>Supported File Types</H1>
+
+
+
+<p>The ColdFusion Verity implementation supports a wide array of document types. This means you can index Web pages, ColdFusion applications, and many binary document types and produce search results that include summaries of these documents.The following table lists the supported document types.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Supported File Types&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Documents</strong>
+</th><th align="left">
+<strong>Versions</strong>
+</th><th align="left">
+<strong>Type</strong>
+</th></tr>
+<tr valign="top"><td valign="top" colspan=3 rowspan=1>
+<strong>Text files</strong>
+</td></tr>
+<tr valign="top"><td valign="top">
+HTML, CFML, DBM, SGML, XML, 
+</td><td valign="top">
+N/A
+</td><td valign="top">
+Text
+</td></tr>
+<tr valign="top"><td valign="top">
+ANSI, ASCII, Plain Text
+</td><td valign="top">
+N/A
+</td><td valign="top">
+Text
+</td></tr>
+<tr valign="top"><td valign="top" colspan=3 rowspan=1>
+<strong>Word processors</strong>
+</td></tr>
+<tr valign="top"><td valign="top">
+Adobe Acrobat (PDF)
+</td><td valign="top">
+all
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Adobe FrameMaker (MIF)
+</td><td valign="top">
+all
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Aplix Words
+</td><td valign="top">
+4.2
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Corel WordPerfect for Windows
+</td><td valign="top">
+5.x 6, 7, 8
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Corel WordPerfect for Macintosh
+</td><td valign="top">
+2, 3
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Lotus Ami Pro
+</td><td valign="top">
+2, 3
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Lotus Ami Pro Write Plus
+</td><td valign="top">
+all
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Lotus Word Pro
+</td><td valign="top">
+96, 97
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Microsoft Office
+</td><td valign="top">
+95, 97
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Rich Text Format (RTF)
+</td><td valign="top">
+1.x, 2.0
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Word for Windows
+</td><td valign="top">
+2, 6, 95, 97
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Word for DOS
+</td><td valign="top">
+4, 5, 6
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Word for Macintosh
+</td><td valign="top">
+4.0, 5.0, 6.0
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Notepad, WordPad
+</td><td valign="top">
+all
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Write, MS Works
+</td><td valign="top">
+all
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+XYWrite
+</td><td valign="top">
+4.12
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top" colspan=3 rowspan=1>
+<strong>Spreadsheets</strong>
+</td></tr>
+<tr valign="top"><td valign="top">
+Corel QuattroPro
+</td><td valign="top">
+7, 8
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Lotus 1-2-3 for DOS/Windows
+</td><td valign="top">
+2.0, 3.0, 4.0, 5.0, '96, '97
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Lotus 1-2-3 for OS/2
+</td><td valign="top">
+2
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Excel
+</td><td valign="top">
+3, 4, 5, '95, '97
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS Works
+</td><td valign="top">
+all
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top" colspan=3 rowspan=1>
+<strong>Presentation </strong>
+</td></tr>
+<tr valign="top"><td valign="top">
+Corel Presentations
+</td><td valign="top">
+7.0, 8.0
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+Lotus Freelance
+</td><td valign="top">
+96, 97
+</td><td valign="top">
+Binary
+</td></tr>
+<tr valign="top"><td valign="top">
+MS PowerPoint
+</td><td valign="top">
+4.0, 95, 97
+</td><td valign="top">
+Binary
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

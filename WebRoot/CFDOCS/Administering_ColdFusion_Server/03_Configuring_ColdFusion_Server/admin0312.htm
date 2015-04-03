@@ -1,0 +1,125 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Locking Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0311.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0313.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1059602"></a>
+ <H1>Locking Variables</H1>
+
+
+
+<p>Data stored in Server, Application and Session scopes ("shared data scopes") is persistent across browser requests and multiple requests can access the data. Unlocked access to data by multiple requests at the same time can corrupt the data. While you can still use the CFLOCK tag introduced in ColdFusion 4.0 to control simultaneous access to shared data in these scopes, ColdFusion 4.5 provides more automatic means to protect shared data from incorrect access.</p><p>For each of the Server, Application and Session scopes, the Variable Locking Administrator page provides three choices for control - none, full checking, and automatic locking of read accesses:</p><ul>
+<a name="1059890"> </a>
+<li>Choosing "None" retains current ColdFusion behavior. All reads and writes of data must be protected by a CFLOCK tag. No automatic protection is provided and unprotected accesses may cause corruption of data.
+
+<a name="1059892"> </a>
+</li>
+<li>Choosing "Full checking" will cause ColdFusion to raise an error if any read or write of data in one of the scopes occurs outside of the scope of a CFLOCK. This includes accesses to any data that is aliased by being assigned to a variable outside of the shared data scopes and the data is not copied; this can occur for struct and query variables. For example:
+<p>
+ &lt;CFLOCK type="EXCLUSIVE" scope="Session" timeout="10"&gt;
+</p>
+
+<p>
+ &lt;CFSet Session.var = StructNew() &gt;
+</p>
+
+<p>
+ &lt;CFSet myvar = Session.myvar&gt;
+</p>
+
+<p>
+ &lt;/CFLOCK&gt;
+</p>
+
+<p>
+ &lt;CFSet myvar2 = myvar&gt;  &lt;!--- unprotected access to alias ---&gt;
+</p>
+
+<a name="1059899"> </a>
+</li>
+<li>Choosing "Automatic read locking" will cause ColdFusion to raise errors for unprotected writes, but unprotected reads will be automatically locked. 
+<a name="1059901"> </a>
+</li>
+<li>For Session scope, you can also choose to single thread session requests. This means that all requests from the same session will occur sequentially, each request waiting for all previous requests to finish before proceeding, preventing multiple requests from simultaneously accessing shared data. 
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0311.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0313.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

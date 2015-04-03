@@ -1,0 +1,302 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFLDAP</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_055.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_057.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1970616"></a>
+ <H1>CFLDAP</H1>
+
+
+
+<p>CFLDAP provides an interface to LDAP (Lightweight Directory Access Protocol) directory servers like the Netscape Directory Server. For complete examples of CFLDAP usage, refer to <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p><a name="1970618"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFLDAP SERVER="server_name"
+    PORT="port_number"
+    USERNAME="name"
+    PASSWORD="password"
+    ACTION="action"
+    NAME="name"
+    TIMEOUT="seconds"
+    MAXROWS="number"
+    START="distinguished_name"
+    SCOPE="scope"
+    ATTRIBUTES="attribute, attribute"
+    FILTER="filter"
+    FILTERFILE="&lt;file_name&gt;,&lt;stanza_name&gt;"
+    SORT="attribute[, attribute]..."
+    SORTCONTROL="nocase" and/or "desc" or "asc"
+    DN="distinguished_name"
+    STARTROW="row_number"
+    MODIFYTYPE="REPLACE" or "ADD" or "DELETE"
+    REBIND="Yes/No"
+    REFERRAL="number_of_allowed_hops"
+    SECURE="multi_field_security_string"
+    SEPARATOR="separator_character"
+    &gt;
+</PRE><a name="1970620"></a>
+<h4> SERVER</h4>
+<p>Required. Host name ("biff.upperlip.com") or IP address ("192.1.2.225") of the LDAP server.</p><a name="1970622"></a>
+<h4> PORT</h4>
+<p>Optional. Port defaults to the standard LDAP port, 389.</p><a name="1970624"></a>
+<h4> USERNAME</h4>
+<p>Optional. If no user name is specified, the LDAP connection will be anonymous.</p><a name="1970626"></a>
+<h4> PASSWORD</h4>
+<p>Optional. Password corresponds to user name.</p><a name="1970628"></a>
+<h4> ACTION</h4>
+<p>Optional. Specifies the LDAP action. There are five possible values: </p><ul>
+<a name="1970630"> </a>
+<li>Query -- (Default) Returns LDAP entry information only. Requires NAME, START, ATTRIBUTES attributes. See Usage for more information.
+
+<a name="1970631"> </a>
+</li>
+<li>Add -- Adds LDAP entries to the LDAP server. Requires ATTRIBUTES.
+<a name="1970632"> </a>
+</li>
+<li>Modify -- Modifies LDAP entries on an LDAP server with the exception of the distinguished name ("DN") attribute. Requires DN, ATTRIBUTES. See the <em>MODIFYTYPE </em>attribute for additional controls.
+<a name="1970633"> </a>
+</li>
+<li>ModifyDN -- Modifies the distinguished name attribute for LDAP entries on an LDAP server. Requires DN, ATTRIBUTES.
+<a name="1970634"> </a>
+</li>
+<li>Delete -- Deletes LDAP entries on an LDAP server. Requires DN.
+</li>
+</ul>
+<a name="1970635"></a>
+<h4> NAME</h4>
+<p>Required for ACTION="Query". The name you assign to the LDAP query. </p><a name="1970637"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. Specifies the maximum amount of time in seconds to wait for LDAP processing. Defaults to 60 seconds.</p><a name="1970639"></a>
+<h4> MAXROWS</h4>
+<p>Optional. Specifies the maximum number of entries for LDAP queries.</p><a name="1970641"></a>
+<h4> START</h4>
+<p>Required for ACTION="Query". Specifies the distinguished name of the entry to be used to start the search. </p><a name="1970643"></a>
+<h4> SCOPE</h4>
+<p>Optional. Specifies the scope of the search from the entry specified in the Start attribute for ACTION="Query". There are three possible values: </p><ul>
+<a name="1970645"> </a>
+<li>OneLevel -- (Default) Searches all entries one level beneath the entry specified in the START attribute. 
+
+<a name="1970646"> </a>
+</li>
+<li>Base -- Searches only the entry specified in the START attribute. 
+<a name="1970647"> </a>
+</li>
+<li>Subtree -- Searches the entry specified in the START attribute as well all entries at all levels beneath it. 
+</li>
+</ul>
+<a name="1970648"></a>
+<h4> ATTRIBUTES</h4>
+<p>Required for ACTION="Query", Add, ModifyDN, and Modify. For queries, specifies the comma-separated list of attributes to be returned for queries. For queries, you can also specify the wild card "*" to get all the attributes associated with the entry. In addition, it can be used to specify the list of update columns for ACTION="Add" or "Modify". When used with ACTION="Add" and Action="Modify", separate multiple attributes with a semicolon. When used with ACTION="ModifyDN", ColdFusion passes attributes to the LDAP server without performing any syntax checking.</p><a name="1970650"></a>
+<h4> FILTER</h4>
+<p>Optional. Specifies the search criteria for ACTION="Query". Attributes are referenced in the form: "(attribute operator value)". Example: "(sn=Smith)". Default is "objectclass=*". </p><p>If you also specify the <em>FILTERFILE</em> attribute, the filter is considered to be a search string not a filter.</p><a name="1970654"></a>
+<h4> FILTERFILE</h4>
+<p>Optional. Specifies the name of a filter file and the name of the stanza tag within that file that contains the LDAP filter string specification. You can specify either an absolute path name or a simple file name to identify the file. If you use a simple file name, CFLDAP looks for it in ColdFusion's default LDAP directory. The default LDAP directory is C:\cfusion\ldap. The filter file must be in LDAP filter file format as defined in RCF-1558.</p><a name="2236846"></a>
+<h4> SORT</h4>
+<p>Optional. Indicates the attribute or attributes to sort query results by. Use a comma to separate attributes if more than one attribute is specified.</p><a name="2536028"></a>
+<h4> SORTCONTROL</h4>
+<p>Optional. Specifies how to sort query results. Enter "nocase" for a case-insensitive sort. By default, sorts are case-sensitive. You can also enter "asc" for an ascending sort and "desc" for a descending sort. You can enter a combination of these, for example, "nocase" and "asc". The default sort order is ascending.</p><a name="2236340"></a>
+<h4> DN</h4>
+<p>Required for ACTION="Add", Modify, ModifyDN, and Delete. Specifies the distinguished name for update actions. Example: "cn=Barbara Jensen, o=Ace Industry, c=US". </p><a name="2533837"></a>
+<h4> STARTROW</h4>
+<p>Optional. Used in conjunction with ACTION="Query". Specifies the first row of the LDAP query that is to be inserted into the ColdFusion query. The default is 1. See the Usage section for more information about the query object and query variables.</p><a name="2236345"></a>
+<h4> MODIFYTYPE</h4>
+<p>Optional. Indicates whether to Add, Delete, or Replace an attribute within a multi-value list of attributes, as follows:</p><ul>
+<a name="2238828"> </a>
+<li>Add - appends the new attribute to any existing attributes. 
+
+<a name="2238832"> </a>
+</li>
+<li>Delete - deletes the specified attribute from the set of existing attributes.
+<a name="2238836"> </a>
+</li>
+<li>Replace (default) - Replaces an existing attribute with the specified attribute or attributes.
+</li>
+</ul>
+<p>Note that you cannot add attributes that already exist or that are NULL.</p><a name="2236350"></a>
+<h4> REBIND</h4>
+<p>Optional. Yes or No. If you set REBIND to Yes, CFLDAP attempts to rebind the referral callback and reissue the query via the referred address using the original credentials. The default is No, which means referred connections are anonymous.</p><a name="2236355"></a>
+<h4> REFERRAL</h4>
+<p>Optional. Specifies the number of hops allowed in a referral. Valid values for this are integers equal to or greater than zero. If you specify zero, you turn off CFLDAP's ability to use referred addresses; thus, no data is returned.</p><a name="2236360"></a>
+<h4> SECURE</h4>
+<p>Optional. Identifies the type of security to employ, CFSSL_BASIC or CFSSL_CLIENT_AUTH, and additional information that is required by the specified security type. </p><pre>SECURE="CFSSL_BASIC,<em>certificate_db</em>"
+</pre><p>or</p><pre>SECURE="CFSSL_CLIENT_AUTH,<em>certificate_db</em>,<em>certificate_name</em>,
+<em>                key_db,key_password</em>"
+
+</pre><p>These fields have the following values:</p><p><em>certificate_db</em>: The name of the certificate database file (in Netscape cert7.db format). You can specify either an absolute path or a simple file name.</p><p><em>certificate_name</em>: The name of the client certificate to send the server.</p><p><em>key_db</em>: Keyword database that holds the public/private key-pair (in Netscape key3.db format). You can specify either an absolute path or a simple file name.</p><p><em>keyword_db</em>: The password to key database.</p><p>If you use a simple file name for <em>certificate_db </em>or<em> keyword_db</em>, CFLDAP looks for it in ColdFusion's default LDAP directory. The default LDAP directory is C:\cfusion\ldap. </p><p>Refer to the Usage section for information about the differences between the two types of security: CFSSL_BASIC and CFSSL_CLIENT_AUTH types.</p><a name="2239987"></a>
+<h4> SEPARATOR</h4>
+<p>Optional. Specifies the character that CFLDAP uses to separate attribute values in multi-value attributes. This character is used by the QUERY, ADD, and MODIFY action attributes, and is used by CFLDAP to output multi-value attributes. The default character is the comma (,). </p><a name="1970656"></a>
+ 
+<H3>Usage</H3>
+<p>If you use the Query ACTION, CFLDAP creates a query object, allowing you access to information in the three query variables as described in the following table.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>CFLDAP Query Variables&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Variable Names</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE><em>queryname</em>.RecordCount
+</PRE></td><td valign="top">
+The total number of records returned by the query.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE><em>queryname.</em>CurrentRow
+</PRE></td><td valign="top">
+The current row of the query being processed by CFOUTPUT.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE><em>queryname.</em>ColumnList
+</PRE></td><td valign="top">
+The list of the column names in the query.
+</td></tr>
+
+</table>
+</div>
+</p><p>The CFSSL_BASIC type of security provides V2 SSL, and the CFSSL_CLIENT_AUTH type of security provides V3 SSL. V2 SSL provides encryption and server authentication. V3 SSL adds to this certificate-based client authentication.</p><p>Both forms of security encrypt the conversation, and the server always sends a digital certificate to confirm that it is the right server.</p><p>For CFSSL_BASIC, you must also specify the CFLDAP attributes <em>USERNAME</em> and <em>PASSWORD</em> to authenticate yourself. V2 then encrypts the password prior to transmission.</p><p>For CFSSL_CLIENT_AUTH, you do not send a user name and password; instead, you perform authentication by a digital certificate that you send to the server. CFSSL_CLIENT_AUTH is much more secure; however, it is difficult to administer since all the clients must have certificates, which the server must be able to validate, and all the certificates must have keys associated with them and passwords to protect those keys.</p><a name="2043146"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfldap
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---  This example shows the use of CFLDAP ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFLDAP Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;CFLDAP Example&lt;/H3&gt;
+
+&lt;P&gt;CFLDAP provides an interface to LDAP (Lightweight Directory Access
+Protocol) directory servers like BigFoot 
+(&lt;a href="http://www.bigfoot.com"&gt;http://www.bigfoot.com&lt;/A&gt;).
+&lt;P&gt;Enter a name (try your own name) and search a public LDAP resource.
+...
+&lt;!--- If the server has been defined, run the query ---&gt;
+&lt;CFIF IsDefined("form.server")&gt;
+&lt;!--- check to see that there is a name listed ---&gt;
+&lt;CFIF form.name is not ""&gt;
+&lt;!--- make the LDAP query ---&gt;
+&lt;CFLDAP
+ SERVER="ldap.bigfoot.com"
+ ACTION="QUERY"
+ NAME="results"
+ START="cn=#name#,c=US"
+ FILTER="(cn=#name#)"
+ ATTRIBUTES="cn,o,l,st,c,mail,telephonenumber"
+ SORT="cn ASC"&gt;
+&lt;!--- Display results ---&gt;
+    &lt;CENTER&gt;
+    &lt;TABLE BORDER=0 CELLSPACING=2 CELLPADDING=2&gt;
+     &lt;TR&gt;
+          &lt;TH COLSPAN=5&gt;&lt;CFOUTPUT&gt;#results.RecordCount# matches found
+            &lt;/CFOUTPUT&gt;&lt;/TH&gt;
+     &lt;/TR&gt;
+     &lt;TR&gt;
+          &lt;TH&gt;&lt;FONT SIZE="-2"&gt;Name&lt;/FONT&gt;&lt;/TH&gt;
+          &lt;TH&gt;&lt;FONT SIZE="-2"&gt;Organization&lt;/FONT&gt;&lt;/TH&gt;
+          &lt;TH&gt;&lt;FONT SIZE="-2"&gt;Location&lt;/FONT&gt;&lt;/TH&gt;
+          &lt;TH&gt;&lt;FONT SIZE="-2"&gt;E-Mail&lt;/FONT&gt;&lt;/TH&gt;
+          &lt;TH&gt;&lt;FONT SIZE="-2"&gt;Phone&lt;/FONT&gt;&lt;/TH&gt;
+     &lt;/TR&gt;
+    &lt;CFOUTPUT QUERY="results"&gt;
+     &lt;TR&gt;
+       &lt;TD&gt;&lt;FONT SIZE="-2"&gt;#cn#&lt;/FONT&gt;&lt;/TD&gt;
+       &lt;TD&gt;&lt;FONT SIZE="-2"&gt;#o#&lt;/FONT&gt;&lt;/TD&gt;
+       &lt;TD&gt;&lt;FONT SIZE="-2"&gt;#l#, #st#, #c#&lt;/FONT&gt;&lt;/TD&gt;
+       &lt;TD&gt;&lt;FONT SIZE="-2"&gt;&lt;A HREF="mailto:#mail#"&gt;#mail#&lt;/A&gt;&lt;/FONT&gt;&lt;/TD&gt;
+       &lt;TD&gt;&lt;FONT SIZE="-2"&gt;#telephonenumber#&lt;/FONT&gt;&lt;/TD&gt;
+     &lt;/TR&gt;
+    &lt;/CFOUTPUT&gt;
+    &lt;/TABLE&gt;
+    &lt;/CENTER&gt;
+&lt;/CFIF&gt;
+&lt;/CFIF&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfldap
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_055.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_057.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

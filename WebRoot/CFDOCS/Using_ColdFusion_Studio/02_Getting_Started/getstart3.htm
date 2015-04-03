@@ -1,0 +1,132 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Customizing the Workspace</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Getting Started</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025193"></a>
+ <H1>Customizing the Workspace</H1>
+
+
+
+<p>A development tool needs to provide a productive interface for its users, and the best way to do that is to give users the greatest possible flexibility to set up the interface in a way that works for them. Here are some options:</p><ul>
+<a name="1031526"> </a>
+<li>Press Ctrl + F12 to toggle the Full Screen view.
+
+<a name="1012777"> </a>
+</li>
+<li>Press F9 or open the View menu to toggle the Resources window display.
+<a name="1012902"> </a>
+</li>
+<li>To resize the Resources window, drag the side border and the divider between the top and bottom panes.
+<a name="1012930"> </a>
+</li>
+<li>The Resources window can be moved and docked in a variety of locations by dragging the grab bar at the top.
+<a name="1031465"> </a>
+</li>
+<li>Resource tabs can be floated as individual windows by clicking the tab and dragging it to a new location. Resource tabs can be docked together in any combination by dragging them to the same location.
+<a name="1031510"> </a>
+</li>
+<li>Floating Resource windows can be made to float on top of the main Studio window by right-clicking the title bar and choosing Always on top.
+<a name="1031475"> </a>
+</li>
+<li>The order of Resource tabs in any window can be changed by right-clicking the Resource tab and dragging.
+<a name="1031463"> </a>
+</li>
+<li>Use the General pane of the Settings dialog box (F8) to control the display of Resource tabs in a window.
+<a name="1012781"> </a>
+</li>
+<li>Right-click in the file list to set file display options.
+<a name="1012973"> </a>
+</li>
+<li>Drag toolbars to any location as floating windows or dock them vertically on the workspace borders.
+<a name="1012782"> </a>
+</li>
+<li>Right-click in any toolbar to set display options and to organize and customize toolbars.
+<a name="1012783"> </a>
+</li>
+<li>Open the Options &gt; Customize dialog box (Shift + F8) to change toolbar layout, keyboard shortcuts, and to add shortcut keys for code snippets.
+<a name="1012784"> </a>
+</li>
+<li>Open the Options &gt; Settings dialog box (F8) to explore a wide range of interface settings and development options.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:30 -->
+</body>
+</html>

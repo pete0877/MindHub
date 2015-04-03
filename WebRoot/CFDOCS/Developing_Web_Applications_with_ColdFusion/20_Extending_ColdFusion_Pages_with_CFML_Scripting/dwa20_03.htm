@@ -1,0 +1,266 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>The CFScript Language</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 20	:&nbsp;&nbsp;Extending ColdFusion Pages with CFML Scripting</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997916"></a>
+ <H1>The CFScript Language</H1>
+
+
+
+<p>This section explains the syntax of the CFScript language.</p><a name="998169"></a>
+ 
+<H2>Statements</H2>
+<p>Note that in CFScript, semicolons define the end of a statement. Line breaks in your source are insignificant. You can enclose multiple statements in curly braces: </p><pre>{ <em>statement</em>; <em>statement</em>; <em>statement</em>; }
+</pre><p>The following statements are supported in CFScript:</p><p><strong>Assignment: </strong><em>lval</em> = <em>expr</em> ;</p><p>Note that <em>lval</em> can be a simple variable, an array reference, or a member of a structure.</p><pre>x = "positive"; /y = x; a[3]=5;/ structure.member=10;
+</pre><p></p><p><strong>CFML expression: </strong><em>expr</em> ;</p><pre>StructInsert(employee,"lastname",FORM.lastname);
+</pre><p>For more information on ColdFusion expressions see the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> .</p><p></p><p><strong>if-else:</strong> if(<em>expr) statement </em>[else <em>statement</em>] ;</p><pre>if(score GT 1)
+    result = "positive";
+else
+    result = "negative";
+</pre><p></p><p><strong>for loop:</strong> for (<em>init-expr</em> ; <em>test-expr</em> ; <em>final-expr) statement </em>;</p><p>Note that <em>init-expr</em> and <em>final-expr</em> can be one of the following:</p><ul>
+<li>a single assignment expression, for example, x=5 or loop=loop+1
+
+</li>
+<li>any ColdFusion expression, for example, SetVariable("a",a+1)
+</li>
+<li>empty
+</li>
+</ul>
+<p>The <em>test-expr</em> can be one of the following:</p><ul>
+<li>any ColdFusion expression, for example, A LT 5, loop LE x, or Y EQ "not found" AND loop LT end
+
+</li>
+<li>empty
+</li>
+</ul>
+<p>Here are some examples of <em>for</em> loops:</p><pre>// Multiline for statement
+for(Loop1=1;
+    Loop1 LT 10;
+    Loop1 = Loop1 + 1);
+    a[loop1]=loop1;
+
+// Complete for loop in a single line.
+for(loop=0; loop LT 10; loop=loop+1)arr[loop]=loop;
+
+// Uses braces to note the code to loop over
+for( ; ; )
+{
+    indx=indx+1;
+    if(Find("key",strings[indx],1))
+        break;
+}
+</pre><p></p><p><strong>while loop:</strong> while (<em>expr</em>) <em>statement</em> ;</p><pre>// Use braces to note the code to loop over
+a = ArrayNew(1);
+while (loop1 LT 10)
+{
+ a[loop1] = loop1 + 5;
+ loop1 = loop1 + 1;
+}
+
+
+a = ArrayNew(1);
+while (loop1 LT 10)
+{
+    a[loop1] = loop1 + 5;
+    loop1 = loop1 +1;
+}
+</pre><p></p><p><strong>do-while loop:</strong> do <em>statement</em> while (<em>expr</em>) ;</p><pre>// Complete do-while loop on a single line
+a = ArrayNew(1);
+do {a[loop1] = loop1 + 5; loop1 = loop1 + 1;} while (loop1 LT 10);
+
+
+// Multiline do-while loop
+a = ArrayNew(1);
+do
+{
+  a[loop1] = loop1 + 5;
+  loop1 = loop1 + 1;
+}
+while (loop1 LT 10);
+</pre><p></p><p><strong>switch-case: </strong>switch (<em>expr</em>) {case <em>const-expr </em>: <em>statement</em> break ; default : <em>statement</em> }</p><p>In this syntax, <em>const-expr</em> must be a constant (i.e., not a variable, a function, or other expression). Only one default statement is allowed. There can be multiple case statements. You cannot mix Boolean and numeric case values in a <em>switch</em> statement.</p><p>No two constants may be the same inside a <em>switch</em> statement.</p><pre>switch(name)
+{
+    case "John":
+    {
+        male=true;
+        found=true;
+        break;
+    }
+    case "Mary":
+    {
+        male=false;
+        found=true;
+        break;
+    }
+    default:
+    {
+        found=false;
+        break;
+    }
+} //end switch
+</pre><p></p><p><strong>for-in loop:</strong> for (<em>variable</em> in <em>collection</em>) <em>statement</em> ;</p><p>Note that <em>variable </em>can be any ColdFusion identifier, and <em>collection</em> must be the name of an existing ColdFusion structure.</p><pre>for (x in mystruct) mystruct[x]=0;
+</pre><p></p><p><strong>continue:</strong> skip to next loop iteration</p><pre>for ( loop=1; loop LT 10; loop = loop+1)
+<code>{
+</code>    if(a[loop]=0) continue;
+    a[loop]=1;
+<code>}
+</code></pre><p></p><p><strong>break:</strong> break out of the current switch statement or loop</p><pre>for( ; ; )
+{
+    indx=indx+1;
+    if(Find("key",strings[indx],1))
+        break;
+}
+</pre><p></p><a name="1006020"></a>
+ 
+<H2>Expressions</H2>
+<p>CFScript supports all CFML expressions. CFML expressions include operators (such as +, -, EQ, etc.) as well as all CFML functions.</p><p>See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for information about CFML operators and functions.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You cannot use CFML tags in CFScript.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="997934"></a>
+ 
+<H2>Variables</H2>
+<p>Variables can be of any ColdFusion type, such as numbers, strings, arrays, queries, and COM objects. You can read and write variables within the script region.</p><a name="1005471"></a>
+ 
+<H2>Comments</H2>
+<p>Comments in CFScript blocks begin with two forward slashes (//) and end at the line end. You can also enclose CFScript comments between /* and */. Note that you cannot nest /* and */ inside other comment lines.</p><a name="998370"></a>
+ 
+<H2>Differences from JavaScript</H2>
+<p>While CFScript is based on JavaScript, there are some key differences you'll want to note:</p><ul>
+<li>CFScript uses ColdFusion expressions, which are neither a subset nor a superset of JavaScript expressions. For example, there is no &lt; operator in CFScript.
+
+</li>
+<li>No user-defined functions or variable declarations are available.
+</li>
+<li>CFScript is case-insensitive.
+</li>
+<li>All statements end in a semi-colon, and line breaks in your code are insignificant.
+</li>
+<li>In CFScript, assignments are statements, not expressions.
+</li>
+<li>Some implicit objects are not available, such as Window and Document.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>CFScript is not directly exportable to JavaScript. Only a limited subset of 
+JavaScript can run inside CFScript.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1005492"></a>
+ 
+<H2>Reserved words</H2>
+<p>In addition to the names of ColdFusion functions and words reserved by ColdFusion expressions (such as NOT, AND, IS, and so on), the following words are reserved in CFScript. Do not use these words as variables or identifiers in your scripting code:</p><ul>
+<li>for
+
+</li>
+<li>while
+</li>
+<li>do
+</li>
+<li>if
+</li>
+<li>else
+</li>
+<li>switch
+</li>
+<li>case
+</li>
+<li>break
+</li>
+<li>default
+</li>
+<li>in
+</li>
+<li>continue
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:06 -->
+</body>
+</html>

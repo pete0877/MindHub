@@ -1,0 +1,308 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Help Entering Content</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1027447"></a>
+ <H1>Getting Help Entering Content</H1>
+
+
+
+<p>Studio offers a range of options to easily access code syntax. These productivity features can be configured using various options in the Settings dialog box (F8). For most features, you can toggle their use on the Editor toolbar or use shortcut keys.</p><a name="1028242"></a>
+ 
+<H2>Tag Insight</H2>
+<p>This tool is especially handy if you type much of your code. You don't want to have to type in long attribute strings or remember the syntax for every tag.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable Tag Insight:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Settings dialog box (F8).
+
+
+</li>
+<li>Expand the Editor node and click Tag Insight.
+
+</li>
+<li>Check the Enable Tag Insight box.
+
+</li>
+<li>Use the slider to set the time delay for the display of Tag Insight help.
+
+<p>The list at the bottom shows the tags that are available after a start (&lt;) bracket is 
+entered on the page. You can manage the list by adding and deleting tags.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use Tag Insight:
+</td>
+</tr>
+</table>
+</div><p>This interactive feature can be used to write new code and to edit existing code:</p><ul>
+<a name="1028250"> </a>
+<li>When you type a start bracket (&lt;), a tag list opens. After you choose a tag, press the Spacebar to open successive drop-down lists from which to select attributes and values.
+
+<a name="1028251"> </a>
+</li>
+<li>When you place the cursor to the left of an end bracket (&gt;) and press the Spacebar, the drop-down attribute list opens.
+</li>
+</ul>
+<p>You can close a list by pressing the Esc key.</p><p>If you just want to see the attributes and values associated with a tag, place the cursor inside the tag and press F2 to open a Tag Tip. Press Esc to close the tip.</p><a name="1024337"></a>
+ 
+<H2>Tag Completion</H2>
+<p>You can have Studio automatically insert the end tag for the start tag that you type. This feature is most helpful when you are typing HTML and CFML codes and text at the same time rather than editing isolated text and tags.</p><p>You use the Editor &gt; Tag Completion pane in the Settings dialog box (F8) to:</p><ul>
+<a name="1037225"> </a>
+<li>Turn the tag completion feature on and off.
+
+<a name="1037226"> </a>
+</li>
+<li>Edit the tag completion list.
+<a name="1037227"> </a>
+</li>
+<li>Include ASP tags.
+<a name="1037228"> </a>
+</li>
+<li>Close double quotes for attribute values.
+</li>
+</ul>
+<a name="1024166"></a>
+ 
+<H2>Tag Validation</H2>
+<p>Rather than wait until a document is completed to run the code validator, you can set it to run on a tag-by-tag basis. </p><p>Use the Validation pane in the Settings dialog box (F8) to set validation rules.</p><a name="1048344"></a>
+ 
+<H2>Auto Completion</H2>
+<p>Auto Completion provides automatic completion of user defined strings (triggers) while you are editing a file. Auto Completion is similar to tag completion except that you can define any text you want, not just tags, as triggers. Auto Completion comes with four triggers built in:</p><ul>
+<a name="1048658"> </a>
+<li>Double quotes (" ")
+
+<a name="1048667"> </a>
+</li>
+<li>Comments (&lt;!-- --&gt;)
+<a name="1048681"> </a>
+</li>
+<li>Pound signs (# #)
+<a name="1048696"> </a>
+</li>
+<li>ASP tags (&lt;% %&gt;)
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable Auto Completion:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Settings dialog box (F8).
+
+
+</li>
+<li>Expand the Editor node and click Auto Completion.
+
+</li>
+<li>Check the Auto Completion box.
+
+</li>
+<li>Click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a trigger:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Settings dialog box (F8), click the Editor node, then click Auto Completion.
+
+
+</li>
+<li>Click the Add button to see the Auto Completion dialog box.
+
+</li>
+<li>Enter a trigger string in the Trigger String box. The trigger string is the text that you type in the Editor window that triggers the completion string to appear.
+
+</li>
+<li>Enter a completion string in the Completion String box. Completion strings can consist of multiple lines.
+
+</li>
+<li>Choose the location for the cursor after the string has been completed from the Cursor Position options box. To have text selected after the string has been completed, select the text in the Completion String box and click Select the text as shown.
+
+</li>
+<li>Click OK to add the trigger.
+
+</li>
+<li>Click OK to close the Settings dialog box.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use Auto Completion:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Editor window, type the trigger string.
+
+
+</li>
+<li>The completion string is automatically added to the page and the cursor is placed where you specified.
+
+</li>
+</ol>
+<a name="1046800"></a>
+ 
+<H2>Function Insight</H2>
+<p>Function Insight provides automatic function argument "insight" in the same way that Tag Insight offers assistance with tag attributes. </p><p>The functions that are available for use with Function Insight are controlled by the Expression Builder function library. <br>See <a href="../../customizing_the_development_environment/vtml.htm">Customizing the Development Environment</a> for information on how to modify the Expression Builder definition file in order to change the list of functions.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable Function Insight:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Settings dialog box (F8).
+
+
+</li>
+<li>Expand the Editor node and click Function Insight.
+
+</li>
+<li>Check the Enable Function Insight box.
+
+</li>
+<li>Use the slider to set the time delay for the display of Function Insight help.
+
+<p>The list at the bottom shows the functions that are available for use with Function 
+Insight.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use Function Insight:
+</td>
+</tr>
+</table>
+</div><p>This interactive feature can be used to write new code and to edit existing code. The Function Insight list appears:</p><ul>
+<a name="1047081"> </a>
+<li>When you type a function name followed by a left parentheses.
+
+<a name="1047117"> </a>
+</li>
+<li>When you type a comma, or a space after a comma in the function argument list.
+</li>
+</ul>
+<a name="1024646"></a>
+ 
+<H2>Special characters</H2>
+<p>You must use character entities to display special characters on Web pages. When enabled, this feature automatically converts characters above ASCII 127 to entity names for proper rendering in browsers.</p><p>Select View &gt; Special Characters to open a palette of character entities that you can insert.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

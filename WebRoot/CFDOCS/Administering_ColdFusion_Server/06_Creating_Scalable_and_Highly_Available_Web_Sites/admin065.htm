@@ -1,0 +1,268 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Techniques for Creating Scalable &amp; Highly Available Sites</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1065606"></a>
+ <H1>Techniques for Creating Scalable &amp; Highly Available Sites</H1>
+
+
+
+<p>Now that you have a fairly good understanding of scalability and availability, the next step is to familiarize yourself with the techniques you can use to achieve scalable and highly available Web sites.</p><p>This section describes the following topics:</p><ul>
+<a name="1065634"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1065795">&quot;What is clustering?&quot;</a>
+
+<a name="1065635"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1065874">&quot;Hardware-based clustering solutions&quot;</a>
+<a name="1065638"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1066964">&quot;Software-based clustering solutions&quot;</a>
+<a name="1065785"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1067290">&quot;Combining hardware and software clustering solutions&quot;</a>
+</li>
+</ul>
+<a name="1065795"></a>
+ 
+<H2>What is clustering?</H2>
+<p>Clustering is a technique in which two or more Web servers supporting one or more domains (www.yourcompany.com) are grouped together as a <em>cluster</em> of servers to collectively accommodate increases in load and provide system redundancy.</p><p>The following figure shows an example of a server cluster for a sample Web site.</p><p><img src="../images/Cluster.gif">
+
+
+</p><p>Clustering for scalability works by distributing load among each server in the cluster (load balancing) using either an unintelligent-but-regular distribution sequence (round-robin DNS and routers) or a predefined threshold or algorithm that you specify and can adjust for each server in the cluster (specialized clustering software). </p><p>Clustering for failover relies on redundant servers to ensure that business-critical applications remain available if one of the servers in a cluster fails. Intelligent software-based failover solutions can detect when a server has failed and automatically redirect new incoming HTTP requests to the cluster members that are available. Some hardware-based failover devices that have less built-in intelligence require an administrator's intervention once the failure is detected.</p><p>Clustering can be accomplished using software-based solutions, such as round-robin DNS by itself or together with a third-party package, a hardware-based solution, such as a packet router, or a combination of the two.</p><a name="1065874"></a>
+ 
+<H2>Hardware-based clustering solutions</H2>
+<p>The most common and reliable hardware-based clustering solution is a device known as a packet router. One of the most popular routers on the market is Cisco System's LocalDirector. A router sits in front of a cluster of Web servers and directs incoming HTTP requests to available Web servers that form the cluster. A router works by assessing the speed and volume of IP packet flow to and from the Web servers and then selecting the best server to accommodate the traffic. This process is fast and efficient. The router device in conjunction with the Web servers comprise what is known as a <em>virtual server</em>. </p><p>Routers are considered semi-intelligent devices because they can detect a server failure and redirect requests to other servers. If a Web server fails or stops responding, the router stops sending packets to the unresponsive server. Routers are not considered fully intelligent because while they can redirect requests upon discovering a failure, they do not allow you to configure redirection thresholds for individual servers. They also do not provide for application-aware load balancing.</p><p>The following figure shows a router distributing requests in round-robin fashion to the available servers in a Web server cluster.</p><p><img src="../images/Router.gif">
+
+
+</p><a name="1066762"></a>
+ 
+<H3>Advantages</H3>
+<p>A hardware-based clustering solution, such as a router, is an attractive solution for the following reasons:</p><ul>
+<a name="1066770"> </a>
+<li>Proven technology
+
+<a name="1066771"> </a>
+</li>
+<li>Relatively low complexity
+<a name="1068084"> </a>
+</li>
+<li>No recurrent licensing fees
+<a name="1066772"> </a>
+</li>
+<li>Semi-intelligent
+<p>Routers can load balance in a round-robin fashion, and some can detect 
+failures and automatically redirect traffic and remove failed servers from a 
+cluster.
+</p></li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Not all routers have the same features or offer the same capabilities.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1065903"></a>
+ 
+<H3>Considerations</H3>
+<p>Carefully evaluate the following issues against a router's attributes:</p><ul>
+<a name="1066773"> </a>
+<li>Expense
+
+<p>Hardware devices can be expensive relative to some software solutions, even 
+without yearly licensing fees.
+</p><a name="1066782"> </a>
+</li>
+<li>Single point of failure
+<p>If a problem develops on the router <em>itself</em> and it fails, your load balancing and 
+failover strategies are no longer working. Although some routers come with 
+secondary systems for just this reason, this additional hardware is often what 
+inflates the overall price of a hardware solution.
+</p><a name="1066774"> </a>
+</li>
+<li>Not application-aware
+<p>The device cannot be tuned for particular types of Web applications (static vs. 
+dynamic sites) or for the development tools used to build them (ColdFusion vs. 
+ASP vs. CGI vs. Java and so on). Consequently, a router cannot measure the 
+performance of a Web application server.
+</p><a name="1066787"> </a>
+</li>
+<li>Limited intelligence
+<p>The device does not allow you to configure individual load and redirection 
+thresholds for each server in a cluster, and therefore, it is unable to effectively 
+manage load to prevent failures.
+</p></li>
+</ul>
+<a name="1066964"></a>
+ 
+<H2>Software-based clustering solutions</H2>
+<p>A software-based solution is another approach to clustering. There are several good software clustering packages on the market as well as different platform implementations of the Domain Name System (DNS). </p><p>Just like hardware-based clustering solutions, there are strengths and weaknesses associated with software clustering solutions. For example, while round-robin DNS is a very popular choice because of its relative simplicity and low implementation cost, it does not contain any intelligence in balancing load or reacting to server failures. It, therefore, will not be able to help you prevent server overloads and eventual failures for highly trafficked sites. </p><p>Similarly, Microsoft's Cluster Server provides failover capabilities for an application's messaging related services. It has also proven its reliability with numerous implementations, and it operates seamlessly with Microsoft's NT operating system and IIS Web server. The type of clustering that Cluster Server provides is known as Primary/Backup clustering, in which two cloned systems provide redundancy for one another. This type of clustering does not provide any parallel server load balancing. Additionally, Cluster Server has some limitations. Its shortcomings include lengthy durations in detecting server failures (up to 10 minutes) and not being able to provide Exchange-specific failure detection.<a href="#1067336"><sup>1</sup></a></p><p>ClusterCATS, Allaire's embedded software clustering solution for load balancing and high availability, allows you to easily create, optimize, and maintain &quot;smart&quot; clusters to support your ColdFusion Web applications. ClusterCATS runs on NT, Solaris, and Linux platforms and works with leading mission-critical Web servers, including Microsoft IIS, Netscape Enterprise Server, and Apache. It is easily administered from remote locations and provides robust features, including the ability to:</p><ul>
+<a name="1071044"> </a>
+<li>configure load and redirection thresholds per server 
+
+<a name="1071046"> </a>
+</li>
+<li>optimize your load balancing scheme with application-aware and session-aware load balancing
+<a name="1071049"> </a>
+</li>
+<li>automatically detect failures 
+<a name="1071050"> </a>
+</li>
+<li>automatically redirect traffic to available servers
+<a name="1071051"> </a>
+</li>
+<li>automatically notify administrators of problems
+</li>
+</ul>
+<a name="1067043"></a>
+ 
+<H3>Advantages</H3>
+<p>The following benefits make a software-based clustering solution attractive:</p><ul>
+<a name="1067060"> </a>
+<li>Relatively low expense
+
+<p>Compared to the cost of hardware devices, such as routers or switches, 
+software-based clustering solutions are relatively inexpensive. In fact, you can 
+cheaply implement Internet DNS on UNIX and Windows platforms for initial 
+load balancing needs and augment it with third-party clustering software.
+</p><a name="1067061"> </a>
+</li>
+<li>Flexibility
+<p>Some clustering software can augment existing hardware devices, thereby 
+providing a more robust load balancing and failover solution. Additionally, by 
+integrating hardware with software, you diminish, if not eliminate, losses on 
+capital expenditures that your organization has already made. See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1067290">&quot;Combining 
+hardware and software clustering solutions&quot;</a> and <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1200328">&quot;Integrating 
+ClusterCATS with load balancing devices&quot;</a> for more information 
+about how hardware and software solutions can be integrated.
+</p><a name="1067064"> </a>
+</li>
+<li>Intelligence
+<p>Some software solutions provide a level of intelligence that enables preventive 
+load balancing measures that actually minimize the chance of servers 
+becoming unavailable. In the event that a server does becomes overloaded or 
+actually fails, some software can automatically detect the problem and reroute 
+HTTP requests to available servers in the cluster. 
+</p><a name="1067074"> </a>
+</li>
+<li>No single point of failure
+<p>By distributing the load balancing and failover capabilities among multiple 
+servers in a cluster, as opposed to relying on only a single device, no individual 
+server failure will disable your application.
+</p></li>
+</ul>
+<a name="1067090"></a>
+ 
+<H3>Considerations</H3>
+<p>Consider the following issues when evaluating software-based solutions for your environment:</p><ul>
+<a name="1067092"> </a>
+<li>Differences among feature sets
+
+<p>Not all software-based clustering solutions are the same in terms of capabilities 
+and features. For instance, some have no automatic failure detection, 
+notification, or IP address assumption, and others have significantly delayed 
+detection. Some let you configure load thresholds to enable preventive 
+measures, some don't. Determine your scalability and failover needs in advance 
+and pick your solution accordingly.
+</p><a name="1067099"> </a>
+</li>
+<li>Platform constraints
+<p>Determine if the software solution you are considering will be available on your 
+platform or operate with your preferred Web server. If reviewing data sheets 
+and other marketing collateral from vendors, make sure that the robust features 
+you want are available on the platform you need.
+</p><a name="1067100"> </a>
+</li>
+<li>Level of complexity
+<p>Some software-based clustering solutions have relatively low complexity. 
+Others introduce a higher level of complexity because of the features offered, 
+the amount of initial configuration and subsequent administration, or the 
+amount of integration that needs to occur between other systems and devices.
+</p></li>
+</ul>
+<a name="1067290"></a>
+ 
+<H2>Combining hardware and software clustering solutions</H2>
+<p>Instead of having to choose either a hardware solution or a software solution, another possibility is to combine both types of clustering choices. Combining hardware and software solutions will certainly provide the greatest scalability and availability capabilities for your site. Additionally, a combined solution is an attractive option if your organization has already invested in one but is looking for more comprehensive coverage. Having the flexibility to integrate hardware with software means that your organization won't necessarily have to absorb a capital loss on a previous technology investment if you decide to purchase additional clustering technology.</p><p>However, as already discussed, not all hardware or software solutions are equal. Many have different features and capabilities, and not all hardware and software integrate well together. Be sure to investigate thoroughly when purchasing additional technology to augment your current solution.</p><p>For a visual representation of hardware and software clustering solutions working together, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm#1065874">&quot;Hardware-based clustering solutions&quot;</a>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

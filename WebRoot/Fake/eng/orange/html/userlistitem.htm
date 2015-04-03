@@ -1,0 +1,12 @@
+<!-- filename: userlistitem.htm -->
+
+<tr class="guilistitemrow">
+	<td class="guilistitemcell"><% lastnametxt %>, <% firstnametxt %> <% middlenametxt %></td>
+	<td class="guilistitemcell"><% titletxt %></td>
+	<td class="guilistitemcell"><a href="mailto:<% emailtxt %>"><% emailtxt %></a></td>
+	<td class="guilistitemcell"><% workphonetxt %></td>
+	<td class="guilistitemcell">
+		<a class="guilistitemlink" href="#" onclick="HandleEvent('viewButton', 'click', '<% objid %>'); return false;">View</a>	-
+		<a class="guilistitemlink" href="#" onclick="HandleEvent('editButton', 'click', '<% objid %>'); return false;">Edit</a>
+	</td>
+</tr>

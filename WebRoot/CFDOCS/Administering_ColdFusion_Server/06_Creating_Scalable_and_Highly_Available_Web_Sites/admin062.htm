@@ -1,0 +1,411 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Issues Affecting Successful Scalability Implementations</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin061.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1056062"></a>
+ <H1>Issues Affecting Successful Scalability Implementations</H1>
+
+
+
+<p>Achieving scalable Web servers is not a trivial task. There are various solutions to pick from, setup and configuration tasks to understand and perform, and many delicate dependencies between related but heterogeneous technologies. This section describes some of the major issues affecting successful scalability implementations. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Although your immediate role and responsibilities as an administrator 
+may not encompass all of the areas and issues described in this section, 
+you can share the information with relevant members of your 
+organization to help ensure successful development efforts.
+</td>
+</tr>
+</table>
+</div>
+<br><p>This section discusses the following topics:</p><ul>
+<a name="1056224"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1146326">&quot;Designing and coding scalable applications&quot;</a>
+
+<a name="1056225"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1059150">&quot;Avoiding common bottlenecks&quot;</a>
+<a name="1056226"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1059410">&quot;DNS effects on Web site performance and availability&quot;</a>
+<a name="1146324"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1064613">&quot;Load testing your Web applications&quot;</a>
+</li>
+</ul>
+<a name="1146326"></a>
+ 
+<H2>Designing and coding scalable applications</H2>
+<p>Application architects must create designs that are inherently flexible by relying upon open standards that don't restrict the application's construction and implementation to vendor-specific interfaces and tools. Similarly, the Web developers that construct the designed application must be aware that they can significantly impact the application's scalability in the way in which they write their code, build their SQL queries, invoke thread management, access databases, and partition the application.</p><p>This section discusses the following topics to consider when designing and building a Web application:</p><ul>
+<a name="1057519"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1100867">&quot;Application session and state management&quot;</a>
+
+<a name="1057523"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1058163">&quot;Single threaded vs. multi-threaded application connections&quot;</a>
+<a name="1100864"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1058167">&quot;Database locking and concurrency issues&quot;</a>
+<a name="1100865"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1102237">&quot;Application partitioning&quot;</a>
+</li>
+</ul>
+<a name="1100867"></a>
+ 
+<H3>Application session and state management</H3>
+<p>As you create Web applications, you will likely create specific variables that you intend to carry across multiple interactions between a user's browser and a site's Web server(s). Using <em>client</em> variables that get stored in a shared state repository or <em>session </em>variables that get stored in memory of a specific server are popular approaches for accomplishing this. The latter approach, however, introduces a significant challenge for a Web site that is supported by multiple servers. Once a user has begun a session and variables are stored on a specific server, the user must return to that server for the life of the session to maintain correct state information.</p><p>A good example that illustrates this concept is an e-commerce application that uses shopping carts. With this type of application, as a customer accumulates items in his or her cart, there must be a mechanism that ensures that the user can see the items as they are added. One approach is to store these items in session variables on a specific Web server. However, if you use this approach, there must also be a way to ensure that the user always returns to the same server for the life of the session. ClusterCATS for ColdFusion automatically handles this for you.</p><p>Another approach to solving the same problem is to store client variables in a back-end common state repository. This approach enables all Web servers comprising the cluster to access variables in a common, shared back-end data store, such as a database. However, you must be aware that this approach can potentially impact your site's performance.</p><p>Web developers must think through the various user scenarios in which application session and state are affected and engineer appropriate mechanisms for elegantly handling such situations. The three most common ways to handle session data are:</p><ul>
+<a name="1107757"> </a>
+<li>Client-side options consisting of cookies, hidden fields, a get list, or URL parameters
+
+<a name="1107764"> </a>
+</li>
+<li>Server-side session variables
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Storing session data on the server requires that a simple identifier be 
+stored on the client, such as a cookie.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1107767"> </a>
+</li>
+<li>An open state repository consisting of either a common back-end database or some other shared storage device
+</li>
+</ul>
+<p>Whatever mechanism your architects and engineers use, it's important that they anticipate the scenarios in which maintaining an application's state is vital to a good user experience. See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1118461">&quot;Configuring session-aware load balancing&quot;</a>.</p><a name="1058163"></a>
+ 
+<H3>Single threaded vs. multi-threaded application connections</H3>
+<p>Another major issue that Web developers must consider when constructing their applications is whether or not the application will be single-threaded or multi-threaded. Threading refers to how the application responds to multiple user requests for application services. If an application is <em>single threaded</em>, the application can only handle a single user request for services at a time. If there are multiple requests for the same service, they are put into a queue, and the application responds to each individually in order. Single-threading is not a scalable approach for application services that you anticipate will be used by many users simultaneously.</p><p>A <em>multi-threaded</em> application can handle multiple requests for the same application service simultaneously by instantiating separate connections (threads) for each user request. Applications that anticipate lots of concurrent multi-user activity should ensure that the application functions are multi-threaded.</p><p>ColdFusion by default provides multi-threaded application services. However, if your application contains particular functions that require single user interaction, such as writing to shared application variables, you can easily restrict the function to be single threaded by using the CFML tag, <code>&lt;cflock&gt;</code>. </p><a name="1058167"></a>
+ 
+<H3>Database locking and concurrency issues</H3>
+<p>Dynamic Web applications, those that allow users to modify a database, must ensure appropriate database concurrency handling. Database concurrency handling refers to how an application manages multiple concurrent user requests when accessing the same database records. If an application does not impose any database locking mechanism on multiple requests to update the same record, data integrity can be compromised in the database. In such a scenario, two users could make simultaneous modifications to a record, but only the last change would take effect.</p><p>For example, consider a Human Resources Web application on a company intranet. The HR Generalist adds two new employee records to the HR database by filling out a Web form because two new employees have just been hired. The Generalist enters most of the vital information into the records but doesn't yet have the new employees' phone extensions or HMO selections, and therefore leaves those fields blank. Later in the day, the HR Generalist's boss, the HR Director, obtains this information from both new hires and decides to enter it in the database herself. However, one of the new employees, after speaking with her husband, decides to change her HMO selection from the basic selection to the PPO choice, which allows greater flexibility in choosing physicians. The employee calls the HR Generalist to tell him of the change, and the Generalist says he will take care of it immediately. Unbeknownst to the HR Director, the HR Generalist adds the information into the employee records at the same time that the HR Director is attempting to add the outdated information.</p><p>In this scenario, if the application uses an appropriate database concurrency validation mechanism, such as a SQL <code>WHERE</code> clause, then the HR Director would receive a message informing her that she could not access the employee record because it was in use, thereby alerting her that the HR Generalist is trying to change the record. However, if the application did not use such a validation mechanism, the HR Director would overwrite the new data that the Generalist had just entered, resulting in data integrity problems. This simple example illustrates how important it is that your dynamic Web applications handle database concurrency issues well.</p><a name="1102237"></a>
+ 
+<H3>Application partitioning</H3>
+<p>The way an application has been partitioned and deployed dramatically affects its ability to scale. Therefore, a key development objective must be to ensure that each partition scales independently of the others, thereby eliminating application bottlenecks. </p><p>Application partitioning refers to the logical and physical deployment of an application's three core types of logic, or services -- presentation, business, and data access. If you are familiar with the concept of tiered client/server application development, you already understand the rationale for developing applications in this way. However, if you're not, we'll run through a short review to shed some light on this methodology's benefits.</p><p>An application, regardless of whether it is a Web application or a more traditional client/server application, has three main categories of logic, or services.</p><ul>
+<a name="1101232"> </a>
+<li><strong>Presentation services</strong> -- Refer to the application's user interface by which users interact with the application's features. In a traditional client/server application, this logic sits on a client's PC, typically as a proprietary executable file. In a Web paradigm, there is no specific proprietary client software required, other than a browser. Emerging Web technologies can help you leverage powerful client-side processing available via your browser. Some of these technologies include Java Script, applets, Dynamic HTML, and ColdFusion's WDDX components (for client-side form validation, for example). Well planned use of these client technologies can reduce unnecessary trips to the server, thereby minimizing performance degradation.
+
+<a name="1101233"> </a>
+</li>
+<li><strong>Business services</strong> -- Represent the custom business logic and rules that the application uses to perform calculations and application-specific functions. An example of a business service would be an algorithm that automatically calculates the shipping and handling charges for an order based on the total cost of the order. In ColdFusion, this logic is contained within your CFML that the ColdFusion Server processes and interprets. Depending on the nature of the business and how often the business rules need to change, business logic can be partitioned to sit on its own server for easier access that expedites frequent logic modifications, or it can reside in stored procedures on the database server.
+<a name="1094081"> </a>
+</li>
+<li><strong>Data services</strong> -- Refer to the interaction between the application and the database in which the application stores and manipulates data. The way in which an application manages data services is directly tied to the application's performance capability. In short, accessing a database can be a costly endeavor and can cause significant performance degradation depending on a variety of factors. For example, the types of database drivers used for connections (native vs. ODBC), the actual construction of SQL queries, the manner in which database connections are pooled and maintained, and whether or not stored procedures are implemented for frequent database access all directly impact the application's performance.
+</li>
+</ul>
+<p>The way in which architects and Web developers decide to partition and deploy these core application services significantly affects the application's ability to scale. Although your development efforts may no longer be burdened with developing, distributing, customizing, and updating proprietary client software for your applications, the ubiquitous graphical user interface (GUI) -- the Web browser -- presents new interface issues and challenges. For example, you must ensure that your applications' presentation remains performance-friendly. It should minimize the number and size of graphic elements that must be downloaded to the client. Also, because not all browsers are yet able to display all emerging technologies cleanly, such as Java applets and frames, you should carefully evaluate their use in your applications. </p><p>Bear in mind these types of presentation guidelines to aid your applications' performance and user experience, and be sure to plan and test for the lowest common denominator that all browsers can accommodate.</p><p>Often, partitioning business services to a separate business logic application server from the primary application server, if necessary, can yield better application organization and easier maintenance. You can maximize your application's data services by carefully constructing them and by ensuring that a separate database server (in this case, a separate machine) is used to increase processor capacity for any database transactions.</p><p>These are several of the most important topics you and the developers creating your Web applications should consider early on. In doing so, you ensure that your Web applications are designed and coded with scalability in mind.</p><a name="1059150"></a>
+ 
+<H2>Avoiding common bottlenecks</H2>
+<p>In addition to application design and construction considerations, you must also plan accordingly to avoid common bottlenecks that can negatively affect a Web application's performance. </p><p>Following are typical bottlenecks that can affect your application's ability to perform and scale well:</p><ul>
+<a name="1059185"> </a>
+<li><strong>Poorly written application logic </strong>-- Inefficient programming is probably the most common reason applications perform poorly. Instituting industry best practices, such as coding standards, design reviews, and code walkthroughs, can significantly help to alleviate this problem.
+
+<a name="1107815"> </a>
+</li>
+<li><strong>Processor capacity</strong> -- Even a well architected and programmed Web application can perform poorly if the Web server's CPU is unable to provide sufficient processing power. Make sure that heavy load, mission-critical applications reside on hardware that can effectively do the job.
+<a name="1059186"> </a>
+</li>
+<li><strong>Memory</strong> -- Insufficient Random Access Memory (RAM) limits the amount of application data that can be cached. Ensure that the amount of memory installed on the application server machine is commensurate with the needs of the Web application.
+<a name="1059187"> </a>
+</li>
+<li><strong>Server congestion</strong> -- Server congestion refers to all type of servers, not just the Web server. Your application, proxy, search and index, and backoffice servers can periodically experience high volume that indirectly degrades the performance of your Web application. Therefore, when planning the physical design of the system, be sure to investigate carefully the network topology that will be implemented to ensure that existing servers are up to the task. If they are not, you may need to add new servers to the topology to ensure uninterrupted service and performance expectations.
+<a name="1059188"> </a>
+</li>
+<li><strong>Firewalls</strong> -- Some dynamic applications that must restrict anonymous access because they present or share confidential information must pass through a corporate firewall, which can slow down requests and responses. Make sure that the correct ports are open on the firewall to ensure valid security authentication and to enable appropriate client/server communications. (You may be able to open additional secure ports to accommodate increased traffic.)
+<a name="1059189"> </a>
+</li>
+<li><strong>Network connectivity and bandwidth</strong> -- Consider the type of network your application will run on (LAN/WAN/Internet) and how much traffic it typically receives. If traffic is consistently heavy, you may need to add additional nodes, routers, switches, or hubs to the network to handle the increased traffic.
+<a name="1059190"> </a>
+</li>
+<li><strong>Databases</strong> -- Database access, while vitally important to your application's capabilities and feature set, can be costly in terms of performance and scalability if it is not engineered efficiently. When creating data sources for accessing your database, use a native database driver rather than an ODBC driver if possible because it will provide faster access. Similarly, try to reduce the number of individual SQL queries that must be repetitiously constructed and submitted by placing common database queries in stored procedures that reside on the database server. In short, tune your databases and queries for maximum efficiency.
+</li>
+</ul>
+<a name="1059410"></a>
+ 
+<H2>DNS effects on Web site performance and availability</H2>
+<p>Improper Domain Name System (DNS) setup and configuration on Web servers is one of the most common problems administrators encounter. This section addresses the following topics:</p><ul>
+<a name="1112792"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1059437">&quot;What is DNS&quot;</a>
+
+<a name="1112793"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1112830">&quot;DNS effects on site performance and availability&quot;</a>
+<a name="1112809"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1111780">&quot;DNS core elements&quot;</a>
+</li>
+</ul>
+<a name="1059437"></a>
+ 
+<H3>What is DNS<a href="#1059453"><sup>1</sup></a></H3>
+<p>DNS is a set of protocols and services on a TCP/IP network that allows network users to use hierarchical natural language names rather than computer IP addresses when searching for other computer hosts (servers) on the network. DNS is used extensively on the Internet as well as on private enterprise networks, including LANs and WANs.</p><p>The primary capability contained within DNS is its ability to map host names to IP addresses, and vice-versa. For example, suppose the Web server at Allaire has an IP address of 157.55.100.1. Most people would connect to this server by entering the domain name (www.allaire.com) and not the less friendly IP address. Besides being easier to remember, the name is more reliable because the numeric address could change for a variety of reasons, but the name can always be reserved.</p><a name="1112830"></a>
+ 
+<H3>DNS effects on site performance and availability</H3>
+<p>Internet DNS is a powerful and successful mechanism that has enabled huge numbers of individuals and organizations to create easily locatable Web sites on the Internet. However, DNS by itself may not allow your Web site to perform and scale as it needs to, thus causing it to become unavailable and unreliable. Whether or not you use DNS by itself to load balance inbound traffic depends largely on the site's purpose and the amount of concurrent activity you expect on it. For instance, a low volume, static site that only provides textual HTML information can likely be accommodated just fine by round-robin DNS. However, a high volume, dynamic, e-commerce site that you anticipate doing lots of volume likely won't perform or scale well ultimately if its only supported by round-robin DNS.</p><p>To understand why, let's look further at the e-commerce example. Even if you have planned ahead and set up multiple servers to support this high volume site, if you rely only on DNS, it can only do two things: translate the natural language names to server IP address mappings so that users can find the site, and if you've enabled round-robin distribution for multi-server load balancing, it can distribute the load among each server in a rote, sequential distribution manner. However, if a spike in user activity occurs and causes servers to overload or fail, round-robin DNS will keep distributing the requests among all of the servers, even if some of them are no longer operational.</p><p>In short, Internet DNS is limited in its capabilities, and its round-robin distribution mechanism does not contain any intelligence that allows it to monitor, manage, and react to overloaded or failed servers. Consequently, DNS <em>by itself</em> is not a sound load balancing or failover solution for your business-critical sites. The load balancing and failover technology that ColdFusion provides, ClusterCATS, compensates for DNS limitations and allows you to create highly available, reliable, and scalable ColdFusion Web applications.</p><a name="1111780"></a>
+ 
+<H3>DNS core elements</H3>
+<p>Following are core DNS elements that you must understand and be able to configure if your ColdFusion applications are to work well with DNS:</p><ul>
+<a name="1112723"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1113329">&quot;Zones and domains&quot;</a>
+
+<a name="1116317"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1115987">&quot;DNS record types, server aliases, and round-robin distribution&quot;</a>
+</li>
+</ul>
+<a name="1113329"></a>
+<h4> Zones and domains</h4>
+<p>A Domain Name System is composed of a distributed database of names. The names in the DNS database establish a logical tree structure called the <em>domain name space</em>. On the Internet, the root of the DNS database is managed by the Internet Network Information Center (InterNIC). The top-level domains were originally assigned organizationally and by country. Two-letter and three-letter abbreviations are used for countries and various abbreviations are reserved for use by organizations.</p><p>A <em>domain</em> is a node on a network and all of the nodes below it (subdomains) that are contained within the DNS database tree structure. Domains and subdomains can be grouped into zones to allow distributed administration of the name space. More specifically, a <em>zone</em> is some portion of the DNS name space whose database records exist and are managed in a particular physical file. A single DNS server may be configured to manage one or multiple zone files. Each zone is anchored at a specific domain node. Zones are used for breaking up domains across multiple segments when you need to distribute the management of the domain to multiple groups and for replicating data more efficiently. </p><p>The following figure illustrates these concepts.</p><p><img src="../images/admin0671.gif" height="234" width="505">
+
+
+</p><p>DNS servers store information about the domain name space and are referred to as <em>name servers</em>. Name servers typically have one or more zones for which they are responsible. The name server has authority for those zones. When you configure a DNS name server, you tell it all the other DNS name servers that are in the same domain.</p><a name="1115987"></a>
+<h4> DNS record types, server aliases, and round-robin distribution</h4>
+<p>There are three DNS record types that you must define and configure for each Web server in order for ColdFusion's load balancing and failover technology to work correctly. These records must be defined and configured on your local and primary DNS servers.</p><ul>
+<a name="1115989"> </a>
+<li>A Record
+
+<p>This record contains a host name to IP address mapping, where the natural 
+language name is the primary name representing the IP address.
+</p><a name="1115991"> </a>
+</li>
+<li>PTR Record
+<p>This record contains the IP address to host name mapping. This is the reverse 
+lookup of the A record, in which given the IP address, the natural language host 
+name for the IP address is displayed.
+</p><a name="1115993"> </a>
+</li>
+<li>CNAME Record
+<p>CNAME is short for Canonical record. This record contains an alias name that 
+maps to the primary host name of the Web server. For example, if you have a 
+server named fred.yourcompany.com, you could assign it an alias of 
+www1.yourcompany.com so that users never see fred.yourcompany.com in the 
+event of a server redirection.
+</p></li>
+</ul>
+<p>To see how all of these records work together, let's look at a simple example. Suppose there are two Web servers named fred.yourcompany.com and barney.yourcompany.com, with aliases of www1.yourcompany.com and www2.yourcompany.com, respectively. You don't ever want your users to see the primary host names (A records) for these servers in their browser; rather, you only want them to see their assigned aliases (CNAME records) when being redirected.</p><p>Therefore, your DNS entries would look like the following:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>; Addresses for canonical names
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>fred.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>IN A
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>192.168.0.1
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>barney.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>IN A
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>192.168.0.2
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>; Aliases
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>www1.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>IN CNAME
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>fred.yourcompany.com
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>www2.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>IN CNAME
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>barney.yourcompany.com
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>; Round Robin 
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>www.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>192.168.0.1
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>&nbsp;
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>192.168.0.2
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>www1.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>IN A
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>192.168.0.1
+</pre></td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1><pre>www2.yourcompany.com
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>IN A 
+</pre></td><td valign="top"><font face="arial,helvetica" size=-1><pre>192.168.01.2
+</pre></td></tr>
+
+</table>
+
+</div>
+</p><p>To ensure that your site lookups and translations occur as intended, you must provide correct entries in your DNS records, as shown above. Also, if you want to enable round-robin DNS functionality, your round-robin entries must be done in the manner shown above. On the Windows platform, you make these DNS entries using the Domain Name Service Manager utility. On UNIX platforms, you make these DNS entries in the name.db file, which is read by the DNS server's Berkeley Internet Name Daemon (BIND). See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1191927">&quot;Configuring ClusterCATS offline maintenance support (NT only)&quot;</a> for detailed procedures.</p><p>For additional detailed information about DNS and all of its components and how they work together, you can check out the following resources:</p><ul>
+<a name="1094430"> </a>
+<li>Suhy, Scott and Glenn Wood. &quot;DNS and Microsoft Windows NT 4.0: A White Paper.&quot; Redmond, WA: Microsoft Corporation, 1996. Available on the Microsoft Web site at: http://www.microsoft.com/ntserver/nts/technicaldetails.
+
+<a name="1094701"> </a>
+</li>
+<li>Albitz, Paul and Cricket Liu. &quot;DNS and BIND.&quot; Sebastopol, CA: O'Reilly and Associates, Inc., 1992. ISBN #: 1-56592-010-4. Available at your local computer book store.
+<a name="1205294"> </a>
+</li>
+<li>Derfler, Frank and Steve Rigney. &quot;TCP/IP, A Survival Guide for Users.&quot; New York, New York: A Division of Henry Holt and Company, Inc.: MIS Press, Inc., 1998. ISBN #: 1-55828-5644. Available at your local computer book store. Also see <br>http://www.mispress.com.<strong></strong>
+</li>
+</ul>
+<p>See also <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0615.htm#1120089">&quot;Other Informational Resources&quot;</a>.</p><a name="1064613"></a>
+ 
+<H2>Load testing your Web applications</H2>
+<p>Load testing is the process of defining acceptable benchmarks for your Web application's performance and then simulating load and measuring resulting response times and throughput against those benchmarks. You perform load testing to measure the application's ability to scale. </p><p>This section discusses the following topics:</p><ul>
+<a name="1064664"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1064673">&quot;Reasons to perform load testing&quot;</a>
+
+<a name="1064665"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1107909">&quot;How to load test your Web applications&quot;</a>
+<a name="1064877"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm#1064870">&quot;Load testing considerations&quot;</a>
+</li>
+</ul>
+<a name="1064673"></a>
+ 
+<H3>Reasons to perform load testing</H3>
+<p>Load testing is important to your Web site's success because it lets you test its capacities before you deploy it, thereby enabling you to find problems and fix them before they are exposed to your users. Determining your site's purpose and the amount of traffic you anticipate it will receive may affect how you load test it. </p><p>Small sites that don't expect heavy concurrent loads may be able to organize and use actual users to simultaneously access the site to perform load testing. However, this is often a difficult activity to accomplish well because it introduces many human variables. Therefore, it is typically not a practice that we advocate. In fact, for larger business-critical systems that expect heavy concurrent load, this type of testing is not feasible and will not be able to provide satisfactory nor realistic results. </p><p>A better approach to load testing is to use load simulation software. There are some excellent software load testing tools on the market that let you <em>simulate</em> heavy load hitting your Web server. By using the load testing software in conjunction with your defined benchmarks and formal test plans, you can confidently determine if your Web application is ready for deployment.</p><p>Another reason to load test is to verify your failover capabilities. Failover ensures that if a primary server within a cluster of servers stops functioning, then subsequent user requests are directed to another server within the cluster. Failover is addressed in more depth in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1064937">&quot;What is Web Site Availability?&quot;</a>. Using the load testing software of your choice, you can essentially force a server redirection by designating a machine as &quot;unavailable&quot; or by shutting it down.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ClusterCATS for ColdFusion uses the HTTP protocol to redirect packets 
+of data from a failed server to an available server. Therefore, it is 
+important to verify that your load testing tool can handle HTTP 
+redirections properly before you initiate load testing.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1107909"></a>
+ 
+<H3>How to load test your Web applications</H3>
+<p>One of the first things you need to do to be able to load test is purchase a load testing software tool and learn how to use it. There are a variety of good load testing software tools on the market, including RSW's e-TEST Suite (which includes a load testing component called e-LOAD), Segue's SilkPerformer, Rational Software's PerformanceStudio, and Mercury Interactive's LoadRunner. Each of these packages provide substantial Web-enabled software testing solutions that will help you effectively simulate and test load.</p><p>After you purchase, install, and learn to use the load testing software, you need to determine benchmarks that you want to or <em>must</em> achieve for your Web site to ensure a good user experience. Following that, you must formalize your testing strategy by designing and developing written test plans against which you'll execute your tests.</p><p>Once your test plans are written and approved, it's time to run the tests. After you do so, you need to capture and analyze the load testing results and report the statistics to the development team. From there, you'll need to reach consensus about what are the most serious problems you discovered, what are the necessary changes to make, and what is the best way to implement the fixes. After the changes are made and a new build of the application is available, you'll rerun the tests to look for performance improvements. Again, you'll reanalyze the testing results and continue this cycle until the site is operating within the established parameters that you've set. When your team agrees that the site scales well and is operating at peak performance under heavy stress, you're ready to deploy the application into a production environment.</p><a name="1064870"></a>
+ 
+<H3>Load testing considerations</H3>
+<p>Before starting your load testing, consider the following:</p><ul>
+<a name="1064878"> </a>
+<li>Define benchmarks early
+
+<p>Make sure you understand your Web site's performance and scalability 
+requirements before you start running tests against your site. Otherwise, you 
+won't know what you're testing for and the statistics you capture won't have 
+significance. Also, remember that the benchmarks you define should be 
+customized for the current application; don't simply reuse benchmarks from an 
+earlier site on which you may have worked. Each Web application is often 
+distinct in terms of its design, construction, backoffice integration, and user 
+experience requirements.
+</p><a name="1068043"> </a>
+</li>
+<li>Ensure the test environment mirrors the production environment
+<p>Create a test environment that is identical as much as possible to the actual 
+production environment in which the Web site will be hosted. If you don't 
+simulate a similar network and bandwidth scenario, or use the same types of 
+servers, or ensure that the same versions of software (operating system, service 
+packs, Web server, and third-party tools) reside on both the test and production 
+servers, you can't anticipate problems nor determine why they occur. The 
+number of possibilities would be too large. 
+</p><a name="1065939"> </a>
+</li>
+<li>Minimize distributed environment load testing
+<p>Load testing in a distributed environment can be problematic if the network on 
+which you are performing your load tests becomes congested, resulting in poor 
+response times. Additionally, if everyone else in the organization is using that 
+network for their everyday activities, such as e-mail, source control, and file 
+management, an increased load going over the network will likely cause 
+significant network degradation for them. As they likely have nothing to do with 
+the testing effort, this situation can cause great frustration. 
+</p><p>In such a scenario, it may be more effective to physically sit in front of the server 
+on which the application resides and perform the tests locally rather than bring 
+the entire LAN or WAN to a slow crawl. Also, by testing locally, you are better 
+able to rule out the network as the source of the scalability problems. 
+Alternatively, you may be able to configure a separate subnet on the LAN or 
+WAN that is distinct from the subnet on which everybody else in your 
+environment uses network services. 
+</p></li>
+</ul>
+<p>You should now have a good overview of what scalability implies, the core elements that comprise it, some of the issues that affect successful implementations, and the tasks that must be performed to verify that your Web applications are able to achieve satisfactory scalability. </p><p>The next section describes Web site availability and reliability concepts and considerations.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin061.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

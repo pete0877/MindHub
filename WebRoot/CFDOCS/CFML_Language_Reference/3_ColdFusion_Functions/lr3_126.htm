@@ -1,0 +1,136 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>IsBinary</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_125.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_127.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2571594"></a>
+ <H1>IsBinary</H1>
+
+
+
+<p>Returns TRUE if <em>value</em><em> </em>is binary; otherwise, the function returns FALSE. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_240.htm#2583224">ToBinary</a>, <a href="../3_ColdFusion_Functions/lr3_239.htm#2583123">ToBase64</a>, <a href="../3_ColdFusion_Functions/lr3_132.htm#999452">IsNumeric</a> and <a href="../3_ColdFusion_Functions/lr3_252.htm#1002763">YesNoFormat</a>.
+</p>
+
+<a name="2570628"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>IsBinary</strong>(<em>value</em>)
+</PRE><a name="2570630"> </a>
+<h5 class="param"> value</h5>
+<p class="param">Any value.</p><a name="2570632"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsBinary
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!------------------------------------------------------------------ 
+This example shows the use of IsBinary. It assumes that another page
+in a syndication program has passed this page the value of the variable 
+data_var, which can hold either character data or binary data. This 
+example checks to see whether data_var is binary, and if it is, it
+converts the binary data into Base64 data.
+--------------------------------------------------------------------&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+IsBinary Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;IsBinary Example&lt;/H3&gt;
+
+&lt;!------------------------------------------------------------------
+Check to see if syndicated data is in binary form, and if it is, convert 
+it to Base64 so that it can be viewed as printable characters.
+---------------------------------------------------------------------&gt;
+&lt;CFIF IsBinary(data_var)&gt;
+    
+    &lt;CFSET Base64data = ToBase64(data_var)
+&lt;/CFIF&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsBinary
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_125.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_127.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,181 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Dynamically Populating Select Boxes</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Making Variables Dynamic</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012163"></a>
+ <H1>Dynamically Populating Select Boxes</H1>
+
+
+
+<p>In the previous chapter, you hard-coded a form's select box options. </p><p>Instead of manually entering the information on a form, you can dynamically populate a select box with database fields. When you code this way, changes that you make to a database are automatically reflected on the form page.</p><p>To dynamically populate a select box:</p><ul>
+<li>Use the CFQUERY tag to retrieve the column data from a database table. 
+
+</li>
+<li>Use the CFOUTPUT tag with the QUERY attribute within the SELECT tag to dynamically populate the OPTIONS of this form control.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To dynamically populate a select box:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the file <code>formpage.cfm</code> in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+</pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Input form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+<span class="codemark">&lt;CFQUERY NAME="GetDepartments" DATASOURCE="CompanyInfo"&gt;
+</span><span class="codemark">SELECT Location
+</span><span class="codemark">FROM Departments
+</span><span class="codemark">&lt;/CFQUERY&gt;
+</span>
+&lt;!--- define the action page in the form tag. The form variables will 
+pass to this page when the form is submitted ---&gt;
+
+&lt;form action="actionpage.cfm" method="post"&gt;
+
+&lt;!-- text box --&gt;
+&lt;P&gt;
+First Name: &lt;INPUT TYPE="Text" NAME="FirstName" SIZE="20" 
+MAXLENGTH="35"&gt;&lt;BR&gt;
+Last Name: &lt;INPUT TYPE="Text" NAME="LastName" SIZE="20" 
+MAXLENGTH="35"&gt;&lt;BR&gt;
+Salary: &lt;INPUT TYPE="Text" NAME="Salary" SIZE="10" MAXLENGTH="10"&gt;
+&lt;/P&gt;
+
+&lt;!-- select box --&gt;
+City
+
+<span class="codemark">&lt;SELECT NAME="City"&gt;
+</span><span class="codemark">&lt;CFOUTPUT QUERY="GetDepartments"&gt;
+</span><span class="codemark">&lt;OPTION VALUE="#GetDepartments.Location#&gt;
+</span><span class="codemark">#GetDepartments.Location#
+</span><span class="codemark">&lt;/OPTION&gt;
+</span><span class="codemark">&lt;/CFOUTPUT&gt;
+</span><span class="codemark">&lt;/SELECT&gt;
+</span>
+&lt;!-- radio buttons --&gt;
+&lt;P&gt;
+Department:&lt;BR&gt;
+&lt;INPUT TYPE="radio" name="Department" value="Training"&gt;Training&lt;BR&gt;
+&lt;INPUT TYPE="radio" name="Department" value="Sales"&gt;Sales&lt;BR&gt;
+&lt;INPUT TYPE="radio" name="Department" value="Marketing"&gt;Marketing&lt;BR&gt;
+&lt;/P&gt;
+
+&lt;!-- check box --&gt;
+&lt;P&gt;
+Contractor? &lt;input type="checkbox" name="Contractor" value="Yes" 
+checked&gt;Yes
+&lt;/P&gt;
+
+&lt;!-- reset button --&gt;
+&lt;INPUT TYPE="reset" NAME="ResetForm" VALUE="Clear Form"&gt;
+
+&lt;!-- submit button --&gt;
+&lt;INPUT TYPE="submit" NAME="SubmitForm" VALUE="Submit"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>formpage.cfm</code>.
+
+</li>
+<li>View <code>formpage.cfm</code> in a browser. 
+
+<p>The changes that you just made appear in the form.
+</p><p>Remember that you need an action page to submit values. 
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:44 -->
+</body>
+</html>

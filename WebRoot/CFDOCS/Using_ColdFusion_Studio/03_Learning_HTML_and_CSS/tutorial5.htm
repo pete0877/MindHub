@@ -1,0 +1,358 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Tables for Page Formatting</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="468535"></a>
+ <H1>Using Tables for Page Formatting</H1>
+
+
+
+<p>HTML tables allow for more interesting and precise page compositions. Tables are relatively complex compared to the other tags covered so far, so it's worth spending some time on tables in general before looking at the specific table design in the Archaeology Tours page.</p><p>HTML tables are built in the Table <code>&lt;TABLE&gt;&lt;/TABLE&gt;</code> tag. The table's basic structure is defined by table row <code>&lt;TR&gt;...&lt;/TR&gt;</code> tags. Inside table rows are table cells, marked with table data <code>&lt;TD&gt;&lt;/TD&gt; </code>tags. You can also use table header tags <code>&lt;TH&gt;&lt;/TH&gt;</code>, which are identical to table data tags except that the text is bolded and centered horizontally in the data cell by default.</p><a name="484203"></a>
+ 
+<H2>Spanning rows and columns</H2>
+<p>You can cause table data or table headers to span rows or columns by using the <code>ROWSPAN</code> and <code>COLSPAN</code> attributes, which produce effects similar to merging cells in a spreadsheet or word processor table.</p><p></p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>The online HTML Reference contains a detailed section on tables, 
+including examples and information on browser inconsistencies in 
+rendering table code. If you plan to support multiple browsers, you 
+will need to test the table code in those browsers.
+</td>
+</tr>
+</table>
+</div>
+<br><p></p><a name="484225"></a>
+ 
+<H2>Other table attributes</H2>
+<p>There are a number of other attributes that can be used within the &lt;TABLE&gt; tag. The most important are listed below.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Table Formatting Attributes</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Tag</strong>
+</th><th align="left">
+<strong>Attribute</strong>
+</th><th align="left">
+<strong>Effect</strong>
+</th></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=4>
+TABLE
+</td><td valign="top">
+CELLSPACING=<em>pixel value</em>
+</td><td valign="top">
+Sets the distance between the edges of cells.
+</td></tr>
+<tr valign="top"><td valign="top">
+CELLPADDING=<em>pixel value</em>
+</td><td valign="top">
+Sets the distance between edges of cells and their contents.
+</td></tr>
+<tr valign="top"><td valign="top">
+BORDER=<em>pixel value</em>
+</td><td valign="top">
+Draws a border of a specified width around all cells and the entire table.
+</td></tr>
+<tr valign="top"><td valign="top">
+BGCOLOR=<em>color</em>
+</td><td valign="top">
+Specifies a background color for the entire table.
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=3>
+TD, TH, TR
+</td><td valign="top">
+ALIGN=Left, Right, or Center
+</td><td valign="top">
+Aligns the contents of the data cell or row horizontally.
+</td></tr>
+<tr valign="top"><td valign="top">
+VALIGN=Top, Middle, or Bottom
+</td><td valign="top">
+Aligns the contents of the data cell or row vertically.
+</td></tr>
+<tr valign="top"><td valign="top">
+BGCOLOR=<em>color</em>
+</td><td valign="top">
+Specifies a background color for the data cell or row.
+</td></tr>
+
+</table>
+</div>
+</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To build the Archaeology Tours table:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor on a line below the "Travel back in time!" paragraph.
+
+
+</li>
+<li>Click the Table Wizard button on the Tables QuickBar.
+
+<p><img src="../images/table_wizard_button.gif">
+
+
+
+</p><p>The Table Wizard opens with the default table layout of two columns by two rows. 
+</p></li>
+<li>Click the top left cell of the table layout, then click the Row Span + button to make the cell span two rows.
+
+<p>Color-coding shows the cell now fills the entire left column. 
+</p></li>
+<li>Click Next to open the Table Properties screen.
+
+</li>
+<li>Set the Alignment to left, Cell Spacing to 0, Cell Padding to 3, and Border Size to 1.
+
+</li>
+<li>Click Next to open the Cell Properties screen.
+
+</li>
+<li>Click the top-right cell and choose center from the Horizontal drop-down list.
+
+</li>
+<li>Click the bottom-right cell and set the Horizontal property to center.
+
+</li>
+<li>Click Finish.
+
+<p>The code should look like this:
+</p><pre>&lt;TABLE CELLSPACING="0" CELLPADDING="3" BORDER="1"&gt;
+&lt;TR&gt;
+    &lt;TD ROWSPAN="2"&gt;&lt;/TD&gt;
+    &lt;TD ALIGN="center"&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;
+    &lt;TD ALIGN="center"&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/TABLE&gt;
+</pre></li>
+</ol>
+<p>Notice how Studio indents the <code>&lt;TR&gt;</code> and <code>&lt;TD&gt;</code> blocks in the code above. This coding convention makes it easier to see the table structure. This hierarchical display of table elements is coded by nesting the row and cell tags within the table tag. </p><p>In the following procedures, you'll add text and formatting to the table cells.</p><a name="468728"></a>
+ 
+<H2>Entering text in tables</H2>
+<p>Content for HTML tables is entered in the table cells using the table data <code>&lt;TD&gt;</code> and table header <code>&lt;TH&gt;</code> tags. </p><p>Table text is formatted in the same way as paragraph text, by coding the <code>&lt;FONT&gt;</code> tag.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enter text in table cells:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor between the <code>&lt;TD&gt;&lt;/TD&gt;</code> tags in the line that contains the <code>ROWSPAN="2"</code> attribute. 
+
+
+</li>
+<li>Insert a &lt;P&gt; tag, so that the line looks like this:
+
+<p>&lt;TD ROWSPAN="2"&gt;&lt;P&gt;&lt;/P&gt;&lt;/TD&gt;
+</p></li>
+<li>Place the cursor after the &lt;P&gt; and select the File &gt; Insert File menu command. 
+
+</li>
+<li>Select <code>Insert Text 1.txt</code> from the <code>tutorial files</code> folder and click Open.
+
+<p>The text is inserted in the paragraph. The code now looks like this:
+</p><pre>&lt;TD ROWSPAN="3"&gt;&lt;P&gt;Welcome to Archaeology Tours, the first choice of 
+travelers and adventurers. Our Mediterranean Cruise features luxury 
+accommodations, with stops in the following ancient cities:&lt;/P&gt;&lt;/TD&gt;
+</pre></li>
+</ol>
+<p>The rest of the content of this cell consists of a bulleted list, which we'll get to a bit later. First, let's format the cells in the right column, beginning in the top cell.</p><a name="468764"></a>
+ 
+<H2>Using the table tag editors</H2>
+<p>After you create a table with the Table Wizard, you can refine the layout by editing the properties of its individual elements. To change these properties, use the <code>&lt;TR&gt;</code> and <code>&lt;TD&gt;</code> tag editors. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To format table cells:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click inside the <code>&lt;TD&gt;</code> tag that follows the <code>&lt;TD&gt;</code> containing the "Welcome" text and select Edit Tag.
+
+
+<p>The alignment value you set in the Table Wizard is displayed in the editor.
+</p><p><img src="../images/tag_editor_td.gif">
+
+
+
+</p></li>
+<li>Click the HTML 4.0 tab, choose Yellow from the Background Color drop-down list, and click Apply.
+
+</li>
+<li>Go to the next &lt;TD&gt; tag and repeat step 2 to set the background color of the bottom-right cell to Lime.
+
+<p>The code for the entire table should look like this:
+</p><pre>&lt;TABLE CELLSPACING="0" CELLPADDING="3" BORDER="1"&gt;
+&lt;TR&gt;
+    &lt;TD ROWSPAN="2"&gt;&lt;P&gt;Welcome to Archaeology Tours, the first choice 
+of
+    travelers and adventurers. Our Mediterranean Cruise features 
+luxury
+    accommodations, with stops in the following ancient cities:&lt;/P&gt;&lt;/
+TD&gt;
+    &lt;TD ALIGN="center" BGCOLOR="Yellow"&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;
+    &lt;TD ALIGN="center" BGCOLOR="Lime"&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/TABLE&gt;
+</pre></li>
+</ol>
+<p>If those colored cells in the left column look a bit small, don't worry. We'll size them by putting text in them. </p><a name="498074"></a>
+ 
+<H2>Adding hyperlinks</H2>
+<p>Hyperlinks, or links, are the heart of the World Wide Web. They enable you to move from page to page and they provide the connections between Web pages and other resources.</p><p>Links are created with the Anchor <code>&lt;A&gt;&lt;/A&gt;</code> tag and always include the <code>HREF</code> attribute, which specifies the page to which you are linking. Links are usually identified on a page by special link text formatting, such as a distinct color or underlining. Many sites also use images that are as links.</p><p>Unlike the Allaire link you coded earlier, these next links are to documents in the file system and do not require the <code>http://www</code> protocol. </p><p>In this section, you will learn two ways to add hyperlinks.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert a hyperlink using the Anchor dialog box:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor between the <code>&lt;TD&gt;&lt;/TD&gt;</code> tags for the top right cell (the cell with the Yellow background) and enter the text <em>Purchase Cruise Tickets</em>.
+
+
+</li>
+<li>Select the "Purchase Cruise Tickets" text, then click the Anchor button on the Common toolbar.
+
+<p>The selected text appears in the Description box.
+</p></li>
+<li>In the HREF box, enter <em>tickets.htm</em>, then click OK to insert the link code.
+
+</li>
+<li>Select "Purchase Cruise Tickets" again and click the Bold button.
+
+<p><img src="../images/bold_button.gif">
+
+
+
+</p><p>The table cell tag looks like this:
+</p><pre>    &lt;TD ALIGN="CENTER" BGCOLOR="Yellow"&gt;
+        &lt;A HREF="tickets.htm"&gt;&lt;B&gt;Purchase Cruise Tickets&lt;/B&gt;&lt;/A&gt;
+    &lt;/TD&gt;
+</pre></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert a hyperlink using drag and drop:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Drag the <code>map.htm</code> file from the <code>tutorial files</code> folder and release the mouse button between the <code>&lt;TD&gt;&lt;/TD&gt;</code> tags for the bottom right cell (the cell with the Lime background).
+
+
+<p>The link text is filled in for you from the contents of the <code>map.htm</code> &lt;TITLE&gt; tag.
+</p></li>
+<li>Select "Interactive Tour Map" again and click the Bold button.
+
+<p>The code looks like this:
+</p><pre>    &lt;TD ALIGN="CENTER" BGCOLOR="Lime"&gt;
+        &lt;A HREF="map.htm"&gt;&lt;B&gt;Purchase Cruise Tickets&lt;/B&gt;&lt;/A&gt;
+    &lt;/TD&gt;
+</pre></li>
+</ol>
+<p>In the next section, you complete the table text by creating a list.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

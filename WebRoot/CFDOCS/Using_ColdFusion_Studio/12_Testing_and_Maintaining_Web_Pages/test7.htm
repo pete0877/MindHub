@@ -1,0 +1,105 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Site View to Check Page Links</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Testing and Maintaining  Web Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1005629"></a>
+ <H1>Using Site View to Check Page Links</H1>
+
+
+
+<p>Site View gives you a graphic representation of links, beginning in the current document. The configurable displays can be set to a tree view or chart view. Each link is identified by a file type icon (internal, Web, image, mailto, etc.) and the file name.</p><p>Links supported in Site View include:</p><ul>
+<a name="1010297"> </a>
+<li>A tags
+
+<a name="1010298"> </a>
+</li>
+<li>IMG tags
+<a name="1010299"> </a>
+</li>
+<li>APPLET tags that contain a CODE or CODEBASE attribute
+<a name="1010300"> </a>
+</li>
+<li>FRAME tags that contain a SRC attribute
+</li>
+</ul>
+<p>Selecting Options &gt; Show &lt;Title&gt; item on the shortcut menu displays the contents of the TITLE tag instead of the link text.</p><p>To edit a link, click on it in Site View to highlight it in the document. Use the Refresh command on the shortcut menu to update the view after you make changes.</p><p>If you want to pursue links beyond the current document, double-click on a link or right-click on it and select Expand Links. The URL is processed and its links are displayed. This process can be continued across succeeding pages that themselves contain links. To view a linked page, click on the link in the Browse view of the current document.</p><p>You can drag the vertical window border to enlarge the viewing area as the link list expands. If the view gets too dense, use the Set as Root command to make the selected link the top item in the view.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:54 -->
+</body>
+</html>

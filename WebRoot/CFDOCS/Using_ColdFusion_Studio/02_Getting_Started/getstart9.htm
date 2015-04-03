@@ -1,0 +1,441 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Managing Files</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Getting Started</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1027852"></a>
+ <H1>Managing Files</H1>
+
+
+
+<p>The Universal Files tab on the Resources window is your primary location for accessing and working with drives, directories, and files.</p><p><img src="../images/universal_files_tab_callout.gif">
+
+
+</p><p>The Universal Files tab allows you to access all of the following:</p><ul>
+<a name="1027914"> </a>
+<li>Local drives
+
+<a name="1027919"> </a>
+</li>
+<li>Network drives
+<a name="1027928"> </a>
+</li>
+<li>Remote servers (FTP and RDS servers)
+</li>
+</ul>
+<p>Any local or network drives that are available in your Windows Explorer will also be available in the Drive List. Remote servers must be configured in order for you to see them in the Drive List. Remote servers are listed under the Allaire FTP &amp; RDS option in the Drive List.</p><p>With a few exceptions, directories and files on remote servers function identically to those on local and network drives. The following sections will show you how to work with directories and files first, after which you will learn how to configure and work with remote servers. All of the information you learn about directories and files below will apply to remote servers.</p><a name="1028037"></a>
+ 
+<H2>Working with directories</H2>
+<p>You can choose to work with your directories from the Universal Files tab or you can open Windows Explorer from within Studio to work with the directories there. Any of the tasks you can perform in Windows Explorer to work with directories (deleting, renaming, etc.) can be performed in either the Universal Files tab or the Windows Explorer window.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To work with a directory from the Universal Files tab:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">On the Universal Files tab, choose the drive that contains the directory you want to work with from the Drive List.
+
+
+</li>
+<li>Navigate to the directory you want to work with in the Directory List. You can expand a directory by clicking the + sign next to the directory name or by double-clicking the directory name.
+
+</li>
+<li>Right-click the directory in the Directory List to see the shortcut menu.
+
+</li>
+<li>Use the shortcut menu options to work with your directories just as you would in Windows Explorer.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open a directory in Windows Explorer:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">On the Universal Files tab, choose the drive that contains the directory you want to work with from the Drive List.
+
+
+</li>
+<li>Navigate to the directory you want to work with in the Directory List.
+
+</li>
+<li>Right-click the directory and choose Explore from the menu.
+
+<p>The Windows Explorer window opens up with the directory you selected opened. 
+You can use any of Windows Explorer's features to work with the directory.
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The shortcut menu you see when you right-click a directory in the 
+Universal Files tab contains all of the same options that you see when you 
+right-click a directory in Windows Explorer.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create new directories from the Universal Files tab:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">On the Universal Files tab, use the Drive List and the Directory List to navigate to and select the directory that will contain the new directory. To place a new directory at the root level, click the drive name at the top of the list.
+
+
+</li>
+<li>Right-click in the file list and choose Create Folder from the menu. 
+
+<p>A new directory is added to the Directory List in the location you specified. The 
+new directory is highlighted, waiting for you to rename it.
+</p></li>
+</ol>
+<a name="1028042"></a>
+ 
+<H2>Working with files</H2>
+<p>You can use the following procedures to work with files, regardless of their location (local drive, network drive, or remote server).</p><a name="1028901"></a>
+ 
+<H3>Opening and linking files</H3>
+<p>Use the procedures below to open and link files in the file list.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open files:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">On the Universal Files tab, use the Drive List and the Directory List to navigate to the directory that contains the file you want to open.
+
+
+</li>
+<li>Double-click the file in the file list or right-click the file and choose Edit from the menu.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Read-only files are marked with a red dot in the file list. You can 
+right-click a file and choose Properties from the menu to set read 
+and write access. This is not recommended, however, if you are using 
+a source control application to manage read and write privileges.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a link to a file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the page you want to place the link in the Editor window.
+
+
+</li>
+<li>Drag the file you want to create a link to from the file list to the page in the Editor window. Release the mouse button when the cursor is in the location where you want the link to be added.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Alternatively, you can right-click a file and choose Insert As Link 
+from the shortcut menu. The link is inserted in the current page at 
+the cursor location.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<p>You can also right-click a file in the file list and use the File options in the shortcut menu to delete, move, copy, or rename the file.</p><a name="1028864"></a>
+ 
+<H3>Saving files</H3>
+<p>Unsaved changes in a document are indicated by an "X" next to the file name in the Document tab at the bottom of the Editor window.</p><p><img src="../images/unsaved_changes.gif">
+
+
+</p><p>Use the Save commands from the File menu or the Standard toolbar icons to save and close files. Open the Settings dialog box (F8) and use the File Settings pane to specify a format for saved files. The default is PC, but UNIX and Macintosh formats are available. You can set a default file extension on this tab, as well.</p><p>When you add links or images to a new file, you are prompted to save the file. This ensures that relative paths to these page elements are resolved correctly.</p><a name="1028800"></a>
+ 
+<H3>Working with the file list</H3>
+<p>You can customize the file list to display exactly what you want.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To filter the file list:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click in the file list and choose Filter from the menu.
+
+
+</li>
+<li>From the Filter submenu, choose the file type you want displayed:
+
+<ul>
+<a name="1029006"> </a>
+<li>Web Documents displays web documents only.
+
+<a name="1029007"> </a>
+</li>
+<li>Web Images displays web images only (JPEG, JPG, PNG, and GIF).
+<a name="1029008"> </a>
+</li>
+<li>All Web Files displays both web documents and web images.
+<a name="1028977"> </a>
+</li>
+<li>All Files displays all files in the selected directory.
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Use the File Settings pane in the Settings dialog box (F8) to view and 
+edit the list of file extensions that are included for Web documents 
+and Web images.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ul>
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change the file list view:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click in the file list and choose View from the menu.
+
+
+</li>
+<li>From the View submenu, you can toggle the display of the document title, document size, modified date/time, and document type.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To refresh the file list:
+</td>
+</tr>
+</table>
+</div><ul>
+<a name="1029063"> </a>
+<li>To refresh the file list if changes to the list are not displayed immediately, right-click in the file list and choose Refresh from the menu.
+
+</li>
+</ul>
+<a name="1028849"></a>
+ 
+<H3>Importing Files from Windows Explorer</H3>
+<p>You can drag files directly from the Windows Explorer to a page in the Studio editor window to create links. Doing this is identical to dragging a file from the file list to a page in order to create a link.</p><p>If you hold down the Ctrl key when you drag the file to the Studio editor, the file will be opened for editing. If the file is not a recognized text file, a dialog box displays, allowing you to open the file in an associated program for that file type.</p><a name="1029505"></a>
+ 
+<H2>Working with Favorites</H2>
+<p>You can build a list of favorite folders to make accessing their files easier. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a folder to the favorites list:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select the folder in the Directory List.
+
+
+</li>
+<li>In the file list, right-click and choose Favorite Folders &gt; Add Current Folder to Favorites.
+
+<p>The folder is added to your favorites list for easy selection.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view a favorite folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click in the file list and choose Favorite Folders from the menu.
+
+
+</li>
+<li>From the Favorite Folder submenu, choose the folder you want to see.
+
+<p>The folder is opened in the Directory List and its files are displayed in the file list.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To organize your favorite folders:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click in the file list and choose Favorite Folders from the menu.
+
+
+</li>
+<li>From the Favorite Folders submenu, choose Organize Favorites to see the Favorite Folders dialog box.
+
+<p><img src="../images/favorite_folders.gif">
+
+
+
+</p></li>
+<li>Select a folder and use the up and down arrows to move its location in the favorite folders list.
+
+</li>
+<li>Select a folder and click Remove to remove it from the favorite folders list. When you are prompted to confirm the deletion, click Yes to delete the folder.
+
+</li>
+<li>Click OK to close the Favorite Folders dialog box and apply your changes.
+
+</li>
+</ol>
+<a name="1029778"></a>
+ 
+<H3>Other Methods for Accessing Files Quickly</H3>
+<p>Studio gives you several additional options for speedy access to files:</p><ul>
+<a name="1029780"> </a>
+<li>Choose which folders and files to open each time Studio loads by setting the Startup pane in the Settings dialog box (F8).
+
+<a name="1029781"> </a>
+</li>
+<li>Select a file from the File &gt; Recent Files list.
+</li>
+</ul>
+<a name="1028047"></a>
+ 
+<H2>Working with Remote Servers</H2>
+<p>Working with directories and files on remote servers is virtually identical to working with them on local or network drives. The primary difference is that you need to establish a connection to remote servers before you can work with their files.</p><p>For steps to connecting to a remote server, see <a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm#999102">&quot;Connecting to Remote Servers&quot;</a>.</p><p>Configured servers are listed under Allaire FTP &amp; RDS in both the Universal Files tab and the Windows Explorer.</p><p><img src="../images/getstart4a.gif" height="231" width="349">
+
+
+</p><p>The procedures for working with remote servers can be performed from either the Universal Files tab or Windows Explorer. All of the options necessary to configure remote servers are contained in the shortcut menu you see when you right-click Allaire FTP &amp; RDS.</p><p>Once you've added a remote server connection, it is easy to open that server and work with the files. You can work with remote files just as you do with local ones. When you save files, changes are saved to the remote server.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:30 -->
+</body>
+</html>

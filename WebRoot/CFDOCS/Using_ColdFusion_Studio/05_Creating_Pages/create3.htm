@@ -1,0 +1,144 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Coding Tools</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1041403"></a>
+ <H1>Using Coding Tools</H1>
+
+
+
+<p>You can use any combination of typing, toolbars, tag dialog boxes, templates, and wizards to create page elements, format content, and add hyperlinks. </p><a name="1042181"></a>
+ 
+<H2>Typing tools</H2>
+<ul>
+<a name="1041294"> </a>
+<li>Use Tag Insight to select tag attributes as you type.
+
+<a name="1041067"> </a>
+</li>
+<li>Use Function Insight to select expression arguments as you type.
+<a name="1021498"> </a>
+</li>
+<li>Use keyboard shortcuts for tags and commands.
+<a name="1041149"> </a>
+</li>
+<li>Set Tag Help options (F8) to validate code and convert ASCII special characters as you type.
+<a name="1042356"> </a>
+</li>
+<li>Save code blocks as Snippets for easy re-use.
+<a name="1042346"> </a>
+</li>
+<li>Use Code Templates to expand code and text blocks as you type.
+</li>
+</ul>
+<a name="1041124"></a>
+ 
+<H2>Tag dialog boxes</H2>
+<p>Tag-specific syntax and usage help is available in tag dialog boxes.</p><ul>
+<a name="1042198"> </a>
+<li>Click buttons on the customizable QuickBar to display tag dialog boxes that allow you to enter HTML, CFML, and scripting tags.
+
+<a name="1041094"> </a>
+</li>
+<li>Keep the Tag Chooser (Ctrl + E) open to quickly select from the complete HTML and CFML tag sets, and specialized languages. 
+</li>
+</ul>
+<a name="1042258"></a>
+ 
+<H2>Code generators</H2>
+<ul>
+<a name="1041965"> </a>
+<li>Use templates and wizards (File &gt; New) to generate code for common page elements such as framesets and tables and DHTML scripts for browser-based outlines and slide shows.
+
+<a name="1042286"> </a>
+</li>
+<li>Use Design mode to prototype page layouts and to quickly create HTML tables and forms and set font and image formatting.
+<a name="1040137"> </a>
+</li>
+<li>Integrate Studio with Macromedia Dreamweaver to generate DHTML elements.
+<a name="1040123"> </a>
+</li>
+<li>Open TopStyle Lite to design, preview, and link Cascading Style Sheets.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

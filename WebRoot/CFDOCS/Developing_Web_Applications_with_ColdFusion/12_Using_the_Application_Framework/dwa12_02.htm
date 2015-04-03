@@ -1,0 +1,113 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Understanding the Web Application Framework</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025843"></a>
+ <H1>Understanding the Web Application Framework</H1>
+
+
+
+<p>A ColdFusion application is a collection of application pages that work together. Applications can be as simple as a guest book or as sophisticated as a full Internet commerce system with catalog pages, shopping carts, and reporting. You can combine individual applications to create advanced Web systems.</p><p>You create a special template, named <code>Application.cfm</code>, which you place in the root directory of the application. All the other templates in the application are stored in directories below the application's root directory. </p><p>The ColdFusion Web Application Framework is based on four basic components:</p><ul>
+<li>Application-level settings and functions
+
+</li>
+<li>Client state management
+</li>
+<li>Custom error handling
+</li>
+<li>Web server security integration
+</li>
+</ul>
+<p>With these components, you can easily combine your ColdFusion application pages into sophisticated Web applications.</p><a name="1025853"></a>
+ 
+<H2>Application-level settings and functions in Application.cfm</H2>
+<p>ColdFusion offers application-level features that help you control settings, variables, and features available across the entire application. Once you have defined an application, you can use the application-level features in addition to all of the other features in ColdFusion.</p><a name="1025873"></a>
+ 
+<H2>Client state management</H2>
+<p>Because the Web is a stateless system, each connection a browser makes to a Web server is unique in the eyes of the Web server. However, within an application it is important to be able to keep track of users as they move through the pages within the application. This is the definition of client state management.</p><p>An application maintains client state by seamlessly tracking variables for a browser as the user moves from page to page within the application. This can be used in place of other methods for tracking client state such as using URL parameters, hidden form fields, and HTTP cookies.</p><p>ColdFusion creates a client record for each browser that requests an application page in an application in which client state management is enabled. The client record is identified by a unique token that is stored in an HTTP cookie in the user's browser.</p><p>The application can then define variables within the client record. These client variables are accessible as parameters in every application page that the client requests within the scope of the application.</p><a name="1025880"></a>
+ 
+<H2>Custom error handling</H2>
+<p>Using the CFERROR tag, you can display customized HTML pages when errors occur. This allows you to maintain a consistent look and feel within your application even when errors occur. It also allows you to optionally suppress the display of error information.</p><p>See <a href="../08_Debugging_and_Error_Handling/dwa08_05.htm#1027602">&quot;Generating Custom Error Messages (CFERROR)&quot;</a> for more information.</p><a name="1025887"></a>
+ 
+<H2>Web server security integration</H2>
+<p>You can integrate your applications with the user authentication and security provided by your Web server. In addition, the ColdFusion Server offers a security framework that controls access to applications, pages, data sources, and users. You set the bounds of a security domain using the CFAUTHENTICATE tag.</p><p>See <a href="../17_Application_Security/dwa17.htm#998063">Chapter 17, &quot;Application Security&quot;</a> for more information.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

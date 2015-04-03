@@ -1,0 +1,126 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Forms Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_002.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_004.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2314260"></a>
+ <H1>ColdFusion Forms Tags<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_016.htm#1967355">CFAPPLET</a>
+</td><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_054.htm#1970387">CFINPUT</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_040.htm#1968844">CFFORM</a>
+</td><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_085.htm#1972744">CFSELECT</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_042.htm#1969319">CFGRID</a>
+</td><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_092.htm#2311619">CFSLIDER</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_043.htm#1969546">CFGRIDCOLUMN</a>
+</td><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_096.htm#1973223">CFTEXTINPUT</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_044.htm#1969699">CFGRIDROW</a>
+</td><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_099.htm#1973540">CFTREE</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_045.htm#1969726">CFGRIDUPDATE</a>
+</td><td valign="top">
+<a href="../2_ColdFusion_Tags/lr2_100.htm#1973697">CFTREEITEM</a>
+</td></tr>
+
+</table>
+</div>
+</H1>
+
+
+
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_002.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_004.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

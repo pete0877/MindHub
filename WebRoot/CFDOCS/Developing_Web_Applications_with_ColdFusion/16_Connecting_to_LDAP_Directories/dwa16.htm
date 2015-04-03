@@ -1,0 +1,103 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to LDAP Directories</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="999324"></a>
+<H1>Chapter 16	<br>
+Connecting to LDAP Directories</H1>
+
+<p>Support for the Lightweight Directory Access Protocol (LDAP) API in CFML is part of Allaire's commitment to open networking standards.</p><a name="1046393"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../16_Connecting_to_LDAP_Directories/dwa16_02.htm#1046425">What is LDAP?</a>
+
+</li>
+<li><a href="../16_Connecting_to_LDAP_Directories/dwa16_03.htm#1046874">ColdFusion Support for LDAP</a>
+</li>
+<li><a href="../16_Connecting_to_LDAP_Directories/dwa16_04.htm#1046450">Working with LDAP Directories</a>
+</li>
+<li><a href="../16_Connecting_to_LDAP_Directories/dwa16_05.htm#1047338">Viewing the Directory Schema</a>
+</li>
+<li><a href="../16_Connecting_to_LDAP_Directories/dwa16_06.htm#1046520">Querying an LDAP Directory</a>
+</li>
+<li><a href="../16_Connecting_to_LDAP_Directories/dwa16_07.htm#1046528">Updating an LDAP Directory</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:59 -->
+</body>
+</html>

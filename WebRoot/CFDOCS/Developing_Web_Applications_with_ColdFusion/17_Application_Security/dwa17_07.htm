@@ -1,0 +1,118 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Authentication and Authorization Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 17	:&nbsp;&nbsp;Application Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998173"></a>
+ <H1>Authentication and Authorization Functions</H1>
+
+
+
+<p>Once you've used CFAUTHENTICATE to check if the user is defined for a particular security context, you can use the following security functions throughout your applications any time you need to authenticate or authorize a user:</p><ul>
+<li>IsAuthenticated checks if the current session has been authenticated by the CFAUTHENTICATE tag.
+
+</li>
+<li>IsAuthorized checks if the authenticated user has access to the named resource, based on rules defined in the security context for which the user has been authenticated.
+</li>
+</ul>
+<a name="1024822"></a>
+ 
+<H2>Using the IsAuthenticated Function</H2>
+<p>The IsAuthenticated function checks whether a CFAUTHENTICATE tag has been successfully executed for the current request. If not, it looks for the CFAUTH cookie to determine if the user is authenticated or not. If you don't set a CFAUTH cookie with CFAUTHENTICATE, you must call CFAUTHENTICATE for every request in the application.</p><p>The IsAuthenticated function returns TRUE if the user has been authenticated for the current request; otherwise, it returns FALSE.</p><p>If you enter an optional security context parameter for IsAuthenticated, then it returns true if the user is authenticated in the named security context; otherwise it returns false.</p><pre>IsAuthenticated("<em>security_context_name</em>")
+</pre><a name="998182"></a>
+ 
+<H2>Using the IsAuthorized Function</H2>
+<p>Once a user is authenticated, you can use the IsAuthorized function to check which resources the user is allowed to access. You define d authorization levels when you create security policies on the Advanced Security page of the ColdFusion Administrator.</p><p>IsAuthorized returns TRUE if the user is authorized to perform the specified action on the specified ColdFusion resource. IsAuthorized takes three parameters:</p><pre>IsAuthorized(ResourceType, ResourceName, [ResourceAction])
+</pre><p>For example, to check whether the authenticated user is authorized to update a data source resource called orders, use this syntax:</p><pre>IsAuthorized("Datasource", "orders", "update")
+</pre><p>In this example, the IsAuthorized function returns TRUE if the user is authorized for the named Datasource, or if the Datasource is not protected in the security context.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The ColdFusion server does not check user authorization unless a 
+developer specifically requests it with the IsAuthorized function. It is up 
+to the developer to decide what action to take based on the results of the 
+IsAuthorized call.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:02 -->
+</body>
+</html>

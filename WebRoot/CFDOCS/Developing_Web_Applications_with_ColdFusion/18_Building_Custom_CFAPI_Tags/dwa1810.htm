@@ -1,0 +1,222 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Approaches to Debugging Java CFXs</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa189.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1811.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015060"></a>
+ <H1>Approaches to Debugging Java CFXs</H1>
+
+
+
+<p>Java CFXs are not standalone applications that run in their own process like typical Java applications. Rather, they are created and invoked from an existing process -- ColdFusion Server. This makes debugging Java CFXs more difficult because it is not possible to use an interactive debugger to debug Java classes that have been loaded by another process.</p><p>To overcome this limitation, you can use one of two techniques:</p><ul>
+<li>Debug the CFX while it is running within ColdFusion Server by outputting debug information as needed. See <a href="../18_Building_Custom_CFAPI_Tags/dwa1810.htm#1015072">&quot;Outputting Debug Information&quot;</a> for details.
+
+</li>
+<li>Debug the request in an interactive debugger offline from ColdFusion Server using the special <code>com.allaire.cfx </code>debugging classes. See <a href="../18_Building_Custom_CFAPI_Tags/dwa1810.htm#1015078">&quot;Using the Debugging Classes&quot;</a> for more information.
+</li>
+</ul>
+<a name="1015072"></a>
+ 
+<H2>Outputting Debug Information</H2>
+<p>Before using interactive debuggers became the norm, programmers typically debugged their programs by inserting output statements in their programs to indicate information such as variable values and control paths taken. Often, when a new platform emerges, this technique comes back into vogue while programmers wait for more sophisticated debugging technology to be brought to the platform.</p><p>If you need to debug a Java CFX while running against a live production server, this is the technique you must use. In addition to simply outputting debug text using the <code>Response.write</code> method, you can also use the <code>DEBUG</code> attribute in your Java CFX. This attribute flags the CFX that the request is running in debug mode and therefore should output additional extended debug information. For example, to call the <code>HelloColdFusion</code> CFX in debug mode, you would use the following CFML code:</p><pre><code>&lt;CFX_HelloColdFusion" NAME="Robert"</code> DEBUG="On"&gt;
+</pre><p>To determine if a CFX has been invoked with the <code>DEBUG</code> attribute, you use the <code>Request.debug</code> method. To write debug output which will be printed in a special debug block after the tag finishes executing, you use the <code>Response.writeDebug</code> method. See the <em><a href="../18_Building_Custom_CFAPI_Tags/dwa1820.htm#1020100"></em>&quot;Java CFX Reference&quot;<em></a></em> for details on using these methods.</p><a name="1015078"></a>
+ 
+<H2>Using the Debugging Classes</H2>
+<p>To develop and debug Java CFXs in isolation from the ColdFusion Server, you use three special debugging classes that are included in the <code>com.allaire.cfx</code> package. These classes enable you to simulate a call to the <code>processRequest</code> method of your CFX within the context of the interactive debugger of a Java development environment. The three debugging classes are:</p><ul>
+<li><code>DebugRequest</code> -- An implementation of the <code>Request</code> interface that enables you to initialize the request with custom attributes, settings, and a query.
+
+</li>
+<li><code>DebugResponse</code> -- An implementation of the <code>Response</code> interface that enables you to print the results of a request once it has completed.
+</li>
+<li><code>DebugQuery</code> -- An implementation of the <code>Query</code> interface that enables you to initialize a query with a name, columns, and a data set.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use the debugging classes:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a <code>main</code> method for your Java CFX class. This method will be used as the testbed for your CFX.
+
+
+</li>
+<li>Within the <code>main</code> method, initialize a <code>DebugRequest</code> and <code>DebugResponse</code>, and a <code>DebugQuery</code> if appropriate, with the attributes and data you want to use for your test.
+
+</li>
+<li>Create an instance of your Java CFX and call its <code>processRequest</code> method, passing in the <code>DebugRequest</code> and <code>DebugResponse</code> objects.
+
+</li>
+<li>Call the <code>DebugResponse.printResults</code> method to output the results of the request, including content generated, variables set, queries created, and so forth.
+
+</li>
+</ol>
+<p>Once you have implemented a main method as described above, you can debug your Java CFX using an interactive, single-step debugger. Just specify your Java CFX class as the <code>main</code> class, set breakpoints as appropriate, and begin debugging.</p><a name="1015090"></a>
+ 
+<H3>Debugging Classes Example</H3>
+<p>The following example demonstrates the use of the debugging classes.</p><pre>import java.util.Hashtable ;
+import com.allaire.cfx.* ;
+
+public class OutputQuery implements CustomTag 
+{
+   // debugger testbed for OutputQuery
+   public static void main(String[] argv)
+   {
+      try
+      {
+         // initialize attributes         
+         Hashtable attributes = new Hashtable() ;
+         attributes.put( "HEADER",  "Yes" ) ;
+         attributes.put( "BORDER", "3" ) ;
+         
+         // initialize query       
+         
+         String[] columns = 
+            { "FIRSTNAME", "LASTNAME", "TITLE" } ;
+         
+         String[][] data =  {   
+            { "Stephen", "Cheng", "Vice President" },
+            { "Joe", "Berrey", "Intern" },
+            { "Adam", "Lipinski", "Director" },
+            { "Lynne", "Teague", "Developer" } }  ;         
+         
+         DebugQuery query = 
+            new DebugQuery( "Employees", columns, data ) ;         
+                              
+
+         // create tag, process debug request, and print results           
+         OutputQuery tag = new OutputQuery() ;
+         DebugRequest request = new DebugRequest( attributes, query ) ;
+         DebugResponse response = new DebugResponse() ;
+         tag.processRequest( request, response ) ;
+         response.printResults() ;        
+      }
+      catch( Throwable e )
+      {
+         e.printStackTrace() ;
+      }      
+   }   
+
+   public void processRequest( Request request ) throws Exception
+   {
+      // ...code for processing the request...
+   }
+}
+</pre><a name="1015141"></a>
+ 
+<H2>Debugging Classes Reference</H2>
+<p>The specific constructors and methods supported by the <code>DebugRequest</code>, <code>DebugResponse</code>, and <code>DebugQuery</code> classes are as follows. Note that these classes also support the other methods of the <code>Request</code>, <code>Response</code>, and <code>Query</code> interfaces, respectively.</p><a name="1015143"></a>
+ 
+<H3>DebugRequest</H3>
+<pre>// initialize a debug request with attributes
+public DebugRequest( Hashtable attributes ) ;
+
+// initialize a debug request with attributes and a query
+public DebugRequest( Hashtable attributes, Query query ) ;
+
+// initialize a debug request with attributes, a query, and settings
+public DebugRequest( Hashtable attributes, Query query, 
+                     Hashtable settings ) ;
+</pre><a name="1015153"></a>
+ 
+<H3>DebugResponse</H3>
+<pre>// initialize a debug response
+public DebugResponse() ;
+
+// print the results of processing 
+public void printResults() ;
+</pre><a name="1015159"></a>
+ 
+<H3>DebugQuery</H3>
+<pre>// initialize a query with name and columns
+public DebugQuery( String name, String[] columns ) 
+   throws IllegalArgumentException ;
+
+// initialize a query with name, columns, and data
+public DebugQuery( String name, String[] columns, String[][] data ) 
+    throws IllegalArgumentException ;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa189.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1811.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

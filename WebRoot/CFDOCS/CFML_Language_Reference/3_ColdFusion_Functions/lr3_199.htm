@@ -1,0 +1,144 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>RandRange</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_198.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_200.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001784"></a>
+ <H1>RandRange</H1>
+
+
+
+<p>Returns a random integer between two specified numbers. Note that requests for random integers greater than 100,000,000 will result in non-random behavior. This restriction prevents overflow during internal computations. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_197.htm#1001741">Rand</a> and <a href="../3_ColdFusion_Functions/lr3_198.htm#1001760">Randomize</a>.
+</p>
+
+<a name="1001787"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>RandRange</strong>(<em>number1</em>, <em>number2</em>)
+</PRE><a name="1001789"> </a>
+<h5 class="param"> number1, number2</h5>
+<p class="param">Integer numbers less than 100,000,000.</p><a name="1806522"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="RandRange
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of RandRange ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+RandRange Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;RandRange Example&lt;/H3&gt;
+
+&lt;P&gt;RandRange returns an integer between two specified integers.
+&lt;CFIF IsDefined("FORM.myInt")&gt;
+    &lt;P&gt;RandRange returned:
+        &lt;CFOUTPUT&gt;#RandRange(FORM.myInt, FORM.myInt2)#&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;CFFORM ACTION="randRange.cfm" METHOD="POST"&gt;
+&lt;P&gt;Enter a number to seed the randomizer:
+&lt;CFINPUT TYPE="Text" NAME="MyInt" VALUE="1" RANGE="1,100000000"
+  MESSAGE="Please enter a value between 1 and 100,000,000"
+    VALIDATE="integer" REQUIRED="Yes"&gt;
+&lt;CFINPUT TYPE="Text" NAME="MyInt2" VALUE="500" RANGE="1,100000000"
+  MESSAGE="Please enter a value between 1 and 100,000,000"
+    VALIDATE="integer" REQUIRED="Yes"&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" NAME=""&gt;
+&lt;/CFFORM&gt;
+
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="RandRange
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_198.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_200.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,347 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFHTTP</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_047.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_049.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1969849"></a>
+ <H1>CFHTTP</H1>
+
+
+
+<p>The CFHTTP tag allows you to execute POST and GET operations on files. Using CFHTTP, you can execute standard GET operations as well as create a query object from a text file. POST operations allow you to upload MIME file types to a server, or post cookie, formfield, URL, file, or CGI variables directly to a specified server. </p><a name="1969851"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFHTTP URL="hostname"
+    PORT="port_number"
+    METHOD="get_or_post"
+    USERNAME="username"
+    PASSWORD="password"
+    NAME="queryname"
+    COLUMNS="query_columns"
+    PATH="path"
+    FILE="filename"
+    DELIMITER="character"
+    TEXTQUALIFIER="character"
+    RESOLVEURL="Yes/No"
+    PROXYSERVER="hostname"
+    PROXYPORT="port_number"
+    USERAGENT="user_agent"
+    THROWONERROR="Yes/No"
+    REDIRECT="Yes/No"
+    TIMEOUT="timeout_period"&gt;
+&lt;/CFHTTP&gt;
+</PRE><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Terminate CFHTTP POST operations with &lt;/CFHTTP&gt;. Termination is 
+not required with CFHTTP GET operations.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1969855"></a>
+<h4> URL</h4>
+<p>Required. Full URL of the host name or IP address of the server on which the file resides. </p><a name="1969857"></a>
+<h4> PORT</h4>
+<p>Optional. The port number on the server from which the object is being requested. Default is 80. When used with RESOLVEURL, the URLs of retrieved documents that specify a port number are automatically resolved to preserve links in the retrieved document. </p><a name="1969859"></a>
+<h4> METHOD</h4>
+<p>Required. GET or POST. Use GET to download a text or binary file, or to create a query from the contents of a text file. Use POST to send information to a server page or a CGI program for processing. POST requires the use of a CFHTTPPARAM tag.</p><a name="1969861"></a>
+<h4> USERNAME</h4>
+<p>Optional. When required by a server, a valid username.</p><a name="1969863"></a>
+<h4> PASSWORD</h4>
+<p>Optional. When required by a server, a valid password. </p><a name="1969866"></a>
+<h4> NAME</h4>
+<p>Optional. The name to assign to a query when a query is to be constructed from a file. </p><a name="1969868"></a>
+<h4> COLUMNS</h4>
+<p>Optional. The column names for a query. If no column names are specified, the query returns all rows in the query except for the first row. To get all the rows in a query, you must specify column names.</p><a name="1969870"></a>
+<h4> PATH</h4>
+<p>Optional. The path to the directory in which a file is to be stored. If a path is not specified in a POST or GET operation, a variable is created (CFHTTP.FileContent) that you can use to present the results of the POST operation in a CFOUTPUT.</p><a name="1969872"></a>
+<h4> FILE</h4>
+<p>Required in a POST operation if PATH is specified. The filename to be used for the file that is accessed. For GET operations, defaults to the name specified in URL. Enter path information in the PATH attribute.</p><a name="1969874"></a>
+<h4> DELIMITER</h4>
+<p>Required for creating a query. Valid characters are a tab or comma. Default is a comma ( , ).</p><a name="1969876"></a>
+<h4> TEXTQUALIFIER</h4>
+<p>Required for creating a query. Indicates the start and finish of a column. Should be appropriately escaped when embedded in a column. For example, if the qualifier is a quotation mark, it should be escaped as """". If there is no text qualifier in the file, specify a blank space as " ". Default is the quote mark ( " ).</p><a name="1969878"></a>
+<h4> RESOLVEURL</h4>
+<p>Optional. Yes or No. Default is No. For GET and POST operations, when Yes, any page reference returned into the FileContent internal variable will have its internal URLs fully resolved, including port number, so that links remain intact. The following HTML tags, which can contain links, will be resolved:</p><ul>
+<a name="1969880"> </a>
+<li>IMG SRC
+
+<a name="1969881"> </a>
+</li>
+<li>A HREF
+<a name="1969882"> </a>
+</li>
+<li>FORM ACTION
+<a name="1969883"> </a>
+</li>
+<li>APPLET CODE
+<a name="1969884"> </a>
+</li>
+<li>SCRIPT SRC
+<a name="1969885"> </a>
+</li>
+<li>EMBED SRC
+<a name="1969886"> </a>
+</li>
+<li>EMBED PLUGINSPACE
+<a name="1969887"> </a>
+</li>
+<li>BODY BACKGROUND
+<a name="1969888"> </a>
+</li>
+<li>FRAME SRC
+<a name="1969889"> </a>
+</li>
+<li>BGSOUND SRC
+<a name="1969890"> </a>
+</li>
+<li>OBJECT DATA
+<a name="1969891"> </a>
+</li>
+<li>OBJECT CLASSID
+<a name="1969892"> </a>
+</li>
+<li>OBJECT CODEBASE
+<a name="1969893"> </a>
+</li>
+<li>OBJECT USEMAP
+</li>
+</ul>
+<a name="1969894"></a>
+<h4> PROXYSERVER</h4>
+<p>Optional. Host name or IP address of a proxy server. </p><a name="2183646"></a>
+<h4> PROXYPORT</h4>
+<p>Optional. The port number on the proxy server from which the object is being requested. Default is 80. When used with RESOLVEURL, the URLs of retrieved documents that specify a port number are automatically resolved to preserve links in the retrieved document. </p><a name="2183607"></a>
+<h4> USERAGENT</h4>
+<p>Optional. User agent request header. </p><a name="2183630"></a>
+<h4> THROWONERROR</h4>
+<p>Optional. Boolean indicating whether to throw an exception that can be caught by using the CFTRY and CFCATCH tags. The error code and its associated message can be viewed in the variable CFHTTP.StatusCode. The default is NO. See the Usage section for more information.</p><a name="2270281"></a>
+<h4> REDIRECT</h4>
+<p>Optional. Boolean indicating whether to redirect execution or stop execution. The default is YES. If set to NO and <em>THROWONERROR</em> is set to YES, execution stops if CFHTTP fails, and the status code and associated error message are returned in the variable CFHTTP.StatusCode. To see where execution would have been redirected, use the variable <code>CFHTTP.ResponseHeader</code>[LOCATION]. The key LOCATION identifies the path of redirection.</p><a name="2183632"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. Timeout period in seconds. By default, the ColdFusion server processes requests asynchronously; that is, the ColdFusion server uses the timeout set on the URL in the browser, the timeout set in the ColdFusion Administrator, and the timeout set in the tag to determine the timeout period for the CFHTTP request. </p><p>When a URL timeout is specified in the browser, this timeout setting will take precedence over the ColdFusion Administrator timeout. The ColdFusion server then takes the lesser of the URL timeout and the timeout passed in the TIMEOUT attribute so that the request will always time out before or at the same time as the page times out. Likewise, if there is no URL timeout specified, ColdFusion takes the lesser of the ColdFusion Administrator timeout and the timeout passed in the TIMEOUT attribute.</p><p>If there is no timeout set on the URL in the browser, no timeout set in the ColdFusion Administrator, and no timeout set with the TIMEOUT attribute, ColdFusion processes requests synchronously; thus, ColdFusion waits indefinitely for the CFHTTP request to process.</p><p>Note that you must enable the timeout set in the ColdFusion Administrator in order for the ColdFusion Administrator timeout and the URL timeout to take effect. This setting is on the ColdFusion Administrator Server Settings page. Please refer to <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a >for more information about ColdFusion settings.</p><a name="1969904"></a>
+ 
+<H3>Usage</H3>
+<p>Note the following:</p><ul>
+<a name="1969906"> </a>
+<li><strong>HTTP GET</strong> -- A user can specify a URL that points to a text or binary file. The file will be downloaded and its contents stored in a CF variable or in a file so that the user can manipulate the data. The internal variable FileContent is available for text and MIME file types. The MimeType variable is available for all file manipulations. In addition, Header and ResponseHeader allow you to see the response headers. These variables can be accessed in the following manner: 
+
+<p><code>#CFHTTP.FileContent# 
+</code></p><p><code>#CFHTTP.MimeType#
+</code></p><p><code>#CFHTTP.Header#
+</code></p><p><code>#CFHTTP.ResponseHeader</code>[<em>http_header_key</em>]<code>#
+</code></p><p>The ResponseHeader variable is a CFML structure; the other variables are 
+strings. See the table at the end of this section for a summary of variables 
+returned by CFHTTP.
+</p><a name="1969909"> </a>
+</li>
+<li><strong>GET file into a query</strong> -- To download a file in a ColdFusion page so that a query can be built using the file, the file must be either comma-separated or tab-delimited. Although risky, text qualification may be omitted. The file will be parsed and an appropriate query built from it. Columns may be specified in the attribute list so that the client can override the columns specified in the file. There is error checking within the tag that prevents a user from either entering an invalid column name or using an invalid column name that was specified in the original file. If such an illegal filename is encountered, the illegal characters are stripped. Such action could produce duplicate column names, so duplicate columns are renamed and inserted into the query header. The query has all of the functionality of a standard CFQUERY object.
+<a name="1969910"> </a>
+</li>
+<li><strong>HTTP POST</strong> -- CFHTTPPARAM tags can be nested inside a CFHTTP tag in a POST operation. The browser can be pointed to a URL specifying a CGI executable or a ColdFusion page. Since multiple CFHTTPPARAM tags can be nested in one CFHTTP tag, you can construct a multipart/form-data style post. A file content variable is created and this can be used in a CFOUTPUT. If PATH and FILE are specified, the data returned from the server is saved to the specified location.
+<a name="1969911"> </a>
+</li>
+<li><strong>Authentication</strong> -- CFHTTP supports Windows NT Basic Authentication for both GET and POST operations. However, Basic Authentication will not work if your Web server has enabled Windows NT Challenge/Response (Microsoft IIS).
+<a name="1969912"> </a>
+</li>
+<li><strong>Encryption</strong> -- CFHTTP is capable of using Secure Sockets Layer (SSL) for negotiating secured transactions over the wire. 
+<a name="2269384"> </a>
+</li>
+<li><strong>CFHTTP.StatusCode</strong>-- CFHTTP throws an error and provides the CFHTTP.StatusCode variable for access to the HTTP error string associated with the error if the <em>THROWONERROR</em> attribute is set to YES. See the following table for all the variables returned by CFHTTP.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>CFHTTP Variables&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Variable Names</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+<code>#CFHTTP.FileContent# </code>
+</td><td valign="top">
+Returns the contents of the file for text and MIME files.
+</td></tr>
+<tr valign="top"><td valign="top">
+<code>#CFHTTP.MimeType#</code>
+</td><td valign="top">
+Returns the MIME type.
+</td></tr>
+<tr valign="top"><td valign="top">
+<code>#CFHTTP.ResponseHeader</code>[<em>http_hd_key</em>]<code>#</code>
+</td><td valign="top">
+Returns the response headers. If there is only one instance of a header key, then the value may be accessed as a simple type. If there is more than one instance, then the values are placed in an array within the ResponseHeader structure.
+</td></tr>
+<tr valign="top"><td valign="top">
+<code>#CFHTTP.Header#</code>
+</td><td valign="top">
+Returns the raw response header. 
+</td></tr>
+<tr valign="top"><td valign="top">
+#CFHTTP.StatusCode#
+</td><td valign="top">
+Returns the HTTP error code and associated error string if <em>THROWONERROR</em> is YES.
+</td></tr>
+
+</table>
+</div>
+
+</li>
+</ul>
+<a name="2042545"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfhttp
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--------------------------------------------------------------------
+This example shows the use of CFHTTP to pull information from a web page. 
+-----------------------------------------------------------------------&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFHTTP Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFHTTP Example&lt;/H3&gt;
+
+&lt;P&gt;This example shows the ability of CFHTTP to pull
+the contents of a web page from the Internet, and shows how 
+you can get the following information by using CFHTTP variables:
+&lt;/P&gt;
+&lt;UL&gt;
+&lt;LI&gt;display the page (fileContent)
+&lt;LI&gt;derive the MIME type of the page (mimeType) 
+&lt;LI&gt;find the header responses (responseHeader).
+&lt;/UL&gt;
+
+&lt;CFHTTP
+    URL = "http://www.allaire.com"
+    resolveurl = 1
+    throwonerror = Yes
+&gt;
+&lt;/CFHTTP&gt;
+
+&lt;CFOUTPUT&gt;
+#cfhttp.filecontent#&lt;BR&gt;
+&lt;BR&gt;
+&lt;H3&gt;&lt;B&gt;The mime-type:&lt;/B&gt;&lt;/H3&gt;&lt;BR&gt;
+#cfhttp.mimetype#&lt;BR&gt;
+&lt;H3&gt;&lt;B&gt;The Status Code:&lt;/B&gt;&lt;/H3&gt;&lt;BR&gt;
+#cfhttp.statuscode#&lt;BR&gt;
+&lt;H3&gt;&lt;B&gt;The Raw Header:&lt;/B&gt;&lt;/H3&gt;&lt;BR&gt;
+#cfhttp.header#&lt;BR&gt;
+
+&lt;/CFOUTPUT&gt;
+
+&lt;H3&gt;&lt;B&gt;Output the Response Headers:&lt;/B&gt;&lt;/H3&gt;&lt;BR&gt;
+&lt;HR&gt;
+
+&lt;CFLOOP collection=#CFHTTP.RESPONSEHEADER# item="httpHeader"&gt;
+    &lt;CFSET value = CFHTTP.RESPONSEHEADER[httpHeader]&gt;
+    &lt;CFIF IsSimpleValue(value)&gt;
+        &lt;CFOUTPUT&gt;
+            #httpHeader# : #value#&lt;BR&gt;
+        &lt;/CFOUTPUT&gt;
+    &lt;CFELSE&gt;
+        &lt;CFLOOP index="counter" from=1 to=#ArrayLen(value)#&gt;
+            &lt;CFOUTPUT&gt;
+                #httpHeader# : #value[counter]#&lt;BR&gt; 
+            &lt;/CFOUTPUT&gt;
+        &lt;/CFLOOP&gt;
+    &lt;/CFIF&gt;
+&lt;/CFLOOP&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+     
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfhttp
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_047.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_049.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

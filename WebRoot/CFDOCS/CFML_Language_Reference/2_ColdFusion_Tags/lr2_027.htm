@@ -1,0 +1,330 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFERROR</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_026.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_028.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1968064"></a>
+ <H1>CFERROR</H1>
+
+
+
+<p>Provides the ability to display customized HTML pages when errors occur. This allows you to maintain a consistent look and feel within your application even when errors occur.</p><a name="1968066"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFERROR 
+    TYPE="Request" or "Validation" or "Monitor" or "Exception"
+    TEMPLATE="template_path"
+    MAILTO="email_address"
+    EXCEPTION=&quot;exception_type&quot;&gt;
+</PRE><a name="1968068"></a>
+<h4> TYPE</h4>
+<p>Required. The type of error that this custom error page is designed to handle:</p><ul>
+<a name="2275688"> </a>
+<li>Specify Exception to handle exceptions. 
+
+<a name="2280195"> </a>
+</li>
+<li>Specify Validation to handle data input validation errors that occur when submitting a form. A validation error handler is only useful if placed inside the <code>Application.cfm</code> file.
+<a name="2275671"> </a>
+</li>
+<li>Specify Monitor to set up an exception monitor.
+<a name="2280207"> </a>
+</li>
+<li>Specify Request to handle errors that occur during the processing of a page. Request is the default. 
+</li>
+</ul>
+<p>See the table under <a href="../2_ColdFusion_Tags/lr2_027.htm#1968082">CFERROR Error Variables</a> for information about the variables and other constructs available from the templates used to handle each type of error.</p><a name="1968072"></a>
+<h4> TEMPLATE</h4>
+<p>Required. The relative path to the custom error handling page. The following table describes the template to use for each type of error.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Types and Their Corresponding Custom Error Pages </strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Type</strong>
+</th><th align="left">
+<strong>Custom Error Page</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>Exception
+</PRE></td><td valign="top">
+An exception-handling template that is dynamically invoked by the CFML language processor when it detects an unhandled exception condition.  Exception-handling templates may be specified as part of an application, via the &lt;CFERROR TYPE="Exception"&gt; tag, or may be set via the ColdFusion Administrator.
+
+An exception-handling template can use the full range of CFML tags, making it significantly more powerful than &lt;CFERROR TYPE="Request"&gt;. This template also has access to the error variables in the table under <a href="../2_ColdFusion_Tags/lr2_027.htm#1968082">CFERROR Error Variables</a>.
+</td></tr>
+
+</table>
+</div>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Types and Their Corresponding Custom Error Pages (Continued)</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Type</strong>
+</th><th align="left">
+<strong>Custom Error Page</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>Request
+</PRE></td><td valign="top">
+This template can include only the error variables described in the table under <a href="../2_ColdFusion_Tags/lr2_027.htm#1968082">CFERROR Error Variables</a> and cannot include CFML tags. It is useful as a backup error handler for sites with high user interface requirements.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Validation
+</PRE></td><td valign="top">
+A validation error handler. It handles data input validation errors that occur when submitting a form. It is useful only if placed inside the <code>Application.cfm</code> file.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Monitor
+</PRE></td><td valign="top">
+An exception-monitoring template is dynamically invoked by the CFML language processor when it first detects an exception condition, before it searches for &lt;CFTRY&gt;/&lt;CFCATCH&gt; or &lt;CFERROR&gt; handlers for the exception.
+
+Exception-monitoring templates are useful for monitoring and debugging exception handling within complex applications.
+</td></tr>
+
+</table>
+</div>
+</p><a name="2334689"></a>
+<h4> MAILTO</h4>
+<p>Optional. The email address of the administrator who should be notified of the error. This value is available to your custom error page using the MailTo property of the error object, such as #Error.MailTo#. </p><a name="2288469"></a>
+<h4> EXCEPTION</h4>
+<p>Required if the type is specified as Exception or Monitor. The type of exception.</p><a name="2288465"></a>
+ 
+<H3>Usage</H3>
+<p>The CFERROR tag is normally used to customize the error messages for all the pages in an application. As a result, you generally embed it in the <code>Application.cfm</code> file. For more information about the <code>Application.cfm</code> file, refer to <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>. </p><p>To help ensure that error pages display successfully, pages you specify with CFERROR should not be encoded with the <code>cfencode</code> utility. </p><a name="1968082"></a>
+ 
+<H2>CFERROR Error Variables</H2>
+<p>The exception-handling template specified in the TEMPLATE attribute of the CFERROR tag may contain one or more error variables, which will be substituted by ColdFusion when an error is displayed.</p><a name="1968086"></a>
+ 
+<H3>Error Variables for Request, Exception, and Monitor Types</H3>
+<p>The following error variables are available when CFERROR specifies TYPE="Request", TYPE="Exception" or TYPE="Monitor":<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Variables for Request, Exception, and Monitor Types</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Error Variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>Error.Diagnostics
+</PRE></td><td valign="top">
+Detailed error diagnostics from ColdFusion Server.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.MailTo
+</PRE></td><td valign="top">
+Email address of administrator who should be notified (corresponds to the value set in the MAILTO attribute of CFERROR).
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.DateTime
+</PRE></td><td valign="top">
+Date and time when the error occurred.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.Browser
+</PRE></td><td valign="top">
+Browser that was running when the error occurred.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.GeneratedContent
+</PRE></td><td valign="top">
+The failed request's generated content .
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.RemoteAddress
+</PRE></td><td valign="top">
+IP address of the remote client.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.HTTPReferer
+</PRE></td><td valign="top">
+Page from which the client accessed the link to the page where the error occurred.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.Template
+</PRE></td><td valign="top">
+Page being executed when the error occurred. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.QueryString
+</PRE></td><td valign="top">
+URL query string of the client's request. 
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you have specified<code> TYPE="Exception"</code> or <code>TYPE="Monitor"</code>, you 
+can substitute the prefix CFERROR for Error if you prefer this form; for 
+example, CFERROR.Diagnostics, CFERROR.Mailto or 
+CFERROR.DateTime. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="2542414"></a>
+ 
+<H3>Error pages where TYPE="Validation"</H3>
+<p>Error variables available when CFERROR uses TYPE="Validation" are as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Custom Error Pages where TYPE="Validation"</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Error Variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>Error.ValidationHeader
+</PRE></td><td valign="top">
+Text for header of validation message.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.InvalidFields
+</PRE></td><td valign="top">
+Unordered list of validation errors that occurred.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Error.ValidationFooter
+</PRE></td><td valign="top">
+Text for footer of validation message.
+</td></tr>
+
+</table>
+</div>
+</p><a name="2035629"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cferror
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFERROR. ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFERROR Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFERROR Example&lt;/H3&gt;
+
+&lt;P&gt;CFERROR provides the ability to display customized
+HTML pages when errors occur. This allows you to
+maintain a consistent look and feel within your
+application even when errors occur. Note that no CFML
+can be displayed in the resulting templates except
+for the specialized error variables.
+&lt;P&gt;CFTRY/CFCATCH provides a more interactive way to
+handle your CF errors within a CF template than CFERROR,
+but CFERROR is still a good safeguard against general
+errors.
+&lt;P&gt;You can also use CFERROR within the Application.cfm
+to specify error handling responsibilities for an entire
+application.
+
+&lt;!--- Example of CFERROR call within a template ---&gt;
+&lt;CFERROR TYPE="REQUEST"
+     TEMPLATE="request_err.cfm"
+     MAILTO="admin@mywebsite.com"&gt;
+
+&lt;!--- Example of the template to handle this error ---&gt;
+&lt;!---
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;We're sorry -- An Error Occurred&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;UL&gt;
+&lt;CFOUTPUT&gt;
+    &lt;LI&gt;&lt;B&gt;Your Location:&lt;/B&gt; #Error.RemoteAddress#
+    &lt;LI&gt;&lt;B&gt;Your Browser:&lt;/B&gt; #Error.Browser#
+    &lt;LI&gt;&lt;B&gt;Date and Time the Error Occurred:&lt;/B&gt; #Error.DateTime#
+    &lt;LI&gt;&lt;B&gt;Page You Came From:&lt;/B&gt; #Error.HTTPReferer#
+    &lt;LI&gt;&lt;B&gt;Message Content&lt;/B&gt;: &lt;BR&gt;&lt;HR width=50%&gt;
+       &lt;P&gt;#Error.Diagnostics#&lt;HR width=50%&gt;&lt;P&gt;
+    &lt;LI&gt;&lt;B&gt;Please send questions to:&lt;/B&gt; 
+       &lt;a href="mailto:#Error.MailTo#"&gt;#Error.MailTo#&lt;/A&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/UL&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;        ---&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cferror
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_026.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_028.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

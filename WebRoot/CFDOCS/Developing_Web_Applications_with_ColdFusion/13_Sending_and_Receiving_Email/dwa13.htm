@@ -1,0 +1,105 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Sending and Receiving Email</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="1000593"></a>
+<H1>Chapter 13	<br>
+Sending and Receiving Email</H1>
+
+<p>You can add interactive email features to your ColdFusion applications, providing complete two-way interface to mail servers via the CFMAIL tag and the CFPOP tag. The boom in Internet mail services makes ColdFusion's enhanced email capability a vital link to your users.</p><a name="1026154"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_02.htm#1026157">Using ColdFusion with Mail Servers</a>
+
+</li>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_03.htm#999001">Sending Email Messages</a>
+</li>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_04.htm#997435">Samples uses of CFMAIL</a>
+</li>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_05.htm#997500">Customizing Email for Multiple Recipients</a>
+</li>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_06.htm#997556">Advanced Sending Options</a>
+</li>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_07.htm#997611">Receiving Email Messages</a>
+</li>
+<li><a href="../13_Sending_and_Receiving_Email/dwa13_08.htm#997628">Handling POP Mail</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_15.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:56 -->
+</body>
+</html>

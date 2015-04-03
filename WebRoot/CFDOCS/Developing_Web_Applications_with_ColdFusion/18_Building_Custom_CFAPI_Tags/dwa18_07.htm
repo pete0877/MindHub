@@ -1,0 +1,125 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Before You Begin Developing CFX Tags in Java</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa188.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1014946"></a>
+ <H1>Before You Begin Developing CFX Tags in Java</H1>
+
+
+
+<p>Because the methods and syntax are similar, if you are familiar with creating CFXs using C++ you will be productive creating CFXs in Java almost immediately. Even if you have never used the C++ based API, you will find that the Java implementation is extremely easy to learn and work with.</p><a name="1014949"></a>
+ 
+<H2>Sample Java CFXs</H2>
+<p>Before you begin developing a CFX tag in Java, you may want to study sample CFX tags. The Java source files for the examples can be found in the <code>examples</code> subdirectory of the main installation directory. The example tags are:</p><ul>
+<li><code>HelloColdFusion</code> - Prints a personalized greeting. Demonstrates the minimal implementation required to create a CFX.
+
+</li>
+<li><code>ZipBrowser</code> - Retrieves the contents of a zip archive. Demonstrates generating a ColdFusion query and returning it to the calling page.
+</li>
+<li><code>ServerDateTime</code> - Retrieves the date and time from a network server. Demonstrates attribute validation, using numeric attributes, and setting variables within the calling page.
+</li>
+<li><code>OutputQuery</code> - Outputs a ColdFusion query in an HTML table. Demonstrates handling a ColdFusion query as input, throwing exceptions, and generating dynamic output.
+</li>
+<li><code>HelloWorldGraphic</code> - Generates a "Hello World!" graphic in JPEG format. Demonstrates how to dynamically create and return graphics from a Java CFX.
+</li>
+</ul>
+<a name="1014958"></a>
+ 
+<H2>Setting Up Your Development Environment to Develop CFXs in Java</H2>
+<p>You can use a wide range of Java development environments to build Java CFXs, including the Java Development Kit which you can download from Sun at</p><pre><a href="http://www.javasoft.com/products/jdk/1.2/index.html
+">http://www.javasoft.com/products/jdk/1.2/index.html
+</a></pre><p>Although you can use just the basic JDK, it is highly recommended that you use one of the commercial Java IDEs that provide an integrated environment for development, debugging, project management, and access to documentation. If you don't already have a Java development environment, we recommend that you try Symantec Visual Caf&eacute;, for which a 30 day free trial is available at </p><pre><a href="http://www.symantec.com/domain/cafe/vcafe30.html
+">http://www.symantec.com/domain/cafe/vcafe30.html
+</a></pre><a name="1014963"></a>
+ 
+<H3>Configuring the Class Path</H3>
+<p>To configure your development environment to build Java CFXs, you need to make sure that the supporting classes are visible to your Java compiler. These classes are located in the <code>classes\cfx.jar</code> archive. The full path is &lt;coldfusioninstalldir&gt;/Java/classes Consult your Java development tool's documentation to determine how to configure the compiler class path for your particular environment. </p><p>The <code>classes</code> directory created by the ColdFusion setup program serves two purposes:</p><ol>
+</li>
+<li>It contains the supporting classes required for developing and deploying Java CFXs. This is the <code>com.allaire.cfx</code> package located in the <code>cfx.jar</code> archive.
+
+</li>
+<li>It supports a feature that allows Java CFXs located within it to be reloaded every time they are changed. Although this is not the default behavior for other Java classes, it is very useful during an iterative development and testing cycle.
+
+</li>
+</ol>
+<p>Allaire strongly recommends that when you create new Java CFXs, you develop and deploy them within the <code>classes</code> directory. Following this guideline will dramatically simplify your development, debugging, and testing processes. </p><p>Once you are finished with development and testing, you can then deploy your Java CFX anywhere on the class path visible to the ColdFusion embedded JVM. See <a href="../18_Building_Custom_CFAPI_Tags/dwa1811.htm#1018053">&quot;Java Customization and Configuration&quot;</a> for more details on customizing the class path.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa188.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

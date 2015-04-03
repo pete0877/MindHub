@@ -1,0 +1,146 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>The Server Settings Page</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin032.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin034.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1036697"></a>
+ <H1>The Server Settings Page</H1>
+
+
+
+<p>The Administrator Server Settings page contains several configuration options you can set or enable to manage the ColdFusion server. Many of these options can significantly affect server performance. Use the following table to find out about options on the Server Settings Administrator page.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Server Settings Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Limit simultaneous requests
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Use this value to limit the number of simultaneous requests for the ColdFusion server. Once ColdFusion reaches this limit, requests are queued up and handled in the order received. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Timeout requests
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Set a value to limit the amount of time ColdFusion waits before terminating a request. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Restart unresponsive server
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+This option allows you to restart the ColdFusion Server service (daemon) in the event some ColdFusion component does not respond within the specified amount of time. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enforce strict attribute validation
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enables strict attribute validation rules. ColdFusion tag attributes that are not relevant to the execution of a tag will not be allowed. When disabled, irrelevant attributes may be passed to CFML tags without effect. Strict attribute validation improves template execution time and can help prevent many CFML coding errors. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Suppress whitespace by default 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+When checked, the engine will compress runs of spaces, tabs, and carriage return/linefeeds into a single space. This can significantly compact the output of a CFML template. Developers can locally override this setting for a template (for example, to emit preformatted data) by using the CFPROCESSINGDIRECTIVE tag. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Fast Date/Time parsing
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+(Solaris only) When checked, ColdFusion uses a simpler, faster Date/Time parsing routine when evaluating expressions. Enabling this option improves performance, but may affect backward compatibility. This does not affect the ParseDateTime function.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Missing Template Handler
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Lets you specify a default template to execute any time the ColdFusion Application Server cannot find a requested template. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Site-wide Error Handler
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Lets you specify a template to execute any time the ColdFusion Application Server encounters errors while processing a request. 
+</td></tr>
+
+</table>
+
+</div>
+</p><p>When changing values on this page, be sure to stop and restart ColdFusion for these options to take affect. For more information on stopping and starting ColdFusion, see <a href="../03_Configuring_ColdFusion_Server/admin032.htm#1036767">&quot;Starting and Stopping ColdFusion&quot;</a><a href="."></p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin032.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin034.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

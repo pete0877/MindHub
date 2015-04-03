@@ -1,0 +1,102 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Administrator Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin034.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin036.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1056496"></a>
+ <H1>Configuring Administrator Security</H1>
+
+
+
+<p>ColdFusion security options include two levels of security you can implement: Basic and Advanced. With Basic Security, separate passwords secure access to the ColdFusion Administrator, and to files, directories, and data sources from ColdFusion Studio. Knowing these passwords gives you complete access to all resources and all ColdFusion Administrator pages.</p><p>Advanced Security allows you to authenticate individual users and associate specific access rights based on user login or group association. ColdFusion Advanced Security gives you the ability to enforce security at a very granular level. For example, you can define security domains and policies that allow you to secure specific areas of the ColdFusion Administrator or specific ColdFusion resources, including the execution of specific ColdFusion tags. This security framework allows you to authenticate individual users, and, once authenticated, control access to a wide range of operations, such as adding or deleting data sources, setting server performance options and so on. </p><p>For detailed information about configuring security options in the ColdFusion Administrator, see the following chapters:</p><ul>
+<a name="1056194"> </a>
+<li><a href="../08_ColdFusion_Security/admin08.htm#1008294">Chapter 8, &quot;ColdFusion Security&quot;</a> -- Explains the differences between Basic and Advanced security so you can determine which features best suit your needs.
+
+<a name="1056361"> </a>
+</li>
+<li><a href="../09_Configuring_Basic_Security/admin09.htm#997347">Chapter 9, &quot;Configuring Basic Security&quot;</a> -- Describes how to configure Basic security options for developing and deploying coldFusion applications.
+<a name="1056381"> </a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin10.htm#997347">Chapter 10, &quot;Configuring Advanced Security&quot;</a> -- Describes how to configure Advanced security options for developing and deploying ColdFusion applications.
+</li>
+</ul>
+<p>For more information about implementing runtime security measures, refer to <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin034.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin036.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

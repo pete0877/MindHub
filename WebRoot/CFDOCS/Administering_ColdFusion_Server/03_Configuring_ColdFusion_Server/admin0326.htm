@@ -1,0 +1,254 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Distributed ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0325.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0327.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1038019"></a>
+ <H1>Configuring Distributed ColdFusion</H1>
+
+
+
+<p>Before trying to run ColdFusion in a distributed configuration, you must perform a standard installation of ColdFusion on all the machines involved. On the computer running the Web server, this guarantees that the ColdFusion server plug-ins are correctly loaded by the Web server. On the computer running the ColdFusion engine, this guarantees that the engine is set up and operating correctly. </p><p>Having complete, standard installations of ColdFusion available on all machines also provides a useful baseline environment so that validation can be done in the absence of the remote extensions. Should problems arise using ColdFusion in remote mode, it`s possible to run ColdFusion locally to determine whether or not the problems are related to the distributed configuration.</p><p>If, after successfully testing your remote configuration, you wish, for security reasons, to disable the ColdFusion engine installed on the computer hosting the Web server, you can do this easily by renaming the following executable files in the <code>cfusion/bin</code> (Windows) <code>coldfusion/bin</code> (Solaris) directory: </p><ul>
+<a name="1048741"> </a>
+<li><code>cfserver</code>
+
+<a name="1048753"> </a>
+</li>
+<li><code>cfrdsservice</code>
+<a name="1048758"> </a>
+</li>
+<li><code>cfexec</code>
+</li>
+</ul>
+<p>This prevents any ColdFusion server-side process from running while generally preserving your ColdFusion configuration.</p><a name="1038027"></a>
+ 
+<H2>Using the modified plug-in</H2>
+<p>In ColdFusion 4.5 all the Web server plug-ins are remote-capable so no special installation is required. All you need to do is let the plug-in know that you want to run in remote mode. You do this by putting the following information in an INI file and putting that file in the root directory of your ColdFusion installation on the machine running the Web server. That INI file must be named <code>cfremote.ini</code>. To enhance security, this INI file may be optionally set to be automatically deleted after being read at startup.</p><p>Here is a sample of the INI file with comments explaining what the various fields do. This sample may be cut and pasted and used as a template to get started.</p><pre>;-------------------------------------------------------------------
+;
+; Sample INI file for ColdFusion Remoting.
+;
+; Place this file in the root directory of your ColdFusion installation.
+; It must be named "cfremote.ini".
+;
+; !IMPORTANT! * All values (the strings on the right hand side of 
+;               the equals sign) must be quoted using double 
+;               quotes. 
+;             * All info is case insensitive..
+;             * Lines beginning with a semicolon are treated as 
+;               comments and are ignored.
+;
+; Use REMOTEPATH and LOCALPATH to map filenames from one host to another.
+; For example, if you are running Apache webserver on Solaris and you
+; want to connect to a ColdFusion server running on Windows NT, you might
+; set these values as:
+;
+; LOCALPATH = &quot;/usr/local/apache/htdocs&quot;
+; REMOTEPATH = &quot;C:\Inetpub\wwwroot\&quot;
+;
+; This would map any ColdFusion pages in /usr/local/apache/htdocs/fcml/
+; to C:\Inetpub\wwwroot\cfml\
+
+; Use this to turn on/off the remoting capability.
+; Valid values: Yes, No.
+;
+REMOTING = "YES"
+
+
+; Use this to specify the IP address of the remote computer running 
+; the ColdFusion Server.
+;
+; Valid values: a valid IP address, e.g.: 139.56.205.102.
+;
+IP = "205.181.21.61"
+
+; Use this to specify the port on that computer on which the remote 
+; ColdFusion Network Listener Module is listening.
+;
+; Valid values: a valid port number (integer).
+;
+PORT = "1234"
+
+; Use this to specify that the data sent between the machine running
+; the Web server and the machine running the ColdFusion Application
+; Server be encrypted.
+;
+; Valid values: Yes, No.
+;
+ENCRYPTION = "YES"
+
+; Use this to specify the key used to encrypt the data.
+;
+; Valid values: any string of up to 127 ASCII chars.
+;
+KEY = "doglips"
+
+; Use this to have this INI file be deleted after it is read at 
+; startup. (This is a security feature as it keeps your key from
+; being read by others.)
+;
+; Valid values: Yes, No.
+;
+DELETE = "NO"
+
+; Use this to write a message to the ColdFusion "webserver.log" 
+confirming that
+; remoting is active and what startup parameters (except the encryption
+; key) were used.
+;
+; Valid values: Yes, No.
+;
+MESSAGE = "YES"
+;
+;--------------------------------------------------------------------
+</pre><p>As with all warning and error messages from any of the ColdFusion Web server plug-ins, such text is written to the ColdFusion log file <code>webserver.log</code> in the log subdirectory of the directory into which you installed ColdFusion (on the machine hosting the Web server.) This file should be the first place you look if you encounter problems running ColdFusion in a distributed configuration since, for a variety of practical and security reasons, ColdFusion will not run in distributed mode if any information in the INI file is missing or incomplete.</p><a name="1038106"></a>
+ 
+<H2>The Network Listener Module (NLM)</H2>
+<p>The NLM is a stand-alone program that acts as a network front-end for the standard ColdFusion Server. It runs on the same computer on which the ColdFusion Server is running. It listens for incoming requests via TCP/IP and forwards them on to the local ColdFusion Server. The ColdFusion Server then processes those requests, returning the results to the listener module which, in turn, returns them via the original TCP/IP connection. It is a silent, background process with no user interaction. On NT, it runs as an NT service. On UNIX, it runs as a daemon. For debugging or other special purposes, it may also be run as a command line program by specifying the appropriate command line option (-i) at startup.</p><a name="1038109"></a>
+ 
+<H3>Installing the module on Windows NT</H3>
+<p>On NT, the module consists of a single executable file, <code>cfdist.exe</code>. Before you can run the listener as an NT service, you must perform the following installation step.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install the network listener module as a service:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Run the listener with the following special command line argument:
+
+
+<pre>cfdist.exe -sINSTALL
+</pre></li>
+<li>If installation was successful, it should now appear on your Services list under the name ColdFusion NetListener. If it doesn't show up, look in the module's log file, <code>distributed.log</code> in the log subdirectory of your ColdFusion installation, for information about why the install failed. 
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Once you've installed the module as an NT service you cannot move the 
+executable file unless you uninstall and reinstall it in its new location.
+</td>
+</tr>
+</table>
+</div>
+<br><p>Once installed as a service, you can start, stop, pause or continue the listener's operation as you would any NT service. You can start or stop the listener independent of any of the other ColdFusion services although, of course, the listener must be running to receive remote network requests. Note that when starting the service (from the NT Services Control Panel applet), you will need to specify -p switch and possibly the -k switch in the Startup Parameters box in the Services applet. </p><p>Please refer to the list of command line options below.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To uninstall the listener
+</td>
+</tr>
+</table>
+</div><p>Invoke <code>cfdist.exe</code> with the <code>-sREMOVE</code> command line option. Notice of successful removal will be written to the listener log.</p><a name="1038117"></a>
+ 
+<H2>Installing the module on UNIX</H2>
+<p>On UNIX, the listener module consists of a single executable file, in this case named simply <code>cfdist</code>. It is not necessary to perform any special installation step on UNIX. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To start the listener as a daemon:
+</td>
+</tr>
+</table>
+</div><p>Type the executable's name (without the -i switch) and the process will start. Because it's running as a daemon, the command will return immediately having launched the process in the background. You will probably use at least the -p switch when starting the daemon. </p><p>Please refer to the list of command line options below.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To stop the daemon process:
+</td>
+</tr>
+</table>
+</div><p>You need to kill it by its process ID. Use the <code>ps</code> command to get the PID and then kill the process as demonstrated below.</p><pre>    ps -deaf  | grep cfdist | grep -v grep
+</pre><p>It returns the PID in a string something like: </p><pre>    ckintzin   980     1  0 15:48:12 ?        0:00 cfdist
+</pre><p>The first number is the PID. Use it in the kill command to stop the process:</p><pre>    kill -INT 980
+</pre><p>Repeating the <code>ps</code> command should now return nothing, indicating the process is now dead.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0325.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0327.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

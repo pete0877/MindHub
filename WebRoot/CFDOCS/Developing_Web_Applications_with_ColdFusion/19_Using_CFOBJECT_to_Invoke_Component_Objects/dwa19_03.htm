@@ -1,0 +1,135 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Invoking Component Objects</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 19	:&nbsp;&nbsp;Using CFOBJECT to Invoke Component Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998215"></a>
+ <H1>Invoking Component Objects</H1>
+
+
+
+<p>The CFOBJECT tag is used to create an instance of the object and other ColdFusion tags, such as CFSET and CFOUTPUT, are used to invoke properties (attributes), and methods (operations) on the object. An object created by CFOBJECT or returned by other objects is implicitly released at the end of the template execution.</p><a name="998217"></a>
+ 
+<H2>Coding guidelines</H2>
+<p>The following coding practice is required (or recommended) when accessing the object. Assume that the NAME attribute in the CFOBJECT tag specified the value "obj", and that the object has a property called "Property", and methods called "Method1", "Method2", and "Method3".</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set a property:
+</td>
+</tr>
+</table>
+</div><pre>&lt;CFSET obj.property = "somevalue"&gt;
+</pre>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To get a property:
+</td>
+</tr>
+</table>
+</div><pre>&lt;CFSET value = obj.property&gt;
+</pre><p>Note that parentheses are not used on the right side of the equation for property-gets.</p><a name="998224"></a>
+ 
+<H2>Calling methods</H2>
+<p>Object methods usually take zero or more arguments. Arguments can be sent by value ([in] arguments) or by reference ([out] and [in,out]). Arguments sent by reference usually have their value changed by the object. Some methods return values while others may not.</p><a name="998226"></a>
+<h4> Methods with no arguments:</h4>
+<pre>&lt;CFSET retVal = obj.Method1()&gt;
+</pre><p>Note that parentheses are required for methods with no arguments.</p><a name="998229"></a>
+<h4> Methods with one or more arguments:</h4>
+<pre>&lt;CFSET x = 23&gt;
+&lt;CFSET retVal = obj.Method1(x, "a string literal")&gt;
+</pre><p>This method accepts one integer argument, and one string argument.</p><a name="998233"></a>
+<h4> Methods with reference arguments:</h4>
+<pre>&lt;CFSET x = 23&gt;
+&lt;CFSET retVal = obj.Method2("x",  "a string literal")&gt;
+&lt;CFOUTPUT&gt; #x#&lt;/CFOUTPUT&gt;
+</pre><p>Note the use of double-quotes ("") to specify reference arguments. If the object changes the value of "x", it will now contain a value other than 23. </p><a name="998238"></a>
+ 
+<H2>Calling nested objects</H2>
+<p>The current release of ColdFusion does not support nested (scoped) object calls. For example, if an object method returns another object and you would like to invoke a property/method on that object, the following is required:</p><pre>&lt;CFSET objX = myObj.X&gt;
+&lt;CFSET prop = objX.Property&gt;
+</pre><p>(That is, the syntax<code> &lt;CFSET prop = myObj.X.Property&gt;</code> will fail.)</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

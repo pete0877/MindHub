@@ -1,0 +1,167 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Client Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1033994"></a>
+ <H1>Using Client Variables</H1>
+
+
+
+<p>A client variable is accessed using the same syntax as other types of variables, and can be used anywhere other ColdFusion variables are used.</p><p>To display the favorite color that has been set for a specific user, use the following code:</p><pre>&lt;CFOUTPUT&gt;
+    Your favorite color is #Client.FavoriteColor#.
+&lt;/CFOUTPUT&gt;
+</pre><a name="1033998"></a>
+ 
+<H2>Standard client variables</H2>
+<p>In addition to storing custom client variables, the Client object has several standard parameters. These parameters can be useful in providing customized behavior depending on how often users visit your site and when they last visited. For example, the following code shows the date of a user's last visit to your site:</p><pre>&lt;CFOUTPUT&gt;
+    Welcome back to the Web SuperShop. Your last 
+    visit was on #DateFormat(Client.LastVisit)#.
+&lt;/CFOUTPUT&gt;
+</pre><p>The standard Client object attributes are read-only (they can be accessed but not set by your application) and include CFID, CFToken, URLToken, HitCount, TimeCreated, and LastVisit.</p><a name="1034002"></a>
+ 
+<H2>Using client state management without cookies</H2>
+<p>You can use ColdFusion's client state management without cookies. However,this is not recommended. If you choose to maintain client state without cookies, you must ensure that every request carries CFID and CFTOKEN. </p><p>To maintain client state without cookies, set the SETCLIENTCOOKIES attribute of the CFAPPLICATION tag to No. Then, you must maintain client state in URLs. by passing the client ID (CFID)and the client security token (CFTOKEN) between pages, either in hidden form fields or appended to URLs. You accomplish this using the variable Client.URLTOKEN or Session.URLTOKEN.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>In ColdFusion, client state management is explicitly designed to work 
+with cookies, the standard tool for identifying clients. Using client state 
+management without cookies requires careful programming to ensure 
+that the URLToken is always passed between applicati.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1034007"></a>
+ 
+<H2>Getting a list of client variables</H2>
+<p>To obtain a list of the custom client parameters associated with a particular client, use the GetClientVariablesList function.</p><pre>&lt;CFOUTPUT&gt;#GetClientVariablesList()#&lt;/CFOUTPUT&gt;
+</pre><p>The GetClientVariablesList function returns a comma-separated list of variable names defined for the application context declared by CFAPPLICATION, if any. The standard system-provided client variables (CFID, CFToken, URLToken, HitCount, TimeCreated, and LastVisit) are not returned in the list.</p><a name="1034011"></a>
+ 
+<H2>Deleting client variables</H2>
+<p>Unlike normal variables, client variables and their values persist over time. (In this fashion they are akin to cookies.) To delete a client variable, use the DeleteClientVariable function. For example:</p><pre>&lt;CFSET IsDeleteSuccessful=DeleteClientVariable("MyClientVariable")&gt;
+</pre><p>The DeleteClientVariable function operates only on variables within the scope declared by CFAPPLICATION, if any. See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for more information on this function.</p><p>Also, through the Variables page of the ColdFusion Administrator, you can edit the client variable storage to remove client variables after a set number of days. (The default value is 90 days when client variables are stored in the registry, ten days when stored in a data source.)</p><p>See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a><em> </em>for more information about setting time-out values.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The system-provided client variables (CFID, CFToken, URLToken, 
+HitCount, TimeCreated, and LastVisit) cannot be deleted.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1034022"></a>
+ 
+<H3>Client variables with CFLOCATION behavior </H3>
+<p>When using CFLOCATION to redirect to a path that contains .DBM or .CFM, the Client.URLToken is automatically appended to the URL. This behavior can be suppressed by adding the attribute ADDTOKEN="No" to the CFLOCATION tag.</p><a name="1034024"></a>
+ 
+<H3>Variable caching</H3>
+<p>All client variable reads and writes are cached to help decrease the overhead of client state management operations. See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a><em> </em>for information on variables and server clustering.</p><a name="1034026"></a>
+ 
+<H2>Exporting the client variable database</H2>
+<p>If your client variable database is stored in the system registry and you need to move it to another machine, you can export the registry key that stores your client variables and take it to your new server. The system registry allows you to export and import registry entries.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To export your client variable database from the registry:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the registry editor. In UNIX, use the program, <code>/&lt;install_dir&gt;/coldfusion/bin/regedit.</code>
+
+
+</li>
+<li>Find and select the following key: <code>HKEY_LOCAL_MACHINE\SOFTWARE\Allaire\ColdFusion\ <br>CurrentVersion\Clients</code>
+
+</li>
+<li>On the Registry menu, click Export Registry File.
+
+</li>
+<li>Enter a name for the registry file.
+
+</li>
+</ol>
+<p>Once you've created a registry file, you can take it to a new machine and import it by selecting Import Registry File on the Registry Editor Registry menu.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

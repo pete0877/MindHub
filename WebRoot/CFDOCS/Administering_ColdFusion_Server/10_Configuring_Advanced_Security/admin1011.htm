@@ -1,0 +1,189 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Specifying Resources to Protect</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1010.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1012.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011569"></a>
+ <H1>Specifying Resources to Protect</H1>
+
+
+
+<p>When you define a security context, you specify the types of resources to protect, for example, files and directories. Now you must specify exactly which resources and which actions to protect. For example, you might limit write access to files at a specific pathname. </p><p>Once you've defined resources, you define a security <em>policy</em> that matches resources to users and groups. You grant access to a protected resource by adding both rules and users to a policy. The users and user groups you add to a policy (you can think of them as <em>policy holders</em>) are authorized to use the resources protected by the security context .</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ColdFusion 4.5 introduces a new Resources View in Advanced security. 
+This view provides and easy-to-use, graphical way to specify resources 
+you want to protect and add them to policies. Once you've specified user 
+directories and created security contexts, you can configure all Advanced 
+security settings in the new Resource View.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To protect resources:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Advanced Server Security page, click Resources.
+
+
+<p>You see the Resource View page.
+</p></li>
+<li>Select a security context from the Current Security Context drop-down box. 
+
+<p>In the Resource Browser, any resource type you selected when you created the 
+current security context appears next to an icon that depicts a closed lock. This 
+icon indicates that you can protect individual resources of this type. Resource 
+types you did not select when you created the current context appear next to an 
+icon that depicts an open lock.
+</p></li>
+<li>In the Resource Browser, select a resource type and then click the Add Resource button at the bottom of the page.
+
+<p>You see the Add Resource dialog. The contents of this dialog are different for each 
+resource type. For example, if you select CFML Tags, you see a drop-down list that 
+contains all the ColdFusion tags; if you select Files and Directories, you see a text 
+box where you enter the name of the file or path to protect.
+</p></li>
+<li>Specify the resource to protect and click OK.
+
+<p>You see the Resource View page again. At the bottom of the page, you see the 
+Policy Editor for the resource you just specified.
+</p></li>
+<li>Click Add Policy.
+
+</li>
+<li>Enter a name for the new policy and click OK.
+
+<p>For example, you could create a top-level security policy, called <strong>Platinum</strong>, to grant 
+to certain users broad access to protected resources.
+</p></li>
+<li>Write a description of the policy and click OK.
+
+<p>You see the Resource View page again, showing the policy you just created. Other 
+available policies appear in a drop-down box at the botton of the page. 
+</p></li>
+<li>Select the check boxes that correspond to the actions you want to protect.
+
+<p>Now you can add users to the policy.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add users and groups to a policy:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Edit Users button at the bottom of the Resource View page to open the Users page for the current policy. Click the Add/Remove button. ColdFusion opens the Add/Remove Users page for the current policy. 
+
+
+</li>
+<li>Select from the available groups on the right side of the list control and click the left arrow to add them to the current policy. To add individual users, you enter a login name in the Enter User box and click Add. 
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Only groups are displayed when you add users to a policy. To enter an 
+individual user, you must know the user login and enter it in the Enter 
+User box. Displaying a list of all possible individual users, which could 
+easily number in the thousands, would be a very impractical means of 
+adding individual users to a policy. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>The users you have added to the security policy are now matched to the resources that you have also defined and added to the policy. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1010.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1012.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

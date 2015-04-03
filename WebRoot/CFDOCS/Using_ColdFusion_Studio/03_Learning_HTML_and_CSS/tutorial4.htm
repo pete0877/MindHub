@@ -1,0 +1,498 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Adding Code and Content</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="485258"></a>
+ <H1>Adding Code and Content</H1>
+
+
+
+<p>Now we're ready to get to work on our page. </p><p>A picture of the toolbutton used for each procedure is shown below the procedure step. Menu commands and shortcut keys are listed for many of the procedures, as well.</p><a name="496527"></a>
+ 
+<H2>Body tag</H2>
+<p>Our sample page is for a travel Web site. We want the site to be pleasing to the eye and easy to navigate, so we'll start by adding an attractive page background and then select a complementary color for the text.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add Body content:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click inside the <code>&lt;BODY&gt;</code> tag and choose Edit Tag from the menu to open the Body dialog box.
+
+
+<p><img src="../images/body.gif">
+
+
+
+</p></li>
+<li>Click the Browse button to the right of the Background Image text box.
+
+<p><img src="../images/browse.gif">
+
+
+
+</p></li>
+<li>In the Open dialog box, select the <code>image1.jpg</code> file from the <code>tutorial files</code> folder and click Open.
+
+<p>The file's name is inserted in the Background Image text box. Images are separate 
+graphics files (usually with the gif or jpg extension) inserted into HTML 
+documents. They can fill an entire page or be sized to fit just a portion of a page.
+</p></li>
+<li>Open the Text Color drop-down list and choose Navy.
+
+</li>
+<li>Click OK to apply your changes and close the Body dialog box.
+
+<p>The resulting HTML code looks like this:
+</p><pre>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+
+&lt;HTML&gt;
+HEAD&gt;
+    &lt;TITLE&gt;Archaeology Tours&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BACKGROUND="image1.jpg" TEXT="Navy"&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+</ol>
+<a name="500195"></a>
+ 
+<H2>Paragraph tag</H2>
+<p>The paragraph <code>&lt;P&gt;&lt;/P&gt;</code> tag is the most basic text container. Paragraphs appear in the browser with a blank line before them. Text inside paragraphs can be aligned to the left, center, or right. You set can specify </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a paragraph and enter text:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor on a line after the <code>&lt;BODY&gt;</code> tag line.
+
+
+<p>Click the Paragraph button on the Common QuickBar or press SHIFT+CTRL+P to 
+insert a paragraph tag. The <code>&lt;P&gt;</code> tag does not require a closing tag, but you can 
+check the Include closing <code>&lt;/P&gt;</code> tag option in the Settings &gt; HTML pane (F8) if you 
+want one inserted.
+</p><p><img src="../images/paragraph_button.gif">
+
+
+
+</p></li>
+<li>Type<em> This page was created with ColdFusion Studio, which you can find at Allaire's Web site </em>after the <code>&lt;P&gt;</code> tag.
+
+</li>
+<li>Click the Browse tab or press F12 to view your page.
+
+<p><img src="../images/browse_tab.gif">
+
+
+
+</p></li>
+<li>Click the Edit tab (F12) to return to the HTML code.
+
+</li>
+</ol>
+<p>Let's make <em>ColdFusion Studio</em> stand out a bit in that sentence.</p><p></p><a name="503627"></a>
+ 
+<H2>Bold tag</H2>
+<p>You can wrap a single character, a word, or a text block in the &lt;B&gt; tag to highlight it on the page. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add bold formatting:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select the phrase ColdFusion Studio in the paragraph you just typed.
+
+
+</li>
+<li>Click the Bold button on the Common toolbar.
+
+<p><img src="../images/bold_button.gif">
+
+
+
+</p></li>
+<li>Check it in Browse mode.
+
+<p>That's better!
+</p></li>
+<li>Click the Save button on the Standard toolbar or choose File &gt; Save (CTRL+S).
+
+<p><img src="../images/save_button.gif">
+
+
+
+</p></li>
+</ol>
+<p>Next, you'll create a link from this paragraph to the Allaire Corporation's Web site.</p><a name="500495"></a>
+ 
+<H2>Anchor tag</H2>
+<p>Hyperlinks, or links, are the heart of the World Wide Web. They enable you to move from page to page with the click of a mouse and they provide the connections between Web pages and other resources.</p><p>Links are created with the Anchor <code>&lt;A&gt;&lt;/A&gt;</code> tag and require the <code>HREF</code> attribute, which specifies the target page to which you are linking. Links are usually identified on a page by special link text formatting, such as a distinct color or underlining. Many sites also use images that are coded with the Anchor tag.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert a hyperlink:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">At the end of the line you just typed, select the text <em>Allaire's Web site</em>. 
+
+
+</li>
+<li>Click the Anchor button on the Common QuickBar or press SHIFT+CTRL+A to open the Anchor dialog box.
+
+<p><img src="../images/anchor_button.gif">
+
+
+
+</p><p><img src="../images/anchor.gif">
+
+
+
+</p></li>
+<li>Type <em>http:</em>//<em>www.allaire.com</em> in the HREF box. The text you selected in step 1 displays in the Description box.
+
+</li>
+<li>Click OK to insert the link in your document. 
+
+<p>The line should now look like this:
+</p><pre>&lt;P&gt;This page was created with &lt;B&gt;ColdFusion Studio&lt;/B&gt;, which you can 
+find at &lt;A HREF="http://www.allaire.com"&gt;Allaire's Web site&lt;/A&gt;.&lt;/P&gt;
+</pre></li>
+</ol>
+<a name="498910"></a>
+ 
+<H2>Image tag</H2>
+<p>We used an image file for the page background, now we will place an image on the page by coding the <code>&lt;IMG&gt;</code> tag. Several attributes are available for the <code>&lt;IMG&gt;</code> tag, but only one is required, <code>SRC, </code>which specifies the image file path. The <code>&lt;IMG&gt;</code> tag doesn't require an end tag.</p><pre>&lt;IMG SRC="images/myimage.gif"&gt;
+</pre><p>By default an image is treated as an inline image, that is, the browser renders it as if it were a character in the line of text. The bottom of the image is aligned with the base of the line, and the image's position within the text will remain the same regardless of how the browser wraps the lines. You can set images off by themselves by placing them in separate paragraphs or table cells. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The image's source file is unaffected by changes made to an image's 
+attributes in Studio. 
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert the Greek Column image:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor below the first paragraph and click the Image button on the Common QuickBar or press SHIFT+CTRL+I to open the Image dialog box.
+
+
+<p><img src="../images/images_button.gif">
+
+
+
+</p><p><img src="../images/image.gif">
+
+
+
+</p></li>
+<li>Click the Browse button next to the Source text box.
+
+</li>
+<li>Select <code>greekcolumn.gif</code> from the <code>tutorial files</code> folder and click Open.
+
+<p><code>greekcolumn.gif</code> is entered in the Source text box. 
+</p></li>
+<li>Enter <em>Greek Column</em> in the Alt. Text box.
+
+<p>This ensures that a text description of the image appears on the page if the image 
+cannot be rendered.
+</p></li>
+<li>Choose <code>RIGHT</code> from the Align drop-down list.
+
+<p>This attribute forces the text to the left of the image.
+</p></li>
+<li>Click OK. 
+
+<p>The tag should look like this, although the <code>WIDTH</code> and <code>HEIGHT</code> values may differ:
+</p><pre>    &lt;IMG SRC="greekcolumn.gif" WIDTH=111 HEIGHT=187 BORDER=0
+    ALIGN="RIGHT" ALT="Greek Column"&gt;
+</pre></li>
+</ol>
+<a name="498642"></a>
+ 
+<H2>Heading tags</H2>
+<p>The next text in the page is a heading. HTML allows six levels of headings, ranging from <code>&lt;H1&gt;</code>, which produces the largest font, to <code>&lt;H6&gt;</code>, the smallest. Heading tags can contain formatting attributes, but we'll just accept the browser default for this one.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert the Archaeology Tours heading:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor on a line below the &lt;IMG&gt; tag.
+
+
+</li>
+<li>Click the H1 button on the Fonts QuickBar or choose Tags &gt; Heading 1.
+
+<p><img src="../images/h1_button.gif">
+
+
+
+</p></li>
+<li>With the cursor between the &lt;H1&gt; and &lt;/H1&gt; tags, type <em>Archaeology Tours</em>.
+
+<p>The tag should look like this:
+</p><pre>    &lt;H1&gt;Archaeology Tours&lt;/H1&gt;
+</pre></li>
+</ol>
+<a name="499895"></a>
+ 
+<H2>Horizontal Rule tag</H2>
+<p>Let's add a visual element to separate the heading from the next section. We'll accomplish this by adding a horizontal rule.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a horizontal rule:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor on a line below the heading.
+
+
+</li>
+<li>Click the Horizontal Rule button on the Common QuickBar or choose Tags &gt; Horizontal Rule to open the <code>&lt;HR&gt;</code> editor.
+
+<p><img src="../images/horizontal_rule_button.gif">
+
+
+
+</p><p><img src="../images/tag_editor_hr.gif">
+
+
+
+</p></li>
+<li>Leave the Align option set to the default value, Center. 
+
+</li>
+<li>Check the No Shading option.
+
+</li>
+<li>Enter <em>80%</em> in the Width box (note that you can specify widths in percentages of the page width or in pixels)
+
+</li>
+<li>Click the Browser-specific tab and choose Black from the Color drop-down list.
+
+</li>
+<li>Click Apply. 
+
+<p>The code looks like this:
+</p><pre>    &lt;HR WIDTH="80%" COLOR="Black" NOSHADE&gt;
+</pre></li>
+</ol>
+<a name="468393"></a>
+ 
+<H2>Font and Align tags</H2>
+<p>We want the next line of text to stand out on the page, so we will add some special formatting that applies to just that line.</p><p>The <code>&lt;FONT&gt;</code> tag allows you to specify the font face, the size in relative or absolute pixel values, and the text color. You use the <code>ALIGN</code> attribute to set the horizontal alignment of the text on the page.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create the Travel back in time paragraph:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor on a line below the <code>&lt;HR&gt;</code> tag. 
+
+
+</li>
+<li>Insert a <code>&lt;P&gt;</code> tag.
+
+</li>
+<li>Type <em>Travel back in time! </em>after the <code>&lt;P&gt;</code> tag.
+
+<p>The tag should look like this:
+</p><pre>    &lt;P&gt;Travel back in time!&lt;/P&gt;
+</pre><p>Let's use the <code>&lt;P&gt;</code> editor to complete this tag.
+</p></li>
+<li>Right-click in the <code>&lt;P&gt;</code> tag and select Edit Tag from the menu.
+
+</li>
+<li>Select center from the Align box and click Apply to close the editor.
+
+<p>The <code>ALIGN</code> attribute is added to the tag.
+</p></li>
+<li>Select the "Travel Back In Time!" text.
+
+</li>
+<li>Click the Font button on the Fonts QuickBar to open the &lt;FONT&gt; editor. 
+
+<p><img src="../images/font_button.gif">
+
+
+
+</p><p><img src="../images/tag_editor_font.gif">
+
+
+
+</p></li>
+<li>Choose Red from the Color drop-down list.
+
+</li>
+<li>Choose +3 from the Relative + drop-down list.
+
+</li>
+<li>Click the HTML 4.0 tab.
+
+</li>
+<li>Choose Arial from the top Font Face drop-down list.
+
+</li>
+<li>Click Apply.
+
+<p>The tag now looks like this:
+</p><pre>    &lt;P ALIGN="Center"&gt;&lt;FONT FACE="Arial" SIZE="+3" COLOR="Red"&gt;
+    Travel back in time!&lt;/FONT&gt;
+    &lt;/P&gt;
+</pre></li>
+</ol>
+<a name="500701"></a>
+ 
+<H2>Break tag</H2>
+<p>As mentioned, Web browsers ignore line breaks, tabs, and extra spaces in documents. HTML elements such as paragraphs, lists, and headings each set their own spacing, so if additional spacing is needed, it must be coded. </p><p>One way to easily set spacing is by entering <code>a &lt;BR&gt;</code> tag. This can be done to break a line or to separate page content. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert a line break:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor above the "Travel back in time!" line.
+
+
+</li>
+<li>Click the Break button on the Common QuickBar.
+
+<p><img src="../images/line_break_button.gif">
+
+
+
+</p></li>
+<li>Add three more <code>&lt;BR&gt;</code> tags to get the right spacing.
+
+</li>
+<li>Check the spacing in the browser and adjust it if needed.
+
+</li>
+</ol>
+<p>The rest of the Archaeology Tours page is laid out as a table, which you'll create in the next set of procedures.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Structuring Page Content in Lists</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="468850"></a>
+ <H1>Structuring Page Content in Lists</H1>
+
+
+
+<p>The remainder of the large data cell on the left is filled by an unordered list. Lists are one of the most frequently used organizational elements in Web authoring, just as they are in printed documents. </p><p>They are fairly easy to implement and offer several useful ways to structure information in HTML documents, so we'll present a brief overview of list elements before resuming the tutorial.</p><a name="468870"></a>
+ 
+<H2>List types</H2>
+<p>HTML includes several list tags. Numbered lists are called <em>ordered lists</em> and use the <code>&lt;OL&gt;&lt;/OL&gt;</code> tag. Bulleted lists are called <em>unordered lists</em>, and use the <code>&lt;UL&gt;&lt;/UL&gt;</code> tag. Individual <em>list items</em> for either type of list are specified by the <code>&lt;LI&gt;</code> tag, which does not require an end tag.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a bulleted list:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Place the cursor in the first cell of the table (the cell with the Welcome text) between the <code>&lt;/P&gt;</code> and <code>&lt;/TD&gt;</code> tags.
+
+
+</li>
+<li>Click the Quick Lists button on the Lists QuickBar to open the List dialog box.
+
+<p><img src="../images/quick_lists_button.gif">
+
+
+
+</p><p><img src="../images/List_Dialog_Box.gif">
+
+
+
+</p></li>
+<li>Change the number of rows to 3.
+
+</li>
+<li>Under List Style, click Unordered.
+
+</li>
+<li>In the first row of the text box, enter <em>Crete</em>.
+
+</li>
+<li>Type <em>Istanbul</em> in the second row and <em>Alexandria</em> in the third row and click OK.
+
+<p>The code looks like this:
+</p><pre>&lt;UL&gt;
+    &lt;LI&gt;Crete
+    &lt;LI&gt;Istanbul
+    &lt;LI&gt;Alexandria
+&lt;/UL&gt;
+</pre><p>We'll finish the table cell by inserting a paragraph after the list.
+</p></li>
+<li>Place the cursor between the <code>&lt;/UL&gt;</code> and <code>&lt;/TD&gt;</code> tags and click the Paragraph button.
+
+</li>
+<li>Choose File &gt; Insert File, select the <code>Insert Text 2.txt</code> file and click Open.
+
+<p>The following text is entered between the <code>&lt;P&gt;&lt;/P&gt;</code> tags:
+</p><p>Follow our guides back in time as you cruise the beautiful waters of 
+antiquity and visit important archeological digs.
+</p></li>
+</ol>
+<p>You have now completed the HTML tags tutorial. Congratulations!</p><p>If you want to explore a different method for designing Web pages, see the <a href="../03_Learning_HTML_and_CSS/tutorial8.htm#469157">&quot;Cascading Style Sheets Tutorial&quot;</a>. </p><p>Styles enable you to format page elements, such as paragraphs, tables, and lists independently of the code blocks themselves.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

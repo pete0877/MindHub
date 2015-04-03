@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>GetProfileString</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_107.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_109.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2658154"></a>
+ <H1>GetProfileString</H1>
+
+
+
+<p>Returns the value of an entry in an initialization file or an empty string if the value does not exist. An <em>initialization file </em>assigns values to configuration variables, also known as entries, that need to be set when the system boots, the operating system comes up, or an application starts. An initialization file is distinguished from other files by its .ini suffix, for example, boot.ini, Win32.ini, and setup.ini. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_216.htm#1675773">SetProfileString</a>.
+</p>
+
+<a name="1658659"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>GetProfileString</strong>(<em>ini</em><em>Path</em>,<em> section, entry</em>)
+</PRE><a name="1675552"> </a>
+<h5 class="param"> iniPath</h5>
+<p class="param">Fully qualified path (drive, directory, filename, and extension) of the initialization file, for example, C:\boot.ini.</p><a name="1675730"> </a>
+<h5 class="param"> section</h5>
+<p class="param">The section of the initialization file from which you would like to extract information.</p><a name="1675740"> </a>
+<h5 class="param"> entry</h5>
+<p class="param">The name of the value that you would like to see. </p><a name="1802164"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetProfileString
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---This example uses GetProfileString to set the 
+     timeout value in an initialization file. ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;GetProfileString Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;body  bgcolor="#FFFFD5"&gt;
+
+&lt;H3&gt;GetProfileString Example&lt;/H3&gt;
+
+This example uses GetProfileString to get the value of timeout in an 
+initialization file. Enter the full path of your initialization file, and 
+submit the form.
+
+&lt;!---  This section of code checks to see if the form was submitted.
+       If the form was submitted, this section gets the initialization
+       path and timeout value of the path and timeout value specified 
+       in the form                                                        ---&gt;
+&lt;CFIF Isdefined("Form.Submit")&gt;
+
+    &lt;CFSET IniPath = FORM.iniPath&gt;
+    &lt;CFSET Section = "boot loader"&gt;
+    &lt;CFSET timeout = GetProfileString(IniPath, Section, "timeout")&gt;
+    
+    &lt;H4&gt;Boot Loader&lt;/H4&gt;
+    &lt;!--- If you do not have an entry in an initialization file, nothing 
+          will be displayed ---&gt;
+    
+    &lt;P&gt;Timeout is set to: &lt;CFOUTPUT&gt;#timeout#&lt;/CFOUTPUT&gt;.&lt;/P&gt;
+            
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="getprofilestring.cfm" METHOD="POST"&gt;
+&lt;hr size="2" color="#0000A0"&gt;
+&lt;table cellspacing="2" cellpadding="2" border="0"&gt;
+&lt;tr&gt;
+    &lt;td&gt;Full Path of Init File&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="IniPath" VALUE="C:\myboot.ini"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Submit" NAME="Submit" VALUE="Submit"&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/FORM&gt;
+&lt;hr size="2" color="#0000A0"&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetProfileString
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_107.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_109.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

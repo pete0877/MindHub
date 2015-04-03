@@ -1,0 +1,9 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<HTML>
+<HEAD>
+	<TITLE>TACK2 News</TITLE>
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="stylesheet.css">
+</HEAD>
+
+<BODY BGCOLOR="#FFffFF" BACKGROUND="?images/storebg.gif" LEFTMARGIN=5 TOPMARGIN=0>

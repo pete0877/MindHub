@@ -1,0 +1,171 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFWDDX</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_102.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1974081"></a>
+ <H1>CFWDDX</H1>
+
+
+
+<p>The CFWDDX tag serializes and de-serializes CFML data structures to the XML-based WDDX format. You can also use it to generate JavaScript statements instantiating JavaScript objects equivalent to the contents of a WDDX packet or some CFML data structures.</p><a name="1974083"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFWDDX ACTION="action" 
+    INPUT="inputdata" 
+    OUTPUT="resultvariablename" 
+    TOPLEVELVARIABLE="toplevelvariablenameforjavascript"
+    USETIMEZONEINFO="Yes/No"&gt;
+</PRE><a name="1974085"></a>
+<h4> ACTION</h4>
+<p>Specifies the action taken by the CFWDDX tag. Use one of the following:</p><ul>
+<a name="1974087"> </a>
+<li>CFML2WDDX -- Serialize CFML to WDDX format
+
+<a name="1974088"> </a>
+</li>
+<li>WDDX2CFML -- Deserialize WDDX to CFML
+<a name="1974089"> </a>
+</li>
+<li>CFML2JS -- Serialize CFML to JavaScript format
+<a name="1974090"> </a>
+</li>
+<li>WDDX2JS -- Deserialize WDDX to JavaScript
+</li>
+</ul>
+<a name="1974091"></a>
+<h4> INPUT</h4>
+<p>Required. The value to be processed. </p><a name="1974093"></a>
+<h4> OUTPUT</h4>
+<p>The name of the variable to hold the output of the operation. This attribute is required for ACTION=WDDX2CFML. For all other actions, if this attribute is not provided, the result of the WDDX processing is outputted in the HTML stream. </p><a name="1974095"></a>
+<h4> TOPLEVELVARIABLE</h4>
+<p>Required when ACTION=WDDX2JS or ACTION=CFML2JS. The name of the top-level JavaScript object created by the deserialization process. The object created by this process is an instance of the WddxRecordset object, explained in WddxRecordset Object .</p><p>This attribute applies only when the ACTION is WDDX2JS or CFML2JS.</p><a name="1974101"></a>
+<h4> USETIMEZONEINFO</h4>
+<p>Optional. Indicates whether to output time-zone information when serializing CFML to WDDX. If time-zone information is taken into account, the hour-minute offset, as represented in the ISO8601 format, is calculated in the date-time output. If time-zone information is not taken into account, the local time is output. The default is Yes.</p><a name="1974103"></a>
+ 
+<H3>Usage</H3>
+<p>Use this tag to serialize and deserialize packets of data used to communicate with the browser.</p><p>For complete information on WDDX, see the "Programming with XML " chapter in <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p><a name="2045692"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfwddx
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This snippet shows basic use of the CFWDDX tag. ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;CFWDDX Tag&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;!--- Create a simple query  ---&gt;
+&lt;CFQUERY NAME='q' DATASOURCE='cfsnippets'&gt;
+    select Message_Id, Thread_id, Username from messages
+&lt;/CFQUERY&gt;
+
+The recordset data is:...&lt;P&gt;
+&lt;CFOUTPUT QUERY=q&gt;
+    #Message_ID# #Thread_ID# #Username#&lt;br&gt;
+&lt;/CFOUTPUT&gt;&lt;P&gt;
+
+&lt;!--- Serialize data to WDDX format ---&gt;
+Serializing CFML data...&lt;P&gt;
+&lt;CFWDDX ACTION='cfml2wddx' input=#q# output='wddxText'&gt;
+
+&lt;!--- Display WDDX XML packet ---&gt;
+Resulting WDDX packet is:
+&lt;xmp&gt;&lt;CFOUTPUT&gt;#wddxText#&lt;/CFOUTPUT&gt;&lt;/xmp&gt;
+
+&lt;!--- Deserialize to a variable named wddxResult ---&gt;
+Deserializing WDDX packet...&lt;P&gt;
+&lt;CFWDDX ACTION='wddx2cfml' input=#wddxText# output='qnew'&gt;
+
+The recordset data is:...&lt;P&gt;
+&lt;CFOUTPUT QUERY=qnew&gt;
+    #Message_ID# #Thread_ID# #Username#&lt;br&gt;
+&lt;/CFOUTPUT&gt;&lt;P&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfwddx
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_102.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

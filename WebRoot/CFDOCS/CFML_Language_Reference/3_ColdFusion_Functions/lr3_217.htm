@@ -1,0 +1,145 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>SetVariable</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_216.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_218.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1677520"></a>
+ <H1>SetVariable</H1>
+
+
+
+<p>The function sets the variable specified by <em>name</em><em> </em>to <em>value</em> and returns the new value of the variable.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_084.htm#998398">DeleteClientVariable</a> and <a href="../3_ColdFusion_Functions/lr3_101.htm#1274656">GetClientVariablesList</a>.
+</p>
+
+<a name="1002313"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>SetVariable</strong>(<em>name</em>, <em>value</em>)
+</PRE><a name="1002315"> </a>
+<h5 class="param"> name</h5>
+<p class="param">Valid variable name.</p><a name="1002316"> </a>
+<h5 class="param"> value</h5>
+<p class="param">String or number assigned to the variable.</p><a name="1002317"></a>
+ 
+<H3>Usage</H3>
+<p>When setting client variables, it is required that the client variable exists prior to the using of this function and the ClientManagement attribute of CFAPPLICATION tag has been set to "Yes" for this template.</p><a name="1807506"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="SetVariable
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows SetVariable ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+SetVariable Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;SetVariable Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.myVariable")&gt;
+&lt;!--- strip out url, client., cgi., session., caller. ---&gt;
+&lt;!--- This example only lets you set form variables ---&gt;
+&lt;CFSET myName = ReplaceList(FORM.myVariable,
+  "url,client,cgi,session,caller", "FORM,FORM,FORM,FORM,FORM")&gt;
+
+&lt;CFSET temp = SetVariable(myName, FORM.myValue)&gt;
+&lt;CFSET varName = myName&gt;
+&lt;CFSET varNameValue = Evaluate(myName)&gt;
+
+&lt;CFOUTPUT&gt;
+    &lt;P&gt;Your variable, #varName#
+    &lt;P&gt;The value of #varName# is #varNameValue#
+&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+...
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="SetVariable
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_216.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_218.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,155 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Calling a CORBA Object</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa196.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa198.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 19	:&nbsp;&nbsp;Using CFOBJECT to Invoke Component Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998326"></a>
+ <H1>Calling a CORBA Object</H1>
+
+
+
+<p>In the CFOBJECT tag, several key attributes are required for calling CORBA objects:</p><ul>
+<li>Set the TYPE attribute to CORBA. If no TYPE is specified, COM is assumed.
+
+</li>
+<li>The CONTEXT attribute shows how the object reference is obtained. Set the CONTEXT either to "IOR" for a file containing the object's unique Interoperable Object Reference or to "NameService".
+</li>
+<li>If the CONTEXT attribute is set to IOR, set the CLASS attribute to the file containing the stringified version of the IOR. ColdFusion must be able to read this IOR file at all times, so it should be local to the server or on the network in an accessible location.
+</li>
+<li>If the CONTEXT attribute is set to a NameService, the CLASS attribute must include a period-delimited name such as Allaire.Department.Dev. Currently ColdFusion can only resolve objects registered in VisiBrokers's Naming Service. This will change when ORB vendors implement the CORBA 3.0 specification. Make sure that the NamingService (NS) is brought-up with a default NamingContext. The server implementing the object should bind to the default context, and register the appropriate name. ColdFusion also binds to the default context to resolve the name.
+</li>
+<li>Set the NAME attribute to the name your application uses to call the object's operations and attributes.
+</li>
+</ul>
+<p>See the <a href=" ../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for the complete CFOBJECT syntax.</p><a name="1000416"></a>
+ 
+<H2>Declaring structures and sequences</H2>
+<p>Once the object is created, attributes and operations on the object can be invoked using the syntax outlined in the above sections. In addition, ColdFusion also supports the use of complex types such as structures and sequences. For structures, use ColdFusion structures. For sequences, use ColdFusion arrays.</p><a name="1000418"></a>
+ 
+<H3>Example</H3>
+<p>The IDL for an object</p><pre>struct SimpleStruct
+{
+  short s;
+  long l;
+  float d;
+};
+
+struct NestedStruct
+{
+  SimpleStruct f;
+  char c;
+  string s;
+};
+
+typedef sequence&lt;long, 5&gt; BLongSequence;
+
+interface SomeObject {
+  short SomeMethod( in NestedStruct inStruct,  in BlongSequence inSeq);
+
+};
+</pre><p>The applicable ColdFusion code</p><pre>&lt;!--Declare a couple of structures -
+&lt;CFSET x = StructNew()&gt;
+&lt;CFIF IsStruct(x)&gt;
+    &lt;CFSET temp=StructInsert(x,"s",3)&gt;
+    &lt;CFSET temp=StructInsert(x,"l", 256)&gt;
+    &lt;CFSET temp=StructInsert(x,"d", 93.45)&gt;
+&lt;/CFIF&gt;
+
+&lt;CFSET NestedStruct = StructNew()&gt;
+&lt;CFIF IsStruct(xx)&gt;
+    &lt;CFSET temp=StructInsert(NestedStruct,"f",x)&gt;
+    &lt;CFSET temp=StructInsert(NestedStruct,"c", 'b')&gt;
+    &lt;CFSET temp=StructInsert(NestedStruct,"s", " bu-bu")&gt;
+&lt;/CFIF&gt;
+
+&lt;!--Declare a sequence -
+&lt;CFSET FixedSeq = ArrayNew(1)&gt;
+
+&lt;CFLOOP INDEX="LoopCount" FROM="1" TO="5"&gt;
+    &lt;CFSET FixedSeq [LoopCount] = #LoopCount#&gt;
+&lt;/CFLOOP&gt;
+
+&lt;CFSET retA=obj.SomeMethod(NestedStruct, FixedSeq)&gt;
+</pre><a name="1000464"></a>
+ 
+<H2>Exception handling</H2>
+<p>Exceptions thrown by the CORBA object methods can be caught with the CFTRY and CFCATCH tags. However, no information can be extracted from the exception object in this release. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa196.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa198.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

@@ -1,0 +1,146 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating and Using COM Objects</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa196.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 19	:&nbsp;&nbsp;Using CFOBJECT to Invoke Component Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000821"></a>
+ <H1>Creating and Using COM Objects</H1>
+
+
+
+<p>In the following example, an SMTP mail handling component is created using CFOBJECT.</p><pre>&lt;CFOBJECT ACTION=CREATE
+NAME=MAILER
+CLASS=SMTP.Mailer&gt;
+</pre><p>The component needs to be created by ColdFusion before any methods in the component can be invoked or properties assigned in your application pages. This sample SMTP component includes a number of methods and properties to perform a wide range of mail handling tasks.. In the OLE/COM Viewer, methods and properties may be grouped together, making it a little confusing at first to determine one from the other.</p><p>Our SMTP mail component includes properties such as:</p><pre>Screen
+User
+FullName
+FromName
+FromAddress
+</pre><p>You use these properties to define elements of the mail message you want to send. The SMTP Mailer component also includes a number of methods, such as:</p><pre>SendMail
+AddRecipient
+AddCC
+AddAttachment
+</pre><a name="998296"></a>
+ 
+<H2>Connecting to COM objects</H2>
+<p>There are essentially two ways, specified with the ACTION attribute of CFOBJECT, to connect to COM objects using CFOBJECT:</p><ul>
+<li>The Create method (CFOBJECT ACTION="Create"), which takes a COM object, typically a DLL, and instantiates it prior to invoking methods and assigning properties.
+
+</li>
+<li>The Connect method (CFOBJECT ACTION="Connect"), which links to an object that is already running on the server, typically an executable.
+</li>
+</ul>
+<p>In addition to specifying which way to connect to a COM object, you also have to specify the following with the CONTEXT attribute:</p><ul>
+<li>INPROC -- This means an In-Process server object (typically a DLL) that is running in the same process space as the calling process, such as ColdFusion.
+
+</li>
+<li>LOCAL -- This is an Out-of-Process server object (typically an EXE) that is running outside the ColdFusion process space but running locally on the same server.
+</li>
+<li>REMOTE -- This is also an Out-of-Process server object (also typically an EXE) that is running remotely on the network. Using REMOTE implies using the SERVER attribute to identify where the object resides.
+</li>
+</ul>
+<a name="998312"></a>
+ 
+<H2>Setting properties and invoking methods</H2>
+<p>The following example, using the sample SMTPMailer COM object, shows how to assign properties to the mail message you want to send and how to execute component methods to handle mail messages.</p><p>In the example, form variables are used to provide method parameters and properties, such as the name of the recipient, the desired email address, and so on.</p><pre>&lt;!--- First, create the object ---&gt;
+
+&lt;CFOBJECT ACTION="Create"
+    NAME="Mailer"
+    CLASS="SMTPsvg.Mailer"&gt;
+
+&lt;!--- Then, use the form variables from the
+user entry form to populate a number of properties
+necessary to create and send the message. ---&gt;
+
+&lt;CFSET Mailer.FromName = #form.fromname#&gt;
+&lt;CFSET Mailer.RemoteHost = #RemoteHost#&gt;
+&lt;CFSET Mailer.FromAddress = #form.fromemail#&gt;
+&lt;CFSET Mailer.Subject = "Testing CFOBJECT"&gt;
+&lt;CFSET Mailer.BodyText = "#form.msgbody#"&gt;
+&lt;CFSET Mailer.SMTPLog = "#logfile#"&gt;
+
+&lt;!--- Last, use the AddRecipient and SendMail
+methods to finish and send the message along ---&gt;
+
+&lt;CFSET Mailer.AddRecipient("#form.fromname#","#form.fromemail#")&gt;
+&lt;CFSET success=Mailer.SendMail()&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa196.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

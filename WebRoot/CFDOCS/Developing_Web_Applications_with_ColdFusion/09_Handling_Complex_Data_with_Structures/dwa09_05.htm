@@ -1,0 +1,124 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Referencing Elements in Dynamic Arrays</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997461"></a>
+ <H1>Referencing Elements in Dynamic Arrays</H1>
+
+
+
+<p>In ColdFusion, array indexes are counted starting with position 1, which means that position 1 is referenced as <code>firstname[1]</code>.</p><p>Let's add to the current firstname array example. For 2D arrays, you reference an index by specifying two coordinates: <code>myarray[1][1]</code>.</p><pre>&lt;!--- This example adds a 1D array to a 1D array ---&gt;
+
+&lt;CFSET firstname=ArrayNew(1)&gt;
+
+&lt;CFSET firstname[1]="Coleman"&gt;
+&lt;CFSET firstname[2]="Charlie"&gt;
+&lt;CFSET firstname[3]="Dexter"&gt;
+
+&lt;!--- First, declare the array ---&gt;
+
+&lt;CFSET fullname=ArrayNew(1)&gt;
+
+&lt;!--- Then, add the firstname array to
+index 1 of the fullname array ---&gt;
+
+&lt;CFSET fullname[1]=firstname&gt;
+
+&lt;!--- Now we'll add the last names for symmetry ---&gt;
+
+&lt;CFSET fullname[2][1]="Hawkins"&gt;
+&lt;CFSET fullname[2][2]="Parker"&gt;
+&lt;CFSET fullname[2][3]="Gordon"&gt;
+
+&lt;CFOUTPUT&gt;
+    #fullname[1][1]# #fullname[2][1]#&lt;BR&gt;
+    #fullname[1][2]# #fullname[2][2]#&lt;BR&gt;
+    #fullname[1][3]# #fullname[2][3]#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre><a name="997498"></a>
+ 
+<H2>Additional referencing methods</H2>
+<p>You can reference array indexes in the standard way: myarray[<em>x</em>] where <em>x</em> is the index you want to reference. You can also use ColdFusion expressions inside the square brackets to reference an index. The following are valid ways of referencing an array index:</p><pre>&lt;CFSET myarray[1]=<em>expression</em>&gt;
+&lt;CFSET myarray[1 + 1]=<em>expression</em>&gt;
+&lt;CFSET myarray[arrayindex]=<em>expression</em>&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

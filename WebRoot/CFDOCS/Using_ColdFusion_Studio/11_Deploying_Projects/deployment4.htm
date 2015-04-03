@@ -1,0 +1,294 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Setting Up Default Deployment Servers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Deploying_Projects/deployment3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Deploying_Projects/deployment5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Deploying Projects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1016531"></a>
+ <H1>Setting Up Default Deployment Servers</H1>
+
+
+
+<p>The servers that are listed under Deployment Servers in your project are your default deployment servers.</p><p><img src="../images/deployment_servers.gif">
+
+
+</p><p>The Deployment Servers list provides a visual cue as to which servers are associated with your project and will be included in the project file (.apf file). When you deploy your project, you get to pick the servers to deploy to from this list.</p><p>The process for adding a deployment server is very similar to that for configuring a remote server in the Universal Files tab. The primary difference is that deployment server information is added to the project file, while remote server information is not. Remember, by passing the project file along with a project, developers can maintain the same deployment settings.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To see a list of default deployment servers:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Projects tab.
+
+
+</li>
+<li>Open a project (see <a href="../10_Using_Projects_for_Site_Management/projects.htm#997350">Chapter 10, &quot;Using Projects for Site Management&quot;</a> for information on opening projects).
+
+</li>
+<li>Expand Deployment Servers to see a list of the default deployment servers for the project you selected.
+
+</li>
+</ol>
+<a name="1016532"></a>
+ 
+<H2>FTP servers</H2>
+<p>If you have added an FTP server using Allaire FTP &amp; RDS, you will need to enter the server information from the Projects tab to congiure the server for deployment.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add an FTP server for deplyment:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click Deployment Servers and choose Add FTP Server to see the Configure FTP Server dialog box.
+
+
+<p><img src="../images/configure_ftp_server.gif">
+
+
+
+</p></li>
+<li>Enter the following information for the server you want to connect to:
+
+<ul>
+<a name="1020106"> </a>
+<li><strong>Description</strong> -- A descriptive name that will be displayed in the Universal Files tab and in Windows Explorer.
+
+<a name="1020109"> </a>
+</li>
+<li><strong>Host Name</strong> -- The server's domain name, such as <code>allaire.com</code>, or an IP address. Servers that include <code>ftp</code> as part of the domain name require that you enter the complete name, such as ftp.somesite.com. 
+<a name="1020111"> </a>
+</li>
+<li><strong>Initial Directory</strong> -- This entry is optional for accounts that default to the root directory of the FTP server, but is required if the account specifies an initial directory. 
+<a name="1020113"> </a>
+</li>
+<li><strong>Relative from server-assigned directory</strong> -- Check the box to specify whether the initial directory should be set from the server-assigned user directory or from the server root.
+<a name="1020115"> </a>
+</li>
+<li><strong>Username</strong> -- The login name for the account used to access the remote server or "anonymous" for anonymous FTP servers. You will be prompted for a username at login if this field is left blank.
+<a name="1020117"> </a>
+</li>
+<li><strong>Password</strong> -- The password for the account used to access the remote server. You will be prompted for a password at login if this field is left blank.
+<a name="1020118"> </a>
+</li>
+<li><strong>Root URL</strong> -- Enter the http:// address of the site. This entry allows you to browse files that were opened from the remote server, edited, and saved.
+<a name="1020119"> </a>
+</li>
+<li><strong>Remote Port</strong> -- The port used by the FTP server. Use the default 21 unless another is specified by the server administrator or internet service provider.
+<a name="1020121"> </a>
+</li>
+<li><strong>Request Timeout</strong> -- Set a value for the amount of time Studio waits for a server connection to complete.
+<a name="1020123"> </a>
+</li>
+<li><strong>Assume UTC file times</strong> -- Check this box if you see incorrect date/time information for files on the FTP server. It adjust for servers that use the Universal Coordinated Time format. 
+<a name="1020125"> </a>
+</li>
+<li><strong>Disable passive mode</strong> -- Check this box if the server does not use passive connections. 
+</li>
+</ul>
+</li>
+<li>Click OK to close the dialog box and add the server to the Deployment Servers list.
+
+</li>
+</ol>
+<a name="1020127"></a>
+ 
+<H3></H3>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>FTP server connection requirements vary greatly. The instructions above 
+work in the majority of cases. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1020743"></a>
+ 
+<H2>RDS servers</H2>
+<p>If you have added an RDS server using Allaire FTP &amp; RDS, you will need to enter the server information from the Projects tab to configure the server for deployment.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add an RDS server for deployment:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click Deployment Servers and choose Add RDS Server.
+
+
+<p><img src="../images/configure_rds_server.gif">
+
+
+
+</p></li>
+<li>Complete the Remote Host fields in the Configure RDS Server dialog:
+
+<ul>
+<a name="1020682"> </a>
+<li><strong>Description</strong> -- The name that you want to appear in the server list.
+
+<a name="1020685"> </a>
+</li>
+<li><strong>Host Name</strong> -- The server domain name, such as <code>www.allaire.com</code> or an IP address.
+<a name="1020686"> </a>
+</li>
+<li><strong>Port</strong> -- The Web server port. Use the default 80 unless another port is specified by the server administrator or ISP.
+<a name="1020688"> </a>
+</li>
+<li><strong>Use Secure Sockets Layer</strong> (SSL) -- Allows exchanges between Studio and the server to be encrypted via SSL.
+</li>
+</ul>
+</li>
+<li>Complete the ColdFusion RDS Security fields:
+
+<ul>
+<a name="1020692"> </a>
+<li><strong>User Name</strong> -- Required if the server is password-protected. 
+
+<a name="1020694"> </a>
+</li>
+<li><strong>Password</strong> -- Required if the server is password-protected. Open the ColdFusion Administrator Server &gt; Basic Security page to edit or disable the Studio password.
+</li>
+</ul>
+</li>
+<li>Check <strong>Prompt for Password</strong> to enable these entries.
+
+</li>
+<li>Click OK to complete the dialog.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set server properties:
+</td>
+</tr>
+</table>
+</div><p>You can set server properties from Projects tab the same as you would from the Universal Files tab.</p><ol>
+<li class="first">Right-click the server you want to change and choose Properties from the menu to see the Configure FTP Server dialog box.
+
+
+</li>
+<li>Make any changes necessary and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove a server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Expand Deployment Servers.
+
+
+</li>
+<li>Right-click the server you want to remove and click Remove Server.
+
+<p>You are asked to confirm that you want to remove the server.
+</p></li>
+<li>Click Yes.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Deploying_Projects/deployment3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Deploying_Projects/deployment5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:53 -->
+</body>
+</html>

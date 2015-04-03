@@ -1,0 +1,205 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Version Information</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0313.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0316.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019070"></a>
+ <H1>ColdFusion Version Information</H1>
+
+
+
+<p>The Version Info Administrator page provides ColdFusion Server profile information. The values shown correspond to several ColdFusion server variables as follows:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Windows NT Server Information Variables&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Variable</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.ProductName
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the ColdFusion product name, for example, <strong>ColdFusion Engine</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.ProductVersion
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+<code></code>Stores ColdFusion product release information, for example, <strong>4,0,1,0</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.ProductLevel
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores ColdFusion product level information, for example, <strong>Professional</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.SerialNumber
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores ColdFusion serial number information.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the server operating system name, for example, <strong>Windows NT</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.Version
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the operating system version, for example, <strong>4.5</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.AdditionalInformation
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores additional information about the operating system, for example, <strong>Service Pack 4</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.BuildNumber
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the build number of the host operating system, for example, <strong>1381</strong>.
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1030777"></a>
+ 
+<H2>Solaris version information</H2>
+<p>On Solaris, these server variables store slightly different information:</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Solaris Server Information Variables&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Variable</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.ProductName 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the ColdFusion product name, for example, <strong>ColdFusion Engine</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.ProductVersion
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores ColdFusion product release information, for example, <strong>4, 0, 1, 0</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.ProductLevel
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores ColdFusion product level information, for example, <strong>Enterprise</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.ColdFusion.SerialNumber
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores ColdFusion serial number information. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the server operating system name, for example, <strong>UNIX</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.Version
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the operating system version, for example, <strong>5.5.1</strong>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.AdditionalInformation
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores additional information about the operating system, for example, <strong>SunOS</strong>. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server.OS.BuildNumber
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Stores the build number of the host operating system, for example, <strong>Generic_103640-19</strong>.
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0313.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0316.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

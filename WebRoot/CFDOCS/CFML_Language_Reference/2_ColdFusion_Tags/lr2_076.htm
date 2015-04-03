@@ -1,0 +1,155 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFREGISTRY ACTION="GetAll"</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_075.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_077.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1972155"></a>
+ <H1>CFREGISTRY ACTION="GetAll"</H1>
+
+
+
+<p>Use CFREGISTRY with the GetAll action to return all registry keys and values defined in a branch. You can access these values as you would any record set.</p><a name="1972157"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFREGISTRY ACTION="GetAll"
+    BRANCH="branch"
+    TYPE="data type"
+    NAME="query name" 
+    SORT="criteria"&gt;
+</PRE><a name="1972159"></a>
+<h4> BRANCH</h4>
+<p>Required. The name of the registry branch containing the keys or values you want to access. </p><a name="1972161"></a>
+<h4> TYPE</h4>
+<p>Optional. The type of data you want to access:</p><ul>
+<a name="1972163"> </a>
+<li>String -- Return string values (default).
+
+<a name="1972164"> </a>
+</li>
+<li>DWord -- Return DWord values.
+<a name="1972165"> </a>
+</li>
+<li>Key -- Return keys.
+<a name="1972166"> </a>
+</li>
+<li>Any -- Return keys and values.
+</li>
+</ul>
+<a name="1972167"></a>
+<h4> NAME</h4>
+<p>Required. The name of the record set to contain returned keys and values.</p><a name="1972169"></a>
+<h4> SORT</h4>
+<p>Optional. Sorts query column data (case-insensitive). Sorts on Entry, Type, and Value columns as text. Specify any combination of columns from query output in a comma separated list. ASC (ascending) or DESC (descending) can be specified as qualifiers for column names. ASC is the default. For example:</p><pre>Sort="value DESC, entry ASC"
+</pre><a name="1972172"></a>
+ 
+<H3>Usage</H3>
+<p>CFREGISTRY returns #Entry#, #Type#, and #Value# in a record set that you can access through tags such as CFOUTPUT. To fully qualify these variables use the record set name, as specified in the NAME attribute.</p><p>If #Type# is a key, #Value# is an empty string.</p><p>If you specify Any for TYPE, GetAll also returns binary registry values. For binary values, the #Type# variable contains UNSUPPORTED and #Value# is blank.</p><a name="2045180"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfregistry
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example uses CFREGISTRY with the GetAll Action  ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFREGISTRY ACTION="GetAll"&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;CFREGISTRY ACTION="GetAll"
+  BRANCH="HKEY_LOCAL_MACHINE\Software\Microsoft\Java VM" 
+  TYPE="Any" NAME="RegQuery"&gt;
+&lt;P&gt;
+&lt;H1&gt;CFREGISTRY ACTION="GetAll"&lt;/H1&gt;
+&lt;CFTABLE QUERY="RegQuery" COLHEADERS HTMLTABLE BORDER="Yes"&gt;
+&lt;CFCOL HEADER="&lt;B&gt;Entry&lt;/b&gt;" WIDTH="35" TEXT="#RegQuery.Entry#"&gt;
+&lt;CFCOL HEADER="&lt;B&gt;Type&lt;/b&gt;" WIDTH="10" TEXT="#RegQuery.Type#"&gt;
+&lt;CFCOL HEADER="&lt;B&gt;Value&lt;/b&gt;" WIDTH="35" TEXT="#RegQuery.Value#"&gt;
+&lt;/CFTABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfregistry
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_075.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_077.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

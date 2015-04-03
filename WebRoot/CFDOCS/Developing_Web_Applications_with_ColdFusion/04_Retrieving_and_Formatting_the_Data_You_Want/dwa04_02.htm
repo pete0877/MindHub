@@ -1,0 +1,327 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Forms to Specify the Data to Retrieve</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Retrieving and Formatting the Data You Want</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018832"></a>
+ <H1>Using Forms to Specify the Data to Retrieve</H1>
+
+
+
+<p>Until now, you've retrieved all of the records from a table. However, there are many instances when you'll want to retrieve data based on certain criteria. For example, you may want to see records for everyone in a particular department, everyone in a particular town whose last name is Smith, or books by a certain author.</p><p>You can use forms in ColdFusion applications to allow users to specify what data they want to retrieve in a query.</p><p>When you submit a form, you pass the variables to an associated page, called an action page, where some type of processing takes place. </p><p><img src="../images/actionpages.gif">
+
+
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Because forms are not ColdFusion-specific, the syntax and examples that 
+follow provide you with just enough detail to get going with ColdFusion. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1013691"></a>
+ 
+<H2>FORM tag syntax</H2>
+<pre>&lt;FORM ACTION="actionpage.cfm" METHOD="Post"&gt;
+    ...
+&lt;/FORM&gt;
+</pre><ul>
+<li>Use the ACTION attribute to specify an action page to which you pass form variables for processing.
+
+</li>
+<li>Use the METHOD attribute to specify how the variables are submitted from the browser to the action page on the server. 
+<p>All ColdFusion forms must be submitted with an attribute setting of 
+METHOD="Post".
+</p></li>
+</ul>
+<a name="1013681"></a>
+ 
+<H2>Form Controls</H2>
+<p>Within the form, you'll describe the form controls needed to gather and submit user input. There are a variety of form controls types available. You choose form control input types based on the type of input the user should provide.</p><p><img src="../images/form.gif">
+
+
+</p><a name="1012411"></a>
+ 
+<H3><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>HTML Form Controls</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Control</strong>
+</th><th align="left">
+<strong>Code</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Text control
+</td><td valign="top"><PRE>&lt;INPUT TYPE="Text" NAME="ControlName" SIZE="Value" MAXLENGTH="Value"&gt;
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Radio buttons
+</td><td valign="top"><PRE>&lt;INPUT TYPE="Radio" NAME="ControlName" VALUE="Value1"&gt;DisplayName1
+&lt;INPUT TYPE="Radio" NAME="ControlName" VALUE="Value2"&gt;DisplayName2
+&lt;INPUT TYPE="Radio" NAME="ControlName" VALUE="Value3"&gt;DisplayName3
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Select box
+</td><td valign="top"><pre>&lt;SELECT NAME="ControlName"&gt;
+    &lt;OPTION VALUE="Value1"&gt;DisplayName1
+    &lt;OPTION VALUE="Value2"&gt;DisplayName2
+    &lt;OPTION VALUE="Value3"&gt;DisplayName3
+&lt;/SELECT&gt;
+</pre></td></tr>
+<tr valign="top"><td valign="top">
+Check box
+</td><td valign="top"><PRE>&lt;INPUT TYPE="Checkbox" NAME="ControlName" VALUE="Yes|No"&gt;Yes
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Reset button
+</td><td valign="top"><PRE>&lt;INPUT TYPE="Reset" NAME="ControlName" VALUE="DisplayName"&gt;
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Submit button
+</td><td valign="top"><PRE>&lt;INPUT TYPE="Submit" NAME="ControlName" VALUE="DisplayName"&gt;
+</PRE></td></tr>
+
+</table>
+</div>
+</H3>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a form:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page, using Studio.
+
+
+</li>
+<li>Edit the page so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Input form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;!--- define the action page in the form tag. The form variables will 
+pass to this page when the form is submitted ---&gt;
+
+&lt;form action="actionpage.cfm" method="post"&gt;
+
+&lt;!-- text box --&gt;
+&lt;p&gt;
+First Name: &lt;INPUT TYPE="Text" NAME="FirstName" SIZE="20" 
+MAXLENGTH="35"&gt;&lt;br&gt;
+Last Name: &lt;INPUT TYPE="Text" NAME="LastName" SIZE="20" 
+MAXLENGTH="35"&gt;&lt;br&gt;
+Salary: &lt;INPUT TYPE="Text" NAME="Salary" SIZE="10" MAXLENGTH="10"&gt;
+&lt;/P&gt;
+
+&lt;!-- select box --&gt;
+City
+&lt;SELECT NAME="City"&gt;
+    &lt;OPTION VALUE="Arlington"&gt;Arlington
+    &lt;OPTION VALUE="Boston"&gt;Boston
+    &lt;OPTION VALUE="Cambridge"&gt;Cambridge
+    &lt;OPTION VALUE="Minneapolis"&gt;Minneapolis
+    &lt;OPTION VALUE="Seattle"&gt;Seattle
+&lt;/SELECT&gt;
+
+&lt;!-- radio buttons --&gt;
+&lt;p&gt;
+Department:&lt;br&gt;
+&lt;input type="radio" name="Department" value="Training"&gt;Training&lt;br&gt;
+&lt;input type="radio" name="Department" value="Sales"&gt;Sales&lt;br&gt;
+&lt;input type="radio" name="Department" value="Marketing"&gt;Marketing&lt;br&gt;
+&lt;/p&gt;
+
+&lt;!-- check box --&gt;
+&lt;P&gt;
+Contractor? &lt;input type="checkbox" name="Contractor" value="Yes" 
+checked&gt;Yes
+&lt;/P&gt;
+
+&lt;!-- reset button --&gt;
+&lt;INPUT TYPE="Reset" NAME="ResetForm" VALUE="Clear Form"&gt;
+
+&lt;!-- submit button --&gt;
+&lt;INPUT TYPE="Submit" NAME="SubmitForm" VALUE="Submit"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>formpage.cfm</code> within the <code>myapps</code> directory under your Web root directory. 
+
+</li>
+<li>View the form in a browser.
+
+<p>The form appears in the browser.
+</p><p>Remember that you need an action page in order to submit values; you will create 
+one later in this chapter.
+</p></li>
+</ol>
+<a name="1013876"></a>
+ 
+<H3>Code Review</H3>
+<p>A form appears on the page, ready for user input.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;FORM ACTION="actionpage.cfm" METHOD="POST"&gt;
+</PRE></td><td valign="top">
+Gather the information from this form using the Post method, and do something with it on the page actionpage.cfm.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;INPUT TYPE="Text" NAME="FirstName" SIZE="20" 
+MAXLENGTH="35"&gt;
+</PRE></td><td valign="top">
+Create a text box called FirstName where users can enter their first name. Make it 20 characters wide, but allow input of up to 35 characters.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;INPUT TYPE="Text" NAME="LastName" SIZE="20" 
+MAXLENGTH="35"&gt;
+</PRE></td><td valign="top">
+Create a text box called LastName where users can enter their first name. Make it 20 characters wide, but allow input of up to 35 characters.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;INPUT TYPE="Text" NAME="Salary" SIZE="10" 
+MAXLENGTH="10"&gt;
+</PRE></td><td valign="top">
+Create a text box called Salary where users can enter a salary to look for. Make it 10 characters wide, and allow input of up to 10 characters.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;SELECT NAME="City"&gt;
+    &lt;OPTION VALUE="Arlington"&gt;Arlington
+    &lt;OPTION VALUE="Boston"&gt;Boston
+    &lt;OPTION VALUE="Cambridge"&gt;Cambridge
+    &lt;OPTION VALUE="Minneapolis"&gt;Minneapolis
+    &lt;OPTION VALUE="Seattle"&gt;Seattle
+&lt;/SELECT&gt;
+</PRE></td><td valign="top">
+Create a drop down select box named City and populate it with the values "Arlington," "Boston," "Cambridge," "Minneapolis," and "Seattle."
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;input type="checkbox" name="Contractor" 
+value="Yes|No" checked&gt;Yes
+</PRE></td><td valign="top">
+Create a checkbox that allows users to specify whether they want to list employees who are contractors. Have the box checked by default.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;INPUT TYPE="Reset" NAME="ResetForm" 
+VALUE="Clear Form"&gt;
+</PRE></td><td valign="top">
+Create a reset button to allow users to clear the form. Put the text "Clear Form" on the button.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;INPUT TYPE="Submit" NAME="SubmitForm" 
+VALUE="Submit"&gt;
+</PRE></td><td valign="top">
+Create a submit button to send the values users enter to the action page for processing. Put the text "Submit" on the button.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1012527"></a>
+ 
+<H2>Form Notes and Considerations</H2>
+<ul>
+<li>To make the coding process easy to follow, name form controls the same as target database fields.
+
+</li>
+<li>Limit radio buttons to three-to-five mutually exclusive options. 
+<p>If you need more than that many options, consider a dropdown select box.
+</p></li>
+<li>Use select boxes to allow the user to choose multiple items.
+</li>
+<li>All the data that you collect on a form is automatically passed as form variables to the associated action page.
+</li>
+<li>Checkboxes and radio buttons do not pass to action pages unless they are selected on a form. In fact, if you try to reference these variables on the action page, you will receive an error if they are not present.
+</li>
+<li>You can dynamically populate dropdown select boxes using query data. See <a href="../05_Making_Variables_Dynamic/dwa05_02.htm#1012163">&quot;Dynamically Populating Select Boxes&quot;</a> for details.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:42 -->
+</body>
+</html>

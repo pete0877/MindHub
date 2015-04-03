@@ -1,0 +1,139 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Started with COM/DCOM</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa195.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 19	:&nbsp;&nbsp;Using CFOBJECT to Invoke Component Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998244"></a>
+ <H1>Getting Started with COM/DCOM</H1>
+
+
+
+<p>ColdFusion is an automation (late-binding) COM client. This implies that the COM object has to support the IDispacth interface, and that arguments for methods and properties be standard automation types. Since ColdFusion is a typeless language, it uses the object's type information to correctly set up the arguments on call invocations. Any ambiguity in the object's data-types could lead to unexpected behavior.</p><p>It is important to use server-side COM objects in ColdFusion, that is, they should not have a graphical user interface. If you invoke an object with a graphical interface in your ColdFusion application, a window for the component might appear on the Web server desktop, not on the user's desktop. This could tie up ColdFusion server threads and result in further Web server requests not being serviced.</p><p>ColdFusion can call Inproc, Local, or remote COM objects. The attributes specified in the CFOBJECT tag determine which type of object is called.</p><a name="998248"></a>
+ 
+<H2>Requirements for COM</H2>
+<p>To make use of COM components in your ColdFusion application, you need at least the following items:</p><ul>
+<li>The Microsoft OLE/COM Object Viewer, available from <a href="http://www.microsoft.com/com/resource/oleview.asp">Microsoft</a>. It is a handy tool for viewing registered COM objects.
+
+</li>
+<li>The COM objects you want to use in your ColdFusion application pages. These are typically DLL or EXE files. These components should allow late binding, that is, they implement the IDispatch interface. Object Viewer allows you to view the object's class information so that you can properly define the CLASS attribute for the CFOBJECT tag. It also displays the object's supported interfaces, which allows you to discover the properties and methods (for the IDispatch interface) of the object.
+</li>
+</ul>
+<a name="998259"></a>
+ 
+<H2>Registering the object</H2>
+<p>Once you've acquired the object you want to use, you may need to register it with Windows in order for ColdFusion (or anything else) to find it. Some objects may be deployed with their own setup programs that register objects automatically, while others may require manual registration.</p><p>Inproc object servers (*.dll, *.ocx) can be registered manually by using the "regsvr32.exe" utility using the following form:</p><pre>regsvr32 c:\path\servername.dll
+</pre><p>Local servers (*.exe) are typically registered either by simply starting them or specifying a command line parameters like:</p><pre>C:\pathname\servername.exe -register
+</pre><a name="998268"></a>
+ 
+<H2>Finding the component ProgID and methods</H2>
+<p>Your COM object should provide documentation explaining each of the component's methods and the ProgID. With this information, you're ready to work with the CFOBJECT tag. If you don't have documentation, use the Object Viewer to view the component's interface.</p><a name="998270"></a>
+ 
+<H3>Using the OLE/COM Object Viewer</H3>
+<p>The OLE/COM Object Viewer installation installs the executable by default as <code>\mstools\bin\oleview.exe</code>. You use the Object Viewer to retrieve a COM object's Program ID as well as its methods and properties.</p><p>Once you've installed a COM object, make sure you register it using the regsvr32.exe utility. Otherwise you won't find the object in the Object Viewer. The Object Viewer retrieves all COM objects and controls from the Registry and presents the information in a simple format, sorted into groups for easy viewing.</p><p>By selecting the category and then the component, you can see the Program ID of the COM object you want to use. The Object Viewer also gives you access to options for the operation of the object.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view an object's properties:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Object Viewer and scroll to the object you want to examine.<img src="../images/oleviewer.gif">
+
+
+
+
+
+</li>
+<li>Select and expand the object in the Object Viewer.
+
+</li>
+<li>Right-click the object to view it. If you view the TypeInfo, you'll see the object's methods and properties. Some objects will not have any access to the TypeInfo area. This is determined when an object is built and by the language used.<img src="../images/methods.gif">
+
+
+
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa195.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

@@ -1,0 +1,163 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ASin</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_036.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_038.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1623656"></a>
+ <H1>ASin</H1>
+
+
+
+<p>Returns the arcsine of a number in radians. The arcsine is the angle whose sine is <em>number</em>.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_219.htm#1002369">Sin</a>, <a href="../3_ColdFusion_Functions/lr3_055.htm#997601">Cos</a>, <a href="../3_ColdFusion_Functions/lr3_189.htm#1001598">Pi</a>, and <a href="../3_ColdFusion_Functions/lr3_236.htm#1256168">Tan</a>.
+</p>
+
+<a name="1623671"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ASin</strong>(<em>number</em>)
+</PRE><a name="1624284"> </a>
+<h5 class="param"> number</h5>
+<p class="param">Sine of the angle that is to be calculated. This value must be between 1 and -1.</p><a name="1624934"></a>
+ 
+<H3>Usage</H3>
+<p>The range of the result is -<img src="../images/pi.gif">/2 to <img src="../images/pi.gif">/2 radians. To convert degrees to radians, multiply degrees by <img src="../images/pi.gif">/180. To convert radians to degrees, multiply radians by 180/<img src="../images/pi.gif">.</p><a name="1798878"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ASin
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to use ASin ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ASin Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;ASin Example&lt;/H3&gt;
+&lt;!--- output its arcsine value ---&gt;
+&lt;CFIF IsDefined("FORM.SinNum")&gt;
+    &lt;CFIF IsNumeric(FORM.SinNum)&gt;
+        &lt;CFIF FORM.SinNum LESS THAN OR EQUAL TO 1&gt;
+            &lt;CFIF FORM.SinNum GREATER THAN OR EQUAL TO -1&gt;
+                ASin(&lt;CFOUTPUT&gt;#FORM.SinNum#&lt;/CFOUTPUT&gt;) =
+                  &lt;CFOUTPUT&gt;#Evaluate(ASin(FORM.sinNum))# Radians&lt;/
+CFOUTPUT&gt;
+                  &lt;BR&gt;
+                  or
+                  &lt;BR&gt;ASin(&lt;CFOUTPUT&gt;#FORM.SinNum#&lt;/CFOUTPUT&gt;) =
+                  &lt;CFOUTPUT&gt;#Evaluate(ASin(FORM.sinNum) * 180/Pi())# 
+Degrees&lt;/CFOUTPUT&gt;
+            &lt;CFELSE&gt;
+&lt;!--- if it is less than negative one, output an error message ---&gt;
+            &lt;H4&gt;Please enter the sine of the angle that is to be 
+calculated in degrees and radians. This value must be between 1 and -1, 
+inclusive.&lt;/H4&gt;
+            &lt;/CFIF&gt;
+        &lt;CFELSE&gt;
+&lt;!--- if it is greater than one, output an error message ---&gt;
+        &lt;H4&gt;Please enter the sine of the angle that is to be calculated in 
+degrees and radians. This value must be between 1 and -1, inclusive.&lt;/H4&gt;
+        &lt;/CFIF&gt;        
+    &lt;CFELSE&gt;
+&lt;!--- if it is empty, output an error message ---&gt;
+        &lt;H4&gt;Please enter the sine of the angle that is to be calculated in 
+degrees and radians. This value must be between 1 and -1, inclusive.&lt;/H4&gt;    
+    &lt;/CFIF&gt;    
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="asin.cfm" METHOD="POST"&gt;
+&lt;P&gt;Type in a number to get its arcsine in Radians and Degrees.
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="sinNum" size="25"&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" NAME=""&gt; &lt;INPUT TYPE="RESET"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ASin
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_036.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_038.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

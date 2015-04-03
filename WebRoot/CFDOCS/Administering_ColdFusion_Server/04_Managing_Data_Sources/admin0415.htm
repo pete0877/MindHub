@@ -1,0 +1,388 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to DB2 Data Sources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0414.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0416.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1080837"></a>
+ <H1>Connecting to DB2 Data Sources</H1>
+
+
+
+<p>You can configure DB2 ColdFusion data sources for Windows NT and UNIX, using both ODBC and native drivers.</p><a name="1083083"></a>
+ 
+<H2>Configuring DB2 Options (Windows)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a Windows NT server, you can configure DB2 ColdFusion data sources using a native driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Driver: DB2 Universal Database 5.2/6.1 Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion options for the DB2 Universal Database 5.2/6.1 native driver. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information about adding data sources to ColdFusion.</p><a name="1089389"></a>
+ 
+<H2>Configuring DB2 Options (UNIX)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a Solaris or Linux server, you can configure DB2 ColdFusion data sources using a native driver. On a Solaris server, you can also use an ODBC driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Driver: DB2 Universal Database 5.2/6.1 Options (Solaris, Linux)
+</td>
+</tr>
+</table>
+</div><p>ColdFusion native drivers are the same for both Windows NT and UNIX. To see ColdFusion options for the DB2 Universal Database 5.2/6.1 native driver, see the table in <a href="../04_Managing_Data_Sources/admin0415.htm#1083089">&quot;Native Driver: DB2 Universal Database 5.2/6.1 Options (Windows)&quot;</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: DB2/6000 Options (Solaris)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion options for the DB2/6000 ODBC driver. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information about adding data sources to ColdFusion.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT IBM DB2/6000 ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the DB2/6000 database. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Cursors
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Preserve cursors at the end of each transaction --Enable this option if you want cursors to be held at the current position when the transaction ends. Doing so may impact the performance of your database operations.
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1089486"></a>
+ 
+<H2>Configuring System and Services Files (UNIX)</H2>
+<p>Add the following settings to the <code>/etc/system</code> file. These settings are necessary for the Client Enabler software libraries to work.</p><pre>set msgsys:msqginfo_msgmax = 65535
+set msgsys:msqginfo_msgmnb = 65535
+set msgsys:msqginfo_msgseg = 8192
+set msgsys:msqginfo_msgssz = 16
+</pre><p>You must reboot the server for these settings to take effect.</p><p>Add the following settings to the <code>/etc/services</code> file:</p><pre>dbserver1 50000/tcp # DB2 connection service port
+<ul>
+<a name="1089496"> </a>
+<li><code>dbserver1</code> is the Connection Service name 
+
+<a name="1089497"> </a>
+</li>
+<li><code>50000</code> is the port number for the Connection Port 
+<a name="1089498"> </a>
+</li>
+<li><code>tcp</code> is the communication protocol that you are using 
+</li>
+</ul>
+</pre><p>The port number used on the client must match the port number used on the server. If you are planning on supporting a UNIX client that is using Network Information Services (NIS), you must update the services file located on your NIS master server. </p><a name="1089579"></a>
+ 
+<H2>Installing and Configuring DB2 Client Enabler (UNIX)</H2>
+<p>Before you can create a ColdFusion data source with the DB2 native driver, you must install the DB2 version 5.2 Client Enabler Software and create an instance. The client software can be found on the DB2 version 5.2 Software Development Kit CDROM.</p><p>Refer to the documentation that comes with the software for details. You should be familiar with DB2 to successfully complete this process. Gather the following information before you begin:</p><ul>
+<a name="1089582"> </a>
+<li>Host name where the DB2 database server resides 
+
+<a name="1089583"> </a>
+</li>
+<li>Node name 
+<a name="1089584"> </a>
+</li>
+<li>Database name 
+<a name="1089585"> </a>
+</li>
+<li>Database alias 
+<a name="1089586"> </a>
+</li>
+<li>Database userid and password 
+<a name="1089587"> </a>
+</li>
+<li>Service name from the <code>/etc/services</code> file on client and host
+</li>
+</ul>
+<a name="1089589"></a>
+ 
+<H3>Set environment variables </H3>
+<p>After you install the Client Enabler, there will be a directory with some scripts in it that you need to run to set up your environment. Environment variables need to be set to run the command line tool db2. Look in the <code>&lt;installdir&gt;/sqllib</code> directory for the db2profile and db2cshrc scripts.</p><p>For sh or ksh run:</p><pre>.&lt;installdir&gt;/sqllib/db2profile
+</pre><p>For csh run:</p><pre>source &lt;installdir&gt;/sqllib/db2cshrc
+</pre><a name="1089595"></a>
+ 
+<H3>Catalog a TCP/IP node </H3>
+<p>You must add an entry to the client's node directory to describe the remote node. </p><p>This entry specifies the chosen alias (<code>node_name</code>), the hostname (or ip_address), and the servicename (or port_number) that the client will use to access the remote server. </p><ol>
+<li class="first">Run the db2 command line utility db2
+
+
+</li>
+<li>At the db2 prompt enter the following:
+
+<pre>db2 =&gt; catalog tcpip node dbserver1node remote db2unixhost server 
+db2server1
+db2 =&gt;terminate
+</pre></li>
+</ol>
+<a name="1089603"></a>
+ 
+<H3>Catalog the database </H3>
+<p>Before a client application can access a remote database, the database must be cataloged on the server node and on any client nodes that will connect to it. When you create a database, it is automatically cataloged on the server with the database alias (<code>database_alias</code>) the same as the database name (<code>database_name</code>). The information in the database directory, along with the information in the node directory, is used on the client to establish a connection to the remote database. </p><p>You must add an entry to the client's node directory to describe the remote node.</p><ol>
+</li>
+<li>Run the db2 command line utility db2.
+
+</li>
+<li>At the db2 prompt enter the following:
+
+<pre>db2 =&gt; catalog database sample as sample1 at node dbserver1node
+db2 =&gt;terminate
+</pre></li>
+</ol>
+<a name="1089612"></a>
+ 
+<H3>Test the connection </H3>
+<p>You are now ready to test the connection with a known table. The following procedure uses a table that is installed with DB2.</p><ol>
+</li>
+<li>Run the DB2 command line utility db2
+
+</li>
+<li>At the db2 prompt enter the following:
+
+<pre>db2 =&gt; connect to sample1 user username using password
+db2 =&gt; select * from employee
+db2 =&gt; terminate
+</pre></li>
+</ol>
+<a name="1089620"></a>
+ 
+<H2>Data source and start script settings for DB2 (UNIX)</H2>
+<p>This section describes changes you must make to the ColdFusion start script and </p><p>Here are the environment variables that need to be set in the <code>&lt;installdir&gt;/coldfusion/bin/start</code> script file.</p><pre># DB2 environment variables
+DB2INSTANCE=db2inst1
+INSTHOME=/export/home/db2inst1
+# Set library search path
+#
+# NOTE: Add your database client library directory to the FRONT of this 
+list
+#
+# Example: 
+#
+LD_LIBRARY_PATH=/usr/dt/lib:/lib:/usr/openwin/lib:$INSTHOME/sqllib/
+lib:$CFHOME/lib
+#
+# This is the list of variables that ColdFusion will see
+# Add any special Database environment variables here
+#
+VAR_LIST="LD_LIBRARY_PATH DB2INSTANCE INSTHOME CFHOME SYBASE ORACLE_HOME 
+INFORMIXDIR INFORMIXSERVER II_SYSTEM"
+</pre><a name="1089639"></a>
+ 
+<H3>Data source settings for the ColdFusion DB2 native driver</H3>
+<p>The data source setting for the native driver need to point to the database name, and include a valid DB2 login name and password. The catalog procedures described above make the connection through the DB2 Client Enabler software.</p><a name="1089713"></a>
+ 
+<H2>DB2 Binding and Privileges for ODBC (UNIX)</H2>
+<p>Access to DB2 requires that you bind and grant privileges to the MERANT bind files. To locate the bind files, enter the DB2 command line processor by typing <code>db2</code> from a shell prompt. The bind files are located in the <code>&lt;installdir&gt;/coldfusion/odbc/db2</code> directory. Before you proceed with the steps in this section, set up your environment by running the <code>db2profile</code> or <code>db2csh</code> script as described in <a href="../04_Managing_Data_Sources/admin0415.htm#1089589">&quot;Set environment variables&quot;</a>. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To connect to your DB2 database
+</td>
+</tr>
+</table>
+</div><p>From the DB2 command line processor, connect your DB2 database using the following syntax:</p><pre>db2=&gt; CONNECT TO &lt;database_name&gt; USER &lt;userid&gt; USING &lt;password&gt;
+</pre>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To bind the MERANT SQL files to the DB2 database
+</td>
+</tr>
+</table>
+</div><p>The next step is to bind the MERANT SQL files to the database. You can use special options on the BIND command, based on your installation. Consult the DB2 <em>Command Reference</em> for a detailed list of BIND options. To bind the files, enter the commands listed in the following sections. To exit the DB2 command processor, enter the verb <code>quit</code>.</p><pre>db2=&gt; BIND iscsso.bnd blocking all grant public
+db2=&gt; BIND isrrso.bnd blocking all grant public
+db2=&gt; BIND isurso.bnd blocking all grant public
+db2=&gt; BIND iscswhso.bnd blocking all grant public
+db2=&gt; BIND isrrwhso.bnd blocking all grant public
+db2=&gt; BIND isurwhso.bnd blocking all grant public
+</pre><a name="1089798"></a>
+ 
+<H2>Executing a DB2 Stored Procedure (Windows, UNIX)</H2>
+<p>Follow these steps to execute a DB2 stored procedure through ColdFusion. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To execute a DB2 stored procedure:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Precompile the source file. Use the PREP command for this. For example: <code>PREP C:\TEMP\OUTSRV.SQC</code>. 
+
+
+<p>When this command is executed (barring any errors) you should be left with a C 
+source file, for example, <code>OUTSRV.C
+</code></p></li>
+<li>Compile and link the .c file generated in step 1. At this point the .c file needs to be precompiled and this process will explode the source into the appropriate C code. Compile the C file and link to get .dll
+
+</li>
+<li>Place the library file (.dll) generated in step 2 in the appropriate directory on the server. For example, put the file on a server called DB2SERVER in the <code>C:\sqllib\function\</code> folder. It could also be put in the <code>C:\sqllib\function\unfenced\</code> folder.
+
+</li>
+<li>Run a CREATE PROCEDURE statement to register your stored procedure. 
+
+<ul>
+<a name="1089806"> </a>
+<li>The CREATE PROCEDURE statement creates a row in the database catalog (syscat.procedures table), making it visible to client applications, including ColdFusion Server. 
+
+<a name="1089807"> </a>
+</li>
+<li>The stored procedure's name is what you called it in your .SQC file. The example which follows calls the stored procedure outsrv. 
+<a name="1089808"> </a>
+</li>
+<li>The create procedure statement looks like this:
+<pre>    CREATE PROCEDURE server1
+    (OUT sal double, IN salind integer)
+    EXTERNAL NAME 'outsrv!outsrv'
+    LANGUAGE C
+    DETERMINISTIC
+    PARAMETER STYLE DB2DARI;
+</pre></li>
+</ul>
+</li>
+<li>Grant users who need to run the stored procedure permission to execute it:
+
+<pre>GRANT EXECUTE ON PACKAGE server1 TO PUBLIC;
+</pre></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Example
+</td>
+</tr>
+</table>
+</div><p>The following example demonstrates a CFSTOREDPROC tag that calls the stored procedure named outsrv. Note that the actual stored procedure name is case sensitive, as is the password parameter. </p><pre>&lt;CFSTOREDPROC PROCEDURE="outsrv" 
+    DATASOURCE="DB2SERVER" 
+    USERNAME="DB2" 
+    PASSWORD="DB2"&gt; 
+
+    &lt;CFPROCPARAM TYPE="OUT" 
+        CFSQLTYPE="CF_SQL_DOUBLE" 
+        VARIABLE="FOO" NULL="NO"&gt; 
+
+    &lt;CFPROCPARAM TYPE="IN" 
+        CFSQLTYPE="CF_SQL_INTEGER" 
+        VALUE="0" 
+        NULL="NO"&gt;
+
+&lt;/CFSTOREDPROC&gt; 
+
+&lt;CFOUTPUT&gt;#FOO#&lt;/CFOUTPUT&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0414.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0416.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

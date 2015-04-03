@@ -1,0 +1,298 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Dynamic SQL</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Making Variables Dynamic</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015842"></a>
+ <H1>Dynamic SQL</H1>
+
+
+
+<p>Embedding SQL queries that use dynamic parameters is a powerful mechanism for linking variable inputs to database queries. However, in more sophisticated applications, you will often want user inputs to determine not only the content of queries but also the structure of queries.</p><p>Dynamic SQL allows you to dynamically determine (based on runtime parameters) which parts of a SQL statement are sent to the database. So if a user leaves a search field empty, for example, you could simply omit the part of the WHERE clause that refers to that field. Or, if a user does not specify a sort order, the entire ORDER BY clause could be omitted.</p><p>Dynamic SQL is implemented in ColdFusion by using CFIF, CFELSE, CFELSEIF tags to control how the SQL statement is constructed, for example:</p><pre>&lt;CFQUERY NAME="<em>queryname</em>"
+    DATASOURCE="<em>datasourcename</em>"<em>&gt;
+</em>...<em>Base SQL statement
+</em>
+&lt;CFIF value operator value &gt;
+...<em>additional SQL
+</em>&lt;/CFIF&gt;
+
+&lt;/CFQUERY&gt;
+</pre><p>First, you need to create an input form, which asks for information about several fields in the Employees table. Instead of entering information in each field, a user may want to search on certain fields, or even on only one field. To search for data based on only the fields the user enters in the form, you use CFIF statements in the SQL statement.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create the input form:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Input form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;!--- Query the Employees table to be able to populate the form ---&gt;
+&lt;CFQUERY NAME="AskEmployees" DATASOURCE="CompanyInfo"&gt;
+SELECT      
+    FirstName, 
+    LastName, 
+    Salary, 
+    Contract
+FROM         Employees
+&lt;/CFQUERY&gt;
+
+&lt;!--- define the action page in the form tag. The form variables will 
+pass to this page when the form is submitted ---&gt;
+
+&lt;FORM ACTION="getemp.cfm" METHOD="post"&gt;
+
+&lt;!-- text box --&gt;
+&lt;P&gt;
+First Name: &lt;INPUT TYPE="Text" NAME="FirstName" SIZE="20" 
+MAXLENGTH="35"&gt;&lt;BR&gt;
+Last Name: &lt;INPUT TYPE="Text" NAME="LastName" SIZE="20" 
+MAXLENGTH="35"&gt;&lt;BR&gt;
+Salary: &lt;INPUT TYPE="Text" NAME="Salary" SIZE="10" MAXLENGTH="10"&gt;
+&lt;/P&gt;
+
+&lt;!-- check box --&gt;
+&lt;P&gt;
+Contractor? &lt;input type="checkbox" name="Contract" value="Yes" &gt;Yes 
+if checked
+&lt;/P&gt;
+
+&lt;!-- reset button --&gt;
+&lt;INPUT TYPE="reset" NAME="ResetForm" VALUE="Clear Form"&gt;
+
+&lt;!-- submit button --&gt;
+&lt;INPUT TYPE="submit" NAME="SubmitForm" VALUE="Submit"&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>askemp.cfm</code>.
+
+</li>
+</ol>
+<p>Once you have created the input form, you can then create the action page to process the user's request. This action page will determine where the user has entered search criteria and search based only on those criteria.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create the action page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Get Employee Data&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="CompanyInfo"&gt;
+<span class="codemark">    SELECT * 
+</span><span class="codemark">FROM Employees
+</span><span class="codemark">WHERE 0=0
+</span><span class="codemark">
+</span><span class="codemark">&lt;CFIF #Form.FirstName# is not ""&gt;
+</span><span class="codemark">AND Employees.FirstName LIKE '#form.FirstName#%'
+</span><span class="codemark">&lt;/CFIF&gt;
+</span>
+<span class="codemark">&lt;CFIF #Form.LastName# is not ""&gt;
+</span><span class="codemark">AND Employees.LastName LIKE '#form.LastName#%'
+</span><span class="codemark">&lt;/CFIF&gt;
+</span>
+<span class="codemark">&lt;CFIF #Form.Salary# is not ""&gt;
+</span><span class="codemark">AND Employees.Salary &gt;= #form.Salary#
+</span><span class="codemark">&lt;/CFIF&gt;
+</span>
+<span class="codemark">&lt;CFIF isDefined("Form.Contract") IS "YES"&gt;
+</span><span class="codemark">AND Employees.Contract = 'Yes'
+</span><span class="codemark">&lt;CFELSE&gt;
+</span><span class="codemark">AND Employees.Contract = 'No'
+</span><span class="codemark">&lt;/CFIF&gt;
+</span>
+&lt;/CFQUERY&gt;
+
+&lt;H3&gt;Employee Data Based on Criteria from Form&lt;/H3&gt;
+&lt;TABLE&gt;
+&lt;TR&gt;
+    &lt;TH&gt;First Name&lt;/TH&gt;
+    &lt;TH&gt;Last Name&lt;/TH&gt;
+    &lt;TH&gt;Salary&lt;/TH&gt;
+    &lt;TH&gt;Contractor&lt;/TH&gt;
+&lt;/TR&gt;
+&lt;CFOUTPUT QUERY="GetEmployees"&gt;
+&lt;TR&gt;
+    &lt;TD&gt;#FirstName#&lt;/TD&gt;
+    &lt;TD&gt;#LastName#&lt;/TD&gt;
+    &lt;TD&gt;#DollarFormat(Salary)#&lt;/TD&gt;
+    &lt;TD&gt;#Contract#&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/TABLE&gt;
+
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>getemp.cfm</code>.
+
+</li>
+<li>Open the file <code>askemp.cfm</code> in your browser and enter criteria into any fields, then submit the form.
+
+</li>
+<li>The results should meet the criteria you specify.
+
+</li>
+</ol>
+<a name="1013000"></a>
+ 
+<H3>Code Review</H3>
+<p>The action page <code>getemp.cfm</code> build a SQL statement dynamically based on what the user enters in the form page AskEmp.cfm.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>CFML Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>SELECT * 
+    FROM Employees
+    WHERE 0=0
+</PRE></td><td valign="top">
+Get all the records from the Employees table as long as 0=0.
+
+The WHERE 0=0 clause has no impact on the query submitted to the database. But if none of the conditions is true, it ensures that the WHERE clause does not result in a SQL syntax error.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFIF #Form.FirstName# is not ""&gt;
+    AND Employees.FirstName LIKE 
+'#form.FirstName#%'
+&lt;/CFIF&gt;
+</PRE></td><td valign="top">
+If the user entered anything in the FirstName text box in the form, add "AND Employees.FirstName LIKE `[<em>what the user entered in the FirstName text box</em>]%'" to the SQL statement.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFIF #Form.LastName# is not ""&gt;
+    AND Employees.LastName LIKE 
+'#form.LastName#%'
+&lt;/CFIF&gt;
+</PRE></td><td valign="top">
+If the user entered anything in the LastName text box in the form, add "AND Employees.LastName LIKE `[<em>what the user entered in the LastName text box</em>]%'" to the SQL statement.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFIF #Form.Salary# is not ""&gt;
+    AND Employees.Salary &gt;= 
+#form.Salary#
+&lt;/CFIF&gt;
+</PRE></td><td valign="top">
+If the user entered anything in the Salary text box in the form, add "AND Employees.Salary &gt;= <em>[what the user entered in the Salary text box]" </em>to the SQL statement.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFIF isDefined("Form.Contract") IS 
+"YES"&gt;
+    AND Employees.Contract = 'Yes'
+    &lt;CFELSE&gt;
+    AND Employees.Contract = 'No'
+&lt;/CFIF&gt;
+
+
+</PRE></td><td valign="top">
+If the user checked the Contractor check box, get data for the employees who are contractors, otherwise, get data for employees who are not contractors.
+</td></tr>
+
+</table>
+</div>
+</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:44 -->
+</body>
+</html>

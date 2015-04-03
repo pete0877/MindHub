@@ -1,0 +1,111 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Server-Side Source Control</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0323.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0325.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1002888"></a>
+ <H1>Configuring Server-Side Source Control</H1>
+
+
+
+<p>On Windows systems, you can configure ColdFusion Server to use Microsoft Visual SourceSafe for source code management. This allows ColdFusion Studio users to access source files through a ColdFusion RDS server. Please review your SourceSafe licensing agreement for guidelines on this configuration. </p><a name="1052826"></a>
+ 
+<H2>Requirements</H2>
+<p>You need the following software configuration for server-side source control with ColdFusion:</p><ul>
+<a name="1052830"> </a>
+<li>SourceSafe client software installed on the same server as ColdFusion Server.
+
+<a name="1052831"> </a>
+</li>
+<li>The account under which ColdFusion runs must have permission to access the SourceSafe server executables and files. Since the SourceSafe server may well be hosted on a remote (non-local) system, be sure that ColdFusion has been configured to run under an account other than the default system account. 
+</li>
+</ul>
+<p>In the ColdFusion Administrator, you enable server-side source control by entering values in two form fields:</p><ul>
+<a name="1052742"> </a>
+<li><strong>Path to SrcSafe.ini</strong> -- Enter the path to the local srcsafe.ini file. This is the file the local SourceSafe client uses for configuration. 
+
+<a name="1052956"> </a>
+</li>
+<li><strong>Working directory</strong> -- This is the directory the SourceSafe server uses when files are checked in and out. 
+</li>
+</ul>
+<p>In addition, you can set an Operation Timeout option that allows you to set the amount of time in seconds before a source control operation times out. Ordinarily, you won't have to change the default value. </p><p>Once you have the ColdFusion Server configured for server-side source control, Studio users can create a remote RDS server in Studio, and go about checking files in and out. For more information about source control configuration in ColdFusion Studio, please refer to Studio online documentation. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0323.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0325.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

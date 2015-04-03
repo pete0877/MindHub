@@ -1,0 +1,121 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building Custom CFAPI Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="996797"></a>
+<H1>Chapter 18	<br>
+Building Custom CFAPI Tags</H1>
+
+<p>For some applications, building executables to run with ColdFusion is the best solution. Perhaps the application requirements go beyond what is currently feasible in CFML. Or perhaps application performance can be improved for certain types of processing.</p><p>To meet these types of requirements, you can use the ColdFusion Extension Application Programming Interface (CFXAPI) to access ColdFusion functions.</p><p>While this chapter documents custom tag development using Microsoft Visual C++, or Java it is currently also possible to develop them in Inprise's Delphi.</p><a name="1011933"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa18_02.htm#1011955">What Are CFX Tags?</a>
+
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa18_03.htm#1012109">Before You Begin Developing CFX Tags in C++</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa18_04.htm#1013406">Using the Tag Wizard to create CFXs in C++</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa18_05.htm#1015548">Compiling C++ CFXs</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa18_06.htm#1013430">Debugging C++ CFXs</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa18_07.htm#1014946">Before You Begin Developing CFX Tags in Java</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa188.htm#1014977">Writing a Java CFX</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa189.htm#1014993">ZipBrowser Example</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1810.htm#1015060">Approaches to Debugging Java CFXs</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1811.htm#1018053">Java Customization and Configuration</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1812.htm#1014793">Implementing C++ CFX Tags</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1813.htm#1023687">Implementing Java CFX Tags</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1814.htm#1018860">Registering CFXs</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1815.htm#1019212">C++ CFX Reference</a>
+</li>
+<li><a href="../18_Building_Custom_CFAPI_Tags/dwa1820.htm#1020100">Java CFX Reference</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

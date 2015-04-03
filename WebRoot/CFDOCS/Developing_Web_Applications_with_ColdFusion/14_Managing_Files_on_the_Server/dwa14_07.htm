@@ -1,0 +1,227 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Reading, Writing, and Appending to a Text File</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 14	:&nbsp;&nbsp;Managing Files on the Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999230"></a>
+ <H1>Reading, Writing, and Appending to a Text File</H1>
+
+
+
+<p>In addition to managing files on the server, you can use CFFILE to read, create, and modify text files.</p><p>This gives you the ability to</p><ul>
+<li>Create log files.
+
+</li>
+<li>Generate static HTML documents.
+</li>
+<li>Use text files to store information that can be brought into Web pages.
+</li>
+</ul>
+<a name="997688"></a>
+ 
+<H2>Reading a text file</H2>
+<p>You can use CFFILE to read an existing text file. The file is read into a dynamic parameter which you can use anywhere in the application page. For example, you could read a text file and then insert its contents into a database. Or you could read a text file and then use one of the find and replace functions to modify the contents.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To read a text file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Read a Text File&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+Ready to read the file:&lt;BR&gt;
+<span class="codemark">&lt;CFFILE ACTION="Read"
+</span><span class="codemark">    FILE="C:\inetpub\wwwroot\mine\message.txt"
+</span><span class="codemark">    VARIABLE="Message"&gt;
+</span>
+&lt;CFOUTPUT&gt;
+    #Message#
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Replace <code>c:\inetpub\wwwroot\mine\message.txt</code> with the location and name of a text file on your server.
+
+</li>
+<li>Save the file as <code>readtext.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+<a name="997699"></a>
+ 
+<H2>Writing a text file</H2>
+<p>You can use CFFILE to write a text file based on dynamic content. For example, you could create static HTML files or log actions in a text file.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a form in which to enter data for a text file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears a follows:
+
+</pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Put Information into a Text File&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;Put Information into a Text File&lt;/H2&gt;
+
+&lt;FORM ACTION="writetextfileaction.cfm" METHOD="POST"&gt;
+    &lt;p&gt;Enter you name: &lt;INPUT TYPE="text" NAME="Name" SIZE="25"&gt;
+    &lt;p&gt;Enter you the name of the file: &lt;INPUT TYPE="text" 
+NAME="FileName" SIZE="25"&gt;
+    &lt;p&gt;Enter your message:&lt;/p&gt;
+    &lt;INPUT TYPE="textarea" NAME="message"cols=45 rows=6&gt;
+    &lt;/p&gt;
+    &lt;INPUT TYPE="submit" NAME="submit" VALUE="Submit"&gt; 
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>writetextfileform.cfm</code> in <code>myapps</code> under the Web root directory<code>.</code>
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To write a text file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Untitled&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;CFFILE ACTION="Write"
+    FILE="C:\inetpub\wwwroot\mine\#form.filename#"
+    OUTPUT="Created By: #Form.Name#
+    #Form.Message# "&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Modify the path C:\inetpub\wwwroot\mine\ to point to a path on your server.
+
+</li>
+<li>Save the file as <code>writetextfileaction.cfm</code>.
+
+</li>
+<li>View the file <code>writetextfileform.cfm</code> in your browser, enter values, and submit the form.
+
+</li>
+</ol>
+<p>The text file is written to the location you specified.</p><p>You can use <code>CFFILE ACTION="Append"</code> to append additional text to the end of an existing text file, for example, when creating log files. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

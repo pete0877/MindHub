@@ -1,0 +1,209 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Specifying Deployment Settings</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Deploying_Projects/deployment2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Deploying_Projects/deployment4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Deploying Projects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018221"></a>
+ <H1>Specifying Deployment Settings</H1>
+
+
+
+<p>You can specify deployment settings for the entire project or for each folder in the project. The Deployment tab of the Project Properties dialog provides these deployment options:</p><ul>
+<a name="1018080"> </a>
+<li>Relative to the Parent Folder Deployment Location
+
+<a name="1018089"> </a>
+</li>
+<li>Specific Deployment Location
+<a name="1018090"> </a>
+</li>
+<li>Do Not Upload
+</li>
+</ul>
+<p>Each of the deployment options is described in the following sections.</p><a name="1016508"></a>
+ 
+<H2>Relative to the parent folder deployment location</H2>
+<p>Relative to the Parent Folder Deployment Location specifies that a folder will be deployed to a location that is relative to its parent folder or project. For example:</p><p><strong>Parent Folder:</strong><code> MyDirectory/ParentFolder
+</code></p><p>Child Folder: <code>MyDirectory/ParentFolder/ChildFolder
+</code></p><p>If the parent folder's deployment location is <code>ServerDirectory/ParentFolder</code>, then the child folder's deployment location will be <code>ServerDirectory/ParentFolder/<br>ChildFolder</code>. Child paths are calculated for you automatically by Studio.</p><p>Relative to the Parent Folder Deployment Location is not available at the project level because the project functions as the root and has no parents.</p><a name="1016510"></a>
+ 
+<H2>Specific deployment location</H2>
+<p>Specific Deployment Location allows you to enter the exact path to which the folder will be deployed.</p><p>It is recommended that you use the Browse button to set a specific deployment location. The protocol for the pathname can vary depending on the location you choose for deployment. The following rules will help you enter pathnames manually should you choose to do so:</p><ul>
+<a name="1019483"> </a>
+<li>Pathnames to local and network drives include the drive letter and backslashes (for example, <code>C:\MyDirectory\MySubdirectory</code> or <code>\\MyDirectory\<br>MySubdirectory</code>).
+
+<a name="1019487"> </a>
+</li>
+<li>Pathnames to remote servers use forward slashes. RDS servers use drive letters, while FTP servers do not. An RDS example would look like <code>C:/MyDirectory/MySubdirectory</code>. An FTP example would look like <code>MyDirectory/MySubdirectory</code>.
+</li>
+</ul>
+<p>Typically, the pathname you enter does not include the server name for the host. Studio automatically appends the server name to the path when you choose which servers you want to deploy to in the Deployment Wizard. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you do enter a server name as part of the deployment location, and that 
+server is not chosen for deployment in the Deployment Wizard, you will 
+see an error in the Results window.
+</td>
+</tr>
+</table>
+</div>
+<br><p>You must set a specific deployment location at the project level.</p><a name="1021406"></a>
+ 
+<H2>Do not upload</H2>
+<p>Do Not Upload specifies that the folder and its contents will be ignored during deployment. Do Not Upload is not available at the project level.</p><a name="1018641"></a>
+ 
+<H2>Setting deployment options</H2>
+<p>See <a href="../10_Using_Projects_for_Site_Management/projects.htm#997350">Chapter 10, &quot;Using Projects for Site Management&quot;</a> for information on using the Projects tab and opening projects.</p><p>Follow the instructions below to set deployment options for a project or its folders.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To specify deployment settings for the project:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the project in the Projects tab. 
+
+
+</li>
+<li>Right-click on the project root and choose Properties from the menu to see the Edit Project Properties dialog box.
+
+</li>
+<li>Click the Deployment tab.
+
+<p>At the project level, you have to specify a Specific Deployment Location.
+</p></li>
+<li>Click the Browse button to choose the location via the Select Directory dialog box or enter the location in the Deployment Path box. (For information on enter pathnames manually, see <a href="../11_Deploying_Projects/deployment3.htm#1016510">&quot;Specific deployment location&quot;</a>.)
+
+<p><img src="../images/browse.gif">
+
+
+
+</p></li>
+<li>Click OK.
+
+<p>Your deployment settings are applied to the project.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To specify deployment settings for a folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the folder and choose Properties from the menu to see the Edit Folder Properties dialog box.
+
+
+</li>
+<li>Click the Deployment tab.
+
+</li>
+<li>Choose a deployment option: Relative to the Parent Folder Deployment Location, Specific Deployment Location, or Do Not Upload. See the previous page for a description of these three options.
+
+</li>
+<li>If you chose Specific Deployment Location, click the Browse button to choose the location via the Select Directory dialog box or enter the location in the Deployment Path box.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Do not enter a server name in the Deployment Location path. The 
+server name is appended for you by Studio.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Click OK.
+
+<p>Your deployment settings are applied to the folder.
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Deploying_Projects/deployment2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Deploying_Projects/deployment4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:53 -->
+</body>
+</html>

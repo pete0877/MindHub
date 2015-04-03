@@ -1,0 +1,158 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Samples uses of CFMAIL</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 13	:&nbsp;&nbsp;Sending and Receiving Email</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997435"></a>
+ <H1>Samples uses of CFMAIL</H1>
+
+
+
+<p>An application page with the CFMAIL tag dynamically generates email messages based on the tag's settings. Some of the things you can accomplish with CFMAIL are:</p><ul>
+<li>Send a mail message whose recipient and contents are determined by data the user enters in an HTML form.
+
+</li>
+<li>Use a query to send a mail message to a database-driven list of recipients.
+</li>
+<li>Use a query to send a customized mail message, such as a billing statement to a list of recipients that is dynamically populated from a database.
+</li>
+<li>Send a MIME file attachment along with a mail message.
+</li>
+</ul>
+<a name="1043073"></a>
+ 
+<H2>Sending form-based email</H2>
+<p>In the example below, the contents of a customer inquiry form submittal are forwarded to the marketing department. Note that the same application page could also insert the customer inquiry into the database.</p><pre>&lt;CFMAIL FROM="#Form.EMailAddress#"
+    TO="marketing@allaire.com"
+    SUBJECT="Customer Inquiry"&gt;
+
+A customer inquiry was posted to our Web site:
+
+Name: #Form.FirstName# #Form.LastName#
+Subject: #Form.Subject#
+
+#Form.InquiryText#
+
+&lt;/CFMAIL&gt;
+</pre><a name="1043079"></a>
+ 
+<H2>Sending query-based email</H2>
+<p>In the example below, a query ("ProductRequests") is run to retrieve a list of the customers who have inquired about a product over the last seven days. This list is then sent, with an appropriate header and footer, to the marketing department:</p><pre>&lt;CFMAIL QUERY="ProductRequests"
+    FROM="webmaster@allaire.com"
+    TO="marketing@allaire.com"
+    SUBJECT="ColdFusion status report"&gt;
+
+Here is a list of people who have inquired about
+Allaire ColdFusion over the last seven days:
+
+&lt;CFOUTPUT&gt;
+#ProductRequests.FirstName# #ProductRequests.LastName# 
+(#ProductRequests.Company#) - #ProductRequests.EMailAddress#
+&lt;/CFOUTPUT&gt;
+
+Regards,
+The WebMaster
+webmaster@allaire.com
+
+&lt;/CFMAIL&gt;
+</pre><p>Note the use of the nested CFOUTPUT tag to present a dynamic list embedded within a normal CFMAIL message. The text within the CFOUTPUT is repeated for each row in the "ProductRequests" query, while the text above and below it serve as the header and footer (respectively) for the mail message.</p><a name="999908"></a>
+ 
+<H2>Sending email to multiple recipients</H2>
+<p>In the following example, a query ("CFBetaTesters") is run to retrieve a list of people who are beta testing ColdFusion. This query is then used to send a notification to each of these testers that a new version of the beta release is available:</p><pre>&lt;CFMAIL QUERY="CFBetaTesters"
+    FROM="beta@allaire.com"
+    TO="#TesterEMail#"
+    SUBJECT="ColdFusion Beta Four Available"&gt;
+
+To all ColdFusion beta testers:
+
+ColdFusion Beta Four is now available 
+for downloading from the Allaire site.
+The URL for the download is:
+
+http://beta.allaire.com
+
+Regards,
+ColdFusion Technical Support
+beta@allaire.com
+
+&lt;/CFMAIL&gt;
+</pre><p>Note that in this example, the contents of the CFMAIL tag are not dynamic, that is, they don't use any # delimited dynamic parameters. What is dynamic is the list of email addresses to which the message is sent. Note the use of the "TesterEMail" column from the "CFBetaTesters" query in the TO attribute.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:56 -->
+</body>
+</html>

@@ -1,0 +1,180 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Mathematical Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_010.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_012.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1138964"></a>
+ <H1>Mathematical Functions<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_017.htm#996758">Abs</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_049.htm#997421">BitXor</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_178.htm#1001105">Max</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_018.htm#1630384">ACos</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_050.htm#997451">Ceiling</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_180.htm#1001163">Min</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_037.htm#1623656">ASin</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_055.htm#997601">Cos</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_189.htm#1001598">Pi</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_038.htm#1626102">Atn</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_082.htm#1442304">DecrementValue</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_197.htm#1001741">Rand</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_041.htm#1017682">BitAnd</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_089.htm#998474">Exp</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_198.htm#1001760">Randomize</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_042.htm#997197">BitMaskClear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_096.htm#998710">Fix</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_199.htm#1001784">RandRange</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_043.htm#997230">BitMaskRead</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_119.htm#999146">IncrementValue</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_212.htm#1002118">Round</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_044.htm#997263">BitMaskSet</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_120.htm#999174">InputBaseN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_218.htm#1002341">Sgn</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_045.htm#997297">BitNot</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_122.htm#999237">Int</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_219.htm#1002369">Sin</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_046.htm#997323">BitOr</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_163.htm#1000229">Log</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_222.htm#1002459">Sqr</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_047.htm#997353">BitSHLN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_164.htm#1000257">Log10</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_236.htm#1256168">Tan</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_048.htm#997389">BitSHRN</a>
+</td><td valign="top">
+&nbsp;
+</td><td valign="top">
+&nbsp;
+</td></tr>
+
+</table>
+</div>
+</H1>
+
+
+
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_010.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_012.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,148 @@
+<HTML>
+<HEAD><TITLE>Test ColdFusion Installation</TITLE></HEAD>
+
+
+
+<script language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</script>
+
+<script language="JavaScript">
+<!-- Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+
+
+</head>
+
+<body>
+
+
+
+<!-- Start navigation table -->
+
+
+
+	<table border="0" cellspacing="0" cellpadding="5" align="right">
+	<tr>
+
+		<td>
+			<a href="../dochome.htm">
+			<img src="../images/icons/back.gif" alt="ColdFusion documentation" border=0></a><br>
+		</td>
+
+		<td>
+			<a href="javascript: makeRemote();">
+			<img src="../images/icons/search.gif" alt="Search the docs" border=0></a><br>
+		</td>
+
+		<td>
+			<a href="../index.htm">
+			<img src="../images/icons/home.gif" alt="ColdFusion Welcome page" border=0></a><br>
+		</td>
+		
+		<td>
+			<a href="../dochome.htm">
+			<img src="../images/icons/uplevel.gif" alt="ColdFusion documentation" border=0></a><br>
+		</td>
+		
+		<td>
+			<A HREF="../examplehome.cfm">
+			<img src="../images/icons/next.gif" alt="Example applications" border=0></a><br>
+		</td>
+	</tr>
+	</table><br><br><br><br>
+<!-- End navigation table -->
+
+<hr>
+
+
+
+
+
+<a name="top"></A>
+<h1>Verify Installation and Configuration</h1>
+
+<p>You are browsing a local file (file://) rather than an HTTP connection (http://)</p>
+  
+<P>If you accessed the documentation by using the 'Open File...' or
+'Open Local...' command of your browser then you will not be able
+to invoke ColdFusion applications.</p>
+
+<P>Check the URL displayed at the top of your browser. If it is 
+prefixed with 'file://' then this is the problem. Re-connect to the
+Welcome to ColdFusion page using your web server's address followed by
+'/cfdocs/index.htm'. For example, if your server's address is
+'bigbadserver.com' then you would use the URL:</p>
+
+<PRE>   http://bigbadserver.com/cfdocs/index.htm</PRE>
+
+<P>If you are unable to browse the file using an HTTP connection
+because your web server is not yet set up, you need to do this
+before continuing with ColdFusion.</p>
+
+<hr>
+
+<!-- Start navigation table -->
+
+<table border="0" cellspacing="0" cellpadding="5" align="right">
+	<tr>
+		<td>
+			<a href="../dochome.htm">
+			<img src="../images/icons/back.gif" alt="ColdFusion documentation" border=0></a><br>
+		</td>
+
+		<td>
+			<a href="javascript: makeRemote();">
+			<img src="../images/icons/search.gif" alt="Search the docs" border=0></a><br>
+		</td>
+
+		<td>
+			<a href="../index.htm">
+			<img src="../images/icons/home.gif" alt="ColdFusion Welcome page" border=0></a><br>
+		</td>
+		
+		<td>
+			<a href="../dochome.htm">
+			<img src="../images/icons/uplevel.gif" alt="ColdFusion documentation" border=0></a><br>
+		</td>
+		
+		<td>
+			<A HREF="../examplehome.cfm">
+			<img src="../images/icons/next.gif" alt="Example applications" border=0></a><br>
+		</td>
+	</tr>
+	
+</table>
+
+<!-- End navigation table -->
+
+
+
+</BODY>
+</HTML>

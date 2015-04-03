@@ -1,0 +1,27 @@
+---BEGIN PUBLISHING DATA---
+LOCATIONS=2
+DESCRIPTION=This template has two columns for teasers.
+---END PUBLISHING DATA---
+
+<HTML>
+<HEAD>
+	<TITLE>Two-Column Layout</TITLE>
+	<LINK REL="STYLESHEET" TYPE="text/css" HREF="stylesheet.css">
+</HEAD>
+
+<BODY BGCOLOR="#FFCC33">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="600">
+<TR>
+	<TD VALIGN="TOP" WIDTH="385">
+		<CF_ShowContent LOCATION=1>
+	</TD>
+	<TD WIDTH="30">&nbsp;</TD>
+	<TD VALIGN="TOP" WIDTH="185">
+		<CF_ShowContent LOCATION=2>
+	</TD>
+</TR>
+</TABLE>
+
+</BODY>
+</HTML>

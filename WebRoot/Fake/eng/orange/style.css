@@ -1,0 +1,263 @@
+.page {
+	background-color : #F9F4E1;
+	font-family: Tahoma;
+	font-size: 10pt;	
+}
+
+
+.mainmenubody {
+	background-color : #ECDCA4;	
+}
+
+.mainmenusection
+{
+	font-family: Tahoma;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.mainmenuitem
+{
+	font-family: Tahoma;
+	font-size: 10pt;
+}
+
+.sectionheader
+{
+	font-family: Tahoma;
+	font-size: 10pt;
+	font-weight: bold;
+	background-color: #905B00;
+	width: 100%;
+	color: #FFFFFF;
+	letter-spacing: 2pt;
+}
+
+
+H1 {
+	font-family: Tahoma;
+	font-size: 13pt;
+}
+
+
+.guititletable
+{
+	border-width: 1pt;
+	border-color: Black;
+	border-style: solid;	
+	background-color: #B6B6A4;
+}
+
+.guititlerow
+{
+}
+
+.guititlecell
+{
+	font-family: Tahoma;;
+	font-size: 11pt;
+	letter-spacing: 5pt;
+	padding-left: 5pt;
+	padding-right: 5pt;
+}
+
+.guiwrappertable
+{
+	border-width: 1pt;
+	border-color: Black;
+	border-style: solid;
+	background-color: #FFFFFF;
+}
+
+.guiwrapperrow
+{
+}
+
+.guiwrappercell
+{
+}
+
+.guilistheadertable
+{
+}
+
+.guilistheaderrow
+{
+	background-color: #000000;
+	font-family: Tahoma;;
+	font-size: 9pt;
+	letter-spacing: 2pt;
+	color: White;
+	margin: 0pt;
+	padding: 0pt;	
+	height: 15pt;	
+}
+
+.guilistheadercell
+{
+	padding-left: 5pt;
+	padding-right: 5pt;	
+}
+
+.guilistitemtable
+{
+	background-color: White;
+	border-width: 1pt;
+	border-color: black;
+	border-style: solid;
+}
+
+
+.guilistitemrow
+{
+	font-family: Tahoma;;
+	font-size: 9pt;
+	height: 14pt;	
+	behavior: url(/fake/eng/orange/guilistitemrow.htc);
+}
+
+
+.guilistitemcell
+{
+	padding-left: 5pt;
+	padding-right: 5pt;	
+}
+
+
+.guiformtable
+{
+	background-color: White;	
+}
+
+.guiformheaderrow
+{
+	background-color: #000000;
+	font-family: Tahoma;;
+	font-size: 9pt;
+	letter-spacing: 2pt;
+	color: White;
+	margin: 0pt;
+	padding: 0pt;	
+	height: 15pt;	
+}
+
+.guiformheadercell
+{
+	font-family: Tahoma;;
+	font-size: 10pt;
+	padding-left: 5pt;
+	padding-right: 5pt;		
+}
+
+.guiformitemrow
+{
+	height: 14pt;
+	font-family: Tahoma;;
+	font-size: 9pt;	
+	behavior: url(/fake/eng/orange/guiformitemrow.htc);
+}
+
+.guiformitemlabel
+{
+	height: 14pt;
+	font-family: Tahoma;;
+	font-size: 9pt;	
+	padding-left: 5pt;
+	padding-right: 5pt;	
+}
+
+.guiformiteminput
+{
+	padding-left: 5pt;
+	padding-right: 5pt;	
+}
+
+.guiforminput
+{
+	background-color : #FFFEEE;
+	font-family : Tahoma;
+	font-size : 9pt;
+}
+
+.guiforminputro
+{
+	padding-left: 5pt;
+	padding-right: 5pt;	
+}
+
+.guilistitemlink
+{
+	font-family: Tahoma;;
+	font-size: 9pt;
+	color: #B67800;
+}
+
+.guiactionbartable
+{
+	width: 100%;
+}
+
+.guiactionbarrow
+{
+	font-family: Tahoma;;
+	font-size: 9pt;
+	height: 30pt;
+}
+
+.guiactionbarcell
+{
+	text-align : center;
+}
+
+.guitoolbartable
+{
+	width: 100%;
+}
+
+.guitoolbarrow
+{
+	font-family: Tahoma;;
+	font-size: 9pt;
+}
+
+.guitoolbarcell
+{
+	text-align : left;
+}
+
+.guimessagetable
+{
+	width: 100%;
+}
+
+.guimessagerow
+{
+	height: 40pt;
+}
+
+.guimessagerowcell
+{
+	text-align : center;
+	font-family: Tahoma;;
+	font-size: 10pt;
+}
+
+.guiformbutton
+{
+	background-color : #FFC752;
+	border-color : #FFE88A #DC8A4A #DC8A4A #FFE88A;
+	font-family : Tahoma;
+	font-size : 9pt;
+	height : 16pt;
+	width: 150pt;
+	margin-left: 10pt;
+	margin-right: 10pt;	
+}
+
+.guiitemrow
+{
+	font-family: Tahoma;;
+	font-size: 9pt;
+	height: 14pt;	
+	behavior: url(/fake/eng/orange/guiitemrow.htc);
+}

@@ -1,0 +1,10 @@
+<!-- filename: securitylevelitem.htm -->
+
+<% Set("fullref", ConCat(".tsecurityuserlevels.", vinputname)) %>
+<% Set(fullref, Eval(vinputname)) %>
+
+<tr class="guiitemrow">
+	<td class="guilistitemcell"><% UICheckBox(fullref, "guiforminput", guif) %></td>
+	<td class="guilistitemcell"><% vdescription %></td>
+</tr>
+

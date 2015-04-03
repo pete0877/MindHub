@@ -1,0 +1,138 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Setting up Web Server Page Processing</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Installing and Configuring ColdFusion Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998646"></a>
+ <H1>Setting up Web Server Page Processing</H1>
+
+
+
+<p>When you view an HTML page in Studio's internal or external browser, the page is simply opened from the local file system or returned via FTP from a remote server. That's OK for checking page content and formatting, but for developing a Web site you need to view the pages as visitors to the site will actually experience them. </p><p>To do this, you can route HTML documents through a Web server. The server software can be on the local machine, a network server, or a remote system. So instead of just opening the files, an HTTP request for the page is sent to the server. If any server-side processing is required, such as for server-side includes, forms, ColdFusion applications, or Active Server Pages, the Web server will hand off the page to the appropriate server for further processing, then return it to the browser. This is invaluable for previewing site elements in a test environment before deploying the site.</p><p>Studio makes it easy to work with Web servers by associating the physical directories where your files are stored with the server that processes the files. This association is called a <em>mapping</em>. Studio supports a wide range of Web servers, so you can create multiple mappings and select which server to use for processing. Consult your server documentation or provider for the specifics of accessing server directories.</p><p>Note that to use server mappings, either Microsoft Internet Explorer or Netscape's Mozilla NGLayout must be configured as the internal browser. </p><p>If you want to set a mapping to a remote server, follow the steps in <a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm#999102">&quot;Connecting to Remote Servers,&quot;</a> before defining the mapping.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To define a server mapping:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Browse option in the Options &gt; Settings dialog box (F8).
+
+
+</li>
+<li>Check either Microsoft Internet Explorer or Netscape's Mozilla NGLayout as the internal browser.
+
+</li>
+<li>Check the Enable server mappings box.
+
+</li>
+<li>Click Add to open the Mapping dialog box.
+
+</li>
+<li>In the Map From field, enter the directory path to the files you want to route through the Web server, such as <code>c:\inetpub\wwwroot\mysite\pages</code>.
+
+</li>
+<li>In the Map To field, you can accept the default localhost or select a configured server from the drop-down list. 
+
+</li>
+<li>Click OK to save the mapping. 
+
+</li>
+</ol>
+<a name="998667"></a>
+<h4> Mapping options:</h4>
+<ul>
+<a name="999068"> </a>
+<li>To add other mappings, repeat steps 4-6. 
+
+<a name="999065"> </a>
+</li>
+<li>To set a mapping as the default, select it and click the up arrow to move it to the top of the list.
+<a name="999061"> </a>
+</li>
+<li>To change a mapping, select it in the list and click Edit.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion_Studio/install.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:29 -->
+</body>
+</html>

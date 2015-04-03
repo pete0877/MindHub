@@ -1,0 +1,150 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Why Is ColdFusion Security Important?</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_ColdFusion_Security/admin083.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;ColdFusion Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1008314"></a>
+ <H1>Why Is ColdFusion Security Important?</H1>
+
+
+
+<p>Today's Web applications offer unique opportunities from e-commerce to global communication and collaboration. Today, developers and administrators alike must concern themselves with issues of security. The nature of the Web -- global access, ease of connectivity and interaction, and lack of any real control over clients -- creates an environment where application misuse or abuse can flourish. As a result, almost any discussion of Web applications and data integration quickly becomes a discussion of security. Web developers must fully understand the security risks that could affect their applications so they can address legitimate concerns while ignoring the tabloid-style hype that sometimes surrounds any mention of Web security.</p><p>All Web applications can potentially fall victim to these security breaches:</p><ul>
+<a name="1008317"> </a>
+<li><strong>Snooping and Eavesdropping</strong><strong> </strong>-- The risk that someone could &quot;overhear&quot; data being sent over the Web is a primary concern when applications send confidential data, such as credit-card information, over public connections.
+
+<a name="1008318"> </a>
+</li>
+<li><strong>User impersonation</strong><strong> </strong>-- Without proper authentication control, the risk of non-trusted users gaining access to secure information by impersonating trusted users is a very real risk. Someone who successfully impersonates a trusted user could gain access to anything that user was authorized to see or download.
+<a name="1008319"> </a>
+</li>
+<li><strong>Unauthorized access</strong><strong> </strong>-- The risk of exposing sensitive information to unauthorized users is the biggest and most complex security risk, because the Internet effectively links every computer to one large network. While completely allowing or disallowing access to a given system or data source remains relatively straight-forward, allowing the partial access that is required for an application to be useful remains risky. For example, it is easy for a large bank to publish a public, freely accessible site where no individual account information is available, but it's much harder for the bank to create an account maintenance site where users have exclusive access to their own personal accounts.
+</li>
+</ul>
+<p>ColdFusion is a proven, highly secure environment for Web application development and deployment. ColdFusion can help you reduce these security risks:</p><ul>
+<a name="1008321"> </a>
+<li><strong>Encryption</strong><strong> </strong>-- ColdFusion supports the Secure Sockets Layer (SSL) protocol which protects against snooping, eavesdropping, or any sort of message tampering when information is passed between clients and servers. See <a href="../08_ColdFusion_Security/admin082.htm#1008342">&quot;Data Encryption&quot;</a> for more information.
+
+<a name="1008325"> </a>
+</li>
+<li><strong>Authentication</strong><strong> </strong>-- Authentication simply means making sure someone is a valid user of the system. Authentication involves prompting a user for a unique identification, like a login name, and some form of verification - information that no one other than the user could know, like a password or personal identification number (PIN).
+<a name="1008326"> </a>
+</li>
+<li><strong>Access Control</strong>-- Authenticated users are usually granted access to particular features or components based on security clearance, group affiliation, or other criteria specified by the developer. 
+</li>
+</ul>
+<a name="1008328"></a>
+ 
+<H2>Types of ColdFusion Security</H2>
+<p>ColdFusion Server provides two mutually exclusive security frameworks called Basic security and Advanced security. You can use either type of security to secure ColdFusion application development and deployment.</p><a name="1008330"></a>
+ 
+<H3>Basic Security</H3>
+<p>Basic security is the initial default security framework for ColdFusion and lets you secure the ColdFusion server with password access:</p><ul>
+<a name="1008332"> </a>
+<li><strong>Application development </strong>-- Secure access to data sources and files with password protection. Block access to several sensitive ColdFusion tags.
+
+<a name="1008333"> </a>
+</li>
+<li><strong>Application deployment </strong>-- Prevent applications from executing several ColdFusion tags that could be used to upload, delete, or otherwise manipulate server files.
+<a name="1008334"> </a>
+</li>
+<li><strong>Administrative Access</strong> -- Secure access to ColdFusion administrative functions with password protection.
+</li>
+</ul>
+<p>All editions of ColdFusion Server include Basic Security features. When you install ColdFusion Server, Basic Security is automatically activated.</p><a name="1008336"></a>
+ 
+<H3>Advanced Security</H3>
+<p>ColdFusion Server Professional and Enterprise editions include Advanced Security features that provide scalable, granular security for building and deploying your ColdFusion applications:</p><ul>
+<a name="1008338"> </a>
+<li><strong>Application development</strong> -- Control access to files, data sources and administration for each developer on your team. Coordinate team development on shared servers with the assurance that sensitive data and applications are secure. 
+
+<a name="1008339"> </a>
+</li>
+<li><strong>Application deployment </strong>-- Create complex rules to programmatically control access to functionality within applications. Provide multiple levels of user access from within an application. Confine applications to secure areas that can flexibly restrict the access applications have to directories, components, databases or other resources on the server. 
+<a name="1008340"> </a>
+</li>
+<li><strong>Administrative Access</strong> -- Assign different degrees of administrative access to specified users.
+</li>
+</ul>
+<a name="1008342"></a>
+ 
+<H3>Data Encryption</H3>
+<p>Both Basic and Advanced security support the Secure Sockets Layer (SSL) protocol which encrypts Internet application protocols (like HTTP) with public key cryptography. SSL protects against snooping, eavesdropping, or any sort of message tampering when information is passed between clients and servers. Most Web servers support SSL. The server administrator installs a private key that is used to decrypt inbound data and encrypt outbound data. Once the key is installed, the Web server automatically encrypts or decrypts data as it is received or transmitted.</p><p>If your Web server connections are encrypted with SSL, all communications, including ColdFusion transmissions, are automatically encrypted. You don't have to do anything from within ColdFusion to activate data encryption. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_ColdFusion_Security/admin08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_ColdFusion_Security/admin083.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:04 -->
+</body>
+</html>

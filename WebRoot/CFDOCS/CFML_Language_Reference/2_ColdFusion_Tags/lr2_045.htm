@@ -1,0 +1,188 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFGRIDUPDATE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_044.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_046.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1969726"></a>
+ <H1>CFGRIDUPDATE</H1>
+
+
+
+<p>Used in a <a href="../2_ColdFusion_Tags/lr2_042.htm#1969319">CFGRID</a>, CFGRIDUPDATE allows you to perform updates to data sources directly from edited grid data. CFGRIDUPDATE provides a direct interface with your data source. </p><p>CFGRIDUPDATE first applies DELETE row actions followed by INSERT row actions and finally UPDATE row actions. Row processing stops if any errors are encountered.</p><a name="1969730"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFGRIDUPDATE GRID="gridname"
+    DATASOURCE="data source name"
+    DBTYPE="type"
+    DBSERVER="dbms"
+    DBNAME="database name"
+    TABLENAME="table name"
+    USERNAME="data source username"
+    PASSWORD="data source password"
+    TABLEOWNER="table owner"
+    TABLEQUALIFIER="qualifier"
+    PROVIDER="COMProvider" 
+    PROVIDERDSN="datasource" 
+    KEYONLY="Yes/No"&gt;
+</PRE><a name="1969732"></a>
+<h4> GRID</h4>
+<p>Required. The name of the CFGRID form element that is the source for the update action. </p><a name="1969734"></a>
+<h4> DATASOURCE</h4>
+<p>Required. The name of the data source for the update action. </p><a name="1969736"></a>
+<h4> DBTYPE</h4>
+<p>Optional. The database driver type:</p><ul>
+<a name="1969738"> </a>
+<li>ODBC (default) -- ODBC driver.
+
+<a name="1969739"> </a>
+</li>
+<li>Oracle73 -- Oracle 7.3 native database driver. Using this option, the ColdFusion  Server computer must have Oracle 7.3.4.0.0 (or greater) client software installed.
+<a name="1969740"> </a>
+</li>
+<li>Oracle80 --Oracle 8.0 native database driver. Using this option, the ColdFusion  Server computer must have Oracle 8.0 (or greater) client software installed.
+<a name="1969741"> </a>
+</li>
+<li>Sybase11 --Sybase System 11 native database driver. Using this option, the ColdFusion  Server computer must have Sybase 11.1.1 (or greater) client software installed. Sybase patch ebf 7729 is recommended.
+<a name="1969742"> </a>
+</li>
+<li>OLEDB --OLE DB provider. If specified, this database provider overrides the driver type specified in the ColdFusion Administrator.
+<a name="1969743"> </a>
+</li>
+<li>DB2 --DB2 5.2 native database driver.
+<a name="1969744"> </a>
+</li>
+<li>Informix73--Informix73 native database driver.
+</li>
+</ul>
+<a name="1969745"></a>
+<h4> DBSERVER</h4>
+<p>Optional. For native database drivers and the SQLOLEDB provider, specifies the name of the database server machine. If specified, DBSERVER overrides the server specified in the data source.</p><a name="1969747"></a>
+<h4> DBNAME</h4>
+<p>Optional. The database name (Sybase System 11 driver and SQLOLEDB provider only). If specified, DBNAME overrides the default database specified in the data source.</p><a name="1969749"></a>
+<h4> TABLENAME</h4>
+<p>Required. The name of the table you want to update. Note the following:</p><ul>
+<a name="1969751"> </a>
+<li>ORACLE drivers -- This specification must be in uppercase.
+
+<a name="1969752"> </a>
+</li>
+<li>Sybase driver -- This specification is case-sensitive and must be in the same case as that used when the table was created
+</li>
+</ul>
+<a name="1969753"></a>
+<h4> USERNAME</h4>
+<p>Optional. If specified, USERNAME overrides the username value specified in the ODBC setup.</p><a name="1969755"></a>
+<h4> PASSWORD</h4>
+<p>Optional. If specified, PASSWORD overrides the password value specified in the ODBC setup.</p><a name="1969757"></a>
+<h4> TABLEOWNER</h4>
+<p>Optional. For data sources that support table ownership (such as SQL Server, Oracle, and Sybase SQL Anywhere), use this field to specify the owner of the table.</p><a name="1969759"></a>
+<h4> TABLEQUALIFIER</h4>
+<p>Optional. For data sources that support table qualifiers, use this field to specify the qualifier for the table. The purpose of table qualifiers varies across drivers. For SQL Server and Oracle, the qualifier refers to the name of the database that contains the table. For the Intersolv dBase driver, the qualifier refers to the directory where the DBF files are located.</p><a name="1969761"></a>
+<h4> PROVIDER</h4>
+<p>Optional. COM provider (OLE-DB only).</p><a name="1969763"></a>
+<h4> PROVIDERDSN</h4>
+<p>Optional. Data source name for the COM provider (OLE-DB only).</p><a name="1969765"></a>
+<h4> KEYONLY</h4>
+<p>Optional. Yes or No. Yes specifies that in the update action, the WHERE criteria is confined to just the key values. No specifies that in addition to the key values, the original values of any changed fields are included in the WHERE criteria. Default is Yes.</p><a name="2040286"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfgridupdate
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the CFGRID, CFGRIDCOLUMN, CFGRIDROW,
+and CFGRIDUPDATE tags in action ---&gt;
+...
+&lt;!--- If the gridEntered form field has been tripped,
+perform the gridupdate on the table specified in the database.
+Using the default value keyonly=yes allows us to change only
+the information that differs from the previous grid ---&gt;
+&lt;CFIF IsDefined("form.gridEntered") is True&gt;
+&lt;CFGRIDUPDATE GRID="FirstGrid" DATASOURCE="cfsnippets"
+  TABLENAME="CourseList"  KEYONLY="Yes"&gt;
+&lt;/CFIF&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfgridupdate
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_044.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_046.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

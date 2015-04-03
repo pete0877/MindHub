@@ -1,0 +1,115 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Welcome To ColdFusion</title>
+</head>
+
+<body>
+
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../contents.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../1_Welcome_to_ColdFusion/lr1_001.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+ 
+
+<br>
+<a name="1073239"></a>
+<H1>Preface 	<br>
+Welcome To ColdFusion</H1>
+
+
+<p>ColdFusion is a rapid application development system for professional developers who want to create dynamic Web applications and interactive Web sites. It provides the fastest way to integrate browser, server, and database technologies into powerful Web applications. With ColdFusion, you can build everything from online stores to sophisticated business systems.</p><p>Developing applications with ColdFusion does not require coding in a traditional programming language; instead, you build applications by combining standard HTML with a straightforward server-side markup language, the ColdFusion Markup Language (CFML). This manual documents CFML.</p><a name="1073242"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_001.htm#1081834">Intended Audience</a>    
+
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_002.htm#1082823">Welcome to the ColdFusion 4.5 Web Application Server</a>
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_003.htm#1082829">Products and System Requirements</a>
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_004.htm#1082860">New features in ColdFusion 4.5</a>
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_005.htm#1083462">Language Reference Features</a>    
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_006.htm#1083477">Using End Tags</a>    
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_007.htm#1082908">Developer Resources</a>
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_008.htm#1082951">About ColdFusion Documentation</a>
+</li>
+<li><a href="../1_Welcome_to_ColdFusion/lr1_009.htm#1083008">Getting Answers</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../contents.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../1_Welcome_to_ColdFusion/lr1_001.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:44 -->
+</body>
+</html>

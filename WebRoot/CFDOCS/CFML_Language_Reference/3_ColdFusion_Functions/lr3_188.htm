@@ -1,0 +1,149 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ParseDateTime</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_187.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_189.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001568"></a>
+ <H1>ParseDateTime</H1>
+
+
+
+<p>Returns a date/time object from a string.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_173.htm#1038684">LSParseDateTime</a>, <a href="../3_ColdFusion_Functions/lr3_128.htm#999364">IsDate</a> and <a href="../3_ColdFusion_Functions/lr3_133.htm#999488">IsNumericDate</a>.
+</p>
+
+<a name="1001571"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ParseDateTime</strong>(<em>date-time-string</em> [, <em>pop-conversion</em> ] )
+</PRE><a name="1001573"> </a>
+<h5 class="param"> date-time-string</h5>
+<p class="param">String being converted to date/time object.</p><a name="1001574"> </a>
+<h5 class="param"> pop-conversion</h5>
+<p class="param">POP or STANDARD. If you specify POP, the function takes the date/time string passed from a POP mail server and converts it to GMT (Greenwich Mean Time) for the English (US) locale. If you specify STANDARD or nothing, the function provides no conversion. See the Note for more information about parsing date-time strings that are not from the English (US) locale.</p><a name="1700461"></a>
+ 
+<H3>Usage</H3>
+<p>ParseDateTime is similar to CreateDateTime except that it takes a string instead of specifically enumerated date/time values.</p><p>Both ParseDateTime and CreateDateTime are provided primarily to increase the readability of code in compound expressions.</p><p>Years from 0 to 29 are interpreted as 21<sup>st</sup> century values. Years 30 to 99 are interpreted as 20<sup>th</sup> century values. </p><p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If the date is formatted for a locale other than the English (US) locale, you 
+need to use the LSParseDateTime() function, then add or subtract the 
+conversion time, depending on the locale. LSParseDateTime does not 
+accept POP dates, nor does it have the capacity to convert dates to 
+Greenwich Mean Time. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1805960"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ParseDateTime
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of ParseDateTime---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+ParseDateTime Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;ParseDateTime Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.theTestValue")&gt;
+    &lt;CFIF IsDate(FORM.theTestValue)&gt;
+    &lt;H3&gt;The expression &lt;CFOUTPUT&gt;#DE(FORM.theTestValue)#&lt;/CFOUTPUT&gt; 
+      is a valid date&lt;/H3&gt;
+    &lt;P&gt;The date, parsed for use as a date/time value:
+      &lt;CFOUTPUT&gt;#ParseDateTime(FORM.theTestValue)#&lt;/CFOUTPUT&gt;
+...
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ParseDateTime
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_187.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_189.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

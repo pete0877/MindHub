@@ -1,0 +1,124 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFASSOCIATE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_017.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_019.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1967592"></a>
+ <H1>CFASSOCIATE</H1>
+
+
+
+<p>The CFASSOCIATE tag allows sub-tag data to be saved with the base tag. This applies to custom tags only.</p><a name="1967594"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFASSOCIATE BASETAG="tagname"
+    DATACOLLECTION="collectionname"&gt;
+</PRE><a name="1967596"></a>
+<h4> BASETAG</h4>
+<p>Specifies the name of the base tag.</p><a name="1967598"></a>
+<h4> DATACOLLECTION</h4>
+<p>Optional. Specifies the name of the structure in which the base tag stores sub-tag data. The default is AssocAttribs.</p><a name="1967600"></a>
+ 
+<H3>Usage</H3>
+<p>Call this tag within a sub-tag to save sub-tag data in the base tag.</p><p>ColdFusion saves sub-tag attributes in a structure whose default name is AssocAttribs. Use the DataCollection attribute to specify a non-default structure name. Specify a non-default structure name when the base tag can have multiple sub tags and you want to segregate sub-tag attributes.</p><p>If the custom tag uses an attribute collection, the attributes passed in the attribute collection are saved as independent attribute values, with no indication that they were grouped together in a structure within the custom tag.</p><a name="2035486"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfassociate
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- Find the context ---&gt;
+&lt;CFIF thisTag.executionMode is "start"&gt;
+  &lt;!--- Associate attributes 
+      This code occurs in a custom tag's 
+      sub tag. ---&gt;
+  &lt;CFASSOCIATE BASETAG="CF_TAGBASE"&gt;
+
+  &lt;!--- Define defaults for attributes ---&gt;
+  &lt;CFPARAM NAME="attributes.happy" DEFAULT="Yes"&gt;
+  &lt;CFPARAM NAME="attributes.sad" DEFAULT="No"&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfassociate
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_017.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_019.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

@@ -1,0 +1,121 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>C++ CFX Reference</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1814.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019212"></a>
+ <H1>C++ CFX Reference</H1>
+
+
+
+<p>Below is a listing of CFXAPI classes and members. Individual members are described fully in the following sections. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Class</strong>
+</th><th align="left">
+<strong>Members</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm#1019366">CCFXException Class</a>
+</td><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm#1019396">CCFXException::GetError</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm#1019399">CCFXException::GetDiagnostics</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019411">CCFXQuery Class</a>
+</td><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019460">CCFXQuery::AddRow</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019473">CCFXQuery::GetColumns</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019489">CCFXQuery::GetData</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019515">CCFXQuery::GetName</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019527">CCFXQuery::GetRowCount</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019539">CCFXQuery::SetData</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019560">CCFXQuery::SetQueryString</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019568">CCFXQuery::SetTotalTime</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019577">CCFXRequest Class</a>
+</td><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019662">CCFXRequest::AddQuery</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019685">CCFXRequest::AttributeExists</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019699">CCFXRequest::CreateStringSet</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019715">CCFXRequest::Debug</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019731">CCFXRequest::GetAttribute</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019749">CCFXRequest::GetAttributeList</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019769">CCFXRequest::GetCustomData</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019785">CCFXRequest::GetQuery</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019801">CCFXRequest::GetSetting</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019816">CCFXRequest::ReThrowException</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019836">CCFXRequest::SetCustomData</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019850">CCFXRequest::SetVariable</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019866">CCFXRequest::ThrowException</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019885">CCFXRequest::Write</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm#1019899">CCFXRequest::WriteDebug</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019917">CCFXStringSet Class</a>
+</td><td valign="top">
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019950">CCFXStringSet::AddString</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019964">CCFXStringSet::GetCount</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019983">CCFXStringSet::GetIndexForString</a><br><a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019998">CCFXStringSet::GetString</a>
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1814.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

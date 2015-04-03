@@ -1,0 +1,132 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFIMPERSONATE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_050.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_052.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2223974"></a>
+ <H1>CFIMPERSONATE</H1>
+
+
+
+<p>Allows you to impersonate a user defined in a security context defined in Advanced Security. The ColdFusion Application Server enforces all the privileges and restrictions that have been set up for that user with the Advanced Security rules.</p><a name="2226899"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFIMPERSONATE 
+    SECURITYCONTEXT="SecurityContext"
+    USERNAME="Name"
+    PASSWORD="Password"
+    TYPE= "CF" or "OS"&gt;
+    ...
+    HTML or CFML code to execute
+&nbsp;    ...
+&lt;/CFIMPERSONATE&gt;
+</PRE><a name="2363610"></a>
+<h4> SECURITYCONTEXT</h4>
+<p>Required. The security context in which the user should be authenticated. If the impersonation type is "CF ," then you should specify a security context that has already been defined using the ColdFusion Advanced Security Administrator. If the impersonation type is "OS," then you should specify an NT domain as the security context.</p><a name="2224001"></a>
+<h4> USERNAME </h4>
+<p>Required. The user name of the user you want to impersonate. You can create a rule within ColdFusion Advanced Security to restrict a user from being impersonated within a security context.</p><a name="2224003"></a>
+<h4> PASSWORD</h4>
+<p>Required. The password of the user that you want to impersonate.</p><a name="2224007"></a>
+<h4> TYPE</h4>
+<p>Required. The type of impersonation needed. This attribute can have the value - "CF " for impersonation at the application level or "OS" for impersonation at the operating system level. Operating System level impersonation means that the impersonation is of a user known to the operating system.  Currently, this type of impersonation is available only for Windows NT and not for UNIX.  When this type of impersonation is in effect, the operating system will automatically perform access control for access to any resources managed by the operating system such as files and directories.  This is fast, since ColdFusion is not doing any extra checking, the OS is, but the OS is limited since only resources that are protected by the operating systemare protected.  For example, the operating system cannot check for resource types such as Application, data sources etc.</p><a name="2224583"></a>
+ 
+<H3>Usage</H3>
+<p>CFIMPERSONATE is typically used to run a block of code in a secure mode.  For impersonation of type "CF," there is automatic enforcement of access control of ColdFusion resources such as files, data sources, and collections between the start and end tags of CFIMPERSONATE. If CF type impersonation is turned on, the ColdFusion engine enforces the rules and policies specified for the user in the Advanced Security section of the ColdFusion Administrator. Therefore, there is no need to make multiple isAuthorized() calls in the code to protect each resource.</p><p>Refer to <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a> for more information about Advanced Security.</p><a name="2223278"></a>
+ 
+<H3>Example</H3>
+<pre>&lt;!--- This example shows the use of CFIMPERSONATE to impersonate
+a person with the user name Bill and the password BJ4YE.---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;CFIMPERSONATE Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFIMPERSONATE SECURITYCONTEXT="testContext"
+    USERNAME="Bill" 
+    PASSWORD="BJ4YE"
+    TYPE= "CF"&gt;
+...
+&lt;/CFIMPERSONATE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_050.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_052.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

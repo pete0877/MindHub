@@ -1,0 +1,200 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>What is Web Site Availability?</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1064937"></a>
+ <H1>What is Web Site Availability?</H1>
+
+
+
+<p>As you've already learned from the previous section, it's critical to design, develop, test, and deploy your Web applications so that they can scale well under heavy and ever-increasing load. However, the reality is that in spite of the best-laid plans and preparations, servers can fail for seemingly unknown reasons, causing your site to become unavailable. If and when a server fails or becomes overloaded, regardless of why it has, you want to ensure that it won't adversely affect your business by preventing your customers from accessing and using your Web application. If it does, you risk jeopardizing your bottom line with lost sales and disgruntled customers who will look to your competitors' products for goods and services.</p><p>This section defines and describes Web site availability and failover. It contains the following topics:</p><ul>
+<a name="1104297"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1104334">&quot;Availability &amp; reliability&quot;</a>
+
+<a name="1104302"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1104542">&quot;Common failures&quot;</a>
+<a name="1104268"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1065164">&quot;A Web site availability scenario&quot;</a>
+<a name="1065432"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1065144">&quot;Failover considerations&quot;</a>
+</li>
+</ul>
+<a name="1104334"></a>
+ 
+<H2>Availability &amp; reliability</H2>
+<p>In the simplest of terms, availability and reliability means you can access your Web site whenever you request it by entering the site's URL in your browser and all of its features work as intended. Thus, availability and reliability refers to the uptime of a Web site, which is often directly related to the uptime of the Web server and other dependent servers, such as a database server, an application server, or a file server. All of the servers that provide your site's functionality must work for a site to be considered available.</p><p><img src="../images/Availability.gif">
+
+
+</p><p>For ColdFusion applications, it's particularly important that the ColdFusion Server (CFS) remain as highly available and responsive as the Web server and other dependent servers. The CFS processes application-specific logic that is sent to it from the Web server by interpreting embedded CFML tags. Upon successfully processing the application logic, the CFS returns the results back to the Web server, which in turn returns an HTML response back to the browser. For all of this to occur correctly and within acceptable time frames, the CFS itself must remain available and not become overloaded. To that end, the scalability and high availability technology embedded in ColdFusion ensures that your CFS is load balanced as well as your Web server.</p><p>Availability and reliability is concerned with keeping the relevant servers that provide services to your Web application available at all times. However, if a server on which your site depends becomes unavailable, it's critical that a sound redundancy scheme makes certain that your site remains available. As your organization moves into an e-business paradigm, you must plan, design, and implement load balancing and failover strategies that guarantee that your servers will remain operational and serving your customers.</p><p>If servers employ a good strategy for load balancing and failover, there's no reason why they should not provide high availability and reliability to their users. In fact, Internet Service Providers (ISPs) that host commercial Web sites and offer 24x7 technical support as a competitive service differentiator will typically specify in written service-level agreements (SLA) a percentage of time that they guarantee a Web site will be available. If the ISP has a sound scalability and failover strategy in place, this figure is usually in the range of 99% or better.</p><a name="1104542"></a>
+ 
+<H2>Common failures</H2>
+<p>Following are typical types of failures that can negatively impact your Web application's availability and reliability:</p><ul>
+<a name="1104544"> </a>
+<li><strong>Hardware failures</strong> -- While less common than software failures, hardware failures do occur and may include crashed hard drives, blown processors, and corrupted network cards. Diagnosing and fixing these kinds of issues can be a lengthy endeavor because of time spent procuring the parts and performing the labor. If your Web application is mission-critical, you should ensure a sound hardware redundancy strategy to avoid costly downtime. A sound strategy includes a minimum of two Web servers but preferably three.
+
+<a name="1104545"> </a>
+</li>
+<li><strong>Software failures</strong> -- The types of software failures that will most likely affect a Web application involve the Web server's operating system, the Web server software itself, or the Web application software. If the operating system crashes or becomes corrupt, the Web server cannot function properly (or perhaps at all), causing your Web application's availability, reliability, and performance to be compromised. Similarly, if the Web server software crashes or acts erratically, it will likely cause the Web server to stop running when you didn't intend it to. It's hard to prepare for software failures, but if you have mirrored secondary hardware systems in place to account for failures, you'll minimize your Web application's downtime.
+<a name="1104546"> </a>
+</li>
+<li><strong>Server failures</strong> -- In addition to the Web server, other servers on which your Web application depends can also fail, causing either downtime or diminished capabilities on your site. For example, for distributed applications, a proxy server may go down, causing requests for your Web application's services to go unanswered. Or, the database server can crash, making it impossible for users to submit or retrieve information from your database. Or, a mail server can go down, making it impossible for your users to successfully send mail to you. Ensure that your organization's IT architecture includes network monitoring and notification software that can quickly report on the general health of your network and alert you about any failed servers.
+</li>
+</ul>
+<a name="1065164"></a>
+ 
+<H2>A Web site availability scenario</H2>
+<p>Imagine that you've just built a robust, interactive e-commerce Web site on which you plan to sell the most sought-after books and music in the world. You've used ColdFusion to build the application, so of course you've taken advantage of it's many built-in features, including:</p><ul>
+<a name="1095532"> </a>
+<li>back-end relational database support to manage inventory control and order submissions 
+
+<a name="1096409"> </a>
+</li>
+<li>advanced personalization and membership capabilities to provide a customized experience and superior authentication
+<a name="1096413"> </a>
+</li>
+<li>ad management features to generate additional revenues and enrich partner relationships
+<a name="1096416"> </a>
+</li>
+<li>ordering and payment features, including shopping carts and secure sockets layer, to ensure easy and safe online transactions
+</li>
+</ul>
+<p>Upon finishing the development work and quality assurance testing, you deploy the Web site onto a single production Web server that is hosted within your IT department. The IT department informs you that it is able to use its existing Internet connection to make your site &quot;live&quot; while minimizing additional hosting support costs by going to an outside vendor. The site goes live the following day and it's an instant success. Orders start pouring in the very first day, and huge numbers of people log on to browse and buy. Everything seems perfect. Except, on the second day of business, the load hitting the site is so high, the Web server's performance slows to a crawl, eventually causing the server to become unavailable. Suddenly, your tech support lines are ringing off the hook with complaints that users cannot access your site, causing you to miss out on tons of sales.</p><p>Although the application may have contained many useful features and capabilities, the customers were not able to use them for very long because the site's performance degraded to the point that the site eventually became unavailable. Because the site was deployed on only a single server, there was no way to load balance the incoming traffic. Additionally, without multiple redundant servers in place, the site was not capable of intelligently load balancing increasing traffic nor able to redirect traffic to other available servers (no failover).</p><p>This simple scenario illustrates that a critical part of any successful Web development effort must include adequate scalability, performance, and failover planning. Servers can become overloaded or fail at any time for many reasons, so make sure that your design, development, testing, and deployment strategies are sound, promote good communication between necessary departments, and include adequate disaster recovery capabilities.</p><a name="1065144"></a>
+ 
+<H2>Failover considerations</H2>
+<p>The ability to fail over servers that have become unavailable to redundant servers is a cornerstone of any mission-critical application, one that ensures an application's continuous and reliable operation. Such disaster planning and recovery can be broken down into:</p><ul>
+<a name="1108865"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1065477">&quot;Hardware planning&quot;</a>
+
+<a name="1108870"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1108833">&quot;Systems monitoring&quot;</a>
+<a name="1108875"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin063.htm#1108859">&quot;Corrective actions&quot;</a>
+</li>
+</ul>
+<p>Review the following considerations to ensure that you have a sound failover strategy in place -- one that guarantees your Web site's availability.</p><a name="1065477"></a>
+ 
+<H3>Hardware planning</H3>
+<p>As illustrated in the availability example above, it's important to acquire all of the necessary hardware and configure it before you deploy the application. All Web sites have different requirements, feature sets, purposes, audiences, and budgets. It all translates into determining appropriate needs. However, if your site is a business-critical system that affects your company's bottom line, you <em>must</em> ensure an appropriate redundancy strategy by having two or more redundant systems in place. In fact, Allaire recommends that you use a minimum of three servers to support any critical Web site so that you can take one server offline to perform update and maintenance tasks while maintaining at least two servers in production at all times. This scheme provides administrative flexibility while simultaneously protecting your site from hardware or software failures.</p><a name="1108880"></a>
+<h4> Redundancy models</h4>
+<p>The two predominant redundancy models used today are:</p><ul>
+<a name="1109132"> </a>
+<li>Primary/Backup Servers
+
+<p>An example of this model would be an important Web application that receives 
+relatively little traffic. For instance, a corporate intranet. Typically, this 
+redundancy model uses an expensive, high-capacity server for the primary 
+server and uses an inexpensive, lower quality server for the backup server in 
+case the primary server fails.
+</p><a name="1109133"> </a>
+</li>
+<li>Parallel Servers
+<p>This model is known as a classic load balancing/redundancy model and is used 
+most often for business-critical applications. Unlike the primary/secondary 
+scheme discussed above, the multiple servers used in a parallel scheme are 
+considered peers and are grouped together as a single entity to support one or 
+more applications. 
+</p><p>You can use identical cloned hardware for creating your server clusters, or you 
+can mix hardware sizes and models. Cloned, higher capacity, higher-end 
+hardware may have greater up-front hardware costs but will help minimize 
+administration costs down the line. Conversely, mixing hardware models and 
+capacities may be less expensive up-front but can add administrative costs later 
+on. 
+</p><p>If you plan to use a parallel model, Allaire recommends that you use many 
+middle range servers rather than fewer high-end ones or lots of inexpensive 
+ones. Servers that provide adequate capacity and are moderately priced can 
+generally accommodate all your needs just as well as expensive ones at a 
+fraction of the cost.
+</p></li>
+</ul>
+<a name="1108833"></a>
+ 
+<H3>Systems monitoring</H3>
+<p>In addition to redundant hardware, you should ensure that your network and the mission-critical sites that reside on its servers are supported by systems monitoring software. This type of software actively and continuously monitors an application's availability and its service levels. These monitoring programs must not only be able to detect problems, but they must also be able to route alerts to the correct administrators for immediate notification of problems.</p><a name="1108859"></a>
+ 
+<H3>Corrective actions</H3>
+<p>The third major failover consideration is the corrective actions that need to occur if a failure causes a server to become unavailable. Generally speaking, if a server goes down and causes your site to become unavailable, some level of human interaction is usually required to effectively diagnose and correct the problem. </p><p>However, before the analysis and repair can happen, the administrator needs to be notified. Whatever failover system you put in place, it should include an automated notification system that can route alerts via your telecommunications infrastructure (e-mail, pagers, real time web-based alerts, etc.) to the appropriate administrator for prompt attention.</p><p>Besides notifying the administrator that a problem has occurred, you also want your failover solution to automatically redirect traffic intended for the unavailable server to other available servers until the unavailable server is fixed. This crucial corrective action is what keeps your Web site up and available to your users even if one of the servers supporting it is experiencing problems.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin062.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

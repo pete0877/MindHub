@@ -1,0 +1,209 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ClusterCATS for ColdFusion Components</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1072008"></a>
+ <H1>ClusterCATS for ColdFusion Components</H1>
+
+
+
+<p>ClusterCATS consists of three components:</p><ul>
+<a name="1072010"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm#1204969">&quot;ClusterCATS Server&quot;</a>
+
+<a name="1072011"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm#1072020">&quot;ClusterCATS Explorer&quot;</a>
+<a name="1179480"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm#1179531">&quot;ClusterCATS Server Administrator&quot;</a>
+</li>
+</ul>
+<p>All of the components are installed on a machine when you run the ColdFusion Server installation program and select the Load Balancing and High Availability install option.</p><p>You need to run the installation program on each server that will be part of your cluster as well as on the Windows machine (NT, 98, or 95) from which you will use the ClusterCATS Explorer to administer the cluster. Even if your clusters run on Solaris or Linux platforms, obtain a Windows machine for running the ClusterCATS Explorer. If you can't, you can use the Web-based Explorer in conjunction with included server utilities to administer your clusters.</p><a name="1204969"></a>
+ 
+<H2>ClusterCATS Server</H2>
+<p>ClusterCATS Server runs on Windows NT, Sun Solaris, and Linux platforms. This component must be installed on each server in your cluster. Each ClusterCATS Server component monitors the status of all other Web servers in a cluster and tracks application and transaction resource availability.</p><p>Each ClusterCATS Server component:</p><ul>
+<a name="1072017"> </a>
+<li>Intelligently manages HTTP load across Web servers
+
+<a name="1142017"> </a>
+</li>
+<li>Proactively manages ColdFusion Server load
+<a name="1072018"> </a>
+</li>
+<li>Provides automatic and transparent failover support to every server in your cluster
+</li>
+</ul>
+<a name="1072020"></a>
+ 
+<H2>ClusterCATS Explorer</H2>
+<p>ClusterCATS Explorer is a Windows-based administration utility that you use to create and manage ClusterCATS clusters. Using a Windows Explorer-like graphical interface, you configure, view, monitor, and perform other management tasks, such as:</p><ul>
+<a name="1072022"> </a>
+<li>Creating and removing clusters
+
+<a name="1072023"> </a>
+</li>
+<li>Adding and removing servers from a cluster 
+<a name="1142477"> </a>
+</li>
+<li>Configuring load balancing and high availability features
+<a name="1072024"> </a>
+</li>
+<li>Enabling administrator authentication privileges
+<a name="1072025"> </a>
+</li>
+<li>Configuring e-mail-based alarm notifications
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can run the ClusterCATS Explorer from any server in the cluster, or 
+you can run it from a centrally located computer that is not in the same 
+location as the cluster. This flexibility allows administrators in different 
+geographic locations the ability to administer distributed clusters.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1072030"></a>
+ 
+<H3>The ClusterCATS Explorer main window</H3>
+<p>The ClusterCATS Explorer presents a view of your cluster in much the same manner as the Windows Explorer presents a view of the files and directories that reside on a PC. Each of the objects in a ClusterCATS cluster configuration -- clusters, servers, monitors, and probes -- is represented by a unique icon. You can manipulate these icons in much the same manner as you expand and collapse directory trees in the Explorer application.</p><p><img src="../images/BT001.gif">
+
+
+</p><p></p><p>The ClusterCATS interface includes four distinct areas:</p><ul>
+<a name="1072038"> </a>
+<li>Menu Bar -- Menu access to all ClusterCATS functionality.
+
+<a name="1086895"> </a>
+</li>
+<li><strong>Toolbar</strong> -- Shortcuts to the most frequently used ClusterCATS functions.
+<a name="1072039"> </a>
+</li>
+<li><strong>Left Pane</strong> -- Contains views of cluster objects. 
+<a name="1072040"> </a>
+</li>
+<li><strong>Right Pane</strong> -- Contains the view folder and files for the object currently selected in the left pane.<strong></strong>
+</li>
+</ul>
+<a name="1179531"></a>
+ 
+<H2>ClusterCATS Server Administrator</H2>
+<p>The ClusterCATS Server Administrator is a graphical, Windows-based utility that lets you perform various server administration activities, including:</p><ul>
+<a name="1179716"> </a>
+<li>adding and removing the ClusterCATS filter from the Web server service
+
+<a name="1179717"> </a>
+</li>
+<li>stopping and starting the ClusterCATS service
+<a name="1179727"> </a>
+</li>
+<li>placing a cluster member in maintenance mode
+<a name="1179728"> </a>
+</li>
+<li>resetting a clustered server's configuration to its pre-clustered state
+</li>
+</ul>
+<p>The ClusterCATS Server Administrator lets you accomplish these tasks by using an easy-to-use graphical user interface.</p><p><img src="../images/CC_Server_Admin.gif">
+
+
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The ClusterCATS Server Administrator is installed on each Windows NT 
+server you cluster. If your servers are UNIX servers, use the btadmin 
+utility to perform the aforementioned server administration activities. 
+See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1039412">&quot;btadmin utility&quot;</a>. <br>
+<br>
+Also, unlike the ClusterCATS Explorer, which lets you administer your 
+clusters from a single, central computer if you want, you must run the 
+ClusterCATS Server Administrator from each server in your cluster to 
+perform server-specific modifications.
+</td>
+</tr>
+</table>
+</div>
+<br><p>See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1184863">&quot;Performing Common Cluster Administration Tasks&quot;</a> to learn how to use the ClusterCATS Server Administrator.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

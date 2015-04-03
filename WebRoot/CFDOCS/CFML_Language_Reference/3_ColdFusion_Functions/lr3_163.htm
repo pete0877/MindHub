@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Log</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_162.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_164.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000229"></a>
+ <H1>Log</H1>
+
+
+
+<p>Returns the natural logarithm of a number. Natural logarithms are based on the constant e (2.71828182845904).</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_089.htm#998474">Exp</a> and <a href="../3_ColdFusion_Functions/lr3_164.htm#1000257">Log10</a>.
+</p>
+
+<a name="1000232"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Log</strong>(<em>number</em>)
+</PRE><a name="1000234"> </a>
+<h5 class="param"> number</h5>
+<p class="param">Positive real number for which you want the natural logarithm.</p><a name="1804737"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Log
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to use Log ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Log Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Log Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.number")&gt;
+&lt;CFOUTPUT&gt;
+&lt;P&gt;Your number, #FORM.number#
+&lt;BR&gt;#FORM.number# raised to the E power: #exp(FORM.number)#
+&lt;CFIF FORM.number LTE 0&gt;&lt;BR&gt;You must enter a positive real number to
+see the natural logarithm of that number&lt;CFELSE&gt;&lt;BR&gt;The natural logarithm
+of #FORM.number#: #log(FORM.number)#&lt;/CFIF&gt;
+&lt;CFIF FORM.number LTE 0&gt;&lt;BR&gt;You must enter a positive real number to
+see the logarithm of that number to base 10&lt;CFELSE&gt;&lt;BR&gt;The logarithm of
+#FORM.number# to base 10: #log10(FORM.number)#&lt;/CFIF&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;CFFORM ACTION="log.cfm" METHOD="POST"&gt;
+Enter a number to see its value raised to the E power,
+the natural logarithm of that number, and the logarithm of
+number to base 10.
+&lt;CFINPUT TYPE="Text" NAME="number" MESSAGE="You must enter a number"
+  VALIDATE="float" REQUIRED="No"&gt;
+&lt;INPUT TYPE="Submit" NAME=""&gt;
+&lt;/CFFORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Log
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_162.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_164.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

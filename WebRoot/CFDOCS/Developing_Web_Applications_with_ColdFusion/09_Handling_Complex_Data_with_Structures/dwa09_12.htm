@@ -1,0 +1,136 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Structures as Associative Arrays</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1028763"></a>
+ <H1>Using Structures as Associative Arrays</H1>
+
+
+
+<p>You can also use structures as associative arrays. When used as associative arrays, structures index repetitive data by string keys rather than by integers.</p><p>You might use structures to create an associative array that matches people's names with their departments. In this example, a structure named <em>Departments</em> includes an employee named John, listed in the Sales department. To access John's department, you would use the syntax, <code>Departments["John"]</code>.</p><p>A structure's key must be a string. The values associated with the key can be anything:</p><ul>
+<li>a string
+
+</li>
+<li>an integer
+</li>
+<li>an array
+</li>
+<li>another structure
+</li>
+</ul>
+<a name="1028773"></a>
+ 
+<H2>Looping through structures</H2>
+<p>The following example shows how you can loop through a structure to output its contents. Note that when you enumerate key-value pairs using a loop, the keys appear in upper-case.</p><pre>&lt;!--- Create a structure and loop through its contents ---&gt;
+
+&lt;CFSET Departments=StructNew()&gt;
+
+&lt;CFSET val=StructInsert(Departments, "John", "Sales")&gt;
+&lt;CFSET val=StructInsert(Departments, "Tom", "Finance")&gt;
+&lt;CFSET val=StructInsert(Departments, "Mike", "Education")&gt;
+
+&lt;!--- Build a table to display the contents ---&gt;
+
+&lt;CFOUTPUT&gt;
+
+&lt;TABLE cellpadding="2" cellspacing="2"&gt;
+    &lt;TR&gt;
+    &lt;TD&gt;&lt;B&gt;Employee&lt;/B&gt;&lt;/TD&gt;
+    &lt;TD&gt;&lt;B&gt;Department&lt;/B&gt;&lt;/TD&gt;
+    &lt;/TR&gt;
+
+&lt;!--- In CFLOOP, use ITEM to create a variable
+    called person to hold value of key as loop runs ---&gt;
+
+&lt;CFLOOP COLLECTION=#Departments# ITEM="person"&gt;
+
+    &lt;TR&gt;
+    &lt;TD&gt;#person#&lt;/TD&gt;
+    &lt;TD&gt;#Departments[person]#&lt;/TD&gt;
+    &lt;/TR&gt;
+
+&lt;/CFLOOP&gt;
+
+&lt;/TABLE&gt;
+&lt;/CFOUTPUT&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

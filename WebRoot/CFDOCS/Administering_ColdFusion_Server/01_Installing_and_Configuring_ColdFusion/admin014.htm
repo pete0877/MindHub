@@ -1,0 +1,250 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Installing ColdFusion on Linux</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Installing and Configuring ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025636"></a>
+ <H1>Installing ColdFusion on Linux</H1>
+
+
+
+<p>Allaire is pleased to offer ColdFusion on the popular Linux platform. This section addresses the following topics about installing ColdFusion on Linux:</p><ul>
+<a name="1025701"> </a>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin014.htm#1025716">&quot;Installing ColdFusion&quot;</a>
+
+<a name="1025714"> </a>
+</li>
+<li><a href="../01_Installing_and_Configuring_ColdFusion/admin014.htm#1025833">&quot;Uninstalling ColdFusion&quot;</a>
+</li>
+</ul>
+<a name="1025716"></a>
+ 
+<H2>Installing ColdFusion</H2>
+<p>Before installing ColdFusion on Linux, please note the following considerations:</p><ul>
+<a name="1025722"> </a>
+<li>The installation procedure assumes you are installing from a CD. If you purchased and downloaded ColdFusion from the Allaire Online Store, follow the download instructions found there and then follow the install procedure below, substituting the CD location for the directory in which you downloaded ColdFusion.
+
+<a name="1025968"> </a>
+</li>
+<li>You must log in as root.
+<a name="1025799"> </a>
+</li>
+<li>By default the installation script installs ColdFusion into the <code>/opt</code> directory. If you want to install ColdFusion into a different directory, you must create that directory before running the installation<code> </code>script. The installation script will create a symbolic link from <code>/opt/coldfusion</code> to wherever you installed ColdFusion.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install ColdFusion on Linux:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Log in as <code>root</code>.
+
+
+</li>
+<li>Load the ColdFusion CD-ROM into your CD drive.
+
+</li>
+<li>Mount the CD-ROM on <code>/mnt/cdrom </code>if necessary.
+
+</li>
+<li>Change directories to the <code>cf/linux</code> directory on the CD.
+
+</li>
+<li>Run the ColdFusion installation script by entering the following command:
+
+<p><code>./cfinstall
+</code></p><p>The ColdFusion installation script starts.
+</p></li>
+<li>Enter your ColdFusion registration ID and press Enter.
+
+<p>You can find the registration ID on the product box.
+</p></li>
+<li>Enter the name of the directory in which you want to install ColdFusion or accept the default directory.
+
+<p><code>/opt</code> is the default installation directory.
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you specified a directory other than the default, the installation 
+script will create a symbolic link from <code>/opt/coldfusion</code> to wherever 
+you installed ColdFusion.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter the name of the Web server you are running and press Enter or just press Enter if you are running the default Web server (Apache).
+
+</li>
+<li>Press Enter to let the installation script automatically configure your Web server for ColdFusion.
+
+<p>The program loads the necessary plug-in for Netscape or module for Apache 1.3.x 
+Web servers.
+</p></li>
+<li>Enter the path of your Web server's document root directory and press Enter. 
+
+<p>The default document root directory is <code>home/httpd/html</code>.
+</p></li>
+<li>Press enter to install the ColdFusion documentation below your Web server's document root directory.
+
+<p>The documentation is installed in the /<code>cfdocs</code> directory, which resides under the 
+Web root directory.
+</p></li>
+<li>Enter the password you want to use to access the ColdFusion Administrator, which allows you to configure and modify settings for the ColdFusion Server.
+
+<p>You'll be asked to re-enter the password for verification purposes.
+</p></li>
+<li>Enter the password you want to use to connect to ColdFusion Server when developing applications with ColdFusion Studio.
+
+<p>You'll be asked to re-enter the password for verification purposes.
+</p></li>
+<li>Enter the user name under which ColdFusion will run or press Enter to run under the default user name (<code>nobody</code>).
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This user account must be a valid, existing account.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>If you want to install ClusterCATS at this time, press Enter. Otherwise, enter <code>n</code> and press Enter to continue.
+
+<p>If you do not install ClusterCATS now, you can do so later by running the 
+ClusterCATS installation script on its own. See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin069.htm#1203339">&quot;Installing ClusterCATS&quot;</a>.
+</p></li>
+<li>Press Enter to have the installation script begin copying program files to your server and making the configurations you specified.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you elected to install ClusterCATS, the ColdFusion installation script 
+runs first, followed by the ClusterCATS installation script. The 
+ClusterCATS installation script will prompt you with additional questions 
+about your Web server configuration.
+</td>
+</tr>
+</table>
+</div>
+<br><p>When the installation is complete, a shell script restarts the Web server and starts ColdFusion services.</p><a name="1025833"></a>
+ 
+<H2>Uninstalling ColdFusion</H2>
+<p>Use the <code>remove </code>utility to delete an installed version of ColdFusion by doing the following:</p><ol>
+</li>
+<li>Log in as root.
+
+</li>
+<li>Change to the following directory on your server:
+
+<p><code>/opt/coldfusion/uninstall/cfremove
+</code></p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Step 2 assumes you originally installed ColdFusion to the default 
+installation directory (<code>/opt</code>). If you installed ColdFusion to a 
+directory other than the default directory, substitute its name in step 
+2 accordingly.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter the following command at the prompt:
+
+<p><code>./cfremove
+</code></p><p>ColdFusion is deleted from your server.
+</p></li>
+</ol>
+<p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin013.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:26 -->
+</body>
+</html>

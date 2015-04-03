@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Returning Query Results to the User</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Retrieving and Formatting the Data You Want</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1017244"></a>
+ <H1>Returning Query Results to the User</H1>
+
+
+
+<p>When you build search interfaces, keep in mind that there won't always be a record returned. If there is at least one record returned from a query, you will usually format that data using an HTML table. But to make sure that a search has retrieved records, you will need to test if any records have been returned using the recordcount variable in a conditional logic expression in order to display search results appropriately to users.</p><p>For example, to inform the user that no records were found if the number of records returned for the GetEmployees query is 0, insert the following code before displaying the data:</p><pre>&lt;CFIF GetEmployees.RecordCount IS "0"&gt;
+    No records match your search criteria. &lt;BR&gt;
+&lt;CFELSE&gt;
+</pre><ul>
+<li>Prefix RecordCount with the queryname.
+
+</li>
+<li>Add a true procedure that displays a message to the user.
+</li>
+<li>Add a not true procedure after the CFELSE tag to format the returned data using an HTML table.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To return search results to users:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Return to <code>actionpage.cfm</code> in Studio.
+
+
+</li>
+<li>Add the code indicated.
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Retrieving Employee Data Based on Criteia from Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="CompanyInfo"&gt;
+SELECT  Departments.Department.Name,
+    Employees.FirstName,
+    Employees.LastName,
+    Employees.StartDate,
+    Employees.Salary
+    FROM Departments, Employees
+WHERE Departments.Department_ID = Employees.Department_ID
+    &lt;CFIF Form.Department_Name IS NOT ""&gt;
+    AND Departments.Department_Name = 'Form.Department_Name'
+&lt;/CFQUERY&gt;
+&lt;H4&gt;Employee Data Based on Criteia from Form&lt;/H4&gt;
+<span class="codemark">&lt;CFIF GetEmployees.RecordCount IS "0"&gt;
+</span><span class="codemark">No records match your search criteria. &lt;br&gt;
+</span><span class="codemark">Please go back to the form and try again.
+</span><span class="codemark">&lt;CFELSE&gt;
+</span>&lt;TABLE&gt;
+&lt;TR&gt;
+    &lt;TH&gt;First Name&lt;/TH&gt;
+    &lt;TH&gt;Last Name&lt;/TH&gt;
+    &lt;TH&gt;Salary&lt;/TH&gt;
+&lt;/TR&gt;
+&lt;CFOUTPUT QUERY="GetEmployees"&gt;
+&lt;TR&gt;
+    &lt;TD&gt;#FirstName#&lt;/TD&gt;
+    &lt;TD&gt;#LastName#&lt;/TD&gt;
+    &lt;TD&gt;#Salary#&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/TABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file.
+
+</li>
+<li>Return to the form, enter search criteria and submit the form. 
+
+</li>
+<li>If no records match the criteria you specified, the message displays.
+
+</li>
+</ol>
+<p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:42 -->
+</body>
+</html>

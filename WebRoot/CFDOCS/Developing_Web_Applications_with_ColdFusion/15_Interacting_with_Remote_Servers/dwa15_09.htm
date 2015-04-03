@@ -1,0 +1,90 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>An Overview of Distributed Data for the Web</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1043004"></a>
+ <H1>An Overview of Distributed Data for the Web</H1>
+
+
+
+<p>Web Distributed Data Exchange (WDDX) is an Extensible Markup Language (XML) vocabulary for describing complex data structures such as arrays, associative arrays, and recordsets in a generic fashion so they can be moved between different application server platforms and between application servers and browsers using only HTTP. Target platforms for WDDX include ColdFusion, Active Server Pages, JavaScript, Perl, Java, Python, and COM.</p><p>Unlike other approaches to creating XML-based generic distributed object systems for the Web, WDDX is not designed as an analog of traditional object programming languages. These approaches use XML as a generic descriptor for initiating remote procedure calls between different object frameworks. This is a valuable approach to the problem of using traditional object-based applications to the Internet, but it is more useful as a bridge between different programming paradigms than it is as a Web-native methodology for distributing structured data between application.</p><p>There are several problems with merging the distributed object model of computing with the Internet. Primarily, this model was designed with a completely different vision of what general internetworking would look like. Instead of the "dumb and disconnected" model of HTTP, distributed computing was built on the assumption of rich network services that would allow resources on remote machines to act like local components. These services allow an application on one system to find, invoke, and maintain state with objects on a remote system. Communication between objects on remote systems uses an efficient, special-purpose wire protocol.</p><p>But these services are a barrier to development in the disconnected world. At the most fundamental level, the wire protocols of Distributed COM and CORBA are blocked by most Web firewall software. But the largest barrier is that client-server oriented distributed computing frameworks impose a development methodology that is radically different from that of the Web. This methodology excludes the vast majority of developers building Web applications whose main tools are tag-based markup languages and scripting. While WDDX will work with systems that support component object development paradigms, there is a large set of applications that can benefit from the general characteristics of a distributed data system without the client-server overhead.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

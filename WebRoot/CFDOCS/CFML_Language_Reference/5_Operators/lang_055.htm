@@ -1,0 +1,134 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Function Syntax</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../5_Operators/lang_054.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_056.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;ColdFusion Expressions: Operators and Other Constructs</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2672976"></a>
+ <H1>Function Syntax</H1>
+
+
+
+<p>The following table illustrates function syntax and usage guidelines.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Function Syntax Guidelines&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Usage</strong>
+</th><th align="left">
+<strong>Example</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+The exception -- no arguments
+</td><td valign="top"><PRE>Function()
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Basic format
+</td><td valign="top"><PRE>Function(Data)
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Nesting functions
+</td><td valign="top"><PRE>Function1(Function2(Data))
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Separate multiple arguments with commas
+</td><td valign="top"><PRE>Function(data1, data2, data3)
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Enclose string arguments in single or double quotes
+</td><td valign="top"><PRE>Function('This is a demo') Function("This 
+is a demo")
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Arguments are expressions
+</td><td valign="top"><PRE>Function1(X*Y, Function2("Text"))
+</PRE></td></tr>
+
+</table>
+</div>
+</p><p>To learn how to insert functions in various types of expressions see <a href="../5_Operators/lang_056.htm#2673587">Pound Signs</a>.</p><a name="2673020"></a>
+ 
+<H2>Optional arguments in functions</H2>
+<p>Some functions may take optional arguments after their required arguments. If omitted, optional arguments take some default value. For example:</p><pre>Replace("FooFoo", "Foo", "Boo") returns "BooFoo"
+Replace("FooFoo", "Foo", "Boo", "ALL") returns "BooBoo"
+</pre><p>The difference in behavior is explained by the fact that the Replace function takes an optional fourth argument which specifies the scope of replacement. The default value is &quot;ONE&quot; which explains why only the first occurrence of &quot;Foo&quot; was replaced with &quot;Boo&quot;. In the second example, a fourth argument is provided that forces the function to replace all occurrences of &quot;Foo&quot; with &quot;Boo&quot;.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../5_Operators/lang_054.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_056.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:40:20 -->
+</body>
+</html>

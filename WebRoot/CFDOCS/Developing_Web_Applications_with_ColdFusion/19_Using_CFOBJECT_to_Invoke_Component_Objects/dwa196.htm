@@ -1,0 +1,99 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Started with CORBA</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa195.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa197.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 19	:&nbsp;&nbsp;Using CFOBJECT to Invoke Component Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999116"></a>
+ <H1>Getting Started with CORBA</H1>
+
+
+
+<p>ColdFusion supports CORBA through the Dynamic Invocation Interface (DII). As with COM, the object's type information has to be available to ColdFusion. This implies that an IIOP compliant Interface Repository (IR) should be running on the network, and that the object's IDL is registered in the IR.</p><p>ColdFusion Enterprise version 4.0 is bundled with deployment software from Inprise VisiBroker for C++ 3.2. These runtime DLLs are used to invoke operations on object references made available using the CFOBJECT tag.</p><p>A directory for logging output from VisiBroker is created when you first start ColdFusion Enterprise. This directory is called vbroker\log and its location is determined as follows:</p><ul>
+<li>If VisiBroker is already installed on the server, the log directory is the directory pointed to by the VBROKER_ADM environment variable.
+
+</li>
+<li>If this is a new VisiBroker installation, the log directory is created on the root of the drive from which ColdFusion Server is started. For example, if ColdFusion is installed in c:\cfusion or opt/coldfusion (UNIX), then the log directory will be c:\vbroker\log or /vbroker (UNIX).
+</li>
+<li>If the creation of the log directory on the root fails, then the directory is created in the ColdFusion installation directory.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa195.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa197.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

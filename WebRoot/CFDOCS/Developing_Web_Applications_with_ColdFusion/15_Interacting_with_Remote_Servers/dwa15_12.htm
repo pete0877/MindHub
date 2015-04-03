@@ -1,0 +1,93 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Data Exchange Across Application Servers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1043021"></a>
+ <H1>Data Exchange Across Application Servers</H1>
+
+
+
+<p>The other common use of WDDX is expected to be sending complex, structured data seamlessly between different application server platforms. This will allow an application based on ColdFusion at one business to send a purchase order, for instance, to a supplier running a CGI-based system. The supplier could then extract information from the order and pass it to a shipping company running an application based on ASP. Unlike traditional client-server approaches (including distributed object systems) minimal to no prior knowledge of the source or target systems is required by any of the others.</p><a name="1043023"></a>
+ 
+<H2>Time zone processing</H2>
+<p>Because producers and consumers of WDDX packets can be in geographically dispersed locations, using time zone information during the serialization and deserialization phases becomes critical for correct date-time processing.</p><p>All of Allaire's WDDX serializers (CFML, COM, and JS) have an attribute/property <code>useTimezoneInfo</code> that specifies whether time zone information should be used in the serialization process. The default value is true.</p><p>In the CFML implementation, <code>useTimezoneInfo</code> is a property of the CFWDDX Action=Cfml2WDDX tag. In the COM implementation, <code>useTimezoneInfo</code> is a property of the IWDDXSerializer interface provided by the object <code>WDDX.Serializer.1</code>. In the JS implementation <code>useTimezoneInfo</code> (note the case-sensitivity of JS) is a property of the WDDXSerializer object.</p><p>Date-time values in WDDX are represented using a subset of the ISO8601 format. Time zone information is represented as an hour/minute offset from UTC, for example, "1998-9-8T12:6:26-4:0".</p><p>During WDDX deserialization to CFML and COM time zone information is automatically taken into account and all date-time values are converted to local time. In this way, UTC is taken out of the picture entirely and developers do not need to worry about the details of time zone conversions.</p><p>However, during deserialization to JavaScript expressions, time zone information is not taken into account. Complications arise because of the difficulty of knowing the time zone of the browser.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

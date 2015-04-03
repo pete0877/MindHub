@@ -1,0 +1,200 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>HTMLEditFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_116.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_118.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999081"></a>
+ <H1>HTMLEditFormat</H1>
+
+
+
+<p>Returns HTML escaped <em>string</em>. All carriage returns are removed from <em>string</em>, and all special characters (&gt; &lt; " &amp;) are escaped.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_116.htm#999056">HTMLCodeFormat</a>.
+</p>
+
+<a name="999084"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>HTMLEditFormat</strong>(<em>string</em> [, <em>version</em> ])
+</PRE><a name="999086"> </a>
+<h5 class="param"> string</h5>
+<p class="param">String being HTML escaped.</p><a name="999087"> </a>
+<h5 class="param"> version</h5>
+<p class="param">The specific HTML version to use in replacing special characters with their entity references. Valid entries are:</p><ul>
+<a name="999088"> </a>
+<li><code>-1</code> - The latest implementation of HTML
+
+<a name="999089"> </a>
+</li>
+<li><code>2.0</code> - For HTML 2.0 (Default)
+<a name="999090"> </a>
+</li>
+<li><code>3.2</code> - For HTML 3.2
+</li>
+</ul>
+<a name="1147181"></a>
+ 
+<H3>Usage</H3>
+<p>By escaping all special characters, this function increases the length of the specified string. This can cause unpredictable results when performing certain string functions (Left, Right, and Mid, for example) against the expanded string.</p><a name="1802605"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="HTMLEditFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of HTMLCodeFormat
+and HTMLEditFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+HTMLEditFormat Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;HTMLEditFormat Example&lt;/H3&gt;
+
+&lt;FORM ACTION="HTMLeditformat.cfm" METHOD="POST"&gt;
+Try entering a URL for the tag to return in HTMLCodeFormat
+and HTMLEditFormat:
+&lt;INPUT TYPE="Text" size=25 NAME="urladdress" 
+  VALUE="http://www.allaire.com"&gt;
+
+&lt;INPUT TYPE="Submit" NAME="" VALUE="get page"&gt;
+&lt;/FORM&gt;
+
+&lt;!--- sets a default value for a url to retrieve ---&gt;
+&lt;CFPARAM NAME="urladdress" DEFAULT="http://localhost/cfdocs/index.htm"&gt;
+
+&lt;!--- if we have passed a url address in the FORM, we
+want to display the passed address ---&gt;
+&lt;CFIF IsDefined("FORM.urladdress") is True&gt;
+&lt;!--- do simple error check to avoid crashing the tag ---&gt;
+    &lt;CFIF Trim(Form.urladdress) is "" or Trim(Form.urladdress) is "http:/
+/"&gt;
+&lt;!--- if error condition tripped, set alternative ---&gt;
+        &lt;CFSET urlAddress ="http://localhost/cfdocs/index.htm"&gt;
+        &lt;H4&gt;because you entered no url or an empty string, the tag
+        will return the following address: 
+        http://localhost/cfdocs/index.htm&lt;/H4&gt;
+
+    &lt;CFELSE&gt;
+&lt;!--- otherwise use address passed from form ---&gt;
+        &lt;CFSET urlAddress = "#FORM.urladdress#"&gt;
+    &lt;/CFIF&gt;
+&lt;!--- now use the CFHTTP tag to get the file content
+represented by urladdress ---&gt;
+        &lt;CFHTTP URL="#urladdress#"
+            METHOD="GET"
+            RESOLVEURL=YES&gt;
+        &lt;/CFHTTP&gt;
+&lt;CFELSE&gt;
+&lt;!--- the first time through, retrieve a URL that we know exists ---&gt;
+
+&lt;CFHTTP URL="http://localhost/cfdocs/index.htm"
+    METHOD="GET"
+    RESOLVEURL=YES&gt;
+&lt;/CFHTTP&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- Now, output the file, including the mimetype and content ---&gt;
+&lt;H3&gt;Show the file&lt;/H3&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;P&gt;Here is an example of 255 characters from your file
+output in HTMLCodeFormat:
+&lt;P&gt;#HTMLCodeFormat(Mid(CFHTTP.FileContent,1,255))#
+
+&lt;P&gt;Here is an example of 255 characters from your file
+output in HTMLEditFormat:
+&lt;P&gt;#HTMLEditFormat(Mid(CFHTTP.FileContent,1,255))#
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="HTMLEditFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_116.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_118.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

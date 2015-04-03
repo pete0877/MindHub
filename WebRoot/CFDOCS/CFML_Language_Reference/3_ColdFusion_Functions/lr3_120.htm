@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>InputBaseN</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_119.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_121.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999174"></a>
+ <H1>InputBaseN</H1>
+
+
+
+<p>Returns the number obtained by converting <em>string</em> using the base specified by <em>radix</em>, an integer ranging from 2 to 36.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_097.htm#998742">FormatBaseN</a>.
+</p>
+
+<a name="999177"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>InputBaseN</strong>(<em>string</em>, <em>radix</em>)
+</PRE><a name="999179"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string representing number in base specified by radix.</p><a name="999180"> </a>
+<h5 class="param"> radix</h5>
+<p class="param">Base of number represented by string ranging from 2 to 36.</p><a name="1802788"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="InputBaseN
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows FormatBaseN and InputBaseN---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+InputBaseN Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;InputBaseN Example&lt;/H3&gt;
+
+&lt;P&gt;FormatBaseN converts a number to a string in the
+base specified by Radix.
+&lt;P&gt;
+&lt;CFOUTPUT&gt;
+&lt;BR&gt;FormatBaseN(10,2): #FormatBaseN(10,2)#
+&lt;BR&gt;FormatBaseN(1024,16): #FormatBaseN(1024,16)#
+&lt;BR&gt;FormatBaseN(125,10): #FormatBaseN(125,10)#
+&lt;BR&gt;FormatBaseN(10.75,2): #FormatBaseN(10.75,2)#
+&lt;/CFOUTPUT&gt;
+&lt;H3&gt;InputBaseN Example&lt;/H3&gt;
+&lt;P&gt;InputBaseN returns the number obtained by converting
+a string using the base specified by Radix, an integer ranging
+from 2 to 36.
+&lt;CFOUTPUT&gt;
+&lt;BR&gt;InputBaseN("1010",2): #InputBaseN("1010",2)#
+&lt;BR&gt;InputBaseN("3ff",16): #InputBaseN("3ff",16)#
+&lt;BR&gt;InputBaseN("125",10): #InputBaseN("125",10)#
+&lt;BR&gt;InputBaseN(1010,2): #InputBaseN(1010,2)#
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="InputBaseN
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_119.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_121.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

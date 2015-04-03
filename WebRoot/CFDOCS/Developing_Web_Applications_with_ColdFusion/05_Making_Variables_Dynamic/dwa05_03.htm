@@ -1,0 +1,235 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Dynamic Checkboxes and Multiple Select Boxes</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Making Variables Dynamic</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012160"></a>
+ <H1>Creating Dynamic Checkboxes and Multiple Select Boxes</H1>
+
+
+
+<p>When an HTML form contains either a list of checkboxes with the same name or a multiple select box, the user's entries are made available as a comma-delimited list with the selected values. These lists can be very useful for a wide range of inputs.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If no value is entered for a checkbox or multiple select lists, no variable is 
+created.The SQL INSERT statement will not work correctly if there are no 
+values. To correct this problem, make the form fields required, use 
+Dynamic SQL, or use CFPARAM to establish a default value for the form 
+field..
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1011980"></a>
+ 
+<H2>Checkboxes</H2>
+<p>When you put a series of checkboxes with the same name in an HTML form, the variable that is created contains a comma-delimited list of values. The values can be either numeric values or alphanumeric strings. These two types of values are treated slightly differently.</p><a name="1012574"></a>
+ 
+<H3>Searching numeric values</H3>
+<p>Suppose you want a user to select one or more departments using checkboxes. You query the database to retrieve detailed information on the selected department(s).</p></pre><pre>Select one or more departments to get information on:
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDept"
+    VALUE="1"&gt;
+    Training&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDept"
+    VALUE="2"&gt;
+    Marketing&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDept"
+    VALUE="3"&gt;
+    HR&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDept"
+    VALUE="4"&gt;
+    Sales&lt;BR&gt;
+
+&lt;INPUT TYPE="hidden"
+    NAME="SelectedDepts_required"
+    VALUE="You must select at least one organization."&gt;
+</pre><p>The text displayed to the user is the name of the department, but the VALUE attribute of each checkbox corresponds to the underlying database primary key for the department's record.</p><p>If the user checked the Marketing and Sales items, the value of the SelectedDept form field would be "2,4." If this parameter were used, the following would be the resulting SQL statement:</p><pre>SELECT *
+    FROM Departments
+    WHERE Department_ID IN ( #form.SelectedDept# )
+</pre><p>The statement sent to the database would be:</p><pre>SELECT *
+    FROM Departments
+    WHERE Department_ID IN ( 2,4 )
+</pre><a name="1011992"></a>
+ 
+<H3>Searching string values</H3>
+<p>To search for a database field containing string values (instead of numeric), you must modify both the checkbox and CFQUERY syntax.</p><p>The first example searched for department information based on a numeric primary key field called "Department_ID." Suppose, instead, that the primary key is a database field called "DepartmentName" that contains string values. In that case, it's necessary to make the following modifications:</p><ul>
+<li>Make the value attribute of the checkboxes equal to the string value.
+
+</li>
+<li>Enclose the value attribute in single quotes.
+<pre>&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDepts"
+    VALUE="'Training'"&gt;
+    Training&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDepts"
+    VALUE="'Marketing'"&gt;
+    Marketing&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDepts"
+    VALUE="'HR'"&gt;
+    HR&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDepts"
+    VALUE="'Sales'"&gt;
+    Sales&lt;BR&gt;
+
+&lt;INPUT TYPE="checkbox"
+    NAME="SelectedDepts_required"
+    VALUE="You must select at least one organization."&gt;
+</pre></li>
+</ul>
+<p>If the user checked Marketing and Sales, the value of the SelectedDepts form field would be 'Marketing','Sales'.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You must use the ColdFusion PreserveSingleQuotes function in the SQL 
+statement to prevent ColdFusion from escaping the single quotes in the 
+form field value:
+</td>
+</tr>
+</table>
+</div>
+<br><pre>SELECT *
+    FROM Departments
+    WHERE DepartmentName IN
+    (#PreserveSingleQuotes(form.SelectedDepts)#)
+</pre><p>The statement sent to the database would be:</p><pre>SELECT *
+    FROM Departments
+    WHERE DepartmentName IN ('Marketing','Sales')
+</pre><a name="1012498"></a>
+ 
+<H2>Multiple select lists</H2>
+<p>ColdFusion treats multiple select lists (HTML input type SELECT with attribute MULTIPLE) just like checkboxes. The data made available to your page from any multiple select list is a comma-delimited list of the entries selected by the user. For example, a multiple select list contains four entries: Training, Marketing, HR, and Sales. The user selects Marketing and Sales. The value of the form field variable is then 'Marketing', 'Sales'.</p><p>Just as you can with checkboxes, you can also query with multiple select lists by searching a database field that contains either numeric values or string values.</p><a name="1012010"></a>
+ 
+<H3>Searching numeric values</H3>
+<p>For example, suppose you want the user to select departments from a multiple select box. The query retrieves detailed information on the selected department(s):</p><pre>Select one or more companies to get more information on:
+&lt;SELECT Name="SelectDepts" MULTIPLE&gt;
+    &lt;OPTION VALUE="1"&gt;Training
+    &lt;OPTION VALUE="2"&gt;Marketing
+    &lt;OPTION VALUE="3"&gt;HR
+    &lt;OPTION VALUE="4"&gt;Sales
+&lt;/SELECT&gt;
+
+&lt;INPUT TYPE="hidden"
+    NAME="SelectDepts_required"
+    VALUE="You must select at least one department."&gt;
+</pre><p>If the user selected the Marketing and Sales items, the value of the SelectDepts form field would be 2,4.</p><p>If this parameter were used in the following SQL statement:</p><pre>SELECT *
+    FROM Departments
+    WHERE Department_ID IN (#form.SelectDepts#)
+</pre><p>the statement sent to the database would be:</p><pre>SELECT *
+    FROM Departments
+    WHERE Department_ID IN (2,4)
+</pre><a name="1012018"></a>
+ 
+<H3>Searching string values</H3>
+<p>Suppose you want the user to select departments from a multiple select list. The database field search is a string field. The query retrieves detailed information on the selected department(s):</p><pre>Select one or more departments to get
+more information on:
+&lt;SELECT Name="SelectDepts" MULTIPLE&gt;
+    &lt;OPTION VALUE="'Training'"&gt;Training
+    &lt;OPTION VALUE="'Marketing'"&gt;Marketing
+    &lt;OPTION VALUE="'HR'"&gt;HR
+    &lt;OPTION VALUE="'Sales'"&gt;Sales
+&lt;/SELECT&gt;
+
+&lt;INPUT TYPE="hidden"
+    NAME="SelectDepts_required"
+    VALUE="You must select at least one department."&gt;
+</pre><p>If the user selected the Marketing and Sales items, the value of the SelectDepts form field would be 'Marketing','Sales'.</p><p>Just as you did when using checkboxes to search database fields containing string values, use the ColdFusion PreserveSingleQuotes function with multiple select boxes:</p><pre>SELECT * 
+    FROM Departments
+    WHERE DepartmentName IN (#PreserveSingleQuotes(form.SelectDepts)#)
+</pre><p>The statement sent to the database would be:</p><pre>SELECT *
+    FROM Departments
+    WHERE DepartmentName IN ('Marketing', 'Sales')
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Making_Variables_Dynamic/dwa05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Making_Variables_Dynamic/dwa05_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:44 -->
+</body>
+</html>

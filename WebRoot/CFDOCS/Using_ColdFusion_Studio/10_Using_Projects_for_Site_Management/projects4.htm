@@ -1,0 +1,186 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Project Folders</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012309"></a>
+ <H1>Project Folders</H1>
+
+
+
+<p>Folders are the primary means of organizing files in your projects. This section describes the different types of folders and the concepts you need know to work with them effectively.</p><p>There are two distinct folder types in Studio 4.5:</p><ul>
+<a name="1012352"> </a>
+<li>Physical folders
+
+<a name="1012353"> </a>
+</li>
+<li>Virtual folders
+</li>
+</ul>
+<a name="1012354"></a>
+ 
+<H3>Physical folders</H3>
+<p>Physical folders are directly tied, or mapped, to a directory on your computer. The files that exist in the directory on your computer will also exist in the physical folder in Studio. Physical folders can be mapped to directories on local or network drives.</p><a name="1012316"></a>
+ 
+<H3>Virtual folders</H3>
+<p>Virtual folders function as repositories for files that have no logical relationship to each other on a physical disk drive. You can think of a virtual folder as a "container" into which you can place whatever files you want. Virtual folders are a useful way to organize files that are scattered across your file system into one location in Studio.</p><a name="1012386"></a>
+ 
+<H2>Manual-Inclusive and Auto-Inclusive</H2>
+<p>Physical folders can be further broken down into auto-inclusive and manual-inclusive.</p><ul>
+<a name="1012524"> </a>
+<li>Manual-inclusive folders require you to specify which files in the mapped directory should be included in the folder. For example, you may have a folder with ten files in it, only three of which are necessary for your Web site. You can create a manual-inclusive folder, add just those three files, and ignore the other seven.
+
+<a name="1012531"> </a>
+</li>
+<li>Auto-inclusive folders include every file in the mapped directory by definition. You can specify which file types you would like to include (for example, all the HTML files) but you cannot specify individual files to be included. Auto-inclusive folders are automatically updated when you add files to or delete files from the mapped directory.
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Auto-inclusive and manual-inclusive refer to <em>physical</em> folders only.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ul>
+<a name="1012476"></a>
+ 
+<H2>Referencing and the .APF file</H2>
+<p>Both physical and virtual folders reference, or point to, the files on your file system. They do not create copies of the files or move them around. If anything happens to the original file in the file system (for example, it is moved or deleted), the reference between the Studio folder and the file is lost.</p><p>References to your the files in your project are stored in an .apf file. The .apf file is created and saved when you create a new project. As you make changes to your project's contents, the .apf file is updated automatically. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>In Studio 4.0, the project file had an .apj extension. This extension has 
+been changed to .apf in Studio 4.5 to avoid versioning issues. Studio 4.0 
+.apj files can be opened in 4.5 but 4.5 .apf files cannot be opened in 4.0.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The .apf file is stored in an XML-defined WDDX format. This format can be difficult to read and may change with future enhancements so, while it may seem like it, it is not the ideal location to view a list of files contained in your project. The VTOM scripting engine functionality is more suited to this task. See <a href="../../scripting_the_visual_tools_object_model/vtom.htm">Scripting the Visual Tools Object Model</a> for more information on the VTOM scripting engine.</p><a name="1013370"></a>
+ 
+<H2>Folder review</H2>
+<p>The following table displays the icons for each folder type along with a description of when you should use each folder type.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Icon</strong>
+</th><th align="left">
+<strong>Folder Type</strong>
+</th><th align="left">
+<strong>Usage</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+<img src="../images/virtual_folder.gif">
+
+
+
+</td><td valign="top">
+Virtual folder
+</td><td valign="top">
+Use when you want to organize files from several different locations into one location in Studio.
+</td></tr>
+<tr valign="top"><td valign="top">
+<img src="../images/auto_inclusive_folder.gif">
+
+
+
+</td><td valign="top">
+Auto-inclusive folder (physical)
+</td><td valign="top">
+Use when you want all of the files (or all files of a certain type) in a specific directory to be included in your project.
+</td></tr>
+<tr valign="top"><td valign="top">
+<img src="../images/manual_inclusive_folder.gif">
+
+
+
+</td><td valign="top">
+Manual-inclusive folder (physical)
+</td><td valign="top">
+Use when you want to choose exactly which files, on a file-by-file basis, in a specific directory are included in your project.
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

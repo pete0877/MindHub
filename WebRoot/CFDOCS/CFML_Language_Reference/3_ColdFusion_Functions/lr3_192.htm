@@ -1,0 +1,192 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>QueryAddColumn</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_191.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_193.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1679669"></a>
+ <H1>QueryAddColumn</H1>
+
+
+
+<p>Adds a new column to a specified query and populates the column's rows with the contents of a one-dimensional array. Returns the query object with the additional column. Padding is added, if necessary, on the query columns to ensure that all columns have the same number of rows.</p><p>
+ See also <a href="../2_ColdFusion_Tags/lr2_073.htm#1019524">CFQUERY</a>, <a href="../3_ColdFusion_Functions/lr3_194.htm#1001679">QueryNew</a>, <a href="../3_ColdFusion_Functions/lr3_193.htm#1679723">QueryAddRow</a> and <a href="../3_ColdFusion_Functions/lr3_195.htm#1001705">QuerySetCell</a>.
+</p>
+
+<a name="1679678"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>QueryAddColumn</strong>(<em>query</em>, <em>column-name</em>, <em>array-name</em>)
+</PRE><a name="1679680"> </a>
+<h5 class="param"> query</h5>
+<p class="param">Name of a query that was created with QueryNew.</p><a name="1679682"> </a>
+<h5 class="param"> column-name</h5>
+<p class="param">The name of the new column.</p><a name="1681936"> </a>
+<h5 class="param"> array-name</h5>
+<p class="param">The name of the array whose elements are to populate the new column.</p><a name="1683682"></a>
+ 
+<H3>Usage</H3>
+<p>You can add columns to any type of query object, such as queries retrieved with CFQUERY or queries created with QueryNew. The only type of query that you cannot use QueryAddColumn on is a cached query.</p><p>This function is particularly useful if you are an Oracle developer and would like to generate a query object from the arrays of output parameters which Oracle stored procedures can generate. Padding is added, if necessary, on the query columns to ensure that all columns have the same number of rows. </p><a name="1806124"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="QueryAddColumn
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of QueryAddColumn ---&gt;
+
+&lt;HTML&gt;
+
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+QueryAddColumn Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;basefont face="Arial, Helvetica" size=2&gt;
+
+&lt;body  bgcolor="#FFFFD5"&gt;
+
+&lt;BODY&gt;
+
+&lt;H3&gt;QueryAddColumn Example&lt;/H3&gt;
+
+&lt;P&gt;This example adds three columns to a query object and then populates 
+the columns with the contents of three arrays.&lt;/P&gt;  
+
+&lt;P&gt;After populating the query, the example shows, in tabular format, the
+contents of the columns.&lt;/P&gt; 
+
+&lt;!--- make a new query ---&gt;
+&lt;CFSET myQuery = QueryNew("")&gt;
+
+&lt;!--- create an array ---&gt;
+&lt;CFSET FastFoodArray = ArrayNew(1)&gt;
+&lt;CFSET FastFoodArray[1] = "French Fries"&gt;
+&lt;CFSET FastFoodArray[2] = "Hot Dogs"&gt;
+&lt;CFSET FastFoodArray[3] = "Fried Clams"&gt;
+&lt;CFSET FastFoodArray[4] = "Thick Shakes"&gt;
+
+&lt;!--- add a column to the query ---&gt;
+&lt;CFSET nColumnNumber = QueryAddColumn(myQuery, "FastFood", 
+FastFoodArray)&gt;
+&lt;!--- create a second array ---&gt;
+&lt;CFSET FineCuisineArray = ArrayNew(1)&gt;
+&lt;CFSET FineCuisineArray[1] = "Lobster"&gt;
+&lt;CFSET FineCuisineArray[2] = "Flambe"&gt;
+&lt;!--- add a second column to the query ---&gt;
+&lt;CFSET nColumnNumber2 = QueryAddColumn(myQuery, "FineCuisine", 
+FineCuisineArray)&gt;
+
+&lt;!--- create a third array ---&gt;
+&lt;CFSET HealthFoodArray = ArrayNew(1)&gt;
+&lt;CFSET HealthFoodArray[1] = "Bean Curd"&gt;
+&lt;CFSET HealthFoodArray[2] = "Yogurt"&gt;
+&lt;CFSET HealthFoodArray[3] = "Tofu"&gt;
+
+&lt;!--- add a third column to the query ---&gt;
+&lt;CFSET nColumnNumber3 = QueryAddColumn(myQuery, "HealthFood", 
+HealthFoodArray)&gt;
+
+&lt;table cellspacing="2" cellpadding="2" border="0"&gt;
+&lt;tr&gt;
+    &lt;th align="left"&gt;Fast Food&lt;/th&gt;
+    &lt;th align="left"&gt;Fine Cuisine&lt;/th&gt;
+    &lt;th align="left"&gt;Health Food&lt;/th&gt;
+&lt;/tr&gt;
+&lt;CFOUTPUT query="myQuery"&gt;
+&lt;tr&gt;
+    &lt;td&gt;#FastFood#&lt;/td&gt;
+    &lt;td&gt;#FineCuisine#&lt;/td&gt;
+    &lt;td&gt;#HealthFood#&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/table&gt;
+&lt;P&gt;&lt;B&gt;Note:&lt;/B&gt; Because there are fewer elements in the Fine Cuisine and 
+Health Food arrays, QueryAddColumn 
+added padding to the corresponding columns in the query.&lt;/P&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="QueryAddColumn
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_191.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_193.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

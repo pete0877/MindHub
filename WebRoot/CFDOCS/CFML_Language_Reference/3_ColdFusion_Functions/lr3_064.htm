@@ -1,0 +1,161 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CreateODBCTime</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_063.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_065.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997751"></a>
+ <H1>CreateODBCTime</H1>
+
+
+
+<p>Returns a time object in ODBC time format.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_063.htm#997725">CreateODBCDateTime</a> and <a href="../3_ColdFusion_Functions/lr3_065.htm#997777">CreateTime</a>.
+</p>
+
+<a name="997754"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>CreateODBCTime</strong>(<em>date</em>)
+</PRE><a name="997756"> </a>
+<h5 class="param"> date</h5>
+<p class="param">Date/time object in the period from 100 AD to 9999 AD.</p><a name="997757"></a>
+ 
+<H3>Usage</H3>
+<p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><a name="1800045"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="CreateODBCTime
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This code illustrates CreateTime and CreateODBCTime ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CreateODBCTime Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;CreateODBCTime Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.hour")&gt;
+Your time value, presented using different CF time functions:
+&lt;CFSET yourTime = CreateTime(FORM.hour, FORM.minute, FORM.second)&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;UL&gt;
+    &lt;LI&gt;Built with CreateTime: #TimeFormat(yourTime)#
+    &lt;LI&gt;Built with CreateODBCTime: #CreateODBCTime(yourTime)#
+&lt;/UL&gt;
+
+&lt;P&gt;The same value can be formatted with timeFormat:
+&lt;UL&gt;
+    &lt;LI&gt;Built with CreateTime: #TimeFormat(yourTime, 'hh:mm:ss')#
+    &lt;LI&gt;Built with CreateODBCTime: 
+       #TimeFormat(yourTime, 'hh:mm:sstt')#
+&lt;/UL&gt;    
+&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;CFFORM ACTION="createodbctime.cfm" METHOD="post"&gt;
+&lt;PRE&gt;
+Hour    &lt;CFINPUT TYPE="Text" NAME="hour" VALUE="16" RANGE="0,23" 
+  MESSAGE="You must enter an hour (0-23)" VALIDATE="integer"
+    REQUIRED="Yes"&gt;
+Minute    &lt;CFINPUT TYPE="Text" NAME="minute" VALUE="12" RANGE="0,59"
+  MESSAGE="You must enter a minute value (0-59)" VALIDATE="integer"
+    REQUIRED="Yes"&gt;
+Second    &lt;CFINPUT TYPE="Text" NAME="second" VALUE="0" RANGE="0,59"
+  MESSAGE="You must enter a value for seconds (0-59)"
+    VALIDATE="integer" REQUIRED="Yes"&gt;
+&lt;/PRE&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" NAME=""&gt; &lt;INPUT TYPE="RESET"&gt;
+&lt;/CFFORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="CreateODBCTime
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_063.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_065.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

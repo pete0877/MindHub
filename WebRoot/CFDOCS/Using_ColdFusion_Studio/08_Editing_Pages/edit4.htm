@@ -1,0 +1,161 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Collapsing Text </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026132"></a>
+ <H1>Collapsing Text </H1>
+
+
+
+<p>When editing long documents or complex applications, you can hide text and code blocks so that you can focus on just a portion of the content. A customizable marker displays the first few characters of the collapsed selection.</p><a name="1026135"></a>
+ 
+<H2>Setting options</H2>
+<p>Open the Editor &gt; Collapsed Text pane of the Settings dialog box (F8) to set options for this feature. Using these settings, you can:</p><ul>
+<a name="1026138"> </a>
+<li>Customize the appearance of the collapsed text marker, including the font, foreground and background colors, and amount of text to display inside the marker (note that the number of characters actually displayed in the marker may vary if a proportional font is used). 
+
+<a name="1026139"> </a>
+</li>
+<li>Enable a popup display of the full text when you move your mouse over the collapsed text marker. You can set the maximum number of lines to display in the popup box.
+<a name="1027582"> </a>
+</li>
+<li>Enable the automatic selection of text when a collapsed text section is expanded. This allows you to expand a collapsed region to view its contents, and then easily re-collapse it.
+<a name="1027729"> </a>
+</li>
+<li>Set file save/open options for the collapsed text. 
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To collapse text in the current document use one of these commands:
+</td>
+</tr>
+</table>
+</div><ul>
+<a name="1026144"> </a>
+<li>Select some text and click on one of the collapse buttons (-) that appear in the editor gutter. 
+
+<a name="1026145"> </a>
+</li>
+<li>Right-click a selection of text and choose Collapse selection from the popup menu. 
+<a name="1026146"> </a>
+</li>
+<li>Right-click in a start or end tag and select Collapse Tag. This collapses the entire tag body. 
+<a name="1026147"> </a>
+</li>
+<li>Right-click in a start or end tag and select Collapse All Identical Tags. This collapses all tags which are the same as the current tag, including nested tags.
+<a name="1026148"> </a>
+</li>
+<li>Click on the blue plus sign &lt;+&gt; at the top of the Tag Inspector pane. This collapses the text based on the current Tag Inspector outline.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To work with collapsed text:
+</td>
+</tr>
+</table>
+</div><ul>
+<a name="1026152"> </a>
+<li>Double-click a collapsed text marker to expand the text.
+
+<a name="1026153"> </a>
+</li>
+<li>To expand all collapsed text, right-click anywhere in a document and select Expand All from the popup menu. 
+<a name="1026154"> </a>
+</li>
+<li>You can drag and drop collapsed text just like regular text blocks. 
+<a name="1026155"> </a>
+</li>
+<li>Collapsed text blocks can be nested within each other. 
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

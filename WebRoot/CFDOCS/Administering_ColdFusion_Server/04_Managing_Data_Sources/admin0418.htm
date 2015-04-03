@@ -1,0 +1,210 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using ColdFusion to Create a Data Source</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0417.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1071798"></a>
+ <H1>Using ColdFusion to Create a Data Source</H1>
+
+
+
+<p>The MERANT ODBC drivers that ship with all UNIX versions of ColdFusion include a FoxPro 2.5/dBase driver you can use to create a database file in a CFQUERY with standard SQL syntax even if you don't have an Oracle, Informix, Sybase, or DB2 database. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>See Appendix A in the MERANT DataDirect ODBC Drivers manual for 
+details about SQL statements used for flat file drivers. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>The following example creates tables in a data source called <strong>newtable</strong>. This example uses a coffee inventory model as a theme for the data. Before you can run this code, you need to create the <strong>newtable</strong> data source in the ColdFusion Administrator, specifying the MERANT dBase/FoxPro ODBC driver. If you don't create the data source, you'll receive an error when you try to execute this page. This example generates the following tables in the newtable data source. </p><p></p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Fields created in the Beans1 table</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Field</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Data type</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Bean_ID
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+numeric
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+char
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Price
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+char
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Date
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+date
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Descript
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+char
+</td></tr>
+
+</table>
+
+</div>
+</p><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;DBASE Table Setup&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;!---        
+Before running this code, you need to create the 
+<strong>newtable</strong> data source in the ColdFusion Administrator, 
+specifying the Merant dBase/FoxPro ODBC driver. 
+---&gt;
+
+&lt;CFQUERY NAME=xs DATASOURCE="newtable"&gt; 
+    CREATE TABLE Beans1 ( 
+        Bean_ID numeric(6), 
+        Name char(50), 
+        Price char(50), 
+        Date date,&lt;/P&gt; 
+        Descript char(254))
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME=xs DATASOURCE="newtable"&gt;
+    INSERT INTO Beans1 VALUES ( 
+        1,&lt;/P&gt; 
+        'Kenya', 
+        '33', 
+        {ts '1999-08-01 00:00:00.000000'}, 
+        'Round, rich roast')
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME=xs DATASOURCE="newtable"&gt; 
+    INSERT INTO Beans1 VALUES ( 
+        2, 'Sumatra', 
+        '21', 
+        {ts '1999-08-01 00:00:00.000000'}, 
+        'Complex flavor, medium-bodied')
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME=xs DATASOURCE="newtable"&gt; 
+    INSERT INTO Beans1 VALUES ( 
+        3, 'Colombia', 
+        '89', 
+        {ts '1999-08-01 00:00:00.000000'}, 
+        'Deep rich, high-altitude flavor')
+&lt;/CFQUERY&gt; 
+
+&lt;CFQUERY NAME=xs DATASOURCE="newtable"&gt; 
+    INSERT INTO Beans1 VALUES ( 
+        4,&lt;/P&gt; 
+        'Guatamala', 
+        '15', 
+        {ts '1999-08-01 00:00:00.000000'}, 
+        'Organically grown')
+&lt;/CFQUERY&gt; 
+
+&lt;CFQUERY NAME=xs DATASOURCE="newtable"&gt; 
+    CREATE UNIQUE INDEX Bean_ID on Beans1 (Bean_ID)
+&lt;/CFQUERY&gt;
+
+&lt;CFQUERY NAME=""QueryTest2"" DATASOURCE="newtable"&gt; 
+    SELECT * FROM Beans
+&lt;/CFQUERY&gt;
+
+&lt;CFOUTPUT QUERY=""QueryTest2""&gt; 
+    #Bean_ID# #Name#&lt;br&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0417.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

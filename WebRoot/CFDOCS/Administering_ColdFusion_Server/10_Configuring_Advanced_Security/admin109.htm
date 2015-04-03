@@ -1,0 +1,241 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Defining User Directories</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin108.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1010.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011458"></a>
+ <H1>Defining User Directories</H1>
+
+
+
+<p>User and group authentication is carried out against either an existing Windows NT domain, an LDAP directory, or an ODBC data source. When you set up Advanced security, you must specify at least one user directory. You can add as many user directories as you like. Once you define a user directory, it is available for you to use with any security context you define for this security server.</p><ul>
+<a name="1017850"> </a>
+<li>Windows NT Domains<strong> </strong>-- Authenticating against a Windows NT domain makes sense if you are already working in a Windows NT environment or will be deploying your application code to a Windows NT environment. This method is a very quick way to implement ColdFusion Advanced security, since users and groups have already been defined. ColdFusion Advanced security doesn't provide any user/group management facilities; you must manage users and groups using the Windows NT User Manager for Domains administrative utility. 
+
+<a name="1017853"> </a>
+</li>
+<li>LDAP Directories<strong> </strong>-- If you are running ColdFusion Server on a UNIX server, you can only use LDAP directories to store your security profile information.
+<p>ColdFusion includes a restricted-use license of the Netscape Directory Server. 
+This embedded Netscape Directory Server is restricted for use in conjunction 
+with security access control, policy storage, and user authentication and 
+cannot be used for any other purpose. Only Netscape-supplied Directory Server 
+administration tools, command line programs and user interfaces, provided 
+with the embedded version can be used to modify or access the database in a 
+manner consistent with its restricted license. There is no user count restriction 
+on your use of Directory Server. On UNIX, you can find the Netscape Directory 
+Server tar file(s) in the <code>ldap</code> directory on the ColdFusion CD.
+</p><p>To use the Netscape Direcotry Server on UNIX, you must install it <em>before</em> 
+installing ColdFusion Server. If you have already installed ColdFusion Server 
+and you want to use the Netscape Directory Server to store security profile 
+information, you must reinstall ColdFusion after installing Netscape Directory 
+Server.
+</p><a name="1017854"> </a>
+</li>
+<li>ODBC Data Sources<strong> </strong>-- If your ColdFusion applications are already using a Sybase, Oracle, or any other database that supports connections through ODBC, you can use your existing database to also store your security profile tables. You must register an ODBC data source with ColdFusion before you can use it to store security profile information. See <a href="../04_Managing_Data_Sources/admin04.htm#997518">Chapter 4, &quot;Managing Data Sources</a>&quot; for more information about registering data sources with ColdFusion. See <a href="../10_Configuring_Advanced_Security/admin1011.htm#1011569">&quot;Specifying Resources to Protect&quot;</a> to learn how to use an ODBC data source for username and password security authentication.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To define a user directory:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Advanced Server Security page of the Administrator, click the User Directories button.
+
+
+</li>
+<li>Enter a name for the user directory in the User Directory text box and click Add. The name you enter here is an internal name that ColdFusion uses to refer to this user directory. You can enter any name you want.
+
+<p>You see the New User Directory page. 
+</p></li>
+<li>Select Windows NT, LDAP, or ODBC in the Namespace drop-down menu. 
+
+</li>
+<li>Enter the appropriate information the Location field:
+
+<ul>
+<a name="1029778"> </a>
+<li>If your user directory is an LDAP directory, enter the name of the LDAP server that hosts the directory.
+
+<a name="1029779"> </a>
+</li>
+<li>If your user directory is an ODBC data source, enter the fully-qualified name of the database file to use.
+<a name="1029780"> </a>
+</li>
+<li>If your user directory is an NT Domain, enter the domain name.
+</li>
+</ul>
+</li>
+<li>Enter a username and password if the domain, directory, or data source requires one. You can leave these fields blank if ColdFusion Server is running under Administrator access. 
+
+</li>
+<li>Select the Secure Connect check box to implement encrypted transmission of authentication information. Secure Connect must be enabled when accessing an LDAP server over Secure Sockets Layer (SSL). 
+
+</li>
+<li>Leave the Add User Directory to Existing Security Context check box selected to add users from this user directory to existing security contexts automatically. If you disable this option, you must manually associate users with each security context you create. 
+
+</li>
+<li>If your user directory is an NT Domain or ODBC data source, click Add to define the directory. If your user directory is an LDAP directory, complete the steps that follow to set LDAP directory options.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To define LDAP options:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Enter a Search Root. The Search Root must point to the branch of the LDAP tree where a user namespace logically begins. Typically, this branch represents an &quot;organization&quot; or an &quot;organizational unit&quot; and corresponds to one user directory. 
+
+
+</li>
+<li>Enter a Lookup Start. ColdFusion uses the Lookup Start to construct the non-unique beginning of the DN string, for example, <em>uid=</em>. 
+
+</li>
+<li>Enter a Lookup End. ColdFusion uses the Lookup End to construct the part of the DN string that follows user ID, for example, <em>ou=marketing,o=widgetinc.com</em>.
+
+</li>
+<li>Enter a Search Timeout. The Search Timeout indicates the maximum amount of time (in seconds) you want ColdFusion to spend searching a directory. 
+
+</li>
+<li>Enter the maximum number of results you want the search to return in the Search Results field. 
+
+</li>
+<li>Select a Search Scope from the drop-down list. Enter the depth of your search. For example, if you want to be able to access everything under the search root, select the Subtree option. Otherwise, select the One Level option. 
+
+</li>
+<li>Click Add to define the user directory.
+
+</li>
+</ol>
+<p>The Add User Directory to Existing Security Context box is checked by default. This setting enables you to add users to existing security contexts automatically.</p><a name="1030254"></a>
+ 
+<H3>Using the Sample ODBC Data Source as a User Directory</H3>
+<p>On Windows systems, you can use an ODBC data source for username/password security authentication. A sample ODBC access database, <code>SmSampleUsers.mdb</code>, is installed in the <code>cfusion\database</code> directory. </p><p>Follow these steps to use this sample database to test the ODBC username/password authentication:</p><ol>
+</li>
+<li>Use the ColdFusion Administrator to create an ODBC data source using the Microsoft Access ODBC driver. Be sure to name the data source <strong>SmSampleUsers</strong><strong> </strong>and point at the <code>SmSampleUsers.mdb</code> file installed in the <code>cfusion\database</code> directory. 
+
+</li>
+<li>Use the ColdFusion Administrator Advanced Security page to add a User Directory. Select the ODBC namespace and enter <strong>SmSampleUsers</strong> in the location form field. See <a href="../10_Configuring_Advanced_Security/admin109.htm#1011458">&quot;Defining User Directories&quot;</a> for more information.
+
+</li>
+<li>Associate a user or group with a policy in your security context. Example username/passwords are admin/secret and vlander/firewall. You can browse the the username/passwords in the Access database file.
+
+</li>
+</ol>
+<p>The ODBC username/password requires the <code>SmDsQuery.ini</code> file, which is installed in the <code>cfusion\bin</code> directory. The file contains the SQL for the SmSampleUsers data source:</p><pre>[SmSampleUsers]
+Query_Enumerate=select Name, 'User' as Class from SmUser Union 
+    select Name, 'Group' as Class from SmGroup order by Class
+
+Query_InitUser=select Name from SmUser where Name = '%s'
+
+Query_AuthenticateUser=select Name from SmUser where Name = '%s' 
+    and Password = '%s'
+
+Query_GetGroups=select SmGroup.Name from SmGroup, SmUser, SmUserGroup
+    where SmUser.Name = '%s' and SmUser.Id  = SmUserGroup.UserId 
+    and SmGroup.Id = SmUserGroup.GroupId
+
+Query_GetUserProp=select %s from SmUser where Name = '%s'
+
+Query_SetUserProp=update SmUser set %s = %s where Name = '%s'
+
+Query_GetObjInfo=select Name, 'User' from SmUser where Name = '%s' 
+    Union select Name, 'Group' from SmGroup where Name = '%s'
+
+Query_GetUserProps=Name, Id, FirstName, LastName, 
+    TelephoneNumber, EmailAddress
+
+Query_IsGroupMember=select Id from SmUserGroup 
+    where UserId = (select Id from SmUser where Name = '%s') 
+    and GroupId = (select Id from SmGroup where Name = '%s')
+</pre><p>Each ODBC data source you use for authenticating users requires a section of the same name in this INI file. The section must contain the appropriate SQL statements to authenticate users. You can use the SmSampleUsers section as an example.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin108.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin1010.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

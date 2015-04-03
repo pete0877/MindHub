@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working in a Source Control System</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019001"></a>
+ <H1>Working in a Source Control System</H1>
+
+
+
+<p>An additional benefit of creating projects is that you can manage project files in a source control system. </p><a name="1019396"></a>
+ 
+<H2>Why use source control?</H2>
+<p>Version source control for Web site content is an essential for coordinating team development of complex projects. A source control system does add a layer of file management responsibility, but it offers clear advantages for developers, managers, and support staff, including:</p><ul>
+<a name="1019362"> </a>
+<li>Share files on a LAN without overwriting work or accidentally modifying files simultaneously.
+
+<a name="1019363"> </a>
+</li>
+<li>Track versions of files and modifications as files are changed.
+<a name="1019364"> </a>
+</li>
+<li>Control the deployment of applications.
+<a name="1019365"> </a>
+</li>
+<li>Replicate applications to a local workstation for development and testing.
+</li>
+</ul>
+<p>Source control systems really are about control; they are designed to control file management in application development and related work. Common terms such as check-in, check-out, lock, and unlock accurately describe the security procedures required for an effective source control system.</p><a name="1019391"></a>
+ 
+<H2>Supported source control systems</H2>
+<p>Studio uses the Microsoft-published interface called the Source Code Control (SCC) API to connect with a wide range of standard source control products. Studio can work with both client-based and server-based systems.</p><p>Studio will automatically generate a list of source control applications detected on your system when you first select the Choose Source Control Provider command for a project. You can then select the appropriate provider from the list.</p><p>The interface and command structure for source control applications varies from vendor to vendor, so check the product documentation of your source control software for specific procedures and options. </p><a name="1019551"></a>
+ 
+<H2>Setting up a project in source control</H2>
+<p>The following procedure takes you through the steps of adding files to Microsoft Visual SourceSafe and then creating a HomeSite project for those files. You can adapt this procedure to work in your particular development environment.</p><p>Visual SourceSafe uses the term "project" to refer to a distinct set of files stored in its database, so this procedure uses the term "VSS project" to distinguish it from a HomeSite project. </p><p>All the source control commands are available by right-clicking in a project.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To access project files from Visual SourceSafe:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a VSS project and add the HomeSite project files.
+
+
+</li>
+<li>Create a working directory on your system and Get the files from SourceSafe.
+
+<p>If you are prompted to select a source control provider, choose from the Source 
+Control Provider provider list. 
+</p></li>
+<li>Create a HomeSite project in the working directory.
+
+</li>
+<li>Right-click the project root and select Source Control &gt; Map Project To Source Control.
+
+</li>
+<li>Select your work directory and the appropriate VSS project folder.
+
+</li>
+</ol>
+<p>Once the relationship between the project and the source control application is established, you can right-click in the project files list to manage check-out, check-in, and other operations. You can use the Run Source Control Applcation command when you need to work directly in the source control system.</p><a name="1019448"></a>
+ 
+<H2>Working in server-based source control</H2>
+<p>If you have a network version of Microsoft Visual SourceSafe installed on the same machine as ColdFusion Server, open the Source Control page in the ColdFusion Administrator and complete the form to enable the system to work with ColdFusion Studio projects.</p><p></p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Deploying_Projects/deployment.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

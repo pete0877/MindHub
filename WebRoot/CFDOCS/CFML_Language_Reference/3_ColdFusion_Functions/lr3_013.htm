@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>String Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_012.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_014.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1138971"></a>
+ <H1>String Functions<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_036.htm#997105">Asc</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_162.htm#1000196">LJustify</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_204.htm#1001901">Replace</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_051.htm#997479">Chr</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_160.htm#1685820">ListValueCount</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_205.htm#1001938">ReplaceList</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_052.htm#997513">CJustify</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_161.htm#1686748">ListValueCountNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_206.htm#1001970">ReplaceNoCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_053.htm#997538">Compare</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_172.htm#1000806">LSParseCurrency</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_207.htm#1002007">REReplace</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_054.htm#997573">CompareNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_173.htm#1038684">LSParseDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_208.htm#1223436">REReplaceNoCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_076.htm#998205">DayOfWeekAsString</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_174.htm#1702979">LSParseEuroCurrency</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_209.htm#1046725">Reverse</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_097.htm#998742">FormatBaseN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_175.htm#1000948">LSParseNumber</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_210.htm#1002068">Right</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_177.htm#1001073">LTrim</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_211.htm#1002097">RJustify</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_093.htm#998598">FindNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_179.htm#1001133">Mid</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_213.htm#1002150">RTrim</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_094.htm#998636">FindOneOf</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_183.htm#1001253">MonthAsString</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_220.htm#1002393">SpanExcluding</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_114.htm#1274233">GetToken</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_188.htm#1001568">ParseDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_221.htm#1002426">SpanIncluding</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_121.htm#999211">Insert</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_200.htm#1001808">REFind</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_239.htm#2583123">ToBase64</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_138.htm#2600189">JSStringFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_201.htm#1670747">REFindNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_243.htm#1002610">UCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_140.htm#999561">Left</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_202.htm#1222576">RemoveChars</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_246.htm#1002657">Val</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_141.htm#999590">Len</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_203.htm#1001868">RepeatString</a>
+</td><td valign="top">
+&nbsp;
+</td></tr>
+
+</table>
+</div>
+</H1>
+
+
+
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_012.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_014.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

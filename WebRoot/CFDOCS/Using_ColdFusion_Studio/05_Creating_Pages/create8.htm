@@ -1,0 +1,143 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Started with Templates and Wizards</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1024161"></a>
+ <H1>Getting Started with Templates and Wizards</H1>
+
+
+
+<p>Select File &gt; New to select from an extensive collection of templates and wizards to help you get started building a site or an application. </p><a name="1020498"></a>
+ 
+<H2>Templates</H2>
+<p>Studio templates are similar to those used in word processing software; they provide a basic structure for different document types.</p><p><img src="../images/template_icon.gif">
+
+
+</p><p>Use the File &gt; Save As Template command to add the current document to the File &gt; New &gt; Custom tab. You can then use it as a starting point for new documents.</p><a name="1020049"></a>
+ 
+<H2>HTML wizards</H2>
+<p>Many of the wizards listed here are also available on the QuickBar. Wizards are indicated by the following icon:</p><p><img src="../images/wizard_icon.gif">
+
+
+</p><ul>
+<a name="1020051"> </a>
+<li><strong>Quick Start</strong> -- Build a page framework by entering meta information.
+
+<a name="1020052"> </a>
+</li>
+<li><strong>Table</strong> -- Define a table structure and properties and enter attributes for individual cells. 
+<a name="1020053"> </a>
+</li>
+<li><strong>Frames</strong> -- Design a frameset, make selections for frame layout and appearance, and specify a source URL for the frame content.
+<a name="1020054"> </a>
+</li>
+<li><strong>Open Window</strong> -- Generates code for the JavaScript openWin function based on the specified URL and window attributes. Create links to display text and images in a custom browser window. The window display is browser-dependent and should be tested.
+<a name="1020055"> </a>
+</li>
+<li><strong>Multimedia Synchronization and Real Player Control</strong>-- Two wizards make it easy to synchronize RealAudio files with HTML page display and to embed RealAudio controls on your pages.
+</li>
+</ul>
+<a name="1020056"></a>
+ 
+<H2>DHTML wizards</H2>
+<p>Dynamic HTML wizards generate styles and JavaScript to create an outline or slide show. Click the DHTML tab on the File &gt; New dialog box to select a wizard:</p><ul>
+<a name="1020058"> </a>
+<li><strong>Outline</strong> -- Create a multi-level outline by typing in or pasting the outline text and defining properties for the display. The JavaScript code for the outline is inserted in the document head.
+
+<a name="1020059"> </a>
+</li>
+<li><strong>Slide Show</strong> -- Build slide presentations that run in a browser. All the features of desktop presentation products - layout and duration control, transition options, and integrated images and text - are available.    
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The <strong>JavaScript Wizard</strong>, which generates code for several navigation and 
+page functions, is only accessible from the Script tab on the QuickBar. 
+Use the View menu to toggle the display of the QuickBar.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

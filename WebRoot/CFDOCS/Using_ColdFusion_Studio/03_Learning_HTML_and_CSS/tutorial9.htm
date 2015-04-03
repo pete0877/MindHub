@@ -1,0 +1,378 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating a Style Block</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="484929"></a>
+ <H1>Creating a Style Block</H1>
+
+
+
+<p>To keep things simple, we'll use embedded styles instead of creating a separate style sheet file. Start by opening the file <code>/tutorial files/tour2.htm</code> and reviewing the HTML code. You will notice that most of the attribute code from <code>tour.htm</code> has been removed, leaving just the structural elements -- <code>&lt;BODY&gt;, &lt;P&gt;, &lt;H1&gt;, &lt;TABLE&gt;, &lt;UL&gt;</code> -- and some formatted content. This an essential first step in moving to the new formatting method. </p><p>To make it easier to follow along, the stripped attributes are shown in code comments above each tag on the page. The browser skips these comments when rendering the page, so the code contained in them will not affect the formatting.</p><p>Click the Browse tab to see what the page looks like at this point.</p><p>We'll begin by entering a <code>&lt;STYLE&gt;</code> block in the <code>&lt;HEAD&gt;</code> section of the document. We will then open TopStyle and work our way through the page code and insert the new style rules when they are completed.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a style block to a document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Enter <code>&lt;STYLE&gt;&lt;/STYLE</code>&gt; tags just above the <code>&lt;/HEAD&gt;</code> tag in the <code>tour2.htm</code> file.
+
+
+</li>
+<li>Click the Style Editor button on the Tools toolbar.
+
+<p><img src="../images/style_editor_button.gif">
+
+
+
+</p></li>
+</ol>
+<p>The Studio Style Editor, TopStyle Lite, has it's own menus, toolbar, and help system. As you will see, its specialized interface makes it easy to create and edit styles.</p><a name="485607"></a>
+ 
+<H2>Defining styles</H2>
+<p>We are now ready to create our style rules.</p><a name="485371"></a>
+ 
+<H3>BODY formatting</H3>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add BODY properties:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In TopStyle, click the New Selector button on the toolbar to open the New Selector dialog.
+
+
+<p><img src="../images/style_selector.gif">
+
+
+
+</p></li>
+<li>Select BODY from the HTML Element list and click OK.
+
+</li>
+<li>Click background-image in the Style Inspector Property list.
+
+</li>
+<li>Open the dropdown Value list and click Select URL.
+
+</li>
+<li>Double-click the file <code>\tutorial files\image1.jpg</code> to add it to the BODY selector.
+
+</li>
+<li>Scroll down the Property list to the Color property and select Green from the dropdown Value list.
+
+</li>
+</ol>
+<p>This completes the BODY properties style. No change is needed to the <code>&lt;BODY&gt;</code> tag in the document.</p><a name="485377"></a>
+ 
+<H3>Bold formatting, with class!</H3>
+<p>Standard HTML uses tags such as &lt;B&gt;, &lt;EM&gt;, and &lt;STRONG&gt; to highlight text. With styles, you set special formatting for words (or characters) by enclosing them in the <code>&lt;SPAN&gt;&lt;/SPAN&gt;</code> tag and applying styles. For formatting paragraphs and larger content blocks, use the <code>&lt;DIV&gt;&lt;/DIV&gt;</code> tag.</p><p>We may want to use bold formatting in different situations, not attached to a particular selector, so we'll define <em>class</em> for the bold property that can be applied wherever we need it. Classes can stand alone or be part of a selector. We'll explore their use in several sections of the page.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a standalone class:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the New Selector button.
+
+
+</li>
+<li>Select (none) from the HTML Element list.
+
+</li>
+<li>Click the Class button, type the word <em>bold</em> in the text box, and click OK.
+
+<p>The bold class displays in the style list.
+</p></li>
+<li>Click font-weight in the Property list.
+
+</li>
+<li>Select bold from the Value list.
+
+<p>The style can now be applied in the document.
+</p></li>
+<li>In the tour_style file, enter the style code so that the line reads "This page was created with <code>&lt;SPAN class="bold"&gt;</code>ColdFusion Studio<code>&lt;/SPAN&gt;</code>, which you can find at..."
+
+</li>
+</ol>
+<a name="485396"></a>
+ 
+<H3>Anchor formatting</H3>
+<p>You can set properties for the A selector, such as colors for active and visited links, but we'll just accept the browser defaults.</p><a name="485394"></a>
+ 
+<H3>Image formatting</H3>
+<p>This image link does not require a style.</p><a name="485406"></a>
+ 
+<H3>Heading formatting</H3>
+<p>The Heading 1 tag uses the default font size set by the browser and inherits the font color value from the BODY style.</p><a name="480918"></a>
+ 
+<H3>Horizontal rule formatting</H3>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add horizontal rule properties:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the New Selector button.
+
+
+</li>
+<li>Select HR from the HTML Element list and click OK.
+
+</li>
+<li>Select the width property and type in the value 80%.
+
+</li>
+<li>Select the color property and the value black.
+
+</li>
+</ol>
+<p>No change is needed in the &lt;HR&gt; tag in the document.</p><a name="481494"></a>
+ 
+<H3>Line break formatting</H3>
+<p>The Line Break tag does not take styles </p><a name="504180"></a>
+ 
+<H3>Paragraph formatting</H3>
+<p>You could set a single paragraph style for an entire site, but the real power of styles is that they make it possible to create and apply a virtually unlimited library of design ideas, through the use of classes.</p><p>For example, you could define individual paragraph classes for introductory text, important notes, and contact information. Setting font faces, colors, and alignment for each of these content types would enhance the look of the site and make it easier for visitors to find what they are looking for. </p><p>As we saw in the bold formatting procedure above, we can create a standalone class and apply to different selectors. Here, we'll create a class just for the &lt;P&gt; tag. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a special paragraph style:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the New Selector button.
+
+
+</li>
+<li>Select P from the HTML Element list.
+
+</li>
+<li>Click the Class button, type "red" in the text box and click OK.
+
+<p>The selector should now read "P.red".
+</p></li>
+<li>For the color property, select the value Red.
+
+</li>
+<li>For the text-align property, select the value center.
+
+</li>
+<li>For the font-family property, first select Font..., then double-click Arial in the Font Builder dialog and click OK.
+
+</li>
+<li>For the font-size property, select the value x-large.
+
+</li>
+<li>To apply the style to the paragraph in the document, just change the <code>&lt;P&gt;</code> tag to read "<code>&lt;P class="red"&gt;</code>".
+
+</li>
+</ol>
+<a name="485550"></a>
+ 
+<H3>Let's take a break</H3>
+<p>At this point, you may be thinking that this is a lot of work to do for something you can just as easily do with tag attributes and you'd be right -- if we were only doing it for this page. </p><p>Cascading Style Sheets evolved as a response to the explosion of Internet content and the demand for a technology that enables the creation and maintenance of sites that contain lots of pages and complex page layout schemes.</p><p>Style sheets are a Web designer's dream because they allow you to make rapid and dramatic changes to all the HTML elements in a site. That means you can preview text, color, and layout designs by simply editing their styles. </p><p>Another advantage of formatting pages with style sheets is that by reducing the amount of code required to format each page, the pages can be downloaded and read by the browser more quickly.</p><p>An additional and very powerful capability is the use of scripts to manipulate styles and other document objects. The combination of styles, scripting, and HTML is known as Dynamic HTML (DHTML). If you want to work with DHTML, there are many print and Web references available on the subject.</p><p>As noted in the introduction to this tutorial, though, there are a number of browser inconsistencies that limit the full and unrestricted implementation of HTML elements, Cascading Style Sheets, and scripts. To prove it, just take a look at the completed tour_style.htm file in Netscape Navigator! You will need to be aware of how best to use these technologies in your site. It comes down to deciding which browsers and which browser versions you will support and then informing yourself about cross-browser design strategies.</p><p>As we continue with the tutorial, keep in mind that as great as style sheets can be, they come with some restrictions.</p><a name="485879"></a>
+ 
+<H3>Table formatting</H3>
+<p>We'll complete this tutorial by applying styles to our page's most complex element, the table. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a table style:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the New Selector button.
+
+
+</li>
+<li>Select TABLE from the HTML Element list.
+
+</li>
+<li>For the padding property, type in <em>3px</em> and press Enter.
+
+</li>
+<li>For the border property, select thin.
+
+</li>
+<li>For the border-style property, select solid.
+
+</li>
+</ol>
+<p>We'll leave the CELLSPACING attribute as is in the document. No changes are needed in the <code>&lt;TABLE&gt;</code> tag.</p><p>No styles are needed for the table row <code>&lt;TR&gt;</code> tag or for the first table data <code>&lt;TD&gt;</code> tag.</p><p>No styles are needed for the list elements or for the paragraph that follows.</p><p>This next procedure is somewhat lengthy because in steps 6-9 we apply styles to the cell borders that are not affected by the <code>&lt;TABLE&gt;</code> border properties. The method is rather crude but it spares us a discussion of style rules for tables, which is really beyond the scope of this tutorial. See the "Tables and Style Sheets" topic in the online HTML Reference for details.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a table data style:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the New Selector button and select TD from the HTML Element list.
+
+
+</li>
+<li>Click the Class button, type the word <em>top</em> in the text box, and click OK.
+
+<p>The TD.top style appears in the style list.
+</p></li>
+<li>For the text-align property, select center.
+
+</li>
+<li>For the font-weight property, select bold.
+
+<p>Since all the text in the table cell is bold, we don't need to wrap it in a <code>&lt;SPAN&gt;</code> tag.
+</p></li>
+<li>For the background-color property, select Yellow.
+
+</li>
+<li>For the border-left-style property, select solid.
+
+</li>
+<li>For the border-left-width property, select thin.
+
+</li>
+<li>For the border-bottom-style property, select solid.
+
+</li>
+<li>For the border-bottom-width property, select thin.
+
+</li>
+<li>In the tour_style file, edit the cell code to read <code>&lt;TD class="top"&gt;.</code>
+
+</li>
+</ol>
+<p>We're almost done. We just need to define styles for the last table cell.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add additional table data styles:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the New Selector button and create a TD.bottom class.
+
+
+</li>
+<li>Apply the same text-align and font-weight properties as you did in TD.top.
+
+</li>
+<li>For the background-color property, select Lime.
+
+</li>
+<li>Apply the same border-left properties as you did in TD.top.
+
+</li>
+<li>In the tour_style file, edit cell code to read <code>&lt;TD class="bottom"&gt;.</code>
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial8.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

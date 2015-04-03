@@ -1,0 +1,123 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Advanced Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Configuring_Basic_Security/admin096.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin102.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="997347"></a>
+<H1>Chapter 10	<br>
+Configuring Advanced Security</H1>
+
+<p>This chapter describes how to set up and configure the ColdFusion Server Advanced security features. Advanced security lets you protect a wide variety of ColdFusion resources. </p><a name="1011122"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../10_Configuring_Advanced_Security/admin102.htm#1011144">What is Advanced Security?</a>
+
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin103.htm#1023975">Advanced Security Basics</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin104.htm#1011207">Advanced Security Implementations</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin105.htm#1011253">Creating an Advanced Security Framework</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin106.htm#1024449">Installing Advanced Security</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin107.htm#1011425">Setting Up a Security Server</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin109.htm#1011458">Defining User Directories</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1010.htm#1011544">Defining a Security Context</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1011.htm#1011569">Specifying Resources to Protect</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1012.htm#1019621">Implementing ColdFusion RDS Security</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1013.htm#1011610">Implementing User Security</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1014.htm#1011629">Implementing Server Sandbox Security</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1015.htm#1011711">Securing the ColdFusion Administrator</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1016.htm#1019089">Viewing a Map of your Security Framework</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1017.htm#1031854">An Example of ColdFusion Studio Security</a>
+</li>
+<li><a href="../10_Configuring_Advanced_Security/admin1018.htm#1012303">Undocumented Tags and Functions</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Configuring_Basic_Security/admin096.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin102.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

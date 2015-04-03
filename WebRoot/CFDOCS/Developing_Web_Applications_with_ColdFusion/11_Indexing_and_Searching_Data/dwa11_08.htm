@@ -1,0 +1,220 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building a Search Interface</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1201520"></a>
+ <H1>Building a Search Interface</H1>
+
+
+
+<p>Now that you've created and indexed a searchable data source, you need to build a search interface to allow users to access the data source. The CFSEARCH tag provides users with a set of operators and modifiers to create sophisticated query expressions. We'll explore these options in detail below, but first let's take a look at getting a basic search application up and running.</p><a name="997673"></a>
+ 
+<H2>Using the Verity wizard in Studio</H2>
+<p>To quickly create a search application for an existing collection, click the File &gt; New command in ColdFusion Studio and select the Verity Wizard in the CFML tab of the New Document dialog. The wizard creates a set of application pages based on the entries you make in the wizard dialogs.</p><p>You can customize the search interface by adding instructional text for users and applying styles to the form pages.</p><a name="1216023"></a>
+ 
+<H2>Basic search operations</H2>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To search the collection:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Stuio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Select the collection to search&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;Search&lt;/H2&gt;
+
+&lt;FORM METHOD="Post" ACTION="collectionsearchaction.cfm"&gt;
+    &lt;P&gt;Enter the collection you want to search:
+    &lt;INPUT TYPE="text" NAME="collection" SIZE="25" MAXLENGTH="35"&gt;&lt;/
+P&gt;
+    &lt;P&gt;Select the type of search:&lt;BR&gt;
+    &lt;INPUT TYPE=radio
+        NAME=type
+        VALUE=Simple checked&gt; Simple&lt;BR&gt;
+    &lt;INPUT TYPE=radio
+        NAME=type
+        VALUE=Explicit&gt; Explicit&lt;BR&gt;
+
+    &lt;P&gt;Enter a search string:&lt;/P&gt;
+    &lt;INPUT TYPE=text 
+        NAME=searchstring SIZE=50&gt;
+
+    &lt;P&gt;&lt;INPUT TYPE=submit
+        NAME=search1 
+        VALUE="Search"&gt;
+    &lt;INPUT TYPE=reset 
+        VALUE="Reset"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>collectionsearchform.cfm</code>.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To present the results of the search to the user:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Stuio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Search output template&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFSEARCH NAME="Search1"
+    COLLECTION="#form.collection#"
+    FORM TYPE="#form.type#"
+    CRITERIA="#form.searchstring#"&gt;
+
+&lt;H2&gt;Search Results&lt;/H2&gt;
+
+&lt;CFOUTPUT&gt;
+    #Search1.RecordCount# found out of
+    #Search1.RecordsSearched# searched.
+&lt;/CFOUTPUT&gt;
+
+&lt;HR NOSHADE&gt;
+    &lt;CFOUTPUT QUERY="Search1"&gt;
+        &lt;A HREF="#Search1.URL#"&gt;#Search1.title#&lt;/A&gt;&lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+&lt;HR NOSHADE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>collectionsearchaction.cfm</code>.
+
+</li>
+<li>View the file <code>collectionsearchform.cfm</code> in your browser, enter values in the form, then submit it.
+
+</li>
+</ol>
+<a name="1021879"></a>
+ 
+<H2>Summarization</H2>
+<p>As part of the indexing process, Verity automatically produces a summary of every document file or query result set. The default summarization selects the best sentences, based on internal rules, up to a maximum of 500 characters. Summarization information is returned by default with every CFSEARCH operation. For more information on this topic, see the Allaire Knowledge Base article, "Custom1, Custom2 and Summary Fields" (ID# 1081) on our Web site at <a href="http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm">http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm</a>.</p><p>To access the summary, invoke the property in the following form:</p><pre>#search_query.Summary#
+</pre><p>For example, in a search operation where the value of the NAME attribute is "mysearch" the following CFML outputs the summary of the search results:</p><pre>&lt;CFOUTPUT QUERY="mysearch"&gt;
+    #Summary#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre><p>For information on an advanced summarization technique, see the Allaire Knowledge Base article, "Synchronizing information stored in Verity Collection Document Fields with Corresponding Data from a Database" (ID# 1161) on our Web site at <a href="http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm">http://www.allaire.com/Support/KnowledgeBase/SearchForm.cfm</a>.</p><a name="997758"></a>
+ 
+<H2>CFSEARCH properties</H2>
+<p>Three properties are generated for each CFSEARCH query that provide information about a particular query:</p><ul>
+<li>RecordCount -- The total number of records returned by the query.
+
+</li>
+<li>CurrentRow -- The current row of the query being processed by CFOUTPUT.
+</li>
+<li>RecordsSearched -- The total number of records in the index that were searched. If no records were returned in the search, this property returns a null value.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

@@ -1,0 +1,161 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Organizing Toolbars</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Getting Started</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1017663"></a>
+ <H1>Organizing Toolbars</H1>
+
+
+
+<p>Individual interface elements contain their own specialized toolbars. You can arrange the display of these toolbars to create a workspace for just the tasks you need to perform.</p><a name="1033779"></a>
+ 
+<H2>Allaire Spectra toolbar</H2>
+<p>If the Allaire Spectra setup program detects Studio on your system, it gives you the option to install tools for Allaire Spectra development. If you select this option, a special toolbar is added. You can dock the toolbar in either toolbar area or float it. </p><p>The current toolbar gives you quick access to tasks such as registering applications, browsing content, and creating object types. You can use the Webtop Auto-Update button to add new toolbar buttons as they become available.</p><a name="1012301"></a>
+ 
+<H2>Positioning toolbars</H2>
+<p>Toolbars marked with a (D) in the list below are dockable, that is, you can move them to a new location on the workspace.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To dock a toolbar:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the drag bar--the double lines located at the left end of the toolbar--and hold the mouse button down.
+
+
+</li>
+<li>Drag the toolbar to the new position. 
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>To place a toolbar on the workspace border, drag it to the edge of the 
+border until the toolbar border changes to thin lines. 
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Release the mouse button.
+
+</li>
+</ol>
+<p>To return a toolbar to its previous location, double-click its title bar.</p><p>The Resources tabs can be re-ordered by right-clicking a tab and dragging it to a new location in the Resources tab order. The individual tabs on the Resources window can be placed in their own windows by left-clicking the tabs and dragging them to new locations on the screen.</p><a name="1033164"></a>
+ 
+<H2>Default toolbars</H2>
+<a name="1012164"></a>
+ 
+<H3>Main (D)</H3>
+<p>Contains standard Windows toolbuttons plus a variety of other buttons to set the workspace display and to run tools. Individual segments are dockable.</p><a name="1012330"></a>
+ 
+<H3>QuickBar (D)</H3>
+<p>Presents the principal interface for inserting HTML, CFML, and scripting code. The QuickBar is organized by tabs for easy access, but you have complete control of how toolbuttons are arranged on individual tabs and how tabs are displayed.</p><p>To set display options and to organize and customize the QuickBar, right-click the QuickBar to see its shortcut menu. Individual tabs are dockable.</p><a name="1012215"></a>
+ 
+<H3>Edit</H3>
+<p>Located on the vertical strip to the left of the Editor window; controls document navigation, tag validation, and user assistance options such as Tag Insight and Tag Completion.</p><a name="1012232"></a>
+ 
+<H3>Browse</H3>
+<p>Displays above the Browse pane and controls page navigation and access to URLs. It also includes options to display rulers on the page borders and to view the page at common resolutions.</p><a name="1012264"></a>
+ 
+<H3>Design</H3>
+<p>Contains controls for text formatting and HTML tables and forms. </p><a name="1012285"></a>
+ 
+<H3>Link Verification (D)</H3>
+<p>Provides features for performing link verification. Enabled when the Links tab is selected on the Results window. </p><a name="1012326"></a>
+ 
+<H3>Projects (D)</H3>
+<p>Allows you to open, create, and deploy projects. Project toolbuttons are available next to the Recent Projects listbox at the top of the Projects pane. </p><a name="1012360"></a>
+ 
+<H3>Help (D)</H3>
+<p>Controls display, search, and bookmarking options for the Help References. </p><a name="1012376"></a>
+ 
+<H3>Tag Inspector (D)</H3>
+<p>Set the formatting of the attributes list and open the Tag Definition editor from the buttons located to the left of the tag name at the top of the Tag Inspector pane. </p><a name="1012420"></a>
+ 
+<H3>Tag Tree (D)</H3>
+<p>This pane, located above the Tag Inspector, contains buttons to refresh the tree and to open the Outline Profile Editor. The Profile editor lets you specify the display of supported tags in the tree, including tag captions and icons. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:30 -->
+</body>
+</html>

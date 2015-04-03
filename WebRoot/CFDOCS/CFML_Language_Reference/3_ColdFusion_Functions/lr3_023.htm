@@ -1,0 +1,140 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ArrayInsertAt</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_022.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_024.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="996845"></a>
+ <H1>ArrayInsertAt</H1>
+
+
+
+<p>Inserts data in the specified array at the specified index position. All array elements with indexes greater than the new position are shifted right by one. The length of the array increases by one index.</p><p>Returns a Boolean TRUE on successful completion. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_022.htm#996831">ArrayDeleteAt</a>.
+</p>
+
+<a name="996849"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ArrayInsertAt</strong>(<em>array</em>, <em>position</em>, <em>value</em>)
+</PRE><a name="996851"> </a>
+<h5 class="param"> array</h5>
+<p class="param">Name of the array in which you want to insert data.</p><a name="996852"> </a>
+<h5 class="param"> position</h5>
+<p class="param">The index position in the specified array where you want to insert the data specified in value. </p><a name="996853"> </a>
+<h5 class="param"> value</h5>
+<p class="param">The value of the data you want to insert into the array. </p><a name="1798215"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ArrayInsertAt
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ArrayInsertAt ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ArrayInsertAt Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ArrayInsertAt Example&lt;/H3&gt;
+
+&lt;P&gt;
+&lt;!--- create a new array ---&gt;
+&lt;CFSET DaysArray = ArrayNew(1)&gt;
+&lt;!--- populate an element or two ---&gt;
+&lt;CFSET DaysArray[1] = "Monday"&gt;
+&lt;CFSET DaysArray[2] = "Tuesday"&gt;
+&lt;CFSET DaysArray[3] = "Thursday"&gt;
+&lt;!--- add an element before position 3 ---&gt;
+&lt;P&gt;Add an element before position 3: 
+&lt;CFOUTPUT&gt;#ArrayInsertAt(DaysArray,3,"Wednesday")#&lt;/CFOUTPUT&gt;
+&lt;P&gt;Now output the array as a list:
+&lt;CFOUTPUT&gt;#ArrayToList(DaysArray)#&lt;/CFOUTPUT&gt;
+&lt;!--- Notice how the array now has four elements, and that
+element 3, "Thursday", has now become element four ---&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ArrayInsertAt
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_022.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_024.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

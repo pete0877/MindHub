@@ -1,0 +1,297 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>LSNumberFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_170.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_172.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000576"></a>
+ <H1>LSNumberFormat</H1>
+
+
+
+<p>Formats a number using the locale convention. If mask is omitted, the number is formatted as an integer. </p><a name="1000578"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>LSNumberFormat</strong>(<em>number</em> [, <em>mask</em> ])
+</PRE><a name="1000580"> </a>
+<h5 class="param"> number</h5>
+<p class="param">The number you want to format. </p><a name="1000581"> </a>
+<h5 class="param"> mask</h5>
+<p class="param">All LSNumberFormat mask characters apply except that ($) dollar, (,) comma, and (.) dot are mapped to their locale-specific counterparts.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>LSNumberFormat Mask Characters</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Character</strong>
+</th><th align="left">
+<strong>Meaning</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>_ (underscore)
+</PRE></td><td valign="top">
+Optional digit placeholder. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>9
+</PRE></td><td valign="top">
+Optional digit placeholder. Same as _, but shows decimal places more clearly. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>.
+</PRE></td><td valign="top">
+Specifies the location of a mandatory decimal point. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>0
+</PRE></td><td valign="top">
+Located to the left or right of a mandatory decimal point, to force padding with zeros. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>( )
+</PRE></td><td valign="top">
+Places parentheses around the mask if the number is less than 0.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>+
+</PRE></td><td valign="top">
+Places + in front of positive numbers, - (minus sign) in front of negative numbers.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>-
+</PRE></td><td valign="top">
+Place " " (space) in front of positive, - (minus sign) in front of negative numbers. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>,
+</PRE></td><td valign="top">
+Separates thousands with commas. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>L,C
+</PRE></td><td valign="top">
+Specifies left-justify or center-justify a number within the width of the mask column. L or C must appear as the first character of the mask. By default, numbers are right-justified. 
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>$
+</PRE></td><td valign="top">
+Places a dollar sign in front of the formatted number. $ must appear as the first character of the mask.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>^
+</PRE></td><td valign="top">
+Separates left from right formatting.
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If you do not specify a sign for the mask, positive and negative numbers 
+will not align in columns. As a result, if you expect to display both positive 
+and negative numbers in your application, use either the space or use - 
+(hyphen) to force a space in front of positive numbers and a minus sign 
+in front of negative numbers.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1000637"></a>
+ 
+<H3>Usage</H3>
+<p>The position of codes in format masks determines where those codes will have effect. For example, if you place a dollar sign character at the far left of a format mask, ColdFusion displays a dollar sign at the very left edge of the formatted number. If you separate the dollar sign on the left edge of the format mask by at least one underscore, ColdFusion displays the dollar sign just to the left of the digits in the formatted number. </p><p>In all examples below, the numbers under the masks and the formatted output are used to clearly show the positions of characters. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Number</strong>
+</th><th align="left">
+<strong>Mask</strong>
+</th><th align="left">
+<strong>Result</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>4.37
+</PRE></td><td valign="top"><PRE>$____.__
+</PRE></td><td valign="top"><PRE>"$   4.37"
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><PRE>4.37
+</PRE></td><td valign="top"><PRE>_$___.__
+</PRE></td><td valign="top"><PRE>"   $4.37"
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><p></p></td><td valign="top"><PRE>12345678
+</PRE></td><td valign="top"><PRE> 12345678 
+</PRE></td></tr>
+
+</table>
+</div>
+</p><p>This positioning idea can also be used to show where to place the - (minus sign) for negative numbers:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Number</strong>
+</th><th align="left">
+<strong>Mask</strong>
+</th><th align="left">
+<strong>Result</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>-4.37
+</PRE></td><td valign="top"><PRE>-____.__
+</PRE></td><td valign="top"><PRE>"-   4.37"
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><PRE>-4.37
+</PRE></td><td valign="top"><PRE>_-___.__
+</PRE></td><td valign="top"><PRE>"   -4.37"
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><p></p></td><td valign="top"><PRE>12345678
+</PRE></td><td valign="top"><PRE>12345678
+</PRE></td></tr>
+
+</table>
+</div>
+</p><p>There are four possible positions for any code character: far left, near left, near right, and far right. The left and right positions are determined by the side of the decimal point the code character is shown on. For formats that do not have a fixed number of decimal places, you can use a ^ (caret) to separate the left fields from the right.</p><p>Whether the code is placed in the far or near position is determined by the use of _ (underscore). Most code characters will have their effect determined by which of these of fields they are located in. The following example shows how to use the field to determine exactly where to place parentheses to display negative numbers:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Number</strong>
+</th><th align="left">
+<strong>Mask</strong>
+</th><th align="left">
+<strong>Result</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>3.21
+</PRE></td><td valign="top"><PRE>C(__^__)
+</PRE></td><td valign="top"><PRE>"( 3.21 )"
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><PRE>3.21
+</PRE></td><td valign="top"><PRE>C__(^__)
+</PRE></td><td valign="top"><PRE>" (3.21 )"
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><PRE>3.21
+</PRE></td><td valign="top"><PRE>C(__^)__
+</PRE></td><td valign="top"><PRE>"( 3.21) "
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><PRE>3.21
+</PRE></td><td valign="top"><PRE>C__(^)__
+</PRE></td><td valign="top"><PRE>" (3.21) "
+</PRE></td></tr>
+<tr valign="top"><td valign="top"><p></p></td><td valign="top"><PRE>12345678
+</PRE></td><td valign="top"><PRE> 12345678
+</PRE></td></tr>
+
+</table>
+</div>
+</p><a name="1805127"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSNumberFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This shows LSNumberFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;LSNumberFormat Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;LSNumberFormat Example&lt;/H3&gt;
+
+&lt;P&gt;LSNumberFormat returns a number value using
+the locale convention.  
+
+&lt;!--- loop through a list of possible locales and
+show number values  ---&gt;
+&lt;CFLOOP LIST="#Server.Coldfusion.SupportedLocales#"
+INDEX="locale" DELIMITERS=","&gt;
+    &lt;CFSET oldlocale = SetLocale(locale)&gt;
+    &lt;CFOUTPUT&gt;&lt;P&gt;&lt;B&gt;&lt;I&gt;#locale#&lt;/I&gt;&lt;/B&gt;&lt;BR&gt;
+        #LSNumberFormat(-1234.5678, "_________")#&lt;BR&gt;
+        #LSNumberFormat(-1234.5678, "_________.___")#&lt;BR&gt;
+        #LSNumberFormat(1234.5678, "_________")#&lt;BR&gt;
+        #LSNumberFormat(1234.5678, "_________.___")#&lt;BR&gt;        
+        #LSNumberFormat(1234.5678, "$_(_________.___)")#&lt;BR&gt;        
+        #LSNumberFormat(-1234.5678, "$_(_________.___)")#&lt;BR&gt;        
+        #LSNumberFormat(1234.5678, "+_________.___")#&lt;BR&gt;        
+        #LSNumberFormat(1234.5678, "-_________.___")#&lt;BR&gt;        
+        &lt;Hr noshade&gt;
+    &lt;/CFOUTPUT&gt;
+&lt;/CFLOOP&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSNumberFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_170.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_172.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

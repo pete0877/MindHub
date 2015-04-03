@@ -1,0 +1,237 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Tag Tree and Tag Inspector</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015994"></a>
+ <H1>Tag Tree and Tag Inspector</H1>
+
+
+
+<p>The Tag Inspector tab of the Resource pane contains two integrated tools: Tag Tree and Tag Inspector. By using them in combination, you can edit all the code in a document without having to work directly in the document. </p><p><img src="../images/tag_inspector_tab.gif">
+
+
+</p><a name="1015998"></a>
+ 
+<H2>Tag Tree</H2>
+<p>The Tag Tree, located in the top pane, is helpful for inspecting and navigating a document's structure. It can be easily configured to display just the tags you want.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use the Tag Tree:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the drop-down list at the top of the pane to filter the view.
+
+
+</li>
+<li>Use the plus and minus signs to expand and contract the nodes of the Tag Tree.
+
+</li>
+<li>Click on a tag in the tree to quickly locate it in the document. Shift + Ctrl + double-click selects the entire tag block.
+
+<p>If the selected tag supports attributes, they are displayed, with their values, in the 
+Tag Inspector pane.
+</p></li>
+<li>Click the Refresh button to update the Tag Tree as you edit the document.
+
+<p><img src="../images/refresh_button.gif">
+
+
+
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure the Tag Tree display:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Configure Outline Profiles button at the top of the pane to open the Outline Profiles dialog box.
+
+
+<p><img src="../images/outline_profiles_button.gif">
+
+
+
+</p></li>
+<li>Use the Add and Remove buttons in the Outline Profiles pane to edit the current tag sets.
+
+</li>
+<li>Use the Add and Remove buttons in the Recognized Tags pane to edit the tag list for the selected set.
+
+</li>
+<li>To add a caption and icon to a tag, make selections in the Tag Settings pane.
+
+</li>
+<li>Click Done to update the Tag Tree profiles.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To import an Outline Profile:
+</td>
+</tr>
+</table>
+</div><p>The Tag Tree supports tag sets created in Allaire's Visual Tools Markup Language (VTML), or a Document Type Definition (using the DTD file extension) from an SGML-compliant language, such as Extensible Markup Language (XML). </p><ol>
+<li class="first">Click the Import button in the Configure Outline Profiles dialog box.
+
+
+</li>
+<li>Select either a VTML definition file or a DTD file to import.
+
+</li>
+<li>Click Next. 
+
+<p>The Wizard reports the status of the import process. If the process completes 
+successfully, click Finish.
+</p></li>
+</ol>
+<a name="1023830"></a>
+ 
+<H2>Tag Inspector</H2>
+<p>The Tag Inspector lets you edit code in a property sheet interface that will be familiar to Visual Basic and Delphi programmers. The four icons at the top of the Inspector pane control the way attributes and scripting events are displayed.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use the Tag Inspector:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click in a tag, either in the Tag Tree or in the Editor, to see a list of its attributes.
+
+
+</li>
+<li>Click an attribute name to type in a value or to select from a list if the attribute takes pre-defined values.
+
+</li>
+<li>Click outside the current field to enter the new value in your code.
+
+</li>
+</ol>
+<p>Every tag that Studio installs includes a definition file, written in VTML, that specifies the valid attributes for that tag and the content and formatting of the tag's editor. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change a tag definition file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Edit Tag Definitions icon to open the Tag Definitions Library dialog box. The left pane lists all of the installed languages. You can edit the definitions list by using the Add and Remove buttons.
+
+
+<p><img src="../images/edit_tag_def_button.gif">
+
+
+
+</p></li>
+<li>Expand a language entry to view individual tags. When you select a tag, the attributes and other components defined in its VTM file appear in the tabbed pane.
+
+</li>
+<li>Make changes in the tag definition fields and click Done to save the changes.
+
+</li>
+</ol>
+<a name="1022359"></a>
+ 
+<H3>Scripting Event Handlers</H3>
+<p>Click on an event attribute, such as ONCLICK, for the selected tag and choose a script language option from the drop-down list. Enter a name for the event handler and click OK to insert the handler ID in the tag and a starter script block in the &lt;HEAD&gt; section.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

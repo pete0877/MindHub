@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFEXECUTE </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_027.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_029.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2257999"></a>
+ <H1>CFEXECUTE </H1>
+
+
+
+<p>Enables ColdFusion developers to execute any process on the server machine.   </p><a name="2258001"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFEXECUTE 
+    NAME=" ApplicationName "
+    ARGUMENTS="CommandLine Arguments"
+    OUTPUTFILE="Output file name&quot;
+    TIMEOUT=&quot;Timeout interval in seconds&quot;&gt;
+</PRE><a name="2258007"></a>
+<h4> NAME </h4>
+<p>Required. The full path name of the application that is to be executed.</p><p>Note:  On Windows systems, you must specify the extension, for example, .exe, as part of the application's name.</p><a name="2258010"></a>
+<h4> ARGUMENTS</h4>
+<p>Optional. Any command-line arguments that should be passed to the program.</p><p>If <em>ARGUMENTS </em>is specified as a string, it is processed as follows:</p><ul>
+<a name="2258013"> </a>
+<li>On Windows systems, the entire string is passed to the Windows process control subsystem for parsing.
+
+<a name="2258014"> </a>
+</li>
+<li>On UNIX, the string is tokenized into an array of arguments.  The default token separator is a space; arguments with embedded spaces may be delimited by double quotes.
+</li>
+</ul>
+<p>If <em>ARGUMENTS </em>is passed as an array, it is processed as follows:</p><ul>
+<a name="2258015"> </a>
+<li>On Windows systems, the array elements will be concatenated into a string of tokens, separated by spaces.  This string is then passed to the Windows process control subsystem as above.
+
+<a name="2258017"> </a>
+</li>
+<li>On UNIX, the elements of the <em>ARGUMENTS</em> array is copied into a corresponding array of exec() arguments.
+</li>
+</ul>
+<a name="2258019"></a>
+<h4> OUTPUTFILE</h4>
+<p>Optional. The file where the output of the program is to be directed.  If this is not specified, the output appears on the page from which it was called.</p><a name="2258021"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. Indicates how long in seconds the ColdFusion executing thread will wait for the spawned process.  Indicating a timeout of 0 is equivalent to the non-blocking mode of executing.  A very high timeout value is equivalent to a blocking mode of execution. The default is 0; therefore, the ColdFusion thread spawns a process and immediately returns without waiting for the process to terminate.</p><p>If no output file is specified, and the timeout value is zero, then the program's output will be directed to the bit bucket.</p><a name="2258024"></a>
+ 
+<H3>Usage</H3>
+<p>CFEXECUTE is available on Windows NT 4.0 and UNIX platforms.   Do not put any other ColdFusion tags or functions between the start and the end tags of CFEXECUTE.  Also, CFEXECUTE tags cannot be nested.</p><a name="2261534"></a>
+ 
+<H3>Exception</H3>
+<p>CFEXECUTE throws the following exceptions:</p><ul>
+<a name="2261510"> </a>
+<li>If the application name is not found, an Application File Not Found exception will be thrown.
+
+<a name="2261511"> </a>
+</li>
+<li>If the output file cannot be opened, an Output File Cannot be opened will be thrown.
+<a name="2261512"> </a>
+</li>
+<li>If the effective user of the ColdFusion executing thread does not have permissions to execute the process, a security exception will be thrown.
+<a name="2261513"> </a>
+</li>
+<li>The time out values must be between 0 and  some high number (to be determined).
+</li>
+</ul>
+<a name="2262515"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfexecute
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---------------------------------------------------------------------- 
+This example illustrates use of the CFEXECUTE tag. 
+-----------------------------------------------------------------------&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFEXECUTE&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFEXECUTE&lt;/H3&gt;
+&lt;P&gt;
+This example executes the Windows NT version of the <strong>netstat</strong> network 
+monitoring program, and places its output in a file.
+
+&lt;CFEXECUTE NAME="C:\WinNT\System32\netstat.exe"
+    ARGUMENTS="-e" 
+    OUTPUTFILE="C:\Temp\output.txt"
+    TIMEOUT=&quot;1&quot;&gt;
+
+&lt;/CFEXECUTE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfexecute
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_027.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_029.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

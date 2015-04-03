@@ -1,0 +1,229 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Example of User Authentication and Authorization</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 17	:&nbsp;&nbsp;Application Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998190"></a>
+ <H1>Example of User Authentication and Authorization</H1>
+
+
+
+<p>The following sample pages illustrate how a developer might implement user security by authenticating users and then allowing users to see/use only the resources they are authorized to use.</p><p>In this example, a user requests a page in an application named Orders, which is part of a security context, also named Orders, that governs pages and resources for an order tracking application.</p><p>User security is generally handled in two steps:</p><ul>
+<li>First, the <code>Application.cfm</code> page checks to see if the current user is <em>authenticated</em>. If not, we present a login form and the user must submit a username and password for authentication.
+
+<p>If a user passes the authentication test, ColdFusion passes a cookie to carry the 
+user's authentication state to subsequent application pages governed by this 
+<code>Application.cfm</code> page.
+</p></li>
+<li>Next, only authenticated users are able to access the requested application page, for selecting and updating customer orders in a database. This page checks to see which resources the authenticated user is <em>authorized</em> to see and use.
+</li>
+</ul>
+<a name="998194"></a>
+ 
+<H2>Authenticating users in Application.cfm</H2>
+<p>This example code for an <code>Application.cfm</code> page checks first to see whether the current user is authenticated by checking to see if a login form was submitted. If the username and password can be authenticated for the current security context, the user passes through and the requested page is served.</p><p>If the <code>Application.cfm</code> page does not receive the user's login information from the previous page, it prompts the user to provide a username and password. The user's response is checked against the list of valid users defined for the current security context.</p><p>If the user passes the authentication step too, the requested page appears. We use the CGI variables <em>script_name</em> and <em>query_string</em> keep track of the page originally requested. This way, once users are authenticated, we can serve the page they originally requested.</p><p>All pages governed by this <code>Application.cfm</code> page -- those in the same directory as <code>Application.cfm</code> and in its sub-tree -- will invoke this authentication test.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>To use this code in your own <code>Application.cfm</code> page, change the 
+application name and security context name to match your application 
+and security names.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1003178"></a>
+ 
+<H3>Example: Application.cfm</H3>
+<pre><code>&lt;CFAPPLICATION NAME="Orders"&gt;
+
+&lt;CFIF not IsAuthenticated()&gt;
+    &lt;!--- The user is not authenticated ---&gt;
+
+    &lt;CFSET showLogin = "No"&gt;
+&lt;CFIF IsDefined("form.username") and 
+    IsDefined("form.password")&gt;
+
+&lt;!--- The login form was submitted ---&gt;
+&lt;CFTRY&gt;
+    &lt;CFAUTHENTICATE SecurityContext="Orders"
+        username="#form.username#"
+        password="#form.password#"
+        setCookie="YES"&gt;
+
+&lt;CFCATCH TYPE="security"&gt;
+&lt;!--- Security error in login occurred, 
+    show login again ---&gt;
+    &lt;H3&gt;Invalid Login&lt;/H3&gt;
+    &lt;CFSET showLogin = "Yes"&gt;
+&lt;/CFCATCH&gt;
+&lt;/CFTRY&gt;
+
+&lt;CFELSE&gt;
+&lt;!--- The login was not detected ---&gt;
+    &lt;CFSET showLogin = "Yes"&gt;
+&lt;/CFIF&gt;
+
+&lt;CFIF showLogin&gt;
+&lt;!--- Recreate the url used to call this template ---&gt;
+    &lt;CFSET url = "#cgi.script_name#"&gt;
+&lt;CFIF cgi.query_string is not ""&gt;
+    &lt;CFSET url = url &amp; "?#cgi.query_string#"&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- Populate the login with the recreated url ---&gt;
+
+&lt;CFOUTPUT&gt;
+    &lt;FORM ACTION="#url#" METHOD="Post"&gt;
+    &lt;TABLE&gt;
+    &lt;TR&gt;
+    &lt;TD&gt;username:&lt;/TD&gt;
+    &lt;TD&gt;&lt;INPUT TYPE="text" NAME="username"&gt;&lt;/TD&gt;
+    &lt;/TR&gt;
+
+    &lt;TR&gt;
+    &lt;TD&gt;password:&lt;/TD&gt;
+    &lt;TD&gt;&lt;INPUT TYPE="password" NAME="password"&gt;&lt;/TD&gt;
+    &lt;/TR&gt;
+    &lt;/TABLE&gt;
+    &lt;INPUT TYPE="submit" VALUE="Login"&gt;
+
+    &lt;/FORM&gt;
+&lt;/CFOUTPUT&gt;
+&lt;CFABORT&gt;
+&lt;/CFIF&gt;
+
+&lt;/CFIF&gt;
+</code></pre><a name="998197"></a>
+ 
+<H2>Checking for authentication and authorization</H2>
+<p>Inside application pages, developers can use the IsAuthorized function to check whether an authenticated user is authorized to access the protected resources, and then display only the authorized resources.</p><p>The following sample page appears to users who pass the authentication test in the <code>Application.cfm</code> page above. It uses the IsAuthorized function to test whether authenticated users are allowed to update or select data from a datasource.</p><a name="1003294"></a>
+ 
+<H3>Example: orders.cfm</H3>
+<pre><code>
+&lt;!---  This example calls the IsAuthorized function. ---&gt;
+
+...
+
+&lt;!--- First, check whether a form button was submitted ---&gt;
+
+&lt;CFIF IsDefined("form.btnUpdate")&gt;
+
+&lt;!--- Is user is authorized to update or select 
+    information from the Orders data source? ---&gt;
+
+    &lt;CFIF ISAUTHORIZED("DataSource", "Orders", "update")&gt;
+    &lt;CFQUERY NAME="AddItem" DATASOURCE="Orders"&gt;
+        INSERT INTO Orders
+        (Customer, OrderID)
+        VALUES
+            &lt;CFOUTPUT&gt;(#Customer#, #OrderID#)&lt;/CFOUTPUT&gt;
+        &lt;/CFQUERY&gt;
+        &lt;CFOUTPUT QUERY="AddItem"&gt;
+        Authorization Succeeded. Order information added:
+        #Customer# - #OrderID#&lt;BR&gt;
+        &lt;/CFOUTPUT&gt;
+
+    &lt;CFELSE&gt;
+        &lt;CFABORT SHOWERROR="You are not allowed
+        to update order information."&gt;
+
+    &lt;/CFIF&gt;
+
+&lt;/CFIF&gt;
+
+&lt;CFIF ISAUTHORIZED("DataSource", "Orders", "select")&gt;
+    &lt;CFQUERY NAME="GetList" DATASOURCE="Orders"&gt;
+        SELECT *    FROM Orders
+    &lt;/CFQUERY&gt;
+    Authorization Succeeded. Order information follows:
+    &lt;CFOUTPUT QUERY="GetList"&gt;
+        #Customer# - #BalanceDue#&lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+
+&lt;CFELSE&gt;
+    &lt;CFABORT SHOWERROR="You cannot view
+        order information."&gt;
+
+&lt;/CFIF&gt;
+</code>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:02 -->
+</body>
+</html>

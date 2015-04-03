@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Monitoring ColdFusion Performance</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0310.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0312.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1037868"></a>
+ <H1>Monitoring ColdFusion Performance</H1>
+
+
+
+<p>ColdFusion provides a set of counters for monitoring the performance of the ColdFusion Server. This allows you to use the Windows NT Performance Monitor administration utility to monitor ColdFusion performance. This enhancement to NT Performance Monitor is installed automatically by the ColdFusion setup.</p><p>A Windows NT Performance Monitor configuration file has been added to ColdFusion for Windows systems that is pre-configured to monitor ColdFusion Server activity. The Performance Monitor configuration file, <code>ColdFusionServer.pmc</code> is installed in <code>cfusion\bin.</code> </p><p>To monitor ColdFusion Server activity, click on the ColdFusion Performance Monitor icon in the ColdFusion Server Program group. You can also open the Performance Monitor utility and then open the <code>cfusion/bin/ColdFusionServer.pmc</code> file. </p><a name="1037870"></a>
+ 
+<H2>ColdFusion counters available</H2>
+<p>ColdFusion supports 11 different counters you can enable in the Windows Performance Monitor:</p><ul>
+<a name="1039774"> </a>
+<li>Average database transaction time
+
+<a name="1039794"> </a>
+</li>
+<li>Average queue time
+<a name="1039803"> </a>
+</li>
+<li>Average request time
+<a name="1039812"> </a>
+</li>
+<li>Bytes incoming per second
+<a name="1039832"> </a>
+</li>
+<li>Bytes outgoing per second
+<a name="1039821"> </a>
+</li>
+<li>Database hits per second
+<a name="1039841"> </a>
+</li>
+<li>Page hits per second
+<a name="1039850"> </a>
+</li>
+<li>Cache pops per second
+<a name="1039859"> </a>
+</li>
+<li>Number of queued requests
+<a name="1039864"> </a>
+</li>
+<li>Number of running requests
+<a name="1039869"> </a>
+</li>
+<li>Number of timed out requests
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable the Performance Monitor for ColdFusion:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator to the Miscellaneous Debugging page. 
+
+
+</li>
+<li>Click the Enable performance monitoring option. The default is off. 
+
+</li>
+<li>Click Apply to save the new setting. 
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure the Performance Monitor:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the Windows Start menu, select Programs &gt; Administrative Tools &gt; Performance Monitor. 
+
+
+</li>
+<li>In the Performance Monitor, select Edit &gt; Add to Chart or File &gt; Open to open an existing chart. 
+
+<p>In the Add to Chart dialog, select ColdFusion Server from the Object drop-down 
+list. You can change any of the display options (Color, Scale, Width, Style) for a 
+counter before adding it. 
+</p></li>
+<li>Click one or more selections in the Counters list, then click the Add button. The counters are listed at the bottom of the Chart View. 
+
+</li>
+<li>Click the Explain button to display embedded help for the selected counter. 
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0310.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0312.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

@@ -1,0 +1,139 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>FindOneOf</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_093.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_095.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998636"></a>
+ <H1>FindOneOf</H1>
+
+
+
+<p>Return the first index of the occurrence of any character from <em>set</em> in <em>string</em>. Returns 0 if no characters are found. The search is case-sensitive.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>, <a href="../3_ColdFusion_Functions/lr3_053.htm#997538">Compare</a>, and <a href="../3_ColdFusion_Functions/lr3_200.htm#1001808">REFind</a> functions.
+</p>
+
+<a name="998639"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>FindOneOf</strong>(<em>set</em>, <em>string</em> [, <em>start</em> ])
+</PRE><a name="998641"> </a>
+<h5 class="param"> set</h5>
+<p class="param">String containing one or more characters being sought.</p><a name="998642"> </a>
+<h5 class="param"> string</h5>
+<p class="param">String being searched.</p><a name="998643"> </a>
+<h5 class="param"> start</h5>
+<p class="param">Starting position for the search.</p><a name="1801643"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="FindOneOf
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>...
+&lt;!--- depending upon the action desired,  perform
+different function ---&gt;
+&lt;CFSWITCH EXPRESSION="#tag#"&gt;
+    &lt;CFCASE VALUE="find"&gt;
+        &lt;CFSET TheAction = Find(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFCASE&gt;
+    &lt;CFCASE VALUE="findNoCase"&gt;
+        &lt;CFSET TheAction = FindNoCase(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFCASE&gt;    
+    &lt;CFCASE VALUE="findOneof"&gt;
+        &lt;CFSET TheAction = FindOneOf(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFCASE&gt;    
+    &lt;CFDEFAULTCASE&gt;
+        &lt;CFSET TheAction = Find(FORM.MyString,
+         CFHTTP.FileContent, 1)&gt;
+    &lt;/CFDEFAULTCASE&gt;
+&lt;/CFSWITCH&gt;
+...
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="FindOneOf
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_093.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_095.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

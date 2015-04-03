@@ -1,0 +1,1971 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Release Notes - ColdFusion Server 4.5.1</TITLE>
+<!-- Updated March 23, 2000 -->
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2014.210" name=GENERATOR>
+
+<SCRIPT language=JavaScript>
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</SCRIPT>
+</HEAD>
+
+<BODY><A name=top></A>
+
+<H1>ColdFusion Server 4.5.1 <BR>
+<FONT size=-1>Release Notes -- Updated March 23, 2000</FONT></H1>
+
+<HR>
+
+<H2>Contents</H2>
+<UL>
+  <LI><A href="#system">System Requirements</A> 
+  <LI><A href="#installinglinux">Before installing ColdFusion on Linux</A> 
+  <LI><A href="#fix451">Issues fixed in ColdFusion 4.5.1</A> 
+  <LI><A href="#upgrading45">Upgrading to ColdFusion 4.5.1</A> 
+  <LI><A href="#all_platform_issues">Known issues: All platforms</A> 
+  <LI><A href="#windows_issues">Known issues: Windows NT</A> 
+  <LI><A href="#linux_issues">Known issues: Linux</A> 
+  <LI><A href="#solaris_issues">Known issues: Solaris</A> 
+  <LI><A href="#mysql">Configuring MySQL data sources on ColdFusion Server for Linux</A> 
+  <LI><A href="#postgres">Configuring PostgreSQL data sources on ColdFusion Server for Linux</A> 
+  <LI><A href="#tokens">Changing the way Tokens are generated</A> 
+  <LI><A href="#migrating_registry">Migrating a ColdFusion Solaris registry to ColdFusion 4.5.1</A> 
+  <LI><A href="#remote">Redirecting processing to a Custom Error Page</A> 
+  <LI><A href="#load">Load Balancing and Failover with ClusterCATS</A> 
+  <LI><A href="#apache">Configuring the Apache Web Server</A> 
+  <LI><A href="#forums">Running Allaire Forums under ColdFusion 4.5</A> </LI>
+</UL>
+
+<P>Welcome to ColdFusion Server 4.5.1. As in ColdFusion 4.5, this release is 
+comprised of a platform-independent code base. This evolution means changing 
+many of the core libraries that support functionality like CFMAIL, CFPOP, 
+CFHTTP, and CFLDAP. </P>
+
+<P>Use these release notes to stay apprised of important information relating to 
+ColdFusion Server installation and configuration. On this page, you'll also find 
+details about <a href="#all_platform_issues">known problems or behaviors in this release</a>.</P>
+
+<P>This release builds upon the many new features and enhancements that made 
+ColdFusion 4.5 a significant upgrade. For information about new features and 
+enhancements, see the <A href="new.htm">New Features 
+page</A>.</P>
+
+<HR>
+<A name=system></A>
+<H2>ColdFusion Server System Requirements</H2>
+<H3>ColdFusion Server 4.5.1 Enterprise Edition for Windows</H3>
+<H4>System</H4>
+<UL>
+  <LI>Windows NT 4.0 SP 4 or later
+  <LI>Intel Pentium or higher 
+  <LI>100 MB hard disk space 
+  <LI>128 MB RAM </LI></UL>
+  <p>Windows 2000 issues:
+  <ul>
+  	<li>You may have to add your LDAP server to the hosts file on 
+	the Windows 2000 server that hosts the CF Application Server.</li>
+  </UL>
+
+<H4>Web servers</H4>
+<UL>
+  <LI>Microsoft Internet Information Server (IIS) 4.0 
+  <LI>Netscape Enterprise Server (NSAPI) 3.51, 3.6, and V4.0 (iPlanet) 
+  <LI>All Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible 
+  versions (up to and including 1.3.12)
+  <LI>WebSite Server API (WSAPI) 
+  <LI>Common Gateway Interface (CGI) </LI></UL>
+<P>NOTE: ClusterCATS is supported on IIS, Netscape Enterprise Server, and Apache Web Server.
+
+<!-- ==================================  -->
+<H3>ColdFusion Server 4.5.1 Professional Edition for Windows</H3>
+<H4>System</H4>
+<UL>
+  <LI>Windows 95/98 or Windows NT 4.0 
+  <LI>Intel Pentium or higher 
+  <LI>50 MB hard disk space 
+  <LI>32 MB RAM (128 recommended) </LI></UL>
+</UL>
+  
+<H4>Web servers</H4>
+<UL>
+  <LI>Microsoft Internet Information Server (IIS) 4.0 
+  <LI>Netscape Enterprise Server (NSAPI) 3.51, 3.6 and V4.0 (iPlanet)
+  <LI>All Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible versions (up to and including 1.3.12)
+  <LI>Microsoft Personal Web Server (PWS) 
+  <LI>WebSite Server API (WSAPI) 
+  <LI>Common Gateway Interface (CGI) </LI>
+</UL>
+  
+<!-- ==================================  -->
+<H3>ColdFusion Server 4.5.1 Enterprise Edition for Linux</H3>
+<H4>System</H4>
+<UL>
+  <LI>Red Hat Linux 6.0 or greater, on Intel processors only
+  <LI>64 MB RAM (128 MB recommended and required for clustering support) 
+  <LI>70 MB hard disk space (100 MB required for clustering support) </LI>
+</UL>
+
+<H4>Web servers</H4>
+<UL>
+  <LI>All Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible versions (up to and including 1.3.12)</LI>
+  <li>Netscape/iPlanet Enterprise Web server 4.1</li>
+</UL>
+
+<!-- ==================================  -->
+<H3>ColdFusion Server 4.5.1 Professional Edition for Linux</H3>
+<H4>System</H4>
+<UL>
+  <LI>Red Hat Linux 6.0 or greater, on Intel processors only
+  <LI>64 MB RAM (128 MB recommended) 
+  <LI>70 MB hard disk space </LI></UL>
+<H4>Web servers</H4>
+<UL>
+  <LI>All Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible versions (up to and including 1.3.12)</LI>
+  <li>Netscape/iPlanet Enterprise Web server 4.1</li>
+</UL>
+
+<!-- ==================================  -->
+<H3>ColdFusion Server 4.5.1 Enterprise Edition for Solaris</H3>
+<UL>
+  <LI>OS: Solaris 2.5.1, 2.6, or Solaris 7 running on Sparc 
+  <LI>Memory: 128 MB 
+  <LI>Disk space: 128 MB 
+  <LI>Web Servers : Netscape or Apache </LI></UL>
+<H4>Patches Required for Solaris 2.5.1:</H4>
+<UL>
+  <LI>Solaris patch 103640-19 or higher (kernel patch) 
+  <LI>Solaris patch 103663-10 or higher (libresolv.so for threaded applications) 
+
+  <LI>Solaris patch 106529-04 or higher (LibC: Shared library patch for C++) 
+  </LI></UL>
+<H4>Solaris 2.5.1 with ClusterCATS load balancing:</H4>
+<UL>
+  <LI>Solaris patch 103582-18 or higher (/kernel/drv/tcp patch) </LI></UL>
+<H4>Patches Required for Solaris 2.6:</H4>
+<UL>
+  <LI>Solaris patch 105181-09 or higher (kernel patch) 
+  <LI>Solaris patch 105591-06 or higher (LibC: Shared library patch for C++) 
+  </LI></UL>
+<H4>Patches Required for Solaris 7:</H4>
+<UL>
+  <LI>Solaris patch 106327-05 or higher (LibC: Shared library patch for C++) 
+  </LI></UL>
+<P>[These patches are available at access1.sun.com]</P>
+<H4>Packages Required:</H4>
+<P>The following package must be installed on your system:</P>
+<UL>
+  <LI>SUNWxcu4 -- The XCU4 Utilities </LI></UL>
+<H4>Web servers</H4>
+<UL>
+  <LI>Netscape Enterprise Server (NSAPI) 3.51 or higher
+  <LI>All Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible versions (up to and including 1.3.12) 
+</UL>
+<P>NOTE: Load balancing and failover support is available only on 
+Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible versions (up to and including 1.3.12) and 
+Netscape Web servers.</P>
+<HR>
+<A name=installinglinux></A>
+<H2>Before installing ColdFusion on Linux</H2>
+<P>Before installing ColdFusion on Linux, note the following 
+considerations:</P>
+<UL>
+  <LI>Allaire recommends running your RedHat Linux Web server on a 
+  single-processor Pentium machine. We have found that this configuration 
+  currently handles heavy load slightly better than a multi-processor machine 
+  configuration. For large Linux site deployment using Linux server farms, the 
+  load balancing and service-level failover capabilities of ColdFusion 
+  Enterprise can be used to maximize overall site efficiency, scalability and 
+  availability. 
+  <LI>For performance reasons, Allaire recommends that during the RedHat Linux 
+  6.x install, you choose either a Linux "Server" or "Custom" installation 
+  rather than a "GNOME" or "KDE" Workstation installation. After installation is 
+  complete, you should also make sure that your server network is configured 
+  properly, and that the line "ServerName" in /etc/httpd/conf file is 
+  uncommented and "localhost.localdomain" is changed to "yourserver.domain.com". 
+</UL>
+
+<HR>
+<A name=fix451></A>
+<H2>Issues fixed in ColdFusion 4.5.1</H2>
+<P>Following are behaviors in ColdFusion that have been fixed or enhanced in ColdFusion 4.5.1 since the release of ColdFusion 4.5:</P>
+
+<H3>Administration</H3>
+	<UL>
+		<li>On Windows NT (SP5), the following problem using CFCACHE has been fixed: When using CFCACHE <br>
+		and only basic authentication is enabled in IIS, you are unable to access any cached pages, and an 
+		"Access Denied" error is generated. Two new attributes have been added to CFCACHE. They are 
+		USERNAME and PASSWORD. [14910]</li>
+
+	  	<LI>When you go to the Debugging page in the ColdFusion Administrator and 
+	  	check Show SQL and data source name, and uncheck Show query information, 
+	  	database errors do not display the SQL statement. This behavior has been fixed 
+	  	in this release. [14531]
+	  
+		<LI>On UNIX platforms, group permissions for the ColdFusion processes are 
+  		now set correctly.
+  		
+		<LI>On Linux, the ColdFusion user is now set correctly during installation.
+  		
+		<LI>On Linux, the cfremove script now removes the ColdFusion system startup files
+  		in /etc/rc.d.
+		
+		<li>An enhancement has been added to the Sybase native driver which allows user-defined 
+		errors to be trapped. To activate this feature, check the Enable RAISERROR checkbox in the Sybase native 
+		driver page of the Administrator. [13485]
+		
+		<li>When using OLEDB data sources in a stored procedure, a C++ runtime error was 
+		thrown. This behaviro has been fixed in this release. [14939]</li>
+		
+		<li>NT Challenge/Response authentication requests no longer generate a log message. 
+		(Formerly a message was generated in the application.log.) [15082]</li>
+		
+		<li>NT Windows 2000 Only: In the NT Performance Monitor, one of ColdFusion's counters, 
+		"Cache Pops /Sec", may not display correctly and a junk counter displayed with the name 
+		"3610", may appear instead. Aside from the fact that Cache Pops counter is missing, 
+		all other aspects of ColdFusion in the Performance Monitor work normally. [15124]</li>
+		
+		<li>In order to run smconsole, type ./smconsole from the shell. example:
+		/opt/coldfusion/siteminder/bin)-->./smconsole The same applies for 
+		smtest and smdstest [14969]</li>
+		
+		<li>On Solaris, you can use the smexec utility to execute any SiteMinder utility, except 
+		smconsole, smdstest, and smtest, which already have wrapper scripts around them 
+		to simplify their execution. To run smobjexport for example you should type 
+		smexec smobjexport with the appropriate arguments. You must be root in order 
+		for this to work. [15513]</li>
+		
+		<li>Advanced Security note: Coldfusion supports Netscape LDAP Server version 3.x 
+		and 4.11. [15714]</li>
+		
+		<li>In version 4.5, the "request timeout" condition became a catchable error 
+		(catchable by &lt;CFCATCH TYPE=""COM.Allaire.ColdFusion.Request.Timeout""&gt; or 
+		by &lt;CFCATCH TYPE="ANY"&gt;). In Version 4.5.1, the request timeout exception subsystem 
+		has undergone reliability enhancements. Because of this, the "Date/Time," "Browser" 
+		and "Remote Address" diagnostic displays will be shown on the default request timeout 
+		browser screen. [15983]</li>
+		
+
+	 </UL>
+	 
+<h3>Database</h3>
+
+<ul>
+
+	<li>The underlying DB2 client libraries only allow 1 connection to be open at a time, 
+	so mixing ODBC and native connections to DB2 could be problematic. It works if you 
+	establish the ODBC connection first, and then use the native drivers, or if you 
+	exclusively use ODBC or native only. [13587]</li>
+
+	<li>A bug in the ODBC.INI file on Solaris caused the ExtensionsList 
+	for a text datasource to always default to txt,TXT. This has been fixed. [11989]</li>
+
+</ul>
+
+
+<H3>Clustering and load balancing</H3>
+	<UL>
+		<LI>There are now new load balancing options that can improve the utilization 
+		of Web servers clustered with Allaire ClusterCATS software. For detailed information, 
+		see <A href="#load">Load Balancing and Failover with ClusterCATS</A>.
+	</UL>
+
+
+<H3>Tags</H3>
+	<UL>
+	  	<LI>When using a CFFORM tag, the subsequent SCRIPT tag that ColdFusion 
+	  	generated was missing the type="text/javascript" attribute. This behavior has 
+	  	been fixed in this release. [13822]
+	  
+	  	<LI>CFHTTP did not render XML properly. This behavior has been fixed in this 
+	  	release. [14372]	  
+	  
+    	<LI>When you used the CFHTTP RESOLVEURL attribute, it appended link information to 
+  		mailto links. This behavior has been fixed in this release. [11421]
+		
+  		<LI>CFEXECUTE was not protected by basic security. After disabling CFEXECUTE 
+  		with the administrator, CFEXECUTE still worked. This behavior has been fixed 
+  		in this release.		
+		
+  		<LI>Because Verity is not available for Linux, the CFSEARCH tag was not 
+  		implemented. When you used the CFSEARCH tag (or other unimplemented tags) 
+		within a CFTRY CFCATCH TYPE="any" block, the ColdFusion 
+  		server crashed. This behavior has been fixed in this release. [14620]
+
+  		<LI>The whitespace suppression algorithm sometimes incorrectly emitted a space 
+  		at the beginning of a tag such as CFIF, instead of at the end. This behavior 
+  		has been fixed in this release. [14567]</LI>
+		
+		<LI>On Solaris, using the ListDir action of the CFFTP tag no longer generates 
+  		an error. [14521]
+
+		<LI>On NT, NT Challenge/Response authentication requests no longer generate a 
+  		log message. (Formerly a message was generated in the application.log.)"
+		
+		<li>In the CFEXECUTE tag, using the OUTPUTFILE option did not result in output 
+		being redirected to a file. This behavior has been fixed in this release. [13288]
+		
+		<li>The CFLDAP tag has a new attribute, DELIMITER, which allows you to 
+		specificy an alternate separator character for use between multiple 
+		name/value pairs in the ATTRIBUTE attribute list. [14520]
+		
+		<li>When using CFPOP, reading a blank email with an attachment resulted in behavior 
+		such as the attachment not getting written to the destination directory, and background 
+		image of the email appearing only as an attachment. This behavior has been fixed in 
+		this release [15052]
+		
+		<li>On UNIX, you can now delete a Verity collection and recreate it using the same name. [15213]
+	 </UL>
+	 
+<H3>Functions</H3>
+
+	<UL>
+
+		<li>In ColdFusion 4.5 as opposed to CF 4.0.1, more extensive range-checking is performed 
+		to determine whether an argument is an integer. This may lead to situations where code 
+		which executes correctly on CF 4.0.1 results in an error in CF 4.5. For example, the 
+		maximum value for the 1st argument in FormatBaseN function is 2147483647 on some 
+		Windows NT machines. [13549]</li>
+
+		<li>The NumberFormat function was overwriting the last digit of a 
+		negative number displayed in parenthesis with the right paren. This has been fixed. 
+		[14534]</li>
+
+  		<LI>The NumberFormat function was ignoring a trailing mandatory decimal point 
+	  	if it had no decimal places following it. This caused the commas to be ignored 
+	  	as well. This behavior has been fixed in this release. [14527]</li>
+	
+  		<LI>NumberFormat() was displaying a 0 value as empty. This has been fixed to 
+		display a 0. [15058]</li>
+	
+		<li>In some beta releases of 4.5.1, the DollarFormat function accepted 
+		an optional second parameter, which was a formatting mask.  This optional parameter 
+		has been removed from the final build of the product, as it sometimes 
+		crashed the ColdFusion Application Server. [14903]</li>
+
+	</UL>
+
+<h3>Verity</h3>
+	
+	<ul>
+		<li>Verity Indexing operations (such as CFINDEX) were broken on UNIX. [13505]</li>
+		
+		<li>On Unix, A problem with the Verity registry updating is fixed. You are now 
+		able to delete a Verity collection and recreate it using the same name. [15213]</li>
+	
+	</ul>
+
+
+
+<H3>Email</H3>
+
+	<UL>
+  		<LI>If you checked for a recordcount of zero in an empty email box, zero was 
+  		not returned. This behavior has been fixed in this release. [14563]
+		
+  		<LI>When you attempted to send an email that was undeliverable with the CFMAIL 
+  		tag, empty email messages were created. This behavior has been fixed in this 
+  		release. [14580]
+	</UL>
+
+
+<H3>CORBA</H3>
+
+	<UL>
+	  <LI>On NT and HP-UX, CORBA support now uses the VisiBroker 3.3/C++ libraries 
+	  for the orb and naming service.</li>
+	  
+	  <li>On Solaris, ColdFusion uses VisiBroker 4.0/C++ libraries for the orb and naming 
+	  service. Please note that the interface repostiories created by the VisiBroker 4.0 
+	  and previous versions are incompatible. There is currently a bug in the VisiBroker 
+	  libraries that prevents objects (TypeCode : tk_objref) to be passed in/out or returned 
+	  as arguments on method or attribute calls. ColdFusion will report an unhandled or 
+	  TypeMismatch exception if an attempt is made to call such a method.</li>
+	  
+	</UL>
+
+<h3>Other</h3>
+
+	<ul>
+	
+		<li>An extra character in the HTTP header returned by CF can upset some browsers, 
+		most notably on Macintosh computers. This problem was introduced in CF 4.5 but has been fixed 
+		in 4.5.1. [14533]</li>
+		
+		<li>Debugging ColdFusion templates on Unix using ColdFusion Studio now works 
+		correctly. [13507]</li>
+	
+	</ul>
+
+
+<hr>
+
+<A name=upgrading45></A>
+<H2>Upgrading to ColdFusion 4.5.1</H2>
+	<P>Note the following when upgrading to ColdFusion 4.5.1 from previous releases of 
+	ColdFusion:</P>
+
+<H4>Whitespace handling</H4>
+	<UL>
+		<LI>ColdFusion Server version 4.5.1 ships with the Administrator setting, 
+		"Suppress whitespace by default," enabled. Some CFML applications have 
+		depended on CFML' s pre-4.5 behavior, which was to leave all whitespace 
+		present in the template. Such applications can be fixed in one of two ways: 
+			<OL>
+				<LI>Disable the "Suppress whitespace by default" feature in the 
+				Administrator. Note that the server must be restarted for this change to 
+				take effect. </li>
+				<LI>Use &lt;CFPROCESSINGDIRECTIVE SUPPRESSWHITESPACE="NO"&gt; tags to guard 
+				the code that depends on the pre-4.5 whitespace preserving behavior. This is 
+				similar to using an HTML &lt;PRE&gt; tag around preformatted data.</LI>
+			</OL>
+	</UL>
+
+<H4>Error handling</H4>
+	<UL>
+		<LI>CFCATCH.EXTENDEDINFO is now available for all structured exception types. 
+		Certain unstructured exceptions, caught by CFCATCH or CFERROR with TYPE="ANY", 
+		may not contain an EXTENDEDINFO variable. All such exceptions can be 
+		distinguished by their type, which will be "UNKNOWN." 
+  
+		<LI>CFCATCH selection logic in ColdFusion 4.5.1 differs slightly from ColdFusion 
+		4.0.x In ColdFusion 4.0.x, the first matching CFCATCH block encountered would be 
+		selected to handle an exception. ColdFusion 4.5 scans a CFTRY tag's entire 
+		list of CFCATCH blocks to find the closest match. For example, if a CFTRY tag 
+		has a CFCATCH TYPE=TEMPLATE block, followed by a CFCATCH TYPE=MISSINGINCLUDE 
+		block, ColdFusion 4.0.x will select the TEMPLATE block to handle a 
+		MISSINGINCLUDE exception, while ColdFusion 4.5.1 will select the MISSINGINCLUDE 
+		block. ColdFusion 4.5.1 can be reset to handle a template using ColdFusion 4.0.x 
+		rules by setting the compatibility setting, &lt;cfsetting 
+		catchexceptionsbypattern=no&gt;</LI>
+	</UL>
+  
+<H4>ColumnList function</H4>
+	<UL>
+	  <LI>In releases prior to ColdFusion Server 4.5, the ColumnList function would 
+	  return columns added by QueryNew in random order. Now ColdFusion returns 
+	  columns in the same order in which they were added. </li>
+	</UL>
+
+<h4>CFHTTP tag</h4>
+	<ul>
+		<li>CFHTTP -- If a Mime Type (or content type) is not returned when requesting 
+		a page via CFHTTP you will receive the following error message:  The requested 
+		file is not ASCII text and can not be rendered.  ColdFusion 4.0.1 ignored the 
+		content type and displayed the page. [14372].</li>
+
+	</ul>
+
+<H4>cfcrypt utility</H4>
+	<UL>
+		<LI>The cfcrypt utility has been renamed cfencode. 
+	</UL>
+ 
+<H4>Changes to Administrator</H4>
+	<UL>
+		<LI>The ColdFusion Administrator Settings page has been broken into two 
+		separate pages: Settings and Caching. 
+
+		<LI>A new Locking page has been added to the ColdFusion Administrator Server 
+		section to cover the new engine options for locking of shared scoped variables 
+		(server, session, application). For details about the new locking options in 
+		the Adminstrator refer to <A href="new.htm#locking">New 
+		Features document</A>. 
+
+		<LI>UNIX only: Because ColdFusion no longer uses the Bristol WindU libraries, 
+		the Fast Date/Time Parsing option has been removed from the Server Settings 
+		page. This option is no longer necessary. 
+	</UL>
+	
+<H4>Clustering</H4>
+	<UL>
+		<LI>Allaire does not recommend running a mixed-version cluster. All cluster 
+		members should be upgraded to the same version of ColdFusion. 
+
+		<LI>Cluster members on Solaris and Netscape Web servers must be deleted prior to upgrading to 
+		ColdFusion Server 4.5.1. The cluster members should be recreated once ColdFusion Server 4.5.1 
+		has been applied. 
+
+		<LI>Session-aware load balancing is enabled by default in ColdFusion Server 4.5.1. 
+
+		<LI>Cluster members join a cluster in active mode by default. </LI>
+	</UL>
+<HR>
+
+
+<A name=all_platform_issues></A>
+<H2>Known Issues: All platforms</H2>
+
+<H4>General</H4>
+
+	<UL>
+
+		<li>In ColdFusion Server 4.5, the "request timeout" condition became a catchable error (catchable 
+		by &lt;CFCATCH TYPE="COM.ALLAIRE.COLDFUSION.REQUESTIMEOUT"&gt; or by 
+		&lt;CFCATCH TYPE="ANY"&gt;).  In ColdFusion 4.5.1, the request timeout exception 
+		subsystem has undergone reliability enhancements.  Because of this, the 
+		"Date/Time," "Browser" and "Remote Address" diagnostic displays will be 
+		shown on the default request timeout browser screen.</li>
+
+		<li>When invalid XML is encountered during WDDX packet serialization or 
+		deserialization an unknown exception condition may be generated.  This will 
+		be addressed in a future release. [15773]</li>
+
+		<LI>Only one instance of ColdFusion can be run on any given system at a time. </LI>
+  
+		<LI>Since the ColdFusion Application Server uses 32-bit signed integers to 
+		represent "integer" numeric values, integers can only take on values in the 
+		range -2147483648 to 2147483647.  When a numeric quantity exceeds these limits, 
+		it will be stored in floating-point representation, but it cannot then be used 
+		as input to functions, such as RandRange(), that require integral parameters.</li>
+		
+		<LI>Although Allaire recommends that you specify the scope of your variables, if 
+		you should not do so when assigning structure fields. For example the following 
+		code will fail:<BR>
+		&lt;cfscript&gt; st1=structnew(); variables.st1.key="foo",&lt;/cfscript&gt;</LI>
+		
+		<LI>Storing client variables in the registry is not recommended by Allaire.
+		You should store client variables in a database or in cookies.
+		On UNIX systems in particular, the registry is implemented as a flat
+		text file (to make editing easier) and reading and writing this file
+		is slow.  Even a small number of clients (less than 100) stored in 
+		the registry will significantly impact performance of the cfserver process.</li>
+
+		<li>CFHTTP -- If a Mime Type (or content type) is not returned when requesting 
+		a page via CFHTTP you will receive the following error message:  The requested 
+		file is not ASCII text and can not be rendered.  ColdFusion 4.01 ignored the 
+		content type and displayed the page. [14372]</li>
+
+
+	</UL>
+
+<H4>Security</H4>
+
+	<UL>
+		<LI>If you are hosting ColdFusion sites created from untrusted developers, a 
+		rogue developer may be able to capture Web server passwords. The information 
+		is passed in the CGI.HTTP_AUTHORIZATION variable and is decipherable by a 
+		well-known algorithm. This situation can be a security problem if you use 
+		basic Web server authentication, you host multiple Web sites, and there are 
+		untrusted developers. </LI>
+		
+		<LI>To prevent all browser clients from being able to view debug 
+		information by passing the MODE=DEBUG query parameter 
+		(for example, http://www.allaire.com/xxx.cfm?mode=debug), add 
+		the IP address 127.0.0.1 to the Restrict debug 
+		output to selected IP addresses list on the Debugging page 
+		of the ColdFusion Administrator.  You should also include any additional IP 
+		addresses for which you wish to view debugging information. [13983]</li>
+		
+		<li>The SiteMinder service in the ColdFusion Advanced Security 
+		feature requires an IP address to work properly. If you are not 
+		on a network, you may see errors in the Advanced Security feature, 
+		such as "Security Policy Action Failed" messages. See 
+		<a href="http://www.allaire.com/Handlers/index.cfm?ID=14378&Method=Full">
+		Knowledge Base article #14378</a> for a workaround. [14665]</li>
+		
+		<li>If the ColdFusion Advanced Security feature is configured to use a database, and 
+		the database server is restarted, or the connection to it is lost, you need to 
+		restart the Advanced Security (SiteMinder) and ColdFusion services. If you do not 
+		restart these services, ColdFusion will use cached security settings until the 
+		timeout has expired, and then attempt to refresh the cache. This will result 
+		in silent security errors until the Advanced Security services and 
+		ColdFusion have been stopped, then restarted. Note that you should restart the 
+		Advanced Security services first, and then stop and start the ColdFusion 
+		services.</li>
+		
+	</UL>
+  
+<H4>Data sources</H4>
+  
+	<UL>
+		<LI>You should not use the data source name "Registry" when creating an 
+		external data source for client variables. A data store named "Registry" 
+		already exists for the option of storing client variables in the registry. </LI>
+		
+		<li>In order to insert or update CLOBs where the text length is greater than 4K 
+		with CF 4.5.1 while going against an Oracle database, you must use the Merant 
+		Oracle 8 ODBC driver version 3.6, available from Merant <A HREF="http://www.merant.com">Merant</A>. 
+		The Merant driver is shipped with ColdFusion for Linux and Solaris but not for Windows NT. 
+	</UL>
+
+<H4>Searching</H4>
+	<UL>
+		<LI>In the ColdFusion Administrator a limitation in the Verity implementation 
+		may cause problems if you repair a Verity collection and then attempt another 
+		action such as a purge before the repair has completed processing. In the 
+		event that a problem does occur, you should delete the affected collection, 
+		re-create it, and then re-populate the collection with the original content. 
+		The safest approach is this: During a repair, NO OTHER ACTION should be taken. 
+
+		<LI>When creating a Verity collection, make sure the collection directory name 
+		contains no spaces. 
+		<LI>Using brackets ([ ]) in the CRITERIA attribute of CFSEARCH causes an error 
+		in CFSEARCH. [7183] </LI>
+	</UL>
+  
+<H4>Tags</H4>  
+
+	<UL>
+		<LI>CFEXECUTE captures program output from the child program's "standard 
+		output" file, but not from its "standard error" file. Since many programs send 
+		error diagnostic output to "standard error," a program may seem to have 
+		produced no output when it did, in fact, produce diagnostics. 
+		<P>Workarounds include:</P>
+			<OL>
+				<LI>Within the child program, redirect error messages and 
+				diagnostics to the standard output file. 
+			    <LI>Use a wrapper program or shell script that redirects the
+				child program's standard output and standard error streams to 
+				the wrapper's standard output stream. Then use CFEXECUTE to 
+				invoke this wrapper. [12869] </LI>
+			</OL>
+		</LI>
+
+		<LI>In ColdFusion 4.5, the site-wide "Missing template" handler (selected via 
+		the Administrator) will not install itself as a default MISSINGINCLUDE 
+		handler, which would handle missing template errors from CFINCLUDE or CFMODULE 
+		tags. To install the site-wide template as a MISSINGINCLUDE handler, include 
+		this tag in your Application.cfm: 
+		<PRE>		&lt;cferror type="exception" 
+		  exception="MissingInclude" 
+		  template="myApp_missingTemplateHandler.cfm"&gt;
+		</PRE>
+		<P>Substitute the name of your site-wide missing include handler for 
+		"myApp_missingTemplateHandler.cfm"</P></LI>
+  
+		<LI>If you include a CFHEADER and a CFLOCATION in the same template and run 
+		the template, you will get "Document contains no data" even though the URL in 
+		the CFLOCATION, when run by itself, results in page output. [2356]</LI>
+  
+		<li>The CFSERVLET tag does not currently return the HTTP response headers 
+		set by the servlet. The tag is documented as returning any response headers
+		set in the servlet code back to ColdFusion using appropriately named fields
+		of the CFSERVLET response variable. This mechanism currently does not
+		work and response headers set in the server are not visible in ColdFusion.
+		
+		<p>A workaround is to use ColdFusion variables as CFSERVLETPARAMs to
+		explicitly return any response variables you care about. Note the OUTPUT
+		field of the CFSERVLET response variable does work correctly and is not 
+		affected by this problem.</p></li>
+
+		<LI>In order to use the CFSERVLET tag in ColdFusion, you need to 
+		make sure you have a compatible version of JRun. JRun 3.0 Beta 5 does not
+		yet support CFSERLET. JRun upgrades are available free on the 
+		<A HREF="HTTP://beta.allaire.com">Allaire beta site</A>. [14379]</li>
+  
+		<LI>Currently, &lt;CFSETTING SHOWDEBUGOUTPUT="Yes"&gt; simply restores the 
+		original level of debugging (which is usually none). We hope to fix this in a 
+		future release, but there is a workaround: Use the ColdFusion Administrator to 
+		turn on debugging output, then include &lt;CFSETTING SHOWDEBUGOUTPUT="No"&gt; 
+		in an Application.cfm file. This will build the necessary high-level data 
+		structures to collect debugging output, but it will suppress the display 
+		unless a subsequent &lt;CFSETTING SHOWDEBUGOUTPUT="Yes"&gt; tag is processed. </LI>
+		
+		<li>On Windows 95 only, when using the CFHTTP tag, if you encounter the 
+		error "unknown error while executing a tag," you probably need to update 
+		your winsock installation. To do so, go to 
+		<a href="http://support.microsoft.com/support/kb/articles/Q184/2/42.ASP">
+		the Microsoft site</A>.</li>
+		
+		<li>CFLOCK: If you specify a lock with the NAME attribute of the CFLOCK tag, 
+		then you should not select full-checking on the Lock page of the ColdFusion 
+		Administrator for the variable's scope.
+		
+		<ul>
+		
+			<li>If the lock is in the application scope, do not specify full checking for 
+			the application scope. </li>
+			
+			<li>If the lock is in the session scope, do not specify full checking for the 
+			session scope. </li>
+		
+			<li>If the lock is in the  server scope, do not specify full checking for the 
+			server scope.</li>
+		
+		</ul>
+		
+		<p>If you specify the SCOPE attribute instead of the NAME attribute within each 
+		CFLOCK tag in the application, you can apply full lock checking from the 
+		ColdFusion Administrator.</p>
+		
+		</li>
+ 
+	</UL>
+	
+<H4>Functions</H4>
+
+	<UL>
+		<LI>If you are using DateCompare to compare two dates and both dates are 
+		exactly the same except that the first date passed is earlier by x seconds, 
+		you would expect a return value of -1 if you passed "s" as the 3rd parameter. 
+		In fact, it returns 1. [9339]. </li>
+  
+		<LI>You should avoid using CFSCRIPT keywords as variables in your code. The 
+		Evaluate function will handle some of them currently, but this behavior may be 
+		changed in a future release. </li>
+  
+		<LI>Passing numeric data to the ColdFusion IsDate and ParseDateTime functions 
+		can yield unexpected results. For example, IsDate may return TRUE for numeric 
+		data that are not dates. This is attributable to the underlying API functions 
+		on which these ColdFusion functions are based. This behavior occurs when passing data ColdFusion 
+		interprets as numeric. For example, single decimal point numeric data such as 
+		"0.1," "21.6667", multiple decimal point numeric data, such as "1.2.3", and 
+		comma separated data, such as "0,1" create unexpected results. To work around 
+		this behavior, it is always advisable to only pass string data in a supported 
+		format to the IsDate and ParseDateTime functions, or, generate date-time data 
+		using the Now or CreateDate functions. </li>
+  
+		<LI>The _eurodate and the _date form field suffixes for server side validation 
+		do not work properly. The problem allows dates like 01/25/1997 in the 
+		_eurodate field and dates like 25/01/1997 in the _date field. [1173] 
+  
+		<LI>The encrypt function gives different output than it did in 4.0.x version. 
+		[10446] </LI>
+	</UL>
+
+<HR>
+
+<A name=windows_issues></A>
+<H2>Known Issues: Windows NT</H2>
+
+<H3>Installation</H3>
+	<UL>
+		<LI>If you uninstall ColdFusion 4.5 or 4.5.1, ClusterCATS Explorer and 
+		ClusterCATS Server Admin remain in the program group for ColdFusion 4.5. and 
+		4.5.1 respectively. [13960]</LI>
+	</UL>
+  
+<H3>Security</H3>
+	<UL>
+
+		<LI>NT Challenge/Response authentication requests no longer generate a 
+	  	log message. (Formerly a message was generated in the application.log.)</li>
+		
+		<li>Allaire recommends backing up your policy store data before installing 
+		ColdFusion - Advanced Security.  The method to do this is use the smobjexport 
+		tool.  The command is "smobjexport -o&lt;FILENAME&gt;" An example would be 
+		smobjexport -oFOO.DAT.  In the event that something went wrong you could use 
+		this file to restore your policy store.  NT users should find 
+		the executable in the cfusion\bin folder.  
+
+		<p>NOTE: The following applies to both NT and Solaris users and is to be done ONLY 
+		if you are migrating an old policy store to a policy store that has been newly 
+		initialized with CF4.5.1 (both Solaris and NT).</p>
+
+		<p>Do the following 3 steps on the LDAP server you initialized the SM policy store on 
+		during installation:</p>
+		
+		<ol>
+			<li>Create an attribute called smDomainAdminOIDs of type StringNoCase. (Leave the OID column blank) 
+			<li>Edit the objectclass smdomain and add smDomainAdminOIDs as an allowed attribute.
+			<li>Save and restart
+		</ol>
+
+		<p>This will allow you to use your previously defined policy store data. [15512]</p></li>
+
+
+	</UL>
+	
+<H3>Data sources</H3>
+
+	<UL>
+		<LI>Allaire recommends that you install the latest version of Microsoft 
+		Data Access Components (version 2.1 SP2), available from
+		<a href="http://www.microsoft.com/data/download.htm?RLD=377">Microsoft</A>,
+		 to avoid problems such as 
+		memory leaks with any of the MS Desktop ODBC drivers or the MS SQL Server. [15047]
+		
+		<li>If you install ColdFusion 4.5.1 after installing MDAC, none of the existing OLE 
+		DB data sources will verify. You should register the oledb32.dll located in 
+		Program Files\Common Files\System\ole db\
+
+		
+		<LI>When using MS Access, if the data source value is capitalized in the ColdFusion 
+		Administrator settings, but not in the CFQUERY tag, there is a lag time of approximately 
+		50 milliseconds. As a result, if you use CFLOCATION to go to another template that should contain
+		updated data, the changes may not appear in the second template. To avoid this problem,  
+		make sure to match case exactly in the Administrator and CFQUERY tags. [14769]</LI>
+		
+		<li>Using the sqloledb ole db provider you cannot update columns of datatype int, small int, 
+		or tiny int. The workaround for this is to use msdasql or ODBC.  This is a provider 
+		limitation based on our tests.</li>
+
+		
+	</UL>
+
+<H3>Java</H3>
+	<UL>
+		<LI>Java support requires JDK 1.2 or JRE 1.2 to be installed, this can 
+		be found at <A  href="http://java.sun.com/products/jdk/1.2/jre/index.html">http://java.sun.com/products/jdk/1.2/jre/index.html</A> 
+
+		<LI>To continue using the CFX_J custom tag, navigate to the Custom Tags 
+		page, and delete the current entry for CFX_J. Now add a new entry with the 
+		same name, and specify the type as "Java". Leave the "Classname" empty 
+		(important). 
+		<P>You will now be able to use the the CFX_J tag as before.</P>
+		<P>Please note that Allaire will phase-out this tag in future releases, and 
+		recommends that you simply convert it to a Java Custom tag.</P>
+		<P>For example, if you currently use the CFX_J tag that has the CLASS 
+		attribute set to "Foo", then to use a Java CFX, you would do the 
+		following:</P>
+			<OL>
+			<LI>Rename your custom tag to something like "CFX_Foo". 
+			<LI>Add the "java" custom tag using the ColdFusion Administrator. Specify 
+			the classname as "Foo" (case sensitive) in the appropriate field. 
+			<LI>Call you custom tag from your template using CFX_Foo instead of CFX_J. 
+			You should omit the "CLASS" attribute in the tag. </LI>
+			</OL>
+		</LI>
+	</UL>
+
+<H3>Tags</H3>	
+	<UL>
+		<LI>The CFIMPERSONATE tag, using the TYPE=OS attribute won't work if the 
+		account under which ColdFusion is running does not have rights to logon the 
+		user.[12544] 
+	
+		<LI>Using an ODBC driver, CFUPDATE does not update datetime fields correctly 
+		for SQL Server 6.5 or Sybase System 11. It inputs a time portion of 00:00:00 
+		no matter what time you provide. This does not happen with CFQUERY or 
+		CFGRIDUPDATE. [7162] </LI>
+		
+		<LI>When using CFGRIDUPDATE with the Sybase native driver, 
+		you can only delete one row. If you try to delete more than 
+		one row, a Sybase DB error will occur.</LI>
+		
+		<li>CFINSERT and CFUPDATE fail for datetime fields 
+		when you use the IBM DB2 ODBC driver. To avoid this behavior, 
+		either use the DB2 native driver, or, if you must use the 
+		IBM DB2 ODBC driver, use the CFQUERY tag to update the row.</LI>
+
+	</UL>
+		
+<H3>COM and CORBA</H3>
+
+	<UL>
+		<LI>The behavior for COM objects that return a VT_NULL has been changed. In 
+		previous versions the return values was "TRUE". In the current version, the 
+		return value is an empty string (""). This was implemented to be consistent 
+		with other scripting languages, and given that the current version of 
+		ColdFusion does not have a concept of NULL values. </li>
+		
+		<li>ColdFusion 4.5.1 now supports calling property put methods that have 
+		arguments. For example to set the following property:<CODE>
+	    [id(200), propput] HRESULT Value([in] BSTR x, [in] VARIANT y);</code>
+		use the following CFM syntax: <code>&lt;cfset foo.Value("name", "bubu")&gt;</code>
+</li>
+		
+		
+
+
+
+		<LI>COM/DCOM support for Intel platforms is available only under NT 4.0 or 
+		greater, and DCOM enabled Windows 95. An error message with the following text 
+		will be displayed when running under platforms that do not support it: 
+		<PRE>
+		This OS does not support COM/DCOM. Please verify that you 
+		are running NT 4.0 or DCOM enabled Windows 95. 
+		CoInitialize has not been called
+		</PRE>
+
+		<P>A patch for Windows 95 can be found at <A 
+		href="http://www.microsoft.com/msdn">http://www.microsoft.com/msdn</A>. (DCOM 
+		for Windows Version 1.1). <BR>
+		
+		There could still be some problems reported when 
+		using objects that do not have a threading model, and potentially have not 
+		been made thread-safe. Some of these objects have been generated using older 
+		versions of Delphi (3.0), and VB. <BR>
+		
+		To work around these issues, change the threading model to "Free" by using 
+		"OleView", or have the vendor of the object/development tool provide you with 
+		an updated conforming object.</P>
+		
+		<LI>The "LOCALE" attribute can be used to set arguments for the call to 
+		init_orb(..). This is specific to VisiBroker orbs, and has only been tested 
+		with the 3.2 C++ version.<BR><BR>
+		
+		The value should be of the form (note that each type-value pair has to start 
+		with a leading "-"):<BR>
+		<PRE>
+		&lt;CFOBJECT TYPE=CORBA
+	 	..
+		LOCALE=" -ORBagentAddr 199.99.129.33   -ORBagentPort 19000" 
+		..&gt;
+		</PRE>
+		</LI>
+	</UL>
+	
+<H3>Functions</H3>
+	<UL>
+		<LI>Due to a limitation in the Win32 API date formatter, the DateFormat 
+		function will not work on dates prior to 1/1/1601. [1056] If you try passing a 
+		date earlier than this to the ColdFusion DateFormat function you will get the 
+		following error: 
+		<PRE>Error Occurred While Processing Request
+		Error Diagnostic Information
+		An error has occurred while processing the expression:
+		DateFormat(date,"mmm dd yyyy") </PRE>
+		</LI>
+
+	</UL>
+		
+<h3>Load-balancing and clustering</h3>
+
+<ul>
+
+	  <li>Windows 2000 systems must be configured to use ClusterCATS dynamic
+	  IP addresses for Failover (High Availability installation option)
+	  to function properly. Static addresses are currently not supported
+	  on Windows 2000 systems.</li>	
+	
+</ul>
+
+
+<HR>
+
+<A name=linux_issues></A>
+<H2>Known Issues: Linux</H2>
+
+<h3>Installation</h3> 
+	<UL>
+
+		<LI>In rare situations, during an install on Linux, the installation fails 
+		because the server or the stub cannot bind to the socket. When this occurs, 
+		the following error message appears in the webserver.log:<br>
+		<BR>
+		"Error","TID=2051","02/27/00","12:11:06","Error attempting to bind to 
+		socket for ColdFusion server."<br>
+		<BR>
+		This situation usually occurs when ColdFusion is being reinstalled as 
+		a different user. To fix this problem, delete the socket 
+		(/tmp/cfserver and /tmp/cfrds) from /tmp prior to beginning 
+		the reinstallation.</li>
+	</UL>
+  
+<H3>Java</H3>
+	<UL>
+		
+		<li>You may need to be running Red Hat 6.1 in order for the JVM to 
+		function correctly. Check the system requirements of the JVM.
+
+		<LI>In order to get Java capability (currently JDK 1.2.2) through 
+		ColdFusion for Linux using the CFOBJECT tag type=JAVA, the following
+		components must be installed: [15538]
+				<ul>
+					<li>jdk1.2.2
+					<li>libc-2.1.1.so
+					<li>linux kernel v 2.2.12
+				</UL>
+		 <li>On the Java page of the ColdFusion Administrator, set the following:
+			 	<ul>
+    	         <li><B>Java Virtual Machine Path:</B> for example, /usr/jdk1.2.2/jre/lib/i386/classic/libjvm.so
+	             <li><B>Class Path:</B> where the Java class files reside
+             	 <li><B>Initial Heap size:</B> 4096K is recommended
+             	 <li><B>Max Heap Size:</B> 16384K
+             	 <li><B>System Options:</B> java.compiler=NONE
+             	 <li><B>CFX Jar Path:</B> /opt/coldfusion/Java/classes
+				 </UL>
+				 
+		<li>In the ColdFusion start script, edit the LD_LIBRARY_PATH to add pointers to the JDK, for example:<BR>
+        LD_LIBRARY_PATH=$CFHOME/lib:/usr/jdk1.2.2/jre/lib/i386/classic:/usr/jdk1.2.2/jre/lib:/usr/jdk1.2.2/jre/lib/i386/native_threads:/usr/jdk1.2.2/jre/lib/i386 
+			
+		<LI>The CFOBJECT tag is only supported for Java objects (TYPE=JAVA) in this 
+		release. 
+		
+		<li>When calling Java objects using the CFOBJECT tag, or when 
+		using Java CFXs under Linux, a segmentation violation may be 
+		reported on the first call. Depending on the JDK/JRE being 
+		used (Sun or Blackdown), it may be necessary to add the flags:<BR>
+		<pre>
+		java.Compiler=NONE
+		</PRE>
+		in the System option field on the Java page of the ColdFusion 
+		Administrator. This indicates to the JVM that JIT is disabled. 
+		You should also refer to the documentation available with the 
+		JRE/JDK regarding the use of the appropriate threading library 
+		(native/green_threads). 
+		</uL>
+	</UL>				
+<H3>Data sources</H3>
+	<UL>
+		<li>When configuring the Informix native Database driver on Linux, 
+		there are two additional fields in the administrator 
+		template that need to be set: Driver and Translation DLL. 
+		Both are the full path to their respective shared object files.<BR>
+		Driver: INFORMIXDIR/lib/cli/iclit09b.so<BR>
+		TranslationDLL: INFORMIXDIR/lib/esql/igo4a304.so<BR>
+		where INFORMIXDIR is what you set it to in the start script.
+  
+		<LI>When creating a data source for Sybase on Linux the server attribute has to 
+		match the case of the interfaces file or you will not be able to get connected 
+		to the server. </LI>
+		
+		<LI>The Sybase Client Libraries currently available are not thread-safe.Therefore, 
+		you must limit the number of simultaneous connections to 1.
+		
+		<LI>The ODBC Microsoft SQLServer MERANT driver supports versions 6.5 and 7.0 of 
+		MS SQLServer and is threadsafe. However, because it cannot maintain 
+		connections, you should turn off the "maintain connections" switch in ColdFusion.</LI>
+
+	</UL>
+	
+<h3>Tags</h3>
+
+<p>You cannot use SSL with the CFLDAP tag on Liniux. SSL is supported on all other platforms. [13350]</p>
+
+
+<H3>Functions</H3>
+	<UL>
+		<LI>The LSParseDateTime() function will only work in the English Locale. 
+		[12523] </LI>
+		
+		<li>English is the only language supported by Verity in ColdFusion for Linux. [15768]</li>
+		
+	</UL>
+	
+
+<HR>
+
+
+<A name=solaris_issues></A>
+<H2>Known Issues: Solaris</H2>
+
+<H4>Installation and system requirements</H4>
+	<UL>
+		<LI>You cannot install ColdFusion 4.5.1 directly over an existing 
+		installation of ColdFusion 3.1 or 4.0. You must first migrate the registry 
+		using the cfregup.sh utility, and then execute a package remove 
+		of the cfusion package before installing 4.5.1. For more 
+		detailed information on the migration procedure, consult the 
+		README file that accompanies this release. In addition, refer to
+		the section <A href="#migrating_registry">Migrating a ColdFusion 
+		Solaris registry to ColdFusion 4.5.1</A> , below.
+
+		<LI>ClusterCATS requires that the group btcats exist. It will attempt create 
+		this group during the ColdFusion installation using groupadd. If you are using 
+		NIS or NIS+, make sure that either nsswitch.conf allows for group 
+		resolution from the group file, or that the group btcats gets created in 
+		NIS/NIS+ prior to installing ClusterCATS. </li>
+  
+		<li>ColdFusion will not work with Netscape 3.0 on Solaris 2.6. you must use 
+		Netscape 3.5.1 or higher.
+		
+		<LI>If you encounter the error "There is already an instance of the package 
+		and you cannot install due to administration rules" while installing ColdFusion, 
+		edit the file /var/sadm/install/admin/default. Change "instance=unique" to 
+		"instance=overwrite" then install ColdFusion. [15190]</LI>
+		
+		<LI>In rare situations, during an install on Solaris, the installation fails 
+		because the server or the stub cannot bind to the socket. When this occurs, 
+		the following error message appears in the webserver.log:<br>
+		<BR>
+		"Error","TID=2051","02/27/00","12:11:06","Error attempting to bind to 
+		socket for ColdFusion server."<br>
+		<BR>
+		This situation usually occurs when ColdFusion is being reinstalled as 
+		a different user. To fix this problem, delete the socket 
+		(/tmp/cfserver and /tmp/cfrds) from /tmp prior to beginning the reinstallation.</li>
+
+		<li>Using the store example application with Netscape may cause the browser to 
+		crash.
+		
+  	</UL>
+  
+<H4>Security</H4>
+	<ul>
+		<li>ColdFusion supports Netscape LDAP Server version 3.x and 4.11.
+		Using Netscape LDAP Server version 4.1 may result in unexpected results.
+		
+		<li>In order to run smconsole, type ./smconsole from the shell.  For example:<br>
+		/opt/coldfusion/siteminder/bin)-->./smconsole<br>
+		In order to run smtest, type ./smtest from the shell. To run smdstest, type 
+		./smdstest from the shell.</li>
+		
+		<LI>The smexec utility allows you to execute any SiteMinder utility, 
+		except smconsole, smdstest, and smtest, which already have wrapper 
+		scripts around them to simplify their execution. For example, to 
+		run smobjexport, type:<BR>
+		./smexec ./smobjexport<BR>
+		with the appropriate arguments.<BR>
+		NOTE: You must be root in order for this to work.</li>
+		
+		<li>In order to ensure the security of your Policy Store, 
+		use the Shared Secret option that appears on the Advanced 
+		Security page of the ColdFusion Administrator.</li>
+		
+		<li>Allaire recommends backing up your policy store data before installing 
+		ColdFusion - Advanced Security.  The method to do this is use the smobjexport 
+		tool.  The command is "smobjexport -o&lt;FILENAME&gt;" An example would be 
+		smobjexport -oFOO.DAT.  In the event that something went wrong you 
+		could use this file to restore your policy store.  
+		
+		<p>On Solaris, the command is: ./smexec ./smobjexport -o /opt/coldfusion/log/FOO.DAT</p>
+		
+		<p>NOTE: The following applies to both NT and Solaris users and is to be done ONLY 
+		if you are migrating an old policy store to a policy store that has been newly 
+		initialized with CF 4.5.1 (both Solaris and NT).
+
+		<p>Do the following 3 steps on the LDAP server you initialized the SM policy store on 
+		during installation:</p>
+		
+		<ol>
+			<li>Create an attribute called smDomainAdminOIDs of type StringNoCase. (Leave the OID column blank) 
+			<li>Edit the objectclass smdomain and add smDomainAdminOIDs as an allowed attribute.
+			<li>Save and restart
+		</ol>
+
+		<p>This will allow you to use your previously defined policy store data. [15512]</p>
+		</li>
+		
+		
+
+ 	</UL>
+	
+<H4>Data sources</H4>   
+	<UL>
+		<LI>The ODBC drivers have been upgraded to version 3.6, and now reflect the 
+		name change from Intersolv to MERANT. Included in this new version of the 
+		drivers is support for Microsoft SQLServer. 
+
+		<LI>The ODBC Microsoft SQLServer MERANT driver supports versions 6.5 and 7.0 of 
+		MS SQLServer and is threadsafe. However, because it cannot maintain 
+		connections, you should turn off the "maintain connections" switch in ColdFusion.</LI>
+	</UL>
+	
+<H4>Java</H4>	
+	<UL>
+		<LI>To continue using the CFX_J custom tag, navigate to the Custom Tags 
+		page, and delete the current entry for CFX_J. Now add a new entry with the 
+		same name, and specify the type as "Java". Please leave the "Classname" empty 
+		(important). 
+		<P>You will now be able to use the the CFX_J tag as before.</P>
+		<P>Please note that Allaire will phase-out this tag in future releases, and 
+		recommends that you simply convert it to a Java Custom tag.</P>
+		<P>For example, if you currently use the CFX_J tag that has the CLASS 
+		attribute set to "Foo", then to use a Java CFX, you would do the 
+		following:</P>
+			<OL>
+			<LI>Rename your custom tag to something like "CFX_Foo". 
+			<LI>Add the "java" custom tag using the ColdFusion Administrator. Specify 
+			the classname as "Foo" (case sensitive) in the appropriate field. 
+			<LI>Call you custom tag from your template using CFX_Foo instead of CFX_J. 
+			You should omit the "CLASS" attribute in the tag. </LI>
+			</OL>
+		</LI>
+	</UL>
+	
+<H4>Tags</H4>
+	<UL>
+		<LI>The CFOBJECT tag is supported only for Java objects (TYPE=Java). 
+
+		<LI>Using an ODBC driver, CFUPDATE does not update datetime fields correctly 
+		for SQL Server 6.5 or Sybase System 11. It inputs a time portion of 00:00:00 
+		no matter what time you provide. This does not happen with CFQUERY or 
+		CFGRIDUPDATE. [7162] </LI>
+	</UL>
+	
+<HR>
+
+
+<A name=mysql></A>
+<H2>Configuring MySQL data sources on ColdFusion Server for Linux</H2>
+
+<P>Allaire now ships a MySQL ODBC driver provided by Merant. In addition, 
+you can use the myODBC driver provided by mySQL.
+
+<P>Use the following information to configure ColdFusion Server for Linux to use 
+the myODBC driver for MySQL data sources. ColdFusion can use the myODBC driver to talk to the mySQL data base.
+Information on mySQL can be found at <a href="http://www.mysql.com/">mysql.com</A>.  Allaire
+has verified that myODBC version 2.50.26 works with mySQL version 3.22.27 and ColdFusion for Linux.  
+You can download myODBC at <a href="http://www.mysql.com/download_myodbc.html">www.mysql.com/downloadmyodbc.html</A>.
+
+<H3>Running MySQL</H3>
+
+<P>Make sure that MySQL has been installed and is running. If you do a ps -eaf | 
+grep mysqld you should see some entries. Here is an example of how you would run 
+it:</P>
+<PRE>/usr/local/bin/safe_mysqld &amp;.</PRE>
+
+<P>Try running /usr/local/bin/mysqlshow mysql host to view the default database. 
+Try running a query using the /usr/local/bin/mysql program, for example: select 
+* from host\g 
+
+<p>On Linux, the current versions of MySQL do not support subselects.  ColdFusion uses this 
+SQL syntax to expire client variable storage.  As a result, cfexec will report 
+an error when trying to expire client variables. As a work-around, Allaire provides a CFML 
+template in /opt/coldfusion/scripts/mysql_expire.cfm which you can run manually, or use the CF 
+scheduler to schedule this template to run every day. You should save the template in your 
+document root directory.</p>
+
+<H3>Adding a MySQL data source</H3>
+<P>ColdFusion 4.5.1 allows you to use the ColdFusion Administrator to add the MySQL data source. 
+Before the mySQL driver will appear in the ODBC datasources drop-down list, you must 
+build and copy the myODBC driver to  /opt/coldfusion/lib/libmyodbc.so. The Merant mySQL driver 
+will always appear in the list.
+
+<HR>
+<A name=postgres></A>
+<H2>Configuring PostgreSQL data sources on ColdFusion Server for Linux</H2>
+
+<p>ColdFusion 4.5.1 for Linux now includes the unixODBC PostgreSQL ODBC
+driver.  For more information on unixODBC, see <a href="http://www.unixODBC.com/">www.unixODBC.com</A>.</p>
+
+<p>You must have the 'postmaster' process running on your system in order
+to use the PostgreSQL database.  For more information on PostgreSQL,
+see <a href="http://www.postgresql.org/">http://www.postgresql.org/</a>.</p>
+
+<p>In order to populate your PostgreSQL database with the example application data 
+sources, see the file /opt/coldfusion/database/PostgreSQL/README.
+<HR>
+
+<A name=tokens></A>
+<H2>Changing the way Tokens are generated</H2>
+<P>Current behavior in ColdFusion is as follows: </P>
+<UL>
+	<LI>CFID is assigned sequentially per machine. The entire value must consist 
+	of all decimal digits (0-9). 
+
+	<LI>CFTOKEN - by default assigned as a random long integer. The value range is 
+	0 &lt; x &lt; 2,147,483,647. ColdFusion no longer validates any part of this 
+	token, allowing users to re-assign this to any value they choose. </LI></UL>
+	<P>However, by setting the registry key 
+	HKEY_LOCAL_MACHINE\Software\Allaire\ColdFusion\CurrentVersion\Clients\ UuidToken 
+	to be the string value "1", ColdFusion assigns CFTOKENS using the same random 
+	number concatenated with a UUID, which is guaranteed to be globally unique.</P>
+	<P>We use the random number to avoid simple guessing of the uuids, since only a 
+	small portion of a uuid changes with each assignment, and to make database 
+	lookups more efficient.</P>
+	<P>A typical CFTOKEN using this method looks like this: 
+	57c6419-f0c43bb2-9e8d-11d3-8b87-00c04fa35ba5</P>
+	<P>If you turn on the UuidToken switch and you are storing client variable 
+	information in a database, you will need to increase the column width of the 
+	'cfid' column in the CDATA and CGLOBAL tables. You should change the current 
+	width of 20 characters to at least 50 characters, due to the increased length of 
+	CFTOKEN.</P>
+	<P>You may also have to change other applications if they are storing the 
+	CFTOKEN value in a fixed length field.</P>
+
+<HR>
+<A name=migrating_registry></A>
+<H2>Migrating a ColdFusion Solaris registry to ColdFusion 4.5.1</H2>
+<P>NOTE: This applies to Solaris only. You only need to use this utility if you want to preserve your 
+registry from a previous version of ColdFusion. If you do not, a simple pkgrm of 
+the previous installation prior to installing 4.5.1 is all that is required.</P>
+<P>The CFREGUP utility package consisting of cfregup.sh and this README file is 
+being provided to migrate the ColdFusion registry (formerly maintained by WindU) 
+to the native format used in ColdFusion Application Server 4.5.1.</P>
+<P>The cfregup.sh script must be run as root on a machine with a running 
+ColdFusion 3.x or 4.0 installation. You should run this script prior to doing a 
+pkgrm of the cfusion package.</P>
+<P>Run the shell script using the following command:</P><PRE>  ./cfregup.sh</PRE>
+<P>This shell script will locate the existing ColdFusion installation and export 
+the WindU registry from it, creating the new ColdFusion 4.5.1 registry. Please 
+note that since the new registry is created in a different place than the old 
+one, this script will not damage, or even write to the existing WindU registry. 
+The script will also preserve your start script and your odbc.ini files so they 
+can be upgraded.</P>
+<P>Once the script has completed, you are free to do a package remove of the 
+existing ColdFusion installation. </P>
+<P>During the installation, ColdFusion 4.5.1 will access the migrated registry and 
+complete the initialization process so it can be used. It will also restore the 
+saved start script and odbc.ini file, making the necessary changes to them so 
+they are version 4.5.1 compliant.</P>
+<P>All intermediate files are saved into a directory called migration, in the 
+ColdFusion installation directory for reference.</P>
+<HR>
+
+<A name=remote></A>
+
+<H2>Redirecting processing to a Custom Error Page for specific errors</H2>
+
+<P>In certain cases, when the communication between the stub (residing in the 
+webserver process space), and the ColdFusion Application Server is disrupted or 
+broken, the following error page is rendered:</P>
+
+<PRE>"Server busy or unable to fulfill request. The server is unable to 
+fulfill your request due to extremely high traffic or an unexpected 
+internal error. Please attempt your request again (if you are repeatedly 
+unsuccessful you should notify the site administrator)."
+</PRE>
+
+<P>In ColdFusion Server 4.5, processing can be redirected to a user-specified 
+location when this error condition occurs in the stub program. Please edit the 
+<CODE>cfremote.ini</CODE> file located in your &lt;ColdFusion Installation 
+Directory&gt;, and add a key/value pair specifying the error condition and the 
+redirection location. In this release only the ERROR_PIPE key is supported.</P>
+
+<P>The following is an example where the error processing is redirected to 
+<CODE>nopipe.htm</CODE></P>
+<PRE>ERROR_PIPE = "http://127.0.0.1/ErrorPages/nopipe.htm"</PRE>
+
+<P>NOTE: ColdFusion Administrator cannot be used to specify 
+these settings. Furthermore every attempt should be made not to change the other 
+settings in this file. Please see Advanced ColdFusion documentation for details about 
+the use of the other settings in this file.</P>
+
+
+<HR>
+
+<A name=load></A>
+
+<H2>Load Balancing and Failover with ClusterCATS</H2>
+
+<P>ClusterCATS consists of two components, the ClusterCATS Server and the 
+ClusterCATS Explorer. ClusterCATS Server provides failover support, load 
+balancing, and other features to help you guarantee the availability of your 
+ColdFusion applications. 
+
+<P>For more information about configuring Web server clusters, refer to 
+<EM>Administering ColdFusion Server</EM>.</P>
+
+	<UL>
+	  <LI>When creating a cluster using ClusterCats for ColdFusion, enter the 
+	  license key "GoColdFusion" 
+	  
+	  <LI>ClusterCATS is now integrated into the ColdFusion Server Linux 
+	  installation. </LI>
+	  
+	  <li>Windows 2000 systems must be configured to use ClusterCATS dynamic
+	  IP addresses for Failover (High Availability installation option)
+	  to function properly. Static addresses are currently not supported
+	  on Windows 2000 systems.</li>
+
+	</UL>
+
+
+<H3>Configuring ClusterCATS on Windows NT:</H3>
+
+<UL>
+
+  <LI>A minimum of Windows NT Service Pack 4 must be installed on each member. </li>
+  
+  <LI>The Streams Environment must be added to Network Protocols on NT 4.0 
+  based systems. On Windows 2000 systems, the installation procedure 
+  will automatically configure Streams.</li>
+
+  <OL>
+	    <LI>Right mouse on the Network Neighborhood.</li>
+	    <LI>Select Properties. </li>
+	    <LI>Select Protocols. </li>
+	    <LI>Click Add. </li>
+	    <LI>Select Streams Environment, and click OK.</li>
+		<li>Select Control Panel, select Device, and then select Enable Streams.</li>
+  </OL>
+  	</LI>
+</UL>
+
+<h3>Customizing the Web Server's Response When No Resources are Available in a Cluster</h3>
+
+<p>When all web servers in a ClusterCATS cluster are busy and/or
+restricted, a browser's request to any member of the cluster
+will receive a HTTP 503 (server too busy) failure response
+from the server. For example, trying to browse index.html
+on server KITCAT in the completely busy cluster KitKatCluster
+will return the following error response:</p>
+
+<pre>index.html is not currently available in cluster KitKatCluster.
+Please try again later.</pre>
+
+<p>To override this default 503 response with one more appropriate for
+your web site, you must edit the ClusterCATS server entries in the
+registry for your OS platform.</p>
+
+<p>In the following procedure, you will add a value called
+"ErrorUrl" to each desired ClusterCATS server registry key.
+This value will specify the name of a file, relative to the
+server's document root, containing the text you want browsers
+to see when all servers in the cluster are unavailable.
+The procedure differs between Window NT and Solaris/Linux platforms.</p>
+
+<p>For Windows NT:</p>
+
+<ol>
+
+	<li>Edit the registry and open the key:
+
+		<p>HKEY_LOCAL_MACHINE | SYSTEM  | CurrentControlSet | Services |
+	   		BrightTiger | Servers</p>
+
+	<p>Under the Servers key, you should see the names of the current
+	cluster members for this system. These are the individual
+	"server keys" that you will modify in the next step.</p></li>
+
+	<li>For each cluster member that you wish to customize for the 503	
+	error response, create the following REG_SZ value under its
+	server key:
+
+	<p>ErrorUrl&nbsp;&nbsp;NameOfErrorFile.htm</p>
+
+	<p>Replace "NameOfErrorFile.htm" with the name of the file containing
+	your selected error text, relative to this server's web document
+	root. For example, the sample file above might be physically
+	located in C:/Inetpub/wwwroot/NameOfErrorFile.html.</p></li>
+   
+	<li>Close the registry editor.</li>
+
+	<li>Test the change by restricting all servers in the cluster --
+	a one-node cluster simplifies this -- and hitting a server
+	with a browser. You should see your customized error text
+	returned.
+
+</ol>	
+	
+<p>For UNIX:</p>
+	
+<p>NOTE: Solaris/Linux versions of ClusterCATS user a file called
+bt.registry to emulate aspects of NT registry features. This is an
+ordinary text file with stringent formatting requirements. This
+procedure requires hand-editing of this file. Be careful!</p>
+
+<ol>
+
+	<li>Become the super user (root).</li>
+
+	<li>Stop all ClusterCATS activity with the command:
+
+	<pre># /usr/lib/btcats/btadmin stop all</pre></li>
+
+	<li>Edit the file /usr/lib/btcats/database/bt.registry with an
+	editor.</li>
+   
+	<li>Search for the string
+
+<pre>	hkey_local_machine\system\currentcontrolset\services\brighttiger\servers:6</pre>
+
+	<p>Under this key, you should see the names of the current	
+	cluster members for this system in distinct blocks for text.
+	For example, here's the first part of an entry for a server
+	called ME:</p>
+
+<pre>	hkey_local_machine\system\currentcontrolset\services\brighttiger\servers\me.test.com:214
+	ClusterMate:          	;                     	REG_SZ
+	ClusterName:          	TestCluster;           	REG_SZ
+	InstanceName:         	https-me;	          	REG_SZ
+	.
+	.
+	.</pre></li>
+
+	<li>For each server that you wish to customize for the 503 error
+	response, create the following value:
+
+<pre>   	ErrorUrl:		NameOfErrorFile.html;		REG_SZ</pre>
+
+	<p>Replace "NameOfErrorFile.htm" with the name of the file containing
+	your selected error text, relative to this server's web document
+	root. For example, the sample file above might be physically
+	located in:</p>
+
+<pre>   	/usr/netscape/suitespot/https-me/docroot/NameOfErrorFile.html</pre>
+
+	<p>Your modified server key should look something like this:</p>
+
+<pre>	hkey_local_machine\system\currentcontrolset\services\brighttiger\servers\me.test.com:214
+   	ErrorUrl:				NameOfErrorFile.html;	REG_SZ
+	ClusterMate:          	;                     	REG_SZ
+	ClusterName:          	TestCluster;           	REG_SZ
+	InstanceName:         	https-me;	          	REG_SZ
+	.
+	.
+	.</pre></li>
+
+
+	<li>Save the file and exit your editor.</li>
+
+	<li>Restart ClusterCATS operations with the command:
+
+<pre>	# /usr/lib/btcats/btadmin start all</pre></li>
+
+	<li>Test the change by restricting all servers in the cluster
+	-- a one-node cluster simplifies this -- and hitting a
+	server with a browser. You should see your customized error
+	text returned.</li>
+
+</ol>
+
+<H3>ClusterCATS and secure Web servers</H3>
+
+<P>Secure Web Servers, such as the Netscape Enterprise Server in secure mode, 
+and secure Apache servers, require a keyfile password to be started. The Allaire 
+ClusterCATS installation script will not restart the Netscape Enterprise Server 
+or Apache server during installation, if the Web server is running with security 
+enabled. You may start the Web server after the installation using your 
+preferred method. The ClusterCATS Web server monitor will not be able to restart 
+a Web server with keyfile passwords on startup.</P>
+
+<H3>Support for multiple Web servers on a single platform</H3>
+
+<P>ClusterCATS does not support being configured to run with different types of 
+Web servers on the same system. For example, if an NT system is configured to 
+run both the Netscape Enterprise Server and IIS, you can choose to configure 
+ClusterCATS with only one of these Web servers.</P>
+
+<H3>ClusterCATS Cluster Members must have a unique IP address</H3>
+
+<P>ClusterCATS Cluster members must have unique IP address. The name used to 
+cluster a Web server, or virtual server must not be either Round Robin or the 
+name of a software virtual server. It should be the name that maps to the IP 
+address of the Web server that is being clustered.</P>
+
+<H3>Virtual Host Headers on IIS and Software Virtual Servers on Apache are not 
+Supported</H3>
+
+<P>Virtual Host Headers on IIS and Software Virtual Servers on Apache allow you 
+to run many Web sites on a single computer. In technical terms, this allows you 
+to support multiple host names with a single IP address. ClusterCATS currently 
+requires a different IP addresses for each virtual server.</P>
+
+<H3>Minimum version of Cisco Local Director Software required is 3.1.4</H3>
+
+<P>Prior to enabling ClusterCATS Load Balancing with Cisco Local Director, the 
+Local Director software version must be at version 3.1.4 or greater. </P>
+
+<H3>Configuring ClusterCats IP Failover With Cisco Local Director</H3>
+
+<P>When a Cisco Local Director is being used for load balancing and failover do 
+not configure ClusterCats to perform IP Failover (IP Aliasing). If ClusterCats 
+does IP aliasing, the Cisco Local Director will not be able to reconnect to the 
+system after it has become available again and recovered the failed-over IP 
+address.</P>
+
+<H3>Configuring Cisco Local Director Update Frequency</H3>
+
+<P>Set the Cisco Local Director load balancing update frequency to a value 
+between 5 and 30 seconds. Set a longer time as greater numbers of Web servers 
+become configured in clusters doing Cisco Local Director load balancing so as to 
+not create too much overhead traffic to the Local Director. The dynamic-feedback 
+timeout value should be set to a value larger then the update frequency. We 
+recommend you set the value to at least two times the update frequency.</P>
+
+<H3>Configuring ClusterCats DFP Agent Listen Port with Cisco Local Director</H3>
+
+<P>If two or more Web servers on the same system are in clusters using Cisco 
+Local Director load balancing, than each cluster must have the same DFP Agent 
+Listen Port number configured. The Clustercats DFP Agent can only listen on one 
+port.</P>
+
+<H3>Configuring the Cisco Local Director dynamic-feedback retry value</H3>
+
+<P>The dynamic-feedback retry value should be set to zero (0) to insure that the 
+Cisco Local Director will continue connection attempts to the ClusterCats DFP 
+Agent in the event of a lengthy period of system unavailability.</P>
+
+<H3>Cisco Local Director dynamic-feedback security not supported</H3>
+
+<P>Do not enable the dynamic-feedback-pw. Clustercats does not support secure 
+DFP host.</P>
+
+<H3>Improving Responsiveness When Integrating with Cisco Local Director</H3>
+
+<p>By default, the frequency at which the ColdFusion load and availability 
+information is sent to Cisco Local Director is every 30 seconds. 
+You may set Update Frequency to a lower value for better response 
+to change in the server load condition. To update the load frequency 
+refer to ColdFusion documentation.
+
+<H3>Gradual Redirection Load Management and Session State Management</H3>
+
+<p>When session aware load management is enabled (the default), 
+gradual redirection load management does not apply. You can 
+still set a gradual redirection load threshold value, but it will 
+have no effect when session aware load management is enabled.
+
+<H3>Session-Aware Load Balancing and the Gradual Redirection Threshold</H3>
+
+<P>When using session-aware load balancing for a cluster, it is
+recommended that Gradual Redirection Threshold be enabled and set
+explicitly to 0%. This setting allows ClusterCATS to optimize
+load balancing for browser requests that have not entered a
+session.
+
+<H3>Configuring a ColdFusion Application Probe</H3>
+
+<P>The ColdFusion Application Probe dialog box creates a default probe for that 
+Web server to determine if ColdFusion Server is functioning. The default action 
+is set to NORESTART, this will not restart the ColdFusion server if the probe 
+fails, the Web server will however be automatically set to the restricted state. 
+See the online help available from the ColdFusion Application Probe dialog box 
+for more information.</P>
+
+<h3>URL for ClusterCATS Explorer Web Addition</H3>
+
+<p>If you are using Netscape Enterprise Server V3.x, the URL 
+for accessing the ClusterCATS Explorer Web addition (btweb) is:<BR>
+http://<server-name>:<nes-admin-port-number>/admin-serv/btweb/default.html
+
+<p>If you are using Netscape Enterprise Server V4.0x, the URL 
+for accesing the ClusterCATS Explorer Web addition (btweb) is:<BR>
+http://server-name>:<nes-admin-port-number>/https-admserv/btweb/default.html
+
+<H3>Configuring ClusterCATS Explorer Web Addition with Apache</H3>
+If you wish to run the Web Addition of the ClusterCATS Explorer,
+for availability and security reasons, you should configure it 
+to run from a separate IP-based virtual host server on a port other
+than 80 and should also password protect access to it. 
+
+<p>Make the following additions to httpd.conf to enable btweb, replacing
+the IP address specified with one appropriate for your system. Also
+enable user/password authentication for the virtual directory.
+
+<p>Once you have configured the server in this manner, to access btweb,
+go to the URL http://btweb, where btweb corresponds to the IP
+address you selected for the VirtualHost.
+
+<PRE>
+##
+###  BTWeb Administration
+###
+Listen 192.168.96.71:2222
+&lt;VirtualHost 192.168.96.71:2222&gt;
+        ServerAdmin root@localhost
+        DocumentRoot /usr/lib/btcats/btweb
+        DirectoryIndex default.htm
+        ServerName btweb
+        ErrorLog logs/btweb_error_log
+        CustomLog logs/btweb_access_log combined
+        ### BTWeb stuff ###
+        AddHandler cgi-script .exe
+        &lt;Directory "/usr/lib/btcats/btweb/"&gt;
+                Options FollowSymLinks
+                Options ExecCGI
+                AllowOverride None
+                Order allow,deny
+                Allow from all
+                AuthName "btcats admin tools"
+                AuthType Basic
+                AuthUserFile /usr/local/apache/conf/users
+                require user admin
+        &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</PRE>
+
+<p>You use the Apache 'htpasswd' utility to create/manage the 
+Authentication list file: (create file and add user 'admin')
+
+<p>htpasswd –c /usr/local/apache/conf/users admin
+
+
+<H3>ColdFusion Application Probe and ColdFusion Running in Distributed Mode</H3>
+
+<p>ClusterCATS can not restart ColdFusion Server if the server 
+is running on a remote system. However, it will restrict access 
+to the server and redirect traffic around the problem, if possible.  
+
+<H3>ColdFusion Application Probe and Application.cfm files</H3>
+
+<P>If other than the default URL to query 
+(http://&lt;myserver&gt;/btauxdir/cfprobe.cfm) is used, than you must insure 
+that no Application.cfm files are in the path of the ColdFusion page to be 
+tested.</P>
+
+<H3>Configuring ClusterCATS on UNIX platforms:</H3>
+
+<P>ClusterCATS requires that the group btcats exist. It will attempt create this 
+group during the ColdFusion installation using groupadd. If you are using NIS or 
+NIS+, make sure that either nsswitch.conf allows for group resolution 
+from the group file, or that the group btcats gets created in NIS/NIS+ prior to 
+installing ClusterCATS.</P>
+
+<H3>UNIX support</H3>
+
+<P>In order to run the ClusterCATS management command, btadmin, on Red Hat, 
+the ksh shell must be installed.</P>
+
+<P><B>Adding appmgr to inittab</B></P>
+
+<P>It may be desirable to add appmgr to your inittab file, to ensure it always 
+running.</P>
+
+<H3>Apache Web server</H3>
+
+<P><B>ClusterCATS and Apache Web Servers</B></P>
+
+<P>Cluster members can appear to be available when the associated Web server 
+is actually down. In such cases the ClusterCATS server will display a 
+load of 100%. Also, if the ColdFusion probe is enabled, the server will also be 
+restricted.</P>
+
+<P><B>Apache Loadable's Support</B></P>
+
+<P>ClusterCats and ColdFusion Apache support requires that mod_so.c module be 
+compiled into Apache (httpd or httpsd). You can verify this with the -l option 
+to httpd (or httpsd): For example:</P>
+<PRE># /usr/local/apache/bin/httpd -l
+Compiled-in modules:
+  http_core.c
+  mod_so.c
+</PRE>
+
+<H3>Windows NT support</H3>
+
+<P><B>Multiple instances support and Windows NT</B></P>
+
+<P>Only a single Netscape Enterprise Server instance per system can be 
+configured run with Allaire ClusterCATS on NT.</P>
+
+<H3>Known problems</H3>
+	<UL>
+
+	<li>Unpredictable Behavior Internet Explorer from iPlanet 4.0 Web Server when all Cluster Members are Busy
+
+	<p>Using Microsoft Internet Explorer (IE) to browse the *home page* of
+	a completely busy ClusterCATS cluster running the iPlanet 4.0 web
+	server can cause a confusing results for the client.</p>
+	
+	<p>Normally, in this case, when the all members of the cluster are
+	busy, an HTTP 503 error response is returned to the browser
+	along with text like the following:</p>
+	
+<pre>	index.html is not currently available in cluseter KitKatCluster.
+	Please try again later.</pre>
+
+	<p>Occasionally, when the busy web server is iPlanet 4.0, this result
+	is not returned to IE when the home page is browsed. Instead, a
+	dialogue box may appear prompting the client for file-download
+	information.</p>
+
+	<p>The workaround for this problem is to establish an "error URL" file
+	for each server in the cluster. This is a file containing a customized
+	"server busy" message for your web site. This text is reliably
+	returned to IE when the cluster is busy.</p>
+
+	<p>NOTE: Instructions on creating an error-URL message are contained in
+	the release note "Creating an Alternate Web Server Response to
+	'Resource Not Available in Cluster' Message."</p></li>
+
+
+
+
+	<LI>Adding or Creating a Cluster under heavy load<BR>
+	When you create a cluster or add a Web server to a cluster with the 
+	ClusterCATS Explorer and that Web server is under heavy load, you may get a 
+	message that the "session aware bit could not be set." The 
+  	ClusterCATS Explorer will display the Web server with 
+	the "unreachable or unknown" icon. In this case, click 
+	OK to dismiss the message, hide the cluster ("Hide 
+	Cluster" in the View menu), then show the cluster again
+	("Show Cluster" in the View menu).
+  
+  	<LI>Netscape Enterprise Administrator Server<BR>
+  	After installing Allaire ClusterCATS, Netscape Administrative 
+	Server will display a warning the next time you attempt to 
+	manage your server with the Netscape Administrator. The warning 
+	states that the Netscape configuration files have 
+	been modified "by hand." Click OK to accept the 
+	warning, then choose to Apply the manual updates. 
+	If you do not apply the manual updates, Allaire 
+	ClusterCATS may be removed from the Netscape 
+	plugin list. (If this happens, re-install Allaire 
+  	ClusterCATS.)
+		
+  	<li>Failover problems when routers are not 
+	configured to timeout their ARP  cache<BR>
+  	When ClusterCATS appears to be ARPing 
+	correctly, but there are persistent 
+  	connectivity problems after Failover 
+	has occurred, there may be a problem with 
+  	one of the adjacent router's ARP cache 
+	timeout settings. If the ARP cache 
+  	timeout is off, set it to a value that 
+	is not too large, such as between 2 and 30 
+  	seconds. Accessing the router configuration 
+	settings will be vendor specific; 
+  	refer to associated hardware and 
+	software documentation for the router box.
+		
+	<li>ClusterCATS IP failover subsystem for 
+	NT IIS creates and removes the 
+  	"Aliased IP addresses" Web site<BR>
+  	The ClusterCATS IP failover subsystem 
+	creates an IIS Web site named 
+  	"Aliased IP addresses" when at least 
+	one IP address is "aliased" on the local 
+  	system. This Web site is removed when 
+	the local system is no longer aliasing 
+  	any IP addresses. This Web site must 
+	not be managed with the Microsoft 
+  	Management Console (MMC). If this Web 
+	site is selected, or has its properties 
+  	enumerated after the IP failover subsystem 
+	has deleted it, but while the MMC 
+  	still has it displayed, various MMC error 
+	messages will be displayed. To update the list 
+	of Web sites and eliminate the stale 
+	view of the IP failover Web site, 
+	perform an MMC refresh operation.
+		
+  	<li>Uninstall Netscape NT (ONLY)<BR>
+  	Uninstall may encounter difficulties removing 
+	the ClusterCATS entries from the obj.conf file. 
+	It will inform you that you must remove these entries by 
+  	hand. To remove the entries, edit the Netscape 
+	Enterprise Server obj.conf file and remove the 
+	following files from your obj.conf file:<br>
+	<PRE>Init fn=load-modules shlib="&lt;install-dir&gt;/program/teserver_nes.dll" 
+	funcs="btcats_server_init,btcats_nsapi_AuthTrans,btcats_nsapi_NameTrans,btcats_ErrorFixup" 
+	Init fnInit fn="btcats_server_init"
+
+	NameTrans fn=btcats_nsapi_NameTrans
+
+	AuthTrans fn=btcats_nsapi_AuthTrans
+
+	Error fn=btcats_ErrorFixup reason="BrightTiger"</PRE>
+
+<p>You will need to restart the Netscape Enterprise Server for these changes to take effect.
+		
+  	<li>Multiple ClusterCATS Explorers viewing the same SmartClusters<BR>
+  	When Multiple ClusterCATS Explorers view one or more 
+	clusters simultaneously, they do not correctly handle 
+	displaying cluster deletions. Only the ClusterCATS 
+  	Explorer where the delete requests were performed 
+	will see that the cluster has been deleted. 
+	(The cluster is removed from view). All other ClusterCATS 
+  	Explorers will show the last cluster member 
+	as unreachable. To work around this problem, 
+	hide the deleted cluster from view.
+		
+	<li>Exiting or dismissing the Server 
+	Properties box can disable gradual redirection<BR>
+		
+	If you examine a ClusterCATS server's Properties box
+	and then dismiss the box by either clicking OK or
+	pressing Enter, the server's Gradual 
+	Redirection Treshold can be unintentionally 
+	disabled. This can have a negative
+	impact on the cluster if Session-Aware Load Balancing
+	is in effect. To avoid this problem:<BR>
+	<ul>
+		<li>If you are only examing the server's 
+		properties, dismiss the Properties box by 
+		clicking Cancel.
+
+		<li>If you have updated the server's properties, 
+		save the changes and dismiss the Properties box by
+		selecting the OK options on the Load tab. (In other
+  		words, never select OK on the General or State tabs.)
+
+  	</UL>
+</UL>
+
+<H3>ClusterCATS Virtual Directory btauxdir is not always being created on system running IIS</H3>
+
+<p>ClusterCATS requires that the virtual directory btauxdir exist under 
+each virtual server which will be clustered and that it point to 
+<install-directory>/brighttiger/btauxdir. ClusterCATS will 
+attempt to create the directory when a cluster member is added. 
+If there is no IP address bound to the site, ClusterCATS 
+will be unable to add the virtual directory to the Web. Use the MMC 
+to add the specific IP address to the Web site, then stop and restart 
+the ClusterCATS Service. The btauxdir virtual directory should 
+get created automatically.
+
+<HR>
+
+
+<A name=apache></A>
+
+<H2>Configuring the Apache Web Server</H2>
+
+<P>For information on Linux and Solaris, see <A href="#apache_linux">Configuring Apache on 
+Linux</A> and <A href="#apache_solaris">Configuring Apache on Solaris</A>. 
+
+<P>All Apache Web servers that are binary compatible with Apache 1.3.6 and binary compatible versions (up to and including 1.3.12) 
+are supported with the current module on all platforms. The current 
+ColdFusion Apache 1.3.6 module will work without change 
+with all Apache Web servers that are binary compatible with Apache 1.3.6</P>
+
+<H3>Configuring Apache on Windows NT</H3>
+
+<P>The ColdFusion Module can be found in the installation directory (usually <CODE>c:\cfusion\bin</CODE>). </p>
+
+<P>We assume below that your Apache installation is found in <CODE>c:\Apache</CODE>. </p>
+
+<OL>
+
+  <LI>Copy the module (ApacheModuleColdFusion.dll) to your modules directory 
+  under the Apache source directory. <PRE>ex. c:\Apache\modules\ApacheModuleColdFusion.dll</PRE>
+
+  <LI>Edit the "httpd.conf" configuration file to contain the following line, 
+  this can be found in <CODE>c:\Apache\conf</CODE>: <BR>
+  <PRE>LoadModule coldfusion_module modules/ApacheModuleColdFusion.dll</PRE></LI>
+
+</OL>
+
+<A name=apache_linux></A>
+
+<H3>Configuring Apache on Linux</H3>
+
+  <P>For detailed instructions on installing and configuring Apache Web Server 
+  on Linux, refer to the <CODE>/opt/coldfusion/webserver/apache/README</CODE> 
+  file installed with ColdFusion.</P>
+
+  <P>The ColdFusion Server installation process can optionally autoconfigure the 
+  Apache Web server for you.</P>
+  
+    <P>Other issues:</P>
+
+  <UL>
+		<LI>If you are not using the Red Hat installed Apache server and 
+		instead are using another distribution, you 
+		should remove the Red Hat Apache package with the command "rpm -e apache". 
+		This will prevent ColdFusion from trying to configure the wrong Web server. </li>
+		
+		<LI>You may need to install the Red Hat package "apache-devel" to get the 
+		Apache header files and the "apxs" command needed to rebuild the ColdFusion 
+		module if you do not have the Apache version compatible with 1.3.6 installed. </LI>
+
+    	<LI>The precompiled Apache 1.3 module for ColdFusion 4.5.1 will only work with 
+    	Apache Web servers that are binary compatible with Apache 1.3.6. During 
+		the installation, you have the option of 
+    	using the 'apxs' script shipped with Apache to build and install a module 
+    	specifically for your installed version of Apache 1.3. 
+		
+    	<LI>In order to rebuild the ColdFusion Apache module, you will need to 
+    	install the Red Hat 'apache-devel' package to get the header files and the 
+    	'apxs' script needed to build modules. </LI></UL>
+
+<A name=apache_solaris></A>
+<H3>Configuring Apache on Solaris</H3>
+
+  <P>For detailed instructions on installing and configuring Apache Web Server 
+  on Solaris, refer to the <CODE>/opt/coldfusion/webserver/apache/README</CODE> 
+  file installed with ColdFusion.</P>
+
+  <P>The ColdFusion Server installation process can optionally autoconfigure the 
+  Apache Web server for you.</P>
+
+  <p>Other issues:
+ 	 <ul>
+  		<LI>The precompiled Apache 1.3 module for ColdFusion 4.5.1 will only work with 
+		Apache Web servers that are binary compatible with Apache 1.3.6. During the installation, 
+		you have the option of using the 'apxs' script shipped with Apache to build and install a module 
+		specifically for your installed version of Apache 1.3. To use apxs you 
+		must have a C compiler and Perl installed and in your path. </li>
+	</UL>
+	
+<HR>
+
+<A name=forums></A>
+
+<H2>Running Allaire Forums under ColdFusion 4.5.1</H2>
+
+<P>If you are running Allaire Forums with ColdFusion Server 4.5.1 you should be 
+running with Allaire Forums 2.0.5. You should download Allaire Forums 2.0.5 from 
+our <A href="http://www.allaire.com/products/forums/index.cfm">product page</A> 
+if you are running an earlier version.</P>
+
+<P>Allaire Forums is not supported on Linux.</P>
+
+<HR>
+
+<P><A href="#top">Back to top</A></P>
+
+</BODY></HTML>

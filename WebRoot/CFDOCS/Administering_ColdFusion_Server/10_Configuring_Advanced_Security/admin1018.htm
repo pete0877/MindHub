@@ -1,0 +1,142 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Undocumented Tags and Functions</title>
+
+
+</head>
+<body>
+
+<!--- Navbar for last page --->
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="95%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1017.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- End of header content. Page content displays below. -->
+
+
+<br>
+<a name="1012303"></a>
+ <H1>Undocumented Tags and Functions</H1>
+
+
+
+<p>The ColdFusion Administrator makes use of several tags and functions not currently documented in the <em>CFML Language Reference</em>. In the context of the ColdFusion Administrator, access to the functionality provided by these undocumented tags and functions is restricted to people with administrative privileges. While these tags and functions are currently unsupported, ColdFusion developers who have permission to create Web applications and executable ColdFusion templates on a ColdFusion server can make use of these functions and tags in their Web applications to perform certain administrative tasks. The availability of illegal de-encoding utilities that can de-encode the ColdFusion Administrator has made knowledge of the undocumented tags and functions more widely known.</p><p>The availability of the undocumented tags potentially gives developers who have permission to place applications on a ColdFusion server the ability to gain unauthorized access to registry, database, and Advanced Security settings. In most cases, this does not pose a security risk because the developers who have access to a server are trusted. However, in a hosted-application environment, such as an ISP or a corporate data center that is hosting multiple independent developer's applications on a single server, the availability of the undocumented tags used in the ColdFusion Administrator makes it more difficult to prevent malicious actions by developers who may be using the hosting server. Currently, you can block one of the two undocumented tags, CFSECURITYADMIN, on the Basic security page of the ColdFusion Administrator. While no ColdFusion functions can be disabled with Basic security, you can protect all the undocumented functions with a security sandbox. </p><a name="1012344"></a>
+ 
+<H2>Administrative Functions</H2>
+<p>In addition to standard CFML functions, the ColdFusion 4.5 Administrator uses the following undocumented functions:</p><ul>
+<a name="1012360"> </a>
+<li>CF_SETDATASOURCEUSERNAME() -- Sets the default user name for a ColdFusion data source 
+
+<a name="1012362"> </a>
+</li>
+<li>CF_SETDATASOURCEPASSWORD() -- Sets the default password for the ColdFusion data source 
+<a name="1012364"> </a>
+</li>
+<li>CF_ISCOLDFUSIONDATASOURCE() -- Verifies a connection to a ColdFusion data source 
+<a name="1012366"> </a>
+</li>
+<li>CF_GETDATASOURCEUSERNAME() -- Gets the default user name for a ColdFusion data source 
+<a name="1012368"> </a>
+</li>
+<li>CFUSION_VERIFYMAIL() -- Verifies the connection to the default ColdFusion SMTP mail server 
+<a name="1012370"> </a>
+</li>
+<li>CFUSION_GETODBCINI() -- Gets ODBC data source information from the Registry 
+<a name="1012372"> </a>
+</li>
+<li>CFUSION_SETODBCINI() -- Sets ODBC data source information in the Registry 
+<a name="1012374"> </a>
+</li>
+<li>CFUSION_GETODBCDSN() -- Gets the ODBC data source names from the Registry 
+<a name="1012376"> </a>
+</li>
+<li>CFUSION_SETTINGS_REFRESH() -- Refreshes some ColdFusion settings not requiring a restart 
+<a name="1012378"> </a>
+</li>
+<li>CFUSION_DBCONNECTIONS_FLUSH() -- Disconnects all currently connected ColdFusion datasources 
+</li>
+</ul>
+<a name="1012343"></a>
+ 
+<H2>Administrative Tags</H2>
+<p>In addition to standard CFML tags, the ColdFusion 4.5 Administrator uses the following undocumented tags:</p><ul>
+<a name="1012497"> </a>
+<li>CFINTERNALDEBUG -- Used for internal ColdFusion debugging by product development and to PCode templates without executing them (used by the CFML Syntax Checker). 
+
+<a name="1012499"> </a>
+</li>
+<li>CFSECURITYADMIN -- Used for updates to Advanced Security information. 
+</li>
+</ul>
+<p></p>
+<br>
+
+<br>
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="95%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin1017.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

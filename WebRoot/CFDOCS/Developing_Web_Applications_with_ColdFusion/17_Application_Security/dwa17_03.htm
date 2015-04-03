@@ -1,0 +1,97 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Remote Development Services (RDS) Security</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 17	:&nbsp;&nbsp;Application Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1007258"></a>
+ <H1>Remote Development Services (RDS) Security</H1>
+
+
+
+<p>ColdFusion RDS security provides security services to developers working in ColdFusion Studio. RDS security is at the core of the security framework in a team-oriented ColdFusion development environment where groups of developers, working in ColdFusion Studio, require different levels of access to ColdFusion files and data sources.</p><p>When you're working in ColdFusion Studio, you access these ColdFusion resources remotely, opening <code>*.cfm</code> files or accessing data sources. RDS security authenticates you and grants access only to the resources appropriate to your login. Authentication is carried out against the NT domain server, an ODBC data source, or an LDAP directory specified in the ColdFusion Administrator as part of a security context.</p><p>There are two ways to implement RDS security services:</p><ul>
+<li><strong>Basic Security</strong> -- Requires developers in ColdFusion Studio to supply a password which, when authenticated, permits access to RDS Services: file browsing, editing, database operations, debugging, and so on.
+
+</li>
+<li><strong>Advanced Security</strong> -- Allows ColdFusion Administrators to restrict or permit access to file systems and data sources based on security contexts and policies established in the Advanced Security page of the ColdFusion Administrator.
+</li>
+</ul>
+<p>Your company or ISP ColdFusion Server administrator configures RDS security so that it best meets the needs of your group. </p><p>For detailed information about setting up RDS security, See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:02 -->
+</body>
+</html>

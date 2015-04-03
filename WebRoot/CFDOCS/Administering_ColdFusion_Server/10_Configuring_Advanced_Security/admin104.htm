@@ -1,0 +1,172 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Advanced Security Implementations</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin103.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin105.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011207"></a>
+ <H1>Advanced Security Implementations</H1>
+
+
+
+<p>The four elements discussed in the previous section<strong> </strong>-- user directories, resources, policies, and security contexts<strong> </strong>-- are the building blocks of every type of security framework you'll create. You can implement the following types of Advanced Security:</p><ul>
+<a name="1011209"> </a>
+<li><strong>User security</strong> -- Secures functionality in a ColdFusion application. User security is implemented in ColdFusion application pages by ColdFusion developers, and offers runtime user authentication and authorization. 
+
+<a name="1011210"> </a>
+</li>
+<li><strong>Remote Development Services (RDS) security </strong>-- Controls a ColdFusion Studio developer's access to ColdFusion resources, including data sources, files, and directories.
+<a name="1011211"> </a>
+</li>
+<li><strong>Server sandbox security</strong> -- Provides runtime security based on directory access at hosted sites and is controlled by the ColdFusion administrator of a hosted site. 
+<a name="1011212"> </a>
+</li>
+<li><strong>Administrator security</strong> -- Secures the ColdFusion Server Administrator against unauthorized access and lets you grant various levels of administrative access to specified users. 
+</li>
+</ul>
+<p>This section describes these types of Advanced Security and explains when you'd use each one. For step-by-step instructions for implementing Advanced Security features, see <a href="../10_Configuring_Advanced_Security/admin105.htm#1011253">&quot;Creating an Advanced Security Framework&quot;</a> .</p><a name="1011217"></a>
+ 
+<H2>Securing Applications with User Security</H2>
+<p>User Security authenticates users in a ColdFusion application and then assigns privileges based on the applicable ColdFusion security context. </p><p>For example, suppose you've used ColdFusion to build and host your company's intranet. The Human Resources department maintains a page on the intranet where all employees can access timely information about the company, like the latest company policies, upcoming events, and job postings. You'd want everyone to be able to read the information, but you'd only want certain authorized HR employees to be able to add, update, or delete information. In addition, you might want to let employees view customized information about their salaries, job levels, and performance reviews. You certainly wouldn't want one employee to view sensitive information about another employee, but you'd want managers to be able to see, and possibly update, information about their direct reports. User Security lets you give each employee an appropriate level of access to the HR data.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This chapter describes the steps necessary install Advanced security 
+features and set up the security framework in the ColdFusion 
+Administrator. Once you've put the security framework in place, 
+developers must code security features into their ColdFusion 
+applications. For information about coding secure applications, see 
+<em>Developing Web Applications with ColdFusion</em>, which came with your 
+ColdFusion package.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1011224"></a>
+ 
+<H2>Securing Resources with RDS Security</H2>
+<p>Remote Development Services (RDS) provides a secure connection from ColdFusion Studio to the ColdFusion Server environment and is a prerequisite to accessing data sources, using server-based browsing, and running the interactive debugger.</p><p>ColdFusion RDS security provides security services in a team-oriented ColdFusion development environment where groups of developers, working in ColdFusion Studio, require different levels of access to ColdFusion files and data sources. RDS security is a valuable tool both for companies with multiple or geographically dispersed development groups and for ISPs that host ColdFusion development environments.</p><p>Developers working in ColdFusion Studio, access these ColdFusion resources remotely, by opening CFM files or accessing data sources. RDS security authenticates users and grants them access only to the resources assigned to them by a security context. Advanced security authenticates each user against the NT domain server, ODBC data source, or LDAP directory specified in the ColdFusion Administrator as part of a security context</p><p>For example, suppose you're a ColdFusion Server administrator at a medium-sized development company where two development groups, the Pi team and the Gamma team, are simultaneously developing separate ColdFusion Web applications. You want to limit the Pi team's access from ColdFusion Studio; they should only be able to access the data source pi_dsn and the files in the directory c:\development\pi. The Gamma team should only be able to access the data source gamma_dsn and the files in the c:\development\gamma directory. You'd use RDS security to create two different security contexts, one for the Pi team and another for the Gamma team.</p><a name="1011231"></a>
+ 
+<H2>Securing Applications with a Security Sandbox</H2>
+<p>A security sandbox is similar to RDS security - it limits access to resources. The main difference is that while RDS security secures resources accessed by ColdFusion Studio developers, a security sandbox secures resources accessed by ColdFusion applications at runtime. A sandbox provides exactly what its name implies: A restricted area -- an entire directory tree, actually -- where the same level of access is enforced for all users. </p><p>ColdFusion offers two types of security sandbox protection:</p><ul>
+<a name="1011234"> </a>
+<li>You can apply the access privileges of a member of any ColdFusion security context to an entire directory tree. 
+
+<a name="1011235"> </a>
+</li>
+<li>You can apply the access privileges of a member of a Windows NT Domain to an entire directory tree. 
+</li>
+</ul>
+<p>Security sandboxes are most useful to ISPs that host ColdFusion applications and development. An ISP can use sandboxes to partition application pages into individually secure areas. For example, suppose an ISP hosts two different domains, PetesApps.com and FoleysApps.com, on the same server. The owners of each domain submit their own custom tags and data sources to the ISP. In turn, the ISP gives each domain's applications exclusive access to that domain's tags and data sources. This ensures that a company's resources remain secure, and are not accessed or altered by another company's applications. It also ensures that no applications can tamper with system resources.</p><p>The access permissions you assign to a directory tree through a security sandbox override any other access permissions users might have for the tree. For example, suppose you designate the directory c:/applications/hr_app as a security sandbox. You configure the sandbox so that nobody could write to any of the Human Resources department data sources via an application running from c:/applications/hr_app. Even the Vice President of HR, who'd certainly have write permissions to the HR data sources in all other contexts, would be unable to write to those sources via an application run from this sandbox.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The security sandbox feature is only available in the Enterprise edition of 
+ColdFusion Server.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1011241"></a>
+ 
+<H2>Securing the ColdFusion Administrator</H2>
+<p>If you've already read earlier chapters of <em>Administering ColdFusion Server</em>, you know that the ColdFusion Administrator is a browser-based interface that lets you perform administrative tasks like managing server performance, adding and configuring ColdFusion data sources, scheduling pages, and managing log files. For any ColdFusion development project, some level of administration is generally necessary to set up ColdFusion Server for your application. In some cases, it's feasible for a single person to perform all the necessary administrative tasks. Many times, though, you'll want to be able to delegate some ColdFusion management tasks.</p><p>With ColdFusion Server, you can decentralize administrative responsibility by creating multiple administrators. Overall security is maintained because these additional administrators can control only the resources and policies for which you've given them explicit responsibility. You can assign the following types of administrative access to any user:</p><ul>
+<a name="1011244"> </a>
+<li><strong>Administrator</strong> -- Provides complete read and write access to all ColdFusion Administrator pages.
+
+<a name="1011245"> </a>
+</li>
+<li><strong>Privileged</strong> -- Provides read and write access to all the ColdFusion pages except the Basic and Advanced Security pages; Privileged users have no access at all to the security pages.
+<a name="1011246"> </a>
+</li>
+<li><strong>Restricted</strong> -- Provides read and write access only to the Datasources Administrator pages, the Verify Data Source page, and the Verity Collections page; Restricted users have no access to any other ColdFusion Administrator pages. You can configure Restricted access so that a user only has access to specified data sources
+</li>
+</ul>
+<p>The ColdFusion decentralized administration model provides two important benefits:</p><ul>
+<a name="1011248"> </a>
+<li>It helps your teams streamline the development process and work together more efficiently.
+
+<a name="1011249"> </a>
+</li>
+<li>It lightens the administrator's load without sacrificing his control over the system.
+</li>
+</ul>
+<p>For example, as a ColdFusion Server administrator, you'll probably want to assign Administrator access to one or two other users, thus ensuring you'll have backup administrators and your company won't have to forgo administrative support if you're away. You might also want to create a class of Privileged access administrators who can manage all aspects of the ColdFusion environment except Basic and Advanced security. Users with Restricted administrative access can function as ColdFusion super users. You could assign Restricted access to one or two members of each development team. That way, development teams can add and configure their own data sources, but can't access other teams' data sources, and can't alter the ColdFusion environment in any significant way.</p><p>See <a href="../10_Configuring_Advanced_Security/admin1015.htm#1011711">&quot;Securing the ColdFusion Administrator&quot;</a> for detailed instructions for securing the Administrator pages.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin103.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin105.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

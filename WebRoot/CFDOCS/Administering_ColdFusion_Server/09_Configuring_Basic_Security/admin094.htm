@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Remote Development Services (RDS)</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Configuring_Basic_Security/admin093.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Configuring_Basic_Security/admin09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Configuring_Basic_Security/admin095.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Configuring Basic Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1023374"></a>
+ <H1>ColdFusion Remote Development Services (RDS)</H1>
+
+
+
+<p>ColdFusion RDS is a component of ColdFusion Server used by the ColdFusion Administrator and ColdFusion Studio to provide remote HTTP-based access to files and databases. You can use RDS to manage ColdFusion Studio access to files and databases on a server hosting ColdFusion. </p><p>RDS provides both Basic and Advanced security services for ColdFusion, allowing you to configure the level of security you need for your situation. For more information see <a href="../10_Configuring_Advanced_Security/admin10.htm#997347">Chapter 10, &quot;Configuring Advanced Security&quot;</a>. </p><p>Basic security options managed by RDS can be found in the Administrator Server, Basic Security page, where you'll find options for defining passwords and securing a subset of ColdFusion tags. </p><a name="1023382"></a>
+ 
+<H2>Basic Security Limitations</H2>
+<p>ColdFusion Basic security hinges on the protection of a single password per server. So long as the password is kept secret, unauthorized access to the files and databases on the server is impossible. It's important to understand that this security model has two liabilities:</p><ol>
+</li>
+<li>Password vulnerability. The password can be lost, stolen, or hacked.
+
+</li>
+<li>Access control is generalized, that is, remote developers have access either to all files and data sources, or none. With Basic security, you can't protect individual directories and or databases.
+
+</li>
+</ol>
+<a name="1023388"></a>
+ 
+<H2>Securing ColdFusion file resources</H2>
+<p>The following table shows how ColdFusion Basic security compares with native OS options available to you in securing files for remote development. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=3 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Securing Files from ColdFusion Studio</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Method</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Security Model</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+LAN-based
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Uses the native file system to provide access to local and network drives. 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Access is determined by the network permissions of user logged into workstation where Studio is being run.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+FTP-based
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Connects to an FTP server running on same machine as the target web server.
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Permissions defined using the native security of the FTP server software.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+RDS-based
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Interacts with the remote file system using RDS on the target ColdFusion Server.
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Files on the target server can be secured with the ColdFusion Studio password. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1023423"></a>
+ 
+<H2>Securing ColdFusion data sources</H2>
+<p>The following table shows how ColdFusion Basic security can be configured to secure ColdFusion data sources. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=3 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Securing Data Sources from ColdFusion Studio</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Method</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Security Model</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Basic security is enabled on the local workstation.
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Data sources are accessed through RDS on the local ColdFusion Server.
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Data sources that are accessible to the user locally are accessible through ColdFusion Studio. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Basic security is enabled on the remote server.
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Data sources are accessed through RDS on the remote ColdFusion Server.
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Data sources that are accessible to ColdFusion Server are accessible remotely via ColdFusion Studio. 
+</td></tr>
+
+</table>
+
+</div>
+</p><p>By using a LAN based file access model and by restricting developer data source access to the local workstation, a very secure development environment can be achieved. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Configuring_Basic_Security/admin093.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Configuring_Basic_Security/admin09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Configuring_Basic_Security/admin095.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:04 -->
+</body>
+</html>

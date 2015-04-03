@@ -1,0 +1,111 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>About Arrays</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997363"></a>
+ <H1>About Arrays</H1>
+
+
+
+<p>Traditionally, an array is a tabular structure used to hold data, much like a spreadsheet table with clearly defined limits and dimensions. A 2-dimensional (2D) array is like a simple table. In ColdFusion, you typically use arrays to temporarily store data. For example, if your site allows users to order goods online, their shopping cart contents can be stored in an array. This allows you to make changes easily without committing the information, which the user may change before completing the transaction, to a database.</p><a name="1008109"></a>
+ 
+<H3>Conventional fixed-size 2D array</H3>
+<p><img src="../images/array2d_trad.gif">
+
+
+</p><p></p><p>A 3-dimensional array is like a cube made up of individual cells.</p><p>ColdFusion arrays differ somewhat from traditional arrays because they are dynamic. For example, in a conventional array, array size is constant and symmetrical, whereas in a ColdFusion 2D array you can have 'columns' of differing lengths based on the data that has been added or removed.</p><a name="1030474"></a>
+ 
+<H3>ColdFusion dynamic 2D array</H3>
+<p><img src="../images/array2d_cf.gif">
+
+
+</p><p></p><p>A ColdFusion 2D array is actually a 1D array that contains a series of additional 1D arrays. Each of the arrays that make up a column can expand and contract independently of any other column.</p><p>The following terms will help you understand subsequent discussions of ColdFusion arrays:</p><ul>
+<li><strong>Array dimension</strong> -- The relative complexity of the array structure.
+
+</li>
+<li><strong>Index -- </strong>The position of an element in a dimension, ordinarily surrounded by square brackets: my1Darray[1], my2Darray[1][1], my3Darray[1][1][1].
+</li>
+<li><strong>Array element</strong> -- Data stored in an array index.
+</li>
+</ul>
+<p>The syntax <code>my2darray[1][3]="Paul"</code> is the same as saying 'My2dArray is a two dimensional array and the value of the array element index [1][3] is "Paul".'</p><p>Dynamic arrays expand to accept data you add to them and contract as you remove data from them. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

@@ -1,0 +1,269 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>IsProtected</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_133.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_135.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2469003"></a>
+ <H1>IsProtected</H1>
+
+
+
+<p>Returns TRUE if the resource is protected in the security context of the authenticated user. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_125.htm#2597008">IsAuthorized</a>.
+</p>
+
+<a name="2469009"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>IsProtected</strong>(<em>resourcetype, resourcename [, action]</em>)
+</PRE><a name="2469011"> </a>
+<h5 class="param"> resourcetype</h5>
+<p class="param">String specifying the type of resource:</p><ul>
+<a name="2469594"> </a>
+<li>Application
+
+<a name="2469598"> </a>
+</li>
+<li>CFML
+<a name="2470084"> </a>
+</li>
+<li>File
+<a name="2470085"> </a>
+</li>
+<li>DataSource
+<a name="2470086"> </a>
+</li>
+<li>Component
+<a name="2470087"> </a>
+</li>
+<li>CustomTag
+<a name="2470088"> </a>
+</li>
+<li>UserObject
+</li>
+</ul>
+<a name="2470091"> </a>
+<h5 class="param"> resourcename</h5>
+<p class="param">String specifying the name of the resource. Resourcename is the actual resource that is protected, not to be confused with the rule name, which you specify in the ColdFusion Administrator. The value specified varies depending on the resource type: <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>resourcetype specification</strong>
+</th><th align="left">
+<strong>resourcenamespecification</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+APPLICATION
+</td><td valign="top">
+Application name
+</td></tr>
+<tr valign="top"><td valign="top">
+CFML
+</td><td valign="top">
+CFML tag name
+</td></tr>
+<tr valign="top"><td valign="top">
+FILE
+</td><td valign="top">
+File name
+</td></tr>
+<tr valign="top"><td valign="top">
+DATASOURCE
+</td><td valign="top">
+Data source name
+</td></tr>
+<tr valign="top"><td valign="top">
+COMPONENT
+</td><td valign="top">
+Component name
+</td></tr>
+<tr valign="top"><td valign="top">
+COLLECTION
+</td><td valign="top">
+Verity collection name
+</td></tr>
+<tr valign="top"><td valign="top">
+CUSTOMTAG
+</td><td valign="top">
+Custom tag name
+</td></tr>
+<tr valign="top"><td valign="top">
+USEROBJECT
+</td><td valign="top">
+Object name
+</td></tr>
+
+</table>
+</div>
+</p><a name="2597226"> </a>
+<h5 class="param"> action</h5>
+<p class="param">String specifying the action for which authorization is requested. Do not specify this parameter for COMPONENT and CUSTOMTAG. For all other resource types, this parameter is required.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>resourcetype specification</strong>
+</th><th align="left">
+<strong>Possible ACTIONs</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+APPLICATION
+</td><td valign="top">
+ALL <br>USECLIENTVARIABLES
+</td></tr>
+<tr valign="top"><td valign="top">
+CFML
+</td><td valign="top">
+Valid actions for the tag specified by <em>resourcename</em>
+</td></tr>
+<tr valign="top"><td valign="top">
+FILE
+</td><td valign="top">
+READ <br>WRITE
+</td></tr>
+<tr valign="top"><td valign="top">
+DATASOURCE
+</td><td valign="top">
+ALL <br>CONNECT <br>SELECT <br>INSERT <br>UPDATE <br>DELETE <br>SP (stored procedure)
+</td></tr>
+<tr valign="top"><td valign="top">
+COMPONENT
+</td><td valign="top">
+No actions for this resource type
+</td></tr>
+<tr valign="top"><td valign="top">
+COLLECTION
+</td><td valign="top">
+DELETE <br>OPTIMIZE <br>PURGE <br>SEARCH <br>UPDATE
+</td></tr>
+<tr valign="top"><td valign="top">
+CUSTOMTAG
+</td><td valign="top">
+No actions for this resource type
+</td></tr>
+<tr valign="top"><td valign="top">
+USEROBJECT
+</td><td valign="top">
+Action specified via the ColdFusion Administrator
+</td></tr>
+
+</table>
+</div>
+</p><a name="2471414"></a>
+ 
+<H3>Usage </H3>
+<p>The IsProtected function only returns true if the resource is protected by a rule in the security context or sandbox within which a request is being processed.  An application may need to determine if a resource is protected and if the current user is authorized to use the resource.  If a resource is not protected, then the<strong> </strong><a href="../3_ColdFusion_Functions/lr3_125.htm#2597008">IsAuthorized</a> function returns true.  In order to determine if a resource is explicitly protected with a rule, you must use the IsProtected function.</p><a name="2597269"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsProtected
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---  This example calls the IsProtected function. ---&gt;
+...
+&lt;!-------------------------------------------------------------------- 
+The following code checks to see if the Orders data source is protected.
+If the data source is protected, the code then checks to see if the
+current user is authorized to select information from the datasource.
+----------------------------------------------------------------------&gt;
+&lt;CFIF IsProtected("DATASOURCE", "Orders", "select")&gt;
+    &lt;CFIF IsAuthorized("DATASOURCE", "Orders", "select")&gt;
+        &lt;CFQUERY NAME="GetList" datasource="Orders"&gt;
+                   SELECT *    FROM Orders
+           &lt;/CFQUERY&gt;
+           &lt;CFOUTPUT QUERY="GetList"&gt;
+                   Authorization Succeeded. Order information follows:
+                   #Customer# - #BalanceDue#&lt;BR&gt;
+            &lt;/CFOUTPUT&gt;
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><a name="2746397"></a>
+ 
+<H3></H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsProtected
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_133.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_135.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

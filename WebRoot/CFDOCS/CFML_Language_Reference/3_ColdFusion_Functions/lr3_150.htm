@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListGetAt</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_149.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_151.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999929"></a>
+ <H1>ListGetAt</H1>
+
+
+
+<p>Returns the element at a given position.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_149.htm#999896">ListFirst</a>, <a href="../3_ColdFusion_Functions/lr3_152.htm#1000001">ListLast</a>, <a href="../3_ColdFusion_Functions/lr3_155.htm#1689171">ListQualify</a>, and <a href="../3_ColdFusion_Functions/lr3_157.htm#1000141">ListSetAt</a>.
+</p>
+
+<a name="999932"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListGetAt</strong>(<em>list</em>, <em>position</em> [, <em>delimiters</em> ])
+</PRE><a name="999934"> </a>
+<h5 class="param"> list</h5>
+<p class="param">List whose element is being retrieved.</p><a name="999935"> </a>
+<h5 class="param"> position</h5>
+<p class="param">Positive integer indicating the position of the element being retrieved.</p><a name="999936"> </a>
+<h5 class="param"> delimiters</h5>
+<p class="param">Set of delimiters used in<em> list</em>.</p><a name="1691380"></a>
+ 
+<H3>Usage</H3>
+<p>The first position in a list is denoted by the number 1, not 0.</p><a name="1804039"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListGetAt
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ListGetAt and ListLen ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ListGetAt Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ListGetAt Example&lt;/H3&gt;
+
+&lt;!--- Find a list of users who wrote messages ---&gt;
+&lt;CFQUERY NAME="GetMessageUser" DATASOURCE="cfsnippets"&gt;
+SELECT    Username, Subject, Posted
+FROM    Messages
+&lt;/CFQUERY&gt;
+
+&lt;CFSET temp = ValueList(GetMessageUser.Username)&gt;
+&lt;!--- loop through the list and show it with ListGetAt ---&gt;
+&lt;H3&gt;This list of usernames who have posted messages numbers
+&lt;CFOUTPUT&gt;#ListLen(temp)#&lt;/CFOUTPUT&gt; users.&lt;/H3&gt;
+&lt;UL&gt;
+&lt;CFLOOP From="1" To="#ListLen(temp)#" INDEX="Counter"&gt;
+    &lt;CFOUTPUT&gt;&lt;LI&gt;Username #Counter#: #ListGetAt(temp, Counter)#
+    &lt;/CFOUTPUT&gt;
+&lt;/CFLOOP&gt;
+&lt;/UL&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListGetAt
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_149.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_151.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

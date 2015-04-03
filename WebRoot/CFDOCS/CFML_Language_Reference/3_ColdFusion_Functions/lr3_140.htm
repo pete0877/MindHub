@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Left</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_139.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_141.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999561"></a>
+ <H1>Left</H1>
+
+
+
+<p>Returns the count of characters from the beginning of a string argument.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_210.htm#1002068">Right</a>, <a href="../3_ColdFusion_Functions/lr3_179.htm#1001133">Mid</a>, and <a href="../3_ColdFusion_Functions/lr3_141.htm#999590">Len</a>.
+</p>
+
+<a name="999564"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Left</strong>(<em>string</em>, <em>count</em>)
+</PRE><a name="999566"> </a>
+<h5 class="param"> string</h5>
+<p class="param">String from which the leftmost characters are retrieved.</p><a name="999567"> </a>
+<h5 class="param"> count</h5>
+<p class="param">Positive integer indicating how many characters to return.</p><a name="1803597"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Left
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!---  This example shows the use of Left ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Left Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Left Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("Form.MyText")&gt;
+&lt;!--- if len is 0, then err ---&gt;
+    &lt;CFIF Len(FORM.myText) is not 0&gt;
+        &lt;CFIF Len(FORM.myText) LTE FORM.RemoveChars&gt;
+        &lt;P&gt;Your string &lt;CFOUTPUT&gt;#FORM.myText#&lt;/CFOUTPUT&gt;
+        only has &lt;CFOUTPUT&gt;#Len(FORM.myText)#&lt;/CFOUTPUT&gt;
+        characters.  You cannot output the &lt;CFOUTPUT&gt;#FORM.removeChars#
+          &lt;/CFOUTPUT&gt;
+        leftmost characters of this string because it is not long enough.
+        &lt;CFELSE&gt;
+        &lt;P&gt;Your original string: &lt;CFOUTPUT&gt;#FORM.myText#&lt;/CFOUTPUT&gt;
+        &lt;P&gt;Your changed string, showing only the
+          &lt;CFOUTPUT&gt;#FORM.removeChars#&lt;/CFOUTPUT&gt; leftmost characters:
+        &lt;CFOUTPUT&gt;#Left(Form.myText, FORM.removeChars)#
+        &lt;/CFOUTPUT&gt;
+        &lt;/CFIF&gt;
+    &lt;CFELSE&gt;
+    &lt;P&gt;Please enter a string
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+...
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Left
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_139.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_141.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

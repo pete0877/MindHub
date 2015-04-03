@@ -1,0 +1,159 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using SQL Builder</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Accessing ColdFusion  Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997418"></a>
+ <H1>Using SQL Builder</H1>
+
+
+
+<p>Studio provides a powerful visual tool to build, test, and save SQL statements for use in data queries. Select a query type from the SQL Builder toolbar or right-click in the Table pane and choose from the Query Type list.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open SQL Builder choose one of these methods:
+</td>
+</tr>
+</table>
+</div><ul>
+<a name="1026340"> </a>
+<li>Right-click on a database or a table in the Database tab and choose New Query.
+
+<a name="1030662"> </a>
+</li>
+<li>Click Tools &gt; SQL Builder, select a database from the dropdown list, and click New Query.
+<a name="1030664"> </a>
+</li>
+<li>Open the CFQUERY tag editor and click the New Query icon.
+<p><img src="../images/new_query_button.gif">
+
+
+
+</p><p><img src="../images/select_table.gif">
+
+
+
+</p></li>
+</ul>
+<a name="1030665"></a>
+ 
+<H2>The SQL Builder interface</H2>
+<p>The following illustration shows the SQL Builder interface:</p><p><img src="../images/query_builder_callout.gif">
+
+
+</p><p>The SQL Builder is divided into four sections:</p><ul>
+<a name="997431"> </a>
+<li>Toolbar -- Contains icons for SQL keywords and commands. 
+
+<a name="1030449"> </a>
+</li>
+<li><strong>Table pane</strong> -- Provides a view of the tables in your query and allows you to create joins between tables.
+<a name="997432"> </a>
+</li>
+<li><strong>Properties pane</strong> -- Allows you to set the properties of the query such as the columns that are being selected or the columns that are being updated.
+<a name="997433"> </a>
+</li>
+<li><strong>SQL pane</strong> -- Shows you the SQL statement as it is built. 
+</li>
+</ul>
+<a name="1026552"></a>
+ 
+<H2>Writing SQL statements</H2>
+<p>SQL Builder opens a SELECT statement by default, since this is the most common type of query. If you have not chosen a table, you will be asked to select one.</p><p>SQL Builder supports four types of SQL statements:</p><ul>
+<a name="1026554"> </a>
+<li>Select
+
+<a name="1026555"> </a>
+</li>
+<li>Insert
+<a name="1026556"> </a>
+</li>
+<li>Update
+<a name="1026557"> </a>
+</li>
+<li>Delete
+</li>
+</ul>
+<p>The SQL pane does not support reverse editing, so any changes you make in this pane will not be made to the query in the Properties pane or the Table pane.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:45 -->
+</body>
+</html>

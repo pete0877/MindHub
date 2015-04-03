@@ -1,0 +1,164 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Searching with Wildcards</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_13.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_15.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="998033"></a>
+ <H1>Searching with Wildcards</H1>
+
+
+
+<p>This table shows the wildcard characters for searching Verity collections.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Verity Wildcard Characters&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Wildcard</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+?
+</td><td valign="top">
+Question. Specifies any single alphanumeric character.
+</td></tr>
+<tr valign="top"><td valign="top">
+*
+</td><td valign="top">
+Asterisk. Specifies zero or more alphanumeric characters. Avoid using the asterisk as the first character in a search string. Asterisk is ignored in a set, [] or an alternative pattern {}.
+</td></tr>
+<tr valign="top"><td valign="top">
+[]
+</td><td valign="top">
+Square brackets. Specifies one of any character in a set, as in "sl[iau]m" which locates "slim," "slam," and "slum." Square brackets indicate an implied OR.
+</td></tr>
+<tr valign="top"><td valign="top">
+{}
+</td><td valign="top">
+Curly braces. Specifies one of each pattern separated by a comma, as in "hoist{s, ing, ed}" which locates "hoists," "hoisting," and "hoisted." Curly braces indicate an implied AND.
+</td></tr>
+<tr valign="top"><td valign="top">
+^
+</td><td valign="top">
+Caret. Specifies one of any character not in the set as in "sl[^ia]m" which locates "slum" but not "slim" or "slam."
+</td></tr>
+<tr valign="top"><td valign="top">
+-
+</td><td valign="top">
+Hyphen. Specifies a range of characters in a set as in "c[a-r]t" which locates every word beginning with "c," ending with "t," and containing any letter from "a" to "r."
+</td></tr>
+
+</table>
+</div>
+</p><a name="998088"></a>
+ 
+<H2>Searching for wildcards as literals</H2>
+<p>To search for a wildcard character in your collection, you need to escape the character with a backslash (\). For example:</p><p>To match a literal asterisk, you precede the * with two backslashes: "a\\*"</p><p>To match a question mark or other wildcard character: "Checkers\?"</p><a name="998094"></a>
+ 
+<H2>Searching for special characters as literals</H2>
+<p>The following non-alphanumeric characters must be preceded by a backslash character (\) in a search string:</p><ul>
+<li>comma (,)
+
+</li>
+<li>left and right parentheses ()
+</li>
+<li>double quotation mark (")
+</li>
+<li>backslash (\)
+</li>
+<li>at sign (@)
+</li>
+<li>left curly brace ({)
+</li>
+<li>left bracket ([)
+</li>
+<li>less than sign (&lt;)
+</li>
+<li>backquote (`)
+</li>
+</ul>
+<p>In addition to the backslash character, you can use paired backquotes (` `) to interpret special characters as literals. For example, to search for the wildcard string "a{b" you can surround the string with backquotes, as follows:</p><pre>`a{b`
+</pre><p>To search for a wildcard string that includes the literal backquote character (`) you must use two backquotes together and surround the whole string in backquotes:</p><pre>`*n``t`
+</pre><p>Note that you can use either paired backquotes or backslashes to escape special characters. There is no functional difference in the use of one or the other. For example, you can query for the term: &lt;DDA&gt; in the following ways:</p><pre>\&lt;DDA\&gt; or `&lt;DDA&gt;`
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_13.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_15.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

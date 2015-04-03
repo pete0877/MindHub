@@ -1,0 +1,97 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Overview of Registry Access in ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa213.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 21	:&nbsp;&nbsp;Accessing the Windows NT Registry</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1002475"></a>
+ <H1>Overview of Registry Access in ColdFusion</H1>
+
+
+
+<p>ColdFusion includes the CFREGISTRY tag, which allows you to get, set, and delete registry values. The registry is a database that Windows uses to maintain hierarchical information about users, hardware, and software. Under UNIX, ColdFusion includes functionality that emulates the registry. It includes keys and values:</p><ul>
+<li>Keys can contain either values or other keys. A key and the keys/values below it are referred to as a <em>branch</em>.
+
+</li>
+<li>Values are conceptually split into two parts: <em>value name</em> and <em>value data.</em>
+</li>
+</ul>
+<p>The registry contains information critical to your system. Be very careful when modifying and deleting registry values. Depending on expected usage, you might consider using the Basic Security tab of the ColdFusion Administrator to restrict the CFREGISTRY tag (this is especially true for ISPs, whose server may host a large and diverse set of developers).</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa213.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:07 -->
+</body>
+</html>

@@ -1,0 +1,146 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Cos</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_054.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_056.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997601"></a>
+ <H1>Cos</H1>
+
+
+
+<p>Returns the cosine of a given angle in radians.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_219.htm#1002369">Sin</a>, <a href="../3_ColdFusion_Functions/lr3_236.htm#1256168">Tan</a>, and <a href="../3_ColdFusion_Functions/lr3_189.htm#1001598">Pi</a>.
+</p>
+
+<a name="997604"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Cos</strong>(<em>number</em>)
+</PRE><a name="997606"> </a>
+<h5 class="param"> number</h5>
+<p class="param">Angle in radians for which you want the cosine.</p><a name="997607"></a>
+ 
+<H3>Usage</H3>
+<p>The range of the result is -1 to 1. </p><p>To convert degrees to radians, multiply degrees by <img src="../images/pi.gif">/180. To convert radians to degrees, multiply radians by 180/<img src="../images/pi.gif">.</p><a name="2344481"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="&nbsp;Cos
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This snippet shows how to use Cos ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Cos Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Cos Example&lt;/H3&gt;
+
+&lt;!--- output its Cos value ---&gt;
+&lt;CFIF IsDefined("FORM.CosNum")&gt;
+    &lt;CFIF IsNumeric(#FORM.CosNum#)&gt;
+        Cos(&lt;CFOUTPUT&gt;#FORM.CosNum#&lt;/CFOUTPUT&gt;) = 
+          &lt;CFOUTPUT&gt;#Cos(FORM.cosNum)# 
+        radians = #Evaluate(Cos(FORM.cosNum) * 180/PI())#
+          Degrees&lt;/CFOUTPUT&gt;
+    &lt;CFELSE&gt;
+&lt;!--- if it is empty, output an error message ---&gt;
+        &lt;H4&gt;Please enter a number between -1 and 1&lt;/H4&gt;
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="cos.cfm" METHOD="POST"&gt;
+&lt;P&gt;Type in a number to get its cosine in Radians and Degrees
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="cosNum" size="25"&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" NAME=""&gt; &lt;INPUT TYPE="RESET"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Cos
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_054.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_056.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

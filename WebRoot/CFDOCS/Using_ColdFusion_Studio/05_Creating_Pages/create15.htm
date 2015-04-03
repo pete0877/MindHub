@@ -1,0 +1,609 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Adding Media Content</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create14.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1043261"></a>
+ <H1>Adding Media Content</H1>
+
+
+
+<p>Well-integrated graphics, sounds, and video can make a site more attractive to visitors and can enhance the overall site content. This section show you how you can use Studio to make these elements part of your site.</p><a name="1026636"></a>
+ 
+<H2>Image files</H2>
+<p>Studio supports the most common Web graphics formats-- GIF, JPEG, and PNG-- but note that these formats are not supported by all browsers.</p><p>The easiest way to add images is to drag and drop an image file from a file list in the Resources pane into your document. You can also click the Image toolbutton on the QuickBar to open the IMG dialog box. First locate a source file, then enter values for the IMG tag attributes. The image is displayed in the dialog box's preview pane.</p><p><img src="../images/images_button.gif">
+
+
+</p><p>You can open the Style Editor to define formatting styles for the IMG element. </p><p>To add a background image for the entire document, use the BACKGROUND attribute of the document's BODY tag.</p><p>For a full description of the IMG tag and its associated attributes, properties, methods and events, see the <a href="../../HTML_Reference/Media_Embedding/Img.htm">&lt;IMG&gt; </a>section of the <em>HTML Reference</em> in the Help References.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>For graphics files that you use often, such as navigation bars or icons, 
+use Snippets to store and retrieve the code block.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1026706"></a>
+ 
+<H3>Viewing image thumbnails</H3>
+<p>When you're working with many graphics files, it's helpful to be able to identify them visually. You can get a thumbnail view of all images in the current directory by clicking the Thumbnails toolbutton. The images appear in the Thumbnail tab of the Results window.</p><p><img src="../images/thumbnails_button.gif">
+
+
+</p><p>Right-click a thumbnail image to see its properties or to view it in Edit or Design mode, you can drag a thumbnail to add the image to your document.</p><a name="1026811"></a>
+ 
+<H2>Image maps</H2>
+<p>Image maps are graphics that contain "hot spots" that respond to user input, generally a mouse click. The hot spots can be mapped to both internal and external pages. Image maps can make navigation easier and give visitors visual cues to content areas. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The information in this section refers to creating client-side image maps 
+only. Server-side image maps use the ISMAP attribute and require 
+processing of the map definition file on the server. The map definition 
+file must contain a script to connect via HTTP to the locations specified 
+in the image map.
+</td>
+</tr>
+</table>
+</div>
+<br><p>In order to create a client-side image map, you must:</p><ul>
+<a name="1044906"> </a>
+<li>Add an image to your HTML page.
+
+<a name="1044907"> </a>
+</li>
+<li>Specify where the map definition information is found using the USEMAP attribute for the image. The map definition information breaks the image down into areas and indicates the pages to which those areas are linked. Map definition information can either be included in the same document as the image or in an external file.
+<a name="1044934"> </a>
+</li>
+<li>If you choose to include map definition information in the same file as the image, you create that information using the Image Map Editor.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a client-side image map:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Add an image to your HTML page (you can use any of the standard methods such as drag and drop).
+
+
+</li>
+<li>Right-click the &lt;IMG&gt; start tag and choose Edit Tag from the menu to open the Image editor.
+
+<p><img src="../images/image.gif">
+
+
+
+</p></li>
+<li>Specify the USEMAP attribute:
+
+<ul>
+<a name="1044970"> </a>
+<li>If you plan to include the map definition information in the document with the image, enter a name with a # prefix, such as #map01. You will use this name again when you add the &lt;MAP&gt; tag that contains the map definition information. 
+
+<a name="1044960"> </a>
+</li>
+<li>If you will use an external map definition file, enter the path and file name in the Use Map box. 
+</li>
+</ul>
+</li>
+<li>Click OK to apply your changes to the image.
+
+</li>
+</ol>
+<p>If you chose to include the map definition information in the same document as the image, you can use the Image Map Editor to quickly enter that information. The Image Map Editor allows you to easily create hot spots, or "areas," and specify the pages to which those areas are linked. Once you have finished working with your image's hot spots, be sure to choose File &gt; Save and Exit in the Image Map Editor to apply your changes to the HTML page.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To access the Image Map Editor:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Enter a &lt;MAP&gt; tag in the Body of your HTML page.
+
+
+</li>
+<li>Right-click in the &lt;MAP&gt; start tag and choose Edit Tag from the menu to open the MAP Tag Editor.
+
+<p><img src="../images/tag_editor_map.gif">
+
+
+
+</p></li>
+<li>In the Image Map Name box, enter the USEMAP name you specified in IMAGE dialog. 
+
+<p>This step creates the link between the image you inserted on your HTML page and 
+the map definition information that is used to process that image.
+</p></li>
+<li>Click the Content tab, then click the Image Map Editor button.
+
+<p><img src="../images/image_map_editor_button.gif">
+
+
+
+</p><p>You see the Image Map Editor.
+</p><p><img src="../images/image_map_editor.gif">
+
+
+
+</p><p>The image that is linked to this map definition is shown in the Image Map Editor.
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>You can also access the Image Map Editor by right-clicking inside an 
+AREA tag and choose Edit Image Map from the menu. This is the 
+easiest method to use if you already have map definition 
+information in your document.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<p>Once you have the Image Map Editor open, you can create a variety of hot spot shapes: rectangle, circle, and polygon.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a circular or rectangular hot spot:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click one of the hot spot shape buttons: circle or rectangle.
+
+
+<p><img src="../images/create15a.gif" height="32" width="331">
+
+
+
+</p></li>
+<li>Place the cursor over the image, hold the mouse button down and drag.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Circles are always drawn proportionately. You can draw either a 
+square or a rectangle using the rectangle tool. To draw a square, hold 
+the SHIFT key down while you drag the mouse.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Release the mouse button to finish the shape and see the Image Map Region Properties dialog box.
+
+<p><img src="../images/image_map_region_props.gif">
+
+
+
+</p></li>
+<li>Enter the URL for the page the hot spot jumps to in the HREF box (alternatively, you can browse the files on your computer or pick from your bookmarks or favorites).
+
+</li>
+<li>If you want alternate text to appear when the user's cursor travels over the hot spot, enter that text in the Alt Text box.
+
+</li>
+<li>Click OK.
+
+<p>The hot spot is indicated on the image by a gray outline and the hot spot 
+information is added to the thumbnails list on the right.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a polygon hot spot:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the polygon hot spot button.
+
+
+<p><img src="../images/poly_selection_button.gif">
+
+
+
+</p></li>
+<li>Click inside the image to set the first point of the polygon.
+
+</li>
+<li>Move the cursor to the location for the next point and click again. Continue moving the mouse and clicking to set the remaining points for the polygon.
+
+</li>
+<li>To complete the polygon, click again on the first point or double-click and the polygon will be completed for you.
+
+</li>
+<li>After the polygon is completed, you see the Image Map Region Properties dialog box. Follow steps 4 through 6 above to fill in this dialog box and finish the hot spot.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To move a hot spot:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Select Region button on the toolbar.
+
+
+<p><img src="../images/select_region_button.gif">
+
+
+
+</p></li>
+<li>Move the cursor inside the hot spot you want to move.
+
+</li>
+<li>Click and hold the left mouse button down, then drag the hot spot to the new location.
+
+</li>
+<li>Release the mouse button when the hot spot is where you want it.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To resize a hot spot:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Select Region button on the toolbar.
+
+
+</li>
+<li>Click the hot spot you want to resize to select it. You see the hot spots handles.
+
+</li>
+<li>Click a handle and hold the left mouse button down, then drag the handle to the new location.
+
+</li>
+<li>Release the mouse button when the hot spot is resized.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Circles can only be resized proportionately. To resize a square or 
+rectangle proportionately, hold down the SHIFT key while you drag a 
+handle. You can move any of the handles on a polygon to change the 
+shape and size of the polygon.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit the link for a hot spot:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Double-click the hot spot outline on the image or double-click the hot spot in the thumbnails view. You see the Image Map Region Properties dialog box for the hot spot.
+
+
+</li>
+<li>Enter any changes and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a hot spot:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Select Region button on the toolbar.
+
+
+</li>
+<li>Click the hot spot you want to delete to select it. You see the hot spots handles.
+
+</li>
+<li>Press the Delete key or choose Edit &gt; Cut.
+
+<p>The hot spot is removed from the image.
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>You can use the standard Windows Cut, Copy, and Paste commands 
+to work with hot spot areas.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change the zoom of the image:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose the zoom percentage from the drop-down list.
+
+
+<p>The image is redrawn.
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>When you change the zoom in the Image Map Editor, you only affect 
+your view of the image in the editor. You do not affect the size of the 
+original image on your HTML page.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<p>Choose Options &gt; View Thumbnails to toggle the display of the hot spot thumbnails.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To save the map definition information:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the File menu, choose Save and Exit (Ctrl+S).
+
+
+<p>The map definition information is entered in the Content tab in the Tag Editor - 
+MAP dialog box.
+</p></li>
+<li>Click Apply.
+
+<p>The HTML code is entered on your page. It should look similar to this:
+</p><p><code>&lt;IMG SRC="ImageMap.GIF" WIDTH=295 HEIGHT=380 ALT="" BORDER=0 
+USEMAP="#MyMap" ISMAP&gt;
+</code></p><p><code>&lt;MAP NAME="MyMap"&gt;
+</code></p><p><code>&lt;AREA SHAPE="CIRCLE" COORDS="114,185,23" HREF="../../Virtual Source 
+1/Virtual 1.html" ALT="Virtual 1"&gt;
+</code></p><p><code>&lt;AREA SHAPE="CIRCLE" COORDS="173,182,23" HREF="../../Virtual Source 
+2/Virtual 2.html" ALT="Virtual 2"&gt;
+</code></p><p><code>&lt;AREA SHAPE="POLY" 
+COORDS="148,328,219,304,238,337,221,376,149,346,84,370,56,333,78,308
+,78,308" HREF="../../Project 1/Manual Inclusive/Manual 1.html" 
+ALT="Manual 1"&gt;
+</code></p><p><code>&lt;/MAP&gt;
+</code></p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>If you accessed the Image Map Editor dialog box by right-clicking an 
+AREA tag, you only have to choose File &gt; Save and Exit to update the 
+HTML.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<a name="1027340"></a>
+ 
+<H2>OpenPix</H2>
+<p>Studio supports Hewlett-Packard's OpenPix ImageIgniter. This technology makes it possible to quickly deliver high quality, interactive images to Web pages. For more information, see the <a href="http://www.allaire.com/Handlers/index.cfm?ID=6651&amp;Method=Full&amp;Cache=Off">OpenPix article</a> on Allaire's Developer site.</p><a name="1027101"></a>
+ 
+<H2>Video</H2>
+<p>You can add video clips in AVI format to your Web pages using the Image dialog box.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a video file to your Web page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Image tag editor.
+
+
+</li>
+<li>Enter an image file name in the Source text box. This file displays as an alternate image if the user's browser cannot run the video clip.
+
+</li>
+<li>Click the Advanced tab, and enter the URL of the video file in the Dyn Source text box.
+
+</li>
+<li>In the Start box, select the user action that triggers the video.
+
+</li>
+<li>Check the Control box to display a control panel below the video window.
+
+</li>
+<li>In the Loop box, enter the number of times to play the video. To run the clip continuously, enter <em>-1</em> or select the Infinite check box.
+
+</li>
+<li>In the Loop Delay box, enter a number for the time (in milliseconds) to pause between replays, and click OK.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The DYNSRC attribute of the IMG tag is a Microsoft Internet Explorer 
+extension and will not display in Netscape Navigator or other browsers. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027123"></a>
+ 
+<H2>Sound</H2>
+<p>Sound adds an exciting dimension to Web pages -- to entertain, give audio cues, provide training instructions, or play audio files. You can add sound files in WAV, MIDI, or AU format.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a sound file to your Web page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose Tools &gt; Tag Chooser and open the Page Elements list.
+
+
+</li>
+<li>Choose the BGSOUND tag for Internet Explorer, or the EMBED tag for Netscape Navigator.
+
+</li>
+<li>In the tag editor for the BGSOUND or EMBED tag, enter the sound file's source path and file name.
+
+</li>
+<li>In the Loop menu, choose either the number of times you want the file to play or Infinite for continuous play.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The BGSOUND attribute is a Microsoft Internet Explorer extension and 
+will not work in Netscape Navigator and other browsers.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027133"></a>
+ 
+<H2>RealNetworks support</H2>
+<p>Studio offers two wizards to help you add sound to Web pages: </p><ul>
+<a name="1027135"> </a>
+<li>Choose File &gt; New and select the Multimedia Synchronization wizard to set timings for HTML content with audio files. For additional information on RealPlayer, see the RealNetworks site at <code>http://www.real.com</code>.
+
+<a name="1027136"> </a>
+</li>
+<li>Choose File &gt; New and select RealPlayer Control Wizard to embed a RealPlayer custom control for an audio event.
+</li>
+</ul>
+<a name="1027138"></a>
+ 
+<H2>Using SMIL tags</H2>
+<p>Studio supports the Synchronized Multimedia Integration Language (SMIL) in the Tag Chooser (CTRL + E). </p><p>For more information on using SMIL tags in Studio, visit the SMIL page on the Allaire Web site: <code>http://www.allaire.com/products/smil/</code>.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create14.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Best_Practices_for_Coding_HTML_and_CFML/styleguide.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Specifying the Interval for a Scheduled Task</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin052.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin054.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Scheduling and Static Page Generation</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997384"></a>
+ <H1>Specifying the Interval for a Scheduled Task</H1>
+
+
+
+<p>Often, you'll want to schedule a page to run at a regular interval for a fixed period of time. For example, to generate an employee list, it's not usually necessary to generate the list dynamically. Instead, you could schedule the page that generates the list to run every night during off peak hours. </p><p>By default, when you open the Add Scheduler Task page, ColdFusion enters the current date and time as the Start date and time for the new event. If you find that a scheduled event is not executing, check your start date and time values. </p><p>When entering an end date and time, if you leave the End Date and Time fields blank, ColdFusion runs the scheduled event until you explicitly stop the event by editing the task parameters, or by deleting the task in the Administrator. </p><p>You can choose from the following Intervals when scheduling a recurring ColdFusion event:</p><ul>
+<a name="997389"> </a>
+<li>Daily
+
+<a name="997390"> </a>
+</li>
+<li>Weekly
+<a name="997391"> </a>
+</li>
+<li>Monthly
+<a name="997392"> </a>
+</li>
+<li>One-time
+<a name="997393"> </a>
+</li>
+<li>Daily at specified intervals
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To define the start/end time and interval:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator and click the Scheduler button. 
+
+
+</li>
+<li>Enter a name for the task you want to schedule and click the Add New Task button. The Add Scheduler Task page appears, where you provide details about the operation you want to schedule. 
+
+</li>
+<li>Enter start and end dates for the task. Note that the end date is optional. You might want the task to be executed without a limit. 
+
+</li>
+<li>Select the type of schedule: One-time, Recurring, or Daily and enter scheduling information according to the type of schedule you want for your task. Enter all time values using the 24 hour clock. For example, enter 03:00 for 3:00AM and 15:00 for 3:00PM. 
+
+</li>
+</ol>
+<a name="999347"></a>
+ 
+<H3>Note</H3>
+<p>When scheduling a new event, you must set the execution time far enough in the future for ColdFusion to update its internal scheduled task list. By default, ColdFusion checks every 15 minutes for newly scheduled tasks. You can modify this interval using the Scheduler Settings page. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin052.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Scheduling_and_Static_Page_Generation/admin054.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

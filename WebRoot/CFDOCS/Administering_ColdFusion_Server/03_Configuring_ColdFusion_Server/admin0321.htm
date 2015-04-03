@@ -1,0 +1,161 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Indexing Data with Verity</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0320.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0322.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997954"></a>
+ <H1>Indexing Data with Verity</H1>
+
+
+
+<p>The Verity Search'97 indexing and searching technology, which has been incorporated into ColdFusion, provides a means for creating collections of indexed data optimized for fast retrieval. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use Verity searching and indexing technology you:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a Verity collection using the ColdFusion Administrator Verity page or using the CFCOLLECTION tag at runtime.
+
+
+</li>
+<li>Populate a collection with data using options on the ColdFusion Administrator Verity page to index specific directories, or using the CFINDEX tag at runtime. 
+
+</li>
+<li>Build searching and indexing capability using the CFINDEX and CFSEARCH tags into your application. 
+
+</li>
+</ol>
+<p>For more information about populating and searching Verity collections using the CFINDEX and CFSEARCH tags, see <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>. </p><a name="997963"></a>
+ 
+<H2>Using the Verity Collections page</H2>
+<p>The Verity Collections page in the Administrator provides a means for creating collections. Collections can also be created and populated externally using native Verity tools. See your Verity documentation for more information about using native Verity tools. </p><p>Use the Verity Collections page to:</p><ul>
+<a name="997966"> </a>
+<li>Create and name collections
+
+<a name="997967"> </a>
+</li>
+<li>Populate a collection with text file data from a specified directory.
+<a name="997968"> </a>
+</li>
+<li>Purge, repair, optimize, delete, or update a collection. 
+</li>
+</ul>
+<a name="997969"></a>
+ 
+<H2>Creating a collection</H2>
+<p>Before you can search collections using the CFSEARCH tag in your ColdFusion application, you must first create the collection and then populate it with data. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a collection, follow these steps:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Administrator Verity page.
+
+
+</li>
+<li>Enter a name for your collection.
+
+</li>
+<li>If necessary, specify a path for the collection. 
+
+</li>
+<li>Select a language from the drop down list box.
+
+</li>
+<li>Click Create.
+
+</li>
+</ol>
+<p>Now, you can populate the collection with data.</p><a name="997979"></a>
+ 
+<H2>Populating a collection</H2>
+<p>Once you've created a collection, you can populate it with data from text and binary files in a directory you specify. Data from a ColdFusion query can only be indexed using the ColdFusion CFINDEX tag in a ColdFusion application page. </p><p>Verity indexes all supported file types found in the target directory. See <a href="../03_Configuring_ColdFusion_Server/admin0322.htm#1033257">Verity Supported File Types</a> for more information.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0320.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0322.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

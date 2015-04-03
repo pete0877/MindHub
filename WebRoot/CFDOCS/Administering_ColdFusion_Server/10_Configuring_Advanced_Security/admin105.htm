@@ -1,0 +1,141 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating an Advanced Security Framework</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin104.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin106.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011253"></a>
+ <H1>Creating an Advanced Security Framework</H1>
+
+
+
+<p>No matter which Advanced Security feature you choose to implement -- user security, RDS security, a security sandbox, or administrator security -- you'll follow the same basic steps for creating the framework:</p><ol>
+</li>
+<li>Set up the security server. See <a href="../10_Configuring_Advanced_Security/admin107.htm#1011425">&quot;Setting Up a Security Server&quot;</a> for more information.
+
+</li>
+<li>Set up user directories to authenticate against an NT domain, an LDAP directory, or an ODBC data source. See <a href="../10_Configuring_Advanced_Security/admin109.htm#1011458">&quot;Defining User Directories&quot;</a> for more information.
+
+</li>
+<li>Create a security context for the application. See <a href="../10_Configuring_Advanced_Security/admin1010.htm#1011544">&quot;Defining a Security Context&quot;</a> for more information.
+
+</li>
+<li>Specify individual resources to protect and set up policies that match secured resources with authorized users and groups.. See <a href="../10_Configuring_Advanced_Security/admin1011.htm#1011569">&quot;Specifying Resources to Protect&quot;</a> for more information.
+
+</li>
+</ol>
+<p>The rest of this chapter teaches you how to configure Advanced security on the ColdFusion server. </p><a name="1011270"></a>
+ 
+<H2>Implementation summary</H2>
+<p>The details of your ColdFusion Server Advanced Security implementation depend largely on your platform and how you decide to store security profile information. Security profile information can be stored in one of three ways:</p><ul>
+<a name="1011272"> </a>
+<li>Using the Access database file supplied by default with ColdFusion Server (Windows only)
+
+<a name="1011273"> </a>
+</li>
+<li>Using the ODBC data source of your choice
+<a name="1011274"> </a>
+</li>
+<li>Using an LDAP directory server, such as the Netscape Directory Server supplied with ColdFusion Server. LDAP is the only option on UNIX. 
+</li>
+</ul>
+<p>Once you have decided on a method of storing security profile information, the implementation details are essentially the same regardless of platform and storage type. ColdFusion Advanced Security is implemented by defining the following elements in order:</p><ol>
+</li>
+<li>A security server.
+
+</li>
+<li>A security context.
+
+</li>
+<li>A user directory, in the form of an NT domain, an LDAP directory, or an ODBC data source. 
+
+</li>
+<li>Specific ColdFusion resources to protect.
+
+</li>
+<li>Users and groups who will have access to the resources.
+
+</li>
+<li>Policies that group users and resources together into logical elements.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin104.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin106.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

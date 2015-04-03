@@ -1,0 +1,133 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Interface CustomTag</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1820.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1822.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012414"></a>
+ <H1>Interface CustomTag</H1>
+
+
+
+<pre>public abstract interface CustomTag
+</pre><p>Interface for implementing custom tags. 
+</p><p>Classes that implement this interface can be specified in the CLASS attribute of 
+the Java CFX tag. For example, if I have a class <code>MyCustomTag</code> which implements 
+this interface then the following CFML code could be used to call the 
+MyCustomTag.processRequest method: 
+</p><PRE>   &lt;CFX_MyCustomTag"&gt; 
+<p>Additional attributes may also be passed to the Java CFX tag. The values of these 
+attributes are available via the Request object passed to the processRequest 
+method.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Method Summary</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>void
+</PRE></td><td valign="top">
+processRequest(Request request, Response response) 
+</td><td valign="top">
+Processes a request originating from the <code>CFX_mycustomtag</code> tag.
+</td></tr>
+
+</table>
+</div>
+
+</p></PRE><a name="1021055"></a>
+ 
+<H2>Method Detail</H2>
+<a name="1021071"></a>
+ 
+<H3>processRequest</H3>
+<pre>public void processRequest(Request request,
+                           Response response)
+                    throws Exception
+</pre><p>Processes a request originating from the Java CFX tag. 
+</p><a name="1021060"></a>
+<h4> Parameters: </h4>
+<p><code>request</code> -- Parameters (attributes, query, etc.) for this request 
+</p><p><code>response</code> -- Interface for generating response to request (output, variables, 
+queries, etc.) 
+</p><a name="1021063"></a>
+<h4> Throws: </h4>
+<p><code>Exception</code> -- If an unexpected error occurs while processing the request.
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1820.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1822.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

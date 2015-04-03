@@ -1,0 +1,188 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Choosing the Right Drivers</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin042.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin044.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1066782"></a>
+ <H1>Choosing the Right Drivers</H1>
+
+
+
+<p>ColdFusion uses ODBC, OLE DB, and native database drivers to communicate with a wide variety of popular database programs. This section describes each type of driver so you can decide which best suits your needs.</p><a name="1066815"></a>
+ 
+<H2>ODBC Drivers</H2>
+<p>Any valid ODBC data source already installed on your system is automatically available to your ColdFusion applications, but unless you register it as a ColdFusion data source, you can't configure it with ColdFusion-specific options, like the ability to specify SQL operations to restrict for the current data source.</p><p>When you create a data source on the Create ODBC Data Source page in the ColdFusion Administrator, you can configure a number of settings for your ODBC data source. The options available to you depend on which database driver you are using. Data source definitions and option settings are stored in the <code>odbc.ini</code><code> file</code>. The main role of the <code>odbc.ini</code> file is to map a data source name (DSN) to a particular ODBC driver and options. </p><p>For detailed information about options specific to your OBDC drivers, refer to the documentation that came with your database program or to the ODBC driver documentation, including help files that might have been copied to your system when you installed ODBC drivers. If you are running ColdFusion Server on a UNIX machine, refer to the MERANT ODBC documentation, which is distributed with ColdFusion as an Acrobat file. By default, it is installed as:</p><pre>&lt;installdir&gt;/coldfusion/odbc/doc/odbchelp.pdf
+</pre><a name="1090229"></a>
+ 
+<H2>Native Drivers</H2>
+<p>The Enterprise edition of ColdFusion Server includes support for DB2, Informix, Sybase System 11, Sybase Adaptive Server 11.5, and Oracle 7.3 8.0, and 8i databases through native database drivers on both Windows NT and UNIX platforms. (See <a href="../04_Managing_Data_Sources/admin042.htm#1068781">&quot;Supported Databases&quot;</a> for a complete list of databases supported through both ODBC and native drivers.) You might consider using native database drivers because</p><ul>
+<a name="1067182"> </a>
+<li>Native drivers tend to offer better performance than their ODBC counterparts.
+
+<a name="1067191"> </a>
+</li>
+<li>Stored procedures are only available through native drivers.
+</li>
+</ul>
+<a name="1080977"></a>
+ 
+<H3>Software requirements for Native Drivers</H3>
+<p>Before you can use the ColdFusion native database drivers, you need to install additional client software. The following table details requirements for each database and each supported platform. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Software Requirements for Native Database Drivers</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Database</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Client Software</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Oracle 7.3
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Oracle 7.3.x client
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Oracle 8.0
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Oracle 8.0 client
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Sybase System 11
+
+Sybase Adaptive Server 11.5
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Sybase Open Client version 11.1.0 with Update 11.1.1 applied (Solaris and Windows NT)
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Informix 7.3 and 9
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Informix ESQL/C
+
+Informix-CLI
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+IBM DB2 5.0/6.1
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+IBM DB2 Client Application Enabler version 5 or 6
+</td></tr>
+
+</table>
+
+</div>
+</p><p>You must install the database client software and ColdFusion Server software on the same server. For more information about connecting to databases using ColdFusion native drivers, refer to the section for your particular database later in this chapter.</p><a name="1080974"></a>
+ 
+<H2>OLE DB Drivers</H2>
+<p>ColdFusion developers can now access a range of new data stores through Microsoft OLE DB, including: </p><ul>
+<a name="1094442"> </a>
+<li>MAPI-based data stores such as Microsoft Exchange and Lotus Mail 
+
+<a name="1094443"> </a>
+</li>
+<li>Non-relational data stores, such as Lotus Notes 
+<a name="1094444"> </a>
+</li>
+<li>LDAP 2.0 data 
+<a name="1094445"> </a>
+</li>
+<li>Data from OLE applications like word processors and spreadsheets 
+<a name="1094446"> </a>
+</li>
+<li>Mainframe data 
+<a name="1094447"> </a>
+</li>
+<li>HTML and text files, flat-file data 
+</li>
+</ul>
+<p>Developers running ColdFusion Server on Windows NT who want to access Microsoft Access or SQL should especially consider using OLE DB instead of ODBC.</p><p>Before ColdFusion can use OLE DB to access data stores, you must install an OLE DB provider, available from third-party vendors. The provider software handles data processing in response to requests from the OLE DB consumer, in this case ColdFusion.</p><p>Performance gains can be made by running an OLE DB provider, instead of an ODBC driver, to process SQL. This depends on how the provider implements the data call. Some providers route OLE DB calls through the ODBC Driver Manager, while others go directly to the database. Providers that go directly to the database are akin to native drivers in providing an alternative to ODBC. Providers are available for all the major relational DBMS products as well as the data stores listed above.</p><p>ColdFusion server comes with a provider, Microsoft Data Access Components (MDAC) 2.1. MDAC 2.1 contains the ODBC/OLE DB subsystem as well as drivers for all Microsoft data types, including Access and SQL Server. After you install ColdFusion Server, you can install MDAC 2.1 from the ColdFusion Server Start menu by choosing Start &gt; Programs &gt; ColdFusion Server 4.5 &gt; Install Microsoft Data Access Components.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Before you install MDAC, stop all unnecessary services, such as web 
+servers, virus scanning programs, or mail servers.
+</td>
+</tr>
+</table>
+</div>
+<br><p>You can confirm that OLE DB drivers are installed by searching for "Microsoft.Jet.OLEDB" in the registry using REGEDIT.EXE - if you find it, you likely have the proper driver installed.</p><p>OLE DB is a Microsoft specification. For more information, including a list of provider vendors, visit the Microsoft OLE DB site at <a href="http://www.microsoft.com/data/oledb/">http://www.microsoft.com/data/oledb/</a>. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin042.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin044.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

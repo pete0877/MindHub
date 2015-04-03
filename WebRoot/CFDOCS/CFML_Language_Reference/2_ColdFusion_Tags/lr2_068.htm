@@ -1,0 +1,245 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFPARAM</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_067.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_069.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1971479"></a>
+ <H1>CFPARAM</H1>
+
+
+
+<p>CFPARAM is used to test for a parameter's existence, and optionally test its data type, and provide a default value if one is not assigned.</p><a name="1971481"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFPARAM NAME="param_name"
+    TYPE="data_type"&gt;
+    DEFAULT="value"&gt;
+</PRE><a name="1971483"></a>
+<h4> NAME</h4>
+<p>The name of the parameter you are testing (such as "Client.Email " or "Cookie.BackgroundColor "). If you omit the DEFAULT attribute, an error occurs if the specified parameter does not exist.</p><a name="1971485"></a>
+<h4> TYPE</h4>
+<p>Optional. The type of parameter that is required. The default value is "any. "<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Type Values</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Type Value</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+any
+</td><td valign="top">
+any value.
+</td></tr>
+<tr valign="top"><td valign="top">
+array
+</td><td valign="top">
+any array value.
+</td></tr>
+<tr valign="top"><td valign="top">
+binary
+</td><td valign="top">
+a binary value.
+</td></tr>
+<tr valign="top"><td valign="top">
+boolean
+</td><td valign="top">
+a Boolean value.
+</td></tr>
+<tr valign="top"><td valign="top">
+date
+</td><td valign="top">
+a date-time value.
+</td></tr>
+<tr valign="top"><td valign="top">
+numeric
+</td><td valign="top">
+a numeric value.
+</td></tr>
+<tr valign="top"><td valign="top">
+query
+</td><td valign="top">
+a query object.
+</td></tr>
+<tr valign="top"><td valign="top">
+string
+</td><td valign="top">
+a string value or a single character.
+</td></tr>
+<tr valign="top"><td valign="top">
+struct
+</td><td valign="top">
+a structure.
+</td></tr>
+<tr valign="top"><td valign="top">
+UUID
+</td><td valign="top">
+a Universally Unique Identifier (UUID) formatted as `XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXXXXX' where `X' stands for a hexadecimal digit (0-9 or A-F). See <a href="../3_ColdFusion_Functions/lr3_067.htm#1643076">CreateUUID</a>.
+</td></tr>
+<tr valign="top"><td valign="top">
+variableName
+</td><td valign="top">
+a valid variable name.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1971540"></a>
+<h4> DEFAULT</h4>
+<p>Optional. Default value to set the parameter to if it does not exist.</p><a name="1971542"></a>
+ 
+<H3>Usage</H3>
+<p>There are three ways to use CFPARAM:</p><ul>
+<a name="1971544"> </a>
+<li>Test for a required variable -- Use CFPARAM with only the NAME attribute to test that a required variable exists. If the variable does not exist, ColdFusion server stops processing the page and returns an error.
+
+<a name="2142691"> </a>
+</li>
+<li>Test for a required variable and for the type of variable -- Use CFPARAM with the NAME attribute and the TYPE attribute to test that a required variable exists, and that it is of the specified type.
+<a name="1971545"> </a>
+</li>
+<li>Test for an optional variable -- Use CFPARAM with both the NAME and DEFAULT attributes to test for the existence of an optional variable. If the variable exists, processing continues and the value is not changed. If the variable does not exist, it is created and set to the value of the DEFAULT attribute.
+</li>
+</ul>
+<a name="2045101"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfparam
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how CFPARAM operates ---&gt;
+&lt;CFPARAM NAME="storeTempVar" DEFAULT="my default value"&gt;
+&lt;CFPARAM NAME="tempVar" DEFAULT="my default value"&gt;
+
+&lt;!--- check if form.tempVar was passed ---&gt;
+&lt;CFIF IsDefined("form.tempVar") is "True"&gt;
+&lt;!--- check if form.tempVar is not blank ---&gt;
+    &lt;CFIF form.tempVar is not ""&gt;
+&lt;!--- if not, set tempVar to value of form.tempVar ---&gt;
+        &lt;CFSET tempVar = form.tempVar&gt;
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFPARAM Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+
+&lt;H3&gt;CFPARAM Example&lt;/H3&gt;
+&lt;P&gt;CFPARAM is used to set default values so that
+the developer does not need to check for the existence
+of a variable using a function like IsDefined.
+
+&lt;P&gt;The default value of our tempVar is "&lt;CFOUTPUT&gt;#StoreTempVar#
+  &lt;/CFOUTPUT&gt;"
+
+&lt;!--- check if tempVar is still the same as StoreTempVar
+and that tempVar is not blank ---&gt;
+&lt;CFIF tempVar is not #StoreTempVar# and tempVar is not ""&gt;
+&lt;H3&gt;The value of tempVar has changed: the new value
+is &lt;CFOUTPUT&gt;#tempVar#&lt;/CFOUTPUT&gt;&lt;/H3&gt;
+&lt;/CFIF&gt;
+
+&lt;P&gt;
+&lt;FORM ACTION="cfparam.cfm" METHOD="POST"&gt;
+Type in a new value for tempVar, and hit submit:&lt;BR&gt;
+&lt;INPUT TYPE="Text" NAME="tempVar"&gt;
+
+&lt;INPUT TYPE="Submit" NAME="" VALUE="submit"&gt;
+
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfparam
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_067.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_069.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

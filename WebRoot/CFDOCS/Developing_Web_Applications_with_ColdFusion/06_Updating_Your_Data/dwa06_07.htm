@@ -1,0 +1,209 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating an Action Page to Update Data </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Updating Your Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012126"></a>
+ <H1>Creating an Action Page to Update Data </H1>
+
+
+
+<p>You can create an action page to update data with either the CFUPDATE tag or CFQUERY with the UPDATE statement.</p><p>The CFUPDATE tag is the easiest way to handle simple updates from a front end form. The CFUPDATE tag has an almost identical syntax to the CFINSERT tag.</p><p>To use CFUPDATE, you must include all of the fields that make up the primary key in your form submittal. The CFUPDATE tag automatically detects the primary key fields in the table you are updating and looks for them in the submitted form fields. ColdFusion uses the primary key field(s) to select the record to update. It then updates the appropriate fields in the record using the remaining form fields submitted.</p><p>For more complicated updates, you can use a SQL UPDATE statement in a CFQUERY tag instead of a CFUPDATE tag. The SQL update statement is more flexible for complicated updates.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an update page with CFUPDATE:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+<PRE><span class="codemark">&lt;CFUPDATE DATASOURCE="CompanyInfo"
+</span></PRE></pre><pre>    TABLENAME="Employees"&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Update Employee&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;H1&gt;Employee Added&lt;/H1&gt;
+&lt;CFOUTPUT&gt;
+You have updated the information for #Form.FirstName# #Form.LastName# 
+in the Employees database.
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page. as <code>updatepage.cfm</code>.
+
+</li>
+<li>View <code>updateform.cfm</code> in a browser, enter values, and click the Submit button. 
+
+</li>
+<li>The data is updated in the Employees table and the message appears.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an update page with CFQUERY:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+<PRE><span class="codemark">&lt;CFQUERY NAME="UpdateEmployee"
+</span></PRE><PRE><span class="codemark">DATASOURCE="CompanyInfo"&gt;
+</span></PRE><PRE><span class="codemark">UPDATE Employees
+</span></PRE><PRE><span class="codemark">SET Firstname='#Form.Firstname#',
+</span></PRE><PRE><span class="codemark">LastName='#Form.LastName#',
+</span></PRE><PRE><span class="codemark">Department_ID='#Form.Department_ID#'
+</span></PRE><PRE><span class="codemark">StartDate='#Form.StartDate#'&gt;
+</span></PRE><PRE><span class="codemark">Salary=#Form.Salary#&gt;
+</span></PRE></pre><pre>    WHERE Employee_ID=#Employee_ID#
+&lt;/CFQUERY&gt;
+
+&lt;H1&gt;Employee Added&lt;/H1&gt;
+&lt;CFOUTPUT&gt;
+You have updated the information for #Form.FirstName# #Form.LastName# 
+in the Employees database.
+&lt;/CFOUTPUT&gt;
+</pre></li>
+<li>Save the page. as <code>updatepage.cfm</code>.
+
+</li>
+<li>View <code>updateform.cfm</code> in a browser, enter values, and click the Submit button. 
+
+</li>
+<li>The data is updated into the Employees table and the message appears.
+
+</li>
+</ol>
+<a name="1016494"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><pre>&lt;CFQUERY NAME="UpdateEmployee"
+    DATASOURCE="CompanyInfo"&gt;
+    UPDATE Employees
+        SET Firstname='#Form.Firstname#',
+        LastName='#Form.LastName#',
+        
+Department_ID='#Form.Department_ID#'
+        StartDate='#Form.StartDate#'&gt;
+        Salary=#Form.Salary#&gt;
+    WHERE Employee_ID=#Employee_ID#
+&lt;/CFQUERY&gt;
+</pre></td><td valign="top">
+After the SET clause, you must name a table column. Then, you indicate a constant or expression as the value for the column.
+
+Be sure to remember the WHERE statement. If you do not use it, If you do not use it, the SQL UPDATE statement will apply the new information to every row in the database.
+</td></tr>
+
+</table>
+</div>
+</H3>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:45 -->
+</body>
+</html>

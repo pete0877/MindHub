@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>SpanExcluding</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_219.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_221.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1002393"></a>
+ <H1>SpanExcluding</H1>
+
+
+
+<p>Returns all characters from <em>string</em><em> </em>from its beginning until it reaches a character from the <em>set</em> of characters. The search is case-sensitive.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_114.htm#1274233">GetToken</a> and <a href="../3_ColdFusion_Functions/lr3_221.htm#1002426">SpanIncluding</a>.
+</p>
+
+<a name="1002396"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>SpanExcluding</strong>(<em>string</em>, <em>set</em>)
+</PRE><a name="1002398"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string.</p><a name="1002399"> </a>
+<h5 class="param"> set</h5>
+<p class="param">String containing one or more characters being sought.</p><a name="1807640"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="SpanExcluding
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- Displays SpanExcluding ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+SpanExcluding Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;SpanExcluding Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.myString")&gt;
+&lt;P&gt;Your string was &lt;CFOUTPUT&gt;#FORM.myString#&lt;/CFOUTPUT&gt;
+&lt;P&gt;Your set of characters was &lt;CFOUTPUT&gt;#FORM.mySet#&lt;/CFOUTPUT&gt;
+&lt;P&gt;Your string up until one of the characters in the set is:
+&lt;CFOUTPUT&gt;#SpanExcluding(FORM.myString, FORM.mySet)#&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;P&gt;Returns all characters from string from
+beginning until it reaches a character from the set
+of characters.  The search is case-sensitive.
+
+&lt;FORM ACTION="spanexcluding.cfm" METHOD="POST"&gt;
+&lt;P&gt;Enter a string:
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="myString" VALUE="Hey, you!"&gt;
+&lt;P&gt;And a set of characters:
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="mySet" VALUE="Ey"&gt;
+&lt;BR&gt;&lt;INPUT TYPE="Submit" NAME=""&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="SpanExcluding
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_219.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_221.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

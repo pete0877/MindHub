@@ -1,0 +1,140 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListAppend</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_141.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_143.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999618"></a>
+ <H1>ListAppend</H1>
+
+
+
+<p>Returns <em>list</em><em> </em>with <em>value</em> appended behind its last element.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_154.htm#1000071">ListPrepend</a>, <a href="../3_ColdFusion_Functions/lr3_151.htm#999963">ListInsertAt</a>, and <a href="../3_ColdFusion_Functions/lr3_157.htm#1000141">ListSetAt</a>.
+</p>
+
+<a name="999621"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListAppend</strong>(<em>list</em>, <em>value</em> [, <em>delimiters</em> ])
+</PRE><a name="999623"> </a>
+<h5 class="param"> list</h5>
+<p class="param">Any list.</p><a name="999624"> </a>
+<h5 class="param"> value</h5>
+<p class="param">Number or list being appended.</p><a name="999625"> </a>
+<h5 class="param"> delimiters</h5>
+<p class="param">Set of delimiters used in list.</p><a name="999626"></a>
+ 
+<H3>Usage</H3>
+<p>When appending an element into a list, ColdFusion needs to insert a delimiter. If <em>delimiters</em> contains more than one delimiter, ColdFusion defaults to the first delimiter in the string, or, (comma) if <em>delimiters</em> was omitted. </p><p>If you intend to use list functions on strings that are delimited by the conjunction ",  " (comma-space), as is common in HTTP header strings such as the COOKIE header, we recommend that you specify <em>delimiters</em> to include both comma and space because ColdFusion Server does not skip white space. For example,</p><pre>ListAppend(List, "MyCookie", "," &amp; CHR(32))
+</pre><a name="1803697"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListAppend
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows ListAppend ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ListAppend Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ListAppend Example&lt;/H3&gt;
+&lt;!--- First, query to get some values for our list ---&gt;
+&lt;CFQUERY NAME="GetParkInfo" DATASOURCE="cfsnippets"&gt;
+SELECT PARKNAME,CITY,STATE
+FROM PARKS WHERE PARKNAME LIKE `AL%'
+&lt;/CFQUERY&gt;
+&lt;CFSET temp = ValueList(GetParkInfo.ParkName)&gt;
+&lt;CFOUTPUT&gt;
+&lt;P&gt;The original list: #temp#
+&lt;/CFOUTPUT&gt;
+&lt;!--- now, append a park name to the list ---&gt;
+&lt;CFSET temp2 = ListAppend(Temp, "ANOTHER PARK", ",")&gt;
+...
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListAppend
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_141.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_143.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

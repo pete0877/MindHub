@@ -1,0 +1,142 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Customizing Email for Multiple Recipients</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 13	:&nbsp;&nbsp;Sending and Receiving Email</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997500"></a>
+ <H1>Customizing Email for Multiple Recipients</H1>
+
+
+
+<p>In the following example, a query ("GetCustomers") is run to retrieve the contact information for a list of customers. This query is then used to send an email to each customer asking them to verify that their contact information is still valid:</p><pre>&lt;CFMAIL QUERY="GetCustomers"
+    FROM="service@allaire.com"
+    TO="#EMail#"
+    SUBJECT="Contact Info Verification"&gt;
+
+Dear #FirstName# -
+
+We'd like to verify that our customer
+database has the most up-to-date contact
+information for your firm. Our current
+information is as follows:
+
+Company Name: #Company#
+Contact: #FirstName# #LastName#
+
+Address:
+    #Address1#
+    #Address2#
+    #City#, #State# #Zip#
+
+Phone: #Phone#
+Fax: #Fax#
+Home Page: #HomePageURL#
+
+Please let us know if any of the above
+information has changed, or if we need to
+get in touch with someone else in your
+organization regarding this request.
+
+Thanks,
+Allaire Customer Service
+service@allaire.com
+
+&lt;/CFMAIL&gt;
+</pre><p>Note that in the TO attribute of CFMAIL, the #Email# query column causes one message to be sent to the address listed in each row of the query. Also note the use of the other query columns (FirstName, LastName, etc.) within the CFMAIL section to customize the contents of the message for each recipient.</p><a name="997533"></a>
+ 
+<H2>Attaching a MIME file</H2>
+<p>You use the CFMAILPARAM tag to attach a file or add a header to a mail message. In the following example, a MIME-encoded file is sent along with an email message:</p><pre>&lt;CFMAIL FROM="abeecho@allaire.com"
+    TO="bobm@supercomputer.com"
+    SUBJECT="File you requested"
+&gt;
+
+Dear Bob,
+
+Here is a copy of the file you requested.
+
+Regards,
+A. Beech
+
+&lt;CFMAILPARAM FILE="c:\photos\asdl_photo.jpg"&gt;
+
+&lt;/CFMAIL&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../13_Sending_and_Receiving_Email/dwa13_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../13_Sending_and_Receiving_Email/dwa13.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../13_Sending_and_Receiving_Email/dwa13_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:56 -->
+</body>
+</html>

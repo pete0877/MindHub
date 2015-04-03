@@ -1,0 +1,124 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_103.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_001.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="996754"></a>
+<H1>Chapter 2	<br>
+ColdFusion Functions</H1>
+
+
+<p>This chapter describes each of the functions in the ColdFusion Markup Language (CFML). The introduction contains an alphabetical summary of ColdFusion functions, a list of new functions in ColdFusion 4.5, and a list of functions by category. The remainder of this chapter provides complete descriptions of each function, listed alphabetically.</p><a name="1147226"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../3_ColdFusion_Functions/lr3_001.htm#1218219">Alphabetical List of ColdFusion Functions</a>
+
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_002.htm#2632994">New Functions in ColdFusion 4.5</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_003.htm#1258462">Array Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_004.htm#2596276">Authentication Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_005.htm#2083422">Date and Time Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_006.htm#2083608">Decision Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_007.htm#2075912">Display and Formatting Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_008.htm#2596303">Dynamic Evaluation Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_009.htm#2064310">International Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_010.htm#1138950">List Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_011.htm#1138964">Mathematical Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_012.htm#2056156">Query Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_013.htm#1138971">String Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_014.htm#2060420">Structure Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_015.htm#1138978">System Functions</a>
+</li>
+<li><a href="../3_ColdFusion_Functions/lr3_016.htm#1138992">Other Functions</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_103.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_001.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

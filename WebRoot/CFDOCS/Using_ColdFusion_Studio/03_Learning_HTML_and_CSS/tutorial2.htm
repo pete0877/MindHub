@@ -1,0 +1,152 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>HTML Basics</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="486482"></a>
+ <H1>HTML Basics</H1>
+
+
+
+<p>Before you start writing pages, you'll need to know a few basic HTML concepts. HTML documents are made up of text, media content such as graphics, audio, and video, and HTML tags that determine how a Web browser displays the content.</p><a name="481675"></a>
+ 
+<H2>Tags and content</H2>
+<p>HTML tags are enclosed in brackets made of the less-than and greater-than signs on your keyboard, (&lt; &gt;). Most HTML tags consist of a start tag, <code>&lt;TAG NAME&gt;</code>, and an end tag, <code>&lt;/TAG NAME&gt;</code>. The end tag is identified by a forward slash (/) before the tag name. Some tags, such as the Break <code>&lt;BR&gt;</code> and Horizontal Rule <code>&lt;HR&gt;</code> tags, do not require an end tag.</p><p>Tag attributes and their values are entered in the start tag, <code>&lt;TAG NAME ATTRIBUTE="value"&gt;.</code> Attributes are separated from one another by a single space. There should be no spaces after the left bracket (&lt;) or before the right bracket (&gt;).</p><p>Tag and attribute names are not case-sensitive, so that <code>&lt;HTML&gt;</code> and <code>&lt;html&gt;</code> are interchangeable. Some attributes values, particularly file names, are case-sensitive, however.</p><p>Many tags can be <em>nested</em>, that is, placed inside other tags, but tags should never overlap:</p><pre>Correct: &lt;P&gt;&lt;FONT SIZE="2"&gt;<em>text</em>&lt;/FONT&gt;&lt;/P&gt;
+Incorrect: &lt;P&gt;&lt;FONT SIZE="2"&gt;<em>text</em>&lt;/P&gt;&lt;/FONT&gt;
+</pre><p>The actual page content, text, links, images, etc., is placed between the start and end tags. </p><a name="502270"></a>
+ 
+<H2>An HTML sample</H2>
+<p>Here's a brief HTML sample. Notice that the only text that will actually display in a browser is "My Home Page". The rest of this sample block will be invisible in the browser because it is enclosed in tag brackets.</p><pre>&lt;P ALIGN="Center"&gt;
+&lt;FONT SIZE="+3"&gt;<em>My Home Page</em>&lt;/FONT&gt;
+&lt;/P&gt;
+</pre><p>In this sample block, the &lt;P&gt; and &lt;FONT&gt; tags contain attributes with values for the appearance of the text. The attribute ALIGN="Center" tells the browser to center the text on the page.</p><a name="481959"></a>
+ 
+<H2>Requirements of an HTML document</H2>
+<p>When you open a new document in Studio, the default template inserts the elements required for a valid HTML document. </p><p>The default document template contains these elements:</p><pre>    &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+    
+    &lt;HTML&gt;
+    &lt;HEAD&gt;
+    &lt;TITLE&gt;Untitled&lt;/TITLE&gt;
+    &lt;/HEAD&gt;
+    
+    &lt;BODY&gt;
+    
+    
+    &lt;/BODY&gt;
+    &lt;/HTML&gt;
+</pre><p>These tags must be included in every Web page. The following table provides a brief description of each of these required elements.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Tag</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+DOCTYPE
+</td><td valign="top">
+Declares the version of HTML that you are using.
+</td></tr>
+<tr valign="top"><td valign="top">
+HTML
+</td><td valign="top">
+Marks the beginning and end of the HTML code.
+</td></tr>
+<tr valign="top"><td valign="top">
+HEAD
+</td><td valign="top">
+Contains data about the document, including the title, metadata, scripts, and a style block or style sheet link.
+</td></tr>
+<tr valign="top"><td valign="top">
+TITLE
+</td><td valign="top">
+Contains the title of the document, which is displayed in the title bar of the browser and is important for indexing documents.
+</td></tr>
+<tr valign="top"><td valign="top">
+BODY
+</td><td valign="top">
+Contains everything that will be rendered by the browser.
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

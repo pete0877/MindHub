@@ -1,0 +1,114 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using ColdFusion in a Distributed Configuration</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0324.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0326.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1052402"></a>
+ <H1>Using ColdFusion in a Distributed Configuration</H1>
+
+
+
+<p>ColdFusion 4.5 can be configured in a distributed manner where the ColdFusion engine is running on a separate computer from the Web server. Running ColdFusion in this way might be called distributed or remote ColdFusion.</p><p>To run distributed ColdFusion, you must make the following changes to a standard installation:</p><ul>
+<a name="1038289"> </a>
+<li>On the Web server side, you must notify the ColdFusion Web server plug-in that you want it to talk to a ColdFusion engine on another machine. You do this simply by making appropriate entries in an INI file. 
+
+<a name="1038298"> </a>
+</li>
+<li>On the ColdFusion engine side, you must run an additional piece of software, known as the Network Listener Module, that listens for incoming ColdFusion requests and forwards them to the ColdFusion engine running on that machine. The ColdFusion engine itself is a standard release version of the engine with no special modifications to accommodate remoting.
+</li>
+</ul>
+<p>In addition to allowing the ColdFusion engine to be located on a separate machine from the Web server, distributed ColdFusion provides the following unique capabilities:</p><ul>
+<a name="1038304"> </a>
+<li>It allows the machine hosting the Web server to potentially be of a different architecture from the machine hosting the ColdFusion engine. 
+
+<a name="1038309"> </a>
+</li>
+<li>It allows more than one Web server to be served by the same ColdFusion engine.
+</li>
+</ul>
+<p>To provide some degree of security for the data being transferred between the Web server and the ColdFusion engine, that conversation is encrypted using a standard, 56-bit DES encryption algorithm.</p><p>Although it's possible for a ColdFusion engine to simultaneously service both local and remote requests, it is not possible for a single Web server to simultaneously dispatch both local and remote ColdFusion requests. When starting up, the ColdFusion Web server plug-in determines if it's to run in local or remote mode and remains in that mode until it's shutdown.</p><a name="1047703"></a>
+ 
+<H2>Distributed ColdFusion and clustering</H2>
+<p>The distributed ColdFusion configuration is not supported when ColdFusion is also configured for clustering. The reason is that the clustering component in ColdFusion, which runs as part of the Web server, needs to be able to communicate with the ColdFusion engine. This arrangement assumes that the ColdFusion engine and the Web server are on the same machine, which is not necessarily the case in a clustered environment. </p><a name="1038319"></a>
+ 
+<H2>Changes in the 4.5 version</H2>
+<p>Remoting capabilities similar to what are now available in ColdFusion 4.0 were first provided as a special, add-on feature of ColdFusion 3.1.1. It was not possible to run the standard, release version of ColdFusion 3.1.1 in this manner. To do so, it was necessary to purchase and install special versions of the ColdFusion Web server plug-in modules on the Web server side and a separate listener module on the ColdFusion engine side. In ColdFusion 4.0 all the necessary pieces are provided as part of the standard distribution. All the supported Web server plug-ins have been enhanced to include the capability to send and receive ColdFusion data via TCP/IP, and the engine-side listener module is available as part of the standard release.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin0324.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin0326.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

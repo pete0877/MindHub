@@ -1,0 +1,144 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>IsStruct</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_136.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_138.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1578384"></a>
+ <H1>IsStruct</H1>
+
+
+
+<p>Returns TRUE if <em>variable</em> is a structure.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_014.htm#2060420">&quot;Structure Functions&quot;</a>.
+</p>
+
+<a name="1578387"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>IsStruct</strong>(<em>variable</em> )
+</PRE><a name="1578389"> </a>
+<h5 class="param"> variable</h5>
+<p class="param">Variable name.</p><a name="1803496"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsStruct
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This view-only example illustrates usage of IsStruct. ---&gt;
+&lt;P&gt;This file is similar to addemployee.cfm, which is called
+by StructNew, StructClear, and StructDelete. It is an 
+example of a custom tag used to add employees. Employee 
+information is passed through the employee structure (the 
+EMPINFO attribute). In UNIX, you must also add the Emp_ID.
+&lt;!--- 
+&lt;CFSWITCH EXPRESSION="#ThisTag.ExecutionMode#"&gt;
+   &lt;CFCASE VALUE="start"&gt;
+      &lt;CFIF IsStruct(attributes.EMPINFO)&gt;
+        &lt;CFOUTPUT&gt;Error. Invalid data.&lt;/CFOUTPUT&gt;
+          &lt;CFEXIT METHOD="ExitTag"&gt;
+      &lt;CFELSE&gt;
+         &lt;CFQUERY NAME="AddEmployee" DATASOURCE="cfsnippets"&gt;
+          INSERT INTO Employees
+               (FirstName, LastName, Email, Phone, Department)
+            VALUES 
+              &lt;CFOUTPUT&gt;
+                (
+                  `#StructFind(attributes.EMPINFO, "firstname")#' ,
+                  `#StructFind(attributes.EMPINFO, "lastname")#' ,
+                  `#StructFind(attributes.EMPINFO, "email")#' ,
+                  `#StructFind(attributes.EMPINFO, "phone")#' ,
+                  `#StructFind(attributes.EMPINFO, "department")#'
+                 )
+              &lt;/CFOUTPUT&gt; 
+        &lt;/cfquery&gt;
+      &lt;/CFIF&gt;
+      &lt;CFOUTPUT&gt;&lt;hr&gt;Employee Add Complete&lt;/CFOUTPUT&gt;
+   &lt;/CFCASE&gt;
+&lt;/CFSWITCH&gt; ---&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="IsStruct
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_136.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_138.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

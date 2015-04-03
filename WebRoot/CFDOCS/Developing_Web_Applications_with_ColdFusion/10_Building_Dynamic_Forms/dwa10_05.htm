@@ -1,0 +1,270 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building Tree Controls with CFTREE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015475"></a>
+ <H1>Building Tree Controls with CFTREE</H1>
+
+
+
+<p>The CFTREE form lets you display hierarchical information in a space-saving collapsible tree populated from data source queries. To build a tree control with CFTREE, you use individual CFTREEITEM tags to populate the control. You can specify one of six built-in icons to represent individual items in the tree control.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create and populate a tree control from a query:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file named <code>tree1.cfm</code> in Studio.
+
+
+</li>
+<li>Modify the page so that it appears as follows:
+
+</pre><pre>&lt;CFQUERY NAME="engquery" DATASOURCE="CompanyInfo"&gt;
+    SELECT FirstName + ' ' + LastName AS FullName
+    FROM EMPLOYEES
+&lt;/CFQUERY&gt;
+&lt;CFFORM NAME="form1" ACTION="submit.cfm" 
+    METHOD="Post"&gt;
+<span class="codemark">&lt;CFTREE NAME="tree1" 
+</span><span class="codemark">REQUIRED="yes" 
+</span><span class="codemark">HSCROLL="no" 
+</span><span class="codemark">VSCROLL="yes"&gt;
+</span><span class="codemark">    &lt;CFTREEITEM VALUE=FullName
+</span><span class="codemark">QUERY="engquery"
+</span><span class="codemark">QUERYASROOT="yes"
+</span><span class="codemark">IMG="folder,document"&gt;
+</span><span class="codemark">&lt;/CFTREE&gt;
+</span>&lt;/CFFORM&gt;
+</pre></li>
+<li>Save the page and view it in your browser.
+
+</li>
+</ol>
+<a name="1124664"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFTREE NAME="tree1"
+</PRE></td><td valign="top">
+Create a tree and name it tree1.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>REQUIRED="yes" 
+</PRE></td><td valign="top">
+Specify that a user must select an item in the tree.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>HSCROLL="no" 
+</PRE></td><td valign="top">
+Don't allow horizontal scrolling.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>VSCROLL="yes"&gt;
+</PRE></td><td valign="top">
+Allow vertical scrolling.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFTREEITEM VALUE=FullName
+QUERY="engquery"
+</PRE></td><td valign="top">
+Create an item in the tree and put the results of the query named engquery in it.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>QUERYASROOT="yes"
+</PRE></td><td valign="top">
+Specify the query name as the root level of the tree control.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>IMG="folder,document"
+</PRE></td><td valign="top">
+Use the images "folder" and "document" that ship with ColdFusion in the tree structure.
+</td></tr>
+
+</table>
+</div>
+</H3>
+<a name="1015510"></a>
+ 
+<H2>Grouping output from a query</H2>
+<p>In a similar query, you may want to organize your employees by the department. In this case, you separate column names with commas in the CFTREEITEM VALUE attribute</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To organize the tree based on ordered results of a query:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file named <code>tree2.cfm</code> in Studio.
+
+
+</li>
+<li>Modify the page so that it appears as follows:
+
+</pre><pre>&lt;!--- CFQUERY with an ORDER BY clause ---&gt;
+&lt;CFQUERY NAME="deptquery" DATASOURCE="CompanyInfo"&gt;
+    SELECT Department_ID, FirstName + ' ' + LastName
+    AS FullName
+    FROM EMPLOYEES
+    ORDER BY Department_ID
+&lt;/CFQUERY&gt;
+
+&lt;!--- Build the tree control ---&gt;
+&lt;CFFORM NAME="form1" ACTION="submit.cfm"
+    METHOD="Post"&gt;
+
+&lt;CFTREE NAME="tree1"
+    HSCROLL="no"
+    VSCROLL="no"
+    BORDER="yes"
+    HEIGHT="350"
+    REQUIRED="yes"&gt;
+
+&lt;CFTREEITEM VALUE="Department_ID, FullName"
+    QUERY="deptquery"
+    QUERYASROOT="Department_ID"
+    IMG="cd,folder"&gt;
+
+&lt;/CFTREE&gt;
+
+&lt;BR&gt;&lt;INPUT TYPE="Submit" VALUE="Submit"&gt;
+&lt;/CFFORM&gt;
+</pre></li>
+<li>Save the page and view it in your browser.
+
+</li>
+</ol>
+<a name="1015539"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>ORDER BY Department_ID
+</PRE></td><td valign="top">
+Order the query results by department.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFTREEITEM 
+VALUE="Department_ID, FullName"
+</PRE></td><td valign="top">
+Popluate the tree with the Department ID, and under each department, the Full Name for each employee in the department
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>QUERYASROOT="Department_ID"
+</PRE></td><td valign="top">
+Make the Department ID the root of the tree
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>IMG="cd,folder"&gt;
+</PRE></td><td valign="top">
+Use the ColdFusion-supplied images CD and Folder.
+</td></tr>
+
+</table>
+</div>
+</H3>
+<p>Note that the comma-separated items in the IMG and the VALUE attributes correspond. If you leave out the IMG attribute, ColdFusion uses the folder image for all levels in the tree.</p><a name="1015555"></a>
+ 
+<H2>CFTREE form variables</H2>
+<p>The CFTREE tag allows you to force a user to select an item from the tree control by setting the REQUIRED attribute to YES. With or without the REQUIRED attribute, ColdFusion passes two form variables to the application page specified in the CFTREE ACTION attribute:</p><ul>
+<li>form.<em>treename</em>.node -- Returns the node of the user selection.
+
+</li>
+<li>form.<em>treename</em>.path -- Returns the complete path of the user selection, in the form: root\node1\node2\node_n\<em>value</em>
+</li>
+</ul>
+<p>The root part of the path is only returned if you set the COMPLETEPATH attribute tof CFTREE to YES; otherwise, the path value starts with the first node.</p><p>In the previous example, if the user selects the name "John Allen" in this tree, the following form variables are returned by ColdFusion:</p><pre>form.tree1.node = John Allen
+form.tree1.path = Department_ID\3\John Allen
+</pre><p>You can specify the backslash character used to delimit each element of the path form variable in the CFTREE DELIMITER attribute.</p><a name="1015568"></a>
+ 
+<H2>Input validation</H2>
+<p>Although, the CFTREE does not include a VALIDATE attribute, you can use the REQUIRED attribute to force a user to select an item from the tree control. In addition, you can use the ONVALIDATE attribute to specify the JavaScript code to perform validation.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

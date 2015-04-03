@@ -1,0 +1,320 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Interface Request</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1822.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1824.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1020988"></a>
+ <H1>Interface Request</H1>
+
+
+
+<pre>public abstract interface Request
+</pre><p>Interface to a request made to a CustomTag. This interface includes methods for 
+retrieving attributes passed to the tag (including queries) and reading global tag 
+settings. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Method Summary</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>boolean
+</PRE></td><td valign="top"><PRE>attributeExists(String name) 
+</PRE></td><td valign="top">
+Checks to see whether the attribute was passed to this tag.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>boolean
+</PRE></td><td valign="top"><PRE>debug() 
+</PRE></td><td valign="top">
+Checks whether the tag contains the <code>DEBUG</code> attribute.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>String
+</PRE></td><td valign="top"><PRE>getAttribute(String name) 
+</PRE></td><td valign="top">
+Retrieves the value of the passed attribute.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>String
+</PRE></td><td valign="top"><PRE>getAttributeList() 
+</PRE></td><td valign="top">
+Retrieves a list of all attributes passed to the tag.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>int
+</PRE></td><td valign="top"><PRE>getIntAttribute(String name) 
+</PRE></td><td valign="top">
+Retrieves the value of the passed attribute as an integer.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>int
+</PRE></td><td valign="top"><PRE>getIntAttribute(String name, int def) 
+</PRE></td><td valign="top">
+Retrieves the value of the passed attribute as an integer (returns default if the attribute does not exist or is not a valid number).
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>Query
+</PRE></td><td valign="top"><PRE>getQuery() 
+</PRE></td><td valign="top">
+Retrieves the query that was passed to this tag.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>String
+</PRE></td><td valign="top"><PRE>getSetting(String name) 
+</PRE></td><td valign="top">
+Retrieves the value of a global custom tag setting.
+</td></tr>
+
+</table>
+</div>
+
+</p><a name="1021215"></a>
+ 
+<H2>Method Detail</H2>
+<a name="1021403"></a>
+ 
+<H3>attributeExists</H3>
+<pre>public boolean attributeExists(String name)
+</pre><p>Checks to see whether the attribute was passed to this tag. 
+</p><p>The following example checks to see if the user passed an attribute named 
+DESTINATION to the tag and throws an exception if the attribute was not passed: 
+</p><pre>   if ( ! request.attributeExists("DESTINATION") )
+   {
+      throw new Exception( 
+         "Missing DESTINATION parameter",
+         "You must pass a DESTINATION parameter in "
+         "order for this tag to work correctly." ) ;
+   } ; 
+</pre><a name="1021414"></a>
+<h4> Parameters: </h4>
+<p><code>name</code> -- Name of the attribute to check (case insenstive) 
+</p><a name="1021416"></a>
+<h4> Returns: </h4>
+<p>Returns true if the attribute is available otherwise returns false. 
+</p><a name="1021418"></a>
+<h4> See Also: </h4>
+<pre>getAttribute,     getAttributeList
+</pre><a name="1021423"></a>
+ 
+<H3>getAttribute</H3>
+<pre>public String getAttribute(String name)
+</pre><p>Retrieves the value of the passed attribute. Returns an empty string if the attribute 
+does not exist (use     attributeExists to test whether an attribute was passed to the 
+tag). Use     getAttribute(String,String) to return a default value rather than an empty 
+string. 
+</p><p>The following example retrieves an attribute named DESTINATION and writes its 
+value back to the user: 
+</p><pre>   String strDestination = request.getAttribute("DESTINATION") ;
+   response.write( "The destination is: " + strDestination ) ; 
+</pre><a name="1021429"></a>
+<h4> Parameters: </h4>
+<p><code>name</code> -- The attribute to retrieve (case insensitive) 
+</p><a name="1021431"></a>
+<h4> Returns: </h4>
+<p>The value of the attribute passed to the tag. If no attribute of that name was passed 
+to the tag then an empty string is returned. 
+</p><a name="1021433"></a>
+<h4> See Also: </h4>
+<pre>attributeExists,     getAttributeList,     getAttribute(String,String),     
+getIntAttribute
+</pre><a name="1021456"></a>
+ 
+<H3>getIntAttribute</H3>
+<PRE>public int getIntAttribute(String name)
+                    throws NumberFormatException
+<p>Retrieves the value of the passed attribute as an integer. Returns -1 if the attribute 
+does not exist. Throws a NumberFormatException if the attribute is not a valid 
+number. Use     attributeExists to test whether an attribute was passed to the tag. Use     
+getIntAttribute(String,int) to return a default value rather than throwing an 
+exception or returning -1. 
+</p><p>The following example retrieves an attribute named PORT and writes its value 
+back to the user: 
+</p><pre>   int nPort = request.getIntAttribute("PORT") ;
+   if ( nPort != -1 )
+      response.write( "The port is: " + String.valueOf(nPort) ) ; 
+</pre></PRE><a name="1021464"></a>
+<h4> Parameters: </h4>
+<p><code>name</code> -- The attribute to retrieve (case insensitive) 
+</p><a name="1021466"></a>
+<h4> Returns: </h4>
+<p>The value of the attribute passed to the tag. If no attribute of that name was passed 
+to the tag then -1 is returned. 
+</p><a name="1021468"></a>
+<h4> Throws: </h4>
+<p><code>NumberFormatException</code> -- If the attribute is not a valid number. 
+</p><a name="1021470"></a>
+<h4> See Also: </h4>
+<pre>attributeExists,     getAttributeList,     getIntAttribute(String,int)
+</pre><a name="1021492"></a>
+ 
+<H3>getAttributeList</H3>
+<pre>public String[] getAttributeList()
+</pre><p>Retrieves a list of all attributes passed to the tag. To retrieve the value of an 
+individual attribute you should use the     getAttribute member function. 
+</p><p>The following example retrieves the list of attributes and then iterates over the list, 
+writing each attribute and its value back to the user: 
+</p><pre>   String[] attribs = request.getAttributeList() ;
+   int nNumAttribs = attribs.length ;                    
+    
+   for( int i=0; i&lt;nNumAttribs; i++ )
+   {
+      String strName = attribs[i] ;
+      String strValue = request.getAttribute( strName ) ;
+      response.write( strName + "=" + strValue + "&lt;BR&gt;" ) ;
+   } 
+</pre><a name="1021505"></a>
+<h4> Returns: </h4>
+<p>An array of strings containing the names of the attributes passed to the tag. 
+</p><a name="1021507"></a>
+<h4> See Also: </h4>
+<pre>attributeExists,     getAttribute
+</pre><a name="1021512"></a>
+ 
+<H3>getQuery</H3>
+<pre>public Query getQuery()
+</pre><p>Retrieves the query that was passed to this tag. 
+</p><p>To pass a query to a custom tag you use the QUERY attribute. This attribute should 
+be set to the name of an existing query (e.g. created using the CFQUERY tag). The 
+QUERY attribute is optional and should only be used by tags which need to 
+process an existing dataset. 
+</p><p>The following example retrieves the query which was passed to the tag. If no query 
+was passed then an exception is thrown:
+</p><pre>   Query query = request.getQuery() ;
+   if ( query == null )
+   {
+      throw new Exception(  
+         "Missing QUERY parameter. " +
+         "You must pass a QUERY parameter in "
+         "order for this tag to work correctly." ) ;   
+   } 
+</pre><a name="1021525"></a>
+<h4> Returns: </h4>
+<p>The Query that was passed to the tag. If no query was passed to the tag then null is 
+returned.
+</p><a name="1021530"></a>
+ 
+<H3>getSetting</H3>
+<pre>public String getSetting(String name)
+</pre><p>Retrieves the value of a global custom tag setting. Custom tag settings are stored 
+within the CustomTags section of the ColdFusion Registry key. 
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>All custom tags implemented in Java share a single registry key for 
+storing settings. This means that to avoid name conflicts you should 
+preface the names of your settings with the name of your     
+CustomTag class. <br>
+<br>
+For example, the code below retrieves the value of a setting named 
+'VerifyAddress' for a CustomTag class named MyCustomTag: 
+</td>
+</tr>
+</table>
+</div>
+<br><pre>   String strVerify = request.getSetting("MyCustomTag.VerifyAddress") 
+;
+   if ( Boolean.valueOf(strVerify) )
+   {
+      // Do address verification...
+   } 
+</pre><a name="1021540"></a>
+<h4> Parameters: </h4>
+<p><code>name</code> -- The name of the setting to retrieve (case insensitive) 
+</p><a name="1021542"></a>
+<h4> Returns: </h4>
+<p>The value of the custom tag setting. If no setting of that name exists then an empty 
+string is returned.
+</p><a name="1021547"></a>
+ 
+<H3>debug</H3>
+<pre>public boolean debug()
+</pre><p>Checks whether the tag contains the DEBUG attribute. You should use this 
+method to determine whether or not you need to write debug information for this 
+request (see Response.writeDebug for details on writing debug information). 
+</p><p>The following example checks to see whether the DEBUG attribute is present, and 
+if it is then it writes a brief debug message: 
+</p><pre>   if ( request.debug() )
+   {
+      response.writeDebug( "debug info" ) ;
+   } 
+</pre><a name="1021555"></a>
+<h4> Returns: </h4>
+<p>Returns true if the tag contains the DEBUG attribute otherwise returns false. 
+</p><a name="1021557"></a>
+<h4> See Also: </h4>
+<pre>Response.writeDebug
+
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1822.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1824.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

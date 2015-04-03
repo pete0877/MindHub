@@ -1,0 +1,96 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Application Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026695"></a>
+ <H1>Using Application Variables</H1>
+
+
+
+<p>Application variables require an application name be associated with them and are always scoped within that application name.</p><p>Unlike client and session variables, however, application variables do not require that a client name (client ID) be associated with them. Thus, they are available to any clients that specify the same application name.</p><p>The name you establish in the CFAPPLICATION tag is accessible elsewhere in the application by using the Application.ApplicationName variable. For example, you would use this variable in the CFLOCK tag to restrict access to application variables to one request at a time.</p><a name="1026708"></a>
+ 
+<H2>Storing application data in application variables</H2>
+<p>Application variables are designed to store application-level data. They are a convenient place to store information that all pages of your application might need no matter who (what client) is running that application. Using application variables, an application could initialize itself, say, when the first user hit any page of that application. This information could then remain available indefinitely to all subsequent hits of any pages of that application, by all users, thereby avoiding the overhead of repeated initialization.</p><p>Because the data stored in application variables is available to all pages of an application and remains available until ColdFusion Server is shut down, application variables are very convenient. However, because all clients running an application see the same set of application variables, they are not useful for client-specific information. To target variables for specific clients, use session variables.</p><a name="1026711"></a>
+ 
+<H2>Application variable time-outs</H2>
+<p>Application variables have a specific lifetime, and this lifetime defines an "application." For example, when you access an application variable inside a specific application, the variable returns a value because your request occurs on a page declared in the CFAPPLICATION tag to be part of a single application.</p><p>The default time-out period for application variables is two days. In the Variables page of the ColdFusion Administrator, you can define time-out values for application and session variables. See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a> for more information.</p><p>You can set the time-out period for application variables within a specific application (thereby overriding the default setting in the ColdFusion Administrator) by using the APPLICATIONTIMEOUT attribute of the CFAPPLICATION tag.</p><p>If no clients access the application within the specified time-out period, ColdFusion Server destroys its application variables.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

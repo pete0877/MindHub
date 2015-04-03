@@ -1,0 +1,169 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ColdFusion Features</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Introduction_to_ColdFusion/dwa01_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Introduction_to_ColdFusion/dwa01.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Introduction_to_ColdFusion/dwa01_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Introduction to ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1013022"></a>
+ <H1>ColdFusion Features</H1>
+
+
+
+<p>ColdFusion provides a comprehensive set of features that enable: </p><ul>
+<li>Rapid development
+
+</li>
+<li>Scalable deployment
+</li>
+<li>Open integration
+</li>
+<li>Complete security
+</li>
+</ul>
+<a name="1013028"></a>
+ 
+<H2>Rapid development</H2>
+<p>The ColdFusion development platform enhances the speed and ease of development through the following features:</p><ul>
+<li>A tag-based server scripting language that is powerful and intuitive.
+
+</li>
+<li>Two-way visual programming and database tools.
+</li>
+<li>Remote interactive debugging for quickly identifying and fixing problems.
+</li>
+<li>Web application wizards to automate common development tasks.
+</li>
+<li>Source control integration to enable team development.
+</li>
+<li>Secure file and database access via HTTP for remote development.
+</li>
+<li>A tag-based component architecture for flexible code reuse.
+</li>
+</ul>
+<a name="1013037"></a>
+ 
+<H2>Scalable deployment</H2>
+<p>ColdFusion delivers a high-performance platform for application deployment through the following features: </p><ul>
+<li>A multi-threaded service architecture that scales across processors.
+
+</li>
+<li>Database connection pooling to optimize database performance.
+</li>
+<li>Just-in-time page compilation and caching to accelerate page request processing.
+</li>
+<li>Dynamic load balancing for scalable performance in a cluster environment (Enterprise Edition only).
+</li>
+<li>Automatic server recovery and fail-over for high availability (Enterprise Edition only).
+</li>
+</ul>
+<a name="1013044"></a>
+ 
+<H2>Open integration</H2>
+<p>ColdFusion integrates with new and legacy technologies through the following features:</p><ul>
+<li>Database connectivity using native database drivers (Enterprise Edition only), ODBC, or OLE-DB.
+
+</li>
+<li>Embedded support for full text indexing and searching.
+</li>
+<li>Standards-based integration with directory, mail, HTTP, FTP, and file servers.
+</li>
+<li>Connectivity to distributed object technologies including CORBA (Enterprise Edition only), COM (Windows Enterprise Edition only), Java objects and EJBs.
+</li>
+<li>Open extensibility with C/C++ and Java.
+</li>
+</ul>
+<a name="1013051"></a>
+ 
+<H2>Complete security</H2>
+<p>ColdFusion provides a foundation for building secure applications through the following features:</p><ul>
+<li>Integration with existing authentication systems including Windows NT domain and LDAP directory servers, and proprietary user and group databases.
+
+</li>
+<li>Advanced access control so that server administrators can control developers' access to files and data sources.
+</li>
+<li>Support for existing database security.
+</li>
+<li>Server sandbox security for protecting multiple applications on a single server (Enterprise Edition only).
+</li>
+<li>Support for existing Web server authentication, security, and encryption.
+</li>
+</ul>
+<p>For detailed information on security, refer to<a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a>. Also, for the latest publications from Allair on security, visit the Security Zone at <a href="http://www.allaire.com/developer/securityzone/">http://www.allaire.com/developer/securityzone/</a>. For a complete feature list and more detailed information, refer to the ColdFusion product pages, <a href="http://www.allaire.com/coldfusion">http://www.allaire.com/coldfusion</a>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Introduction_to_ColdFusion/dwa01_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Introduction_to_ColdFusion/dwa01.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Introduction_to_ColdFusion/dwa01_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:40 -->
+</body>
+</html>

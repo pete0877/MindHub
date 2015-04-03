@@ -1,0 +1,223 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Microsoft SQL Server Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin045.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin047.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1059178"></a>
+ <H1>Connecting to Microsoft SQL Server Databases</H1>
+
+
+
+<p>ColdFusion lets you access SQL Server databases from both Windows NT and UNIX, via ODBC and OLE DB drivers.</p><a name="1067599"></a>
+ 
+<H2>Configuring Microsoft SQL Server Options (Windows)</H2>
+<p>If ColdFusion Server is installed on a Windows NT server, you can configure Microsoft SQL Server as a ColdFusion data source using any either an ODBC or OLE DB driver. For information about using OLE DB drivers with ColdFusion data sources, see <a href="../04_Managing_Data_Sources/admin043.htm#1080974">&quot;OLE DB Drivers&quot;</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Microsoft SQL Server Options (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion ODBC options for Microsoft SQL Server data sources. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Microsoft SQL Server ODBC Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A short description of the data source. 
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=2><font face="arial,helvetica" size=-1>
+Server
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the server hosting the database you want to use. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Use Trusted Connection -- Allows SQL Server to authenticate users based on their Windows NT logins. You can use this option if the SQL Server database is using an Integrated or Mixed security mode.
+
+Integrated security uses NT authentication schemes for all connections. Only users with trusted connections are allowed to connect to SQL Server. It is not necessary to populate the ColdFusion username and password fields because SQL Server ignores these values; using a trusted connection connects to the database as a ColdFusion service user, not a ColdFusion runtime user.
+
+Mixed security allows both trusted and nontrusted connections. If the username and password are left blank, SQL Server will use NT domain credentials. However, if you do pass a username and password, SQL Server tries to authenticate using the passed information. 
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=3><font face="arial,helvetica" size=-1>
+Login Info
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Database -- The name of the SQL Server database. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Language -- The national language used by SQL Server.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Generate Stored Procedure for Prepared Statement -- Stored procedures are created for prepared statements when this option is selected. The SQL Server driver prepares a statement by placing it in a procedure and compiling that procedure. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Translation
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Convert OEM to ANSI characters -- If the SQL Server client computer and SQL Server are using the same non-ANSI character set, select this option. For example, if SQL Server uses code page 850 and this client computer uses code page 850 for the OEM code page, selecting this option will ensure that extended characters stored in the database are properly converted to ANSI for use by Windows-based applications. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1067838"></a>
+ 
+<H2>Configuring Microsoft SQL Server Options (UNIX)</H2>
+<p>If ColdFusion Server is installed on a Solaris server, you can configure Microsoft SQL Server as a ColdFusion data source using an ODBC driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: MERANT MS SQL Server Options for (Solaris)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion options for the MERANT MS SQL Server ODBC driver. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT MS SQL Server ODBC Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the database to which you want to connect.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the server that contains the SQL database you want to access. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Workstation ID
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The workstation ID used by the client.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Performance
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Row Limit -- The number of rows the driver retrieves from the server for a fetch. Enabling this option can increase performance by reducing network traffic.
+
+Disable database cursors for Select statements -- Determines whether database cursors are used for Select statements. In some cases performance degradation can occur when performing large numbers of sequential Select statements because of the amount of overhead associated with creating database cursors.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Customization
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enable Password Encryption from Open Client Library to Server -- Determines whether password encryption can be performed from the Open Client Library to the server.
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin045.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin047.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

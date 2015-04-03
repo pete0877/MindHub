@@ -1,0 +1,146 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>RemoveChars</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_201.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_203.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1222576"></a>
+ <H1>RemoveChars</H1>
+
+
+
+<p>Returns <em>string</em> with <em>count</em> characters removed from the specified starting position. Return 0 if no characters are found.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_121.htm#999211">Insert</a> and <a href="../3_ColdFusion_Functions/lr3_141.htm#999590">Len</a>.
+</p>
+
+<a name="1001841"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>RemoveChars</strong>(<em>string</em>, <em>start</em>, <em>count</em>)
+</PRE><a name="1001843"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string.</p><a name="1001844"> </a>
+<h5 class="param"> start</h5>
+<p class="param">Starting position for the search.</p><a name="1001845"> </a>
+<h5 class="param"> count</h5>
+<p class="param">Number of characters being removed.</p><a name="1806772"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="RemoveChars
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of RemoveChars ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+RemoveChars Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;RemoveChars Example&lt;/H3&gt;
+
+Returns a string with &lt;I&gt;count&lt;/I&gt; characters
+removed from the specified starting position.  Returns 0
+if no characters are found.
+
+&lt;CFIF IsDefined("FORM.myString")&gt;
+    &lt;CFIF Evaluate(FORM.numChars + FORM.start) 
+      GT Len(FORM.myString)&gt;
+        &lt;P&gt;Your string is only &lt;CFOUTPUT&gt;#Len(FORM.myString)#
+          &lt;/CFOUTPUT&gt; characters long.
+        Please enter a longer string, select fewer characters to remove or
+        begin earlier in the string.
+    &lt;CFELSE&gt;
+        &lt;CFOUTPUT&gt;
+        &lt;P&gt;Your original string:     #FORM.myString#
+        &lt;P&gt;Your modified string:    #RemoveChars(FORM.myString,
+         FORM.numChars, FORM.start)#
+        &lt;/CFOUTPUT&gt;
+...
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="RemoveChars
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_201.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_203.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

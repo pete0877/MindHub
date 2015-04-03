@@ -1,0 +1,109 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Welcome to ColdFusion Studio</title>
+</head>
+
+<body>
+
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../contents.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+ 
+
+<br>
+<a name="998495"></a>
+<H1>Welcome to ColdFusion Studio</H1>
+
+<p>ColdFusion Studio is a powerful and flexible tool for building, testing, and deploying Web content. It is also an easy-to-use editor with support for HTML, DHTML, VTML, XML, HDML, SMIL, and a variety of scripting languages.</p><a name="998698"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface2.htm#1054790">Intended Audience</a>
+
+</li>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface3.htm#1059939">Welcome to the ColdFusion 4.5 Web Application Server</a>
+</li>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface4.htm#1059945">Products and System Requirements</a>
+</li>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface5.htm#1059976">New features in ColdFusion 4.5</a>
+</li>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface6.htm#1060024">Developer Resources</a>
+</li>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface7.htm#1060067">About ColdFusion Documentation</a>
+</li>
+<li><a href="../00_Welcome_to_ColdFusion_Studio/preface8.htm#1060124">Getting Answers</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../contents.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Welcome_to_ColdFusion_Studio/preface2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:29 -->
+</body>
+</html>

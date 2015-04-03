@@ -1,0 +1,155 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Starting and Stopping ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin031.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin033.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Configuring ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1036767"></a>
+ <H1>Starting and Stopping ColdFusion</H1>
+
+
+
+<p>Generally speaking, you should always stop and restart ColdFusion Server after making any changes that affect a data source, connection parameter such as caching, thread count, and so on. Specifically, you stop and restart ColdFusion services after making any of the following changes in the Administrator:</p><ul>
+<a name="1036769"> </a>
+<li>After changing any server settings on the Server Settings page. 
+
+<a name="1036770"> </a>
+</li>
+<li>After changing the scheduled task refresh interval. This setting in the ColdFusion Administrator determines how often ColdFusion checks for newly scheduled tasks.
+<a name="1036771"> </a>
+</li>
+<li>Enabling the performance monitoring options in the ColdFusion Administrator. This feature allows you to use the native Windows NT performance monitor to track ColdFusion performance-related data. For more information, see <a href="../03_Configuring_ColdFusion_Server/admin0311.htm#1037868">&quot;Monitoring ColdFusion Performance&quot;</a>.
+<a name="1036775"> </a>
+</li>
+<li>Changing the user account under which ColdFusion runs. 
+<a name="1036776"> </a>
+</li>
+<li>Changing an existing data source setting, such as Page timeout, Buffer size, or Maintaining database connections. 
+</li>
+</ul>
+<a name="1036778"></a>
+ 
+<H2>Using batch files to start and stop ColdFusion (Windows)</H2>
+<p>You can use batch files in Windows NT to stop and restart ColdFusion services. The Windows NT NET START and NET STOP commands can be used in batch files to start and stop ColdFusion services, as in the following excerpt:</p><pre>NET STOP "Cold Fusion Application Server"
+NET START "Cold Fusion Application Server"
+</pre><p>Batch files, as well as other executables, can be scheduled in Windows NT. Refer to your Windows NT documentation for more information about scheduling, and stopping and starting NT services.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You must be logged in with Administrator rights to execute these batch 
+commands. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1036786"></a>
+ 
+<H2>Using scripts to start and stop ColdFusion (Solaris)</H2>
+<p>Two scripts are provided to start and stop the ColdFusion processes: </p><pre>&lt;installdir&gt;/coldfusion/bin/start
+&lt;installdir&gt;/coldfusion/bin/stop
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You must be logged in with root privileges to run these scripts.
+</td>
+</tr>
+</table>
+</div>
+<br><p>In addition, the ColdFusion installation installs the following scripts to start and stop ColdFusion during system boot and shutdown: </p><pre>/etc/init.d/coldfusion
+/etc/rc1.d/K19coldfusion
+/etc/rc3.d/S25coldfusion
+</pre><p>ColdFusion runs the following processes on the system: </p><ul>
+<a name="1036795"> </a>
+<li><code>cfexec</code> - Starts/stops the other processes and manages page scheduling
+
+<a name="1036796"> </a>
+</li>
+<li><code>cfserver</code> - The application server process
+<a name="1036797"> </a>
+</li>
+<li><code>cfideservice</code> - Provides system support for the Administrator
+<a name="1036798"> </a>
+</li>
+<li><code>ipaliasd</code> - Provides IP failover capability for ColdFusion Server
+</li>
+</ul>
+<p>In addition, the <code>windu_registryd42</code> process provides an emulation of the Windows registry database. This process must be running (as the root user) in order for ColdFusion to function. The start script will start this process if it isn't running (such as during system start-up). However, the stop script does not stop the registry process. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Configuring_ColdFusion_Server/admin031.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Configuring_ColdFusion_Server/admin033.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:29 -->
+</body>
+</html>

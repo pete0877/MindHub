@@ -1,0 +1,151 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>About CFScript</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 20	:&nbsp;&nbsp;Extending ColdFusion Pages with CFML Scripting</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997729"></a>
+ <H1>About CFScript</H1>
+
+
+
+<p>The ColdFusion server-side scripting language, CFScript, offers ColdFusion functionality in script syntax.</p><p>This JavaScript-like language offers the same control flow, but without tags. CFScript regions are bounded by &lt;CFSCRIPT&gt; and &lt;/CFSCRIPT&gt;. You can use ColdFusion expressions, but not CFML tags, inside a CFScript region.</p><p>See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for more information about CFML expressions.</p><a name="1005694"></a>
+ 
+<H2>CFScript example</H2>
+<p>The following example shows how a block of CFSET tags can be rewritten in CFScript:</p><a name="1005733"></a>
+ 
+<H3>Using CFML tags</H3>
+<pre>&lt;CFSET employee=StructNew()&gt;
+    &lt;CFSET employee.firstname=FORM.firstname&gt;
+    &lt;CFSET employee.lastname=FORM.lastname&gt;
+    &lt;CFSET employee.email=FORM.email&gt;
+    &lt;CFSET employee.phone=FORM.phone&gt;
+    &lt;CFSET employee.department=FORM.department&gt;
+&lt;CFOUTPUT&gt;About to add #FORM.firstname# #FORM.lastname#
+&lt;/CFOUTPUT&gt;
+</pre><a name="1005781"></a>
+ 
+<H3>Using CFScript</H3>
+<pre>&lt;CFSCRIPT&gt;
+    employee=StructNew();
+    employee.firstname=FORM.firstname;
+    employee.lastname=FORM.lastname;
+    employee.email=FORM.email;
+    employee.phone=FORM.phone;
+    employee.department=FORM.department;
+    WriteOutput("About to add " &amp; FORM.firstname &amp; " " &amp;
+FORM.lastname);
+&lt;/CFSCRIPT&gt;
+</pre><p>The WriteOutput function appends text to the page output stream. Although you can call this function anywhere within a page, it is most useful inside a CFSCRIPT block. See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for information on the WriteOutput function.</p><a name="997732"></a>
+ 
+<H2>Supported statements</H2>
+<p>CFScript supports the following statements:</p><ul>
+<li>if-else
+
+</li>
+<li>while
+</li>
+<li>do-while
+</li>
+<li>for
+</li>
+<li>break
+</li>
+<li>continue
+</li>
+<li>for-in
+</li>
+<li>switch-case
+</li>
+</ul>
+<a name="1005653"></a>
+ 
+<H3>For more information</H3>
+<p>The following JavaScript references may be useful in understanding the concepts and control flow statements in CFScript:</p><ul>
+<li><a href="http://developer.netscape.com/library/documentation/communicator/jsguide4/index.htm">Netscape's JavaScript Guide</a>
+
+</li>
+<li><a href="http://developer.netscape.com/library/documentation/communicator/jsref/index.htm">Netscape's JavaScript Reference</a>
+</li>
+<li>David Flanagan's <em>JavaScript: The Definitive Guide</em>, published by O'Reilly &amp; Associates, 1996, 1998,<a href=" http://www.oreilly.com"> http://www.oreilly.com</a>.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:06 -->
+</body>
+</html>

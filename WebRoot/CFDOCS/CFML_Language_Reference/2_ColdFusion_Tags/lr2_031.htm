@@ -1,0 +1,302 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFFILE ACTION="Upload"</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_030.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_032.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1968485"></a>
+ <H1>CFFILE ACTION="Upload"</H1>
+
+
+
+<p>Use CFFILE with the Upload action to upload a file specified in a form field to a directory on the Web server. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The MODE attribute applies to ColdFusion on Solaris and HP-UX, only. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1968488"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFFILE ACTION="Upload"
+    FILEFIELD="formfield"
+    DESTINATION="full_path_name"
+    NAMECONFLICT="behavior"
+    ACCEPT="mime_type/file_type"
+    MODE="permission"
+    ATTRIBUTES="file_attributes"&gt;
+</PRE><a name="1968490"></a>
+<h4> FILEFIELD</h4>
+<p>Required. The name of the form field that was used to select the file. </p><p><strong>Note</strong>: Do not use pound signs (#) to specify the field name. </p><a name="1968493"></a>
+<h4> DESTINATION</h4>
+<p>Required. The full path name of the destination directory on the Web server where the file should be saved. A trailing slash must be included in the target directory when uploading a file. Use the backward slash (\) on Windows ; use the forward slash (/) on UNIX.</p><p><strong>Note</strong>: The directory does not need to be beneath the root of the Web server document directory. </p><a name="1968496"></a>
+<h4> NAMECONFLICT</h4>
+<p>Optional. Default is error. Determines how the file should be handled if its name conflicts with the name of a file that already exists in the directory. Valid entries are:</p><ul>
+<a name="1968498"> </a>
+<li>Error -- Default. The file will not be saved, and ColdFusion will stop processing the page and return an error.
+
+<a name="1968499"> </a>
+</li>
+<li>Skip -- Neither saves the file nor throws an error. This setting is intended to allow custom behavior based on inspection of FILE properties.
+<a name="1968500"> </a>
+</li>
+<li>Overwrite -- Replaces an existing file if it shares the same name as the CFFILE destination.
+<a name="1968501"> </a>
+</li>
+<li>MakeUnique -- Automatically generates a unique filename for the upload. This name will be stored in the FILE object variable "ServerFile. " You can use this variable to record what name was used when the file was saved. 
+</li>
+</ul>
+<a name="1968502"></a>
+<h4> ACCEPT</h4>
+<p>Optional. Use to limit what types of files will be accepted. Enter one or more MIME types, each separated by comma, of the file types you want to accept. For example, to allow uploads of GIF and Microsoft Word files, enter:</p><pre>ACCEPT="image/gif, application/msword"
+</pre><p>Note that the browser uses the file extension to determine file type. </p><a name="2443133"></a>
+<h4> MODE</h4>
+<p>Optional. Defines permissions for an uploaded file on Solaris or HP-UX. Ignored in Windows. Valid entries correspond to the octal values (not symbolic) of the UNIX chmod command. Permissions are assigned for owner, group, and other, respectively. For example:</p><pre>MODE=644
+</pre><p>Assigns the owner read/write permissions and group/other read permission.</p><pre>MODE=666
+</pre><p>Assigns read/write permissions for owner, group, and other.</p><pre>MODE=777
+</pre><p>Assigns read, write, and execute permissions for all. </p><a name="1968514"></a>
+<h4> ATTRIBUTES</h4>
+<p>Optional. A comma-delimited list of file attributes to be set on the file being uploaded. The following file attributes are supported:</p><ul>
+<a name="1968516"> </a>
+<li>ReadOnly
+
+<a name="1968517"> </a>
+</li>
+<li>Temporary
+<a name="1968518"> </a>
+</li>
+<li>Archive
+<a name="1968519"> </a>
+</li>
+<li>Hidden
+<a name="1968520"> </a>
+</li>
+<li>System
+<a name="1968521"> </a>
+</li>
+<li>Normal
+</li>
+</ul>
+<p>If ATTRIBUTES is not used, the file's attributes are maintained. If Normal is specified as well as any other attributes, Normal is overridden by whatever other attribute is specified. </p><p>Individual attributes must be specified explicitly. For example, if you specify just the ReadOnly attribute, all other existing attributes are overwritten.</p><a name="1968524"></a>
+ 
+<H3>Examples</H3>
+<p>The following example will create a unique filename if there is a name conflict when the file is uploaded on Windows: </p><pre>&lt;CFFILE ACTION="Upload" 
+    FILEFIELD="FileContents" 
+    DESTINATION="c:\web\uploads\" 
+    ACCEPT="text/html" 
+    NAMECONFLICT="MakeUnique"&gt;
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>On Windows, you must include the backward slash (\) after the 
+destination directory name. On UNIX, you must include the forward 
+slash (/) after the destination directory. In this example, the specified 
+destination directory is "uploads. " 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1968528"></a>
+ 
+<H2>Evaluating the results of a file upload</H2>
+<p>After a file upload is completed, you can retrieve status information using file upload parameters. This status information includes a wide range of data about the file, such as the file's name and the directory where it was saved. File upload status parameters use the "File " prefix, for example, File.ClientDirectory. The file status parameters can be used anywhere other ColdFusion parameters can be used.</p><p>The following file upload status parameters are available after an upload.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>File Upload Parameters&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Parameter </strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+AttemptedServerFile
+</td><td valign="top"><p>Initial name ColdFusion used attempting to save a file, for example, myfile.txt.</p></td></tr>
+<tr valign="top"><td valign="top">
+ClientDirectory 
+</td><td valign="top"><p>Directory location of the file uploaded from the client's system.</p></td></tr>
+<tr valign="top"><td valign="top">
+ClientFile 
+</td><td valign="top"><p>Name of the file uploaded from the client's system.</p></td></tr>
+<tr valign="top"><td valign="top">
+ClientFileExt
+</td><td valign="top"><p>Extension of the uploaded file on the client's system without a period, for example, txt not .txt.</p></td></tr>
+<tr valign="top"><td valign="top">
+ClientFileName
+</td><td valign="top"><p>Filename without an extension of the uploaded file on the client's system.</p></td></tr>
+<tr valign="top"><td valign="top">
+ContentSubType
+</td><td valign="top">
+ MIME content subtype of the saved file.
+</td></tr>
+<tr valign="top"><td valign="top">
+ContentType
+</td><td valign="top">
+ MIME content type of the saved file.
+</td></tr>
+<tr valign="top"><td valign="top">
+DateLastAccessed 
+</td><td valign="top">
+Date and time the uploaded file was last accessed.
+</td></tr>
+<tr valign="top"><td valign="top">
+FileExisted
+</td><td valign="top"><p>Indicates (Yes or No) whether or not the file already existed with the same path.</p></td></tr>
+<tr valign="top"><td valign="top">
+FileSize 
+</td><td valign="top"><p>Size of the uploaded file.</p></td></tr>
+<tr valign="top"><td valign="top">
+FileWasAppended 
+</td><td valign="top"><p>Indicates (Yes or No) whether or not ColdFusion appended the uploaded file to an existing file.</p></td></tr>
+<tr valign="top"><td valign="top">
+FileWasOverwritten
+</td><td valign="top"><p>Indicates (Yes or No) whether or not ColdFusion overwrote a file.</p></td></tr>
+<tr valign="top"><td valign="top">
+FileWasRenamed 
+</td><td valign="top"><p>Indicates (Yes or No) whether or not the uploaded file was renamed to avoid a name conflict.</p></td></tr>
+<tr valign="top"><td valign="top">
+FileWasSaved 
+</td><td valign="top"><p>Indicates (Yes or No) whether or not Cold Fusion saved a file.</p></td></tr>
+<tr valign="top"><td valign="top">
+OldFileSize
+</td><td valign="top"><p>Size of a file that was overwritten in the file upload operation.</p></td></tr>
+<tr valign="top"><td valign="top">
+ServerDirectory
+</td><td valign="top"><p>Directory of the file actually saved on the server.</p></td></tr>
+<tr valign="top"><td valign="top">
+ServerFile 
+</td><td valign="top"><p>Filename of the file actually saved on the server.</p></td></tr>
+<tr valign="top"><td valign="top">
+ServerFileExt 
+</td><td valign="top"><p>Extension of the uploaded file on the server, without a period, for example, txt not .txt.</p></td></tr>
+<tr valign="top"><td valign="top">
+ServerFileName
+</td><td valign="top"><p>Filename, without an extension, of the uploaded file on the server.</p></td></tr>
+<tr valign="top"><td valign="top">
+TimeCreated 
+</td><td valign="top"><p>Time the uploaded file was created.</p></td></tr>
+<tr valign="top"><td valign="top">
+TimeLastModified
+</td><td valign="top"><p>Date and time of the last modification to the uploaded file.</p></td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>Use the File prefix to refer to these parameters, for example, 
+#File.FileExisted#.
+</td>
+</tr>
+</table>
+</div>
+<br><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>File status parameters are read-only. They are set to the results of the 
+most recent CFFILE operation. (If two CFFILE tags execute, the results of 
+the first are overwritten by the subsequent CFFILE operation.)
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1968629"></a>
+ 
+<H3>UNIX Examples</H3>
+<p>The following three examples show the use of the MODE attribute for UNIX. The first example creates the file <code>/tmp/foo</code> with permissions defined as <code>rw-r-r</code>-- (owner=read/write, group/other=read). </p><pre>&lt;CFFILE ACTION="Write" 
+    FILE="/tmp/foo" 
+    MODE=644&gt;
+</pre><p>This example appends to the specified file and makes permissions read/write (rw) for all.</p><pre>&lt;CFFILE ACTION="Append" 
+    DESTINATION="/home/tomj/testing.txt" 
+    MODE=666  
+    OUTPUT="Is this a test?"&gt;
+</pre><p>The next example uploads a file and gives it <code>rwx-rw-rw</code> permissions (owner/group/other=read/write). </p><pre>CFFILE ACTION="Upload" 
+    FILEFIELD="fieldname" 
+    DESTINATION="/tmp/program.exe" 
+    MODE=755&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_030.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_032.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

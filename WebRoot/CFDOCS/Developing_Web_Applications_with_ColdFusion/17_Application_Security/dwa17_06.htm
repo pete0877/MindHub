@@ -1,0 +1,112 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using the CFAUTHENTICATE tag</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 17	:&nbsp;&nbsp;Application Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025857"></a>
+ <H1>Using the CFAUTHENTICATE tag</H1>
+
+
+
+<p>The CFAUTHENTICATE tag has several required attributes:</p><ul>
+<li>SECURITYCONTEXT-- Describes which security context to use for authentication and authorization. This name matches the security context as defined in the Advanced Security page of the ColdFusion Administrator.
+
+</li>
+<li>USERNAME -- The username required to access the protected resources.
+</li>
+<li>PASSWORD -- The password required to access the protected resources.
+</li>
+</ul>
+<p>The USERNAME and PASSWORD are usually variables passed in a cookie from form fields on a secure login page for the current session.</p><p>In addition, CFAUTHENTICATE has two optional attributes:</p><ul>
+<li>SETCOOKIE -- Indicates whether ColdFusion sets a cookie to contain authentication information. This cookie is encrypted and includes the user name, security context, browser remote address, and the http user agent. Default is Yes.
+
+</li>
+<li>THROWONFAILURE -- Indicates whether ColdFusion throws an exception of type Security if authentication fails. Default is Yes.
+</li>
+</ul>
+<a name="998168"></a>
+ 
+<H3>Example</H3>
+<pre>&lt;CFAUTHENTICATE SECURITYCONTEXT="SecurityContextName"
+    USERNAME=#userID#
+    PASSWORD=#pwd#&gt;
+</pre><p>If the user has not already been defined in the system, ColdFusion throws a SECURITY exception. You can either reject access to the resource or re-route the user to a login page. For example, you can display a login form and then, if the user logs in successfully, display the originally-requested page.</p><p>Go to the section <a href="../17_Application_Security/dwa17_10.htm#998190">&quot;Example of User Authentication and Authorization&quot;</a> to see a longer code example.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../17_Application_Security/dwa17_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../17_Application_Security/dwa17.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../17_Application_Security/dwa17_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:02 -->
+</body>
+</html>

@@ -1,0 +1,140 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Setting Up a Security Server</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin106.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin108.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Configuring Advanced Security</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011425"></a>
+ <H1>Setting Up a Security Server</H1>
+
+
+
+<p>The first step to implementing Advanced security is setting up a security server. In a non-clustered environment, the security server is the server hosting ColdFusion, where your ColdFusion programming resources, files, data sources, custom tags, Verity collections and so on, are stored. In a clustered environment, you can define a single security server in the cluster to handle all security authentication and authorization. In this case, the other servers in the cluster all point to the security server to authenticate and authorize users and groups. </p><p>You can only administer Advanced security from the security server. You can't administer it from a client or from another server in a cluster.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>It's a good idea to take the ColdFusion server offline while you're 
+configuring Advanced security.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set up a security server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator.Click the Advanced Security link.
+
+
+<p>You see the Advanced Server Security page.
+</p></li>
+<li>Select the Use Advanced Server Security check box. This enables you to set up a security context with policies, rules, and users.
+
+</li>
+<li>Enter the physical location of the security server and click Apply. By default, this is the localhost IP# 127.0.0.1. You can supply an IP address or a logical name that can be resolved to a physical address. 
+
+</li>
+<li>Enter a Shared Secret, which is part of the encryption key that validates Advanced security transactions. Since the default is the same for all ColdFusion Server configurations, you should change the shared secret at least once.
+
+</li>
+<li>ColdFusion reserves the Authorization and Authentication ports to pass security information. Change the port number values only in the unlikely event that these ports are already in use by some other process on the server. 
+
+</li>
+<li>Under Security Server Cache settings, click to enable the Security Server Policy Store Cache, Security Server Authorization Cache, or ColdFusion Server Cache if you want ColdFusion to cache security information and transactions on the security server. 
+
+<p>See <a href="../10_Configuring_Advanced_Security/admin108.htm#1025528">&quot;Caching Advanced Security Information&quot;</a> for a description of the 
+Advanced security caches.
+</p><p>You can also change the Refresh Interval setting for any of the caches. This 
+determines how often a cache gets flushed. 
+</p><p>The Load Security Server Policy Store Cache at Startup option loads this cache 
+every time you start ColdFusion services.
+</p><p>The Maximum Cache Entries option sets the maximum number of entries for each 
+cache buffer. If you exceed the number, a warning is written to the <code>server.log</code> file. 
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Configuring_Advanced_Security/admin106.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Configuring_Advanced_Security/admin10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Configuring_Advanced_Security/admin108.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:03:05 -->
+</body>
+</html>

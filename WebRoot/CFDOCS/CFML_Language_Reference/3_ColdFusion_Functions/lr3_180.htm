@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Min</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_179.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_181.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001163"></a>
+ <H1>Min</H1>
+
+
+
+<p>Returns the minimum, or smaller, value of two numbers.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_178.htm#1001105">Max</a>.
+</p>
+
+<a name="1001166"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Min</strong>(<em>number1</em>, <em>number2</em>)
+</PRE><a name="1001168"> </a>
+<h5 class="param"> number1, number2</h5>
+<p class="param">Any numbers.</p><a name="1805587"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Min
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the Max and Min
+of two numbers ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Min Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Min Example&lt;/H3&gt;
+&lt;CFIF IsDefined("FORM.myNum1")&gt;
+    &lt;CFIF IsNumeric(FORM.myNum1) and IsNumeric(FORM.myNum2)&gt;
+    &lt;P&gt;The maximum of the two numbers is &lt;CFOUTPUT&gt;#Max(FORM.myNum1, 
+      FORM.myNum2)#&lt;/CFOUTPUT&gt;    
+    &lt;P&gt;The minimum of the two numbers is &lt;CFOUTPUT&gt;#Min(FORM.myNum1, 
+      FORM.myNum2)#&lt;/CFOUTPUT&gt;    
+    &lt;CFELSE&gt;
+    &lt;P&gt;Please enter two numbers
+    &lt;/CFIF&gt;
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="min.cfm" METHOD="POST"&gt;
+&lt;H3&gt;Enter two numbers, and see the maximum
+and minimum of the two numbers&lt;/H3&gt;
+
+Number 1 &lt;INPUT TYPE="Text" NAME="MyNum1"&gt;
+&lt;BR&gt;Number 2 &lt;INPUT TYPE="Text" NAME="MyNum2"&gt;
+
+&lt;BR&gt;&lt;INPUT TYPE="Submit" NAME="" VALUE="See results"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Min
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_179.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_181.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

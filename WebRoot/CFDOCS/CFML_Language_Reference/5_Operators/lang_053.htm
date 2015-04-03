@@ -1,0 +1,321 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Operators</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../5_Operators/lang_052.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_054.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;ColdFusion Expressions: Operators and Other Constructs</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2672740"></a>
+ <H1>Operators</H1>
+
+
+
+<p>Operators combine sub-expressions to create more complex expressions. The general syntax for using operators is:</p><pre>Expression Operator Expression
+</pre><p>ColdFusion has four types of operators:</p><ul>
+<a name="2672745"> </a>
+<li>Arithmetic operators
+
+<a name="2672746"> </a>
+</li>
+<li>String operators
+<a name="2672747"> </a>
+</li>
+<li>Decision, or comparison, operators
+<a name="2672748"> </a>
+</li>
+<li>Boolean operators
+</li>
+</ul>
+<a name="2672757"></a>
+ 
+<H2>Arithmetic operators</H2>
+<p><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Arithmetic Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
++, -, *, /
+</td><td valign="top"><p>The basic arithmetic operators: addition, subtraction, multiplication, and division. In the case of division, the right operand cannot be zero.</p></td></tr>
+<tr valign="top"><td valign="top">
++, -
+</td><td valign="top"><p>Unary arithmetic operators for setting the sign of a number either positive or negative (+ or -).</p></td></tr>
+<tr valign="top"><td valign="top">
+MOD
+</td><td valign="top"><p>Returns the remainder (modulus) after a number is divided by a divisor. The result has the same sign as the divisor. The right operand cannot be zero. For example, 11 MOD 4 is 3.</p></td></tr>
+<tr valign="top"><td valign="top">
+\
+</td><td valign="top"><p>Divides two integer values. Use the \ (trailing slash) to separate the integers. The right operand cannot be zero. For example, 9 \ 4 is 2.</p></td></tr>
+<tr valign="top"><td valign="top">
+^
+</td><td valign="top"><p>Returns the result of a number raised to a power (exponent). Use the ^ (caret) to separate the number from the power. The left operand cannot be zero. For example, 2 ^ 3 is 8.</p></td></tr>
+
+</table>
+</div>
+The arithmetic operators are shown in the following table.</p><a name="2672797"></a>
+ 
+<H2>String operators</H2>
+<p><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>String Operators</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+&amp;
+</td><td valign="top">
+Concatenates strings.
+</td></tr>
+
+</table>
+</div>
+The is only one string operator, which is the concatenation operator.</p><a name="2672818"></a>
+ 
+<H2>Decision, or comparison, operators</H2>
+<p>ColdFusion's decision, or comparison, operators produce a Boolean TRUE/FALSE.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Decision Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+IS
+</td><td valign="top">
+Performs a case-insensitive comparison of the two values and returns true if the values are identical.
+</td></tr>
+<tr valign="top"><td valign="top">
+IS NOT
+</td><td valign="top">
+Opposite behavior of <em>is</em>.
+</td></tr>
+<tr valign="top"><td valign="top">
+CONTAINS
+</td><td valign="top">
+Checks to see if the value on the left is contained in the value on the right and returns true if it is.
+</td></tr>
+<tr valign="top"><td valign="top">
+DOES NOT CONTAIN
+</td><td valign="top">
+Opposite behavior of <em>contains</em>.
+</td></tr>
+<tr valign="top"><td valign="top">
+GREATER THAN
+</td><td valign="top">
+Checks to see if the value on the left is greater than the value on the right and returns true if it is.
+</td></tr>
+<tr valign="top"><td valign="top">
+LESS THAN
+</td><td valign="top">
+Opposite behavior of <em>greater than</em>.
+</td></tr>
+<tr valign="top"><td valign="top">
+GREATER THAN OR EQUAL TO
+</td><td valign="top">
+Checks to see if the value on the left is greater than or equal to the value on the right and returns true if it is.
+</td></tr>
+<tr valign="top"><td valign="top">
+LESS THAN OR EQUAL TO
+</td><td valign="top">
+Checks to see if the value on the left is less than or equal to the value on the right and returns true if it is.
+</td></tr>
+
+</table>
+</div>
+</p><a name="2672866"></a>
+ 
+<H3>Shorthand notation for Boolean operators</H3>
+<p>You can replace some Boolean operators with shorthand notations to make your CFML more compact, as shown in the following table:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Shorthand Notation for Boolean Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Alternative name(s)</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+IS
+</td><td valign="top">
+EQUAL, EQ
+</td></tr>
+<tr valign="top"><td valign="top">
+IS NOT
+</td><td valign="top">
+NOT EQUAL, NEQ
+</td></tr>
+<tr valign="top"><td valign="top">
+CONTAINS
+</td><td valign="top">
+Not available
+</td></tr>
+<tr valign="top"><td valign="top">
+DOES NOT CONTAIN
+</td><td valign="top">
+Not available
+</td></tr>
+<tr valign="top"><td valign="top">
+GREATER THAN
+</td><td valign="top">
+GT
+</td></tr>
+<tr valign="top"><td valign="top">
+LESS THAN
+</td><td valign="top">
+LT
+</td></tr>
+<tr valign="top"><td valign="top">
+GREATER THAN OR EQUAL TO
+</td><td valign="top">
+GTE, GE
+</td></tr>
+<tr valign="top"><td valign="top">
+LESS THAN OR EQUAL TO
+</td><td valign="top">
+LTE, LE
+</td></tr>
+
+</table>
+</div>
+</p><a name="2672915"></a>
+ 
+<H2>Boolean operators</H2>
+<p>Boolean, or Logical, operators perform logical connective and negation operations. The operands of Boolean operators are Boolean (TRUE/FALSE) values. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Boolean Operators&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Operator</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+NOT
+</td><td valign="top">
+Reverses the value of an argument. For example, NOT TRUE is FALSE and vice versa.
+</td></tr>
+<tr valign="top"><td valign="top">
+AND
+</td><td valign="top">
+Returns TRUE if both arguments are TRUE; returns FALSE otherwise. For example, TRUE AND TRUE is TRUE, but TRUE AND FALSE is FALSE.
+</td></tr>
+<tr valign="top"><td valign="top">
+OR
+</td><td valign="top">
+Returns TRUE if any of the arguments is TRUE; returns FALSE otherwise. For example, TRUE OR FALSE is TRUE, but FALSE OR FALSE is FALSE.
+</td></tr>
+<tr valign="top"><td valign="top">
+XOR
+</td><td valign="top">
+Exclusive or--either, or, but not both. Returns TRUE if the truth values of both arguments are different; returns FALSE otherwise. For example, TRUE XOR TRUE is FALSE, but TRUE XOR FALSE is TRUE.
+</td></tr>
+<tr valign="top"><td valign="top">
+EQV
+</td><td valign="top">
+Equivalence both true or both false. The EQV operator is the opposite of the XOR operator. For example, TRUE EQV TRUE is TRUE, but TRUE EQV FALSE is FALSE.
+</td></tr>
+<tr valign="top"><td valign="top">
+IMP
+</td><td valign="top">
+Implication. A IMP B is the truth value of the logical statement &quot;If A Then B.&quot; A IMP B is FALSE only when A is TRUE and B is FALSE.
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../5_Operators/lang_052.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_054.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:40:20 -->
+</body>
+</html>

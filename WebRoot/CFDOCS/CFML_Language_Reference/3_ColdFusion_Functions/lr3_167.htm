@@ -1,0 +1,326 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>LSEuroCurrencyFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_166.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_168.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1701708"></a>
+ <H1>LSEuroCurrencyFormat</H1>
+
+
+
+<p>Returns a currency value using the convention of the locale and the Euro as the currency symbol. Default value is "local." </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The locale is set with the <a href="../3_ColdFusion_Functions/lr3_215.htm#1002208">SetLocale</a> function.
+</td>
+</tr>
+</table>
+</div>
+<br><p>See, also, <a href="../3_ColdFusion_Functions/lr3_174.htm#1702979">LSParseEuroCurrency</a>, <a href="../3_ColdFusion_Functions/lr3_165.htm#1000289">LSCurrencyFormat</a>, and <a href="../3_ColdFusion_Functions/lr3_215.htm#1002208">SetLocale</a>.</p><a name="1701710"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>LSEuroCurrencyFormat</strong>(<em>currency-</em><em>number</em> [, <em>type</em> ])
+</PRE><a name="1701712"> </a>
+<h5 class="param"> currency-number</h5>
+<p class="param">The currency value. </p><a name="1701714"> </a>
+<h5 class="param"> type</h5>
+<p class="param">Currency type. Valid arguments are:</p><ul>
+<a name="1702262"> </a>
+<li><code>none</code> -- (For example, 10.00)
+
+<a name="1751298"> </a>
+</li>
+<li><code>local</code> -- (Default. For example, 10.00 &euro;)
+<a name="1702264"> </a>
+</li>
+<li><code>international</code> -- (For example, EUR10.00)
+</li>
+</ul>
+<a name="1702758"></a>
+ 
+<H3>Usage</H3>
+<p>The LSEuroCurrencyFormat function can display the Euro symbol (&euro;) only on Euro-enabled computers, such as Windows NT 4.0 SP4, that have Euro-enabled fonts installed. </p><p>This function is similar to LSCurrencyFormat except that LSEuroCurrencyFormat displays the Euro currency symbol (&euro;) or the international Euro sign (EUR) if you specify the type as local or international, respectively, and the Euro is the accepted currency of the locale.</p><a name="1702942"></a>
+ 
+<H3>Currency output </H3>
+<p>The following table shows sample currency output for some of the locales supported by ColdFusion in each of the format types: <code>local</code>, <code>international</code>, and <code>none</code>.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Currency Output by Locale&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Locale</strong>
+</th><th align="left">
+<strong>Format Type Output</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Dutch (Belgian)
+</td><td valign="top"><PRE>Local: 100.000,00 &euro; 
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Dutch (Standard)
+</td><td valign="top"><PRE>Local: &euro; 100.000,00
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+English (Australian)
+</td><td valign="top"><PRE>Local: &euro;100,000.00
+International: EUR100,000.00
+None: 100,000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+English (Canadian)
+</td><td valign="top"><PRE>Local: &euro;100,000.00
+International: EUR100,000.00
+None: 100,000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+English (New Zealand)
+</td><td valign="top"><PRE>Local: &euro;100,000.00
+International: EUR100,000.00
+None: 100,000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+English (UK)
+</td><td valign="top"><PRE>Local: &euro;100,000.00
+International: EUR100,000.00
+None: 100,000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+English (US)
+</td><td valign="top"><PRE>Local: &euro;100,000.00
+International: EUR100,000.00
+None: 100,000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+French (Belgian)
+</td><td valign="top"><PRE>Local: 100.000,00 &euro; 
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+French (Canadian)
+</td><td valign="top"><PRE>Local: 100 000,00 &euro; 
+International: EUR100 000,00
+None: 100 000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+French (Standard)
+</td><td valign="top"><PRE>Local: 100 000,00 &euro; 
+International: EUR100 000,00
+None: 100 000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+French (Swiss)
+</td><td valign="top"><PRE>Local: &euro; 100'000.00
+International: EUR100'000.00
+None: 100'000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+German (Austrian)
+</td><td valign="top"><PRE>Local: &euro; 100.000,00
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+German (Standard)
+</td><td valign="top"><PRE>Local: 100.000,00 &euro; 
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+German (Swiss)
+</td><td valign="top"><PRE>Local: &euro; 100'000.00
+International: EUR100'000.00
+None: 100'000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Italian (Standard)
+</td><td valign="top"><PRE>Local: &euro; 10.000.000
+International: EUR10.000.000
+None: 10.000.000
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Italian (Swiss)
+</td><td valign="top"><PRE>Local: &euro; 100'000.00
+International: EUR100'000.00
+None: 100'000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Norwegian (Bokmal)
+</td><td valign="top"><PRE>Local: &euro; 100 000,00
+International: EUR100 000,00
+None: 100 000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Norwegian (Nynorsk)
+</td><td valign="top"><PRE>Local: &euro; 100 000,00
+International: EUR100 000,00
+None: 100 000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Portuguese (Brazilian)
+</td><td valign="top"><PRE>Local: &euro;100.000,00
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Portuguese (Standard)
+</td><td valign="top"><PRE>Local: &euro;100.000,00
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Spanish (Mexican)
+</td><td valign="top"><PRE>Local: &euro;100,000.00
+International: EUR100,000.00
+None: 100,000.00
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Spanish (Modern)
+</td><td valign="top"><PRE>Local: 10.000.000 &euro; 
+International: EUR10.000.000
+None: 10.000.000
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Spanish (Standard)
+</td><td valign="top"><PRE>Local: 10.000.000 &euro; 
+International: EUR10.000.000
+None: 10.000.000
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Swedish
+</td><td valign="top"><PRE>Local: 100.000,00 &euro; 
+International: EUR100.000,00
+None: 100.000,00
+</PRE></td></tr>
+
+</table>
+</div>
+</p><a name="1804946"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSEuroCurrencyFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This shows LSEuroCurrencyFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;LSEuroCurrencyFormat Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;LSEuroCurrencyFormat Example&lt;/H3&gt;
+
+&lt;P&gt;LSEuroCurrencyFormat returns a currency value using
+the locale convention.  Default value is "local."
+
+&lt;!--- loop through a list of possible locales and
+show currency values for 100,000 units ---&gt;
+&lt;CFLOOP LIST="#Server.Coldfusion.SupportedLocales#"
+INDEX="locale" DELIMITERS=","&gt;
+    &lt;CFSET oldlocale = SetLocale(locale)&gt;
+
+    &lt;CFOUTPUT&gt;&lt;P&gt;&lt;B&gt;&lt;I&gt;#locale#&lt;/I&gt;&lt;/B&gt;&lt;BR&gt;
+        Local: #LSEuroCurrencyFormat(100000, "local")#&lt;BR&gt;
+        International: #LSEuroCurrencyFormat(100000, 
+"international")#&lt;BR&gt;
+        None: #LSEuroCurrencyFormat(100000, "none")#&lt;BR&gt;
+        &lt;Hr noshade&gt;
+    &lt;/CFOUTPUT&gt;
+
+&lt;/CFLOOP&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSEuroCurrencyFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_166.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_168.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

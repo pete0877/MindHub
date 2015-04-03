@@ -1,0 +1,332 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFLOOP</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_058.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_060.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015414"></a>
+ <H1>CFLOOP</H1>
+
+
+
+<p>Looping is a very powerful programming technique that lets you repeat a set of instructions or display output over and over until one or more conditions are met. CFLOOP supports five different types of loops: </p><ul>
+<a name="2149597"> </a>
+<li><a href="../2_ColdFusion_Tags/lr2_059.htm#2075510">Index Loops</a>
+
+<a name="2149598"> </a>
+</li>
+<li><a href="../2_ColdFusion_Tags/lr2_059.htm#1015818">Conditional Loops</a> 
+<a name="1015450"> </a>
+</li>
+<li><a href="../2_ColdFusion_Tags/lr2_059.htm#1015996">Looping over a Query</a>
+<a name="1015459"> </a>
+</li>
+<li><a href="../2_ColdFusion_Tags/lr2_059.htm#1016317">Looping over a List</a> 
+<a name="1015468"> </a>
+</li>
+<li><a href="../2_ColdFusion_Tags/lr2_059.htm#2139226">Looping over a COM Collection or Structure</a>
+</li>
+</ul>
+<p>The type of loop is determined by the attributes of the CFLOOP tag.</p><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfloop
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><a name="2075510"></a>
+ 
+<H2>Index Loops</H2>
+<p>An index loop repeats for a number of times determined by a range of numeric values. Index loops are commonly known as FOR loops, as in "loop FOR this range of values. "</p><a name="1015498"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFLOOP INDEX="parameter_name"
+    FROM="beginning_value"
+    TO="ending_value"
+    STEP="increment"&gt;
+    ...
+    HTML or CFML code to execute
+&nbsp;    ...
+&lt;/CFLOOP&gt;
+</PRE><a name="1052981"></a>
+<h4> INDEX</h4>
+<p>Required. Defines the parameter that is the index value. The index value will be set to the FROM value and then incremented by 1 (or the STEP value) until it equals the TO value. </p><a name="1052985"></a>
+<h4> FROM</h4>
+<p>Required. The beginning value of the index.</p><a name="1052989"></a>
+<h4> TO</h4>
+<p>Required. The ending value of the index.</p><a name="1052993"></a>
+<h4> STEP</h4>
+<p>Optional. Default is 1. Sets the value by which the loop INDEX value is incremented each time the loop is processed. </p><a name="1015667"></a>
+ 
+<H3>Examples</H3>
+<p>In this example, the INDEX variable is incremented for each iteration of the loop. The following code loops five times, displaying the INDEX value of the loop each time:</p><pre>&lt;CFLOOP INDEX="LoopCount" 
+    FROM="1" TO="5"&gt;
+The loop index is &lt;CFOUTPUT&gt;#LoopCount#&lt;/CFOUTPUT&gt;.&lt;BR&gt;
+&nbsp;
+&lt;/CFLOOP&gt;
+</pre><p>The result of this loop in a browser looks like this: </p><pre>The loop index is 1. 
+The loop index is 2. 
+The loop index is 3. 
+The loop index is 4. 
+The loop index is 5. 
+</pre><p>In this example, the STEP value has a default value of 1. But you can set the STEP value to change the way the INDEX value is incremented. The following code counts backwards from 5:</p><pre>&lt;CFLOOP INDEX="LoopCount" 
+    FROM="5" 
+    TO="1" 
+    STEP="-1"&gt;
+The loop index is &lt;CFOUTPUT&gt;#LoopCount#&lt;/CFOUTPUT&gt;.&lt;BR&gt;
+&nbsp;
+&lt;/CFLOOP&gt;
+</pre><p>The result of this loop in a browser looks like this: </p><pre>The loop index is 5. 
+The loop index is 4. 
+The loop index is 3. 
+The loop index is 2. 
+The loop index is 1. 
+</pre><a name="1015818"></a>
+ 
+<H2>Conditional Loops</H2>
+<p>A conditional loop iterates over a set of instructions while a given condition is TRUE. To use this type of loop correctly, the instructions must change the condition every time the loop iterates until the condition evaluates as FALSE. Conditional loops are commonly known as WHILE loops, as in "loop WHILE this condition is true. "</p><a name="1015834"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFLOOP CONDITION="expression"&gt;
+</PRE><a name="1015867"></a>
+<h4> CONDITION</h4>
+<p>Required. Sets the condition that controls the loop. The loop will repeat as long as the condition evaluates as TRUE. When the condition is FALSE, the loop stops.</p><a name="1015874"></a>
+ 
+<H3>Example</H3>
+<p>The following example increments the parameter "CountVar " from 1 to 5. The results look exactly like the Index loop example. </p><pre>&lt;!--- Set the variable CountVar to 0 ---&gt; 
+&lt;CFSET CountVar=0&gt; 
+ 
+&lt;!--- Loop until CountVar = 5 ---&gt; 
+&lt;CFLOOP CONDITION="CountVar LESS THAN OR EQUAL TO 5"&gt; 
+
+    &lt;CFSET CountVar=CountVar + 1&gt; 
+    The loop index is &lt;CFOUTPUT&gt;#CountVar#&lt;/CFOUTPUT&gt;.&lt;BR&gt; 
+
+&lt;/CFLOOP&gt;
+</pre><p>The result of this loop in a browser would look something like: </p><pre>The loop index is 1. 
+The loop index is 2. 
+The loop index is 3. 
+The loop index is 4. 
+The loop index is 5. 
+</pre><a name="1015996"></a>
+ 
+<H2>Looping over a Query</H2>
+<p>A loop over a query repeats for every record in the query record set. The CFLOOP results are just like a <a href="../2_ColdFusion_Tags/lr2_067.htm#2171447">CFOUTPUT</a>. During each iteration of the loop, the columns of the current row will be available for output. CFLOOP allows you to loop over tags that can not be used inside CFOUTPUT. </p><a name="1016006"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFLOOP QUERY="query_name"
+    STARTROW="row_num"
+    ENDROW="row_num"&gt;
+</PRE><a name="1016077"></a>
+<h4> QUERY</h4>
+<p>Required. Specifies the query that will control the loop. </p><a name="1016081"></a>
+<h4> STARTROW</h4>
+<p>Optional. Specifies the first row of the query that will be included in the loop. </p><a name="1016085"></a>
+<h4> ENDROW</h4>
+<p>Optional. Specifies the last row of the query that will be included in the loop. </p><a name="2098946"></a>
+ 
+<H3>Example 1</H3>
+<p>The following example shows a CFLOOP looping over a query that works in the same way as a CFOUTPUT tag using the QUERY attribute: </p><pre>&lt;CFQUERY NAME="MessageRecords" 
+    DATASOURCE="cfsnippets"&gt; 
+    SELECT * FROM&nbsp;Messages 
+&lt;/CFQUERY&gt; 
+
+&lt;CFLOOP QUERY="MessageRecords"&gt; 
+    &lt;CFOUTPUT&gt;#Message_ID#&lt;/CFOUTPUT&gt;&lt;BR&gt; 
+&lt;/CFLOOP&gt;
+</pre><a name="1016160"></a>
+ 
+<H3>Example 2</H3>
+<p>CFLOOP also provides iteration over a recordset with dynamic starting and stopping points. Thus you can begin at the tenth row in a query and end at the twentieth. This mechanism provides a simple means to get the next <em>n</em> sets of records from a query. </p><p>The following example loops from the tenth through the twentieth record returned by "MyQuery ":</p><pre>&lt;CFSET Start=10&gt; 
+&lt;CFSET End=20&gt; 
+
+&lt;CFLOOP QUERY="MyQuery" 
+    STARTROW="#Start#" 
+    ENDROW="#End#"&gt; 
+
+    &lt;CFOUTPUT&gt;#MyQuery.MyColName#&lt;/CFOUTPUT&gt;&lt;BR&gt;
+
+&lt;/CFLOOP&gt;
+</pre><p>The loop is done when there are no more records or when the current record is greater than the value of the ENDROW attribute. </p><a name="1016255"></a>
+ 
+<H3>Example 3</H3>
+<p>The advantage of looping over a query is that you can use CFML tags that are not allowed in a CFOUTPUT. The following example combines the pages returned by a query of a list of page names into a single document using the <a href="../2_ColdFusion_Tags/lr2_051.htm#2223974"></a><a href="../2_ColdFusion_Tags/lr2_052.htm#2221641">CFINCLUDE</a> tag. </p><pre>&lt;CFQUERY NAME="GetTemplate" 
+    DATASOURCE="Library"
+    MAXROWS="5"&gt; 
+    SELECT TemplateName FROM Templates 
+&lt;/CFQUERY&gt; 
+ 
+&lt;CFLOOP QUERY="TemplateName"&gt; 
+    &lt;CFINCLUDE TEMPLATE="#TemplateName#"&gt; 
+&lt;/CFLOOP&gt;
+</pre><a name="1016317"></a>
+ 
+<H2>Looping over a List</H2>
+<p>Looping over a list offers the option of walking through elements contained within a variable or value returned from an expression. In a list loop, the INDEX attribute specifies the name of a variable to receive the next element of the list, and the LIST attribute holds a list or a variable containing a list. </p><a name="1016327"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFLOOP INDEX="index_name"
+    LIST="list_items"
+    DELIMITERS="item_delimiter"&gt;
+&lt;/CFLOOP&gt;
+</PRE><a name="1732653"></a>
+<h4> INDEX</h4>
+<p>Required. In a list loop, the INDEX attribute specifies the name of a variable to receive the next element of the list, and the LIST attribute holds a list or a variable containing a list. </p><a name="1016411"></a>
+<h4> LIST</h4>
+<p>Required. The list items in the loop, provided directly or with a variable.</p><a name="1016415"></a>
+<h4> DELIMITERS</h4>
+<p>Optional. Specifies the delimiter characters used to separate items in the LIST.</p><a name="1016430"></a>
+ 
+<H3>Example</H3>
+<p>This loop will display the names of each of the Beatles:</p><pre>&lt;CFLOOP INDEX="ListElement" 
+    LIST="John,Paul,George,Ringo"&gt; 
+        &lt;CFOUTPUT&gt;#ListElement#&lt;/CFOUTPUT&gt;&lt;BR&gt; 
+&lt;/CFLOOP&gt;
+</pre><p>Although CFLOOP expects elements in the list to be separated by commas by default, you are free to specify your own element boundaries in the DELIMITER attribute. Here's the same loop as before, only this time CFLOOP will treat commas, colons, or slashes as list element delimiters:</p><pre>&lt;CFLOOP INDEX="ListElement" 
+    LIST="John/Paul,George::Ringo" 
+    DELIMITERS=",:/"&gt; 
+        &lt;CFOUTPUT&gt;#ListElement#&lt;/CFOUTPUT&gt;&lt;BR&gt; 
+&lt;/CFLOOP&gt;
+</pre><p>Delimiters need not be specified in any particular order. Note that consecutive delimiters are treated as a single delimiter; thus the two colons in the previous example are treated as a single delimiter between "George " and "Ringo. "</p><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfloop
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><a name="2139226"></a>
+ 
+<H2>Looping over a COM Collection or Structure</H2>
+<p>The CFLOOP COLLECTION attribute allows you to loop over a structure or a COM/DCOM collection object:</p><ul>
+<a name="2139299"> </a>
+<li>A COM/DCOM collection object is a set of similar items referenced as a group rather than individually. For example, the group of open documents in an application is a type of collection.
+
+<a name="2139312"> </a>
+</li>
+<li>A structure can contain either a related set of items or be used as an associative array. Looping is particularly useful when using a structure as an associative array.
+</li>
+</ul>
+<p>Each collection item is referenced in the CFLOOP by the variable name that you supply in the ITEM attribute. This type of an iteration is generally used to access every object within a COM/DCOM collection or every element in the structure. The loop is executed until all objects have been accessed. </p><p>The COLLECTION attribute is used with the ITEM attribute in a CFLOOP. In the example that follows, ITEM is assigned a variable called<code> file2, so that with each cycle in the CFLOOP, each item in the collection is referenced. In the CFOUTPUT section, the name property of the file2 item is referenced for display.</code></p><a name="2139273"></a>
+ 
+<H3>Examples</H3>
+<p>This example employs a COM object to output a list of files. In this example, <code>FFUNC</code> is a collection of <code>file2</code> objects.</p><pre>&lt;CFOBJECT CLASS=FileFunctions.files 
+    NAME=FFunc 
+    ACTION=Create&gt; 
+ 
+&lt;CFSET FFunc.Path = "c:\"&gt; 
+&lt;CFSET FFunc.Mask = "*.*" &gt; 
+&lt;CFSET FFunc.attributes = 16 &gt; 
+&lt;CFSET x=FFunc.GetFileList()&gt; 
+ 
+&lt;CFLOOP COLLECTION=#<code>FFUNC</code># ITEM=file2&gt; 
+    &lt;CFOUTPUT&gt; 
+        #file2.name# &lt;BR&gt; 
+    &lt;/CFOUTPUT&gt;  
+&lt;/CFLOOP&gt;
+</pre><p>&nbsp;</p><p>This example loops through a structure (used as an associative array):</p><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfloop
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>...&lt;!--- Create a structure and loop through its contents ---&gt;
+&lt;CFSET Departments=StructNew()&gt;
+&lt;CFSET val=StructInsert(Departments, "John ", "Sales ")&gt;
+&lt;CFSET val=StructInsert(Departments, "Tom ", "Finance ")&gt;
+&lt;CFSET val=StructInsert(Departments, "Mike ", "Education ")&gt;
+
+&lt;!--- Build a table to display the contents ---&gt;
+
+&lt;CFOUTPUT&gt;
+&lt;TABLE cellpadding= "2 " cellspacing= "2 "&gt;
+    &lt;TR&gt;
+    &lt;TD&gt;&lt;B&gt;Employee&lt;/B&gt;&lt;/TD&gt;
+    &lt;TD&gt;&lt;B&gt;Dept.&lt;/B&gt;&lt;/TD&gt;
+    &lt;/TR&gt;
+
+&lt;!--- In CFLOOP, use ITEM to create a variable 
+    called person to hold value of key as loop runs ---&gt;
+&lt;CFLOOP COLLECTION=#Departments# ITEM= "person "&gt;
+    &lt;TR&gt;
+    &lt;TD&gt;#person#&lt;/TD&gt;
+    &lt;TD&gt;#StructFind(Departments, person)#&lt;/TD&gt;
+    &lt;/TR&gt;
+&lt;/CFLOOP&gt;
+&lt;/TABLE&gt;
+&lt;/CFOUTPUT&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfloop
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_058.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_060.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

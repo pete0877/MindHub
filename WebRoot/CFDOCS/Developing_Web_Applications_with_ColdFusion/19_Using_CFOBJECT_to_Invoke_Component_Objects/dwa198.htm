@@ -1,0 +1,112 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Calling Java Objects</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa197.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 19	:&nbsp;&nbsp;Using CFOBJECT to Invoke Component Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1006848"></a>
+ <H1>Calling Java Objects</H1>
+
+
+
+<p>The CFOBJECT tag can call any Java class that's available on the Class Path specified in the ColdFusion Administrator. For example:</p><pre>&lt;CFOBJECT Type="Java" Class="MyClass" Name = "myObj"&gt;
+</pre><p>Although this loads the class, it doesn't create an instance object. Static methods and fields are accessible after the call to CFOBJECT.</p><p>To call the constructors explicitly, use the <code>init</code> method with the appropriate arguments. For example:</p><pre>&lt;CFSET ret=myObj.init(arg1, arg2)&gt;
+</pre><p>If you call a public method on the object without first calling the <code>init</code> method, the result will be an implicit call to the default constructor. Arguments and return values can be any valid Java type, for example simple arrays and objects. ColdFusion does the appropriate conversions when strings are passed as arguments, but not when they are received as return values.</p><a name="1006933"></a>
+ 
+<H2>Calling EJBs</H2>
+<p>To call an EJB, you use CFOBJECT to create and call all the appropriate objects. In the following example, it is assumed that the Weblogic JNDI is used to register and find EJBHome instances:</p><pre>&lt;CFOBJECT ACTION="Create"
+        TYPE="Java"
+        CLASS="weblogic/jndi/Environment"
+        NAME="wlEnv"&gt;
+
+&lt;CFSET ctx=wlEnv.getInitialContext()&gt;
+&lt;CFSET ejbHome=ctx.lookup("statelessSession.TraderHome")&gt;
+&lt;CFSET trader=ejbHome.Create()&gt;
+&lt;CFSET value=trader.shareValue(20,55.45)&gt;
+&lt;CFOUTPUT&gt;
+    Share value=#value#
+&lt;/CFOUTPUT&gt;
+
+&lt;CFSET value=trader.remove()&gt;
+</pre><p>In this example, the CFOBJECT tag creates the Weblogic Environment object, which is then used to get the InitialContext. The context object is used to look up the EJBHome interface. The call to create() results in getting an instance of stateless session EJB.</p><a name="1006957"></a>
+ 
+<H2>Exception handling</H2>
+<p>Exceptions thrown by Java object methods can be caught by the CFTRY and CFCATCH tags. ColdFusion checks to see if the exceptin thrown is the method exception and stores the class name of the eception in the <code>message</code> field of the CFCATCH variable.</p><p>                </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa197.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../19_Using_CFOBJECT_to_Invoke_Component_Objects/dwa19.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../20_Extending_ColdFusion_Pages_with_CFML_Scripting/dwa20.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:05 -->
+</body>
+</html>

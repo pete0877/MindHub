@@ -1,0 +1,162 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Entering Text and Other Content</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1042570"></a>
+ <H1>Entering Text and Other Content</H1>
+
+
+
+<p>At the heart of Studio's functionality is the Editor. You will do most of your development work in Edit mode and Studio gives you a wide range of tools to write and edit documents.</p><p><img src="../images/editor_view.gif">
+
+
+</p><p>The following is a list of different methods for entering page content. Each of these methods is described in detail in subsequent sections.</p><ul>
+<a name="1021497"> </a>
+<li>Type in text and code directly. Set Tag Completion, Auto Completion, and Code Template options (F8) to save keystrokes.
+
+<a name="1041620"> </a>
+</li>
+<li>Enter plain text and format it later using Studio's coding tools.
+<a name="1041037"> </a>
+</li>
+<li>Insert text and formatted content from other documents.
+<a name="1041066"> </a>
+</li>
+<li>Convert a text file to a basic HTML document.
+<a name="1041394"> </a>
+</li>
+<li>Copy content from a browser.
+<a name="1041583"> </a>
+</li>
+<li>Convert content from Microsoft Word and Excel.
+<a name="1041601"> </a>
+</li>
+<li>Open the Palette to select colors for page elements. 
+<a name="1042588"> </a>
+</li>
+<li>Drag and drop files from the Files pane to insert links to documents, images, and audio and video clips.
+</li>
+</ul>
+<a name="1042049"></a>
+ 
+<H2>Setting text options on the Editor toolbar</H2>
+<p>The Editor toolbar is on the vertical border between the Edit pane and the Resources pane. The Editor toolbar contains buttons for configuring the Editor pane display:</p><ul>
+<a name="1042058"> </a>
+<li><strong>Close</strong> -- Closes the current document.
+
+<a name="1050948"> </a>
+</li>
+<li><strong>Split current document</strong> -- Splits the current editor document into two separate viewing panes that can be resized by dragging the splitter bar.
+<a name="1050949"> </a>
+</li>
+<li><strong>Show open document list</strong> -- Displays a list of the documents currently open in the Editor window. You can pick a document from this list.
+<a name="1045960"> </a>
+</li>
+<li><strong>Word wrap</strong> -- Toggles the word wrap option. Turn word wrap on to display all text in the editor pane without the need to scroll long lines. With word wrap on, the text line length changes when you resize the editor pane.
+<a name="1042102"> </a>
+</li>
+<li><strong>Gutter</strong> -- Toggles the gutter display option. Turn the gutter on if you want to use the Compressed Text, Bookmark, or Line Number features.
+<a name="1042121"> </a>
+</li>
+<li><strong>Line number</strong> -- Toggles the line number display. Numbering is preserved if you toggle word wrap.
+<a name="1045991"> </a>
+</li>
+<li><strong>First, previous, next, and last document</strong> -- Allows you to step through your open documents. The order of documents is based on the document tabs at the bottom of the Editor pane.
+<a name="1042138"> </a>
+</li>
+<li><strong>Indent/Unindent</strong> -- Allows you to quickly set the alignment of text and code blocks. These features do not affect the browser output. They are just used to make the source page more readable.
+<a name="1046130"> </a>
+</li>
+<li><strong>Tag Insight</strong> -- Toggles Tag Insight on and off. See <a href="../05_Creating_Pages/create7.htm#1027447">&quot;Getting Help Entering Content&quot;</a> for more details on Tag Insight.
+<a name="1046160"> </a>
+</li>
+<li><strong>Tag Completion</strong> -- Toggles Tag Completion on and off. See <a href="../05_Creating_Pages/create7.htm#1024337">&quot;Tag Completion&quot;</a> for more details on Tag Completion.
+<a name="1046243"> </a>
+</li>
+<li><strong>Tag Validation</strong> -- Toggles Tag Validation on and off. See <a href="../05_Creating_Pages/create7.htm#1024166">&quot;Tag Validation&quot;</a> for more details on Tag Validation.
+<a name="1046334"> </a>
+</li>
+<li><strong>Show browser below editor</strong> -- Displays a browser pane below the Editor pane so you can see your changes as you make them.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

@@ -1,0 +1,129 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Cascading Style Sheets Tutorial</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="469157"></a>
+ <H1>Cascading Style Sheets Tutorial</H1>
+
+
+
+<p>For this tutorial, we'll produce the same Archaeology Tours page layout as the HTML tags tutorial, but the formatting will be controlled by a <code>&lt;STYLE&gt;</code> block that we'll create in the Style Editor and insert at the top of the document. </p><p>Cascading Style Sheets can be quite complex and there are a number of browser compatibility issues involved with their use. This tutorial covers the basics and is intended as an introduction to style sheet terminology and methodology and will give you some experience working in the Style Editor. </p><p>You may want to acquaint yourself with Studio's Style Editor before beginning this tutorial. It is described in <a href="../08_Editing_Pages/edit10.htm#1019478">&quot;Formatting Pages with Cascading Style Sheets&quot;</a>.</p><a name="484781"></a>
+ 
+<H2>Style syntax </H2>
+<p>The basic coding requirements for styles are:</p><ul>
+<a name="484896"> </a>
+<li>Properties and their values must be inside curly brackets ({ }).
+
+<a name="484906"> </a>
+</li>
+<li>Each property/value pair must be separated by a colon. Putting a space on both sides of the colon is a convention for better readability, but is not a requirement.
+<a name="484920"> </a>
+</li>
+<li>Each property/value pair must end with a semi-colon.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Style Editor automatically formats the style code correctly, but if you 
+edit styles manually, make sure you follow these syntax guidelines. The 
+Style Editor's color-coding feature makes it easy to identify the various 
+style elements.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="503891"></a>
+ 
+<H2>Replacing tag-based formatting with styles</H2>
+<p>To reproduce the look of the Archaeology Tours page, we will substitute style properties for tag attributes. Not all the tags in our page need to be changed and we will indicate those as we go. </p><p>Styles have great flexibility and in some cases they can be applied to a page element without requiring any changes to the tag code.</p><p>To convert the formatting to styles, we will follow this general procedure:</p><ol>
+</li>
+<li>Choose a selector in the Style Editor that is equivalent to a tag.
+
+</li>
+<li>Add properties comparable to tag attributes.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial9.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

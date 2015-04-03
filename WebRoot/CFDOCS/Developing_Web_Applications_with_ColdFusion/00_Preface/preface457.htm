@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>About ColdFusion Documentation</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Preface/preface456.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Preface/preface45.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/preface458.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Preface 	:&nbsp;&nbsp;Welcome to ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015741"></a>
+ <H1>About ColdFusion Documentation</H1>
+
+
+
+<p>ColdFusion documentation is designed to provide support for all components of the ColdFusion development system. Both the print and online versions are organized to allow you to quickly locate the information you need.</p><p>In addition to the book set, the documentation is provided in two other formats:</p><ul>
+<li><strong>HTML</strong> -- Browser-based Help references.
+
+</li>
+<li><strong>Adobe Acrobat (PDF)</strong> -- Available from the root level on the product CD-ROM and from the Developer area of <a href="http://www.allaire.com">Allaire's Web site</a> at <a href="http://www.allaire.com/developer">http://www.allaire.com/developer</a>.
+</li>
+</ul>
+<a name="1015746"></a>
+ 
+<H2>Documentation updates</H2>
+<p>Late additions and corrections to ColdFusion printed documentation are listed in the Documentation Updates page. To reach this page, open the Welcome to ColdFusion page installed with ColdFusion, where you'll find links to the update page as well as links to other pages containing useful information about ColdFusion, Allaire support options, and Allaire products and services.</p><p>For ColdFusion Studio users, you can access the documentation update page by clicking on the Help resource tab and browsing your way through the online help tree to the Allaire Support folder.</p><a name="1015749"></a>
+ 
+<H2>ColdFusion manuals</H2>
+<p>The core ColdFusion documentation set consists of the following titles.</p><a name="1015754"></a>
+ 
+<H3>Administering ColdFusion Server</H3>
+<p>Includes instructions for installing ColdFusion Server. Describes configuration options for maximizing performance, managing data sources, setting security levels, and a range of development and site management tasks. If you are administering a ColdFusion site, you'll need this book to help plan and implement ColdFusion security, load balancing, and for details about tuning the ColdFusion application server.</p><a name="1015759"></a>
+ 
+<H3>Developing Web Applications with ColdFusion</H3>
+<p>Presents the fundamentals of ColdFusion application development and deployment. Also includes detailed information about ColdFusion data sources, user interfaces, and Web technologies.</p><a name="1015764"></a>
+ 
+<H3>CFML Language Reference</H3>
+<p>Provides the complete syntax, with example code, of all CFML tags and functions.</p><a name="1015769"></a>
+ 
+<H3>Using ColdFusion Studio</H3>
+<p>Documents everything you need to know about using ColdFusion Studio, including features like projects, source control integration, as well as the Studio workspace and interface.</p><a name="1015774"></a>
+ 
+<H3>ColdFusion Quick Reference Guide</H3>
+<p>A valuable quick reference to CFML tags, functions, and variables.</p><a name="1015776"></a>
+ 
+<H2>ColdFusion Server online documentation</H2>
+<p>To view the HTML documentation, open the following URL: <a href="http://127.0.0.1/cfdocs/dochome.htm">http://127.0.0.1/cfdocs/dochome.htm</a>.</p><p>Note that because the Verity search libraries are not available on Linux for this release, the online documentation search facility is not functional on Linux. If you try to open the search page, a message box opens to explain why the facility is not available. </p><p>Acrobat versions of all ColdFusion documentation are available from the root level on the product CD. If you don't have a product CD, you can download ColdFusion documentation from the Allaire web site by visiting <a href="http://www.allaire.com/developer">http://www.allaire.com/developer</a> and clicking the Documentation link.</p><a name="1015780"></a>
+ 
+<H3>ColdFusion Studio online documentation</H3>
+<p>Click the Help resource tab in ColdFusion Studio to view online Help pages. The help tree contains ColdFusion documentation and a number of additional developer resources. Studio online documentation is searchable and individual pages can be bookmarked.</p><a name="1015783"></a>
+ 
+<H2>Printing ColdFusion documentation</H2>
+<p>If you are working with an evaluation version of ColdFusion and would like printed documentation, access the Adobe Acrobat files found from the root level on the product CD. If you do not have access to a product CD, you can download the Acrobat files from the Allaire web site: <a href="http://www.allaire.com/developer">http://www.allaire.com/developer</a>, click the Documentation link.</p><p>The Acrobat files offer excellent print output. You can print an entire manual, individual sections, or page ranges of your choice. To get the Acrobat reader, visit: <a href="http://www.acrobat.com">http://www.acrobat.com</a>. </p><a name="1015788"></a>
+ 
+<H2>Documentation conventions</H2>
+<p>When reading, please be aware of these formatting cues:</p><ul>
+<li>Code samples, filenames, and URLs are set in a <code>monospaced</code> font
+
+</li>
+<li>Notes and tips are identified by bold type
+</li>
+<li>Bulleted lists present options and features
+</li>
+<li>Numbered steps indicate procedures
+</li>
+<li>Tool button icons are generally shown with procedure steps
+</li>
+<li>Menu levels are separated by the greater than (&gt;) sign
+</li>
+<li>Text for you to type in is set in <em>italics</em>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Preface/preface456.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Preface/preface45.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/preface458.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:39 -->
+</body>
+</html>

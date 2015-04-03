@@ -1,0 +1,216 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using the CFHTTP Post Method</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997471"></a>
+ <H1>Using the CFHTTP Post Method</H1>
+
+
+
+<p>Use the Post method to send cookie, form field, CGI, URL, and file variables to a specified ColdFusion page or CGI program. For Post operations, you must use the CFHTTPPARAM tag for each variable you want to post. Unlike the Get method, Post passes data to a specified ColdFusion page or to some executable that interprets the variables being sent and returns data.</p><p>For example, when you build an HTML form using the Post method, you specify the name of the program to which form data will be passed. Using the Post method in CFHTTP is exactly the same.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To pass variables to a ColdFusion page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;CFHTTP METHOD="Post"
+    URL="http://127.0.0.1/dwa_code/server.cfm"
+    USERNAME="user1"
+    PASSWORD="user1pwd"&gt;
+
+    &lt;CFHTTPPARAM TYPE="Cookie"
+        VALUE="cookiemonster"
+        NAME="mycookie6"&gt;
+    &lt;CFHTTPPARAM TYPE="CGI"
+        VALUE="cgivar "
+        NAME="mycgi"&gt;
+    &lt;CFHTTPPARAM TYPE="URL"
+        VALUE="theurl"
+        NAME="myurl"&gt;
+    &lt;CFHTTPPARAM TYPE="Formfield"
+        VALUE="wbfreuh@allaire.com"
+        NAME="emailaddress"&gt;
+    &lt;CFHTTPPARAM TYPE="File"
+        NAME="myfile"
+        FILE="c:\temp\cyberlogo.gif"&gt;
+&lt;/CFHTTP&gt;
+
+&lt;CFOUTPUT&gt;
+    #CFHTTP.filecontent#
+    #CFHTTP.mimetype#
+&lt;/CFOUTPUT&gt;
+</pre></li>
+<li>Replace the URL with one on your server.
+
+</li>
+<li>Save the file as<strong> </strong><code>server.cfm</code> in <code>myapps</code> under your Web root directory.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view the variables:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>You have POSTed to me.&lt;BR&gt;
+&lt;CFFILE DESTINATION="c:\temp\junk"
+    NAMECONFLICT="Overwrite"
+    FILEFIELD="myfile"
+    ACTION="Upload"
+    ATTRIBUTES="Normal"&gt;
+
+&lt;CFOUTPUT&gt;
+    The URL variable is: #url.myurl# &lt;BR&gt;
+    The Cookie variable is: #cookie.mycookie6# &lt;BR&gt;
+    The CGI variable is: #cgi.mycgi#. &lt;BR&gt;
+    The Formfield variable is: #form.myformfield#. &lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre></li>
+<li>Replace c:\temp\junk with a path and filename on your hard drive.
+
+</li>
+<li>Save the file as <code>posttest.cfm</code> in <code>myapps</code> under your Web root directory.
+
+</li>
+</ol>
+<p>This example uses the CFFILE tag to upload the contents of the file variable to <code>c:\temp\junk.</code></p><p>It passes the five supported variable types to the page specified in the URL attribute. The page that receives this data is also shown. It returns the value of the variables which appears in the client's browser. This example uses the CFFILE tag in the page that receives the Posted variables to upload the contents of the file variable to <code>c:\temp\junk.</code></p><p>The CFOUTPUT section in <code>posttest.cfm</code> references the <code>CFHTTP.FileContent</code> variable, which is used to display the output from the <code>server.cfm</code> file. If the <code>CFHTTP.FileContents</code> variable were left out, the browser output would be limited to the contents of the <code>posttest.cfm</code> file.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To return resuls of a CGI program:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;CFHTTP METHOD="Post"
+    URL="http://www.thatsite.com/search.exe"
+    RESOLVEURL="Yes"&gt;
+
+    &lt;CFHTTPPARAM TYPE="Formfield" 
+        NAME="search" 
+        VALUE="hello"&gt;
+
+&lt;/CFHTTP&gt;
+
+&lt;CFOUTPUT&gt;
+    #CFHTTP.MimeType#&lt;BR&gt;
+    Length: #len(cfhttp.filecontent)# &lt;BR&gt;
+    Content: #htmlcodeformat(cfhttp.filecontent)#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre></li>
+<li>Save the file as<code> getcgivars.cfm</code> in <code>myapps</code> under your Web root directory.
+
+</li>
+</ol>
+<p>This example runs a CGI program, <code>search.exe</code>, that searches the site and returns the hits on the value specified in VALUE.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_04.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_06.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

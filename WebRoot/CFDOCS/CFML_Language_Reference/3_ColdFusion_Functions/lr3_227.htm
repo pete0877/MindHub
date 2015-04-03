@@ -1,0 +1,172 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>StructDelete</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_226.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_228.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1256452"></a>
+ <H1>StructDelete</H1>
+
+
+
+<p>Removes the specified item from the specified structure.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_224.htm#1256440">StructClear</a>, <a href="../3_ColdFusion_Functions/lr3_228.htm#1256491">StructFind</a>, <a href="../3_ColdFusion_Functions/lr3_229.htm#1256537">StructInsert</a>, <a href="../3_ColdFusion_Functions/lr3_230.htm#1256583">StructIsEmpty</a>, <a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>, <a href="../3_ColdFusion_Functions/lr3_226.htm#1257560">StructCount</a>, <a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>, and <a href="../3_ColdFusion_Functions/lr3_235.htm#1256721">StructUpdate</a>.
+</p>
+
+<a name="1256455"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>StructDelete</strong>(<em>structure</em>, <em>key</em> [, <em>indicatenotexisting</em> ])
+</PRE><a name="1257144"> </a>
+<h5 class="param"> structure</h5>
+<p class="param">Structure containing the item to be removed.</p><a name="1257149"> </a>
+<h5 class="param"> key</h5>
+<p class="param">Item to be removed.</p><a name="1257154"> </a>
+<h5 class="param"> indicatenotexisting</h5>
+<p class="param">Indicates whether the function returns FALSE if <em>key</em> does not exist. The default is FALSE, which means that the function returns Yes regardless of whether <em>key</em> exists. If you specify TRUE for this parameter, the function returns Yes if <em>key</em> exists and No if it does not.</p><a name="1807986"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="StructDelete
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to use the StructDelete function. ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;StructDelete Function&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;basefont face="Arial, Helvetica" size=2&gt;
+&lt;body  bgcolor="#FFFFD5"&gt;
+&lt;H3&gt;StructDelete Function&lt;/H3&gt;
+&lt;P&gt;
+This example uses the StructInsert and StructDelete functions. 
+&lt;!--- Establish parms for first time through  ---&gt;
+&lt;CFPARAM NAME="firstname" DEFAULT="Mary"&gt;
+&lt;CFPARAM NAME="lastname" DEFAULT="Torvath"&gt;
+&lt;CFPARAM NAME="email" DEFAULT="mtorvath@allaire.com"&gt;
+&lt;CFPARAM NAME="phone" DEFAULT="777-777-7777"&gt;
+&lt;CFPARAM NAME="department" DEFAULT="Documentation"&gt; 
+
+ &lt;CFIF IsDefined("FORM.Delete")&gt;
+  &lt;CFOUTPUT&gt;
+  Field to be deleted: #form.field#
+  &lt;/CFOUTPUT&gt;
+  &lt;P&gt;
+    &lt;CFScript&gt;
+     employee=StructNew();
+     StructInsert(employee, "firstname", firstname);
+     StructInsert(employee, "lastname", lastname);
+     StructInsert(employee, "email", email);
+     StructInsert(employee, "phone", phone);
+     StructInsert(employee, "department", department); 
+    &lt;/CFScript&gt;
+      &lt;CFOUTPUT&gt;  
+       employee is a structure: #IsStruct(employee)#
+      &lt;/CFOUTPUT&gt;
+     &lt;CFSET rc = StructDelete(employee, "#form.field#", "True")&gt;
+      &lt;CFOUTPUT&gt;
+    &lt;P&gt;Did I delete the field "#form.field#"? The code indicates: #rc#
+      &lt;/P&gt;
+    &lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;    
+&lt;CFIF NOT IsDefined("FORM.Delete")&gt;    
+&lt;FORM ACTION="structdelete.cfm" METHOD="post"&gt;
+        &lt;P&gt;Select the field to be deleted:&amp;nbsp;
+        &lt;select NAME="field"&gt;
+        &lt;option VALUE="firstname"&gt;first name
+        &lt;option VALUE="lastname"&gt;last name
+        &lt;option VALUE="email"&gt;email
+        &lt;option VALUE="phone"&gt;phone
+        &lt;option VALUE="department"&gt;department
+        &lt;/select&gt;
+        &lt;INPUT TYPE="submit" NAME="Delete" VALUE="Delete"&gt;
+     &lt;/FORM&gt;
+&lt;/CFIF&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="StructDelete
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_226.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_228.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

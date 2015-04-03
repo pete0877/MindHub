@@ -1,0 +1,161 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Document Basics</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1018187"></a>
+ <H1>Document Basics</H1>
+
+
+
+<p>By default, Studio opens a template containing just the code required for a valid HTML document. This default template is stored as <code>\Wizards\HTML\Default Template.htm</code> below your ColdFusion Studio root directory. You can edit this file and save it to change its content.</p><a name="1038398"></a>
+ 
+<H2>Opening a new document</H2>
+<p>Click the New button to open a new document based on the default template.</p><p><img src="../images/new_document_button.gif">
+
+
+</p><p>Alternatively, you can select File &gt; New to open the New Document dialog box. Here you can choose a template or a wizard to begin your development work.</p><a name="1023674"></a>
+ 
+<H2>Inserting a file into a document</H2>
+<p>You can insert files in HTML, CFML, and a number of other file formats into a Studio document.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To insert a file:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose File &gt; Insert File.
+
+
+</li>
+<li>Open the drop-down list of supported file types to filter file list.
+
+</li>
+<li>Locate the file and click OK to insert the file contents in the current document.
+
+</li>
+</ol>
+<a name="1023728"></a>
+ 
+<H2>Converting a text file </H2>
+<p>Select File &gt; Convert Text File and locate a local or remote file with a txt extension. When you click OK, the file is opened in the editor surrounded by basic HTML tags. You can then add formatting or link to a style sheet.</p><a name="1023882"></a>
+ 
+<H2>Copying content from a browser</H2>
+<ul>
+<a name="1037178"> </a>
+<li>Copying text into Edit mode strips the formatting code.
+
+<a name="1052050"> </a>
+</li>
+<li>Copying text into Design mode preserves the code and hyperlinks.
+</li>
+</ul>
+<a name="1035033"></a>
+ 
+<H2>Converting Microsoft Office content</H2>
+<p>You can convert content such as lists, tables, and worksheet cells into their equivalent HTML formatting by copying from Microsoft Word and Excel. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To convert Microsoft Word and Excel content:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select the content in Word or Excel.
+
+
+</li>
+<li>Paste the selection into the Design window at the location you want it to appear on the page.
+
+</li>
+<li>You can edit the new content visually, for example, click on a table border and drag a handle to resize it, or by switching to the editor to work directly in the code.
+
+</li>
+</ol>
+<p>To explore this feature, you can experiment with inserting different types of content from Office documents and other Windows applications. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

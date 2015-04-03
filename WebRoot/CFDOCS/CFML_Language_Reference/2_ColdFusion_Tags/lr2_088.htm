@@ -1,0 +1,180 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFSET</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_087.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_089.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1021820"></a>
+ <H1>CFSET</H1>
+
+
+
+<p>Use the CFSET tag to define a ColdFusion variable. If the variable already exists, CFSET resets it to the specified value.</p><a name="2319213"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFSET variable_name=expression&gt;
+</PRE><a name="2319215"></a>
+ 
+<H2>Arrays</H2>
+<p>The following example assigns a new array to the variable "months".</p><pre>&lt;CFSET months=ArrayNew(1)&gt;
+</pre><p>This example creates a variable "Array_Length" that resolves to the length of the array "Scores".</p><pre>&lt;CFSET Array_Length=ArrayLen(Scores)&gt;
+</pre><p>This example assigns to index position two in the array "months" the value "February".</p><pre>&lt;CFSET months[2]="February"&gt;
+</pre><a name="1021932"></a>
+ 
+<H2>Dynamic variable names</H2>
+<p>In this example, the variable name is itself a variable. </p><pre>&lt;CFSET myvariable="current_value"&gt;
+&lt;CFSET "#myvariable#"=5&gt;
+</pre><a name="1021952"></a>
+ 
+<H2>COM objects</H2>
+<p>In this example, a COM object is created. A CFSET defines a value for each method or property in the COM object interface. The last CFSET creates a variable to store the return value from the COM object's "SendMail" method.</p><pre>&lt;CFOBJECT ACTION="Create" 
+    NAME="Mailer" 
+    CLASS="SMTPsvg.Mailer"&gt; 
+ 
+&lt;CFSET MAILER.FromName=form.fromname&gt; 
+&lt;CFSET MAILER.RemoteHost=RemoteHost&gt; 
+&lt;CFSET MAILER.FromAddress=form.fromemail&gt; 
+&lt;CFSET MAILER.AddRecipient("form.fromname", "form.fromemail")&gt; 
+&lt;CFSET MAILER.Subject="Testing CFOBJECT"&gt; 
+&lt;CFSET MAILER.BodyText="form.msgbody"&gt; 
+&lt;CFSET Mailer.SMTPLog="logfile"&gt; 
+ 
+&lt;CFSET success=MAILER.SendMail()&gt; 
+ 
+&lt;CFOUTPUT&gt; #success# &lt;/CFOUTPUT&gt;
+</pre><a name="2045322"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfset
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to use CFSET ---&gt;
+&lt;CFQUERY NAME="GetMessages" DATASOURCE="cfsnippets"&gt;
+SELECT   *
+FROM     Messages
+&lt;/CFQUERY&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+CFSET Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY bgcolor=silver&gt;
+&lt;H3&gt;CFSET Example&lt;/H3&gt;
+
+&lt;P&gt;CFSET allows you to set and reassign values to local or
+global variables within a CF template.
+
+&lt;CFSET NumRecords = GetMessages.RecordCount&gt;
+&lt;P&gt;For example, the variable NumRecords has been declared on
+this template to hold the amount of records returned from
+our query (&lt;CFOUTPUT&gt;#NumRecords#&lt;/CFOUTPUT&gt;).
+
+&lt;P&gt;In addition, CFSET can be used to pass variables from other 
+pages, such as this example which takes the url parameter
+Test from this link 
+(&lt;a href="cfset.cfm?test=&lt;CFOUTPUT&gt;#URLEncodedFormat("
+hey, you, get off of my cloud")#&lt;/CFOUTPUT&gt;"&gt;click here&lt;/A&gt;) to display 
+a message: 
+&lt;P&gt;&lt;CFIF IsDefined ("url.test") is "True"&gt;
+    &lt;CFOUTPUT&gt;&lt;B&gt;&lt;I&gt;#url.test#&lt;/I&gt;&lt;/B&gt;&lt;/CFOUTPUT&gt;
+&lt;CFELSE&gt;
+    &lt;H3&gt;The variable url.test has not been passed from
+    another page.&lt;/H3&gt;
+&lt;/CFIF&gt;
+
+&lt;P&gt;Finally, CFSET can also be used to collect environmental
+variables, such as the time, the IP address of the user, or any
+other function or expression possible in ColdFusion.
+
+&lt;CFSET the_date = 
+  #DateFormat(Now())# &amp; " " &amp; #TimeFormat(Now())#&gt;
+&lt;CFSET user_ip = CGI.REMOTE_ADDR&gt;
+&lt;CFSET complex_expr = (23 MOD 12) * 3&gt;
+&lt;CFSET str_example = Reverse(Left(GetMessages.body, 35))&gt;
+...
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfset
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_087.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_089.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

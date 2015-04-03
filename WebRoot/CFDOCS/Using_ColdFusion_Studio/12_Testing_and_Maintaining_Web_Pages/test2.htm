@@ -1,0 +1,108 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working in the Results Window</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Testing and Maintaining  Web Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999314"></a>
+ <H1>Working in the Results Window</H1>
+
+
+
+<p>The Results window is a tabbed interface that opens to view the results when you run any of the following commands:</p><ul>
+<a name="1010422"> </a>
+<li>Extended Find and Replace
+
+<a name="1010426"> </a>
+</li>
+<li>Code Validation
+<a name="1010427"> </a>
+</li>
+<li>Link Verification
+<a name="1010428"> </a>
+</li>
+<li>Image Thumbnails (see <a href="../05_Creating_Pages/create15.htm#1026706">&quot;Viewing image thumbnails&quot;</a> for information on using this command.)
+</li>
+</ul>
+<a name="1010452"></a>
+ 
+<H2>Saving results</H2>
+<p>Results for each of these operations are preserved when you move from tab to tab and when you close the Results window. They are not saved if you repeat an operation or exit Studio. You can open the Results window at any time by clicking View &gt; Results.</p><p>To generate an HTML document containing the Results, right-click in the Search, Validation, or Links tab and select Browse. The document displays in the default browser. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:54 -->
+</body>
+</html>

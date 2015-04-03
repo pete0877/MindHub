@@ -1,0 +1,195 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Products and System Requirements</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Preface/admin_preface3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Preface/admin_preface.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/admin_preface5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Preface 	:&nbsp;&nbsp;Welcome to ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1013059"></a>
+ <H1>Products and System Requirements</H1>
+
+
+
+<p>ColdFusion has been fully tested on the following platforms and with the following configurations.</p><a name="1013061"></a>
+ 
+<H3>ColdFusion Server 4.5 Enterprise Edition for Windows</H3>
+<ul>
+<a name="1013062"> </a>
+<li>Windows NT 4.0 SP4+ 
+
+<a name="1013063"> </a>
+</li>
+<li>Intel Pentium or above
+<a name="1013064"> </a>
+</li>
+<li>150 MB hard disk space 
+<a name="1013065"> </a>
+</li>
+<li>128 MB RAM (256 MB recommended for clustering)
+</li>
+</ul>
+<a name="1013066"></a>
+ 
+<H3>ColdFusion Server 4.5 Enterprise Edition for Solaris</H3>
+<ul>
+<a name="1013067"> </a>
+<li>SPARC Solaris 2.5.1, 2.6, or 7 (patch 103582-1B or higher)
+
+<a name="1013068"> </a>
+</li>
+<li>128 MB RAM (256 MB recommended for clustering) 
+<a name="1013069"> </a>
+</li>
+<li>200 MB hard disk space
+</li>
+</ul>
+<a name="1013070"></a>
+ 
+<H3>ColdFusion Server 4.5 Enterprise Edition for Linux</H3>
+<ul>
+<a name="1013071"> </a>
+<li>Red Hat Linux 6.0 or 6.1
+
+<a name="1013072"> </a>
+</li>
+<li>Intel Pentium or above
+<a name="1013073"> </a>
+</li>
+<li>128 MB RAM (256 MB recommended for clustering)
+<a name="1013074"> </a>
+</li>
+<li>150 MB hard disk space
+</li>
+</ul>
+<a name="1013075"></a>
+ 
+<H3>ColdFusion Server 4.5 Professional Edition for Windows</H3>
+<ul>
+<a name="1013076"> </a>
+<li>Windows 95/98 or Windows NT 4.0 
+
+<a name="1013077"> </a>
+</li>
+<li>Intel Pentium or above
+<a name="1013078"> </a>
+</li>
+<li>50 MB hard disk space 
+<a name="1013079"> </a>
+</li>
+<li>32 MB RAM (128 MB recommended)
+</li>
+</ul>
+<a name="1013080"></a>
+ 
+<H3>ColdFusion Server 4.5 Professional Edition for Linux</H3>
+<ul>
+<a name="1013081"> </a>
+<li>Red Hat Linux 6.0 or 6.1
+
+<a name="1013082"> </a>
+</li>
+<li>Intel Pentium or above
+<a name="1013083"> </a>
+</li>
+<li>64 MB RAM (128 MB recommended)
+<a name="1013084"> </a>
+</li>
+<li>100 MB hard disk space
+</li>
+</ul>
+<a name="1013085"></a>
+ 
+<H3>ColdFusion Studio 4.5 </H3>
+<ul>
+<a name="1013086"> </a>
+<li>Windows 95/98/NT4
+
+<a name="1013087"> </a>
+</li>
+<li>Intel Pentium or above
+<a name="1013088"> </a>
+</li>
+<li>35 MB hard disk space
+<a name="1013089"> </a>
+</li>
+<li>32 MB RAM (64 MB recommended)
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Preface/admin_preface3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Preface/admin_preface.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/admin_preface5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:25 -->
+</body>
+</html>

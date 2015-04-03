@@ -1,0 +1,495 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Connecting to Informix data sources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0415.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0417.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1083104"></a>
+ <H1>Connecting to Informix data sources</H1>
+
+
+
+<p>Connections to Informix databases are supported through ODBC on both Windows and UNIX operating systems. On Windows, ColdFusion uses native drivers and on UNIX, ColdFusion uses both native and ODBC drivers to connect to Informix databases. ColdFusion 4.5 supports Informix 7.3 and higher.</p><a name="1091090"></a>
+ 
+<H2>Configuring Informix Options (Windows)</H2>
+<p>If ColdFusion Server Enterprise edition is installed on a Windows NT server, you can configure Informix ColdFusion data sources using a native driver.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Driver: Informix 7.3 (Windows)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion options for the DB2 Universal Database 5.2/6.1 native driver. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information about adding data sources to ColdFusion.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong> Informix Native Driver Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Default Database
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the database to which you want to connect by default.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+ The name of the INFORMIX server, including the full path.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Host
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the machine on which the INFORMIX server resides.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Service
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The network services file. On Windows NT, the services file is located in c:\winnt40\system32\drivers\etc. On UNIX, the file is located in /etc 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Protocol
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The network protocol.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Client Locale
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Specifies the language, territory, and code set that the client application (ColdFusion) uses to perform operations that read or write to the database. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Locale
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Specifies the language, territory, and code set that the INFORMIX server needs to interpret locale-sensitive data types. 
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1091098"></a>
+ 
+<H2>Configuring Informix Options (UNIX)</H2>
+<p>If ColdFusion Server is installed on a UNIX server, you can configure Informix ColdFusion data sources using either native or ODBC drivers.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Native Driver: Informix 7.3 (UNIX)
+</td>
+</tr>
+</table>
+</div><p>ColdFusion native drivers are the same for both Windows NT and UNIX. To see ColdFusion options for the DB2 Universal Database 5.2/6.1 native driver, see the table in <a href="../04_Managing_Data_Sources/admin0416.htm#1091093">&quot;Native Driver: Informix 7.3 (Windows)&quot;</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">ODBC: Informix 7.x/9.x (UNIX)
+</td>
+</tr>
+</table>
+</div><p>The following table describes ColdFusion options for the MERANT Informix 7.x/9.x ODBC driver. You set these options when you configure a ColdFusion data source. See <a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> for more information about adding data sources to ColdFusion.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>MERANT Informix ODBC Options</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Source Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+A name for your ODBC data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Description
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Descriptive information about the data source. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Database Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the database to which you want to connect.
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=2><font face="arial,helvetica" size=-1>
+Server Host Name
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The name of the machine on which the INFORMIX server resides.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Use INFORMIX registry for Logon ID and Password -- Determines whether the drive reads the Logon ID and Password directly from the INFORMIX registry. 
+</td></tr>
+<tr valign="top"><td valign="top" colspan=1 rowspan=3><font face="arial,helvetica" size=-1>
+Cursors
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Preserve cursors at the end of each transaction -- Determines whether cursors will be preserved or closed at the end of each transaction. Enable this attribute if you want cursors to be held at the current position when the transaction ends. Enabling this option may impact the performance of your database operations.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enable scrollable cursors -- Determines whether the driver provides scrollable cursors. The INFORMIX driver can use scrollable cursors only if there are no long columns (SQL_LONGVARCHAR or SQL_LONGVARBINARY) in a Select list. If you enable this option, you must not include long columns in the Select list.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enable Insert cursors -- Determines whether the driver can use Insert cursors during parametrized inserts.
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1090682"></a>
+ 
+<H2>Connecting to Informix Data Sources (UNIX)</H2>
+<p>Before you can connect to an Informix data source through ColdFusion, you must perform the following tasks:</p><ol>
+<li class="first">Install the Informix ESQL.C9.13 client software.
+
+
+</li>
+<li>Edit the following files: ColdFusion start script, SQLHOSTS, master NIS services, and $INFORMIXDIR/etc/onconfig.
+
+</li>
+<li>Stop and restart ColdFusion Server.
+
+</li>
+</ol>
+<a name="1090687"></a>
+ 
+<H3>Installing the Informix ESQL.C9.13 Client Software</H3>
+<p>The Informix ESQL/C9.13 version client software does not ship with ColdFusion, but you can download it from the Informix Web site:</p><pre><a href="http://www.intraware.com/guest/products/product.html?plne=000111">http://
+www.intraware.com/guest/products/product.html?plne=000111</a
+></pre><p>You can also download it from the Allaire FTP site:</p><p><a href="ftp://www.allaire.com/incoming/CSDK.TAR.Z">ftp://www.allaire.com/incoming/CSDK.TAR.Z</a></p><p>You will need to uncompress, and untar this file into a separate subdirectory on your server. For example: <code>/opt/isdk</code>. This is the directory you will point to in the start script as INFORMIXDIR</p><p>Run the script <code>installclientsdk to </code>install the client SDK.</p><p>Before you continue, make sure that you can connect to the Informix server from a client other than ColdFusion or with a utility such as <strong>iconnect</strong>.</p><a name="1090695"></a>
+ 
+<H3>Editing the ColdFusion start script</H3>
+<p>Edit <code>coldfusion/bin/start</code> script so that it contains the following lines:</p><pre># Informix client directory
+INFORMIXDIR=/opt/isdk;export INFORMIXDIR
+INFORMIXSERVER=alldevtli;export INFORMIXSERVER
+INFORMIXSQLHOSTS=$INFORMIXDIR/etc/sqlhosts;export INFORMIXSQLHOSTS
+LD_LIBRARY_PATH=/usr/dt/lib:/lib:/usr/openwin/lib:$CFHOME/lib
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$INFORMIXDIR/lib:$INFORMIXDIR/lib/esql
+</pre><a name="1090703"></a>
+ 
+<H3>Editing the SQLHOSTS file</H3>
+<p>Edit the sqlhosts file so that it contains the following lines:</p><pre>dbserver nettype hostname service name
+alldev onipcshm alldev online0
+alldevtli ontlitcp alldev turbo
+</pre><p>In these three lines:</p><ul>
+<a name="1090709"> </a>
+<li><strong>dbserver</strong> name matches the value in your Informix <strong>server</strong> /etc/onconfig file, and also matches the INFORMIXSERVER environment variable in your <code>/coldfusion/bin/start</code> script.
+
+<a name="1090710"> </a>
+</li>
+<li><strong>nettype</strong> determines what kind of network protocol to connect with.
+<a name="1090711"> </a>
+</li>
+<li><strong>hostname</strong> is the hostname of the server where the database is, you can put the ip address or hostname
+<a name="1090712"> </a>
+</li>
+<li><strong>service name </strong>is the entry in the <code>/etc/services</code> or master NIS services file for the port that informix listens on. This can also be the port# for the service name, such as 1526.
+</li>
+</ul>
+<a name="1090713"></a>
+ 
+<H3>Editing the /etc/services or NIS services file</H3>
+<p>Edit your <code>/etc/services</code> or master NIS services file so that it contains a line like this:</p><pre>turbo 1526/tcp
+</pre><a name="1090716"></a>
+ 
+<H3>Editing the $INFORMIXDIR/etc/onconfig file</H3>
+<p>Edit the <code>$INFORMIXDIR/etc/onconfig</code> file so that it contains the following lines:</p><pre># System Configuration
+SERVERNUM 0 # Unique id corresponding to an OnLine instance
+DBSERVERNAME alldev # Name of default database server 
+DBSERVERALIASES alldevtli # List of alternate dbservernames
+DEADLOCK_TIMEOUT 60 # Max time to wait for lock in distributed env.
+RESIDENT 0 # Forced residency flag (Yes = 1, No = 0)
+</pre><a name="1090724"></a>
+ 
+<H3>Stopping and restarting ColdFusion services</H3>
+<p>When you've completed all the steps in this section, you will need to stop and restart ColdFusion services to reload the <code>odbc.ini</code> file.</p><a name="1091381"></a>
+ 
+<H2>Connecting to Informix through ODBC/CLI (Windows, UNIX)</H2>
+<p>The following setup information for Informix describes how to install and configure Informix client software for Windows and UNIX systems. This information applies to both native driver connectivity as well as ODBC. </p><p>In order to install INFORMIX-CLI on Windows NT, you must have administrative privileges. Logon as administrator before performing the installation. Check with your dba or network administrator for database server name, host name, correct protocol, and service name.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install the client software:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Connect to the machine that is hosting the Informix software. For example, on Windows, <code>\\machine1\infshare\informix\Informix_ODS_722</code>.
+
+
+</li>
+<li>Run the <code>setup.exe</code> and click Next.
+
+</li>
+<li>Choose Custom
+
+</li>
+<li>Choose the Client connectivity: I-Connect 7.20, CLI 2.50.
+
+</li>
+</ol>
+<a name="1091389"></a>
+ 
+<H3>Modifying the services file entry</H3>
+<p>After the installation is complete you will need to modify your workstations' Services File located in the <code>\winnt\system32\drivers\etc\</code> folder for Windows NT and <code>\windows\system\</code> for Windows 95/98. This entry is needed for the client software to find the instance of the Informix service on our network. Make the following entry at the bottom of the file:</p><pre>turbo 1526/tcp
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Check with your system administrator for the name of the service. 
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1091394"></a>
+ 
+<H3>Configuring Informix SETNET32 settings</H3>
+<p>After you've installed the client software you must configure your workstation to connect to the Informix databases. Let's assume that the demo database that ships with Informix is installed on the Informix server and the name of the demo database is &quot;stores7.&quot; Using the Start button in the Windows taskbar, go to Programs/Informix-CLI 32 and select Informix Setnet 32. </p><p>Configure the Informix Setnet32 utility as follows:</p><ul>
+<a name="1091397"> </a>
+<li>Host Information:
+
+<p>
+ Current Host = ts_informix
+</p>
+
+<p>
+ Username = informix
+</p>
+
+<p>
+ Password = informix
+</p>
+
+<p>After typing in the values, click the Apply button.
+</p><a name="1091402"> </a>
+</li>
+<li>Server Information:
+<p>
+ Informix Server = ol_ts_informix
+</p>
+
+<p>
+ Hostname = ts_informix
+</p>
+
+<p>
+ Protocol = olsoctcp
+</p>
+
+<p>
+ Service Name = turbo
+</p>
+
+<p>After typing in the values, click the Apply button.
+</p><a name="1091408"> </a>
+</li>
+<li>Environment
+<p>
+ INFORMIXDIR=C:\PROGRAM FILES\INFORMIX
+</p>
+
+<p>
+ INFORMIXSERVER=ol_ts_informix
+</p>
+
+<p>
+ INFORMIXSQLHOSTS=\\TS_INFORMIX
+</p>
+
+<p>After typing in the values, click the Set button. Then you'll have to create an 
+ODBC data source using the ODBC Administrator in the Windows ODBC 
+Control Panel applet. 
+</p></li>
+</ul>
+<a name="1091413"></a>
+ 
+<H3>Adding the ODBC data source</H3>
+<p>Follow these steps to add the ODBC data source to your system.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add the ODBC data source to your system:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Run the ODBC administrator in Control Panel.
+
+
+</li>
+<li>Select the System DSN tab and click the add button.
+
+</li>
+<li>From the list of installed drivers, choose Informix-CLI 2.5 (32 bit).
+
+</li>
+<li>Fill out the ODBC INFORMIX 7.2 Driver Setup Dialog box as follows:
+
+<pre>Data Source Name: Inf_ol7
+Description: Demo Data
+Database Name: stores7
+Click the advanced button
+Database List: 
+Default User Name: informix
+Host Name: ts_informix
+Service Name: turbo
+Server Name: ol_ts_informix
+Protocol Type: olsoctcp
+Yield Proc: 1 - None
+Cursor Behavior: 0 - Close
+Enable Scrollable Cursors: 0 - Disabled
+Get DB List From Informix: 1 - Yes
+</pre></li>
+</ol>
+<p>Now you have an Informix ODBC data source. You can use this in a ColdFusion application. It is important to note that you must provide a username and password in the ColdFusion CFQUERY tag. </p><a name="1091434"></a>
+ 
+<H3>Verifying the Informix data source</H3>
+<p>Once the client software is configured, verify the Inf_ol7 data source as described in <a href="../04_Managing_Data_Sources/admin045.htm#1101222">&quot;Verifying ColdFusion Data Sources&quot;</a> to make sure it is configured properly. If verification fails, check the system environment variables. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To check the system environment variables:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the System Control Panel/system and click the Environment tab. In the System Variables box, there should be a variable called &quot;InformixDir,&quot; which should point to the Informix folder (for example, <code>c:\program files\informix</code>). If it does not exist, add one.
+
+
+<p>There should also be a variable called &quot;Path&quot; which should include the path to the 
+Informix bin directory. If not then modify the Path variable to include it.
+</p></li>
+<li>After adding these variables, restart the system.
+
+</li>
+</ol>
+<p>If you are having trouble accessing a data source, and the data source resides on a different machine, you may want to try having ColdFusion run under an administrator account on the Web server. </p><p>Also, make sure that all ColdFusion services are running under a specific account instead of the default system account. By default, ColdFusion will install to run under the system account.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change the Windows NT account ColdFusion uses:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Using the Services Control Panel, highlight the Allaire ColdFusion 4.0 service and click Startup. Make sure to choose a user name from the user list rather then typing it. 
+
+
+</li>
+<li>Reenter the Password and Change Password values. 
+
+</li>
+<li>Stop and Restart the Allaire ColdFusion 4.0 service. 
+
+</li>
+<li>Repeat this process for the ColdFusion Executive and ColdFusion IDE services as well.
+
+</li>
+</ol>
+<p>Once you've reconfigured the account under which ColdFusion runs, you can retry verification of the data source in the ColdFusion Administrator. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin0415.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin0417.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

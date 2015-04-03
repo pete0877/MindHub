@@ -1,0 +1,180 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Array Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997644"></a>
+ <H1>Array Functions</H1>
+
+
+
+<p>The following functions are available for creating, editing, and handling arrays:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Array Functions&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Function</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayAppend
+</PRE></td><td valign="top">
+Appends an array index to the end of a specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayAvg
+</PRE></td><td valign="top">
+Returns the average of the values in the specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayClear
+</PRE></td><td valign="top">
+Deletes all data in a specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayDeleteAt
+</PRE></td><td valign="top">
+Deletes data from a specified array at the specified index.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayInsertAt
+</PRE></td><td valign="top">
+Inserts data in a specified array at the specified index.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayIsEmpty
+</PRE></td><td valign="top">
+Returns TRUE if the specified array is empty of data.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayLen
+</PRE></td><td valign="top">
+Returns the length of the specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayMax
+</PRE></td><td valign="top">
+Returns the largest numeric value in the specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayMin
+</PRE></td><td valign="top">
+Returns the smallest numeric value in the specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayNew
+</PRE></td><td valign="top">
+Creates a new array of specified dimension.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayPrepend
+</PRE></td><td valign="top">
+Adds an array element to the beginning of the specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayResize
+</PRE></td><td valign="top">
+Resets an array to a specified minimum number of elements.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArraySet
+</PRE></td><td valign="top">
+Sets the elements in a 1D array in a specified range to a specified value.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArraySort
+</PRE></td><td valign="top">
+Returns the specified array with elements sorted numerically or alphanumerically.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArraySum
+</PRE></td><td valign="top">
+Returns the sum of values in the specified array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArraySwap
+</PRE></td><td valign="top">
+Swaps array values in the specified indexes.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ArrayToList
+</PRE></td><td valign="top">
+Converts the specified one dimensional array to a list, delimited with the character you specify.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>IsArray
+</PRE></td><td valign="top">
+Returns TRUE if the value is an array.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>ListToArray
+</PRE></td><td valign="top">
+Converts the specified list, delimited with the character you specify, to an array.
+</td></tr>
+
+</table>
+</div>
+</p><p>For more information about each of these functions, see the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

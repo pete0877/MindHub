@@ -1,0 +1,266 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Passing Data Between Nested Custom Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Reusing Code</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1024525"></a>
+ <H1>Passing Data Between Nested Custom Tags</H1>
+
+
+
+<p>A key custom tag feature is the ability of collaborating custom tags to exchange complex data without user intervention and without violating the encapsulation of a tag's implementation outside the circle of its collaborating tags. The following issues need to be addressed:</p><ul>
+<li>What data should be accessible?
+
+</li>
+<li>Which tags can communicate to which tags?
+</li>
+<li>How are the source and targets of the data exchange identified?
+</li>
+<li>What CFML mechanism is used for the data exchange?
+</li>
+</ul>
+<a name="1026181"></a>
+ 
+<H2>What data is accessible?</H2>
+<p>To enable developers to obtain maximum productivity in an environment with few restrictions, CFML custom tags can expose all their data to collaborating tags.</p><p>When you develop custom tags, you should document all variables that collaborating tags can access and/or modify. When your custom tags collaborate with other custom tags, you should make sure that they do not modify any undocumented data.</p><p>To preserve encapsulation, put all tag data access and modification operations into custom tags. For example, rather than simply documenting that the variable MyQueryResults in a tag's implementation holds an important query result set and expecting users of the custom tag to manipulate MyQueryResults directly, create another nested custom tag that manipulates MyQueryResult. This protects the users of the custom tag from changes in the tag's implementation.</p><a name="1029385"></a>
+ 
+<H2>Where is data accessible?</H2>
+<p>Two custom tags can be related in a variety of ways in a page. Ancestor and descendant relationships are important because they relate to the order of tag nesting.</p><p>A tag's descendants are inactive while the page is executed, that is, they have no instance data. The tag's data access is therefore restricted to ancestors only. Ancestor data will be available from the current page and from the whole runtime tag context stack. The tag context stack is the path from the current tag element back up the hierarchy of nested tags, including those in included pages and custom tag references, to the start of the base page for the request. CFINCLUDE tags and custom tags will appear on the tag context stack.</p><a name="1024742"></a>
+ 
+<H2>High-level data exchange</H2>
+<p>There are many cases in which descendant tags are used only as a means for data validation and exchange with an ancestor tag, such as CFHTTP/CFHTTPPARAM and CFTREE/CFTREEITEM. You can use the CFASSOCIATE tag to encapsulate this processing.</p><p>When CFASSOCIATE is encountered in a sub tag, the sub tag's attributes are automatically saved in the base tag. The attributes are in a structure appended to the end of an array whose name is `ThisTag.<em>collection_name</em>'. The default value for the DataCollection attribute is `AssocAttribs'. This attribute should be used only in cases where the base tag can have more than one type of sub tag. It is convenient for keeping separate collections of attributes, one per tag type.</p><p>CFASSOCIATE performs the following operations:</p><pre>&lt;!--- Get base tag instance data ---&gt;
+&lt;CFSET data = getBaseTagData(baseTag).thisTag&gt;
+
+&lt;!--- Create a string with the attribute collection name ---&gt;
+&lt;CFSET collectionName = 'data.#dataCollection#"'&gt;
+
+&lt;!--- Create the attribute collection, if necessary ---&gt;
+&lt;CFIF not isDefined(collectionName)&gt;
+    &lt;CFSET "#collectionName#" = arrayNew(1)&gt;
+&lt;/CFIF&gt;
+
+&lt;!--- Append the current attributes to the array ---&gt;
+&lt;CFSET temp=arrayAppend(evaluate(collectionName), attributes)&gt;
+</pre><p>The CFML code accessing sub-tag attributes in the base tag could look like the following:</p><pre>&lt;!--- Protect against no sub-tags ---&gt;
+&lt;CFPARAM Name='thisTag.assocAttribs' default=#arrayNew(1)#&gt;
+
+&lt;!--- Loop over the attribute sets of all sub tags ---&gt;
+&lt;CFLOOP index=i from=1 
+    to=#arrayLen(thisTag.assocAttribs)#&gt;
+
+    &lt;!--- Get the attributes structure ---&gt;
+    &lt;CFSET subAttribs = thisTag.assocAttribs[i]&gt;
+    &lt;!--- Perform other operations ---&gt;
+
+&lt;/CFLOOP&gt;
+</pre><a name="1024740"></a>
+ 
+<H3>Ancestor data access</H3>
+<p>The ancestor's data is represented by a structure object that contains all the ancestor's data.</p><p>The following set of functions provide access to ancestral data:</p><ul>
+<li><code>GetBaseTagList()</code> -- Returns a comma-delimited list of uppercased ancestor tag names. An empty string is returned if this is a top-level tag. The first element of a non-empty list is the parent tag.
+
+</li>
+<li><code>GetBaseTagData(TagName, InstanceNumber=1)</code> -- Returns an object that contains all the variables, scopes, etc. of the nth ancestor with a given name. By default, the closest ancestor is returned. If there is no ancestor by the given name or if the ancestor does not expose any data (such as CFIF), an exception is thrown.
+</li>
+</ul>
+<a name="1024434"></a>
+ 
+<H3>Example: Ancestor data access</H3>
+<p>This example was snipped from a custom tag.</p><pre>&lt;CFIF thisTag.executionMode is 'start'&gt;
+    &lt;!--- Get the tag context stack 
+     The list will look something like 
+    "CFIF,MYTAGNAME..." ---&gt;
+    &lt;CFSET ancestorList = getBaseTagList()&gt;
+
+    &lt;!--- Output your own name because CFIF is 
+    the first element of the tag context stack ---&gt;
+    &lt;CFOUTPUT&gt;
+    I'm custom tag #ListGetAt(ancestorlist,2)#&lt;P&gt;
+    &lt;/CFOUTPUT&gt;
+
+    &lt;!--- Determine whether you're nested inside a loop ---&gt;
+    &lt;CFSET inLoop = ListFindNoCase(ancestorList,'CFLOOP')&gt;
+    &lt;CFIF inLoop neq 0&gt;
+        I'm running in the context of a CFLOOP tag.&lt;P&gt;
+    &lt;/CFIF&gt;
+    
+    &lt;!--- Determine whether you are nested inside
+    a custom tag. Skip the first two elements of the
+    ancestor list, i.e., CFIF and the name of the
+    custom tag I'm in ---&gt;
+    &lt;CFSET inCustomTag = ''&gt;
+    &lt;CFLOOP index=elem 
+        list=#ListRest(ListRest(ancestorList))#&gt;
+        &lt;CFIF (Left(elem, 3) eq 'CF_')&gt;
+            &lt;CFSET inCustomTag = elem&gt;
+    &lt;CFBREAK&gt;
+        &lt;/CFIF&gt;
+    &lt;/CFLOOP&gt;
+
+    &lt;CFIF inCustomTag neq ''&gt;
+        &lt;!--- Say you are there ---&gt;
+        &lt;CFOUTPUT&gt;
+            I'm running in the context of a custom
+            tag named #inCustomTag#.&lt;P&gt;
+        &lt;/CFOUTPUT&gt;
+        
+        &lt;!--- Get the tag instance data ---&gt;
+        &lt;CFSET tagData = getBaseTagData(inCustomTag)&gt;
+        
+        &lt;!--- Find out the tag's execution mode ---&gt;
+        I'm located inside the
+        &lt;CFIF tagData.thisTag.executionMode neq 'inactive'&gt;
+            template because the tag is in
+            its start or end execution mode.
+        &lt;CFELSE&gt;
+            body
+        &lt;/CFIF&gt;
+        &lt;P&gt;
+    &lt;CFELSE&gt;
+        &lt;!--- Say you are lonely ---&gt;
+        I'm not nested inside any custom tags. :^( &lt;P&gt;
+    &lt;/CFIF&gt;
+
+&lt;/CFIF&gt;
+</pre><a name="1025250"></a>
+ 
+<H2>Passing Custom Tag Arguments via CFML Structures</H2>
+<p>Attributes can be passed to custom tags via the reserved attribute ATTRIBUTECOLLECTION. ATTRIBUTECOLLECTION must reference a structure.</p><a name="1025252"></a>
+ 
+<H3>Syntax</H3>
+<p>CFMODULE
+</p><pre>&lt;CFMODULE TEMPLATE=template
+    OTHERATTR1=value
+    ATTRIBUTECOLLECTION=structure
+    OTHERATTR2=value&gt;
+</pre><p>Shorthand
+</p><pre>&lt;CF_MYCUSTOMTAG OTHERATTR1=<em>value
+</em>    ATTRIBUTECOLLECTION=<em>structure
+</em>    OTHERATTR2=<em>value</em>&gt; 
+</pre><p>The key/value pairs contained within the structure specified by ATTRIBUTECOLLECTION will be copied into the ATTRIBUTES scope. This has essentially the same effect as specifying these attributes in the custom tag's attribute list.</p><p>ATTRIBUTECOLLECTION may be freely mixed with other attributes within the custom tag's attribute list.</p><a name="1025260"></a>
+ 
+<H3>The reserved attribute name ATTRIBUTECOLLECTION</H3>
+<p>Custom tag processing reserves ATTRIBUTECOLLECTION to refer to the structure holding a collection of custom tag attributes. If ATTRIBUTECOLLECTION does not refer to such a collection, the custom tag processor will raise a TEMPLATE exception.</p><p>A custom tag invoked by the two examples above may refer to #attributes.x# and #attributes.y# to access the attributes passed via structure.</p><p>If the called custom tag uses a CFASSOCIATE tag to save its attributes in the base tag, the attributes passed via structure will be saved as independent attribute values, with no indication that they were aggregated into a structure by the custom tag's caller.</p><a name="1025264"></a>
+ 
+<H3>Examples</H3>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Via CFMODULE
+</td>
+</tr>
+</table>
+</div><pre>&lt;CFSET zort=StructNew()&gt;
+&lt;CFSET zort.X = "-X-"&gt;
+&lt;CFSET zort.Y = "-Y-"&gt;
+&lt;CFMODULE TEMPLATE="testtwo.cfm"
+    a="blab"
+    attributecollection=#zort#
+    foo="16"&gt;
+</pre>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">Via shorthand
+</td>
+</tr>
+</table>
+</div><pre>&lt;CFSET zort=StructNew()&gt;
+&lt;CFSET zort.X = "-X-"&gt;
+&lt;CFSET zort.Y = "-Y-"&gt;
+&lt;CF_TESTTWO a="blab" attributecollection=#zort# foo="16"&gt;
+</pre><a name="1025269"></a>
+ 
+<H3>Accessing attributes within the custom tag</H3>
+<p>If <code>testtwo.cfm</code> contains this CFML: </p><pre>---custom tag ---&lt;br&gt;
+&lt;CFOUTPUT&gt;#attributes.a# #attributes.x# #attributes.y# 
+    #attributes.foo#&lt;/cfoutput&gt;
+    &lt;BR&gt;--- end custom tag ---
+</pre><p>Its output will be:</p><pre>---custom tag ---
+blab -X- 12 16
+--- end custom tag ---
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:46 -->
+</body>
+</html>

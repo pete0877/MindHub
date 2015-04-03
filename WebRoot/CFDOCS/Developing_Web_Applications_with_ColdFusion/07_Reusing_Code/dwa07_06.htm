@@ -1,0 +1,120 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Writing Custom CFML Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Reusing Code</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1020653"></a>
+ <H1>Writing Custom CFML Tags</H1>
+
+
+
+<p>Writing a custom tag in CFML is no different from writing any CFML template. You can use all CFML constructs, as well as HTML.</p><p>Custom tags are stored either in the current directory or under the <code>customtags</code> directory. You call them using the CF_ prefix. Beyond that, you are free to use any naming convention that fits your development practice. Unique descriptive names make it easy for you and others to find the right tag. For example, the tag name CF_getweather invokes the file <code>getweather.cfm</code></p><p>If you are concerned about possible name conflicts when invoking a custom tag or if the application must use a variable to dynamically call a custom tag at runtime, the CFMODULE element provides a solution.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>While tag names in templates are case-insensitive, custom tag file names 
+must be lower case on UNIX.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1025625"></a>
+ 
+<H3>Defining attributes</H3>
+<p>CFML custom tags support both required and optional attributes. Attributes are defined as name-value pairs. Custom tag attributes conform to CFML coding standards:</p><ul>
+<li>ColdFusion passes any attributes in the ATTRIBUTES scope.
+
+</li>
+<li>Use the CFPARAM tag at the top of a custom tag to test for and assign defaults for each attribute that may be passed from a calling template.
+</li>
+<li>Use the ATTRIBUTES.<em>attribute_name </em>syntax when initializing passed attributes to distinguish them from local ones.
+</li>
+<li>Attributes are case-insensitive.
+</li>
+<li>Attributes may be listed in any order within a tag.
+</li>
+<li>Attribute = value pairs for a tag must be separated by a space.
+</li>
+<li>Passed values that contain spaces must be enclosed in double-quotes.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:46 -->
+</body>
+</html>

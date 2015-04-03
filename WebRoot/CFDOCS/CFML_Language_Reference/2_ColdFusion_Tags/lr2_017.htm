@@ -1,0 +1,201 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFAPPLICATION</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_016.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_018.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1967438"></a>
+ <H1>CFAPPLICATION</H1>
+
+
+
+<p>Defines scoping for a ColdFusion application, enables or disables storing client variables, and specifies a client variable storage mechanism. By default, client variables are disabled. Also, used to enable session variables and to set timeouts for both session and application variables. Session and application variables are stored in memory. </p><a name="1967440"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFAPPLICATION NAME="Name"
+    CLIENTMANAGEMENT="Yes/No"
+    CLIENTSTORAGE="Storage Type"
+    SETCLIENTCOOKIES="Yes/No" 
+    SESSIONMANAGEMENT="Yes/No"
+    SESSIONTIMEOUT=#CreateTimeSpan(days, hours, 
+      minutes, seconds)#
+    APPLICATIONTIMEOUT=#CreateTimeSpan(days, hours, 
+      minutes, seconds)#
+    SETDOMAINCOOKIES="Yes/No"
+&gt;
+</PRE><a name="1967442"></a>
+<h4> NAME</h4>
+<p>The name you want to give your application. This name can be up to 64 characters long. Required for application and session variables to work. Optional for client variables.</p><a name="1967444"></a>
+<h4> CLIENTMANAGEMENT</h4>
+<p>Optional. Yes or No. Enables client variables. Default is No.</p><a name="1967446"></a>
+<h4> CLIENTSTORAGE</h4>
+<p>Optional. Specifies the mechanism for storing client variables:</p><ul>
+<a name="1967448"> </a>
+<li><em>datasourcename</em> -- ColdFusion stores client variables in the specified ODBC or native data source. To use this option you must create a client variable storage repository using the Variables page of the ColdFusion Administrator.
+
+<a name="1967449"> </a>
+</li>
+<li>Registry -- ColdFusion stores client variables in the system registry. This is the default.
+<a name="1967450"> </a>
+</li>
+<li>Cookie -- ColdFusion stores client variables on the client machine in a cookie. Storing client data in a cookie is scalable to large numbers of clients, but this storage mechanism has some limitations. Chief among them is that if the client turns off cookies in the browser, client variables won't work.
+</li>
+</ul>
+<a name="1967451"></a>
+<h4> SETCLIENTCOOKIES</h4>
+<p>Optional. Yes or No. Yes enables client cookies. Default is Yes.</p><p>If you set this attribute to "NO", ColdFusion does not automatically send the CFID and CFTOKEN cookies to the client browser; you must manually code CFID and CFTOKEN on the URL for every page that uses Session or Client variables.</p><a name="1967454"></a>
+<h4> SESSIONMANAGEMENT</h4>
+<p>Optional. Yes or No. Yes enables session variables. Default is No.</p><a name="1967456"></a>
+<h4> SESSIONTIMEOUT</h4>
+<p>Optional. Enter the CreateTimeSpan function and the values you want in days, hours, minutes, and seconds, separated by commas to specify the lifespan of any session variables that are set. The default value is specified in the Variables page of the ColdFusion Administrator.</p><a name="1967458"></a>
+<h4> APPLICATIONTIMEOUT</h4>
+<p>Optional. Enter the CreateTimeSpan function and the values you want in days, hours, minutes, and seconds, separated by commas to specify the lifespan of any application variables that are set. The default value is specified in the Variables page of the ColdFusion Administrator.</p><a name="2240025"></a>
+<h4> SETDOMAINCOOKIES</h4>
+<p>Optional. Yes or No. Sets the CFID and CFTOKEN cookies for an entire domain not just a single host. Applications that are running on clusters must set this value to Yes. The default is No.</p><a name="1967460"></a>
+ 
+<H3>Usage</H3>
+<p>CFAPPLICATION is typically used in the <code>Application.cfm</code> file to set defaults for a specific ColdFusion application.</p><p>CFAPPLICATION enables application variables unless they have been disabled in the ColdFusion Administrator. Using the SESSIONMANAGEMENT attribute to enable session variables is also overridden by the Administrator. See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a><em> </em>for information about the ColdFusion Administrator. </p><p>Server, Application, and Session Variables</p><p>Whenever you display, set, or update variables in the server, application, and session scopes, you should use the CFLOCK tag with the SCOPE attribute. For server variables, specify the "Server" scope. For application variables, specify the "Application" scope. For session variables, specify the "Session" scope. See <a href="../2_ColdFusion_Tags/lr2_058.htm#1970785">CFLOCK</a> for information about locking server, application, and session scopes.</p><p>If you are running ColdFusion on a cluster, you must specify either Cookie or a data source name for CLIENTSTORAGE; you cannot specify Registry.</p><a name="2035478"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfapplication1
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!------------------------------------------------------------- 
+    This example shows how CFLOCK can be used to guarantee the
+    consistency of data updates to variables in the Application, 
+    Server, and Session scopes.
+    You should copy the following code into an Application.cfm
+    file in the snippets directory. 
+---------------------------------------------------------------&gt;
+    &lt;HTML&gt;
+    &lt;HEAD&gt;
+        &lt;title&gt;Define Session and Application Variables&lt;/title&gt;
+    &lt;/HEAD&gt;
+    
+    &lt;BASEFONT FACE="Arial, Helvetica" SIZE=2&gt;
+    &lt;BODY  bgcolor="#FFFFD5"&gt;
+    
+    &lt;H3&gt;CFAPPLICATION Example&lt;/H3&gt;
+    
+    &lt;P&gt;CFAPPLICATION defines scoping for a ColdFusion application and 
+    enables or disables the storing of application and/or session
+    variables. This tag is placed in a special file called
+    Application.cfm that is run before any other CF template in a
+    directory where the Application.cfm file appears.
+    
+    &lt;CFAPPLICATION NAME="ETurtle" SESSIONTIMEOUT=#CreateTimeSpan(0, 0, 
+      0, 60)# SESSIONMANAGEMENT="yes"&gt;
+    &lt;!------------------------------------------------------------- 
+    Initialize the session and application variables that will be 
+    used by E-Turtleneck. Use the session scope for the session 
+    variables.
+    ---------------------------------------------------------------&gt; 
+    &lt;CFLOCK SCOPE="Session" TIMEOUT="30" TYPE="Exclusive"&gt;
+        &lt;CFIF NOT IsDefined("session.size")&gt;
+            &lt;CFSET session.size = ""&gt;
+        &lt;/CFIF&gt;
+        &lt;CFIF NOT IsDefined("session.color")&gt;
+            &lt;CFSET session.color = ""&gt;
+        &lt;/CFIF&gt;
+    &lt;/CFLOCK&gt;
+    
+    &lt;!---------------------------------------------------------------- 
+    Use the application scope for the application variable. This
+    variable keeps track of the total number of turtlenecks sold. 
+    -------------------------------------------------------------------&gt;
+    &lt;CFLOCK SCOPE="Application" TIMEOUT="30" TYPE="Exclusive"&gt;
+        &lt;CFIF NOT IsDefined("application.number")&gt;
+            &lt;CFSET application.number = 1&gt;
+        &lt;/CFIF&gt;
+    &lt;/CFLOCK&gt;
+    &lt;CFLOCK SCOPE="Application" TIMEOUT="30" TYPE="ReadOnly"&gt;
+        &lt;CFOUTPUT&gt;
+        E-Turtleneck is proud to say that we have sold
+        #application.number# turtlenecks to date.
+        &lt;/CFOUTPUT&gt;
+    &lt;/CFLOCK&gt; 
+&lt;!--- End of Application.cfm ---&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfapplication1
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_016.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_018.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>New features in ColdFusion 4.5</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../1_Welcome_to_ColdFusion/lr1_003.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../1_Welcome_to_ColdFusion/lr1.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../1_Welcome_to_ColdFusion/lr1_005.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Preface 	:&nbsp;&nbsp;Welcome To ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1082860"></a>
+ <H1>New features in ColdFusion 4.5</H1>
+
+
+
+<p>A wide range of new features are available in ColdFusion 4.5.</p><a name="1082862"></a>
+ 
+<H2>New visual tools</H2>
+<p><strong>Universal File Browser</strong> -- Access all your files from a single explorer that integrates access to the Windows file system, ColdFusion RDS servers, and FTP servers. Drag-and-drop between any of these services all in an integrated file browser.</p><p><strong>Advanced Project Management</strong> -- Manage your complex Web application development projects with a new project architecture that gives you more flexibility and control using physical, virtual, and auto-inclusive project folders as well as project resource browsing.</p><p><strong>Scriptable Deployment</strong> -- Deploy applications to complex server configurations with FTP or ColdFusion Remote Development Services (RDS). Use VBScript or Java Script to fully script deployment of projects with granular control over how files uploaded. Setup deployment scripts using a powerful wizard and save scripts for re-use.</p><p><strong>Collapsible Code</strong> -- Work with large, complex scripts and pages more easily by collapsing sections of the code in the editor so you can build sophisticated applications more quickly.</p><p><strong>Function Insight</strong> -- Find the parameters and format for functions instantly and inline as you code.</p><p><strong>Image Map Editor</strong> -- Create image maps right in ColdFusion Studio with a new easy-to-use visual tool.</p><p><strong>Configuration Wizard</strong> -- Setup your work environment so it meets all your needs using any of more than dozen common configurations.</p><p><strong>TopStyle CSS Editor</strong> -- Create and edit standards-compliant cascading style sheets to easily control the look and feel of your web applications.</p><p><strong>WML Support</strong> -- Build wireless Web applications quickly and easily with the complete set of Wireless Markup Language (WML) visual tools.</p><a name="1082872"></a>
+ 
+<H2>Enhancements to CFML</H2>
+<p><strong>Object Scripting</strong> -- Instantiate and script objects using CFML script in addition to the CFOBJECT tag easier integration with distributed object middleware such as COM and CORBA.</p><p><strong>Structured Exception Handling</strong> -- Exception handling now offers hierarchical exception handling that supports both greater customization and greater access to internal exceptions.</p><p><strong>String Conversion Functions</strong> -- Convert strings quickly and easily to be compatible with Java Script and XML standards.</p><a name="1082876"></a>
+ 
+<H2>Better reliability</H2>
+<p><strong>Server Probes</strong> -- Guarantee high availability by automatically detecting when a ColdFusion Server or Web server hangs or stops, failing-over to a new machine in a ColdFusion cluster, and restarting the server with problems. (Enterprise Edition only)</p><p><strong>Improved Automatic Server Recovery</strong> -- Monitor and automatically restart server process in case of failures or critical errors on individual servers not deployed in a cluster.</p><p><strong>Clustering Support for Apache</strong> -- Setup ColdFusion clusters on Linux and Solaris using the Apache Web Server. (Enterprise Edition only)</p><p><strong>Automatic Shared Variable Locking</strong> -- Lock user and session variable reads automatically at the server level to prevent destabilizing conflicts and control thread write contentions. Configure variable locking to meet the specific needs of your applications.</p><p><strong>Individual Data Source Control</strong> -- Enable and disable individual data sources individually without affecting server availability for runtime data source maintenance without server restarts.</p><a name="1082882"></a>
+ 
+<H2>Improved performance</H2>
+<p><strong>Cisco Local Director Integration</strong> -- Deliver very large scale sites with Cisco Local Director intelligently balancing load based on the load metrics provided by the ColdFusion Servers in a cluster. (Enterprise Edition only)</p><p><strong>Client-Side Page Caching</strong> -- Leverage browser page caching to avoid unnecessary downloads of unchanged pages and improve overall site performance. Programmatically control refresh of client-side cache to ensure users see most up-to-date output.</p><p><strong>White Space Removal</strong> -- Reduce white space left by processed code in application pages to make the pages smaller and faster. Control white space removal programmatically or administratively.</p><p><strong>Scriptable Performance Metrics</strong> -- Track key server metrics at run time through your own scripts for intelligent diagnosis of performance bottlenecks of stability problems in your applications.</p><p><strong>Performance Debugging Data</strong> -- Access detailed debugging information on the performance of each individual page included in an application page that is being debugged.</p><a name="1082888"></a>
+ 
+<H2>Enterprise connectivity features</H2>
+<p><strong>Transaction Commit and Rollback</strong> -- Control database transactions with programmable commit and rollback support for more reliable and better-managed database interactions.</p><p><strong>Java Object and EJB Connectivity</strong> -- Connect to any Java object or Enterprise JavaBean (EJB) hosted by any major EJB server to extend ColdFusion and access complex business logic or third party distributed components.</p><p><strong>Java Servlets</strong> -- Call Java Servlets hosted by a Servlet Engine such as Allaire JRun from within a ColdFusion application to access extended functionality </p><p><strong>Java-based ColdFusion Extensions (CFX)</strong> -- Extend ColdFusion with new functionality through CFXs created with Java.</p><p><strong>Binary Object Support </strong>-- Use Character Large Binary Object (CLOB) support to encoded binary objects, transmit them via XML, and store them in databases or files.</p><p><strong>SQL Bind Parameters</strong> -- Improve query performance, security and flexibility with explicitly typed query parameters.</p><p><strong>WDDX 1.0</strong> -- Exchange complex data, including encoded images, between servers and with other programming environments even faster using the latest version of Web Distributed Data Exchange (WDDX).</p><p><strong>OS Command Execution</strong> -- Execute OS shell scripts, services, executables and batch files from within ColdFusion applications.</p><p><strong>LDAP 3.0</strong> -- Use all the power of LDAP 3.0 for directory access including file filtering, SSL encryption, and Microsoft Active Directory integration.</p><p><strong>Enhanced Mail Integration</strong> -- Develop more sophisticated and robust email applications with new support for controlling mail headers, BCC, and multiple file attachments.</p><p><strong>Improved Server-Side HTTP</strong> -- Use URL redirection, SSL, cookies, return headers, and more robust server-side HTTP support for building distributed Web applications.</p><a name="1082900"></a>
+ 
+<H2>Security enhancements</H2>
+<p><strong>General OS Security Integration</strong> -- Secure entire Web applications and control access to files and objects through your existing Windows NT security architecture. Authenticated users in your applications can be limited to privileges authorized through Windows security. (Windows NT Only) </p><p><strong>OS Server Sandbox Security</strong> -- Secure shared hosting environments more easily by creating Server Sandboxes with Windows NT security. OS Server Sandboxes process all requests under the privileges of a designated Windows NT user account (Enterprise Edition for Windows only).</p><p><strong>Enhanced Advanced Security</strong> -- Secure CFML functions and enable CFML code segments to be executed using the run-time security permissions of a designated user. </p><p><strong>New Advanced Security Interface</strong> -- Manage Advanced Security configuration more quickly and easily with a completely redesigned browser-based resource view.</p><p><strong>Scriptable Advanced Security Administration</strong> -- Configure ColdFusion Advanced Security through your own CFML scripts for easier maintenance of ColdFusion Servers.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../1_Welcome_to_ColdFusion/lr1_003.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../1_Welcome_to_ColdFusion/lr1.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../1_Welcome_to_ColdFusion/lr1_005.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:44 -->
+</body>
+</html>

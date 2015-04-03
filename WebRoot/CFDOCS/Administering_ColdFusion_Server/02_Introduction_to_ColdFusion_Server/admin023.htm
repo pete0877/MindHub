@@ -1,0 +1,179 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>The ColdFusion Administrator</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin022.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin024.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Introduction to ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1025653"></a>
+ <H1>The ColdFusion Administrator</H1>
+
+
+
+<p>The Administrator is a Web application you use to configure the ColdFusion Server and to set various server options. The Administrator includes options for managing a wide range of server settings. </p><p>You can open the Administrator by selecting the ColdFusion Administrator icon in the ColdFusion 4.0 program group (Windows) or by opening the following URL:</p><pre>http://<em>hostname</em>/CFIDE/Administrator/index.cfm
+</pre><p>Where<em> hostname</em> is the name of the server where ColdFusion is installed. </p><p>The following table describes the purpose of each category in the Administrator.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>ColdFusion Administrator Options&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Category</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Includes options for tuning server performance, as well as:
+<ul>
+<li>Configuring Administrator and ColdFusion Studio passwords and security options
+
+</li>
+<li>Enabling and configuring ColdFusion application, session, and client variables
+</li>
+<li>Mapping directories
+</li>
+<li>ColdFusion version information
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Data Sources
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Use to configure ColdFusion data sources, including:
+<ul>
+<li>Native database drivers for Oracle and Sybase databases
+
+</li>
+<li>ODBC data sources
+</li>
+<li>Verifying a ColdFusion data source
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Extensions
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Includes options for registering Java applets and CFX tags: custom tags written in C++. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Logging
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+You use the Logging pages to configure a ColdFusion Administrator email address, and to:
+<ul>
+<li>Specify a directory for ColdFusion log files
+
+</li>
+<li>Set mail logging options
+</li>
+<li>View ColdFusion log files
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Automated tasks
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The Automated tasks pages provide options for:
+<ul>
+<li>Adding new scheduled tasks
+
+</li>
+<li>Specifying how often ColdFusion checks for new scheduled tasks to execute
+</li>
+</ul>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Miscellaneous
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Use the Mail page to specify a default mail server hostname as well as other mail-related configuration options. 
+
+The debugging page alows you to enable and configure error message output for ColdFusion pages. 
+
+The Verity page is for managing Verity search indexes.
+
+The Source Control page allows you to setup and configure server-side source control options. 
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin022.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin024.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:28 -->
+</body>
+</html>

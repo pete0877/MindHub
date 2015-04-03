@@ -1,0 +1,154 @@
+<HTML>
+<HEAD><TITLE>The DCF Interface</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFF0">
+
+<!-- Heading -->
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<TR>
+<TD WIDTH=36 ALIGN=CENTER VALIGN=TOP>
+	<A HREF="Contents.html"><IMG SRC="Images/Allaire.gif" ALT="Allaire" BORDER=0 HSPACE=8></A>
+</TD>
+<TD ALIGN=LEFT VALIGN=BOTTOM>
+	<H2>The DCF Interface</H2>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+<!-- Indent -->
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR>
+<TD WIDTH=36 NOWRAP></TD>
+<TD ALIGN=LEFT>
+
+
+<A NAME="InitColumn"></A>
+<B>Initializing a Recordset by Column</B><BR>
+Recordsets can be embedded in an HTML page as APPLET PARAMs that are read when a DCF-enabled applet 
+is constructed. A simple single recordset initialization might look like this:
+
+<BLOCKQUOTE><PRE><FONT COLOR=GRAY>
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;DCF Applet Test&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;!-- A bunch of HTML could go here. --&gt;
+</FONT>
+&lt;APPLET CODEBASE="/classes/" CODE="MyJavaClass.class" WIDTH=640 HEIGHT=480&gt;
+   &lt;PARAM NAME="Columns" VALUE="LarryCol,CurlyCol,MoeCol"&gt;
+   &lt;PARAM NAME="LarryCol" VALUE="5,7,2,1"&gt;
+   &lt;PARAM NAME="CurlyCol" VALUE="1,0,9,1"&gt;
+   &lt;PARAM NAME="MoeCol" VALUE="3,3,4,0"&gt;
+&lt;/APPLET&gt;
+<FONT COLOR=GRAY>
+&lt;!-- A bunch more HTML could go here. --&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</FONT>
+</BLOCKQUOTE></PRE>
+
+In the preceding example, an applet using the DCF would call the 
+<A HREF="allaire.dcf.recordset.AppletParamRecordset.html">AppletParamRecordset</A>
+constructor to find the parameter named "Columns" to identify which parameters hold column data.
+<P>
+
+The AppletParamRecordset would proceed to populate columns of a DCF 
+<A HREF="allaire.dcf.recordset.Recordset.html">Recordset</A> 
+with the values listed in the "LarryCol", "CurlyCol", and "MoeCol" parameters. 
+Thus, there would be four records, and the first record would consist of 
+LarryCol="5", CurlyCol="1", and MoeCol="3".
+<P>
+
+The first column declared determines how many rows are expected by the number of 
+cells it contains. Subsequently declared columns will be padded with empty cells or truncated if they 
+do not contain the same number of rows as the first column.
+<P><BR>
+
+
+<A NAME="InitCell"></A>
+<B>Initializing a Recordset by Cell</B><BR>
+In addition to passing an entire column in an applet parameter, you can set values on a 
+cell-to-cell basis. Columns are enumerated as previously done, but individual cells can be identified 
+by column name and row number (indicated by ".R<I>n</I>"). In this example the "Ringo" column is defined cell-by-cell:
+
+<BLOCKQUOTE><PRE>
+&lt;APPLET CODEBASE="/classes/" CODE="MyJavaClass.class" WIDTH=640 HEIGHT=480&gt;
+   &lt;PARAM NAME="Columns" VALUE="Name,Instrument,IsBreathing"&gt;
+   &lt;PARAM NAME="Name" VALUE="John,Paul,George,Ringo"&gt;
+   &lt;PARAM NAME="Instrument" VALUE="Guitar,Bass,Guitar,Drums"&gt;
+   &lt;PARAM NAME="IsBreathing.<B>R1</B>" VALUE="No"&gt;
+   &lt;PARAM NAME="IsBreathing.<B>R2</B>" VALUE="Yes"&gt;
+   &lt;PARAM NAME="IsBreathing.<B>R3</B>" VALUE="Yes"&gt;
+   &lt;PARAM NAME="IsBreathing.<B>R4</B>" VALUE="Yes"&gt;
+&lt;/APPLET&gt;
+</PRE></BLOCKQUOTE><BR>
+
+<A NAME="InitMultiple"></A>
+<B>Initializing Multiple Recordsets</B><BR>
+Multiple recordsets can be initialized by employing nearly the same techniques used for single recordsets.
+The only differences are that all parameters of a recordset must be share a common recordset name prefix, 
+and the two-parameter <A HREF="allaire.dcf.recordset.AppletParamRecordset.html">AppletParamRecordset</A> 
+constructor is used. For example, the following snippet initializes two two-column recordsets named 
+"Pigs" and "Bears," respectively:
+
+<BLOCKQUOTE><PRE>
+&lt;APPLET CODEBASE="/classes/" CODE="MyJavaClass.class" WIDTH=640 HEIGHT=480&gt;
+   &lt;PARAM NAME="<B>Pigs</B>.Columns" VALUE="PigNum,HouseType"&gt;
+   &lt;PARAM NAME="<B>Pigs</B>.PigNum" VALUE="1,2,3"&gt;
+   &lt;PARAM NAME="<B>Pigs</B>.HouseType" VALUE="Straw,Sticks,Brick"&gt;
+
+   &lt;PARAM NAME="<B>Bears</B>.Columns" VALUE="Title,BearNum"&gt;
+   &lt;PARAM NAME="<B>Bears</B>.Title" VALUE="Papa,Mama,Baby"&gt;
+   &lt;PARAM NAME="<B>Bears</B>.BearNum" VALUE="1,2,3"&gt;
+&lt;/APPLET&gt;
+</PRE></BLOCKQUOTE><BR>
+
+
+<A NAME="Request"></A>
+<B>Requesting Recordsets at Runtime</B><BR>
+Using the <A HREF="allaire.dcf.recordset.Query.html">Query</A> class an applet can request a URL 
+and parse recordsets out of the data returned. The DCF expects the URL to return data like this:
+
+<BLOCKQUOTE><PRE>
+<FONT COLOR=GRAY>A bunch of data could be here.</FONT>
+
+Recordset: Pigs
+Columns: PigNum,HouseType
+
+1,Straw
+2,Sticks
+3,Bricks
+
+
+Recordset: Bears
+Columns: Title,BearNum
+
+Papa,1
+Mama,2
+Baby,3
+
+<FONT COLOR=GRAY>A bunch more data could be here.</FONT>
+</PRE></BLOCKQUOTE>
+
+Two carriage returns terminates the recordset, so there can be no more than one new line between 
+the <I>Columns</I> identifier and the first record of the recordset. Note that the URL can refer 
+to an HTML page, a file on a server, a Cold Fusion template, or any other URL that will return 
+the expected recordset format.
+<P>
+
+Recordsets returned to an applet during execution are passed by row. 
+The first row determines how many columns will be recognized.
+Subsequent rows will be padded with empty cells or truncated to match 
+the column count from the first row.
+<P><BR>
+
+<A HREF="DCF_Contents.html">Database Component Framework Contents</A><BR>
+
+<!-- UnIndent -->
+</TD></TR></TABLE>
+
+<!-- Footer -->
+<HR>
+<FONT SIZE=2>
+	Copyright &copy; 1996 <A HREF="http://www.allaire.com">Allaire</A> Corp. All rights reserved.<P>
+</FONT>
+</BODY>
+</HTML>

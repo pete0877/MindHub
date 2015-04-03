@@ -1,0 +1,221 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CCFXQuery Class</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 18	:&nbsp;&nbsp;Building Custom CFAPI Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019411"></a>
+ <H1>CCFXQuery Class</H1>
+
+
+
+<p>Abstract class that represents a query used or created by a ColdFusion Extension (CFX). Queries contain 1 or more columns of data that extend over a varying number of rows.</p><a name="1019413"></a>
+ 
+<H2>Class members</H2>
+<pre>virtual int AddRow()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019460">CCFXQuery::AddRow</a> adds a new row to the query.
+</p>virtual CCFXStringSet* GetColumns
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019473">CCFXQuery::GetColumns</a> retrieves a list of the query's column names.
+</p>virtual LPCSTR GetData( int iRow, int iColumn )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019489">CCFXQuery::GetData</a> retrieves a data element from a row and column of the 
+query.
+</p>virtual LPCSTR GetName()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019515">CCFXQuery::GetName</a> retrieves the name of the query.
+</p>virtual int GetRowCount()
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019527">CCFXQuery::GetRowCount</a> retrieves the number of rows in the query.
+</p>virtual void SetData( int iRow, int iColumn, LPCSTR lpszData )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019539">CCFXQuery::SetData</a> sets a data element within a row and column of the query.
+</p>virtual void SetQueryString( LPCSTR lpszQuery )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019560">CCFXQuery::SetQueryString</a> sets the query string that will displayed along with 
+query debug output.
+</p>virtual void SetTotalTime( DWORD dwMilliseconds )
+</pre><p><a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019568">CCFXQuery::SetTotalTime</a> sets the total time that was required to process the 
+query (used for debug output).
+</p><a name="1019460"></a>
+ 
+<H2>CCFXQuery::AddRow</H2>
+<pre>int CCFXQuery::AddRow(void)
+</pre><p>Add a new row to the query. You should call this function each time you want to append a row to the query.</p><p>Returns the index of the row that was appended to the query.</p><a name="1019464"></a>
+<h4> Example</h4>
+<p>The following example demonstrates the addition of 2 rows to a query that has 3 columns ('City', 'State', and 'Zip'):</p><pre>// First row
+int iRow ;
+iRow = pQuery-&gt;AddRow() ;
+pQuery-&gt;SetData( iRow, iCity, "Minneapolis" ) ;
+pQuery-&gt;SetData( iRow, iState, "MN" ) ;
+pQuery-&gt;SetData( iRow, iZip, "55345" ) ;
+&nbsp;
+// Second row
+iRow = pQuery-&gt;AddRow() ;
+pQuery-&gt;SetData( iRow, iCity, "St. Paul" ) ;
+pQuery-&gt;SetData( iRow, iState, "MN" ) ;
+pQuery-&gt;SetData( iRow, iZip, "55105" ) ;
+</pre><a name="1019473"></a>
+ 
+<H2>CCFXQuery::GetColumns</H2>
+<pre>CCFXStringSet* CCFXQuery::GetColumns(void)
+</pre><p>Retrieves a list of the column names contained in the query.</p><p>Returns an object of <a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019917">CCFXStringSet Class</a> that contains a list of the columns contained in the query. You are not responsible for freeing the memory allocated for the returned string set (it will be freed automatically by ColdFusion after the request is completed).</p><a name="1019480"></a>
+<h4> Example</h4>
+<p>The following example retrieves the list of columns and then iterates over the list, writing each column name back to the user.</p><pre>// Get the list of columns from the query
+
+CCFXStringSet* pColumns = pQuery-&gt;GetColumns() ;
+int nNumColumns = pColumns-&gt;GetCount() ;
+&nbsp;
+// Print the list of columns to the user
+pRequest-&gt;Write( "Columns in query: " ) ;
+for( int i=1; i&lt;=nNumColumns; i++ )
+{
+    pRequest-&gt;Write( pColumns-&gt;GetString( i ) ) ;
+    pRequest-&gt;Write( " " ) ;
+}
+</pre><a name="1019489"></a>
+ 
+<H2>CCFXQuery::GetData</H2>
+<pre><strong>LPCSTR CCFXQuery::GetData</strong>(int iRow, int iColumn)
+</pre><p>Retrieves a data element from a row and column of the query. Row and column indexes begin with 1. You can determine the number of rows in the query by calling <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019527">CCFXQuery::GetRowCount</a>. You can determine the number of columns in the query by retrieving the list of columns using <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019473">CCFXQuery::GetColumns</a> and then calling <a href="../18_Building_Custom_CFAPI_Tags/dwa1819.htm#1019964">CCFXStringSet::GetCount</a> on the returned string set.</p><p>Returns the value of the requested data element.</p><pre>iRow
+</pre><p>Row to retrieve data from (1-based).
+</p>lColumn
+</pre><p>Column to retrieve data from (1-based).
+</p><a name="1019506"></a>
+<h4> Example</h4>
+<p>The following example iterates over the elements of a query and writes the data in the query back to the user in a simple, space-delimited format:</p><pre>int iRow, iCol ;
+int nNumCols = pQuery-&gt;GetColumns()-&gt;GetCount() ;
+int nNumRows = pQuery-&gt;GetRowCount() ;
+for ( iRow=1; iRow&lt;=nNumRows; iRow++ )
+{
+    for ( iCol=1; iCol&lt;=nNumCols; iCol++ )
+    {
+    pRequest-&gt;Write( pQuery-&gt;GetData( iRow, iCol ) ) ;
+    pRequest-&gt;Write( " " ) ;
+    }
+    pRequest-&gt;Write( "&lt;BR&gt;" ) ;
+}
+</pre><a name="1019515"></a>
+ 
+<H2>CCFXQuery::GetName</H2>
+<pre>LPCSTR CCFXQuery::GetName(void)
+</pre><p>Retrieves the name of the query. Returns the name of the query.</p><a name="1019518"></a>
+<h4> Example</h4>
+<p>The following example retrieves the name of the query and writes it back to the user:</p><pre>CCFXQuery* pQuery = pRequest-&gt;GetQuery() ;
+pRequest-&gt;Write( "The query name is: " ) ;
+pRequest-&gt;Write( pQuery-&gt;GetName() ) ;
+</pre><a name="1019527"></a>
+ 
+<H2>CCFXQuery::GetRowCount</H2>
+<pre>LPCSTR CCFXQuery::GetRowCount(void)
+</pre><p>Retrieves the number of rows in the query. Returns the number of rows contained in the query.</p><a name="1019530"></a>
+<h4> Example</h4>
+<p>The following example retrieves the number of rows in a query and writes it back to the user:</p><pre>CCFXQuery* pQuery = pRequest-&gt;GetQuery() ;
+char buffOutput[256] ;
+wsprintf( buffOutput,
+    "The number of rows in the query is %ld.",
+    pQuery-&gt;GetRowCount() ) ;
+pRequest-&gt;Write( buffOutput ) ;
+</pre><a name="1019539"></a>
+ 
+<H2>CCFXQuery::SetData</H2>
+<pre>void CCFXQuery::SetData(int <em>iRow</em>, int <em>iColumn</em>, LPCSTR <em>lpszData</em>)
+</pre><p>Sets a data element within a row and column of the query. Row and column indexes begin with 1. Before calling <code>SetData</code> for a given row, you should be sure to call <a href="../18_Building_Custom_CFAPI_Tags/dwa1817.htm#1019460">CCFXQuery::AddRow</a> and use the return value as the row index for your call to <code>SetData</code>.</p><pre>iRow
+</pre><p>Row of data element to set (1-based).
+</p>lColumn
+</pre><p>Column of data element to set (1-based).
+</p>lpszData
+</pre><p>New value for data element.
+</p><a name="1019551"></a>
+<h4> Example</h4>
+<p>The following example demonstrates the addition of 2 rows to a query that has 3 columns ('City', 'State', and 'Zip'):</p><pre>// First row
+int iRow ;
+iRow = pQuery-&gt;AddRow() ;
+pQuery-&gt;SetData( iCity, iRow, "Minneapolis" ) ;
+pQuery-&gt;SetData( iState, iRow, "MN" ) ;
+pQuery-&gt;SetData( iZip, iRow, "55345" ) ;
+&nbsp;
+// Second row
+iRow = pQuery-&gt;AddRow() ;
+pQuery-&gt;SetData( iCity, iRow, "St. Paul" ) ;
+pQuery-&gt;SetData( iState, iRow, "MN" ) ;
+pQuery-&gt;SetData( iZip, iRow, "55105" ) ;
+</pre><a name="1019560"></a>
+ 
+<H2>CCFXQuery::SetQueryString</H2>
+<p>This is a deprecated function and should not be used.</p><a name="1019568"></a>
+ 
+<H2>CCFXQuery::SetTotalTime</H2>
+<p>This is a deprecated function and should not be used.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1816.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa18.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../18_Building_Custom_CFAPI_Tags/dwa1818.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:03 -->
+</body>
+</html>

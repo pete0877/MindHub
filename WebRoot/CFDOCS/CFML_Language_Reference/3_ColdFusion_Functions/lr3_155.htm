@@ -1,0 +1,180 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListQualify</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_154.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_156.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1689171"></a>
+ <H1>ListQualify</H1>
+
+
+
+<p>Returns a list with a qualifying character around each item in the list, such as double or single quotes.</p><p>See the <a href="../3_ColdFusion_Functions/lr3_010.htm#1138950">List Functions</a> table.</p><a name="1689183"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListQualify</strong>(<em>list</em>, <em>qualifier</em> [, <em>delimiters</em> ] [, <em>elements</em> ])
+</PRE><a name="1689185"> </a>
+<h5 class="param"> list</h5>
+<p class="param">Any list of items or a variable that names a list.</p><a name="1689187"> </a>
+<h5 class="param"> qualifier</h5>
+<p class="param">The character that is to be placed at the beginning and end of each item in the list.</p><a name="1689189"> </a>
+<h5 class="param"> delimiters</h5>
+<p class="param">Set of delimiters used in<em> list</em>.</p><a name="1689664"> </a>
+<h5 class="param"> elements</h5>
+<p class="param">Either the keyword &quot;ALL&quot; or &quot;CHAR.&quot; If you specify &quot;ALL,&quot; the function qualifies all items in the list. If you specify &quot;CHAR,&quot; the function qualifiers only items comprised of alphabetic characters; it does not qualify numeric items.</p><a name="1689191"></a>
+ 
+<H3>Usage</H3>
+<p>The new list may not preserve all of the delimiters in the previous list.</p><a name="1804247"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListQualify
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example uses ListQualify to put quotes around each 
+      employees full name ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ListQualify Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;body  bgcolor="#FFFFD5"&gt;
+
+&lt;CFQUERY NAME="GetEmployeeNames" DATASOURCE="cfsnippets"&gt;
+SELECT     FirstName, LastName
+FROM     Employees
+&lt;/CFQUERY&gt;
+
+&lt;H3&gt;ListQualify Example&lt;/H3&gt;
+&lt;P&gt;This example uses ListQualify to place the full names of the employees 
+found
+in the query within quotation marks.&lt;/P&gt;
+
+&lt;CFSET myArray = ArrayNew(1)&gt;
+
+&lt;!--- loop through the query and append these names
+      successively to the last element ---&gt;
+      
+&lt;CFLOOP query="GetEmployeeNames"&gt;
+    &lt;CFSET temp= ArrayAppend(myArray, "#FirstName# #LastName#")&gt;
+&lt;/CFLOOP&gt;
+
+&lt;!--- sort that array descending alphabetically ---&gt;
+&lt;CFSET myAlphaArray = ArraySort(myArray, "textnocase")&gt;
+
+&lt;!--- show the resulting array as a list ---&gt;
+&lt;CFSET myList=ArrayToList(myArray, ",")&gt;
+
+&lt;CFOUTPUT&gt;
+    &lt;P&gt;The contents of the unqualified list are as follows:    &lt;/P&gt;
+    #myList#
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- show the resulting alphabetized array as a qualified 
+      list with single quotes around each full name.        ---&gt;
+&lt;CFSET qualifiedList1=ListQualify(myList,"'",",","CHAR")&gt;
+
+&lt;!--- output the array as a list ---&gt;
+&lt;CFOUTPUT&gt;
+    &lt;P&gt;The contents of the qualified list are as follows:    &lt;/P&gt;
+    &lt;P&gt;#qualifiedList1#&lt;/P&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- show the resulting alphabetized array as a qualified 
+      list with quotation marks around each full name. Note that 
+      we use &amp;quot; to denote quotation marks because the 
+      quotation mark character is a control character.         ---&gt;
+&lt;CFSET qualifiedList2=ListQualify(myList,"&amp;quot;",",","CHAR")&gt;
+
+&lt;!--- output the array as a list ---&gt;
+&lt;CFOUTPUT&gt;
+    &lt;P&gt;The contents of the second qualified list are as follows:    &lt;/P&gt;
+    &lt;P&gt;#qualifiedList2#&lt;/P&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListQualify
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_154.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_156.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,272 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFEXIT</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_028.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_030.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2262521"></a>
+ <H1>CFEXIT</H1>
+
+
+
+<p>CFEXIT can be used to:</p><ul>
+<a name="1968250"> </a>
+<li>Abort the processing of the currently executing CFML custom tag. 
+
+<a name="1968251"> </a>
+</li>
+<li>Exit the template within the currently executing CFML custom tag.
+<a name="1968252"> </a>
+</li>
+<li>Reexecute a section of code within the currently executing CFML custom tag.
+</li>
+</ul>
+<a name="1968253"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFEXIT METHOD="method"&gt;
+</PRE><a name="1968255"></a>
+<h4> METHOD</h4>
+<p>Optional. Specifies one of the following:</p><ul>
+<a name="1968257"> </a>
+<li>ExitTag (default) -- Aborts processing of the currently executing CFML custom tag. 
+
+<a name="1968258"> </a>
+</li>
+<li>ExitTemplate -- Exits the template of the currently executing CFML custom tag.
+<a name="1968259"> </a>
+</li>
+<li>Loop -- Reexecutes the body of the currently executing CFML custom tag.
+</li>
+</ul>
+<a name="1968260"></a>
+ 
+<H3>Usage</H3>
+<p>If a CFEXIT tag is encountered outside the context of a custom tag, for example in the base page or an included page, the tag acts exactly like CFABORT. CFEXIT can help simplify error checking and validation logic in custom tags. </p><p>CFEXIT behaves differently depending on location and execution mode:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>METHOD attribute</strong>
+</th><th align="left">
+<strong>Location of CFEXIT call</strong>
+</th><th align="left">
+<strong>Behavior</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+ExitTag
+</td><td valign="top">
+Base template
+</td><td valign="top">
+Terminate processing
+</td></tr>
+<tr valign="top"><td valign="top">
+&nbsp;
+</td><td valign="top">
+Execution mode = Start
+</td><td valign="top">
+Continue after end tag
+</td></tr>
+<tr valign="top"><td valign="top">
+&nbsp;
+</td><td valign="top">
+Execution mode = End
+</td><td valign="top">
+Continue after end tag
+</td></tr>
+<tr valign="top"><td valign="top">
+ExitTemplate
+</td><td valign="top">
+Base template
+</td><td valign="top">
+Terminate processing
+</td></tr>
+<tr valign="top"><td valign="top">
+&nbsp;
+</td><td valign="top">
+Execution mode = Start
+</td><td valign="top">
+Continue from first child in body
+</td></tr>
+<tr valign="top"><td valign="top">
+&nbsp;
+</td><td valign="top">
+Execution mode = End
+</td><td valign="top">
+Continue after end tag
+</td></tr>
+<tr valign="top"><td valign="top">
+Loop
+</td><td valign="top">
+Base template
+</td><td valign="top">
+Error
+</td></tr>
+<tr valign="top"><td valign="top">
+&nbsp;
+</td><td valign="top">
+Execution mode = Start
+</td><td valign="top">
+Error
+</td></tr>
+<tr valign="top"><td valign="top">
+&nbsp;
+</td><td valign="top">
+Execution mode = End
+</td><td valign="top">
+
+</td></tr>
+
+</table>
+</div>
+</p><a name="2035644"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfexit
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFEXIT, and
+is a read-only example ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFEXIT Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFEXIT Example&lt;/H3&gt;
+
+&lt;P&gt;CFEXIT can be used to abort the processing of the
+currently executing CFML custom tag.  Execution will resume
+immediately following the invocation of the custom tag in the
+page that called the tag.
+&lt;H3&gt;Usage of CFEXIT&lt;/H3&gt;
+&lt;P&gt;CFEXIT is used primarily to perform a conditional stop
+of processing inside of a custom tag.  CFEXIT returns control
+to the page that called that custom tag, or in the case of
+a tag called by another tag, to the calling tag.
+
+&lt;!--- CFEXIT can be used inside a CFML custom tag, as
+follows: ---&gt;
+&lt;!--- Place this code (uncomment the appropriate
+sections) inside the CFUSION/customtags directory ---&gt;
+
+&lt;!--- MyCustomTag.cfm ---&gt;
+&lt;!--- This simple custom tag checks for the existence
+of myValue1 and myValue2.  If they are both defined,
+the tag adds them and returns the result to the calling
+page in the variable "result".  If either or both of the
+expected attribute variables is not present, an error message
+is generated, and CFEXIT returns control to the
+calling page.  ---&gt;
+
+&lt;!--- &lt;CFIF NOT IsDefined("attributes.myValue2")&gt;
+            &lt;CFSET caller.result = "Value2 is not defined"&gt;
+            &lt;CFEXIT METHOD="ExitTag"&gt;
+      &lt;CFELSEIF NOT IsDefined("attributes.myValue1")&gt;
+            &lt;CFSET caller.result = "Value1 is not defined"&gt;
+            &lt;CFEXIT METHOD="ExitTag"&gt;
+      &lt;CFELSE&gt;
+              &lt;CFSET value1 = attributes.myValue1&gt;        
+              &lt;CFSET value2 = attributes.myValue2&gt;        
+            &lt;CFSET caller.result = value1 + value2&gt;
+      &lt;/CFIF&gt; ---&gt;
+&lt;!--- End MyCustomTag.cfm ---&gt;
+
+&lt;!--- And place this code inside your page ---&gt;      
+
+&lt;!--- &lt;P&gt;The call to the custom tag, and then the result:
+&lt;CF_myCustomTag
+        myvalue2 = 4&gt;
+&lt;CFOUTPUT&gt;#result#&lt;/cFOUTPUT&gt;  ---&gt;
+&lt;P&gt;If CFEXIT is used outside of a custom tag, it functions
+like a CFABORT.  For example, the text after this message
+will not be processed:
+&lt;CFEXIT&gt;
+&lt;P&gt;This text will not be executed due to the existence of 
+the CFEXIT tag above it.
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfexit
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_028.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_030.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

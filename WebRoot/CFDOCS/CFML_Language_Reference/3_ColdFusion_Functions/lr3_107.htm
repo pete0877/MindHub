@@ -1,0 +1,172 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>GetMetricData</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_106.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_108.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2654405"></a>
+ <H1>GetMetricData</H1>
+
+
+
+<p>On Windows NT, GetMetricData returns all the internal data that is otherwise displayed in the Windows NT PerfMonitor. On UNIX, GetMetricData returns all of the internal data found by using CFStat. For it to work on NT you need to have turned on the PerfMonitor feature from the ColdFusion Administrator. See the Usage section for details of the structure that this function returns.</p><a name="2655528"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>GetMetricData</strong>(<em>monitor_name</em>)
+</PRE><a name="2658544"> </a>
+<h5 class="param"> monitor_name</h5>
+<p class="param">The name of the performance monitor. On Windows NT, the performance monitor is PerfMonitor. On UNIX, it is CFStat.</p><a name="2655540"></a>
+ 
+<H3>Usage</H3>
+<p>On Windows NT, the function returns a ColdFusion structure with the following data fields:</p><ul>
+<a name="2655557"> </a>
+<li>InstanceName
+
+<a name="2655567"> </a>
+</li>
+<li>PageHits
+<a name="2655572"> </a>
+</li>
+<li>ReqQueued
+<a name="2655577"> </a>
+</li>
+<li>DBHits
+<a name="2655582"> </a>
+</li>
+<li>ReqRunning
+<a name="2655587"> </a>
+</li>
+<li>ReqTimedOut
+<a name="2656673"> </a>
+</li>
+<li>BytesIn
+<a name="2656687"> </a>
+</li>
+<li>BytesOut
+<a name="2656702"> </a>
+</li>
+<li>AvgQueueTime
+<a name="2656708"> </a>
+</li>
+<li>AvgReqTime
+<a name="2656719"> </a>
+</li>
+<li>AvgDBTime
+<a name="2656720"> </a>
+</li>
+<li>CachePops
+</li>
+</ul>
+<a name="2656734"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetMetricData
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--------------------------------------------------------------------- 
+This example gets and displays the metric data provided by Windows NT 
+PerfMonitor.
+-----------------------------------------------------------------------&gt;
+
+&lt;CFSET pmData = GetMetricData( "PERF_MONITOR" ) &gt;
+
+&lt;CFOUTPUT&gt;
+    Current PerfMonitor data is: &lt;P&gt;
+    InstanceName:    #pmData.InstanceName# &lt;P&gt;
+    PageHits:                #pmData.PageHits# &lt;P&gt;
+    ReqQueued:          #pmData.ReqQueued# &lt;P&gt;
+    DBHits:                  #pmData.DBHits# &lt;P&gt;
+    ReqRunning:          #pmData.ReqRunning# &lt;P&gt;
+    ReqTimedOut:      #pmData.ReqTimedOut# &lt;P&gt;
+    BytesIn:                 #pmData.BytesIn# &lt;P&gt;
+    BytesOut:                 #pmData.BytesOut# &lt;P&gt;
+    AvgQueueTime:    #pmData.AvgQueueTime# &lt;P&gt;
+    AvgReqTime:          #pmData.AvgReqTime# &lt;P&gt;
+    AvgDBTime:                 #pmData.AvgDBTime# &lt;P&gt;
+    CachePops:                #pmData.CachePops# &lt;P&gt;
+&lt;/CFOUTPUT&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetMetricData
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_106.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_108.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

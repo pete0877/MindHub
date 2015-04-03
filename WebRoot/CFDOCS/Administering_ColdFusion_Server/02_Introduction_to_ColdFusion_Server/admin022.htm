@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Summary of Administrative Tasks</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin021.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin023.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Introduction to ColdFusion Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999142"></a>
+ <H1>Summary of Administrative Tasks</H1>
+
+
+
+<p>The things you may need to do to set up and run the ColdFusion Server fall into several categories:</p><ul>
+<a name="1003918"> </a>
+<li>Installing and configuring ColdFusion
+
+<a name="1003941"> </a>
+</li>
+<li>Managing data sources
+<a name="1003946"> </a>
+</li>
+<li>Managing server performance and resources
+<a name="1003991"> </a>
+</li>
+<li>Managing security for users, applications, and server resources
+</li>
+</ul>
+<p>You can learn more about each of these areas of ColdFusion administration by referring to the information in the following table: </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Information about ColdFusion Administration&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Subject</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Where to find it</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Installing ColdFusion
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+See <a href="../01_Installing_and_Configuring_ColdFusion/admin01.htm#999704">Chapter 1, &quot;Installing and Configuring ColdFusion&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Configuring ColdFusion data sources
+</td><td valign="top" colspan=1 rowspan=3><font face="arial,helvetica" size=-1>
+<a href="../04_Managing_Data_Sources/admin04.htm#997518">Chapter 4, &quot;Managing Data Sources&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Native database drivers for Oracle and Sybase databases
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Configuring OLE-DB data sources
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Setting debugging options
+</td><td valign="top" colspan=1 rowspan=3><font face="arial,helvetica" size=-1>
+<a href="../03_Configuring_ColdFusion_Server/admin03.htm#997351">Chapter 3, &quot;Configuring ColdFusion Server&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Configuring Administrator email
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Managing log files
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Clustering and load-balancing
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm#1151116">Chapter 6, &quot;Creating Scalable and Highly Available Web Sites&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Using CGI with ColdFusion
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+<a href="../07_Using_CGI_with_ColdFusion/admin07.htm#997356">Chapter 7, &quot;Using CGI with ColdFusion&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Configuring basic security for remote development and administration
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+<a href="../09_Configuring_Basic_Security/admin09.htm#997347">Chapter 9, &quot;Configuring Basic Security&quot;</a>.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Configuring Advanced security for ColdFusion resources
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+<a href="../10_Configuring_Advanced_Security/admin10.htm#997347">Chapter 10, &quot;Configuring Advanced Security&quot;</a>.
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Introduction_to_ColdFusion_Server/admin021.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Introduction_to_ColdFusion_Server/admin02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Introduction_to_ColdFusion_Server/admin023.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:28 -->
+</body>
+</html>

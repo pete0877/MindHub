@@ -1,0 +1,136 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Indexing CFLDAP Query Results</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1218384"></a>
+ <H1>Indexing CFLDAP Query Results</H1>
+
+
+
+<p>The widespread use of the Lightweight Directory Access Protocol to build searchable directory structures, both internally and across the Web, provides ColdFusion developers with new opportunities to add value to the sites they create. Contact information or other data from an LDAP-accessible server can be indexed and searched by users. Remember to create the collection in the Administrator.</p><p>Two things to remember when creating an index from an LDAP query:</p><ul>
+<li>Because LDAP structures vary greatly, you must know the server's directory schema and the exact name of every LDAP attribute you intend to use in a query.
+
+</li>
+<li>The records on an LDAP server can be subject to frequent change. You may want to re-index the collection before processing a search request.
+</li>
+</ul>
+<p>In the example below, the search criterion is records with a telephone number in the 617 area code. Generally, LDAP servers use the Distinguished Name (dn) attribute as the unique identifier for each record, so that is used as the KEY value for the index. </p><pre>&lt;!--- Run the LDAP query ---&gt;
+&lt;CFLDAP NAME="OrgList"
+    SERVER="myserver"
+    ACTION="query"
+    ATTRIBUTES="o, telephonenumber, dn, mail"
+    SCOPE="onelevel"
+    FILTER="(|(O=a*) (O=b*))"
+    SORT="o"
+    START="c=US"&gt;
+
+&lt;!--- Output query result set ---&gt;
+&lt;CFOUTPUT QUERY="OrgList"&gt;
+    DN: #dn# &lt;BR&gt;
+    O: #o# &lt;BR&gt;
+    TELEPHONENUMBER: #telephonenumber# &lt;BR&gt;
+    MAIL: #mail# &lt;BR&gt;
+=============================&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- Index the result set ---&gt;
+
+&lt;CFINDEX ACTION="update"
+    COLLECTION="ldap_query"
+    KEY="dn"
+    TYPE="custom"
+    TITLE="o"
+    QUERY="OrgList"
+    BODY="telephonenumber"&gt;
+
+&lt;!--- Search the collection ---&gt;
+&lt;!--- Use the wildcard * to contain the search string ---&gt;
+&lt;CFSEARCH COLLECTION="ldap_query"
+    NAME="s_ldap"
+    CRITERIA="*617*"&gt;
+
+&lt;!--- Output returned records ---&gt;
+&lt;CFOUTPUT QUERY="s_ldap"&gt;
+    #Key#, #Title#, #Body# &lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

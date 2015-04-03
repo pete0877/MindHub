@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>QueryNew</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_193.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_195.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001679"></a>
+ <H1>QueryNew</H1>
+
+
+
+<p>Returns an empty query with a set of columns or an empty query with no columns. See Usage for more information.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_192.htm#1679669">QueryAddColumn</a>, <a href="../3_ColdFusion_Functions/lr3_193.htm#1679723">QueryAddRow</a> and <a href="../3_ColdFusion_Functions/lr3_195.htm#1001705">QuerySetCell</a>. 
+</p>
+
+<a name="1001682"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>QueryNew</strong>(<em>columnlist</em>)
+</PRE><a name="1001684"> </a>
+<h5 class="param"> columnlist</h5>
+<p class="param">Comma-separated list of columns you want to add to the new query or an empty string. </p><a name="1679652"></a>
+ 
+<H3>Usage</H3>
+<p>If you specify an empty string, you can add a new column to the query and populate its rows with the contents of a one-dimensional array using QueryAddColumn.</p><a name="1806268"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="QueryNew
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of QueryNew ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+QueryNew Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H3&gt;QueryNew Example&lt;/H3&gt;
+
+&lt;P&gt;We will construct a new query with two rows:
+&lt;CFSET myQuery = QueryNew("name, address, phone")&gt;
+&lt;!--- make some rows in the query ---&gt;
+&lt;CFSET newRow  = QueryAddRow(MyQuery, 2)&gt;
+
+&lt;!--- set the cells in the query ---&gt;
+&lt;CFSET temp = QuerySetCell(myQuery, "name", "Fred", 1)&gt;
+&lt;CFSET temp = QuerySetCell(myQuery, "address", "9 Any Lane", 1)&gt;
+&lt;CFSET temp = QuerySetCell(myQuery, "phone", "555-1212", 1)&gt;
+
+&lt;CFSET temp = QuerySetCell(myQuery, "name", "Jane", 2)&gt;
+&lt;CFSET temp = QuerySetCell(myQuery, "address", "14 My Street", 2)&gt;
+&lt;CFSET temp = QuerySetCell(myQuery, "phone", "588-1444", 2)&gt;
+
+&lt;!--- output the query ---&gt;
+&lt;CFOUTPUT query="myQuery"&gt;
+&lt;PRE&gt;#name#    #address#    #phone#&lt;/PRE&gt;
+&lt;/CFOUTPUT&gt;    
+To get any item in the query, we can output it individually
+&lt;CFOUTPUT&gt;
+&lt;P&gt;Jane's phone number: #MyQuery.phone[2]#
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="QueryNew
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_193.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_195.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

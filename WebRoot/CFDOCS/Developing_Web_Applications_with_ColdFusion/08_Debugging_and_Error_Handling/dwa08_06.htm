@@ -1,0 +1,227 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Overview of Exception Handling in ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1027576"></a>
+ <H1>Overview of Exception Handling in ColdFusion</H1>
+
+
+
+<p>Ordinarily, when ColdFusion encounters an error, it stops processing. However, you can use ColdFusion's exception handling tags to catch and process exceptions in ColdFusion pages. Exceptions include any event that disrupts the normal flow of instructions in a ColdFusion page, such as failed database operations, missing include files, or developer-specified events.</p><p>In order for your code to handle an exception, the tags in question must appear within a CFTRY block. It's a good idea to enclose an entire application page in a CFTRY block, and use a CFCATCH blocks to trap potential errors. When an exception occurs within the CFTRY block, processing is 'thrown' to the CFCATCH block. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>For cases when the error handler is not able to successfully handle the 
+thrown error, use the CFRETHROW tag within a &lt;CFCATCH&gt; block.
+</td>
+</tr>
+</table>
+</div>
+<br><pre>&lt;CFTRY&gt;
+... Add code here ...
+    &lt;CFCATCH TYPE="<em>exception type</em>1"&gt;
+    ... Add exception processing code here ...
+    &lt;/CFCATCH&gt;
+    &lt;CFCATCH TYPE="<em>exception type</em>2"&gt;
+    ... Add exception processing code here ...
+    &lt;/CFCATCH&gt;
+    &lt;CFCATCH TYPE="Any"&gt;
+    ... Add exception processing code here ...
+    &lt;/CFCATCH&gt;
+&lt;/CFTRY&gt;
+</pre><p>To catch errors in a single problematic SQL statement, for example, you might narrow the focus by using a CFTRY block with a CFCATCH TYPE="Database" tag, outputting the CFCATCH.State information as well.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Do not attempt to enclose an entire application in a CFTRY block by 
+putting the CFTRY tag in Application.cfm because you can't be sure that 
+there will be a matching CFTRY end tag.
+</td>
+</tr>
+</table>
+</div>
+<br><p>See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for information on the CFTRY, CFCATCH, CFRETHROW, and CFTHROW tags.</p><a name="1021243"></a>
+ 
+<H2>Types of recoverable exceptions supported</H2>
+<p>ColdFusion Server supports several types of recoverable exceptions. Use the TYPE attribute in the CFCATCH tag to determine which type of exception to catch.</p><p><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Types of recoverable exceptions</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Type</strong>
+</th><th align="left">
+<strong>Tag(s)</strong>
+</th><th align="left">
+<strong>Notes</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Application-defined exception events
+</td><td valign="top"><PRE>CFTHROW
+CFCATCH TYPE="Application" 
+CFCATCH TYPE="Any"
+a CFCATCH block that has no TYPE 
+attribute
+</PRE></td><td valign="top">
+Raise exceptions using the CFTHROW tag (with an optional diagnostic message), then catch using CFCATCH. 
+
+If you specify the type to be "APPLICATION," the CFCATCH tag catches only those custom exceptions that have been specified as having the APPLICATION type in the CFTHROW tag that defines them.
+</td></tr>
+<tr valign="top"><td valign="top">
+Database failures
+</td><td valign="top"><PRE>CFCATCH TYPE="Database"
+CFCATCH TYPE="Any"
+</PRE></td><td valign="top">
+Catch failed database operations, such as failed SQL statements, ODBC problems, and so on.
+</td></tr>
+<tr valign="top"><td valign="top">
+Template errors
+</td><td valign="top"><PRE>CFCATCH TYPE="Template"
+CFCATCH TYPE="Any"
+</PRE></td><td valign="top">
+Catch general application page errors.
+
+The tags that throw an exception of TYPE="TEMPLATE" are CFINCLUDE, CFMODULE, and CFERROR.
+</td></tr>
+<tr valign="top"><td valign="top">
+Missing included file errors
+</td><td valign="top"><PRE>CFCATCH TYPE="MissingInclude"
+CFCATCH TYPE="Any"
+</PRE></td><td valign="top">
+Catch errors for missing included files.
+</td></tr>
+<tr valign="top"><td valign="top">
+Object exceptions
+</td><td valign="top"><PRE>CFCATCH TYPE="Object"
+</PRE></td><td valign="top">
+Catch exceptions in ColdFusion code that works with objects.
+</td></tr>
+<tr valign="top"><td valign="top">
+Security exceptions
+</td><td valign="top"><PRE>CFCATCH TYPE="Security"
+</PRE></td><td valign="top">
+Raise catchable exceptions in ColdFusion code that works with security.
+</td></tr>
+<tr valign="top"><td valign="top">
+Expression exceptions
+</td><td valign="top"><PRE>CFCATCH TYPE="Expression"
+</PRE></td><td valign="top">
+Catch exceptions when an expression fails evaluation.
+</td></tr>
+<tr valign="top"><td valign="top">
+Locking exceptions
+</td><td valign="top"><PRE>CFCATCH tag with TYPE="Lock"
+</PRE></td><td valign="top">
+Catch failed locking operations, such as when a CFLOCK critical section times out or fails at runtime.
+</td></tr>
+<tr valign="top"><td valign="top">
+Custom exceptions
+</td><td valign="top"><PRE>CFCATCH 
+TYPE="<em>your_custom_exception_type
+</em>"
+</PRE></td><td valign="top">
+Specify a custom type as well as one of the predefined types.
+</td></tr>
+<tr valign="top"><td valign="top">
+Unexpected internal exceptions
+</td><td valign="top"><PRE> CFCATCH TYPE="Any"
+</PRE></td><td valign="top">
+Catch unexpected exceptions
+</td></tr>
+
+</table>
+</div>
+</p><a name="1021276"></a>
+ 
+<H3></H3>
+<p>Specifying the type as ANY causes the ColdFusion Application Server to catch internal exceptions, memory allocation errors, and access violations, which you may not be prepared to handle.</p><p>Applications can optionally use the CFTHROW tag to raise custom exceptions. Such exceptions are caught with any of the following type specifications:</p><ul>
+<li><code>TYPE="custom_exception_type"</code>
+
+</li>
+<li><code>TYPE="APPLICATION</code>"
+</li>
+<li><code>TYPE="ANY"</code>
+</li>
+</ul>
+<p>The <em>custom_exception_type</em> type designates the name of a user-defined type specified with the CFTHROW tag.</p><p>An exception raised within a CFCATCH block cannot be handled by the CFTRY block that immediately encloses the CFCATCH tag.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

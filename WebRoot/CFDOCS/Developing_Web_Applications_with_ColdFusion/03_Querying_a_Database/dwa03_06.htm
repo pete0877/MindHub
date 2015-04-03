@@ -1,0 +1,150 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Retrieving Data </title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012062"></a>
+ <H1>Retrieving Data </H1>
+
+
+
+<p>You can query databases to retrieve data at runtime. When retrieving data from a database:</p><ul>
+<li>You use the CFQUERY tag on a page to tell ColdFusion how to connect to a database and how to store the retrieved data.
+
+</li>
+<li>You write SQL commands inside the CFQUERY block to specify the data that you want to retrieve from the database.
+</li>
+<li>The retrieved data is stored on that page as a query variable.
+</li>
+<li>You can reference the query variable data on that page in a CFOUTPUT block to use its values.
+</li>
+</ul>
+<a name="1012069"></a>
+ 
+<H2>The CFQUERY Tag</H2>
+<p>The CFQUERY tag is one of the most frequently used CFML tags. You use it in conjunction with the CFOUTPUT tag so that you can retrieve and reference the data returned from a query.</p><p>When ColdFusion encounters a CFQUERY tag on a page, it does the following:</p><ul>
+<li>Connects to the specified data source.
+
+</li>
+<li>Performs SQL commands that are enclosed within the block.
+</li>
+<li>Returns query variable values to the page. 
+</li>
+</ul>
+<a name="1012080"></a>
+ 
+<H3>CFQUERY tag syntax</H3>
+<pre>&lt;CFQUERY NAME="EmpList" DATASOURCE="CompanyInfo"&gt;
+    <em>You'll type SQL here
+</em>&lt;/CFQUERY&gt;
+</pre><p>In this example, the query code tells ColdFusion to:</p><ul>
+<li>Use the<code> CompanyInfo</code> data source to connect to the <code>company.mdb</code> database.
+
+</li>
+<li>Store the retrieved data in the query variable EmpList.
+</li>
+</ul>
+<p>In general, you should follow these guidelines:</p><ul>
+<li>The CFQUERY tag is a block tag, that is, it has an opening &lt;CFQUERY&gt; and ending &lt;/CFQUERY&gt; tag.
+
+</li>
+<li>Use the NAME attribute to name the query variable so that you can reference it later on the page.
+</li>
+<li>Use the DATASOURCE attribute to name an existing data source that should be used to connect to a specific database. 
+</li>
+<li>Always surround attribute values with double quotes ("). 
+</li>
+<li>Place SQL statements inside the CFQUERY block to tell the database what to process during the query.
+</li>
+<li>When referencing text literals in SQL, use single quotes ('). For example, <code>Select * from mytable WHERE FirstName='Russ'</code> selects every record from mytable in which the first name is Russ.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The data source must exist in order to perform a successful query.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

@@ -1,0 +1,633 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Alphabetical List of ColdFusion Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_002.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1218219"></a>
+ <H1>Alphabetical List of ColdFusion Functions<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_017.htm#996758">Abs</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_079.htm#998290">DaysInYear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_138.htm#2600189">JSStringFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_197.htm#1001741">Rand</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_018.htm#1630384">ACos</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_080.htm#998318">DE</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_139.htm#999537">LCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_198.htm#1001760">Randomize</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_019.htm#1632616">ArrayAppend</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_081.htm#998346">DecimalFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_140.htm#999561">Left</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_199.htm#1001784">RandRange</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_020.htm#996808">ArrayAvg</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_082.htm#1442304">DecrementValue</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_141.htm#999590">Len</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_200.htm#1001808">REFind</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_021.htm#996823">ArrayClear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_083.htm#1442344">Decrypt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_142.htm#999618">ListAppend</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_201.htm#1670747">REFindNoCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_022.htm#996831">ArrayDeleteAt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_084.htm#998398">DeleteClientVariable</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_143.htm#999664">ListChangeDelims</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_202.htm#1222576">RemoveChars</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_023.htm#996845">ArrayInsertAt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_085.htm#1236011">DirectoryExists</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_144.htm#999698">ListContains</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_203.htm#1001868">RepeatString</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_024.htm#996856">ArrayIsEmpty</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_086.htm#998420">DollarFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_145.htm#999748">ListContainsNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_204.htm#1001901">Replace</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_025.htm#996869">ArrayLen</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_087.htm#1442911">Encrypt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_146.htm#999790">ListDeleteAt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_205.htm#1001938">ReplaceList</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_026.htm#996884">ArrayMax</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_088.htm#998444">Evaluate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_147.htm#999824">ListFind</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_206.htm#1001970">ReplaceNoCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_027.htm#996899">ArrayMin</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_089.htm#998474">Exp</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_148.htm#999858">ListFindNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_207.htm#1002007">REReplace</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_028.htm#996914">ArrayNew</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_090.htm#998504">ExpandPath</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_149.htm#999896">ListFirst</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_208.htm#1223436">REReplaceNoCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_029.htm#996932">ArrayPrepend</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_091.htm#998532">FileExists</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_150.htm#999929">ListGetAt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_209.htm#1046725">Reverse</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_030.htm#996957">ArrayResize</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_151.htm#999963">ListInsertAt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_210.htm#1002068">Right</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_031.htm#996975">ArraySet</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_093.htm#998598">FindNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_152.htm#1000001">ListLast</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_211.htm#1002097">RJustify</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_032.htm#997013">ArraySort</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_094.htm#998636">FindOneOf</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_153.htm#1000034">ListLen</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_212.htm#1002118">Round</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_033.htm#997040">ArraySum</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_095.htm#998674">FirstDayOfMonth</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_154.htm#1000071">ListPrepend</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_213.htm#1002150">RTrim</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_034.htm#1856458">ArraySwap</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_096.htm#998710">Fix</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_155.htm#1689171">ListQualify</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_214.htm#1002182">Second</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_035.htm#997073">ArrayToList</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_097.htm#998742">FormatBaseN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_156.htm#1000108">ListRest</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_215.htm#1002208">SetLocale</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_036.htm#997105">Asc</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_098.htm#1149293">GetBaseTagData</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_157.htm#1000141">ListSetAt</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_216.htm#1675773">SetProfileString</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_037.htm#1623656">ASin</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_099.htm#1236983">GetBaseTagList</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_158.htm#1000175">ListSort</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_217.htm#1677520">SetVariable</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_038.htm#1626102">Atn</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_100.htm#1708174">GetBaseTemplatePath</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_159.htm#1706563">ListToArray</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_218.htm#1002341">Sgn</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_039.htm#2596309">AuthenticatedContext</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_101.htm#1274656">GetClientVariablesList</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_160.htm#1685820">ListValueCount</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_219.htm#1002369">Sin</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_040.htm#2596346">AuthenticatedUser</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_102.htm#1709943">GetCurrentTemplatePath</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_161.htm#1686748">ListValueCountNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_220.htm#1002393">SpanExcluding</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_041.htm#1017682">BitAnd</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_103.htm#998794">GetDirectoryFromPath</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_162.htm#1000196">LJustify</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_221.htm#1002426">SpanIncluding</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_042.htm#997197">BitMaskClear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_104.htm#998898">GetFileFromPath</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_163.htm#1000229">Log</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_222.htm#1002459">Sqr</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_043.htm#997230">BitMaskRead</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_105.htm#2641822">GetFunctionList</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_164.htm#1000257">Log10</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_223.htm#1002489">StripCR</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_044.htm#997263">BitMaskSet</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_106.htm#2646194">GetLocale</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_165.htm#1000289">LSCurrencyFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_224.htm#1256440">StructClear</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_045.htm#997297">BitNot</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_107.htm#2654405">GetMetricData</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_166.htm#1000420">LSDateFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_225.htm#1533945">StructCopy</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_046.htm#997323">BitOr</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_108.htm#2658154">GetProfileString</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_167.htm#1701708">LSEuroCurrencyFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_226.htm#1257560">StructCount</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_047.htm#997353">BitSHLN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_109.htm#998926">GetTempDirectory</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_168.htm#1701702">LSIsCurrency</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_227.htm#1256452">StructDelete</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_048.htm#997389">BitSHRN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_110.htm#998947">GetTempFile</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_169.htm#1000514">LSIsDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_228.htm#1256491">StructFind</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_049.htm#997421">BitXor</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_111.htm#998972">GetTemplatePath</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_170.htm#1000545">LSIsNumeric</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_229.htm#1256537">StructInsert</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_050.htm#997451">Ceiling</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_112.htm#998991">GetTickCount</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_171.htm#1000576">LSNumberFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_230.htm#1256583">StructIsEmpty</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_051.htm#997479">Chr</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_113.htm#1654667">GetTimeZoneInfo</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_172.htm#1000806">LSParseCurrency</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_052.htm#997513">CJustify</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_114.htm#1274233">GetToken</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_173.htm#1038684">LSParseDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_232.htm#1667540">StructKeyExists</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_053.htm#997538">Compare</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_115.htm#999021">Hour</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_174.htm#1702979">LSParseEuroCurrency</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_233.htm#1638010">StructKeyList</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_054.htm#997573">CompareNoCase</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_116.htm#999056">HTMLCodeFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_175.htm#1000948">LSParseNumber</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_234.htm#1639682">StructNew</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_055.htm#997601">Cos</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_117.htm#999081">HTMLEditFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_176.htm#1001001">LSTimeFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_235.htm#1256721">StructUpdate</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_056.htm#997632">CreateDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_118.htm#2596842">IIf</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_177.htm#1001073">LTrim</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_236.htm#1256168">Tan</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_119.htm#999146">IncrementValue</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_178.htm#1001105">Max</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_238.htm#1002525">TimeFormat</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_058.htm#2722158">CreateObject</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_120.htm#999174">InputBaseN</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_179.htm#1001133">Mid</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_239.htm#2583123">ToBase64</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_062.htm#997701">CreateODBCDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_121.htm#999211">Insert</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_180.htm#1001163">Min</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_240.htm#2583224">ToBinary</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_063.htm#997725">CreateODBCDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_122.htm#999237">Int</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_181.htm#1001191">Minute</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_241.htm#2598867">ToString</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_064.htm#997751">CreateODBCTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_123.htm#999265">IsArray</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_182.htm#1001222">Month</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_242.htm#1002586">Trim</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_065.htm#997777">CreateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_124.htm#2596964">IsAuthenticated</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_183.htm#1001253">MonthAsString</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_243.htm#1002610">UCase</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_066.htm#997810">CreateTimeSpan</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_125.htm#2597008">IsAuthorized</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_184.htm#1001277">Now</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_244.htm#2620012">URLDecode</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_067.htm#1643076">CreateUUID</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_126.htm#2571594">IsBinary</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_185.htm#1001300">NumberFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_245.htm#2619824">URLEncodedFormat</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_068.htm#1642959">DateAdd</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_127.htm#2570614">IsBoolean</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_186.htm#1001531">ParagraphFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_246.htm#1002657">Val</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_069.htm#997918">DateCompare</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_128.htm#999364">IsDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_187.htm#1001555">ParameterExists</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_247.htm#1002693">ValueList</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_070.htm#1649018">DateConvert</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_129.htm#1480078">IsDebugMode</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_188.htm#1001568">ParseDateTime</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_248.htm#1002709">Week</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_071.htm#1661330">DateDiff</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_130.htm#999402">IsDefined</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_189.htm#1001598">Pi</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_249.htm#1586537">WriteOutput</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_072.htm#998022">DateFormat</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_131.htm#999416">IsLeapYear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_190.htm#1001621">PreserveSingleQuotes</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_250.htm#2599462">XMLFormat</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_073.htm#998081">DatePart</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_132.htm#999452">IsNumeric</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_191.htm#1001635">Quarter</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_251.htm#1002736">Year</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_074.htm#998151">Day</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_133.htm#999488">IsNumericDate</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_192.htm#1679669">QueryAddColumn</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_252.htm#1002763">YesNoFormat</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_075.htm#998178">DayOfWeek</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_134.htm#2469003">IsProtected</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_193.htm#1679723">QueryAddRow</a>
+</td><td valign="top">
+&nbsp;
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_076.htm#998205">DayOfWeekAsString</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_135.htm#999512">IsQuery</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_194.htm#1001679">QueryNew</a>
+</td><td valign="top">
+&nbsp;
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_077.htm#998235">DayOfYear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_136.htm#1889173">IsSimpleValue</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_195.htm#1001705">QuerySetCell</a>
+</td><td valign="top">
+&nbsp;
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_078.htm#998263">DaysInMonth</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_137.htm#1578384">IsStruct</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_196.htm#1001724">QuotedValueList</a>
+</td><td valign="top">
+&nbsp;
+</td></tr>
+
+</table>
+</div>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+
+</table>
+</div>
+</H1>
+
+
+
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_002.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

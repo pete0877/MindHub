@@ -1,0 +1,218 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working with Resources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012707"></a>
+ <H1>Working with Resources</H1>
+
+
+
+<p>The Resources tree provides an alternate view of the files in your project based on file type. For example, if you click the HTML Documents resource, you see a listing of all the HTML files in your entire project.</p><p>By default, three types of resources are included in the Resources tree: HTML, CFML, and Images. You can control the display of these three default resources using the Projects pane in the Settings dialog box (F8). You can also create your own resources and specify which files extensions should be displayed for them.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view files for a particular resource:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Expand the Resources node.
+
+
+<p><img src="../images/resources_node.gif">
+
+
+
+</p></li>
+<li>Click the Resource whose files you want to see (for example, if you want to see all of your HTML files, click HTML Documents).
+
+<p>A list of files is displayed. The files shown are only those files whose extensions 
+match that of the Resource you selected.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a resource:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click Resources and choose Add Resource from the menu to see the Add Resource Folder dialog box.
+
+
+<p><img src="../images/add_resource_folder.gif">
+
+
+
+</p></li>
+<li>Enter a name for the resource in the Resource Name box.
+
+</li>
+<li>Enter the file extension(s) for this type of resource in the Resource Filter box, separating them with semi-colons if you have more than one (for example, the resource filters for the HTML Documents resource are HTM;HTML).
+
+</li>
+<li>Click OK.
+
+<p>The new resource is added to the resources list. If you click that resource, a list of 
+files with the extensions you specified is displayed in the file list.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a resource:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the resource in the Resources tree and choose Properties from the menu to see the Edit Resource Folder dialog box.
+
+
+</li>
+<li>Make any changes to the resource name or filters and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove a resource:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the resource and choose Remove Resource from the menu.
+
+
+<p>You are asked to confirm that you want to remove the resource.
+</p></li>
+<li>Click Yes.
+
+<p>The resource is removed from the Resources list.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set resource options:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose Options &gt; Settings or press F8 to see the Settings dialog box.
+
+
+</li>
+<li>Click Projects to see the Projects Resources settings.
+
+<p><img src="../images/project_resources_pane.gif">
+
+
+
+</p></li>
+<li>Use the checkboxes to enable and disable resources. If you disable a resource, it is removed from the Resources tree. If you enable a resource, it is displayed it the Resources tree.
+
+</li>
+<li>Use the text boxes to the right of each resource type to specify the extensions that comprise each resource. Separate extensions with a semi-colon.
+
+</li>
+<li>Click OK when you're done setting resource options.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

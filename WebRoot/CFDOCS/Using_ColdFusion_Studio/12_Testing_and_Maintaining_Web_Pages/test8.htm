@@ -1,0 +1,138 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Testing Page Download Times</title>
+
+
+</head>
+<body>
+
+<!--- Navbar for last page --->
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="95%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Testing and Maintaining  Web Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- End of header content. Page content displays below. -->
+
+
+<br>
+<a name="1009779"></a>
+ <H1>Testing Page Download Times</H1>
+
+
+
+<p>Page download times are a frequently-cited metric of a site's design and effectiveness. If you are developing a public site, you need to be sensitive to achieving a balance between attractive content and tolerable page-loading times. Studio can help you find that balance by supplying real values for document download times across a range of modem speeds.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To test the current document's download time:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select Tools &gt; Document Weight. The file's dependencies are listed along with file size and download times for a range of modem speeds. Tags in comments are not calculated.
+
+
+</li>
+<li>If the page's download time exceeds the site's requirements, edit the page to decrease the number or size of dependencies, and re-test.
+
+</li>
+</ol>
+<p>Studio uses the Root URL setting in your FTP configuration to determine the relative path to files.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set the root URL for an FTP server:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Universal Files tab in the Resources view.
+
+
+</li>
+<li>Select Allaire FTP &amp; RDS from the Drive List.
+
+</li>
+<li>Right-click a server name and select Properties to see the Configure FTP Server dialog box.
+
+</li>
+<li>Complete the Root URL field and click OK.
+
+</li>
+</ol>
+<p></p>
+<br>
+
+<br>
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="95%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test7.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:54 -->
+</body>
+</html>

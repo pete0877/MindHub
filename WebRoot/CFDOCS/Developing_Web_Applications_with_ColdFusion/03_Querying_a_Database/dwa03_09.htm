@@ -1,0 +1,202 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Outputting Query Data</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012262"></a>
+ <H1>Outputting Query Data</H1>
+
+
+
+<p>After you have defined a query on a page, you can use the CFOUTPUT tag with the QUERY attribute to define the query variable that you want to output to a page. When you use the QUERY attribute:</p><ul>
+<li>ColdFusion loops over all the code contained within the CFOUTPUT block, once for each row returned from a database.
+
+</li>
+<li>Reference specific column names within the CFOUTPUT block to output the data to the page.
+</li>
+<li>You can place text and HTML tags inside or surrounding the CFOUTPUT block to format the data on the page. 
+</li>
+</ul>
+<p>The CFOUTPUT tag accepts a variety of optional attributes but, ordinarily, you will use the QUERY attribute to define the name of an existing query. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To output query data on your page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Return to <code>empList.cfm</code> in Studio.
+
+
+</li>
+<li>Edit the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Employee List&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;Employee List&lt;/H1&gt;
+&lt;CFQUERY NAME="EmpList" DATASOURCE="CompanyInfo"&gt;
+    SELECT FirstName, LastName, Salary, Contract
+    FROM Employees
+&lt;/CFQUERY&gt;
+<span class="codemark">&lt;CFOUTPUT QUERY="EmpList"&gt;
+</span><span class="codemark">#FirstName#, #LastName#, #Salary#, #Contract#&lt;BR&gt;
+</span><span class="codemark">&lt;/CFOUTPUT&gt;
+</span>&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>emplist.cfm</code>.
+
+</li>
+<li>View the page in a browser.
+
+<p>A list of employees appears in the browser, with each line displaying one row of 
+data.
+</p></li>
+</ol>
+<p>You have created a ColdFusion application page that retrieves and displays data from a database. At present, the output is raw. You will learn how to format the data in the next chapter.</p><a name="1021228"></a>
+ 
+<H3>Code Review</H3>
+<p>You now display the results of the query on the page.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFOUTPUT QUERY="EmpList"&gt;
+</PRE></td><td valign="top">
+Display information retrieved in the EmpList query
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>#FirstName#, #LastName#, 
+#Salary#, #Contract#
+</PRE></td><td valign="top">
+Display the value of the FirstName, LastName, Salary, Contract fields of the first record
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;BR&gt;
+</PRE></td><td valign="top">
+Insert a line break (go to the next line
+
+Then, keep displaying the fields you've specified for each record, followed by a line break, until you run out of records.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;/CFOUTPUT&gt;
+</PRE></td><td valign="top">
+End the CFOUTPUT block
+</td></tr>
+
+</table>
+</div>
+</p><a name="1021202"></a>
+ 
+<H2>Query Output Notes and Considerations</H2>
+<p>When outputting query results, keep these guidelines in mind:</p><ul>
+<li>Run a CFQUERY before referencing its results using a CFOUTPUT with a QUERY attribute.
+
+</li>
+<li>It's a good idea to run all queries before all output blocks.
+</li>
+<li>A query name must exist on the page in order to successfully output its data.
+</li>
+<li>Surround variable references with pound signs to output their current values to a page.
+</li>
+<li>Prefix variables with their variable type -- in the case of a query variable, it's the name of the query.
+</li>
+<li>When outputting the data itself, you define the variable name using the QUERY attribute.
+</li>
+<li>When outputting query properties variables, don't use the QUERY attribute; instead, prefix the variable reference with the name of the query, for example, <code>EmpList.RecordCount</code>.
+</li>
+<li>Columns must exist and be retrieved to the application in order to output their values. 
+</li>
+<li>As with other attributes, surround the QUERY value with double quotes ("). 
+</li>
+<li>As with any variables that you reference for output, surround column names with pound signs (#) to tell ColdFusion to output the column's current values.
+</li>
+<li>Add a &lt;BR&gt; tag to the end of the variable references so that ColdFusion will start a new line for each row that is returned from the query. 
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Querying_a_Database/dwa03_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

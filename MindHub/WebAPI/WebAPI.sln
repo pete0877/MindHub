@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "http://localhost/WebAPI/WebAPI.csproj", "{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = http://localhost/WebAPI/WebAPI.csproj
+		SccProjectName0 = \u0022$/MindHub/Dev/MindHub/WebAPI\u0022,\u0020KIAAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectEnlistmentChoice0 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Debug.ActiveCfg = Debug|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Debug.Build.0 = Debug|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Release.ActiveCfg = Release|.NET
+		{95BC5EE9-31AB-40FA-8709-538FB3CDE1B2}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

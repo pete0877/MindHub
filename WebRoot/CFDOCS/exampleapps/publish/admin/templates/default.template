@@ -1,0 +1,10 @@
+---BEGIN PUBLISHING DATA---
+LOCATIONS=1
+DESCRIPTION=This is a completely bare template which should be modified before use.
+---END PUBLISHING DATA---
+
+<CFINCLUDE TEMPLATE="_header.cfm">
+
+<CF_ShowContent>
+
+<CFINCLUDE TEMPLATE="_footer.cfm">

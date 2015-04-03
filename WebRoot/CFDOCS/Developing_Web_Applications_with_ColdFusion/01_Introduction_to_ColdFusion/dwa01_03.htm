@@ -1,0 +1,99 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>What You Should Already Know</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Introduction_to_ColdFusion/dwa01_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Introduction_to_ColdFusion/dwa01.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Introduction_to_ColdFusion/dwa01_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;Introduction to ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1011926"></a>
+ <H1>What You Should Already Know</H1>
+
+
+
+<p>Before you begin using ColdFusion to create your Web applications, you should be familiar with the following topics:</p><a name="1011927"></a>
+ 
+<H3>HTML</H3>
+<p>You'll find that ColdFusion tags (CFML) are similar in syntax to HTML tags, yet, unlike HTML, they enable you to create dynamic Web pages. You should understand how to create a basic HTML page, put information into tables, gather data in forms, and create links.</p><a name="1011928"></a>
+ 
+<H3>Relational Database Design and Management </H3>
+<p>If you plan on creating applications that use data from existing data sources, you should understand how the data is organized. In most cases, this means understanding how tables are organized to prevent unnecessary duplication of data. For example, if you have data about employees, rather than repeating the department number and name in each employee's record, you would most likely have a separate table that lists each department number and name just once.</p><a name="1011929"></a>
+ 
+<H3>SQL</H3>
+<p>Familiarity with some Structured Query Language (SQL) will be helpful as you develop your ColdFusion applications. In particular, you should be able to use the SELECT, UPDATE, INSERT, and DELETE statements, as well as WHERE clauses and boolean logic operators.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../01_Introduction_to_ColdFusion/dwa01_02.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../01_Introduction_to_ColdFusion/dwa01.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../01_Introduction_to_ColdFusion/dwa01_04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:40 -->
+</body>
+</html>

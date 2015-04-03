@@ -1,0 +1,125 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Indexing CFPOP Query Results</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1218392"></a>
+ <H1>Indexing CFPOP Query Results</H1>
+
+
+
+<p>The contents of mail servers are generally quite volatile; specifically, the MessageNumber is reset as messages are added and deleted. To avoid mismatches between the unique MessageNumber identifiers on the server and in the Verity collection, it's a good idea to re-index the collection before processing a search.</p><p>As with the other query types, you need to provide a unique value for the KEY attribute and enter the data fields to index in the BODY attribute.</p><pre>&lt;!--- Run POP query ---&gt;
+&lt;CFPOP ACTION="getall"
+    NAME="p_messages
+    SERVER="mail.mycompany.com"
+    USERNAME="user1"
+    PASSWORD="user1"&gt;
+
+&lt;!--- Output POP query result set ---&gt;
+&lt;CFOUTPUT QUERY="p_messages"&gt;
+    #MESSAGENUMBER# &lt;BR&gt;
+    #FROM# &lt;BR&gt;
+    #TO# &lt;BR&gt;
+    #SUBJECT# &lt;BR&gt;
+    #BODY# &lt;BR&gt;
+=========================&lt;BR&gt;
+
+&lt;!--- Index result set ---&gt;
+&lt;CFINDEX ACTION="update"
+    COLLECTION="pop_query"
+    KEY="messagenumber"
+    TYPE="custom"
+    TITLE="subject"
+    QUERY="p_messages"
+
+    BODY="body"&gt;
+
+&lt;!--- Search messages for the word "action" ---&gt;
+&lt;CFSEARCH COLLECTION="pop_query"
+    NAME="s_messages"
+    CRITERIA="action"&gt;
+
+&lt;!--- Output search result set ---&gt;
+&lt;CFOUTPUT QUERY=" s_messages"&gt;
+    #Key#, #Title# &lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre><p>The CFSEARCH code in the examples above uses the basic attributes needed to search a collection. The next section expands on the capabilities of this tag for more detailed input and output options.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_12.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

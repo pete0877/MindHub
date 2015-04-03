@@ -1,0 +1,195 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using HTML Tables to Layout Query Results</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Retrieving and Formatting the Data You Want</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015189"></a>
+ <H1>Using HTML Tables to Layout Query Results</H1>
+
+
+
+<p>You have displayed each row of data from the Employees table, but the information was unformatted. You can use HTML tables to control the layout of information on the page. In addition, you can use CFML functions to format individual pieces of data such as dates and numeric values.</p><p>You can use HTML tables to specify how the results of a query appear on a page. To do so, you put the CFOUTPUT tag <em>inside</em> the table tags. You can also use the HTML TH tag to put column labels in a header row. To create a row in the table for each row in the query results, put the TR block inside the CFOUTPUT tag.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To put the query results in a table:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Return to the file <code>emplist.cfm</code> in Studio.
+
+
+</li>
+<li>Modify the page so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Retrieving Employee Data Based on Criteia from Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;CFQUERY NAME="GetEmployees" DATASOURCE="CompanyInfo"&gt;
+    SELECT FirstName, LastName, Salary
+    FROM Employees
+    WHERE LastName='#Form.LastName#'
+&lt;/CFQUERY&gt;
+&lt;H4&gt;Employee Data Based on Criteia from Form&lt;/H4&gt;
+<span class="codemark">&lt;TABLE&gt;
+</span><span class="codemark">&lt;TR&gt;
+</span><span class="codemark">&lt;TH&gt;First Name&lt;/TH&gt;
+</span><span class="codemark">&lt;TH&gt;Last Name&lt;/TH&gt;
+</span><span class="codemark">&lt;TH&gt;Salary&lt;/TH&gt;
+</span><span class="codemark">&lt;/TR&gt;
+</span>&lt;CFOUTPUT QUERY="GetEmployees"&gt;
+<span class="codemark">&lt;TR&gt;
+</span><span class="codemark">&lt;TD&gt;#FirstName#&lt;/TD&gt;
+</span><span class="codemark">&lt;TD&gt;#LastName#&lt;/TD&gt;
+</span><span class="codemark">&lt;TD&gt;#Salary#&lt;/TD&gt;
+</span><span class="codemark">&lt;/TR&gt;
+</span>&lt;/CFOUTPUT&gt;
+<span class="codemark">&lt;/TABLE&gt;
+</span>&lt;/BODY&gt;
+</pre><pre>&lt;/HTML&gt;
+</pre></li>
+<li>Save the page as <code>actionpage.cfm</code> within the <code>myapps</code> directory. 
+
+</li>
+<li>View <code>formpage.cfm</code> in your browser.
+
+</li>
+<li>Enter data for the LastName form control and submit it.
+
+</li>
+<li>The records that match the criteria specified in the form appear in a table.
+
+</li>
+</ol>
+<a name="1016704"></a>
+ 
+<H3>Code Review<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><pre>&lt;TABLE&gt;
+</pre></td><td valign="top">
+Put data into a table.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>&lt;TR&gt;
+    &lt;TH&gt;First Name&lt;/TH&gt;
+    &lt;TH&gt;Last Name&lt;/TH&gt;
+    &lt;TH&gt;Salary&lt;/TH&gt;
+</pre><PRE>&lt;/TR&gt;
+</PRE></td><td valign="top">
+In the first row of the table, include three columns, with the headings: First Name, Last Name, and Salary.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFOUTPUT QUERY="GetEmployees"&gt;
+</PRE></td><td valign="top">
+Get ready to display the results of the GetEmployees query.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>&lt;TR&gt;
+    &lt;TD&gt;#FirstName#&lt;/TD&gt;
+    &lt;TD&gt;#LastName#&lt;/TD&gt;
+    &lt;TD&gt;#Salary#&lt;/TD&gt;
+&lt;/TR&gt;
+</pre></td><td valign="top">
+Create a new row in the table, with three columns. For a record, put the value of the FirstName field, the value of the LastName field, and the value of the Salary field. 
+</td></tr>
+<tr valign="top"><td valign="top"><pre>&lt;/CFOUTPUT&gt;
+</pre></td><td valign="top">
+Keep getting records that matches the criteria, and display each row in a new table row until you run out of records.
+</td></tr>
+<tr valign="top"><td valign="top"><pre>&lt;/TABLE&gt;
+</pre></td><td valign="top">
+End of table.
+</td></tr>
+
+</table>
+</div>
+</H3>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:42 -->
+</body>
+</html>

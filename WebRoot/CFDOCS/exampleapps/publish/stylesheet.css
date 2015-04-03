@@ -1,0 +1,32 @@
+DIV.HeadlineFull  {
+	font-family : Arial Black;
+	font-size : 16pt;
+	font-style : italic;
+}
+
+DIV.HeadlineTeaser  {
+	font-family : Helvetica;
+	font-size : 12pt;
+	font-weight : bold;
+}
+
+DIV.TeaserTeaser  {
+	font-family : MS Sans Serif, Helvetica;
+	font-size : 10pt;
+}
+
+DIV.BodyFull  {
+	font-family : MS Sans Serif, Helvetica;
+	font-size : 10pt;
+}
+
+DIV.LinkTeaser  {
+	font-family : MS Sans Serif, Helvetica;
+	font-size : 10pt;
+}
+
+DIV.LinkFull  {
+	font-family : MS Sans Serif, Helvetica;
+	font-size : 10pt;
+}
+

@@ -1,0 +1,443 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working with Folders and Files</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Using Projects for Site Management</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012582"></a>
+ <H1>Working with Folders and Files</H1>
+
+
+
+<p>Once you have created a project, you must populate it with folders and files. The procedures in this section show you how to:</p><ul>
+<a name="1013769"> </a>
+<li>Add, edit, and delete all of the folder types (virtual, manual-inclusive, auto-inclusive)
+
+<a name="1013778"> </a>
+</li>
+<li>Add files to and remove files from folders
+<a name="1013788"> </a>
+</li>
+<li>Open all the documents in a selected folder
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can also specify deployment settings for a folder. These procedures 
+are covered in <a href="../11_Deploying_Projects/deployment.htm#997350">Chapter 11, &quot;Deploying Projects&quot;</a>.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1013920"></a>
+ 
+<H2>Working with folders</H2>
+<p>When you add a folder to a project, you must decide where that folder will fall within the project tree. You can add a folder to the project root or you can add a folder to an existing folder. When you add a folder to an existing folder, the new folder is defined as the "child" and the existing folder is the "parent." Understanding parent/child relationships between folders will become more important when you specify the deployment properties for the project. For now, you just need to know that they exist.</p><p><img src="../images/project_parent_child_callout.gif">
+
+
+</p><p>There are some limitations to where you can add virtual folders. Virtual folders can only be added to the project root or to another virtual folder. You cannot add a virtual folder to a manual-inclusive or auto-inclusive folder. You can, however, add manual-inclusive or auto-inclusive folders to virtual folders.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a virtual folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click on the parent for the new virtual folder (either the project root or another virtual folder) and choose Add Folder from the menu to see the Add a Project Folder dialog box.
+
+
+<p><img src="../images/add_a_project_folder.gif">
+
+
+
+</p></li>
+<li>Enter a folder name in the Folder Name box.
+
+</li>
+<li>Click Virtual Folder and click OK.
+
+<p>The folder is added to your project.
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Remember, you should use virtual folders when you have a number of 
+files in different locations and you want a "container" to hold them all.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a manual-inclusive folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click on the parent for the new manual-inclusive folder (either the project root or any other folder) and choose Add Folder from the menu to see the Add a Project Folder dialog box.
+
+
+</li>
+<li>Enter a folder name in the Folder Name box.
+
+</li>
+<li>Click Physical Folder.
+
+</li>
+<li>Enter the path for the directory to be referenced in the Directory Path box or click the Browse button to locate the directory using the Select Directory dialog box.
+
+<p><img src="../images/browse.gif">
+
+
+
+</p></li>
+<li>Click OK.
+
+<p>The folder is added to your project. In order to populate the folder with files, you 
+will have to add them manually.
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>When you create a physical folder of either type, you are in essence 
+creating a reference to a directory that already exists on your computer.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add an auto-inclusive folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click on the parent for the new auto-inclusive folder (either the project root or any other folder) and choose Add Folder from the menu to see the Add a Project Folder dialog box.
+
+
+</li>
+<li>Enter a folder name in the Folder Name box.
+
+</li>
+<li>Click Physical Folder.
+
+</li>
+<li>Enter the path for the directory to be referenced in the Directory Path box or click the Browse button to locate the directory using the Select Directory dialog box.
+
+</li>
+<li>Click Auto Include Files Using Filter and choose a filter from the drop-down menu (a filter limits the files that will be included based on the extension types that you specify). Alternatively, you can manually enter file extensions separated by semi-colons.
+
+</li>
+<li>Click OK. You see the Include Files in New Folder dialog box.
+
+</li>
+<li>To include all files inside the referenced directory, click Add all files to this folder. To include any subfolders inside the referenced directory, click Add all subfolders to this folder.
+
+</li>
+<li>Click OK.
+
+<p>The folder is added to your project and is populated according to the options you 
+set in steps 5 and 7.
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>When you create a physical folder of either type, you are in essence 
+creating a reference to a directory that already exists on your computer.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To edit a folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the folder and choose Properties from the menu to see the Edit a Folder Properties dialog box.
+
+
+<p><img src="../images/edit_folder_properties.gif">
+
+
+
+</p></li>
+<li>Change any properties and click OK.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove a folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the folder and choose Remove Folder from the menu.
+
+
+<p>You are asked to confirm that you want to remove the folder.
+</p></li>
+<li>Click Yes.
+
+<p>The folder is removed from the Project display. 
+</p></li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Removing a folder from a project has no affect on the actual files in the 
+mapped directory. You are only removing the reference to that folder in 
+the .apf file.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open all documents in a folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the project and choose Open All Documents in Folder from the menu.
+
+
+<p>All of the text-based files in the folder are opened in the Editor window, with a tab 
+for each file. 
+</p><p>You are asked how to deal with any files that are not text-based. You have three 
+options:
+</p><ul>
+<a name="1015631"> </a>
+<li>Open the file in its associated program (based on the file's extension).
+
+<a name="1015632"> </a>
+</li>
+<li>Open the file in the Editor window anyway if possible.
+<a name="1015633"> </a>
+</li>
+<li>Skip the file.
+</li>
+</ul>
+</li>
+</ol>
+<a name="1014096"></a>
+ 
+<H2>Working with files</H2>
+<p>Now that you have an understanding of how to work with project folders, you can begin to work with files. The methods for working with a file can vary slightly, depending on the type of folder that contains the file.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Project Files list that is displayed in the bottom pane of the Projects 
+tab can be treated very similarly to the file list that is displayed as part of 
+the Universal Files tab. In other words, you can drag and drop files or 
+open files for editing from this list.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1014546"></a>
+ 
+<H3>Files in manual-inclusive or virtual folders</H3>
+<p>The process for adding and deleting files is the same for both virtual and manual-inclusive folders. You cannot add files to or remove files from an auto-inclusive folder with these methods.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add files to a manual- inclusive or virtual folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the folder and choose Add Files to Folder from the menu to see the Add Files to Folder dialog box.
+
+
+<p><img src="../images/add_files_to_folder.gif">
+
+
+
+</p></li>
+<li>Locate and select the files you want to add to your project folder. You can select more than one file for adding by using the Shift and CTRL keys.
+
+</li>
+<li>Click Open to add the files to the folder.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To remove files from a manual- inclusive or virtual folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select the folder in the project tree.
+
+
+<p>The files contained in the selected folder are displayed in the File list.
+</p></li>
+<li>Right-click the file you want to remove in the File list and choose Remove From Project from the menu.
+
+<p>You are asked to confirm that you want to remove the file.
+</p></li>
+<li>Click Yes.
+
+</li>
+<li>The file is removed from the list.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Removing a file from a project has no affect on the actual file in the 
+mapped directory. You are only removing the reference to that file in the 
+.apf file.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1015937"></a>
+ 
+<H3>Files in auto-inclusive folders</H3>
+<p>You control the files that are included in an auto-inclusive folder by specifying the files types that are allowed. You can change the file types at any time to alter the included files.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change the types of files allowed in an auto-inclusive folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click the auto-inclusive folder and choose Properties from the menu to see the Edit Folder Properties dialog box.
+
+
+</li>
+<li>Change the Include Files Using Filter list to contain the extensions for the file types you want included in the folder. You can change the extensions by using the drop-down list or by manually entering the extensions, separated by colons.
+
+</li>
+<li>Click OK.
+
+<p>The list of included files is filtered according to the extensions you specified.
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Using_Projects_for_Site_Management/projects5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Using_Projects_for_Site_Management/projects.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Using_Projects_for_Site_Management/projects7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

@@ -1,0 +1,150 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Indexing database query results</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1220495"></a>
+ <H1>Indexing database query results</H1>
+
+
+
+<p>Indexing the result set from a ColdFusion query involves an extra step not required when indexing documents. You need to code the query and output parameters, then point the CFINDEX tag at the result set from a CFQUERY, CFLDAP, or CFPOP query.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To index a ColdFusion query:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create the collection on the ColdFusion Administrator Verity page.
+
+
+</li>
+<li>Execute a query and output the data.
+
+</li>
+<li>Populate the collection using the CFINDEX tag.
+
+</li>
+</ol>
+<p>To populate a collection from a CFQUERY you specify a KEY, which corresponds to the primary key of the data source, and the BODY, the column in which you want to conduct searches. The following extract shows only the CFQUERY and CFINDEX parts of the process.</p><pre>&lt;!--- Select the entire table ---&gt;
+&lt;CFQUERY NAME="Messages" 
+    DATASOURCE="MyMail"&gt;
+    SELECT * 
+        FROM Messages
+&lt;/CFQUERY&gt;
+
+&lt;!--- Output the result set ---&gt;
+&lt;CFOUTPUT QUERY="Messages"&gt;
+    #Message_ID#, #Subject#, #Title#, #MessageText#
+
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- Index the result set ---&gt;
+&lt;CFINDEX COLLECTION="DBINDEX"
+    ACTION="UPDATE"
+    TYPE="CUSTOM"
+    BODY="MessageText"
+    KEY="Message_ID"
+    TITLE="Subject"
+    QUERY="Messages"&gt;
+</pre><p>This CFINDEX statement specifies the MessageText column as the core of the collection and names the table's primary key, the Message_ID column, as the KEY value. Note that the TITLE attribute names the Subject column. The TITLE attribute can be used to designate an output parameter.</p><p>To index more than one column in a collection, enter a comma-separated list of column names for values of the BODY attribute, such as:</p><pre>BODY=FirstName,LastName,Company
+</pre><a name="1218376"></a>
+ 
+<H3>Advantages of indexing a data source</H3>
+<p>The main advantage of performing searches against a Verity collection over using CFQUERY alone is that the database is indexed in a form that provides faster access. Use this technique instead of CFQUERY in the following cases:</p><ul>
+<li>You want to index textual data. Verity collections containing textual data can be searched much more efficiently with CFINDEX than searching a database with CFQUERY.
+
+</li>
+<li>You want to give your users access to data without interacting directly with the data source itself.
+</li>
+<li>You want to improve the speed of queries.
+</li>
+<li>You want your end users to run queries but not update a database table.
+</li>
+<li>You do not want to expose your data source.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

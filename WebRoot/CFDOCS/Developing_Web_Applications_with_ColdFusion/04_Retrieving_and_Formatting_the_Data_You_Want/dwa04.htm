@@ -1,0 +1,113 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Retrieving and Formatting the Data You Want</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="996797"></a>
+<H1>Chapter 4	<br>
+Retrieving and Formatting the Data You Want</H1>
+
+<p>This chapter explains how to select the data to display in a dynamic Web page. It also describes how to populate an HTML table with query results and how to use ColdFusion functions to format and manipulate data.</p><a name="1011973"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_02.htm#1018832">Using Forms to Specify the Data to Retrieve</a>
+
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_03.htm#1013109">Processing Form Variables on Action Pages</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_04.htm#1016239">Dynamically Generating SQL Statements</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_05.htm#1013126">Creating Action Pages</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_06.htm#1015189">Using HTML Tables to Layout Query Results</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_07.htm#1015279">Formatting Individual Data Items</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_08.htm#1017113">Performing Pattern Matching</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_09.htm#1017134">Filtering Data Based on Multiple Conditions</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_10.htm#1025796">Creating Table Joins</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_11.htm#1017177">Building Flexible Search Interfaces</a>
+</li>
+<li><a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_12.htm#1017244">Returning Query Results to the User</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:42 -->
+</body>
+</html>

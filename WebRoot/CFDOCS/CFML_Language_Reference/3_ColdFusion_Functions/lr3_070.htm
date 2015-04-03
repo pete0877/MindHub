@@ -1,0 +1,209 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>DateConvert</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_069.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_071.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1649018"></a>
+ <H1>DateConvert</H1>
+
+
+
+<p>Converts local time to Universal Coordinated Time (UTC ) or UTC to local time based on the specified parameters. This function uses the daylight savings settings in the executing machine to compute daylight savings time, if required. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_113.htm#1654667">GetTimeZoneInfo</a>, <a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a>, and <a href="../3_ColdFusion_Functions/lr3_073.htm#998081">DatePart</a>.
+</p>
+
+<a name="1649027"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>DateConvert</strong>(<em>conversion-type</em>, <em>date</em>)
+</PRE><a name="1649029"> </a>
+<h5 class="param"> conversion-type</h5>
+<p class="param">There are two conversion types: &quot;local2Utc&quot; and &quot;utc2Local.&quot; The former converts local time to UTC time. The later converts UTC time to local time.</p><a name="1649031"> </a>
+<h5 class="param"> date</h5>
+<p class="param">Any ColdFusion date and time string. In order to create a ColdFusion date and time, use <a href="../3_ColdFusion_Functions/lr3_057.htm#997666">CreateDateTime</a>.</p><a name="1649033"></a>
+ 
+<H3>Usage</H3>
+<p>When passing a date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object, returning undesired results.</p><a name="1800439"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DateConvert
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of DateConvert ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;DateConvert Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;basefont face="Arial, Helvetica" size=2&gt;
+
+&lt;body  bgcolor="#FFFFD5"&gt;
+
+&lt;H3&gt;DateConvert Example&lt;/H3&gt;
+
+&lt;!--- This part of the example shows the conversion of the current date
+        and time to UTC time and back again. ---&gt;
+
+&lt;CFSET curDate = Now()&gt;
+&lt;P&gt;&lt;CFOUTPUT&gt;The current date and time: #curDate#. &lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;CFSET utcDate = DateConvert("local2utc", curDate)&gt;
+&lt;CFOUTPUT&gt;
+    &lt;P&gt;The current date and time converted to UTC time: #utcDate#.&lt;/P&gt; 
+&lt;/CFOUTPUT&gt; 
+
+&lt;!--- This code checks to see if the form was submitted. 
+      If it was submitted the code generates the CFML date with the 
+CreateDateTime function. ---&gt;    
+
+&lt;CFIF IsDefined("FORM.submit")&gt;
+    &lt;CFSET yourDate = CreateDateTime(FORM.year, FORM.month, FORM.day, 
+FORM.hour,FORM.minute, FORM.second)&gt;
+    &lt;P&gt;&lt;CFOUTPUT&gt;Your date value, presented as a ColdFusion date-time 
+string:#yourdate#.&lt;/CFOUTPUT&gt;&lt;/P&gt;
+    &lt;CFSET yourUTC = DateConvert("local2utc", yourDate)&gt;
+    &lt;P&gt;&lt;CFOUTPUT&gt;Your date and time value, converted into Universal 
+Coordinated Time (UTC): #yourUTC#.&lt;/CFOUTPUT&gt;&lt;/P&gt;
+    &lt;P&gt;&lt;CFOUTPUT&gt;Your UTC date and time, converted back to local date and 
+time: #DateConvert("utc2local", yourUTC)#.&lt;/CFOUTPUT&gt;&lt;/P&gt;
+&lt;CFELSE&gt;
+    Type the date and time, and press Enter to see the conversion.
+&lt;/CFIF&gt;    
+    
+
+&lt;Hr size="2" color="#0000A0"&gt;
+
+&lt;FORM ACTION="dateconvert.cfm" METHOD="POST"&gt;
+&lt;P&gt;Please enter the year, month and day in integer format for 
+the date value you would like to view:
+
+
+&lt;table cellspacing="2" cellpadding="2" border="0"&gt;
+&lt;tr&gt;
+    &lt;td&gt;Year&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="year" VALUE="1998" VALIDATE="integer" 
+REQUIRED="Yes"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Month&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="month" VALUE="6" RANGE="1,12" 
+MESSAGE="Please enter a month (1-12)" VALIDATE="integer" 
+REQUIRED="Yes"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Day&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="day" VALUE="8" RANGE="1,31" 
+MESSAGE="Please enter a day of the month (1-31)" VALIDATE="integer" 
+REQUIRED="Yes"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Hour&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="hour" VALUE="16" RANGE="0,23" 
+MESSAGE="You must enter an hour (0-23)" VALIDATE="integer" 
+REQUIRED="Yes"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Minute&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="minute" VALUE="12" RANGE="0,59" 
+MESSAGE="You must enter a minute value (0-59)" VALIDATE="integer" 
+REQUIRED="Yes"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Second&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Text" NAME="second" VALUE="0" RANGE="0,59" 
+MESSAGE="You must enter a value for seconds (0-59)" VALIDATE="integer" 
+REQUIRED="Yes"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;&lt;INPUT TYPE="Submit" NAME="submit" VALUE="Submit"&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;INPUT TYPE="RESET"&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="DateConvert
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_069.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_071.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

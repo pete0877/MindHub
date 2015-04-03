@@ -1,0 +1,129 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Deleting Registry Values</title>
+
+
+</head>
+<body>
+
+<!--- Navbar for last page --->
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="95%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa214.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 21	:&nbsp;&nbsp;Accessing the Windows NT Registry</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<!-- End of header content. Page content displays below. -->
+
+
+<br>
+<a name="998182"></a>
+ <H1>Deleting Registry Values</H1>
+
+
+
+<p>You can use CFREGISTRY with the DELETE action to delete registry keys and values.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Be careful when using the DELETE action; if you delete a key, 
+CFREGISTRY also deletes all values and subkeys defined beneath the key.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a registry value:
+</td>
+</tr>
+</table>
+</div><p>Call the CFREGISTRY tag with the DELETE action, specifying the branch and value name:</p><pre>&lt;CFREGISTRY ACTION="Delete"
+    BRANCH="HKEY_LOCAL_MACHINE\Software\cflangref"
+    ENTRY="LastCFM01"&gt;
+</pre>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a registry key:
+</td>
+</tr>
+</table>
+</div><p>Call the CFREGISTRY tag with the DELETE action, specifying the branch of the key to be deleted (including the key name):</p><pre>&lt;CFREGISTRY ACTION="Delete"
+    BRANCH="HKEY_LOCAL_MACHINE\Software\cflangref"&gt;
+</pre><p></p>
+<br>
+
+<br>
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="95%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa214.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:07 -->
+</body>
+</html>

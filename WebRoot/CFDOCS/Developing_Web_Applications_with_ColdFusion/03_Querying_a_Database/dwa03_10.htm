@@ -1,0 +1,211 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Information About Query Results</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Querying a Database</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1021042"></a>
+ <H1>Getting Information About Query Results</H1>
+
+
+
+<p>Each time you query a database with the CFQUERY tag, you get not only the data itself, but also query properties, as described in the following table::<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Query Properties</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Property</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+RecordCount
+</td><td valign="top">
+The total number of records returned by the query.
+</td></tr>
+<tr valign="top"><td valign="top">
+ColumnList
+</td><td valign="top">
+Returns a comma-delimited list of the query columns.
+</td></tr>
+<tr valign="top"><td valign="top">
+CurrentRow
+</td><td valign="top">
+The current row of the query being processed by CFOUTPUT.
+</td></tr>
+
+</table>
+</div>
+</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To output query data on your page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Return to <code>emplist.cfm</code> in Studio.
+
+
+</li>
+<li>Edit the file so that it appears as follows:
+
+</pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Employee List&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;Employee List&lt;/H1&gt;
+&lt;CFQUERY NAME="EmpList" DATASOURCE="CompanyInfo"&gt;
+    SELECT FirstName, LastName, Salary, Contract
+    FROM Employees
+&lt;/CFQUERY&gt;
+&lt;CFOUTPUT QUERY="EmpList"&gt;
+    #FirstName#, #LastName#, #Salary#, #Contract#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+</pre></li>
+</ol>
+<PRE><span class="codemark">&lt;CFOUTPUT&gt;
+</span><span class="codemark">    The query returned #EmpList.RecordCount# records.
+</span><span class="codemark">&lt;/CFOUTPUT&gt;
+</span><pre>&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></PRE><ol>
+</li>
+<li>Save the file as <code>emplist.cfm</code>.
+
+</li>
+<li>View the page in a browser.
+
+</li>
+</ol>
+<p>The number of employees now appears below the list of employees.</p><a name="1021622"></a>
+ 
+<H3>Code Review</H3>
+<p>You now display the number of records retrieved in the query.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Code</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFOUTPUT&gt;
+</PRE></td><td valign="top">
+Display what follows
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>The query returned
+</PRE></td><td valign="top">
+Display the text "The query returned"
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>#EmpList.RecordCount#
+</PRE></td><td valign="top">
+Display the number of records retrieved in the EmpList query
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>records.
+</PRE></td><td valign="top">
+Display the text "records"
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;/CFOUTPUT&gt;
+</PRE></td><td valign="top">
+End the CFOUTPUT block.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1021174"></a>
+ 
+<H2>Query Properties Notes and Considerations</H2>
+<p>Keep the following in mind when using query properties:</p><ul>
+<li>Prefix the property with its type -- in this case -- prefix the property with the name of the query.
+
+</li>
+<li>Reference the query property within a CFOUTPUT block so that ColdFusion will output the query variable value to the page.
+</li>
+<li>Surround the query property reference with pound signs (#) so that ColdFusion knows to replace the property name with its current value.
+</li>
+</ul>
+<p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Querying_a_Database/dwa03_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Querying_a_Database/dwa03.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Retrieving_and_Formatting_the_Data_You_Want/dwa04.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

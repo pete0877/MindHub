@@ -1,0 +1,161 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Compare</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_052.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_054.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997538"></a>
+ <H1>Compare</H1>
+
+
+
+<p>Performs a case-sensitive comparison of two strings. Returns a negative number if <em>string1</em> is less than <em>string2</em>; 0 if <em>string1</em> is equal to <em>string2</em>; or a positive number if <em>string1</em> is greater than <em>string2</em>.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_054.htm#997573">CompareNoCase</a> and <a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>.
+</p>
+
+<a name="997541"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>Compare</strong>(<em>string1</em>, <em>string2</em>)
+</PRE><a name="997543"> </a>
+<h5 class="param"> string1, string2</h5>
+<p class="param">Strings to be compared.</p><a name="997544"></a>
+ 
+<H3>Usage</H3>
+<p>The comparison is performed on the ASCII values (character codes) of corresponding characters in <em>string1</em> and <em>string2</em>.</p><p>If many strings are sorted in increasing order based on the Compare function, they appear listed in dictionary order.</p><a name="1799529"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Compare
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of Compare ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Compare Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Compare Example&lt;/H3&gt;
+&lt;P&gt;The compare function  performs a &lt;I&gt;case-sensitive&lt;/I&gt;
+comparison of two strings.
+
+&lt;CFIF IsDefined("FORM.string1")&gt;
+  &lt;CFSET comparison = Compare(FORM.string1, FORM.string2)&gt;
+  &lt;!--- switch on the variable to give various responses ---&gt;
+  &lt;CFSWITCH EXPRESSION=#comparison#&gt;
+    &lt;CFCASE VALUE="-1"&gt;
+        &lt;H3&gt;String 1 is less than String 2&lt;/H3&gt;
+        &lt;I&gt;The strings are not equal&lt;/I&gt;
+    &lt;/CFCASE&gt;
+    &lt;CFCASE VALUE="0"&gt;
+        &lt;H3&gt;String 1 is equal to String 2&lt;/H3&gt;
+        &lt;I&gt;The strings are equal!&lt;/I&gt;
+    &lt;/CFCASE&gt;
+    &lt;CFCASE VALUE="1"&gt;
+        &lt;H3&gt;String 1 is greater than String 2&lt;/H3&gt;
+        &lt;I&gt;The strings are not equal&lt;/I&gt;
+    &lt;/CFCASE&gt;
+    &lt;CFDEFAULTCASE&gt;
+        &lt;H3&gt;This is the default case&lt;/H3&gt;
+    &lt;/CFDEFAULTCASE&gt;
+  &lt;/CFSWITCH&gt;
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="compare.cfm" METHOD="POST"&gt;
+&lt;P&gt;String 1
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="string1"&gt;
+
+&lt;P&gt;String 2
+&lt;BR&gt;&lt;INPUT TYPE="Text" NAME="string2"&gt;
+&lt;P&gt;&lt;INPUT TYPE="Submit" VALUE="Compare these Strings" NAME=""&gt; 
+   &lt;INPUT TYPE="RESET"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="Compare
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_052.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_054.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

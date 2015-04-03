@@ -1,0 +1,178 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating an Action Page to Insert Data</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Updating Your Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012013"></a>
+ <H1>Creating an Action Page to Insert Data</H1>
+
+
+
+<p>There are two ways to create an action page to insert data into a database. </p><p>The CFINSERT tag is the easiest way to handle simple inserts from either a CFFORM or an HTML form.</p><p>For more complex inserts from a form submittal you can use a SQL INSERT statement in a CFQUERY tag instead of a CFINSERT tag. The SQL INSERT statement is more flexible because you can insert information selectively or use functions within the statement.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an insert action page with CFINSERT:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+<PRE><span class="codemark">&lt;CFINSERT DATASOURCE="CompanyInfo" TABLENAME="Employees"&gt;
+</span></PRE></pre><pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Input Form&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;Employee Added&lt;/H1&gt;
+&lt;CFOUTPUT&gt;
+You have added #Form.FirstName# #Form.LastName# to the Employees 
+database.
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page. as <code>insertpage.cfm</code>.
+
+</li>
+<li>View <code>insertform.cfm</code> in a browser, enter values, and click the Submit button. 
+
+</li>
+<li>The data is inserted into the Employees table and the message appears.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create an insert page with CFQUERY:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new application page in Studio.
+
+
+</li>
+<li>Enter the following code:
+
+<PRE><span class="codemark">&lt;CFQUERY NAME="AddEmployee"
+</span></PRE><PRE><span class="codemark">DATASOURCE="CompanyInfoB"&gt;
+</span></PRE><PRE><span class="codemark">INSERT INTO Employees (Fi', '#Form.LastName#',
+</span></PRE><PRE><span class="codemark">'#Form.Phone#')
+</span></PRE><PRE><span class="codemark">&lt;/CFQUERY&gt;
+</span></PRE></pre><pre>
+&lt;HTML&gt;
+&lt;HEADER&gt;
+    &lt;TITLE&gt;Insert Action Page&lt;/TITLE&gt;
+&lt;/HEADER&gt;
+
+&lt;BODY&gt;
+&lt;H1&gt;Employee Added&lt;/H1&gt;
+&lt;CFOUTPUT&gt;
+You have added #Form.FirstName# #Form.LastName# to the Employees 
+database.
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the page. as <code>insertpage.cfm</code>.
+
+</li>
+<li>View <code>isertform.cfm</code> in a browser, enter values, and click the Submit button. 
+
+</li>
+<li>The data is inserted into the Employees table and the message appears.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Updating_Your_Data/dwa06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:45 -->
+</body>
+</html>

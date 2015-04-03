@@ -1,0 +1,143 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>GetToken</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_113.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_115.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1274233"></a>
+ <H1>GetToken</H1>
+
+
+
+<p>Returns the specified token in a string. Default delimiters are spaces, tabs, and newline characters. If <em>index</em> is greater than the number of tokens in <em>string</em>, GetToken returns an empty string.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_140.htm#999561">Left</a>, <a href="../3_ColdFusion_Functions/lr3_210.htm#1002068">Right</a>, <a href="../3_ColdFusion_Functions/lr3_179.htm#1001133">Mid</a>, <a href="../3_ColdFusion_Functions/lr3_220.htm#1002393">SpanExcluding</a>, and <a href="../3_ColdFusion_Functions/lr3_221.htm#1002426">SpanIncluding</a>.
+</p>
+
+<a name="1274251"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>GetToken</strong>(<em>string</em>, <em>index</em> [, <em>delimiters</em> ])
+</PRE><a name="1274253"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string.</p><a name="1274255"> </a>
+<h5 class="param"> index</h5>
+<p class="param">Any integer &gt; 0 that indicates position of a token.</p><a name="1274257"> </a>
+<h5 class="param"> delimiters</h5>
+<p class="param">String containing sets of delimiters.</p><a name="1802433"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetToken
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of GetToken ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+GetToken Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;GetToken Example&lt;/H3&gt;
+
+&lt;CFIF IsDefined("FORM.yourString")&gt;
+&lt;!--- set delimiter ---&gt;
+&lt;CFIF FORM.yourDelimiter is not ""&gt;
+    &lt;CFSET yourDelimiter = FORM.yourDelimiter&gt;
+&lt;CFELSE&gt;
+    &lt;CFSET yourDelimiter = " "&gt;
+&lt;/CFIF&gt;
+&lt;!--- check that number of elements in list is
+greater than or equal to the element sought to return ---&gt;
+&lt;CFIF ListLen(FORM.yourString, yourDelimiter) GTE FORM.returnElement&gt;
+    &lt;CFOUTPUT&gt;
+    &lt;P&gt;Element #FORM.ReturnElement# in #FORM.yourString#,
+    delimited by "#yourDelimiter#"
+    &lt;BR&gt;is:#GetToken(FORM.yourString, FORM.returnElement, yourDelimiter)#
+    &lt;/CFOUTPUT&gt;
+...
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="GetToken
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_113.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_115.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

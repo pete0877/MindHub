@@ -1,0 +1,229 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Help References</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Getting_the_Most_from_the_Help_System/help3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Getting_the_Most_from_the_Help_System/help.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Getting_the_Most_from_the_Help_System/help5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Getting the Most from the  Help System</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1004561"></a>
+ <H1>Using Help References</H1>
+
+
+
+<p>The Help tab contains the printed documentation in HTML format plus a number of additional online references. The help system is an extensible resource for learning about Studio's features and Web site development.</p><p>Click the Help tab in the Resources pane to view the Help References tree. Click the plus sign (+) next to a book icon to expand the document list and double-click a help document to open it.</p><p><img src="../images/help_tab.gif">
+
+
+</p><a name="1003914"></a>
+ 
+<H2>Changing the help display location</H2>
+<p>By default, help documents display in the Browse tab of the Editor window. To view them in a pane below the Help tree, click the Browse help in separate panel button on the Help toolbar. You can then adjust pane size by dragging it's borders.</p><p><img src="../images/browse_help_separate_panel.gif">
+
+
+</p><p>To view a help document in an external browser. click the Open in external browser button in the pane below the Help tree.</p><p><img src="../images/open_external_browser.gif">
+
+
+</p><a name="1003298"></a>
+ 
+<H2>Bookmarking help documents</H2>
+<p>You can get quick access to documents by bookmarking them. Bookmarks can be assigned to documents in the Help tree and to HTML documents on local and network drives. The Bookmark icon is located on the Help toolbar. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To bookmark a document in the Help tree:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right-click on a document title.
+
+
+</li>
+<li>Select Add bookmark from the menu.
+
+<p>The document's name is added to the Bookmark list, accessed by clicking the 
+down arrow next to the Bookmark icon.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To bookmark an external document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Bookmark icon to open the Help Bookmarks dialog box.
+
+
+<p><img src="../images/bookmark_button.gif">
+
+
+
+</p></li>
+<li>Click the Add button to see the Add Booksmarks dialog box.
+
+</li>
+<li>Use the Browse button, type in the path or URL, or paste in a URL from a browser.
+
+</li>
+<li>Click OK to add the bookmark to the Help Bookmarks dialog box.
+
+</li>
+<li>Click Close to save your changes and close the Help Bookmarks dialog box.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change the title of a bookmark:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the down arrow next to the bookmark icon to open the bookmark list and choose Organize Bookmarks from the menu.
+
+
+</li>
+<li>Click a title in the bookmarks list and then click Rename to highlight the title text (alternatively, you can double-click a bookmark to highlight its title).
+
+</li>
+<li>Type the new title and press the Enter key to save the new name.
+
+</li>
+<li>Click Close to save your changes and close the Help Bookmarks dialog box.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To open a bookmarked document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the down arrow next to the Bookmark icon to open the bookmark list.
+
+
+<p><img src="../images/bookmark_button.gif">
+
+
+
+</p></li>
+<li>Select a document from the list. 
+
+<p>You see the document in the Browse tab of the Editor window.
+</p></li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To delete a bookmark:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Bookmark icon to open the Help Bookmarks dialog box.
+
+
+</li>
+<li>Select the bookmark and click Remove.
+
+</li>
+<li>Click Close to save your changes and close the Help Bookmarks dialog box.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Getting_the_Most_from_the_Help_System/help3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Getting_the_Most_from_the_Help_System/help.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Getting_the_Most_from_the_Help_System/help5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

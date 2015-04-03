@@ -1,0 +1,158 @@
+<HTML>
+<HEAD><TITLE>The Database Component Framework</TITLE></HEAD>
+<BODY BGCOLOR="#FFFFF0">
+
+<!-- Heading -->
+<TABLE BORDER=0 WIDTH=470 CELLSPACING=0 CELLPADDING=0>
+<TR>
+<TD WIDTH=36 ALIGN=CENTER VALIGN=TOP>
+	<A HREF="Contents.html"><IMG SRC="Images/Allaire.gif" ALT="Allaire" BORDER=0 HSPACE=8></A>
+</TD>
+<TD ALIGN=LEFT VALIGN=BOTTOM>
+	<H2>Database Component Framework</H2>
+</TD>
+</TR>
+</TABLE>
+<P>
+
+<!-- Indent -->
+<TABLE BORDER=0 WIDTH=100% CELLSPACING=0 CELLPADDING=0><TR>
+<TD WIDTH=36 NOWRAP></TD>
+<TD WIDTH=999 ALIGN=LEFT>
+
+
+The Allaire Database Component Framework (DCF) is a collection of Java&#153; classes 
+that provide a simple interface for reading and requesting database records into a Java applet 
+or application. The data collection mechanisms of the DCF allow customers to connect DCF-aware 
+components together with Cold Fusion&#153 and other Web technologies to create sophisticated Web 
+services without the hassle of low-level programming. In addition, the library is an open 
+standard for third-party software developers to build stand-alone, Cold Fusion-enabled Java 
+applets quickly. 
+<P>
+
+This reference is intended for software developers who want to use the Allaire Database 
+Component Framework in their own applets. Familiarity with Java is assumed. If you aren't a 
+Java programmer there are many places on the Web devoted to it. 
+<A HREF="http://java.sun.com/tutorial/index.html">Sun's Java Tutorial</A> is one of them.
+<P><BR>
+
+<B>Installation</B><BR>
+The Allaire DCF library contains a framework for retrieving recordsets 
+from the web server and for operations with recordsets. All Allaire 
+applets use the framework, so it is necessary to install it in the 
+public web server directory. Mapping to this directory is usually 
+named "/classes/" and contains all Java components necessary for 
+serving applets. If you do not have this directory, create the 
+sub-directory "classes" in your web server’s root document directory. 
+If you want to install Java components in a different directory, map 
+"/classes/" to this directory and insure that the web server has access 
+to it. If your server is serving multiple domains you must map 
+"/classes/" for each domain which will use Java applets.
+<P>
+
+Unzip files from the dcf.zip file into the directory described above, 
+using the -d switch to restore the directory structure. 
+Note that some older unzipping utilities will strip the names of the 
+classes from ".class" to ".cla". If this happens the applets will 
+not work. Make sure they unzip with the full ".class", or rename all 
+the classes after they have unzipped.
+<P><BR>
+
+
+<B>Using the DCF</B><BR>
+A Java applet can utilize the Allaire Database Component Framework to receive recordsets in two ways:
+<OL>
+<LI><B>PARAM Initialization</B>. Upon construction the applet can read data specified in an HTML page by PARAM 
+elements within the APPLET tag. This happens only once during initialization of the applet. This initialization 
+is accomplished by constructing an 
+<A HREF="allaire.dcf.recordset.AppletParamRecordset.html">AppletParamRecordset</A> object.
+<P>
+<LI><B>URL Requests</B>. During execution the applet can request data from a URL and read a recordset identified 
+in the data returned. Unlike the initialization technique, this method can be used multiple times 
+during the lifetime of an applet's execution. The request is made by passing a URL to the 
+<A HREF="allaire.dcf.recordset.Query.html">Query</A> constructor and calling the 
+<A HREF="allaire.dcf.recordset.Query.html#execute">execute</A> method.
+
+<P>
+</OL>
+In either case the DCF will need to be given names for each column and a name to associate with each recordset 
+if there are multiple recordsets. The 
+<A HREF="allaire.dcf.recordset.Recordset.html#getColumnNames">getColumnNames</A>, 
+<A HREF="allaire.dcf.recordset.Recordset.html#getRowCount">getRowCount</A>, and 
+<A HREF="allaire.dcf.recordset.Recordset.html#getData">getData</A> methods can be used on the 
+resulting 
+<A HREF="allaire.dcf.recordset.Recordset.html">recordset(s)</A> to obtain the data.
+<P><BR>
+
+
+<B>Class Reference</B><BR>
+<LI><A HREF="allaire.dcf.recordset.Recordset.html">Recordset</A>
+- A container of cells organized by rows and columns.
+<LI><A HREF="allaire.dcf.recordset.AppletParamRecordset.html">AppletParamRecordset</A>
+   - Initializes a recordset with applet parameters.<BR>
+<LI><A HREF="allaire.dcf.recordset.Query.html">Query</A>
+   - Requests data from a URL and populates recordsets with the results.<BR>
+<P><BR>
+
+<B>The DCF Interface</B><BR>
+<LI><A HREF="InterfaceGuidelines.html">Overview</A><BR>
+<LI><A HREF="InterfaceGuidelines.html#InitColumn">Initializing a Recordset by Column</A><BR>
+<LI><A HREF="InterfaceGuidelines.html#InitCell">Initializing a Recordset by Cell</A><BR>
+<LI><A HREF="InterfaceGuidelines.html#InitMultiple">Initializing Multiple Recordsets</A><BR>
+<LI><A HREF="InterfaceGuidelines.html#Request">Requesting Recordsets at Runtime</A><BR>
+<P><BR>
+
+
+<B>Beta 1 Release Notes</B><BR>
+All the DCF class reference files (those found in the <I>Docs</I> directory) should be copied 
+into the directory where you keep the Java SDK reference. All graphics found in the <I>Images</I> 
+subdirectory should be copied to the Java SDK reference subdirectory of the same name.
+<P>
+
+CASE-SENSITIVITY - Java is case-sensitive. Thus, 
+<BLOCKQUOTE><PRE>&lt;PARAM NAME="<FONT COLOR=RED>Columns</FONT>" VALUE="ID,Height,Weight"&gt;</PRE></BLOCKQUOTE>
+is not the same as 
+<BLOCKQUOTE><PRE>&lt;PARAM NAME="<FONT COLOR=RED>COLUMNS</FONT>" VALUE="ID,Height,Weight"&gt;</PRE></BLOCKQUOTE>
+In the event that an expected parameter or keyword (e.g. "Columns" or "Recordset") is not found, the 
+AppletParamRecordset will attempt to look for simple case variations (e.g., "Columns", "COLUMNS", and "columns"), but exhaustive case checking (2^NameLength attempts) is not performed. 
+<P>
+
+URL ENCODING - Text should be URL encoded if it is going to be used in a list of columns or rows. 
+The Cold Fusion function, URLEncodedFormat(), is designed for such use. 
+If the data is not URL encoded, and it contains non-alphanumeric data, the DCF might not interpret 
+the results correctly.
+<P>
+
+NULLS - Null and empty items should be sent as empty strings enclosed within single quotes. For 
+example:<BR>
+<BLOCKQUOTE>Record1,<FONT COLOR=RED>''</FONT>,Record3</BLOCKQUOTE>
+instead of the unquoted version:
+<BLOCKQUOTE>Record1,,Record3</BLOCKQUOTE>
+<BR>
+
+
+<B>Resources at Allaire</B><BR>
+<LI><A HREF="http://www.allaire.com/">Documentation addendum</A><BR>
+<LI><A HREF="http://www.allaire.com/cgi-shl/dbml.exe?action=query&template=cfo/confer/threads.dbm">The Cold Fusion Developer's Forum</A><BR>
+<LI><A HREF="http://206.10.245.5/cgi-shl/dbml.exe?template=/Allaire/support/contact/index.dbm">Technical Support for Registered and Evaluation Users</A><BR>
+<LI><A HREF="mailto:info@allaire.com">Allaire Sales</A><BR>
+<P>
+
+
+<!-- UnIndent -->
+</TD></TR></TABLE>
+
+<!-- Footer -->
+<HR>
+<FONT SIZE=2>
+	Copyright &copy; 1996 <A HREF="http://www.allaire.com">Allaire</A> Corp. All rights reserved.<P>
+
+	No part or contents of these documents may be reproduced nor transmitted 
+	in any form nor by any means without the express written permission of the publisher.<P>
+
+	Cold Fusion is a trademark of Allaire Corp. 
+	Java is a trademark of Sun Microsystems, Inc. 
+	Other trademarks belong to their respective owners.<P>
+</FONT>
+</BODY>
+</HTML>

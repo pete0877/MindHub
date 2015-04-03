@@ -1,0 +1,111 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Working in the Resources Area</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Getting Started</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1020793"></a>
+ <H1>Working in the Resources Area</H1>
+
+
+
+<p>The tabs on this window control display for these Resources:</p><ul>
+<a name="998610"> </a>
+<li><strong>Universal Files</strong> -- Provides access to all of your files, including those on local drives, network drives, and remote servers. Provides functionality to add and remove remote servers. The drop-down list allows you to pick a drive or server while the bottom two panes display the directories and files for the drive or server you selected. Double-click a file in the file list to open it. See <a href="../02_Getting_Started/getstart9.htm#1027852">&quot;Managing Files&quot;</a> for more information.
+
+<a name="998613"> </a>
+</li>
+<li><strong>Projects</strong> -- Provides functionality to create and manage projects. The drop-down list allows you to pick a recent project. The bottom two panes display the folders and files for the selected project. Right-click in the panes to open and create projects and to add projects to your version source control system. See <a href="../10_Using_Projects_for_Site_Management/projects.htm#997350">Chapter 10, &quot;Using Projects for Site Management&quot;</a> for more information.
+<a name="998614"> </a>
+</li>
+<li><strong>Site View</strong> -- Displays a graphic representation of links in the current document. See <a href="../12_Testing_and_Maintaining_Web_Pages/test7.htm#1005629">&quot;Using Site View to Check Page Links&quot;</a>.
+<a name="998615"> </a>
+</li>
+<li><strong>Snippets</strong> -- Stores code blocks for re-use. Snippets can be shared with other users. See <a href="../05_Creating_Pages/create12.htm#1043546">&quot;Saving Code Blocks as Snippets&quot;</a> for more information. 
+<a name="998616"> </a>
+</li>
+<li><strong>Help</strong> -- Displays Studio documentation and other online resources. You can customize Studio's help system by editing existing help files and adding new files. See <a href="../04_Getting_the_Most_from_the_Help_System/help.htm#1006839">Chapter 4, &quot;Getting the Most from the Help System&quot;</a> for more information.
+<a name="1034654"> </a>
+</li>
+<li><strong>Tag Inspector</strong> -- The top pane displays the Tag Tree, a customizable view of the document hierarchy. The bottom pane displays the Tag Inspector, which gives you an interactive "property sheets" mode for editing tags. See <a href="../08_Editing_Pages/edit7.htm#1015994">&quot;Tag Tree and Tag Inspector&quot;</a> for more information.
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Getting_Started/getstart4.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Getting_Started/getstart.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Getting_Started/getstart6.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:30 -->
+</body>
+</html>

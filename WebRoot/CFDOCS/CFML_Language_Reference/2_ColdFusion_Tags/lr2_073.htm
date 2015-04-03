@@ -1,0 +1,282 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFQUERY</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_072.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_074.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1019524"></a>
+ <H1>CFQUERY</H1>
+
+
+
+<p>CFQUERY passes SQL statements for any purpose to your data source. Not limited to queries.</p><a name="1019538"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFQUERY NAME="query_name"
+    DATASOURCE="ds_name"
+    DBTYPE="type"
+    DBSERVER="dbms"
+    DBNAME="database name"
+    USERNAME="username"
+    PASSWORD="password"
+    MAXROWS="number"
+    BLOCKFACTOR="blocksize"
+    TIMEOUT="milliseconds"
+    CACHEDAFTER="date" 
+    CACHEDWITHIN="timespan" 
+    PROVIDER="COMProvider" 
+    PROVIDERDSN="datasource" 
+    DEBUG="Yes/No"&gt;
+&nbsp;
+SQL statements
+&nbsp;
+&lt;/CFQUERY&gt;
+</PRE><a name="1054753"></a>
+<h4> NAME</h4>
+<p>Required. The name you assign to the query. Query names must begin with a letter and may consist of letters, numbers, and the underscore character (spaces are not allowed). The query name is used later in the page to reference the query's record set.</p><a name="1054755"></a>
+<h4> DATASOURCE</h4>
+<p>Required. The name of the data source from which this query should retrieve data.</p><a name="1167046"></a>
+<h4> DBTYPE</h4>
+<p>Optional. The database driver type:</p><ul>
+<a name="1167048"> </a>
+<li>ODBC (default) -- ODBC driver.
+
+<a name="1167049"> </a>
+</li>
+<li>Oracle73 -- Oracle 7.3 native database driver. Using this option, the ColdFusion Server computer must have Oracle 7.3.4.0.0 (or greater) client software installed.
+<a name="1167050"> </a>
+</li>
+<li>Oracle80 --Oracle 8.0 native database driver. Using this option, the ColdFusion Server computer must have Oracle 8.0 (or greater) client software installed.
+<a name="1167051"> </a>
+</li>
+<li>Sybase11 --Sybase System 11 native database driver. Using this option, the ColdFusion Server computer must have Sybase 11.1.1 (or greater) client software installed. Sybase patch ebf 7729 is recommended.
+<a name="1645360"> </a>
+</li>
+<li>OLEDB --OLE DB provider. If specified, this database provider overrides the driver type specified in the ColdFusion Administrator.
+<a name="1671200"> </a>
+</li>
+<li>DB2 --DB2 5.2 native database driver.
+<a name="1671201"> </a>
+</li>
+<li>Informix73 --Informix73 native database driver.
+</li>
+</ul>
+<a name="1645361"></a>
+<h4> DBSERVER</h4>
+<p>Optional. For native database drivers and the SQLOLEDB provider, specifies the name of the database server machine. If specified, DBSERVER overrides the server specified in the data source.</p><a name="1645363"></a>
+<h4> DBNAME</h4>
+<p>Optional. The database name (Sybase System 11 driver and SQLOLEDB provider only). If specified, DBNAME overrides the default database specified in the data source.</p><a name="1054757"></a>
+<h4> USERNAME</h4>
+<p>Optional. If specified, USERNAME overrides the username value specified in the data source setup.</p><a name="1054759"></a>
+<h4> PASSWORD</h4>
+<p>Optional. If specified, PASSWORD overrides the password value specified in the data source setup.</p><a name="1156585"></a>
+<h4> MAXROWS</h4>
+<p>Optional. Specifies the maximum number of rows you want returned in the record set.</p><a name="1156594"></a>
+<h4> BLOCKFACTOR</h4>
+<p>Optional. Specifies the maximum number of rows to fetch at a time from the server. The range is 1 (default) to 100. This parameter applies to ORACLE native database drivers and to ODBC drivers. Certain ODBC drivers may dynamically reduce the block factor at runtime.</p><a name="1272770"></a>
+<h4> TIMEOUT</h4>
+<p>Optional. Lets you specify a maximum number of milliseconds for the query to execute before returning an error indicating that the query has timed-out. This attribute is not supported by most ODBC drivers. TIMEOUT is supported by the SQL Server 6.x or above driver. The minimum and maximum allowable values vary, depending on the driver.</p><a name="1272779"></a>
+<h4> CACHEDAFTER</h4>
+<p>Optional. Specify a date value (for example, 4/16/98, April 16, 1999, 4-16-99). ColdFusion uses cached query data if the date of the original query is after the date specified. Effective only if query caching has been enabled in the ColdFusion Administrator. To use cached data, the current query must use the same SQL statement, data source, query name, user name, password, and DBTYPE. Additionally, for native drivers it must have the same DBSERVER and DBNAME (Sybase only).</p><p>Years from 0 to 29 are interpreted as 21st century values. Years 30 to 99 are interpreted as 20th century values. </p><p>When specifying a date value as a string, make sure it is enclosed in quotes.</p><a name="1645439"></a>
+<h4> CACHEDWITHIN</h4>
+<p>Optional. Enter a timespan using the ColdFusion <a href="../3_ColdFusion_Functions/lr3_066.htm#997810">CreateTimeSpan</a> function. Cached query data will be used if the original query date falls within the time span you define. The CreateTimeSpan function is used to define a period of time from the present backwards. Effective only if query caching has been enabled in the ColdFusion Administrator. To use cached data, the current query must use the same SQL statement, data source, query name, user name, password, and DBTYPE. Additionally, for native drivers it must have the same DBSERVER and DBNAME (Sybase only).</p><a name="1354234"></a>
+<h4> PROVIDER</h4>
+<p>Optional. COM provider (OLE-DB only).</p><a name="1354236"></a>
+<h4> PROVIDERDSN</h4>
+<p>Optional. Data source name for the COM provider (OLE-DB only).</p><a name="1272836"></a>
+<h4> DEBUG</h4>
+<p>Optional. Used for debugging queries. Specifying this attribute causes the SQL statement actually submitted to the data source and the number of records returned from the query to be output.</p><a name="1630438"></a>
+ 
+<H3>Usage</H3>
+<p>In addition to returning data from a ColdFusion data source, the CFQUERY tag also returns informations about the query. CFQUERY.ExecutionTime returns the time it took the query to execute in milliseconds.</p><p>CFQUERY creates a query object, providing you information in three query variables as described in the following table.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>CFQUERY Variables</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Variable Name</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+<em>query_name.</em>RecordCount
+</td><td valign="top">
+The total number of records returned by the query.
+</td></tr>
+<tr valign="top"><td valign="top">
+<em>query_name.</em>CurrentRow
+</td><td valign="top">
+The current row of the query being processed by CFOUTPUT.
+</td></tr>
+<tr valign="top"><td valign="top">
+<em>query_name.</em>ColumnList
+</td><td valign="top">
+Returns a comma-delimited list of the query columns.
+</td></tr>
+
+</table>
+</div>
+</p><p>You can cache query results and execute stored procedures. For information about caching CFQUERY results, executing stored procedures, and displaying CFQUERY output, see <a href="../../Developing_Web_Applications_with_ColdFusion/contents.htm"><em>Developing Web Applications with ColdFusion</em></a>.</p><a name="2045166"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfquery
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of CFQUERY ---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;CFQUERY Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFQUERY Example&lt;/H3&gt;
+
+&lt;!--- define startrow and maxrows to facilitate
+    'next N' style browsing ---&gt;
+&lt;CFPARAM NAME="MaxRows" DEFAULT="10"&gt;
+&lt;CFPARAM NAME="StartRow" DEFAULT="1"&gt;
+
+&lt;!--- query database for information ---&gt;
+&lt;CFQUERY NAME="GetParks" DATASOURCE="cfsnippets"&gt;
+SELECT      PARKNAME, REGION, STATE
+FROM         Parks 
+ORDER by ParkName, State
+&lt;/CFQUERY&gt;
+
+&lt;!--- build HTML table to display query ---&gt;
+&lt;TABLE cellpadding=1 cellspacing=1&gt;
+&lt;TR&gt;
+    &lt;TD colspan=2 bgcolor=f0f0f0&gt;
+    &lt;B&gt;&lt;I&gt;Park Name&lt;/I&gt;&lt;/B&gt;
+    &lt;/TD&gt;
+    &lt;TD bgcolor=f0f0f0&gt;
+    &lt;B&gt;&lt;I&gt;Region&lt;/I&gt;&lt;/B&gt;
+    &lt;/TD&gt;
+    &lt;TD bgcolor=f0f0f0&gt;
+    &lt;B&gt;&lt;I&gt;State&lt;/I&gt;&lt;/B&gt;
+    &lt;/TD&gt;
+&lt;/TR&gt;
+
+&lt;!--- Output the query and define the startrow and maxrows
+      parameters. Use the query variable CurrentCount to
+      keep track of the row you are displaying. ---&gt;
+&lt;CFOUTPUT QUERY="GetParks" StartRow="#StartRow#" MAXROWS="#MaxRows#"&gt;
+&lt;TR&gt;
+    &lt;TD valign=top bgcolor=ffffed&gt;
+    &lt;B&gt;#GetParks.CurrentRow#&lt;/B&gt;
+    &lt;/TD&gt;
+    &lt;TD valign=top&gt;
+    &lt;FONT SIZE="-1"&gt;#ParkName#&lt;/FONT&gt;
+    &lt;/TD&gt;
+    &lt;TD valign=top&gt;
+    &lt;FONT SIZE="-1"&gt;#Region#&lt;/FONT&gt;
+    &lt;/TD&gt;
+    &lt;TD valign=top&gt;
+    &lt;FONT SIZE="-1"&gt;#State#&lt;/FONT&gt;
+    &lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- If the total number of records is less than or equal
+to the total number of rows, then offer a link to
+the same page, with the StartRow value incremented by
+MaxRows (in the case of this example, incremented by 10) ---&gt;
+&lt;TR&gt;
+    &lt;TD colspan=4&gt;
+    &lt;CFIF (StartRow + MaxRows) LTE GetParks.RecordCount&gt;
+        &lt;a href="cfquery.cfm?startrow=&lt;CFOUTPUT&gt;#Evaluate(StartRow + 
+        MaxRows)#&lt;/CFOUTPUT&gt;"&gt;See next &lt;CFOUTPUT&gt;#MaxRows#&lt;/CFOUTPUT&gt; 
+        rows&lt;/A&gt;
+    &lt;/CFIF&gt;
+    
+    &lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/TABLE&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfquery
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_072.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_074.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

@@ -1,0 +1,336 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating an Updateable Grid</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1128421"></a>
+ <H1>Creating an Updateable Grid</H1>
+
+
+
+<p>You can build grids to allow users to edit data within them. Users can edit individual cell data, as well as insert, update, or delete rows. To enable grid editing, you specify SELECTMODE="EDIT" in the CFGRID tag and enable the INSERT or DELETE attributes in CFGRID. </p><p>You can then use either of two ways to use an updateable grid to make changes to your ColdFusion data sources.</p><ul>
+<li>Create a page to which you pass the CFGRID form variables and in that page perform CFQUERY operations to update data source records.
+
+</li>
+<li>Pass grid edits to a page that includes the CFGRIDUPDATE tag, which passes data directly to the data source.
+</li>
+</ul>
+<p>Although using CFQUERY gives you complete control over interactions with your data source, CFGRIDUPDATE provides a much simpler interface for operations that do not require the same level of control.</p><a name="1015793"></a>
+ 
+<H2>Editing data in a CFGRID</H2>
+<p>To enable grid editing, you use the SELECTMODE="EDIT" attribute. When enabled, a user can edit cell data and insert or delete grid rows. When a CFFORM containing a CFGRID is submitted, data about changes to grid cells are stored in one-dimensional arrays you can reference like any other ColdFusion array.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To make the grid editable:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the file <code>grid1.cfm</code> in Studio.
+
+
+</li>
+<li>Edit the file so that it appears as follows:
+
+<pre>&lt;CFQUERY NAME="empdata" DATASOURCE="CompanyInfo"&gt;
+    SELECT * FROM Employees
+&lt;/CFQUERY&gt;
+
+&lt;CFFORM NAME="GridForm"
+    ACTION="handle_grid.cfm"&gt;
+
+    &lt;CFGRID NAME="employee_grid"
+        HEIGHT=170
+        WIDTH=400
+        HSPACE=10
+        VSPACE=6
+        ALIGN="LEFT"
+        SELECTCOLOR="white"
+        SELECTMODE="edit"
+        ROWHEADERS="YES"
+        ROWHEADERWIDTH=25
+        ROWHEADERALIGN="right"
+        COLHEADERS="YES"
+        QUERY="empdata"
+        GRIDDATAALIGN="left"
+        BGCOLOR="yellow"
+        INSERT="YES"
+        DELETE="YES"
+        SORT="YES"
+        MAXROWS=60&gt;
+
+        &lt;CFGRIDCOLUMN NAME="Employee_ID"
+            HEADER="Employee ID"
+            WIDTH=80
+            ITALIC="NO"
+            HEADERALIGN="center"
+            HEADERITALIC="NO"
+            HEADERBOLD="YES"
+            DISPLAY="NO"&gt;
+
+        &lt;CFGRIDCOLUMN NAME="LastName"
+            HEADER="Last Name"
+            WIDTH=80
+            ITALIC="NO"
+            HEADERALIGN="center"
+            HEADERITALIC="NO"
+            HEADERBOLD="YES"
+            DISPLAY="YES"
+            SELECT="YES"&gt;
+
+        &lt;CFGRIDCOLUMN NAME="Department_ID"
+            HEADER="Department"
+            WIDTH=240
+            ITALIC="No"
+            HEADERALIGN="center"
+            HEADERITALIC="No"
+            HEADERBOLD="Yes"
+            BOLD="Yes"
+            DISPLAY="Yes"&gt;
+
+    &lt;/CFGRID&gt;
+
+&lt;INPUT TYPE="Submit" VALUE="Submit"&gt;
+
+&lt;/CFFORM&gt;
+</pre></li>
+<li>Save the file as <code>grid2.cfm</code>.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To update the data source with CFQUERY:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Catch submitted grid values&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;H3&gt;Grid values for FORM.employee_grid row updates&lt;/H3&gt;
+
+&lt;CFIF IsDefined("form.employee_grid.rowstatus.action")&gt;
+
+    &lt;CFLOOP INDEX = "Counter" FROM = "1" TO =
+        #ArrayLen(form.employee_grid.rowstatus.action)#&gt;
+
+    &lt;CFOUTPUT&gt;
+    The row action for #Counter# is:
+    #form.employee_grid.rowstatus.action[Counter]#
+    &lt;BR&gt;&lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+
+    &lt;CFIF form.employee_grid.rowstatus.action[Counter] IS "D"&gt;
+    
+    &lt;CFQUERY NAME="DeleteExistingEmployee" 
+        DATASOURCE="CompanyInfo"&gt;
+        DELETE FROM Employees
+        WHERE 
+Employee_ID=#form.employee_grid.original.Employee_ID[Counter]#
+    &lt;/CFQUERY&gt;
+
+&lt;CFELSEIF form.employee_grid.rowstatus.action[Counter] IS "U"&gt;
+
+    &lt;CFQUERY NAME="UpdateExistingEmployee"
+        DATASOURCE="CompanyInfo"&gt;
+        UPDATE Employees
+        SET 
+        LastName='#form.employee_grid.LastName[Counter]#',
+        Department_ID=#form.employee_grid.Department_ID[Counter]#
+        WHERE
+        
+Employee_ID=#form.employee_grid.original.Employee_ID[Counter]#
+    &lt;/CFQUERY&gt;
+
+&lt;CFELSEIF form.employee_grid.rowstatus.action[Counter] IS "I"&gt;
+
+    &lt;CFQUERY NAME="InsertNewEmployee"
+        DATASOURCE="CompanyInfo"&gt;
+        INSERT into Employees
+        (Employee_ID, LastName, Department_ID)
+        VALUES (#form.employee_grid.Employee_ID[Counter]#,
+        '#form.employee_grid.LastName[Counter]#', 
+#form.employee_grid.Department_ID[Counter]#)
+    &lt;/CFQUERY&gt;
+
+    &lt;/CFIF&gt;
+    &lt;/CFLOOP&gt;
+&lt;/CFIF&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Save the file as <code>handle_grid.cfm</code>.
+
+</li>
+<li>View <code>grid2.cfm</code> in your browser, make changes to the grid, and then submit them.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To update the data source with CFQUERY
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;CFGRIDUPDATE GRID="Employee_grid"
+    DATASOURCE="CompanyInfo"
+    TABLENAME="Employees"
+    KEYONLY="NO"&gt;
+</pre></li>
+<li>Save the file as <code>handle_grid.cfm</code>.
+
+</li>
+<li>View <code>grid2.cfm</code> in your browser, make changes to the grid, and then submit them.
+
+</li>
+</ol>
+<a name="1130450"></a>
+ 
+<H3>How user edits are stored</H3>
+<p>The following arrays are created to keep track of edits to grid rows and cells:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Arrays Used to Store Grid Cell Edit Information&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Array reference</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE><em>gridname</em>.<em>colname</em> [ <em>row_index</em> ]
+</PRE></td><td valign="top">
+Stores the new value of an edited grid cell
+</td></tr>
+<tr valign="top"><td valign="top"><PRE><em>gridname.</em>Original.<em>colname</em> [ <em>row_index</em> ]
+</PRE></td><td valign="top">
+Stores the original value of the edited grid cell
+</td></tr>
+<tr valign="top"><td valign="top"><PRE><em>gridname.</em>RowStatus.Action [ <em>row_index</em> ]
+</PRE></td><td valign="top">
+Stores the edit type made against the edited grid cell. 
+</td></tr>
+
+</table>
+</div>
+</p><p>For example, you have an updateable CFGRID called "mygrid" consisting of two displayable columns, col1, col2, and one hidden column, col3. When an end user selects and changes data in a row, arrays are created to store the original values for all columns as well as the new column values for rows that have been updated, inserted, or deleted.</p><pre>mygrid.col1[ <em>row_index</em> ]
+mygrid.col2[ <em>row_index</em> ]
+mygrid.col3[ <em>row_index</em> ]
+mygrid.original.col1[ <em>row_index</em> ]
+mygrid.original.col2[ <em>row_index</em> ]
+mygrid.original.col3[ <em>row_index</em> ]
+</pre><p>Where <em>row_index</em> is the array index containing the grid data.</p><p>If the end user makes a change to a single cell in col2, you can reference the edit operation, the original cell value, and the edited cell value in the following arrays:</p><pre>&lt;CFSET edittype = mygrid.RowStatus.Action[1]&gt;&lt;BR&gt;
+&lt;CFSET new_value = mygrid.col2[1]&gt;&lt;BR&gt;
+&lt;CFSET old_value = mygrid.original.col2[1]&gt;
+</pre><a name="1015833"></a>
+ 
+<H3>Multi-row edits</H3>
+<p>The use of arrays to track changes allows ColdFusion to manage changes to more than one row in a CFGRID. ColdFusion coordinates entries in the arrays used to store edit type (Update, Insert, or Delete), with arrays that store original grid data and edited grid data. For each grid cell edit, an entry is created in the RowStatus array, and corresponding entries are made in the arrays that store the new cell value and the original cell value.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../10_Building_Dynamic_Forms/dwa10_10.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

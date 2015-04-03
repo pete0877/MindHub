@@ -1,0 +1,122 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Basic Array Techniques</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997424"></a>
+ <H1>Basic Array Techniques</H1>
+
+
+
+<p>To use arrays in ColdFusion, as in other languages, you need to first declare the array, specifying its dimension. Once it's declared, you can add array elements, which you can then reference by index.</p><p>As an example, say you declare a one-dimensional array called "firstname:"</p><pre>&lt;CFSET firstname=ArrayNew(1)&gt;
+</pre><p>At first, the array firstname holds no data and is of an unspecified length. Now you want to add data to the array:</p><pre>&lt;CFSET firstname[1]="Coleman"&gt;
+&lt;CFSET firstname[2]="Charlie"&gt;
+&lt;CFSET firstname[3]="Dexter"&gt;
+</pre><p>Once you've added these names to the array, it has a length of 3:</p><pre>&lt;CFSET temp=ArrayLen(firstname)&gt;
+&lt;!--- temp=3 ---&gt;
+</pre><p>If you remove data from an index, the array resizes dynamically:</p><pre>&lt;CFSET temp=ArrayDeleteAt(firstname, 2)&gt;
+&lt;!--- "Charlie" has been removed from the array ---&gt;
+
+&lt;CFOUTPUT&gt;
+    The firstname array is #ArrayLen(firstname)# 
+    indexes in length
+&lt;/CFOUTPUT&gt;
+
+&lt;!--- Now the array has a length of 2, not 3 ---&gt;
+
+</pre><p>The array now contains:</p><pre>firstname[1]=Coleman
+firstname[2]=Dexter
+</pre><a name="997448"></a>
+ 
+<H2>Adding elements to an array</H2>
+<p>You can add elements to an array by simply defining the value of an array element:</p><pre>&lt;CFSET myarray[1]=form.variable&gt;
+</pre><p>But you can also employ a number of array functions to add data to an array. You can use ArrayAppend to create a new array index at the end of the array, ArrayPrepend to create a new array index at the beginning of the array, and ArrayInsertAt to insert an array index and data. When you insert an array index with ArrayInsertAt, as with ArrayDeleteAt, all indexes to the right of the new index are recalculated to reflect the new index count.</p><p>For more information about these array functions, see the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a>.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Because ColdFusion arrays are dynamic, if you add or delete an element 
+from the middle of an array, subsequent index positions all change.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

@@ -1,0 +1,366 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Performing Common Cluster Administration Tasks</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1184863"></a>
+ <H1>Performing Common Cluster Administration Tasks</H1>
+
+
+
+<p>After you've created your clusters and configured them with load balancing and high availability features, they'll likely run inconspicuously in your environment for quite some time. However, at some point you'll need to update software and content or perform general maintenance tasks that are beyond the typical cluster creation and configuration activities.</p><p>This section describes how to perform the following administration tasks:</p><ul>
+<a name="1184868"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1184859">&quot;Changing a server's state&quot;</a>
+
+<a name="1184872"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1155445">&quot;Restricting a server from participating in a cluster&quot;</a>
+<a name="1187824"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1187806">&quot;Putting a cluster member in maintenance mode&quot;</a>
+<a name="1184876"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1184890">&quot;Updating software or content on an existing cluster&quot;</a>
+<a name="1184990"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1184934">&quot;Resetting a server's configuration to its pre-clustered state&quot;</a>
+</li>
+</ul>
+<a name="1184859"></a>
+ 
+<H2>Changing a server's state</H2>
+<p>All cluster members are added to a cluster in Active state by default. In Active state, ClusterCATS provides availability and failover services to your Web resources. From time to time, you may want to turn off these load balancing and failover services to help you troubleshoot problems or to add additional servers to the cluster. To do this, you can change the cluster's state from Active to Passive. In the Passive state, clusters do not actively manage load nor protect against resource failures. Any HTTP requests sent to a server that is in the Passive state are passed directly to that server without any ClusterCATS processing.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To change a cluster member's state from Active to Passive:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer, select a cluster member, and choose State from the Configure menu. Alternatively, you can right mouse click the cluster member and choose Configure&gt;State.
+
+
+<p>The Server Properties dialog box appears.
+</p><p><img src="../images/Server-state_tab.gif">
+
+
+
+</p></li>
+<li>Select the Passive Member option.
+
+</li>
+<li>Click OK.
+
+<p>The color of the cluster member turns white, indicating that the cluster is passive. 
+</p></li>
+<li>Repeat steps 1 through 3 to change other members in the cluster.
+
+</li>
+<li>To re-activate cluster members, select the Active Member option from this tab and click OK.
+
+</li>
+</ol>
+<a name="1155445"></a>
+ 
+<H2>Restricting a server from participating in a cluster</H2>
+<p>ClusterCATS lets you stop an active cluster member from receiving any HTTP requests. You may want to restrict an active server when performing server maintenance or software updates, verifying load configurations, or as an alternative method to managing load.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To restrict a cluster member from participating in a cluster:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer, select a cluster member, and choose State from the Configure menu. Alternatively, you can right-click the cluster member and choose Configure&gt;State.
+
+
+<p>The Server Properties dialog box appears.
+</p><p><img src="../images/Server-state_tab.gif">
+
+
+
+</p></li>
+<li>Select the Active Member option if the server has been in passive state.
+
+</li>
+<li>Within the Server Access area of the dialog, select Restricted.
+
+<p>This option ensures that HTTP requests sent explicitly to the specific cluster 
+member are redirected to another server within the cluster.
+</p></li>
+<li>Click OK.
+
+<p>The cluster member icon now looks like this <img src="../images/Restricted_server.gif">
+
+
+in the ClusterCATS Explorer, 
+indicating that the cluster is active but restricted.
+</p></li>
+<li>Repeat steps 1 through 4 for each cluster member you want to restrict.
+
+</li>
+<li>To unrestrict a cluster member, select the Unrestricted option and click OK.
+
+</li>
+</ol>
+<a name="1187806"></a>
+ 
+<H2>Putting a cluster member in maintenance mode</H2>
+<p>The ClusterCATS maintenance mode lets you:</p><ul>
+<a name="1198268"> </a>
+<li>stop and start the ClusterCATS service
+
+<a name="1198283"> </a>
+</li>
+<li>add and remove the ClusterCATS filter from the Web server service to assist troubleshooting efforts
+<a name="1198284"> </a>
+</li>
+<li>reset a clustered server's configuration to its pre-clustered state
+<a name="1188061"> </a>
+</li>
+<li>access a server remotely even if the Web server on the machine is unavailable
+<a name="1188045"> </a>
+</li>
+<li>remove a server from an active cluster gracefully so that you can perform necessary updates or maintenance tasks without making your Web site unavailable to users
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To put a cluster member in maintenance mode:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select a cluster member that you want to update.
+
+
+</li>
+<li>Right-click the cluster member and choose Configure&gt;Load.
+
+<p>The Properties dialog box appears for the selected cluster member with the Load 
+tab active.
+</p><p><img src="../images/Server_load_tab.gif">
+
+
+
+</p></li>
+<li>Change the Peak load threshold to zero percent so that any additional HTTP requests will be redirected to other servers in the cluster.
+
+</li>
+<li>Click OK.
+
+</li>
+<li>Physically go to the server you selected in step 1 and open the ClusterCATS Server Administrator utility on this server by clicking Start&gt;Programs&gt;ColdFusion Server 4.5&gt;ClusterCATS Server Administrator.
+
+<p>The ClusterCATS Server Administrator appears.
+</p><p><img src="../images/CC_Server_Admin.gif">
+
+
+
+</p></li>
+<li>Click the BT Service Status button to display the Manage ClusterCATS Services dialog box.
+
+<p><img src="../images/CC_Serveradmin_BTservice.gif">
+
+
+
+</p></li>
+<li>Stop the ClusterCATS service by selecting the Stopped option and enter 10 minutes in the Drain Down Period field to allow current users to conclude their sessions.
+
+</li>
+<li>Click OK.
+
+<p>When the drain-down period expires, the server will fail over to another server in 
+the cluster.
+</p></li>
+</ol>
+<p>You can now update the server with new software or content or troubleshoot problems the server was experiencing. The next section describes how to perform a specific type of maintenance task once you've put the server in maintenance mode.</p><a name="1184890"></a>
+ 
+<H2>Updating software or content on an existing cluster</H2>
+<p>Periodically you'll need to update software or content that resides on your cluster members. Software updates might include new versions or patches to operating system software, Web server software, ClusterCATS software, or other third-party products.</p><p>This procedure explains how to restrict an active cluster member so that you can make necessary updates.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To update an existing cluster member with new software or content:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Perform steps 1 through 8 in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1187806">&quot;Putting a cluster member in maintenance mode&quot;</a>.
+
+
+</li>
+<li>Make your updates to the inactive server.
+
+</li>
+<li>Open a Web browser on the cluster member and enter the server name associated with the maintenance address defined for this server. For example, serv1.mycompany.com.
+
+<p>If you configured the maintenance address correctly as described in <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm#1191927">&quot;Configuring 
+ClusterCATS offline maintenance support (NT only)&quot;</a>, your site will 
+appear in the browser. If it does not, see <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0614.htm#1120085">&quot;Troubleshooting&quot;</a>.
+</p></li>
+<li>Once you've verified your changes, exit the browser.
+
+</li>
+<li>Return to the ClusterCATS Server Administrator and restart the ClusterCATS service by selecting the Running option on the Manage ClusterCATS Services dialog box.
+
+<p><img src="../images/CC_Serveradmin_BTservice.gif">
+
+
+
+</p><p>This will add the cluster member back into the cluster.
+</p></li>
+<li>To initially limit the amount of HTTP traffic sent to the server, return to the ClusterCATS Explorer and reconfigure the cluster member's Peak Load threshold to a low value, like 10%. 
+
+<p><img src="../images/Load_threshold_10%25.gif">
+
+
+
+</p></li>
+<li>Click OK.
+
+</li>
+<li>Within the ClusterCATS Explorer, right-click the cluster member and choose Monitor&gt;Load.
+
+<p>The Server Load Monitor appears.
+</p><p><img src="../images/Server_load_10%25.gif">
+
+
+
+</p></li>
+<li>Observe your cluster member at low usage levels until you are satisfied that your new changes are working properly. 
+
+</li>
+<li>When you are certain that the updates you made have not adversely affected the server's operation, set the Peak and Gradual Redirection load thresholds back to their original values.
+
+</li>
+</ol>
+<a name="1184934"></a>
+ 
+<H2>Resetting a server's configuration to its pre-clustered state</H2>
+<p>If you want to re-cluster servers that were clustered previously, you must first reset each server's configuration to its original, pre-clustered state. You can only do this by using the ClusterCATS Server Administrator that is installed on each cluster member. Using the ClusterCATS Explorer to delete cluster members from a cluster does not delete the server's ClusterCATS configuration, which is stored in the server's registry. Also, running the ClusterCATS uninstall program and reinstalling does not overwrite the server's ClusterCATS configuration.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To reset a server to its pre-clustered state:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Go to the server you want to reset, open the ClusterCATS Server Administrator, and click Advanced.
+
+
+<p>The Advanced Option dialog box appears.
+</p><p><img src="../images/CC_Serveradmin_Advanced.gif">
+
+
+
+</p></li>
+<li>Click Reset ClusterCATS to remove the ClusterCATS configuration from this server.
+
+<p>A message appears confirming that the server has been reset.
+</p></li>
+<li>Exit the ClusterCATS Server Administrator.
+
+</li>
+<li>Return to the computer from which you run the ClusterCATS Explorer.
+
+</li>
+<li>Use the ClusterCATS Explorer to recreate a cluster that includes this server or create a new cluster that contains this server as a cluster member.
+
+</li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

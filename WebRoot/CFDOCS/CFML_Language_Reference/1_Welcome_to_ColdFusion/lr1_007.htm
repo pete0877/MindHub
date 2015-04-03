@@ -1,0 +1,139 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Developer Resources</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../1_Welcome_to_ColdFusion/lr1_006.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../1_Welcome_to_ColdFusion/lr1.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../1_Welcome_to_ColdFusion/lr1_008.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Preface 	:&nbsp;&nbsp;Welcome To ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1082908"></a>
+ <H1>Developer Resources</H1>
+
+
+
+<p>Allaire Corporation is committed to setting the standard for customer support in developer education, technical support, and professional services. Our Web site is designed to give you quick access to the entire range of online resources.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Allaire Developer Services&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Resource</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Allaire Web site
+
+<a href="http://www.allaire.com">www.allaire.com</a>
+</td><td valign="top">
+General information about Allaire products and services.
+</td></tr>
+<tr valign="top"><td valign="top">
+Technical Support
+
+<a href="http://www.allaire.com/support">www.allaire.com/support</a>
+</td><td valign="top">
+Allaire offers a wide range of professional support programs. This page explains all of the available options.
+</td></tr>
+<tr valign="top"><td valign="top">
+Training and Consulting
+
+<a href="http://www.allaire.com/services">www.allaire.com/services</a>
+</td><td valign="top">
+Information about training classes, online courses, and consulting services offered by Allaire.
+</td></tr>
+<tr valign="top"><td valign="top">
+Developer Community
+
+<a href="http://www.allaire.com/developer">www.allaire.com/developer</a>
+</td><td valign="top">
+All of the resources you need to stay on the cutting edge of ColdFusion development, including online discussion groups, Knowledge Base, Component Exchange, Resource Library, technical papers and more.
+</td></tr>
+<tr valign="top"><td valign="top">
+Allaire Partners
+
+<a href="http://www.allaire.com/partners">www.allaire.com/partners</a>
+</td><td valign="top">
+The Allaire Alliance is a network of solution providers, application developers, resellers, and hosting services creating solutions with ColdFusion.
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../1_Welcome_to_ColdFusion/lr1_006.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../1_Welcome_to_ColdFusion/lr1.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../1_Welcome_to_ColdFusion/lr1_008.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:44 -->
+</body>
+</html>

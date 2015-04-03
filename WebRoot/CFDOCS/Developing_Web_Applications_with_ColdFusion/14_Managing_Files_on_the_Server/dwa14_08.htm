@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Performing Directory Operations</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 14	:&nbsp;&nbsp;Managing Files on the Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="999447"></a>
+ <H1>Performing Directory Operations</H1>
+
+
+
+<p>Use the CFDIRECTORY tag to return file information from a specified directory and to create, delete, and rename directories.</p><p>As with CFFILE, ColdFusion administrators can disable CFDIRECTORY processing in the ColdFusion Administrator Tags page. See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for details on the syntax of this tag.</p><a name="999503"></a>
+ 
+<H2>Returning file information</H2>
+<p>When using the ACTION=LIST, CFDIRECTORY returns five result columns you can reference in your CFOUTPUT:</p><ul>
+<li>Name -- Directory entry name.
+
+</li>
+<li>Size -- Directory entry size.
+</li>
+<li>Type -- File type: F or D for File or Directory.
+</li>
+<li>DateLastModified -- Date an entry was last modified.
+</li>
+<li>Attributes -- File attributes, if applicable.
+</li>
+<li>Mode -- (Solaris only) The octal value representing the permissions setting for the specified directory. For information about octal values, refer to the man pages for the chmod shell command.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view directory information:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a new file in Studio.
+
+
+</li>
+<li>Modify the file so that it appears as follows:
+
+<pre>&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;List Directory Information&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H2&gt;List Directory Information&lt;/H2&gt;
+&lt;CFDIRECTORY
+    DIRECTORY="c:\inetpub\wwwroot\mine"
+    NAME="mydirectory"
+    SORT="size ASC, name DESC, datelastmodified"&gt;
+
+&lt;TABLE&gt;
+&lt;TR&gt;
+    &lt;TH&gt;Name&lt;/TH&gt;
+    &lt;TH&gt;Size&lt;/TH&gt;
+    &lt;TH&gt;Type&lt;/TH&gt;
+    &lt;TH&gt;Modified&lt;/TH&gt;
+    &lt;TH&gt;Attributes&lt;/TH&gt;
+    &lt;TH&gt;Mode&lt;/TH&gt;
+&lt;/TR&gt;
+&lt;CFOUTPUT QUERY="mydirectory"&gt;
+&lt;TR&gt;
+    &lt;TD&gt;#mydirectory.name#&lt;/TD&gt;
+    &lt;TD&gt;#mydirectory.size#&lt;/TD&gt;
+    &lt;TD&gt;#mydirectory.type#&lt;/TD&gt;
+    &lt;TD&gt;#mydirectory.datelastmodified#&lt;/TD&gt;
+    &lt;TD&gt;#mydirectory.attributes#&lt;/TD&gt;
+    &lt;TD&gt;#mydirectory.mode#&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/TABLE&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre></li>
+<li>Modify the line DIRECTORY="c:\inetpub\wwwroot\mine"so that it points to a directory on your server.
+
+</li>
+<li>Save the file as <code>directoryinfo.cfm</code> and view it in your browser.
+
+</li>
+</ol>
+<p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

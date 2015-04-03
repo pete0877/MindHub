@@ -1,0 +1,100 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Troubleshooting Common Problems</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1021107"></a>
+ <H1>Troubleshooting Common Problems</H1>
+
+
+
+<p>The following section describes a few common problems that you may encounter and ways to resolve them.</p><a name="1020947"></a>
+ 
+<H2>ODBC data source configuration</H2>
+<p><strong>Problem</strong>: ODBC driver manager cannot make a connection to the database.</p><p>Connection errors may include problems with the location of files, network connections, and database client library configuration.</p><p>First, verify that you can connect to the database by clicking the Verify button on the ODBC Data Sources page of the ColdFusion Administrator. If you are unable to make a simple connection from that page, you need to work with your database and/or driver vendor to solve the problem.</p><p><strong>Problem</strong>: Data source does not exist or name is incorrectly specified.</p><p>Create data sources before you refer to them in your application source files. Also, check the spelling of the data source name.</p><a name="1021006"></a>
+ 
+<H2>HTTP/URL</H2>
+<p><strong>Problem</strong>: ColdFusion cannot correctly decode the contents of your form submission.</p><p>The METHOD in forms sent to the ColdFusion server must be Post, for example:</p><pre>&lt;FORM ACTION="test.cfm" METHOD="Post"&gt;
+</pre><p><strong>Problem</strong>: The browser complains when you include spaces in URLs.</p><p>URLs cannot have embedded spaces. Use a plus sign (+) wherever you want to include a space. ColdFusion correctly translates the + sign into a space.</p><p>A common scenario in which this error occurs is when you dynamically generate your URL from database text fields that may have embedded spaces. To avoid this problem, include only numeric values in the dynamically generated portion of URLs.</p><p>Or, you can use the URLEncodedFormat function, which automatically replaces spaces with + signs. </p><a name="1021049"></a>
+ 
+<H2>CFML syntax errors</H2>
+<p><strong>Problem</strong>: You get an error message you don't understand.</p><p>Make sure all your CFML tags have matching end tags where appropriate. It is a common error to omit the end tag for the CFQUERY, CFOUTPUT, CFTABLE, or CFIF tag.</p><p>When developing pages in ColdFusion Studio, use the Tag Completion feature, which adds an editing tag each time you create an opening tag.</p><p><strong>Problem</strong>: Invalid attribute or value.</p><p>If you use an invalid attribute or attribute values, ColdFusion returns an error message. To prevent such syntax errors, use the ColdFusion syntax validation tools in ColdFusion Studio.</p><p><strong>Problem</strong>: Mismatched quotes and escape characters.</p><p>Check strings in attributes and expressions for proper placement of single and double quotes. Color coding in ColdFusion Studio can help you spot improper quote placement.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

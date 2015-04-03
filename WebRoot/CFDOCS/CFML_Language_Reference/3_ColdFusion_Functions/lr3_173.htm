@@ -1,0 +1,187 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>LSParseDateTime</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_172.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_174.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1038684"></a>
+ <H1>LSParseDateTime</H1>
+
+
+
+<p>A locale-specific version of the ParseDateTime function, except that there is no option for POP date/time object parsing. Returns a date/time object. </p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_188.htm#1001568">ParseDateTime</a> and <a href="../3_ColdFusion_Functions/lr3_215.htm#1002208">SetLocale</a>. 
+</p>
+
+<a name="1088665"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>LSParseDateTime</strong>(<em>date-time-string</em>)
+</PRE><a name="1088667"> </a>
+<h5 class="param"> date-time-string</h5>
+<p class="param">String being converted to date/time object. This string must be in a form that is readable in the current locale setting. By default the locale is set to English (US).</p><a name="1695881"></a>
+ 
+<H3>Usage</H3>
+<p>When passing a date/time value for the English (US) locale, the date-time string can be in any of the following forms:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Date-Time Formats for the English (US) Locale</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Date-Time Composition</strong>
+</th><th align="left">
+<strong>Example</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+dd mmmm yyyy
+</td><td valign="top"><PRE>"25 January 1999"
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+hh:mm:ss
+</td><td valign="top"><PRE>"8:30:00"
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+hh:mm:ss
+</td><td valign="top"><PRE>"20:30:00"
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+mmmm dd, yyyy hh:mm:ss
+</td><td valign="top"><PRE>"January 25, 1999 8:30:00"
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+hh:mm:ss mmm. dd, yyyy
+</td><td valign="top"><PRE>"8:30:00 Jan. 25, 1999"
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+m/dd/yyyy hh:mm:ss
+</td><td valign="top"><PRE>"1/25/1999 8:30:00" 
+</PRE></td></tr>
+
+</table>
+</div>
+</p><p>Note that if you specify a year in the date, you should specify the full year.</p><p>If the date is formatted for a locale other than the English (US) locale, add or subtract the conversion time, depending on the locale. LSParseDateTime does not accept POP dates, nor does it have the capacity to convert dates to Greenwich Mean Time.</p><p>Years from 0 to 29 are interpreted as 21<sup>st</sup> century values. Years 30 to 99 are interpreted as 20<sup>th</sup> century values.</p><a name="1805226"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSParseDateTime
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This shows LSParseDateTime ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;LSParseDateTime Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;LSParseDateTime Example&lt;/H3&gt;
+
+&lt;P&gt;LSParseDateTime returns a locale-specific date/time
+object.
+
+&lt;!--- loop through a list of possible locales and
+show date values for Now()---&gt;
+&lt;CFLOOP LIST="#Server.Coldfusion.SupportedLocales#"
+INDEX="locale" DELIMITERS=","&gt;
+    &lt;CFSET oldlocale = SetLocale(locale)&gt;
+    &lt;CFOUTPUT&gt;&lt;P&gt;&lt;B&gt;&lt;I&gt;#locale#&lt;/I&gt;&lt;/B&gt;&lt;BR&gt;
+        &lt;P&gt;Locale-specific formats:
+        &lt;BR&gt;#LSDateFormat(Now(), "mmm-dd-yyyy")# #LSTimeFormat(Now())#&lt;BR&gt;
+        #LSDateFormat(Now(), "mmmm d, yyyy")# #LSTimeFormat(Now())#&lt;BR&gt;
+        #LSDateFormat(Now(), "mm/dd/yyyy")# #LSTimeFormat(Now())#&lt;BR&gt;
+        #LSDateFormat(Now(), "d-mmm-yyyy")# #LSTimeFormat(Now())#&lt;BR&gt;
+        #LSDateFormat(Now(), "ddd, mmmm dd, yyyy")# 
+#LSTimeFormat(Now())#&lt;BR&gt;
+        #LSDateFormat(Now(), "d/m/yy")# #LSTimeFormat(Now())#&lt;BR&gt;
+        #LSDateFormat(Now())# #LSTimeFormat(Now())#&lt;BR&gt;
+    &lt;P&gt;Standard Date/Time:
+    #LSParseDateTime("#LSDateFormat(Now())# #LSTimeFormat(Now())#")#&lt;BR&gt;
+&lt;Hr noshade&gt;
+    &lt;/CFOUTPUT&gt;
+&lt;/CFLOOP&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSParseDateTime
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_172.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_174.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

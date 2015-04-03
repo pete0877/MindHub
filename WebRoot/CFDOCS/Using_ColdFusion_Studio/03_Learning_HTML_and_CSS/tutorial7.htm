@@ -1,0 +1,159 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>The Complete Page Code</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;Learning HTML and CSS</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="503344"></a>
+ <H1>The Complete Page Code</H1>
+
+
+
+<p>Here is the entire Archaeology Tours page code. If you are new to markup and programming code, take heart! The rapid acceptance of HTML is based on its simple, logical syntax and plain language. </p><p>We've added code comments, set off by the <code>&lt;!--COMMENT--&gt;</code> tag, to define the document structure.</p><pre>
+
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;Archeology Tours&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;!-- add background image --&gt;
+&lt;!-- set text color --&gt;
+&lt;BODY BACKGROUND="image1.jpg" TEXT="Navy"&gt;
+
+&lt;!-- link to Allaire --&gt;
+&lt;P&gt;This page was created with &lt;B&gt;ColdFusion Studio&lt;/B&gt;, which you can 
+find at &lt;A HREF="http://www.allaire.com"&gt;Allaire's Web site&lt;/A&gt;.&lt;/P&gt;
+
+&lt;!-- insert image --&gt;
+&lt;IMG SRC="greekcolumn.gif" WIDTH=111 HEIGHT=187 BORDER=0 ALIGN="RIGHT" 
+ALT="Greek Column"&gt;
+
+&lt;!-- add header 1 --&gt;
+&lt;H1&gt;Archeology Tours&lt;/H1&gt;
+
+&lt;!-- add horizontal rule --&gt;
+&lt;HR WIDTH="80%" COLOR="Black" NOSHADE&gt;
+
+&lt;!-- add line breaks --&gt;
+&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+
+&lt;!-- set red paragraph text --&gt;
+&lt;P ALIGN="center"&gt;&lt;FONT FACE="Arial" SIZE="+3" COLOR="Red"&gt;Travel Back In 
+Time!&lt;/FONT&gt;&lt;/P&gt;
+
+&lt;!-- begin table --&gt;
+&lt;TABLE CELLSPACING="0" CELLPADDING="3" BORDER="1"&gt;
+
+&lt;!-- first column spans two rows --&gt;
+&lt;TR&gt;
+    &lt;!-- begin left table cell --&gt; 
+    &lt;TD ROWSPAN="2"&gt;&lt;P&gt;Welcome to Archaeology Tours, the first choice of 
+travelers and adventurers. Our Mediterranean Cruise features luxury 
+accommodations, with stops in the following ancient cities:&lt;/P&gt;
+
+    &lt;UL&gt;
+        &lt;LI&gt;Crete
+        &lt;LI&gt;Istanbul
+        &lt;LI&gt;Alexandria
+    &lt;/UL&gt;
+
+&lt;P&gt;Follow our guides back in time as you cruise the beautiful waters of 
+antiquity and visit important archaeological digs.&lt;/P&gt;
+    &lt;/TD&gt;
+    
+    &lt;!-- begin top right cell --&gt;
+    &lt;TD ALIGN="center" BGCOLOR="Yellow"&gt;&lt;A HREF="tickets.htm"&gt;Purchase 
+Cruise Tickets&lt;/A&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;!-- begin second row --&gt;
+&lt;TR&gt;
+    &lt;!-- begin bottom right cell --&gt;
+    &lt;TD ALIGN="center" BGCOLOR="Lime"&gt;&lt;A HREF="map.htm"&gt;Interactive Tour 
+Map&lt;/A&gt;&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;/TABLE&gt;
+
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../03_Learning_HTML_and_CSS/tutorial6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../03_Learning_HTML_and_CSS/tutorial.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../03_Learning_HTML_and_CSS/tutorial8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:34 -->
+</body>
+</html>

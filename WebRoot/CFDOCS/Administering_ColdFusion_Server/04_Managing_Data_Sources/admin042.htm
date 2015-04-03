@@ -1,0 +1,644 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Supported Databases</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin041a.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin043.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1068781"></a>
+ <H1>Supported Databases</H1>
+
+
+
+<p>ColdFusion uses ODBC, OLE DB, and native database drivers to interact with data sources. However, not all ColdFusion Server editions support all database types. The following table shows database drivers available for each ColdFusion 4.5 edition.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+Express<br>Windows
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+Professional<br>Windows
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+Professional<br>Linux
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+Enterprise<br>Windows
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+Enterprise<br>Solaris
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+Enterprise<br>Linux
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc colspan=7 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>ODBC Drivers</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT INFORMIX 7.x/9.x Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT Sybase 11 Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT dBase/FoxPro Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT IBM DB2/6000 Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT OpenIngress 1.x Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT OpenIngress 2.x Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT Oracle 7 Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT Oracle 8 Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT Text Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+MERANT MS SQL Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft Access Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft SQL Server Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft dBase Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft FoxPro Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft Visual FoxPro Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft Excel Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft Text Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+FileMaker Pro ODBC Driver
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top" colspan=7 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Native Drivers</strong>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Sybase System 11
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Oracle 7.3, 8.0, and 8i
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Informix 9
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+DB2 Universal Database 5.2/6.1
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td></tr>
+<tr valign="top"><td valign="top" colspan=7 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>OLE DB Drivers</strong>
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+SQLOLEDB
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Microsoft.Jet.OLEDB.3.5.1
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+X
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+&nbsp;
+
+</td></tr>
+
+</table>
+
+</div>
+</p><a name="1080642"></a>
+ 
+<H2>Where to go from here</H2>
+<p>To use an existing database with your ColdFusion applications, you need to register or <em>create</em> the data source using the ColdFusion Administrator. If you are using Informix, DB2, Oracle, or Sybase database, and want to take advantage of the ColdFusion native drivers, you also need to install and configure database client software. </p><p>The remaining sections in this chapter provide details about configuring ColdFusion data sources for specific databases. Look for the section about your database; each database section contains all the information you need to create and connect to data sources on Windows and UNIX. See the <a href="../04_Managing_Data_Sources/admin04.htm#1066588">&quot;Contents&quot;</a> to find your database.</p><p>The following sections apply to all databases and operating systems:</p><ul>
+<a name="1049604"> </a>
+<li><a href="../04_Managing_Data_Sources/admin043.htm#1066782">&quot;Choosing the Right Drivers&quot;</a> -- Describes the different types of drivers you can use to access data sources with ColdFusion Server (ODBC, native, and OLE DB) and helps you decide which driver best suits your needs.
+
+<a name="1068826"> </a>
+</li>
+<li><a href="../04_Managing_Data_Sources/admin044.htm#1098131">&quot;Adding Data Sources for ColdFusion&quot;</a> -- Provides step-by-step instructions for using the ColdFusion Administrator to add a data source. These instructions apply to all platforms and drivers.
+<a name="1090871"> </a>
+</li>
+<li><a href="../04_Managing_Data_Sources/admin045.htm#1101222">&quot;Verifying ColdFusion Data Sources&quot;</a> -- Provides step-by-step instructions for making sure that a data source has been correctly configured and is available to your ColdFusion application pages.
+<a name="1058945"> </a>
+</li>
+<li><a href="../04_Managing_Data_Sources/admin0418.htm#1071798">&quot;Using ColdFusion to Create a Data Source&quot;</a> -- Explains how you can use ColdFusion code to generate database tables dynamically. 
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin041a.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin043.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

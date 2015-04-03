@@ -1,0 +1,280 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>WddxRecordset Object</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../4_WDDX_JavaScript_Objects/lr4_001.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 3	:&nbsp;&nbsp;WDDX JavaScript Objects</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1016031"></a>
+ <H1>WddxRecordset Object</H1>
+
+
+
+<p>The WddxRecordset object includes functions that you call as needed when constructing a WDDX recordset.</p><a name="1015953"></a>
+ 
+<H2>addColumn</H2>
+<p>Adds the specified column to all rows in the WddxRecordset instance.</p><a name="1015955"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>addColumn</strong>( <em>name</em> )
+</PRE><a name="1017360"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxRecordset object.</p><a name="1017373"> </a>
+<h5 class="param"> name</h5>
+<p class="param">Name of the column to add.</p><a name="1017150"></a>
+ 
+<H3>Return value</H3>
+<p>None.</p><a name="1015959"></a>
+ 
+<H3>Usage</H3>
+<p>This function adds the specified column to every row of the WDDX record set. Initially the new column's values are set to NULL.</p><a name="1015961"></a>
+ 
+<H3>Example</H3>
+<p>This example calls the addColumn function:</p><pre>// create a new recordset
+rs = new WddxRecordset();
+
+// add a new column
+rs.addColumn("NewColumn");
+
+// extend the recordset by 3 rows
+rs.addRows(3);
+
+// set an element in the first row
+// newValue is a previously defined variable
+rs.setField(0, "NewColumn", newValue);
+</pre><a name="1017188"></a>
+ 
+<H2>addRows</H2>
+<p>Adds the specified number of rows to all columns in the WddxRecordset instance.</p><a name="1017190"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>addRows</strong>( <em>n</em> )
+</PRE><a name="1017402"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxRecordset object.</p><a name="1017192"> </a>
+<h5 class="param"> n</h5>
+<p class="param">Integer specifying the number of rows to add.</p><a name="1017194"></a>
+ 
+<H3>Return value</H3>
+<p>None.</p><a name="1017196"></a>
+ 
+<H3>Usage</H3>
+<p>This function adds the specified number of rows to every column of the WDDX record set. Initially, the row/column values are set to NULL.</p><a name="1017198"></a>
+ 
+<H3>Example</H3>
+<p>This example calls the addRows function:</p><pre>// create a new recordset
+rs = new WddxRecordset();
+
+// add a new column
+rs.addColumn("NewColumn");
+
+// extend the recordset by 3 rows
+rs.addRows(3);
+
+// set an element in the first row
+// newValue is a previously defined variable
+rs.setField(0, "NewColumn", newValue);
+</pre><a name="1017228"></a>
+ 
+<H2>getField</H2>
+<p>Returns the element in the specified row/column position.</p><a name="1017230"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>getField</strong>( <em>row</em>, <em>col</em> )
+</PRE><a name="1017420"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxRecordset object.</p><a name="1017433"> </a>
+<h5 class="param"> row</h5>
+<p class="param">Integer specifying the zero-based row number of the value to be returned.</p><a name="1017438"> </a>
+<h5 class="param"> col</h5>
+<p class="param">Integer or string specifying the column of the value to be returned.</p><a name="1017234"></a>
+ 
+<H3>Return value</H3>
+<p>Returns the value in the specified row/column position.</p><a name="1017236"></a>
+ 
+<H3>Usage</H3>
+<p>Call this function to access a value in a WDDX record set.</p><a name="1017238"></a>
+ 
+<H3>Example</H3>
+<p>This example calls the getField function (the variable <em>r</em> is a reference to a WddxRecordset instance):</p><pre>for (row = 0; row &lt; nRows; ++row)
+{
+  o += "&lt;tr&gt;";
+  for (i = 0; i &lt; colNames.length; ++i)
+  {
+    o += "&lt;td&gt;" + r.getField(row, colNames[i]) + "&lt;/td&gt;";
+  }
+  o += "&lt;/tr&gt;";
+}
+</pre><a name="1017254"></a>
+ 
+<H2>getRowCount</H2>
+<p>Indicates the number of rows in the WddxRecordset instance.</p><a name="1017256"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>getRowCount</strong>( )
+</PRE><a name="1017453"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxRecordset object.</p><a name="1017260"></a>
+ 
+<H3>Return value</H3>
+<p>Integer. Returns the number of rows in the WddxRecordset instance.</p><a name="1017262"></a>
+ 
+<H3>Usage</H3>
+<p>Call this function before a looping construct to determine the number of rows in the record set.</p><a name="1017264"></a>
+ 
+<H3>Example</H3>
+<p>This example calls the getRowCount function:</p><pre>function dumpWddxRecordset(r)
+{ 
+// Get row count 
+    nRows = r.getRowCount();
+...
+    for (row = 0; row &lt; nRows; ++row)
+...
+</pre><a name="1017280"></a>
+ 
+<H2>setField</H2>
+<p>Sets the element in the specified row/column position.</p><a name="1017282"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>setField</strong>( <em>row</em>, <em>col</em>, <em>value</em> )
+</PRE><a name="1017512"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxRecordset object.</p><a name="1017522"> </a>
+<h5 class="param"> row</h5>
+<p class="param">Integer specifying the row containing the element to be set.</p><a name="1017527"> </a>
+<h5 class="param"> col</h5>
+<p class="param">Integer or string specifying the column containing the element to be set.</p><a name="1017532"> </a>
+<h5 class="param"> value</h5>
+<p class="param">Value to be set.</p><a name="1017286"></a>
+ 
+<H3>Return value</H3>
+<p>None.</p><a name="1017288"></a>
+ 
+<H3>Usage</H3>
+<p>Call this function to set a value in a WddxRecordset instance.</p><a name="1017290"></a>
+ 
+<H3>Example</H3>
+<p>This example calls the setField function:</p><pre>// create a new recordset
+rs = new WddxRecordset();
+
+// add a new column
+rs.addColumn("NewColumn");
+
+// extend the recordset by 3 rows
+rs.addRows(3);
+
+// set an element in the first row
+// newValue is a previously defined variable
+rs.setField(0, "NewColumn", newValue);
+</pre><a name="1017313"></a>
+ 
+<H2>wddxSerialize</H2>
+<p>Serializes a record set.</p><a name="1017552"></a>
+ 
+<H3>Syntax</H3>
+<PRE><em>object</em>.<strong>wddxSerialize</strong>( <em>serializer</em> )
+</PRE><a name="1017567"> </a>
+<h5 class="param"> object</h5>
+<p class="param">Instance name of the WddxRecordset object.</p><a name="1017554"> </a>
+<h5 class="param"> serializer</h5>
+<p class="param">WddxSerializer instance.</p><a name="1017319"></a>
+ 
+<H3>Return value</H3>
+<p>Boolean. Returns True if serialization was successful and False if an error occurs.</p><a name="1017321"></a>
+ 
+<H3>Usage</H3>
+<p>Internal. You do not typically call this function.</p><a name="1017323"></a>
+ 
+<H3>Example</H3>
+<p>This example is from the WddxSerializer serializeValue function:</p><pre>...
+else if (typeof(obj) == "object")
+{
+  if (obj == null)
+  {
+    // Null values become empty strings
+    this.write("&lt;string&gt;&lt;/string&gt;");
+  }
+  else if (typeof(obj.wddxSerialize) == "function")
+  {
+    // Object knows how to serialize itself
+    bSuccess = obj.wddxSerialize(this);
+  }
+...
+</pre><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../4_WDDX_JavaScript_Objects/lr4_001.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../4_WDDX_JavaScript_Objects/lr4.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../5_Operators/lang_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:40:19 -->
+</body>
+</html>

@@ -1,0 +1,171 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Saving Code Blocks as Snippets</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 5	:&nbsp;&nbsp;Creating Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1043546"></a>
+ <H1>Saving Code Blocks as Snippets</H1>
+
+
+
+<p>The Code Snippets feature offers a quick way to store and re-use code blocks and content. Comment your snippets just as you would any code block.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a code snippet:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Snippets tab in the Resource pane.
+
+
+<p><img src="../images/snippets_tab.gif">
+
+
+
+</p></li>
+<li>Right-click in the Snippets tab and choose Create Folder from the shortcut menu.
+
+</li>
+<li>Enter a name for the folder.
+
+</li>
+<li>Right-click in the Snippets pane and choose Add Snippet to open the Snippet dialog box.
+
+</li>
+<li>Enter a name for the snippet in the Description box. Note that snippet names cannot contain characters that are illegal in file names, such as slashes, special characters, double quotes, etc.
+
+</li>
+<li>In the Start Text window, type in or paste an opening code block. You can set a default spacing between the blocks by hitting the Enter key at the end of the start text and at the beginning of the end text.
+
+</li>
+<li>In the End Text window, enter a closing code block. 
+
+</li>
+<li>Click OK. Right-click on a snippet to edit or delete it.
+
+</li>
+</ol>
+<p>The default location for Snippets is the <code>\UserData\Snippets</code> folder below your ColdFusion Studio root directory.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Because snippets can be created as start and end blocks, you can use 
+them to surround other tags and content. This is handy for inserting 
+special formatting, navigation elements, and script blocks. Simply 
+highlight the content you want to surround, then insert the snippet.
+</td>
+</tr>
+</table>
+</div>
+<br><p>To insert a snippet, double-click an entry in the Snippets tab or right-click and select Insert into document from the menu.</p><p>Use the snippets shortcut menus to manage snippets and snippet folders.</p><a name="1043566"></a>
+ 
+<H2>Sharing snippets</H2>
+<p>You can share code snippets with other developers by giving them access to a shared folder on your machine or on another network machine. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a shared snippets folder:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the Options &gt; Settings dialog box (F8) and click Locations.
+
+
+</li>
+<li>In the Shared Snippets box, use the Browse button to navigate to the shared folder location and click OK.
+
+</li>
+<li>In the Snippets tab (in the Resources pane), right-click and choose Create Shared Folder. The folder icon changes color to show that it is shared.
+
+</li>
+</ol>
+<p>Anyone with access to the shared folder can add, edit, and delete snippets.</p><a name="1043574"></a>
+ 
+<H2>Adding snippet shortcut keys</H2>
+<p>Open the Options &gt; Customize dialog box and select the Snippet Shortcuts tab to enable a keyboard combination for a snippet. Select a snippet and press keys to enter the combination in the box at the bottom. </p><p>If a combination is in use, the current command appears below the shortcut box. To overwrite a combination, click Apply. </p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Creating_Pages/create11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../05_Creating_Pages/create.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create13.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

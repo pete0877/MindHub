@@ -1,0 +1,277 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Introducing ClusterCATS for ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1067495"></a>
+ <H1>Introducing ClusterCATS for ColdFusion</H1>
+
+
+
+<p>ClusterCATS for ColdFusion is a Web server clustering technology that provides load balancing and failover services that assure high availability for your Web server and ColdFusion Server (CFS). ClusterCATS lets you cluster distributed servers into a single, high-performance, highly available environment of Web server resources.</p><p>A cluster consists of two or more Web servers located on a LAN or across a WAN. Web servers included in a cluster operate as a single entity to provide rapid and reliable access to resources on those Web servers. A cluster can help your Web site avoid the consequences of busy and failed servers -- slow networks. With ClusterCATS you can avoid bandwidth, latency, and congestion problems. </p><p>This section addresses the following topics:</p><ul>
+<a name="1072231"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm#1071554">ClusterCATS for ColdFusion Features</a>
+
+<a name="1071111"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm#1072008">ClusterCATS for ColdFusion Components</a>
+</li>
+</ul>
+<a name="1071554"></a>
+ 
+<H2>ClusterCATS for ColdFusion Features</H2>
+<p>The ClusterCATS technology embedded in ColdFusion Enterprise provides robust features for load balancing and failing over servers.</p><p>This section describes the following ClusterCATS' features:</p><ul>
+<a name="1171023"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm#1086786">&quot;New clustering features available with ColdFusion v4.5&quot;</a>
+
+<a name="1116885"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm#1116886">&quot;Important ease-of-use features&quot;</a>
+<a name="1086792"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm#1209245">&quot;Load balancing features&quot;</a>
+<a name="1086797"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin066.htm#1072257">&quot;Failover features&quot;</a>
+</li>
+</ul>
+<a name="1086786"></a>
+ 
+<H3>New clustering features available with ColdFusion v4.5</H3>
+<p>ColdFusion Enterprise v4.5 includes these new ClusterCATS features:</p><ul>
+<a name="1083253"> </a>
+<li>Additional Platform Support
+
+<p>ClusterCATS now supports server clusters on the Linux operating system as well 
+as Windows NT and Sun Solaris.
+</p><a name="1083282"> </a>
+</li>
+<li>Additional Web Server Support
+<p>ClusterCATS now supports the Apache Web Server for hosting UNIX-based 
+server clusters in addition Netscape Enterprise Server.
+</p><a name="1203224"> </a>
+</li>
+<li>Automated System Configuration Check (NT/IIS Only)
+<p>Performs various system checks to ensure that your Windows NT/IIS Web 
+servers are configured properly for use with ClusterCATS. This capability 
+checks for the existence of multiple NICs, whether the Streams Environment is 
+installed and configured correctly, and whether the All Unassigned setting for 
+IP address assumption on failover is configured.
+</p><a name="1083272"> </a>
+</li>
+<li>ColdFusion Probe
+<p>Provides another level of ColdFusion-specific load balancing by actively 
+monitoring the ColdFusion Server for failures via application probes that you 
+create to periodically test a ColdFusion URL on your site. If the Probe's 
+validation test fails, it restricts the Web server on which the site resides and 
+redirects the restricted server's HTTP traffic to another server in the cluster. This 
+new feature extends ClusterCATS' automatic monitoring and failover 
+capability.
+</p><a name="1201585"> </a>
+</li>
+<li>Tighter Integration with Cisco LocalDirector
+<p>ClusterCATS is now able to provide the availability and load balancing data it 
+acquires directly to a Cisco LocalDirector so that the LocalDirector can route 
+inbound HTTP traffic to the most appropriate Web server in your cluster.
+</p></li>
+</ul>
+<a name="1116886"></a>
+ 
+<H3>Important ease-of-use features</H3>
+<p>These ClusterCATS features make creating and managing your server clusters easy, fast, and secure:</p><ul>
+<a name="1116902"> </a>
+<li>Graphical Administration Utilities
+
+<p>The Windows-based Explorer allows you to centrally administer NT or UNIX 
+clusters easily and quickly. If you run a UNIX-only environment and do not 
+have a Windows machine (NT, 98, or 95) on which to install the Windows-based 
+Explorer, you can use the Web-based ClusterCATS Explorer together with 
+included server utilities to administer your cluster members. 
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Web-based Explorer does not contain all of the configuration 
+and administration features found in the Windows-based Explorer. 
+See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1133296">&quot;Using the ClusterCATS Web Explorer&quot;</a> for details.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The ClusterCATS Server Administrator lets you perform maintenance and 
+troubleshooting tasks on each server in your cluster. These tasks include 
+putting a server into maintenance mode so that you can update software or 
+content, stopping and starting the ClusterCATS service, and adding and 
+removing the ClusterCATS filter from the Web server service.
+</p><a name="1116944"> </a>
+</li>
+<li>Cluster Administration Security
+<p>ClusterCATS provides three administrator security levels that you can configure 
+for the appropriate level of security within your organization.
+</p><a name="1116957"> </a>
+</li>
+<li>Offline Maintenance Support (Windows NT only)
+<p>ClusterCATS lets you configure an additional IP address for each Windows 
+server in your cluster so that you can perform update and server maintenance 
+tasks without removing the server from the cluster or disconnecting it from the 
+network
+</p></li>
+</ul>
+<a name="1209245"></a>
+ 
+<H3>Load balancing features</H3>
+<p>ClusterCATS provides the following load balancing features:</p><ul>
+<a name="1161541"> </a>
+<li>Load Threshold Configuration
+
+<p>ClusterCATS lets you configure maximum and gradual redirection thresholds 
+for each server in a cluster. The maximum threshold indicates the point at 
+which the server cannot handle any additional load. To prevent a server's load 
+from reaching this point and resulting in poor performance and unavailability, 
+you can also configure a gradual redirection threshold that will redirect 
+requests to a less loaded server when the load reaches the gradual redirection 
+setting.
+</p><a name="1071559"> </a>
+</li>
+<li>Application-Aware Load Balancing
+<p>ClusterCATS ensures that your ColdFusion applications always remain up and 
+running because it understands the load algorithm produced by the 
+ColdFusion Server (CFS). Consequently, ClusterCATS can redirect HTTP 
+requests to other Web servers as necessary in response to increases in load 
+hitting the CFS. Additionally, the new configurable ColdFusion Probe provides 
+another level of ColdFusion-specific load balancing by detecting whether the 
+ColdFusion Server is operating properly. If it determines that the ColdFusion 
+Server has failed or is otherwise unavailable, it redirects traffic to another 
+available server and attempts to recover the failed ColdFusion Server.
+</p><a name="1071564"> </a>
+</li>
+<li>Session-Aware Load Balancing
+<p>This feature ensures that your e-commerce applications maintain their state 
+when users are in the process of shopping, ordering, or paying for their 
+purchases. Sometimes referred to as a &quot;sticky&quot; session, session-aware load 
+balancing guarantees that users won't get bumped from the server on which 
+they started their transaction until the transaction is complete, regardless of the 
+load thresholds that have been defined for the affected server.
+</p><a name="1071565"> </a>
+</li>
+<li>Hardware Load Balancing Device Integration
+<p>ClusterCATS for ColdFusion can augment an existing hardware-based load 
+balancing solution by easily integrating with established devices, such as 
+Cisco's LocalDirector. Consequently, you are able to take advantage of 
+ClusterCATS built-in intelligence, resulting in a more comprehensive load 
+balancing solution.
+</p></li>
+</ul>
+<a name="1072257"></a>
+ 
+<H3>Failover features</H3>
+<p>ClusterCATS provides these important failover features:</p><ul>
+<a name="1072259"> </a>
+<li>Continuous IP Monitoring Within Clusters
+
+<p>The ClusterCATS IP monitoring service is a self-monitoring capability that 
+enables cluster members to listen for server failures within clusters. Each server 
+that is up and running transmits an IP signal, which indicates that the server is 
+available and functioning normally. However, if a server fails, it will no longer 
+transmit a signal, which indicates to the remaining servers that it is no longer 
+available to respond to HTTP requests.
+</p><a name="1072403"> </a>
+</li>
+<li>Automatic IP Address Assumption and HTTP Redirection on Failure
+<p>If a server within a cluster fails or becomes unavailable and is no longer 
+transmitting an IP signal, another available server in the cluster will 
+automatically assume the IP address of the failed server. Subsequent HTTP 
+requests that are bound for the downed server will be redirected to the server 
+that has taken over for its failed counterpart. When the failed server is fixed and 
+comes back online, the server that has assumed the failed server's IP address 
+relinquishes it to the fixed server. This process is known as IP aliasing.
+</p><a name="1072485"> </a>
+</li>
+<li>Automatic Administrator Notification
+<p>ClusterCATS lets you configure automatic e-mail-based alarms for a wide range 
+of failure types. This feature ensures that you can attend to failed servers 
+quickly and minimize server downtime. During regular business hours, you can 
+scan and read your e-mail as usual. For off-hour periods, you can configure 
+your pager to receive e-mail notifications for 24x7 notification capability.
+</p></li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin065.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin067.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

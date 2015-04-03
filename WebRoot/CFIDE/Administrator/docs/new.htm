@@ -1,0 +1,2431 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>ColdFusion 4.5 and 4.5.1 New Features</title>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content="MSHTML 5.00.2314.1000" name=GENERATOR>
+
+
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+
+
+</head>
+
+<body>
+<a name="top"></a>
+<h1>ColdFusion Server<br>
+<font size="-1">New Features and Enhancements</FONT></h1>
+
+<p>This page provides details about new features that have been added to ColdFusion Server. The first section lists new features since <a href="#cf451">ColdFusion 4.5</a>, and the second section lists new features since the <a href="#cf401">ColdFusion 4.0.1 release</a>. For important information about the current release, including fixed issues and known issues, see the <A HREF="releasenotes.htm">Release Notes.</A></p>
+<hr>
+
+<a name="cf451"></A>
+<h2>ColdFusion 4.5.1 New Features</H2>
+
+<p>
+<table BGCOLOR="#FDF0C8" cellpadding="3" cols="">
+	
+	<tr>
+	<td valign="top"><a href="#hashfunc">New Hash function</A></TD>
+	<td valign="top">Converts a variable-length string into a 32-byte, hexadecimal string</TD>
+	</TR>
+
+	<tr>
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#getmetricdatafunc">Changes to GetMetricData function</a></td>
+	<td valign="top">Now takes a mode parameter instead of a monitor_name parameter</td>
+	</tr>
+
+	<tr>
+	<td valign="top"><a href="#newloadbalancing">New Load Balancing Options</A></TD>
+	<td valign="top">Options for gauging processing and load metrics</TD>
+	</TR>
+
+	<tr>
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#duplicatefunc">New Duplicate function</a></td>
+	<td valign="top">Returns a clone, also known as a deep copy, of a variable</td>
+	</tr>
+
+	<tr>
+	<td valign="top"><a href="#cfcacheattributes">New CFCACHE attributes</A></TD>
+	<td valign="top">USERNAME and PASSWORD attributes added</TD>
+	</TR>
+
+	<tr>
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#gethttptimestring">New GetHTTPTimeString function</a></td>
+	<td valign="top">Converts a date-time object to a string</td>
+	</tr>
+
+
+	<tr>
+	<td valign="top"><a href="#spool_interval">New spool interval setting</A></TD>
+	<td valign="top">Ability to define CFMAIL spool interval.</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#merant">Merant ODBC driver</A></TD>
+	<td valign="top">Merant ODBC driver for MS SQLServer threadsafe.</TD>	
+	</TR>
+
+
+	<tr>
+	<td valign="top"><a href="#cfldap_delimiter">New attribute for CFLDAP</A></TD>
+	<td valign="top">DELIMITER separates multiple attribute name/value pairs.</TD>
+	</TR>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#veritylinux">Verity on Linux</A></TD>
+	<td valign="top">Verity searching is now available on Linux.</TD>	
+	</TR>
+	
+</table>
+</p>
+
+<HR>
+<a name="hashfunc"></a>
+<h2>New Hash function</h2>
+
+<p>Takes a variable-length string and converts it into a 32-byte, hexadecimal string, using the MD5 algorithm. The MD5 algorithm is a one-way hash, meaning that there is no conversion from the hash result back into the source string. 
+
+<h3>Syntax</h3>
+<p><code>Hash(string)</code></p>
+
+<p><b>string</b><BR>
+
+Any string.</p>
+
+<h3>Usage</h3>
+
+<p>The result of the Hash function is a fingerprint of the original data. This fingerprint can be used for comparison and validation purposes.  For example, a developer could store the hash of a password in a database without exposing the password itself. Later, the developer could check the validity of the password with the following code:</p>
+<P>
+<PRE>
+&lt;CFIF Hash(Form.Password) IS NOT MyQuery.PasswordHash&gt;
+    &lt;CFLOCATION URL="unauthenticated.cfm"&gt;
+&lt;/CFIF&gt;
+</PRE>
+
+<H3>Example</h3>
+<PRE>
+&lt;!--- This code fragment illustrates how to use the Hash function for 
+password validation. This example assumes that the UserID value was passed to
+this page with a URL parameter.---&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Hash Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Hash Example&lt;/H3&gt;
+
+&lt;CFQUERY NAME="CheckPerson" DATASOURCE="UserData"&gt;
+	SELECT PasswordHash
+	FROM SecureData
+	WHERE UserID=&lt;CFQUERYPARAM VALUE="#UserID#"
+	CFSQLType="CF_SQL_CHARVAR"&gt; 
+&lt;/CFQUERY&gt;
+
+&lt;CFIF Hash(Form.Password) IS NOT CheckPerson.PasswordHash&gt;
+    &lt;CFLOCATION URL="unauthenticated.cfm"&gt;
+&lt;CFELSE&gt;
+	...
+&lt;/CFIF&gt;
+...
+
+</pre>
+</P>
+
+
+<HR>
+
+<a name="getmetricdatafunc"></a>
+<H2>Changes to the GetMetricData function</h2>
+
+<p>The GetMetricData function now takes a mode parameter instead of a monitor_name parameter.</p>
+
+<h3>Syntax</h3>
+
+<p><code>GetMetricData(mode)</code></p>
+
+<p>In addition to supporting the previous value "PERF_MONITOR" for NT, GetMetricData now supports three additional values:
+	<ul>
+		<li>"PREV_REQ_TIME" meaning the previous request time in seconds.
+		<li>"AVG_REQ_TIME" meaning the average request time in seconds.
+		<li>"SIMPLE_LOAD" meaning the result of an algorithm intended to reflect the load on the server.
+	</ul>
+	
+<h3>Example</h3>
+<P>The following code uses the four modes.</p>
+<pre>
+&lt;CFSET pmData = GetMetricData( "PERF_MONITOR" )&gt;
+&lt;CFSET yourLoad = GetMetricData( "SIMPLE_LOAD" ) &gt;
+&lt;CFSET prevRequestTime = GetMetricData( "PREV_REQ_TIME" )&gt;
+&lt;CFSET averageReqestTime = GetMetricData( "AVG_REQ_TIME" )&gt;
+
+&lt;CFOUTPUT&gt;
+    Load: #yourLoad#&lt;BR&gt;
+	Previous Request Time: #prevRequestTime#&lt;BR&gt;
+	Average Request Time: #averageRequestTime#
+&lt;P&gt;Current PerfMonitor data is: &lt;/P&gt;
+    InstanceName:    #pmData.InstanceName# &lt;BR&gt;
+    PageHits:                #pmData.PageHits# &lt;BR&gt;
+    ReqQueued:          #pmData.ReqQueued# &lt;BR&gt;
+    DBHits:                  #pmData.DBHits# &lt;BR&gt;
+    ReqRunning:          #pmData.ReqRunning# &lt;BR&gt;
+    ReqTimedOut:      #pmData.ReqTimedOut# &lt;BR&gt;
+    BytesIn:                 #pmData.BytesIn# &lt;BR&gt;
+    BytesOut:                 #pmData.BytesOut# &lt;BR&gt;
+    AvgQueueTime:    #pmData.AvgQueueTime# &lt;BR&gt;
+    AvgReqTime:          #pmData.AvgReqTime# &lt;BR&gt;
+    AvgDBTime:                 #pmData.AvgDBTime# &lt;BR&gt;
+    CachePops:                #pmData.CachePops# &lt;BR&gt; 
+&lt;/CFOUTPUT&gt;
+</pre>
+
+
+
+<hr>
+
+<a name="newloadbalancing"></a>
+<H2>New Load Balancing Options</H2>
+
+<p>ClusterCATS now supports two new load-balancing options:
+
+	<UL>
+		<LI>Average Request Time<BR>
+		This reflects the average processing time of all requests that fall within a 
+		two-minute moving window. The use of an average smooths the effects of brief spikes 
+		in request volume and in a mixture of short-and long-running requests.</li>
+		
+		<LI>Last Request Time<BR>
+		This reflects the time it took to process the last request to the server. Because 
+		it is a single, undiluted snapshot of request time, it will immediately reflect 
+		peaks and troughs in request processing time.<BR><BR>
+		
+		NOTE: In order to translate these new time-based metrics into a single load value 
+		for the Web server, you must weigh them against the upper threshold of performance 
+		at which a server should be declared "busy" for load-balancing purposes. Once a 
+		server reaches this critical busy threshold, ClusterCATS will redirect further 
+		service requests away from the server until becomes more responsive to its clients.</li>
+	</UL> 
+	
+	
+<p>A ClusterCATS probe agent probes a special ColdFusion page, getsimpleload.cfm, 
+(every five seconds by default) and records the round-trip time (RTT) for each 
+request. From this data, it then computes its own average RTT over a two-minute 
+moving window. By factoring in external influences on Web server responsiveness, 
+such as network load, scheduling load, and disk I/O load, the ClusterCATS probe 
+agent can adjust the load reported by the ColdFusion engine to create a more 
+realistic picture of overall the Web server's performance. </p>
+
+<p>The CFML template getsimpleload.cfm is located in cfusion/BrightTiger/BTAuxdir 
+on NT, and in coldfusion/btcats/btauxdir on UNIX. The probe agent responds to 
+output generated by the load page. That output calculates the load based on one 
+of four available metrics set in the LoadType variable:</p>
+
+<UL>
+	<LI>SIMPLE_LOAD<BR>
+	Calculates load based on ColdFusion queue depths. This is the 
+	"traditional" metric. There is no processing-time-based component 
+	to this metric. As of V4.5.1, this metric is deprecated.</li>
+
+	<LI>AVG_REQ_TIME<BR>
+	Calculates load based on the average service request 
+	time. The load is calculated by dividing the request time 
+	by the maximum acceptable request time. This is the new 
+	default metric.</li>
+
+	<LI>PREV_REQ_TIME <BR>
+	Calculates load based on the time it took to process 
+	the last complete service request. The load is calculated 
+	by dividing the request time by the maximum acceptable 
+	request time.</li>
+
+	<LI>ROUND_TRIP_TIME <BR>
+	Calculates load based on the round trip time for the 
+	request (ROUND_TRIP_TIME). For this metric all load 
+	calculations are performed by the probe agent. </li>
+
+</UL>
+
+<P>During processing, the load page generates three significant 
+output variables that are sent in response to the probe agent's HTTP query:</p>
+
+<UL>
+	<LI>CCLOADVALUE<BR>
+		
+	The load calculated by the page using one of the 
+	available load metrics. The load value identifies
+	how busy the server is as a percentage of its 
+	total capacity.</li>
+		
+	<LI>CCLOADMAX<BR>
+		
+	The maximum acceptable time (in milliseconds) for 
+	a request to complete. This marks the "busy threshold" 
+	for this server. This is the basis upon which a load 
+	percentage is calculated given the results of the 
+	AVG_REQ_TIME or PREV_REQ_TIME metric. The default 
+	maximum is 8 seconds (8000 ms). However, this value 
+	is arbitrary. Be sure to customize this value to fit 
+	the capacity and expectations of your particular Web site.</li>
+		
+	<LI>CCRTTPERCENT <BR>
+		
+	The percentage of the calculated average RTT 
+	that the probe agent should apply to the load 
+	supplied by CCLOADVALUE. The default value is 100. 
+	A value of 0 disables the feature. This variable 
+	provides a tuning knob to determine how much you 
+	want to include external influences on server 
+	performance when calculating the server's overall 
+	load value.</li>
+		
+</UL>
+	
+<P>You should customize getsimpleload.cfm to select the best 
+load metric and variable settings for your particular Web site.
+
+
+<hr>
+
+
+<a name="duplicatefunc"></a>
+<H2>New Duplicate function</h2>
+<P>The Duplicate function returns a clone, also known as a deep copy, of a variable. The copied variable contains no reference to the original variable. </p>
+
+<h3>Syntax</h3>
+<p><code>Duplicate(variable_name)</code></p>
+
+<P><b>variable_name</b><br>
+The name of the variable that is to be duplicated.</p>
+
+<h3>Usage</h3>
+
+<p>This function is very useful in duplicating complex structures, including nested structures and queries.
+You cannot duplicate a COM, CORBA or JAVA object returned from the  CFOBJECT tag or the CreateObject function. If any element in an array or field of a structure is a COM, CORBA, or JAVA object, you cannot duplicate the array or structure. If you try to duplicate an object of this sort, an exception is thrown.</p>
+
+<h3>Example</h3>
+<p><pre>
+&lt;!--- This example shows the use of Duplicate ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Duplicate Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;H3&gt;Duplicate Example&lt;/H3&gt;
+
+&lt;CFSET s1=StructNew()&gt;
+&lt;CFSET s1.nested  = StructNew()&gt;
+&lt;CFSET s1.nested.item = "original"&gt;
+
+&lt;CFSET copy=StructCopy(s1)&gt;
+&lt;CFSET clone=Duplicate(s1)&gt;
+
+&lt;!--- modify the original ---&gt;
+&lt;CFSET s1.nested.item = "modified"&gt;
+
+&lt;cfoutput&gt;
+&lt;P&gt;The copy contains the modified value: #copy.nested.item#&lt;/P&gt;
+&lt;P&gt;The duplicate contains the original value: #clone.nested.item#&lt;/P&gt;
+&lt;/cfoutput&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</pre>
+</p>
+
+
+<hr>
+
+<a name="cfcacheattributes"></a>
+<H2>New CFCACHE attributes</h2>
+<p>Two new attributes have been added to CFCACHE to resolve a problem using CFCACHE with 
+only basic authentication on IIS. The new attributes are USERNAME and PASSWORD. </p>
+
+
+<hr>
+
+<a name="gethttptimestring"></a>
+<H2>New GetHTTPTimeString function</h2>
+
+<p>The GetHttpTimeString function takes a ColdFusion date/time object, and returns that time formatted as a string according to the HTTP standard described in Request For Comments (RFC) 1123. </p>
+
+<h3>Syntax</h3>
+<pre>GetHttpTimeString(date_time_object)</pre>
+
+<p><b>date_time_object</b><p>
+<p>A ColdFusion date-time object.</p>
+
+<h3>Usage</h3>
+<p>The time in the returned string is automatically adjusted to be Greenwich Mean Time (GMT) to be consistent with the HTTP standard.</p>
+
+<h3>Example</h3>
+
+<pre>GetHttpTimeString
+&lt;CFOUTPUT&gt;
+#GetHttpTimeString("#Now()#")#<br>
+&lt;/CFOUTPUT&gt;</pre>
+
+<hr>
+
+<a name="spool_interval"></a>
+<h2>New spool interval setting</h2>
+<p>A new setting in the ColdFusion Administrator mail page allows you to define the interval ColdFusion uses to process spooled mail. </p>
+
+<hr>
+
+<a name="merant"></A>
+<h2>Merant ODBC driver</H2>
+
+<p>The Merant ODBC driver for MS SQLServer now supports version 6.5 and 7.0 of the database and is threadsafe. However, you should make sure to uncheck the maintain connections option when using this driver.</p>
+
+
+<HR>
+<a name="cfldap_delimiter"></A>
+<h2>New attribute for CFLDAP</H2>
+
+<p>The new DELIMITER attribute for the CFLDAP tag is optional. It specifies the character that CFLDAP uses to separate multiple attribute name/value pairs when more than one attribute is specified in the CFLDAP ATTRIBUTE attribute. This character is used by
+the QUERY, ADD, and MODIFY action attributes, and is used by CFLDAP to output multi-value attributes. The default character is the semicolon (;).</p>
+
+<HR>
+<a name="veritylinux"></A>
+<h2>Verity on Linux</H2>
+
+<p>Verity is now available on Linux, on Intel processors only.</p>
+
+<HR>
+<a name="cf401"></A>
+
+<h2>ColdFusion 4.5 New Features</H2>
+
+<p>
+
+<table BGCOLOR="#FDF0C8" cellpadding="3" cols="">
+	
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#listdir">Changes to CFFTP</A></TD>
+	<td valign="top">UNIX mode column now returned</TD>	
+	</TR>
+
+
+	<tr>
+	<td valign="top"><a href="#unsecured">Unsecured tags directory</A></TD>
+	<td valign="top">New option in the Administrator</TD>
+	</TR>
+
+	<Tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#createobject">New CreateObject function</A></TD>
+	<td valign="top">Call methods in COM, CORBA, and JAVA objects</TD>
+	</TR>
+	
+	<tr>
+	<td valign="top"><a href="#cfcache">Enhancements to CFCACHE</A></TD>
+	<td valign="top">New attribute and new actions</TD>
+	</TR>
+
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#HTTP_IF_MODIFIED_SINCE">New 
+	HTTP_IF_MODIFIED_SINCE variable</A></A></TD>
+	<td valign="top">New CGI variable enables browser-side caching</TD>
+	</TR>
+
+
+
+	<tr>
+	<td valign="top"><a href="#scheduler">Running scheduled tasks</A></TD>
+	<td valign="top">Using the Administrator to run a scheduled task</TD>
+	</TR>
+	
+	
+	<TR BGCOLOR="FDF090">
+	<TD valign="top"><a href="#string_nocase">New CFGRIDCOLUMN TYPE value</A></TD>
+	<TD valign="top">New STRING_NOCASE value for TYPE attribute</TD>
+	</TR>
+
+
+	<tr>
+	<td valign="top"><a href="#listandseparator">New CFQUERYPARAM attributes</A></TD>
+	<td valign="top">New LIST and SEPARATOR attributes</TD>
+	</TR>
+
+
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#morelocking">Evolution of locking features</A></TD>
+	<td valign="top">New locking features enabled</TD>
+	</TR>
+
+
+	<tr>
+	<td valign="top"><a href="#cfrethrow">CFRETRHOW tag</A></TD>
+	<td valign="top">CFRETHROW is used to rethrow the current exception</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#basicsecurity">Basic security enhancements</A></TD>
+	<td valign="top">New tags you can disable in the Administrator</TD>
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#cfexecute">CFEXECUTE tag</A></TD>
+	<td valign="top">Execute any process on the CF Server machine</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#jsstringformat">JSStringFormat function</A></TD>
+	<td valign="top">Returns a JavaScript-safe string</TD>
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#xmlformat">XMLFormat function</A></TD>
+	<td valign="top">Returns an XML-safe string</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#tostring">ToString function</A></TD>
+	<td valign="top">Converts values to strings</TD>
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#redirect">New CFHTTP attribute</A></TD>
+	<td valign="top">New Redirect attribute for CFHTTP</TD>
+	</TR>
+
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#cachedquery">Query caching</A></TD>
+	<td valign="top">Improved performance</TD>
+	</TR>
+
+
+	<tr>
+	<td valign="top"><a href="#cfobject_locale">New attribute for CFOBJECT</A></TD>
+	<td valign="top">LOCALE sets arguments for the call to init_orb</TD>
+	</TR>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#corbauserexceptions">Corba User Exceptions</A></td>
+	<td valign="top">New ColdFusion variable or trapping Corba user exceptions</td>
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#javacfx">Java CFXs</A></td>
+	<td valign="top">Support for custom tags coded in Java</td>
+	</tr>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#javaobj">CFOBJECT support for calling Java objects</A></td>
+	<td valign="top">New support for calling Java objects through CFOBJECT and Java CFXs</TD>
+	</tr>
+
+	<tr>
+	<td valign="top"><a href="#cfheader">Enhancement to CFHEADER</A></td>
+	<td valign="top">New StatusCode and StatusText attributes</TD>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#newresourcetypes">Advanced Security enhancements</A></TD>
+	<td valign="top">Two new resource types are available</TD>
+
+	<tr>
+	<td valign="top"><a href="#admin">ColdFusion Administrator</A></TD>
+	<td valign="top">Settings and Locking pages</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#getmetricdata">GetMetricData function</A></TD>
+	<td valign="top">Returns Windows NT PerfMonitor UNIX CFStat data</TD>
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#adminresourceview">Resource view</A></TD>
+	<td valign="top">New Resource view in CF Administator</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#cfservlet">CFServlet tag</A></TD>
+	<td valign="top">New CFServlet and CFServletParam tags</TD>
+	</TR>
+
+	<tr>
+	<TD valign="top"><a href="#getfunctionlist">GetFunctionList function</a></td>
+	<td valign="top">Returns list of supported functions in ColdFusion</td>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<TD valign="top"><a href="#sybaselinux">New Sybase native driver on Linux</a></td>
+	<td valign="top">Sybase 11.1.1 native driver for Linux</td>
+	</TR>
+
+
+	<tr>
+	<TD valign="top"><a href="#urldecode">URLDecode function</a></td>
+	<td valign="top">Decodes a URL-encoded string</td>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<TD valign="top"><a href="#grouping">New groupCaseSensitive attribute</A>
+	<td valign="top">Case-insensitive grouping in CFOutput and CFMail</TD>
+	</tr>
+
+	<tr>
+	<td valign="top"><a href="#exception">Expanded Exception Handling</a></td>
+	<td valign="top">Adds a catch handler to exception handling</td>
+	</tr>
+
+	<tr BGCOLOR="FDF090">
+	<TD valign="top"><a href="#debug">Debugging enhancement</a></TD>
+	<td valign="top">New debug feature in the ColdFusion Administrator</td>
+	</tr>
+	
+	<tr>
+	<td valign="top"><a href="#locking">Locking enhancements</A></TD>
+	<td valign="top">Protection for accesses to data shared in Server, Application, and Session scopes</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#except">Expanded Exception Handling</a></td>
+	<td valign="top">Custom exception types</td>
+	</tr>
+
+	<tr>
+	<td valign="top"><a href="#setdomaincookies">Changes to CFAPPLICATION</A></TD>
+	<td valign="top">New SetDomainCookies attribute</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#cfimpersonate">New CFIMPERSONATE tag</A></TD>
+	<td valign="top">Allows you to impersonate a user defined in a security context</TD>
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#cfldap_enhancements">Changes to CFLDAP</A></TD>
+	<td valign="top">New SEPARATOR attribute and changes to the MODIFYTYPE attribute</TD>
+	</TR>
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#probe">ColdFusion Server Probe</A></td>
+	<td valign="top">A ClusterCATS probe to test user-defined URLs and verify returned content
+	</TR>
+
+	<tr>
+	<td valign="top"><a href="#cfhttp">CFHTTP Enhancements</a></td>
+	<td valign="top">New attributes and a GET variable</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#bin">Binary Data Support</a></td>
+	<td valign="top">Manipulate binary data</td>
+	</tr>
+	
+	<tr>
+	<td valign="top"><a href="#ldap">New CFLDAP Attributes</a></td>
+	<td valign="top">Adds greater control to filtering, attributes, and security</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#dis">Data Source Disable</a></td>
+	<td valign="top">Granular control of data source connections</td>
+	</tr>
+	
+	<tr>
+	<td valign="top"><a href="#bind">CFQUERYPARAM</a></td>
+	<td valign="top">CFQUERY SQL bind parameter support</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#tex">Expanded CFQUERY Text Field Support</a></td>
+	<td valign="top">Removes limitation on retrieval of text or long varchar database fields</td>
+	</tr>
+	
+	<tr>
+	<td valign="top"><a href="#tran">Data Source Transaction Support</a></td>
+	<td valign="top">Greater control over CFTRANSACTION commit/rollback behavior</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#silent">CFSILENT</a></td>
+	<td valign="top">Suppresses all output produced within its scope</td>
+	</tr>
+	
+	<tr>
+	<td valign="top"><a href="#req">Request Tracker</a></td>
+	<td valign="top">Terminates the CFAS process when threshold of unsuccessful requests is reached</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#dir">CFPROCESSINGDIRECTIVE</a></td>
+	<td valign="top">Suppresses extraneous whitespace</td>
+	</tr>
+	
+	<tr>
+	<td valign="top"><a href="#scope">Variable Scope Enhancements</a></td>
+	<td valign="top">Affects URL, CGI, FORM, and Cookie variables</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#mail">CFMAILPARAM</a></td>
+	<td valign="top">Set CFMAIL parameters</td>
+	</tr>
+
+	<tr>
+	<td valign="top"><a href="#pop">New CFPOP attribute</a></td>
+	<td valign="top">GENERATEUNIQUEFILENAMES controls email attachment behavior</td>
+	</tr>
+	
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#curse">Oracle Reference Cursor Support</a></td>
+	<td valign="top">Return result sets via Oracle Reference Cursors</td>
+	</tr>
+
+	<tr>
+	<td valin="top"><a href="#localdirector">Cisco Local Director Integration</a></td>
+	<td valign="top">Clustering with Cisco and ClusterCATS</td>
+	</tr>
+	
+
+	<tr BGCOLOR="FDF090">
+	<td valign="top"><a href="#advancedsecurity">Advanced Security update</A></TD>
+	<td valign="top">Updates to the Advanced Security facility in ColdFusion</TD>
+	</TR>
+
+
+	<tr>
+	<td  valign="top"><a href="#raiseerror">Enhancement to Sybase driver</a></td>
+	<td  valign="top">Sybase native driver RAISEERROR</td>	
+	</tr>
+
+
+</table>
+
+</p>
+
+<br>
+<hr>
+
+<a name="listdir"></A>
+<h2>Change to CFFTP ListDir</H2>
+<p>CFFtp ListDir now returns a "Mode" column containing an octal string representation of UNIX permissions (e.g., "777"), when appropriate. </p>
+
+<hr>
+
+
+
+<a name="unsecured"></A>
+<h2>New Unsecured tags directory option in the Administrator</H2>
+
+<p>The ColdFusion Administrator, Basic Security page contains a new option that allows you to specify a directory from which otherwise blocked tags can be executed. To enable this option, open the Basic Security page in the Administrator and enter a fully qualified path (using forward slashes) in the Unsecured Tags Directory field. By default, this is the directory in which the ColdFusion Administrator is installed.</P>
+
+<hr>
+
+
+
+
+	
+
+<a name="createobject"></A>
+<h2>CreateObject</H2>
+
+<p>Allows you to call methods in COM, CORBA, and JAVA objects.</p>
+<p>Notes: ColdFusion administrators can disable the CFOBJECT tag in the ColdFusion Administrator Basic Security page, which also disables this function. On UNIX, COM objects are not currently supported by CreateObject.</p>
+
+<p>Refer to the CFML Language Reference for details about CreateObject.
+
+
+<HR>
+
+
+
+<a name="cfcache"></A>
+<h2>Enhancements to CFCACHE</H2>
+
+<p>There are two enhancements to CFCACHE: The ability to use browser-side caching;
+and the ability to specify an alternate cache directory (when using 
+server-side caching.) In terms of new/changed attributes, it shakes out
+as follows:</p>
+<ul>
+	<li>Two new action attributes: "OPTIMAL" and "CLIENTCACHE"</li>
+	<li>One new attribute: CACHEDIRECTORY</li>
+</UL>
+
+<p>CACHEDIRECTORY when specified, causes support files involved in server-side caching to be stored in the specified directory instead of (by default) in the directory where the page you're caching resides. Note: The directory you specify must already exist (or the attribute will be silently ignored.)</p>
+
+<p>Action=CLIENTCACHE tries to use the caching facilities of the browser
+to avoid regenerating and even retransmitting the page. In this mode server-side 
+caching is off (just as in the default, Action=CACHE, mode client-side
+caching is off.)</p>
+
+<p>Action=OPTIMAL uses both browser-side and server-side caching to
+deliver the page as fast as possible. If the page can resolved from the browser's
+cache it does that first. If that fails, it tries the server's cache. If that fails, it
+regenerates the page.</p>
+
+<hr>
+
+
+
+
+	
+<a name="HTTP_IF_MODIFIED_SINCE"></A>
+<h2>New HTTP_IF_MODIFIED_SINCE CGI variable</H2>
+
+<p>A new CGI variable is available called "HTTP_IF_MODIFIED_SINCE" which can be
+accessed in ColdFusion pages via our CGI scope as "CGI.HTTP_IF_MODIFIED_SINCE".</p>
+
+<p>This variable is sent at the discretion of the browser usually
+in response to the server having sent the LAST_MODIFIED
+HTTP header. It can be used to take advantage of browser-side
+caching. </p>
+
+<hr>
+
+
+<a name="scheduler"></A>
+<h2>Running scheduled tasks from the Administrator</H2>
+
+<p>In the ColdFusion Administrator Scheduler page you can now RUN the scheduled task by clicking the RUN link. The task is submitted immediately.  The output also lets you know it completed. However you still need to check the log files or for an output file or sent mail to determine if the execution of the target template was successful.</p>
+
+<p>In addition to the RUN support you can now turn on ColdFusion Executive logging for task scheduling under the scheduled settings entry.  When this is checked, CF Executive will write to the schedule log when it is refreshing the schedule list from the registry, listing any changes to already scheduled task and new tasks which have been added.</p>
+
+
+
+<hr>
+
+
+<a name="string_nocase"></A>
+<h2>STRING_NOCASE value for CFGRIDCOLUMN TYPE attribute</H2>
+
+<p>The CFGRIDCOLUMN tag now supports an additional value "STRING_NOCASE" for its TYPE attribute.  When TYPE="STRING_NOCASE", data in the grid can be sorted by the end user as case insensitive text data like an Excel spreadsheet rather than as case sensitive character text.</p>
+
+
+
+<hr>
+
+<a name="listandseparator"></A>
+<h2>New LIST and SEPARATOR attributes for the CFQUERYPARAM tag</H2>
+
+<p>The CFQUERYPARAM tag now supports two new attributes:
+
+<ul>
+	<li>LIST=(YES/NO) where NO is the default 
+	<li>SEPARATOR="separator character" where the default is ",".  
+</ul>	
+	
+<p>If LIST=YES then the &lt;CFQUERYPARAM treats the parameter value as a list of values separated by the SEPARATOR character.  If the value is NULL it is treated as a single NULL value.  A SQL parameter is generated for each item in the list.  Validation is performed on each item.  If you specify a MAXLENGTH then this MAXLENGTH is used to validate the length of each item not the length of the entire list.  The LIST=YES setting is useful for passing a list of values to an IN clause in a SQL statement.  For example - <code>select * from foo where foo_id in ( &lt;CFQUERYPARAM VALUE="10,30," CFSQLTYPE="CF_SQL_INTEGER" LIST=YES&gt; )</CODE></p>
+
+
+
+
+
+<HR>
+
+<a name="morelocking"></A>
+<h2>New locking features enabled</H2>
+
+<p>In previous beta releases, automatic thread locking, a feature available on the locking page
+of the ColdFusion Administrator, was not yet operational. Automatic locking is now working as intended. 
+
+<p>In addition, the single threading option is also working as intended. For more information 
+about locking in ColdFusion, see <A HREF="#locking">Locking enhancements later in this document.</A></p>
+
+
+<hr>
+
+
+<a name="cfrethrow"></A>
+<h2>CFRETHROW tag</H2>
+
+<p>The &lt;CFRETHROW&gt; tag can be used from inside a &lt;CFCATCH&gt; block to re-throw the currently active exception. &lt;CFRETHROW&gt; will preserve the exception’s CFCATCH.TYPE and CFCATCH.TAGCONTEXT information.</p>
+
+<p>CFRETHROW takes no arguments and it can only appear within a CFCATCH block. </P>
+
+
+<hr>
+
+<a name="advancedsecurity"></A>
+<h2>Advanced security updates</H2>
+
+<p>There are a couple of updates in the Advanced Security section of ColdFusion Administrator.</p>
+
+<ul>
+	<li> On Windows NT only -- sandboxes can now be of type "OS". What this means is that all 
+	ColdFusion templates executed within the sandbox will be run with the privileges and 
+	restrictions of the NT user specified. This will mean that all OS-level protection to 
+	OS-level resources such as files will automatically be enforced.
+	
+	<p>Instead of specifying a security context for the sandbox, specify an NT domain. The user 
+	whose privileges you want to apply to the sandbox must be a member of that NT domain.</p>
+
+	
+	<li>You can now now have the option of specifying that all resources of protected 
+	resource types in a security context be protected by default. If you choose this option 
+	no resources of protected types will be authorized for any user unless you create a rule 
+	for it and allow access to it to one or more users/groups in a policy. This is different 
+	from the default case where a resource is not protected till you create a rule for it.
+	
+	<p>Note that protecting *all* resources should only be used as a stopgap measure, for 
+	example, while the Admin is implementing an Advanced security framework. It's not advisable 
+	to have this setting selected if applications are running against the server.</p>
+
+</UL>
+
+<hr>
+
+
+<a name="basicsecurity"></A>
+<h2>Basic security enhancements</H2>
+
+<p>The new CFAdminSecurity tag as well as another new tag <a href="#cfexecute">CFExecute</A> have been added to the current list of tags (CFContent, CFDirectory, CFFile, CFObject and CFRegistry) that can be disabled in Basic Security.</p>
+
+
+<hr>
+
+<a name="cfexecute"></A>
+<h2>CFEXECUTE tag</H2>
+
+<p>Enables ColdFusion developers to execute any process on the server machine. 
+
+<h3>Syntax</H3>
+
+<pre>
+&lt;CFEXECUTE NAME=" ApplicationName "
+   ARGUMENTS="CommandLine Arguments"
+   OUTPUTFILE="Output file name"
+   TIMEOUT="Timeout interval in seconds"&gt;
+</pre>
+
+<h4>NAME </h4>
+
+<p>Required. The full pathname of the application that is to be executed.
+
+<p><B>Note</B>: On Windows systems, you must specify the extension, for example, .exe, as part of the application’s name.
+
+<h4>ARGUMENTS</h4>
+
+<p>Optional. Any command-line arguments that should be passed to the program.</p>
+
+<p>If ARGUMENTS is specified as a string, it is processed as follows:</p>
+
+<ul>
+
+	<li>On Windows systems, the entire string is passed to the Windows process control subsystem 
+	for parsing.
+
+	<li>On Solaris, Linux, and HP-UX systems, the string is tokenized into an array of arguments. 
+	The default token separator is a space; arguments with embedded spaces may be delimited by 
+	double quotes.
+
+</UL>
+
+<p>If ARGUMENTS is passed as an array, it is processed as follows:</p>
+
+<ul>
+
+	<li>On Windows systems, the array elements will be concatenated into a string of tokens, 
+	separated by spaces. This string is then passed to the Windows process control subsystem as above.
+
+	<li>On Solaris, Linux, and HP/UX systems, the elements of the ARGUMENTS array is copied into 
+	a corresponding array of exec() arguments.
+
+</UL>
+
+<h4>OUTPUTFILE</h4>
+
+<p>Optional. The file where the output of the program is to be directed. If this is not specified, the output appears on the page from which it was called.</p>
+
+<h4>TIMEOUT</h4>
+
+<p>Optional. Indicates how long in seconds the ColdFusion executing thread will wait for the spawned process. Indicating a timeout of 0 is equivalent to the non-blocking mode of executing. A very high timeout value is equivalent to a blocking mode of execution. The default is 0; therefore, the ColdFusion thread spawns a process and immediately returns without waiting for the process to terminate.</p>
+
+<p>If no output file is specified, and the timeout value is zero, then the program’s output will be directed to the bit bucket.</p>
+
+<h3>Usage</H3>
+
+<p>CFEXECUTE is available on Windows NT 4.0 and UNIX platforms. Do not put any other ColdFusion tags or functions between the start and the end tags of CFEXECUTE. Also, CFEXECUTE tags cannot be nested.</p>
+
+<h3>Exceptions</H3>
+
+<p>CFEXECUTE throws the following exceptions:</p>
+<ul>
+
+	<li>If the application name is not found, an Application File Not Found exception will be thrown.
+
+	<li>If the output file cannot be opened, an Output File Cannot be opened will be thrown.
+
+	<li>If the effective user of the ColdFusion executing thread does not have permissions to execute 
+	the process, a security exception will be thrown.
+	
+</UL>
+
+
+<p>The time out values must be between 0 and some high number (to be determined).</p>
+
+<h3>Example</H3>
+
+<pre>
+&lt;!---------------------------------------------------------------------- 
+
+This example illustrates use of the CFEXECUTE tag. 
+
+-----------------------------------------------------------------------&gt;
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFEXECUTE&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+
+&lt;BODY&gt;
+
+&lt;H3&gt;CFEXECUTE&lt;/H3&gt;
+
+&lt;P&gt;
+
+This example executes the Windows NT version of the netstat network 
+monitoring program, and places its output in a file.
+
+
+&lt;CFEXECUTE NAME="C:\WinNT\System32\netstat.exe"
+   ARGUMENTS="-e" 
+   OUTFILE="C:\Temp\output.txt"
+   TIMEOUT="1"&gt;
+
+&lt;/CFEXECUTE&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+</PRE>
+
+
+
+
+
+<hr>
+
+<a name="tostring"></A>
+<h2>ToString function</H2>
+
+<p>Attempts to convert a value of any type, including a binary value, into a string. </p>
+
+<h3>Syntax</H3>
+
+<pre>ToString(any_value)</PRE>
+
+<p>Where <code>any_value</CODE> is the value that is to be converted into a string.</p>
+
+<h3>Usage</H3>
+
+<p>If ToString cannot convert the value into a string, it throws an exception.
+
+<hr>
+
+
+<a name="jsstringformat"></A>
+<h2>JSStringFormat function</H2>
+
+<P>Returns a string that is safe to use with JavaScript. </p>
+
+<h3>Syntax</H3>
+
+<pre>JSStringFormat(string)</PRE>
+
+<p>Where <code>string</CODE> is any string.</p>
+
+<h3>Usage</H3>
+
+<p>JSStringFormat escapes special JavaScript characters, such as the single quote (’), double quotes ("), and newline character so that you can put arbitrary strings safely into JavaScript.</p>
+
+<hr>
+
+
+<a name="xmlformat"></A> 
+<h2>XMLFormat function</H2>
+
+<p>Returns a string that is safe to use with XML. </p>
+
+<h3>Syntax</H3>
+
+<pre>XMLFormat(string)</PRE>
+
+<p>Where string is any string.</p>
+
+<h3>Usage</H3>
+
+<p>XMLFormat escapes special XML characters, such as the less than (&lt;) and greater than (&gt;) signs so that you can put arbitrary strings safely into XML.</p>
+
+
+<hr>
+
+
+<a name="redirect"></A>
+<h2>New Redirect attribute for CFHTTP</H2>
+
+<p>The new Redirect attribute for CFHTTP is a boolean indicating whether to redirect execution or stop execution. The default is YES. If set to NO and THROWONERROR is set to YES, execution stops if CFHTTP fails, and the status code and associated error message are returned in the variable CFHTTP.StatusCode. To see where execution would have been redirected, use the variable CFHTTP.Response_Header[LOCATION]. The key LOCATION identifies the path of redirection.</p>
+
+
+<hr>
+<a name="cfobject_locale"></A>
+<h2>New Locale Attribute for CFOBJECT</H2>
+
+<p>The LOCALE attribute can be used to set arguments for the the call to init_orb(..). This is specific to VisiBroker orbs, and has only been tested with the 3.2 C++ version.</P>
+
+<p>The value should be of the form:</P>
+
+<pre>&lt;CFOBJECT TYPE=CORBA
+ ..
+LOCALE=" -ORBagentAddr 199.99.129.33   -ORBagentPort 19000" 
+..&gt;</PRE>
+
+<P>Please note that each type-value pair has to start with a leading "-".</p>
+<hr>
+
+
+<a name="cachedquery"></A>
+<h2>Improved query caching performance</H2>
+
+<p>Cached query performance has been improved. Individual queries are locked when operations are performed on them rather than having the whole cache locked for each query as it was in 4.0.1 and 4.5 beta releases. This means that operations can be performed on multiple queries simultaneously at any given time.</p>
+
+<hr>
+
+
+<a name="corbauserexceptions"></A>
+<h2>Corba User Exceptions</H2>
+
+<p>Exceptions thrown by java object methods can be caught by the &lt;CFTRY&gt;&lt;CFCATCH&gt; tags. ColdFusion checks if the exception thrown is the method exception and stores the classname of the exception in the "message" field of &lt;CFCATCH&gt; variable.</p>
+
+<hr>
+
+
+<a name="javacfx"></A>
+<h2>Building Java CFXs</H2> 
+
+<p>Please see the ColdFusion documentation for details concerning the developement of Java CFXs. </p>
+
+<p>After developing the CFX, please make sure that the location of the class files is in the classpath (specified using the CF Administrator). Register the tag using the custom tag page. Information here includes the name, description, and the classname that implements the Allaire CustomTag interface. </p>
+
+<h3>Using the CFX_J custom tag</h3>
+
+<p>To continue using this custom tag, please navigate to the "CFX Tags" page using the ColdFusion Adminstrator. Add a new custom tag called "CFX_J" (there may be another entry with the same name, but it will be overwritten), and specify the type as "Java". Leave the classname blank (very important), and apply the changes.</p>
+
+<p>Please note that Allaire will phase-out this tag in future releases, and recommends that you simply convert it to a Java Custom tag.</p>
+
+<p>For example, if you currently use the CFX_J tag that has the CLASS attribute set to "Foo", then to use a Java CFX, you would do the following:</p>
+
+<ol>
+	<li>Rename your custom tag to something like "CFX_Foo"
+	<li>Add the "java" custom tag using the ColdFusion Administrator. Specify the classname as "Foo" 
+	(case sensitive) in the appropriate field.
+	<li>Call you custom tag from your template using CFX_Foo instead of CFX_J. You should omit the 
+	"CLASS" attribute in the tag.
+</ol>
+
+
+
+
+<hr>
+<a name="javaobj"></A>
+<h2>CFOBJECT support for calling Java objects</H2>
+
+<p>ColdFusion 4.5 beta 3 introduced support for calling Java objects (and by extension EJB objects) through CFOBJECT, and through Java CFXs. </p>
+
+<p>To be able to call Java CFXs or Java objects, ColdFusion uses a JVM embedded in the process. The loading, location and the settings for the JVM are configurable using the COldFusion Administrator pages.</p>
+
+
+<h3>Using CFOBJECT</H3>
+
+<p></A>Any java class available in the classpath specified in the CF Adminstrator can be loaded and used from ColdFusion using the CFOBJECT tag. The syntax
+
+<pre>&lt;CFOBJECT Type=Java  Class=MyClass Name = myObj&gt;</PRE>
+
+<p>will load the class but not create an instance object. Static methods and fields are accessible after the call to CFOBJECT.
+
+<p>To call the constructors explicitly, use the "init" method with the approproate arguments.
+
+<pre>&lt;CFSET ret = myObj.init(arg1, arg2)&gt;</pre>
+
+<p>Calling a public method on the object without first calling the "init" method will result in an implicit call to the default constructor. Arguments and return values can be any valid Java type (simple, arrays, objects). ColdFusion does the appropriate conversions when strings are passed as arguments, but not when they are received as return values.</p>
+
+<p>ColdFusion 4.5 provides the function "javaCast()" that can sometimes be used to disambiguate arguments to overloaded methods on a Java object. This function can only be used to perform (or provide a hint for ) casting between scalar types and strings. This function should only be used when an overloaded method expects the same number of arguments. Please note that this function cannot be used to cast between complex objects, or to cast to a super-class. The result of this function should only be used on calls to java objects. Also note that given that there is no 1-to-1 correspondence between internally stored CF types and Java scalar types not all conversions can be performed.</p>
+
+
+<p><b>Usage</b>:</p>
+
+<pre>	javaCast(&lt;type&gt;, &lt;variable&gt;)        
+
+	&lt;type&gt; : "bool", "int", "long", "double", or "String"
+	&lt;variable&gt; : any ColdFusion variable holding a scalar or string type.
+</pre>
+
+<p><b>Example</b>:</p>
+-------------
+
+<p>Consider that fooClass has a method fooMethod that takes a single argument whih is overloaded as follows:</p>
+
+<pre>	public void fooMethod(String arg);
+		public void fooMethod(int arg);
+</pre>
+
+<p>Within ColdFusion, you would do the following:</p>
+
+<pre>	&lt;cfobject Type=java class=fooClass Name=obj&gt;
+
+	&lt;!--- CF may treat this as a string or a real number ---&gt;
+	&lt;cfset x = 33&gt;
+
+		&lt;!--- Perform an explicit cast to an int  ---&gt;
+	&lt;cfset myInt = javaCast("int", x)&gt; 
+	&lt;cfset void = fooMethod(myInt)&gt;
+
+		&lt;!--- Perform an explicit cast to an int  ---&gt;
+		&lt;cfset myString = javaCast("String", x)&gt; 
+		&lt;cfset void = fooMethod(myString)&gt;
+</pre>
+
+
+<h3>Calling EJBs</H3>
+
+<p>You would use CFOBJECT to create and call all the appropiate objects. The sequence below assumes that the Weblogic JNDI is used to register and find EJBHome instances:</p>
+
+<pre>&lt;cfobject action=create 
+		type=JAVA
+		class="weblogic/jndi/Environment"
+		name=wlEnv&gt;
+
+&lt;CFSET ctx = wlEnv.getInitialContext()&gt;
+&lt;CFSET ejbHome = ctx.lookup("statelessSession.TraderHome")&gt;			 
+&lt;CFSET trader = ejbHome.Create()&gt;	 
+&lt;CFSET value = trader.shareValue(20, 55.45)&gt;	 
+
+&lt;CFOUTPUT&gt;
+	 Share value = #value#
+&lt;/cfoutput&gt;	 
+
+&lt;CFSET value = trader.remove()&gt;</PRE>
+
+
+<p>The CFOBJECT tag creates the Weblogic Environment object, which is then used to get the InitialContext. The context object is used to look up the EJBHome interface. The call to create() results in getting an isntance of stateless session EJB.</p>
+
+
+<hr>
+
+<a name="cfheader"></A>
+<h2>Enhancements to CFHEADER</H2>
+
+<p>Two new attributes have been added to CFHEADER, StatusCode and StatusText. 
+These new attributes allow you to set the HTTP result/status code and the optional explanatory
+text that goes along with this code in the HTTP header.</p>
+
+<p>Now, in addition to the existing usage which looked like:</p>
+
+<pre>  &lt;CFHEADER   Name="MyCustomHeader"  Value="FourScoreAndSeven..."&gt;</PRE>
+
+<p>you can now say (in a separate instance of CFHEADER):</p>
+
+<pre>  &lt;CFHEADER StatusCode="404"  StatusText="Duh! No such page exists."&gt;</PRE>
+
+<p>The StatusText attribute is optional but it can be used only when using the
+StatusCode syntax. For clarity, the old style Name/Value syntax cannot be
+mixed with the new style StatusCode/StatusText syntax. This is consistent
+with the existing behavior of the tag which did not allow multiple name/value 
+pairs to be specified in a single call to CFHEADER.</p>
+
+<hr>
+
+<a name="newresourcetypes"></A>
+<h2>New Advanced Security Resource Types</H2>
+
+<p>Two new resource types, Functions and Users, have been added to Advanced Security.</p>
+
+<p>You can now protect any ColdFusion function in the following ways:</p>
+
+<ol>
+	<li>By creating a rule for it in a security context in the ColdFusion Administrator
+	<li>By adding the function as a protected resource in the Administrator resource view. 
+</ol>
+
+<p>You can control access to users that are allowed to be impersonated (using the CFImpersonate tag). You can do this by:</p>
+
+<ol>
+
+	<li>Creating  a rule for it in a security context in the ColdFusion administrator
+	<li>Adding the user as a protected resource in the new resource view
+
+</ol>
+
+
+
+<hr>
+
+<a name="urldecode"></A>
+<h2>URLDecode function</H2>
+
+<h3>Syntax</h3>
+<pre>URLDecode(urlEncodedString)</PRE>
+
+<p><B>urlEncodedString</B></p>
+
+<p>A string that has been URL-encoded.</p>
+
+<h3>Remarks</H3>
+
+<p>URL encoding refers to a data format where all high ASCII and non-alphanumeric characters are encoded using a percent sign followed by the two character hexadecimal representation of the character code. For example, a character with code 129 will be encoded as %81. In addition, spaces can be encoded using the plus sign (+).</p>
+
+<p>Query strings in HTTP are always URL-encoded. </p>
+
+<p>URL-encoded strings can be created using the URLEncodedFormat function.</p>
+
+<H3>Example</h3>
+
+<p>Here's an example of the URLDecode and URLEncodedFormat functions. In the example, a string containing all ASCII character codes in the range 1-255 is created. The string is then encoded and decoded. The decoded value is compared with the original string to demonstrate their equality.</p>
+
+<pre>
+&lt;cfscript&gt;
+	// Build string
+	s = "";
+	for (c = 1; c lte 256; c = c + 1)
+	{
+		s = s & chr(c);
+	}
+
+	// Encode string and display result
+	enc = URLEncodedFormat(s);
+	writeOutput("Encoded string is: '#enc#'.&lt;br&gt;");
+
+	// Decode and compare result with original
+	dec = URLDecode(enc);
+	if (dec neq s)
+	{
+		writeOutput("Decoded is not the same as the encoded.");
+	}
+	else
+	{
+		writeOutput("All's well on the Western front.");
+	}
+&lt;/cfscript&gt;
+</PRE>
+
+
+<hr>
+
+<a name="grouping"></A>
+<h2>New groupCaseSensitive attribute</H2>
+<p>A new attribute, groupCaseSensitive, has been implemented in the CFOutput and CFMail tags. As a boolean, its value determines whether grouping is case-sensitive or case-insensitive. The default is TRUE to maintain backward compatibility. </P>
+
+<P>groupCaseSensitive will only work if the recordset has been grouped appropriately already. CFOutput/CFMail will perform no re-grouping or re-sorting on the recordset.</p>
+
+<hr>
+
+<a name="sybaselinux"></A>
+<h2>Sybase 11.1.1 native driver for Linux</H2>
+
+<p>A Sybase 11.1.1 native driver is now available on the linux platform. During the beta period, we had shipped a Sybase 10.4 nativer driver on the Linux platform. Sybase has made their 11.1.1 client libraries freely available. To download them go to <a href="http://www.sybase.com:80/products/databaseservers/linux/index.html">http://www.sybase.com:80/products/databaseservers/linux/index.html</A> and download the 11.9.2 development kit. This release version is consistent with our win32, Solaris and HP_AUX Sybase native drivers and is the release that ColdFusion Server for Linux supports.</P>
+
+<p>In order to use the new driver you must set your SYBASE environment variable to the install 11.9.2 directory.</p>
+
+<hr>
+
+
+<a name="getfunctionlist"></A>
+<h2>GetFunctionList function</H2>
+
+<p>A new function, GetFunctionList(), is available for ColdFusion Server. It returns a structure of functions that are available in ColdFusion. 
+<pre>
+&lt;cfset fList = GetFunctionList()&gt;
+&lt;cfoutput&gt;#StructCount(fList)# functions&lt;BR&gt;&lt;BR&gt;&lt;/cfoutput&gt;
+&lt;cfloop collection="#fList#" item="key"&gt;
+	&lt;cfoutput&gt;#key#&lt;BR&gt;&lt;/cfoutput&gt;
+&lt;/cfloop&gt;
+</PRE>
+
+<p>The above code can be used to display the list of functions in ColdFusion.</p>
+<hr>
+
+<a name="cfservlet"></A>
+<h2>CFServlet tag</H2>
+
+<p>The syntax of the CFServlet tag is designed to be consistent with the 
+HTML markup &lt;SERVLET&gt; and &lt;PARAM&gt; used by some web servers 
+to invoke Java servlets from .shtml pages (in what’s known as SSI, 
+Server-Side Includes.) On the CF side, its operation is consistent 
+with the &lt;CFHTTP&gt; and &lt;CFHTTPPARAM&gt; tags.
+</p>
+
+<pre>
+&lt;CFSERVLET  Code=”MyServletName” 
+JRunProxy=”127.0.0.1:8083” 
+Timeout=”300”
+WriteOutput=”YES”
+&gt;
+	&lt;CFSERVLETPARAM  Name=”Param1”  Value=”Value1”&gt; 
+	&lt;CFSERVLETPARAM  Name=”Param2”  Value=”Value2”&gt;
+	&lt;CFSERVLETPARAM  Name=”Attribute1”  Variable=”CFVar1”&gt;
+	&lt;CFSERVLETPARAM  Name=”Attribute2”  Variable=”CFVar2”&gt;
+&lt;/CFSERVLET&gt;
+</PRE>
+
+<p>The CFSERVLET tag is a closed tag with one required attribute, CODE, describing 
+the name of the Java servlet to execute and four optional attributes. This servlet 
+must exist somewhere in the known universe of the JRun engine executing 
+the servlet. </p>
+
+<p>By default, that JRun engine is assumed to be on the host running CF, but it 
+may actually be on a remote machine as specified by the optional JRUNPROXY 
+attribute. This attribute value is the host name followed by an optional colon 
+and port number.</p>
+ 
+<p>The attribute, TIMEOUT, optionally specifies how many seconds CF will 
+wait for the tag to complete its work. No markup other than the 
+CFSERVLETPARAM tag should appear between the beginning and 
+end CFSERVLET tags.</p>
+
+<p>The WRITEOUTPUT parameter is an optional boolean parameter that 
+specifies if regular text output of the tag should appear as inline 
+text on the generated page or if it should be returned inside a CF 
+variable for further processing . The default value, “YES”, means 
+output is returned as text to appear inline on the generated page. 
+Setting it to “NO” means no visible text is returned but the text 
+is, instead, returned as the value of the CFSERVLET.OUTPUT 
+variable.</p>
+
+<h3>The &lt;CFSERVLETPARAM&gt; tag</h3>
+<p>The CFSERVLETPARAM tag is an open tag that is always a 
+child of CFSERVLET. It is used to pass data to the servlet. One piece of 
+data is passed with each instance of the tag. </p>
+
+<a name="jrunstuff"></A>
+<p>There are two different ways this tag can be used. The first two 
+examples above demonstrate the simpler way to use the tag. 
+Using the CF attribute VALUE, the tag will pass simple 
+name/value string pairs to the servlet. The text strings 
+representing these pairs will appear as servlet parameters on 
+the Java side. Note that you need to have the updated version of 
+JRun in order for the Name/Variable functionality to work. You can download
+the latest version of JRun at <a href="http://www.allaire.com/products/Jrun/">http://www.allaire.com/products/Jrun/</A>.</p>
+
+<p>The second way the tag can be used is demonstrated by the 3rd and 
+4th  examples above. Here, the CF attribute VARIABLE is used to 
+pass the specified CF variable by reference to the servlet. Within the 
+servlet such data appear as Java attribute objects. In this case, it’s 
+not the name of the variable but its value that’s being passed to 
+the servlet. On the Java side, the data can be manipulated, even 
+changed, and those changes will, in turn, change the value of the 
+associated CF variable. </p>
+
+<p>When used in this mode, the NAME attribute represents the name of the 
+Java attribute that will be associated with this CF variable. The VARIABLE 
+attribute represents the name (not #value#) of  a CF variable. This ability 
+to directly share CF variables with servlet is a powerful extension because 
+it allows even complex CF objects such as structures and result sets to be 
+directly accessed from Java.</p>
+
+<P>On the Java side,  CF variables passed in this manner will be available as the following Java objects: java.lang.Boolean, java.lang.Double, java.lang.Interger, java.util.Date, java.lang.String, java.util.Vector, java.util.Hashtable, and com.allaire.util.RecordSet.  Simple CF data types (number, bool, and string) will map to the corresponding Java object types. CF arrays will map to Java Vectors. CF structures will map to Java Hashtables, and CF query result sets will map to the WDDX-supplied utility class, RecordSet.</p>
+
+<P>Java programmers manipulate these objects via the standard servlet API attribute functions getAttribute, setAttribute, and getAttributeNames. If needed, they can enumerate what variables have been passed from CF using the getAttributeNames call. CF Variables can be retrieved using the getAttribute call, manipulated within the servlet as regular Java objects, and then return to CF using the setAttribute call. A CF variable passed to a Java servlet using this NAME/VARIABLE mechanism will possibly have a different value after the CFSERVLET tag than it had before the tag! </p>
+
+<P>When using the NAME/VARIABLE mode of CFSERVLETPARAM an optional third attribute, TYPE, may also be specified. TYPE allows ambiguities resulting from moving variables from the largely typeless word of CF to the strictly typed world of Java to be resolved simply on the CF side. This is a convenience feature, eliminating the need to do extra casting on the Java side, since, in many cases, CF will not know the type of a simple object. In CF, a simple object can be readily manipulated as any simple type (number, string, bool, date) so CF doesn't keep track of what type a variable "should" be. By default CF will most often pass such variables to Java as strings. To have them appear on the Java side as some other type, specify that type as the value of the TYPE attribute. Valid values are: "INT", "DOUBLE", "BOOL", </P>
+
+
+
+<hr>
+<a name="adminresourceview"></A>
+<h2>Resource view in ColdFusion Administrator</H2>
+<p>A new view, the resource view, is available for the ColdFusion Administrator. It allows an administrator to allow/deny access to resources to specific users and groups. Most common administrator tasks can now be accomplished directly from the resource view instead of having to navigate through multiple admin pages. These are the tasks that can now be accomplished directly from the resource view:</p>
+<ul>
+	<li>Protect a resource within a security context. This automatically creates a rule with an 
+	auto-generated rule name to protect the resource. This happens behind the scenes and the user 
+	does not get to know about rules or rule names.  Note that you can only protect resources of 
+	types that have been selected for protection in the security context.</li>
+	<li>Create a new policy to establish the users who are allowed access to a specific resource.</li>
+	<li>Add or remove users from a policy.</li>
+	<li>Allow or disallow access to specific rights to users in a policy. This will add and 
+	remove rules respectively from the policy.</li>
+</UL>
+
+<p>Known issues in this version of the resource view are:
+<ul>
+	<li>Currently available only on Windows NT</li>
+	<li>Wildcards for resources do not work</li>
+	<li>The resource browser sometimes does not display its window on a refresh on IE4 and IE5</li>
+</UL>
+
+<hr>
+<a name="admin"></A>
+<h2>Changes to the ColdFusion Adminstrator</H2>
+<p>The Settings page is now being broken into two separate pages: Settings and Caching.</p>
+<p>A new Locking page in the Server section has been added to cover new options for locking of shared scoped variables: (server, session, application)</p>
+
+
+
+<hr>
+<a name="cfhttpenhancements"></A>
+<h2>Enhancements to CFHTTP</H2>
+
+<h3>Catchable exceptions</H3>
+<p>Catchable exceptions are now possible from CFHTTP. Additionally, the granularity of error messages has been significantly increased. Instead of the standard “Connection Failure” or “Authorization Failure” messages CFHTTP now returns the HTTP status code associated with the response. There are 37 of these. CFHTTP throws these status codes and their associated standardized HTTP error string if an error occurs and the ThrowOnError attribute of CFHTTP is true. If ThrowOnError is not true because the user does not want to halt page processing, CFHTTP does not change the error i.e. “Connection failure.” A new variable has been added called CFHTTP.STATUS_CODE that will contain the code and message. If a user wants heightened error info, they can interrogate this variable.</p>
+
+<h3>Redirection</H3>
+<p>By default, the old 4.0.1 CFHTTP tag redirected a request automatically. The new CFHTTP tag does too, but there a new boolean attribute called REDIRECT has been added, which allows the user to stop CFHTTP from redirecting a request. When "No" the tag will fail if a redirect is needed and the appropriate status code, which can be seen by looking at CFHTTP.STATUS_CODE gets returned. The default for REDIRECT is "Yes."The user can look at the LOCATION response header to see where the redirection points.
+</p>
+
+
+
+<hr>
+<a name="getmetricdata"></A>
+<h2>GetMetricData function</H2>
+
+<p>GetMetricData returns all the internal data that is otherwise displayed
+in the Windows NT PerfMonitor or using CFStat on UNIX. For it to work on NT
+you need to have turned on the PerfMonitor feature from the ColdFusion Administrator.
+The function returns a ColdFusion structure with data in fields as follows:</p>
+
+<pre>
+&lt;CFSET pmData = GetMetricData( "PERF_MONITOR" ) &gt;
+
+&lt;cfoutput&gt;
+	Current PerfMonitor data is: &lt;p&gt;
+	InstanceName:    #pmData.InstanceName# &lt;p&gt;
+	PageHits:	  	  #pmData.PageHits# &lt;p&gt;
+	ReqQueued:	  #pmData.ReqQueued# &lt;p&gt;
+	DBHits:	              #pmData.DBHits# &lt;p&gt;
+	ReqRunning:	  #pmData.ReqRunning# &lt;p&gt;
+	ReqTimedOut:      #pmData.ReqTimedOut# &lt;p&gt;
+	BytesIn:	         #pmData.BytesIn# &lt;p&gt;
+	BytesOut:	         #pmData.BytesOut# &lt;p&gt;
+	AvgQueueTime:    #pmData.AvgQueueTime# &lt;p&gt;
+	AvgReqTime:	  #pmData.AvgReqTime# &lt;p&gt;
+	AvgDBTime:	         #pmData.AvgDBTime# &lt;p&gt;
+	CachePops:	        #pmData.CachePops# &lt;p&gt;
+&lt;/cfoutput&gt;
+</PRE>
+
+
+<hr>
+<a name="debug"></A>
+<h2>Debugging enhancement</H2>
+
+<P>A formerly unexposed feature, known internally as "GetExplodedBenchmarkingInfo"
+has now been exposed. Now known as the "Detail View", it is visible in the ColdFusion 
+Administrator Debug Settings page. </P>
+
+<P>When enabled, Detail View displays the amount of time required to process ColdFusion pages broken down by all the individual pages used to compose the final page. (You must restart ColdFusion Server in order for changes to this setting to take effect.) </P>
+
+<P>This feature will work identically on all platforms.</P>
+<HR>
+
+<a name="setdomaincookies"></A>
+<h2>New SetDomainCookies attribute for CFAPPLICATION</H2>
+
+<P>The SetDomainCookies attribute allows applications to set the 
+CFID and CFTOKEN cookies on the domain (i.e., .allaire.com) level, 
+which is what you need to do to share client variables in a cluster.</p>
+
+<P>Usage: SetDomainCookies="Yes/No"</p>
+
+<p>There are some caveats to using this.</p>
+<ul>
+  <li>If a client has existing host level ID/TOKEN cookies, these
+  cookies are 'migrated' to the Domain level.  The host level
+  cookies are unset, and their values are moved to the domain level
+  cookies.</li>
+
+  <li>There is a new cookie set at the domain level: CFMAGIC.  
+  This cookie is what tells ColdFusion that the domain cookies have 
+  been set.  It is non-determinate which cookies CF will use given 
+  both a domain and host level cookie.
+
+  <p>The CFMAGIC cookie contains the ID and token values, and if these
+  don't agree with the values in the cookies, it assumes these are
+  host level cookies, removes them, and sets the domain level cookies
+  to be the values provided in the CFMAGIC value.</p></li>
+</UL>
+<hr>
+
+<a name="locking"></A>
+<h2>Locking enhancements</H2>
+
+<p>Data stored in Server, Application and Session scopes ("shared data scopes") is persistent across browser requests and multiple requests can access the data.  Unlocked access to data by multiple requests at the same time can corrupt the data.  CF 4.0 introduced the CFLOCK tag to control simultaneous access to the shared data in these scopes.</P>
+
+<p>ColdFusion 4.5 will provide more automatic means to protect shared data from incorrect access.</P>
+
+<p>For each of the Server, Application and Session scopes, the ColdFusion Administrator provides three choices for control - none, full checking, and automatic locking of read accesses.  </P>
+
+<P>Choosing "none" retains current ColdFusion behavior.  All reads and writes of data must be protected by a CFLOCK tag.  No automatic protection is provided and unprotected accesses may cause corruption of data.</P>
+
+<P>Choosing "full checking" will cause ColdFusion to raise an error if any read or write of data in one of the scopes occurs outside of the scope of a CFLOCK.  This includes accesses to any data that is aliased by being assigned to a variable outside of the shared data scopes and the data is not copied; this can occur for struct  and query variables.  An alias example:</P>
+<PRE>&lt;CFLOCK type="EXCLUSIVE" scope="Session" timeout="10"&gt;
+&lt;CFSet Session.var = StructNew() &gt;
+&lt;CFSet myvar = Session.myvar&gt;
+&lt;/CFLOCK&gt;
+&lt;CFSet myvar2 = myvar&gt;  &lt;!--- unprotected access to alias ---&gt;</PRE>
+     
+
+<P>Choosing "automatic read locking" will cause ColdFusion to raise errors for unprotected writes, but unprotected reads will be automatically locked.  </P>
+
+<P>For Session scope, an additional choice is provided.  This is to single thread session requests.  This means that all requests from the same session will occur sequentially, each request waiting for all previous requests to finish before proceeding, preventing multiple requests from simultaneously accessing shared data.  </P>
+
+<hr>
+
+<a name="cfimpersonate"></A>
+<h2>New CFIMPERSONATE tag</H2>
+<p>Allows you to impersonate a user defined in a security context defined in Advanced Security. The ColdFusion Application Server enforces all the privileges and restrictions that have been set up for that user with the Advanced Security rules.</p>
+
+<h3>Syntax</H3>
+<pre>&lt;CFIMPERSONATE SECURITYCONTEXT="SecurityContext"
+	USERNAME="Name"
+	PASSWORD="Password"
+	TYPE="CF" or "OS"
+&gt;
+	...
+	<I>HTML or CFML code to execute</I>
+ 	...
+&lt;/CFIMPERSONATE&gt;</PRE>
+
+<blockquote>
+<h3>USERNAME</H3>
+<p>Required. The user name of the user you want to impersonate. This can be done using the ColdFusion Advanced Security Administrator.</p>
+<h3>PASSWORD</H3>
+<p>Required. The password of the user that you want to impersonate.</p>
+<h3>SECURITYCONTEXT</H3>
+<p>Required. The security context in which the user should be authenticated. If the impersonation type is "CF " then you should specify a Security Context that has already been defined using the ColdFusion Advanced Security Administrator.  Since Advanced Security is only available on ColdFusion Enterprise, you can use an impersonation type of "CF " only if you have the ColdFusion Enterprise version.</p>
+<h3>TYPE</H3>
+<p>Required. The type of impersonation needed. This attribute can have the value – "CF " for impersonation at the application user level.</p>
+</BLOCKQUOTE>
+
+<p>See the CFML Language Reference for more information.</p>
+
+<hr>
+
+<a name="cfldap_enhancements"></A>
+<h2>Enhancements to CFLDAP</H2>
+<p>The CFLDAP tag has been enhanced as follows:</p>
+<ul>
+	<li>The MODIFYTYPE attribute now supports "Delete" in addition to "Add" and "Replace."
+	<li>A new SEPARATOR attribute has been added for specifying the separator used 
+	between multi-value attributes.
+</UL>
+
+<P>See also the <a href="#ldap">section describing new CFLDAP attributes. </A></p>
+
+
+
+<hr>
+
+<a name="probe"></A>
+<h2>ColdFusion Server Probe</H2>
+
+<P>ClusterCATS provides a probe that gives the ability to periodically 
+"test" a user defined ColdFusion URL; It also lets you verify the 
+correctness of the returned content. Correctness is verified by comparing 
+the content returned from the get with a user-specified string. If the URL 
+fails, times out, or the user supplied string was not returned in the page 
+accessed, ClusterCATS restricts a Web Server specified by the administrator. 
+ClusterCATS will also optionally restart ColdFusion Server on failure. 
+The Web server will become available as soon as the probe returns a successful value. 
+ClusterCATS refers to this feature as the <I>CF Probe.</I> </P>
+
+<P>In the event that a ColdFusion application probe fails, the 
+application monitor window in the ClusterCATS Explorer will 
+have a red circle on it. Select the Application Monitor icon to determine 
+which Cluster Members the CF Probes failed on.</P>
+
+
+<hr>
+
+<a name="except"></a>
+<h2>Expanded Exception Handling</h2>
+<h3>Organize custom exception types</h3>
+<p>ColdFusion 4.0.1 introduced custom exception types, such as &lt;CFTHROW TYPE="MyApp.BusinessRuleException.InvalidAccount"&gt;. ColdFusion 4.5 will find a catch handler using the custom type as a pattern.  <br>
+For example,<br>
+<pre>&lt;CFTHROW TYPE="MyApp.BusinessRuleException.InvalidAccount"&gt;</pre>
+would try to find:
+<pre>&lt;CFCATCH TYPE=" MyApp.BusinessRuleException.InvalidAccount"&gt;
+&lt;"CFCATCH TYPE=" MyApp.BusinessRuleException"&gt;
+&lt;"CFCATCH TYPE=" MyApp"&gt;</pre>
+<p>The search always begins with the most specific type and proceeds to the least specific type; the order in which the &lt;CFCATCH&gt; tags are coded within a given page does not matter.</p>
+
+<b>Compatibility considerations</b><br>
+<p>This feature creates an incompatibility with CF 4.0.1, where
+<code>&lt;CFTHROW TYPE="MyApp.foo"&gt;</code> could only be caught by  
+<code>&lt;CFCATCH TYPE="MyApp.foo"&gt;</code>, never by <code>&lt;CFCATCH TYPE="MyApp"&gt;</code>. The ColdFusion Administrator will supply a setting to revert to 4.0.1 behavior and a request can override this behavior by a new <code>&lt;CFSETTING&gt;</code> attribute:
+<code>&lt;CFSETTING CATCHEXCEPTIONSBYPATTERN=yes/no&gt;</code>.
+</p>
+<hr>
+
+
+<a name="cfhttp"></a>
+<h2>CFHTTP Enhancements</h2>
+
+<P>The following changes have been made to CFHTTP:</p>
+
+<ul>
+	
+<li>There is a new CFHTTP variable, CFHTTP.Header, which returns the raw response header from the server. </li>
+
+<li>The variable CFHTTP.Response_Header has been renamed, and is now CFHTTP.ResponseHeader. 
+CFHTTP.ResponseHeader now supports arrays in the structure to allow for more than one instance of the header key.</li>
+
+<li>Secure Socket Layer (SSL) is now supported on Unix.</li>
+
+</ul>
+
+<h3>New CFHTTP attributes</h3>
+
+<ul>
+	<li>PROXYPORT - Optional. The port number on the proxy server from which the object is being requested. Default is 80. When used with RESOLVEURL, the URLs of retrieved documents that specify a port number are automatically resolved to preserve links in the retrieved document. </LI>
+	<li>USERAGENT - Optional. User agent request header. </LI>
+	<li>THROWONERROR - Optional. Boolean indicating whether to throw an exception that can be caught by using the CFTRY and CFCATCH tags. The default is NO.</LI>
+</ul>
+
+<h3>GET Enhancement</h3>
+
+<p>The ResponseHeader (formerly named Response_Header) variable is a CFML structure; it allows you to see the response headers.<br> 
+<pre>#CFHTTP.ResponseHeader[http_header_key]#</pre>
+</p>
+
+
+<hr>
+
+
+
+
+<A name="bin"></a>
+<h2>Binary Data Support</H2>
+
+<p>ColdFusion is developing the ability to handle arbitrary, non-text data. A new core binary data type and some higher level functions have been implemented for this. We are researching additional binary features, such as BLOB manipulation in databases.</p>
+<p>New applications are requiring the ability to manipulate binary data. For example, a customer using CFML could load a .gif image from a file using CFFILE, serialize it using WDDX, and send it to an associate, where it could be saved to disk with CFFILE.</p>
+
+<h3>Base 64</h3>
+<p>Base 64 provides 6 bit encoding of 8-bit ASCII characters. Because high ASCII values and binary objects are not safe for transport over internet protocols such as HTTP and SMTP, ColdFusion offers Base64 as a means to safely send ASCII and binary data over these protocols. Base 64 allows you to store binary objects in a database if you convert the data into Base 64 first. If you receive data in Base 64, you can re-create the actual binary object that it represents, such as a .gif , .jpeg, or executable file, by using the ToBinary function. 
+</p>
+
+<h3>Specification of the new binary type:</h3>
+
+<ul>
+	<li>It is an internal type, consisting of a buffer and a length.</LI>
+	<li>It is a complex type, assigned by reference. </LI>
+	<li>It is not automatically convertible to anything. </LI>
+	<li>Nothing can be automatically converted to it.</LI>
+	<li>It can be serialized through WDDX, where it is converted to a base64 representation, which consists of printable characters.</LI>
+	<li>A WDDX binary deserialization, or tobinary() function call will create a binary object.</LI>
+</ul>
+
+<h3>New Functions</h3>
+
+
+<ul>
+<li>IsBinary - Returns TRUE if value is binary; otherwise, the function returns FALSE.<br> 
+Syntax:<br>
+<pre>IsBinary(value)</pre>
+
+
+<li>ToBase64 - Returns the Base 64 representation of the string or binary object. Base 64 is a format that uses printable characters, allowing binary data to be sent in forms and email, and stored in a database or file.<br>
+Syntax:<br>
+<pre>ToBase64(string_or_binary_object)</pre></li>
+
+<li>ToBinary - Returns the binary representation of Base 64 encoded data.
+Syntax:
+<pre>ToBinary(string_in_Base64)</pre></li>
+
+<li>Len - Returns the length of the binary buffer.
+Syntax:
+<pre>Len(string)</pre></li>
+
+
+</ul>
+
+<h3>Modifications to CFFILE:</h3>
+
+<ul>
+<li>Modification: ACTION 'WRITE', attribute 'output':
+ACTION 'Write' has been modified to allow attribute output to be either a Typeless type (text), or a Binary object (binary).
+
+<li>New ACTION: 'ReadBinary':
+Action ReadBinary allows for data to be read from an arbitrary file into a Binary object. In all other aspects it is identical to Read.
+</ul>
+
+<b>Examples:</b><br>  
+Write:<br>
+<pre>&lt;cffile action="Write" file="c:\logo.jpg" output=#jpegvar#&gt;</pre>
+
+Read:<br>
+<pre>&lt;cffile action="ReadBinary" file="c:\cfusion\bin\cfserver.exe" variable=binaryobj></pre>
+<p>This will actually read the entire ColdFusion executable into a binary object.
+Then the function toBase64(binaryobj) could be used to create a base64 representation of the cfserver.exe file.</p>
+
+<p>Alternatively, cfserver.exe could then be serialized using WDDX.</p>
+
+<h3>Modifications to WDDX</h3>
+<p>WDDX can now serialize binary data using a new &lt;binary&gt; tag.  By default, the CDATA of this tag will contain the base64 representation of the binary data being serialized.</p>
+
+Syntax:<br>
+<pre>&lt;binary&gt; (attributes)>ENCODED_DATA&lt;/binary&gt;</pre>
+Optional attributes include:<br>
+<ul>
+	<li>length: length of encoded data</LI>
+	<li>encoding: encoding type for ENCODED_DATA. 'base64' is the default.</LI>
+</ul>
+
+<p>Serialization and deserialization methods for all implementations of WDDX will eventually  support this tag. A new object will be added to the JavaScript entry:
+<code>function WddxBase64(initData, initLen)</code>, which holds a base64 representation of the data of a &lt;binary&gt; tag. This object is serializable.  </p>
+
+<b>Example:</b><br>
+A WDDX packet may contain an object:<br>
+<pre>&lt;binary length='43'&gt;MIIBAJELVJETELSJAMJjDGjdjgEUUEGSDKEHWEQI==&lt;/binary&gt;</pre><br>
+
+<hr>
+<A name="ldap"></a>
+<h2>New CFLDAP Attributes</H2>
+<p>
+
+<TABLE cellspacing=10>
+	<tr>
+		<th valign=top>Attribute</Th>
+			
+		<th valign=top>Descriptiion</TH>
+	</TR>
+		
+	<tr>
+		<td valign=top>FILTERFILE</TD>
+			
+		<td valign=top>A multi-field string containing the path to a file containing 
+			LDAP filter string specifications and the name of the "stanza" within that file.
+			<P>The format of the FILTERFILE attribute is 	FILTERFILE=&lt;filename&gt;,&lt;tag&gt;. Where filename is an absolute path or a simple filename to the filter file to use and tag is the "stanza tag" for a section of that filter file. If a simple filename is used it is assumed to be relative to the "ldap" subdirectory of your ColdFusion installation.</p>
+		</TD>
+			
+	</TR>
+		
+	<tr>
+		<td valign=top>MODIFYTYPE</TD>
+			
+		<td valign=top>Supports appending attributes to existing multi-valued attributes.
+			Valid entries: REPLACE (default), ADD. ADD appends the new attribute to 
+			any existing attributes. Using the new ADD mode introduces the following LDAP 
+			limitations: You can't do an ADD of values that already exist. You can't do an 
+			ADD of null values. 
+		</TD>
+		
+	</TR>
+		
+	<tr>
+		<td valign=top>REBIND</TD>
+			
+		<td valign=top>Values: NO (default), YES. If set to YES we would try to 
+			"rebind" the referral callback and reissue the query (via the referred address) 
+			using the original credentials. If NO, credentials are lost in referrals 
+			so referrals bindings are anonymous.
+		</TD>
+			
+	</tr>
+	<tr>
+		<td valign=top>REFERRAL</TD>
+			
+		<td valign=top>This optional attribute controls The number of "hops" allowed in a 
+			referral. Valid values for this attribute should be integer values >= 0. If set 
+			to 0, this effectively turns off referrals. In this case, no data is returned 
+			for entries that are referrals (not even whatever attributes may be in the "local" entry.)
+		</TD>
+				
+	</TR>
+		
+	<tr>
+		<td valign=top>SECURE</TD>
+			
+		<td valign=top><p>Establish the LDAP connection via SSL (thereby hiding the 
+			connection password otherwise sent as text.) The value of this attribute 
+			is a multi-field string. The fields of the string have the following values:</p>
+			
+			<p>SECURE = "cf_security_typeid [, posible_additional_fields]"</p>
+			
+			<p>The cf_security_typeid is a string that identifies the type of security to empploy. We currently support two types (the Netscape implementations of type 2 and type 3 SSL) so the string must have one of the following values:</p>
+			
+			<p>"CFSSL_BASIC" or "CFSSL_CLIENT_AUTH"</p>
+			
+			<p>The subsequent fields in the string differ depending on which type is in use. 
+			Their layouts are:</p>
+
+			<p>SECURE="CFSSL_BASIC,certificate_db"<br>
+			SECURE="CFSSL_CLIENT_AUTH,certificate_db,certificate_name,key_db,key_password"</p>
+
+			<p>The fields have the following values:</p>
+
+			<table cellspacing=3 cellpadding=3 border=1>
+				<tr>
+					<td>cf_security_typeid</TD>
+					<td>Id string  indicating the CF security implementation type</TD>
+				</TR>
+				
+				<tr>
+					<td>certificate_db</TD>
+					<td>The name of the certificate database file (in Netscape cert7.db 	format.)			</TD>
+				</TR>
+				
+				<tr>
+					<td>cerificate_name</TD>
+					<td>The name of the client certificate to send the server.</TD>
+				</TR>
+				
+				<tr>
+					<td>key_db</TD>
+					<td>Keyword database holding the public/private key-pair (in Netscape 
+					key3.db format.)</TD>
+				</TR>
+			
+				<tr>
+					<td>keyword_db</TD>
+					<td>The password to key data base.</TD>
+				</TR>			
+			
+			
+			</TABLE>
+			
+		<p>Examples (using Windows paths):</p>
+
+		<p>SECURE="CFSSL_BASIC,C:\temp\cert7.db"<br>
+		SECURE="CFSSL_CLIENT_AUTH,C:\temp\cert7.db,Server-Cert,
+		   &nbsp;&nbsp;C:\temp\key3.db,admin0828"</p>
+
+			
+		</TD>		
+
+	</TR>
+	
+</TABLE>
+
+</UL>
+
+<HR>
+
+
+
+<a name="dis"></a>
+<h2>Data Source Disable</h2>
+
+<p>The CF Administrator can now disable individual data source connections. In previous releases, the ColdFusion server had to be stopped to do administrative work on a database accessible from ColdFusion. This was necessary to ensure that all pending transactions had been completed and that no new ones would be allowed to start on either new or reused database connections for that data source. </p>
+
+<p>The disable feature is part of the CFSettings on the Data Source page.  A Disable database connections checkbox has been added to the page. The attribute will not be checked by default. When the attribute is checked then ColdFusion will no longer allow new connections to be established to the data source. In addition, any existing connections that are not in use will be disconnected and cleaned up, and any connections currently in use will be notified that they are to clean themselves up as soon as their current transaction has been completed. Connections may be reinstated by unchecking the checkbox after the administrative tasks have been completed.</p>
+
+<hr>
+<a name="bind"></a>
+<h2>CFQUERYPARAM</h2>
+
+<p>This new tag adds SQL bind parameter support to CFQUERY. The tag is coded inline in the SQL statement, so it is very easy to use. It was developed to improve performance, maintenance, and security of data queries, specifically:</p>
+
+<ul>
+	<li>Server-side caching for Oracle is enhanced and work toward active SQL statement caching by ColdFusion has begun.</li>
+	<li>Long text fields can be updated from a SQL statement. In previous releases, the developer was required to use a form and the CFINSERT and CFUPDATE tags to do this.</li>
+	<li>A malicious user can no longer attach multiple SQL statements to a SQL statement substitution variable.</li>
+</ul>
+
+<p>If the CFQUERY data source does not support bind parameters, then ColdFusion will execute the SQL statement with the substituted parameters for CFINSERT, CFUPDATE and CFGRIDUPDATE as in previous releases. For example, the Sybase native driver does not support query parameters, so the parameters are substituted into the SQL string.  As a result, a ColdFusion developer wishing to take advantage of SQL bind parameters does not have to write one set of statements for the data sources that support it and another set for data sources that don't. </p>
+
+<p>ColdFusion developers should be aware of the security implications of this feature and use best security practices. In the case of a database that does not support query parameters, the validated parameter value is substituted back into the SQL string - character data is enclosed in single quotes by ColdFusion when it is substituted back into the string.  Numeric and date data types are validated to ensure that the data value can be converted to numeric data or a date respectively. Character and other data types are checked to make sure the value does not exceed the MAXLENGTH for the parameter, if it is specified. </p>
+
+<p>At present, the ColdFusion Sybase11 driver does not support SQL bind parameters because the Sybase client libraries do not provide that support. The OLEDB driver dynamically determines support. The ColdFusion ODBC, DB2, Informix, Oracle 7 and Oracle 8 drivers support SQL bind parameters.<br><br>
+
+For example: <br>
+
+<pre>
+&lt;CFQUERY Name="foo" DataSource="MyDSN"&gt;
+SELECT * FROM courses 
+WHERE course_id = &lt;CFQUERYPARAM Value=#id# 
+CFSQLTYPE=CF_SQL_INTEGER&gt;
+&lt;/CFQUERY&gt;
+</pre>
+
+<p>The CFSQLTYPE attribute is needed for the CFDATAACCESS bind calls. The data conversions are actually done by the database client software, which doesn't necessarily know the target data type. The CFINSERT and CFUPDATE tags determine this information by accessing the database catalog for the target table. This is not an option for CFQUERY since it has no information concerning what the target tables or columns are. The database APIs for ODBC and Oracle support discovery of the param types, however, for ODBC this a level 2 feature and not supported by many ODBC drivers. The param type discovery is expensive. Given the expense of the runtime determination of the param type and the fact that it would limit the param support to fewer ODBC we should use the CFSQLTYPE param in the tag.</p> 
+
+<p>CFSQLTYPE also enables data validation. Developers can do less validation coding since the CFQUERYPARAM values are validated. Three optional parameters - MAXLENGTH, Scale, and Null are available for decimal data types.  If the data source does not support bind parameters the the ColdFusion SQL executor uses CFSQLTYPE to determine if it needs to enclose the substituted value in single quotes.</p>
+
+<hr>
+<a name="tex"></a>
+<h2>Expanded CFQUERY Text Field Support</h2>
+
+<p>This release removes the 65K limit on the retrieval of text or long varchar database fields. The interface provides new data source settings in the ColdFusion Administrator; it does not require new CFML tags or tag attributes. For backward compatibility, the new field size is implemented so that existing applications can continue to work as they did in 4.0. </p>
+
+The text feature is part of the CFSettings on the Data Source page.  An Enable retrieval of long text checkbox has been added to the page.  The option is unchecked by default.  When the option is checked, ColdFusion will retrieve the entire text field column and any subsequent columns in the select list as unbound data. 
+
+A Long Text Buffer Size option has also been added to the cfsettings.  The default value is 65,000 bytes, the current maximum size used by ColdFusion. You can change this value for  retrieving either bound or unbound text fields. If you specify a size that is not supported by the database, then a SQL execution error will occur. The limit is database-specific and there is no way to dynamically determine the limit. When the Enable retrieval of long text is checked, the unbound column is returned in chunks equal to the Long Text Buffer Size. If the Enable retrieval of long text is not checked, then ColdFusion will bind text columns to a buffer which has a buffer size equal to the Long Text Buffer Size. This allows ColdFusion to exceed the previous limit of 65k but not suffer the performance cost of retrieving unbound data. 
+
+<p>This feature is very useful if you have large text fields and know the limits of the text column. For example, an Oracle database may use text fields but limits the input for each occurrence to 256k. By setting the Long Text Buffer Size to 256000, the entire text field can be efficiently returned in a bound column. If you only want the first 1K characters from the long text columns, you could set the Long Text Buffer Size to 1028, making more efficient use of memory to retrieve bound data. This is an important consideration for limiting your bound long text data, since many databases do not support the substring functions for this data type. </p>
+
+<h3>Coding considerations</h3>
+
+<p>If you have a limited number of cases in which you want to retrieve complete long text data, then you should create a data source definition Enable retrieval of long text checked with specifically for this so you will not incur the overhead of retrieving large amounts of data when this is no intended. Retrieving unbound data is much slower than bound data, so you should order the columns in your select statement with the text fields referenced last.</p> 
+
+<p>The statement</p>
+
+<pre>
+SELECT integer_col, char_col, date_col, long_text_col
+FROM data_table 
+</pre>
+
+is more efficient than 
+
+<pre>
+SELECT long_text_col, integer_col, char_col
+FROM data_table.  
+</pre>
+
+<p>because in the first statement only the long_text_col is retrieved as unbound data and the other columns are retrieved as bound data, while in the second statement all the columns are retrieved as unbound data.</p>
+
+<hr>
+<a name="tran"></a>
+<h2>Data Source Transaction Support</h2>
+
+<p>Current transaction support is by the CFTRANSACTION tag. The transaction begins at the first CFML tag after the CFTRANSACTION tag that requires a data source. All subsequent CFML tags contained in the CFTRANSACTION block must use the same data source. An error is thrown if a different data source is specified. When the &lt;/CFTRANSACTION&gt; is executed, the database transaction is committed and the transaction mode is ended. If a database action returns an error or the end of page processing finds an open database transaction, then the transaction is rolled back and the transaction mode is ended.</p>
+
+<p>We now provide more control over commit/rollback behavior through the ACTION attribute of the CFTRANSACTION tag. The ACTION="BEGIN" value is equivalent to the 3.x and 4.x CFTRANSACTION behavior when no ACTION attribute was supported, so all 3.x and 4.x CFTRANSACTION code is upwardly compatible.</p>  
+
+The supported values for the ACTION attribute are:
+
+<pre>
+ACTION="BEGIN" (default) 
+ACTION="COMMIT"
+ACTION="ROLLBACK"
+</pre>
+
+Some syntax notes:<br>
+
+<ul>
+	<li>The COMMIT and ROLLBACK attribute values require an "/&gt;" tag suffix to handle nesting correctly.</LI>
+	<li>A CFTRANSACTION tag that specifies ACTION=COMMIT or ROLLBACK must be nested in a &lt;CFTRANSACTION&gt;&lt;/CFTRANSACTION block&gt;.  </LI>
+</ul>
+
+Here's a commented example:<br> 
+
+<pre>
+&lt;!--- Turn on the database transaction processing, a transaction is started when the first ---&gt;
+&lt;!--- CFML tag which connects to a database is executed.  The ISOLATION attribute is  ---&gt;
+&lt;!--- optional.  A &lt;CFTRANSACTION&gt; tag  that does not specify an ACTION must have  ---&gt;
+&lt;!--- some content otherwise a Tag error is thrown when the template is prepared. This  ---&gt;
+&lt;!--- 3.x, 4.0 behavior.  ---&gt;
+
+
+&lt;CFTRANSACTION  ACTION="BEGIN" ISOLATION="REPEATABLE_READ"&gt; 
+
+&lt;CFLOOP INDEX="loopcount" FROM="1" TO="12"&gt;
+	&lt;CFQUERY NAME="INSERTFOO" DATASOURCE="mydb"&gt;
+	insert into foo values (#loopcount#, 'Joe', 'Smith')
+	&lt;/CFQUERY&gt;
+	&lt;CFIF (loopcount mod 5) is 0 &gt;
+
+&lt;!--- After every 5 rows, commit the transaction and leave transaction processing on.  After  ---&gt;
+&lt;!--- commit another transaction is started when a CFML tag which connects to a database is ---&gt;
+&lt;!--- executed.  The ISOLATION attribute is optional.  If an ISOLATION value is not     ---&gt;
+&lt;!--- provided then the ISOLATION value for the parent &lt;CFTRANSACTION&gt; is used.     ---&gt;
+&lt;!--- A &lt;CFTRANSACTION&gt; tag that specifies an ACTION must have parent ---&gt;
+&lt;!--- &lt;CFTRANSACTION&gt; tag and must have no content(&lt;CFTRANSACTION ACTION… /&gt;) ---&gt;
+&lt;!--- otherwise a Tag error is thrown when the template is prepared. ---&gt;
+
+
+	     &lt;CFTRANSACTION ACTION="COMMIT" ISOLATION="READ_UNCOMMITTED"/&gt; 
+	&lt;/CFIF&gt;	
+&lt;/CFLOOP&gt;
+
+
+&lt;!--- Implicit Commit of database transaction and end the database transaction processing. ---&gt;
+&lt;!--- In this example the 11th and 12th rows that were inserted would still be part of a pending  ---&gt;
+&lt;!--- transaction and would be committed.  If a runtime error occurred and the   ---&gt;
+ &lt;/CFTRANSACTION&gt; end tag not executed then a pending database transaction would be  ---&gt;
+&lt;!--- rolled back. This  3.x, 4.0 behavior.  ---&gt;
+
+&lt;/CFTRANSACTION&gt;
+</pre>
+
+<p>By using CFML error handling with the ACTION attribute, you can have complete control over ending your transactions with either a COMMIT or ROLLBACK and simplify your code. In the 4.0 release, if you wanted all data base activity on a cfm page to be executed in transaction mode you had to use the following style:</p>
+
+<pre>
+&lt;!--- Turn on transaction processing for the northeast db transactions  ---&gt;
+&lt;CFTRANSACTION&gt; 
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_northeast"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_northeast"&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- End database transaction processing which commits pending transaction ---&gt;
+&lt;/CFTRANSACTION&gt;
+
+&lt;!--- Turn on transaction processing for  the southeast db transactions  ---&gt;
+&lt;CFTRANSACTION&gt; 
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_southeast"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_southeast"&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- End database transaction processing which commits pending transaction ---&gt;
+&lt;/CFTRANSACTION&gt;
+
+&lt;!--- Turn on transaction processing for  the midwest db transactions  ---&gt;
+&lt;CFTRANSACTION&gt; 
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_midwest"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_midwest"&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- End database transaction processing which commits pending transaction ---&gt;
+&lt;/CFTRANSACTION&gt;
+
+&lt;!--- Turn on transaction processing for the …… db transactions  ---&gt;
+&lt;CFTRANSACTION&gt; 
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_……"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_……."&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- End database transaction processing which commits pending transaction ---&gt;
+&lt;/CFTRANSACTION&gt;
+</pre>
+
+<p>Using the new ACTION attribute this code can be simplified as follows:</p>
+
+<pre>
+&lt;!--- Turn on the database transaction processing once for the template ---&gt;
+
+&lt;!--- Do the northest db transactions
+&lt;CFTRANSACTION&gt; 
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_northeast"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_northeast"&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- commits pending transaction ---&gt;
+&lt;CFTRANSACTION ACTION="COMMIT"&gt;
+
+&lt;!--- Do the southeast db transactions
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_southeast"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_southeast"&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- commits pending transaction ---&gt;
+&lt;CFTRANSACTION ACTION="COMMIT"&gt;
+
+&lt;!--- Do the midwest db transactions
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_midwest"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_midwest"&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+
+&lt;!--- commits pending transaction ---&gt;
+&lt;CFTRANSACTION ACTION="COMMIT"&gt;
+
+&lt;!--- Do the …… db transactions
+
+	&lt;CFQUERY NAME="INSERTCUSTOMER" DATASOURCE="mydb_……"&gt;
+	insert into customer values (……..)
+	&lt;/CFQUERY&gt;
+
+	&lt;CFQUERY NAME="INSERTORDER" DATASOURCE="mydb_……."&gt;
+	insert into orders values (………)
+	&lt;/CFQUERY&gt;
+
+&lt;!--- commits pending transaction ---&gt;
+&lt;CFTRANSACTION ACTION="COMMIT"&gt;
+
+&lt;!--- End database transaction processing which commits pending transaction ---&gt;
+&lt;/CFTRANSACTION&gt;
+</pre>
+
+<hr>
+<a name="silent">
+<h2>CFSILENT</h2>
+
+<p>This tag will suppress all output produced by the CFML within the tag's scope. The following example shows a long CFML computation within the scope of a CFSILENT tag. No output will be produced by this CFML logic. CFSILENT partially supercedes CFSETTING ENABLECFOUTPUTONLY with a more structured alternative. There are no known compatibility issues. CFSILENT will not throw any exceptions.
+</p>
+
+&lt;cfsilent&gt;<br>
+&lt;cfset a1=x1&gt;<br>
+&lt;cfset a2=x2>&gt;<br>
+…<br>
+&lt;cfset a10000=x10000&lt;<br>
+<br>
+&lt;/cfsilent&gt;<br>
+<br>
+
+<hr>
+<a name="req"></a>
+<h2>Request Tracker</h2>
+
+<p>Memory corruption bugs sometimes leave a server in an unusable state: it is still alive, and its threads accept requests, but the requests always end with "unexpected exception" errors.  The Request Tracker allows the CF Administrator to specify a minimum percentage of successful -vs- unsuccessful requests. </p>
+
+<p>This facility will log all requests, and monitor the presence of "unexpected exception" type error traps.  A request that triggers such an error trap will be considered "unsuccessful." When the percentage of  unsuccessful requests rises above the specified percentage threshold, the Request Tracker will terminate the CFAS process. The service is restarted if abnormal requests occur on a regular basis.</p>
+
+<p>The Request Tracker is enabled by default on the *** page of the CF Administrator. The threshold percentage of successful requests will be set at 90%, and the number of requests will be set at 30. The "90% of 30" is a standard statistical measurement of confidence in a particular hypothesis, in this case, that the CFAS process is not corrupted.
+
+<p>The Request Tracker parameters can also be tuned via the Registry.  The parameters of interest are RequestTrackerSampleSize and RequestTrackerThresholdPercentage.</p>
+
+<hr>
+<a name="dir"></a>
+<h2>CFPROCESSINGDIRECTIVE</h2>
+
+<p>This much-requested feature allows you to specify a p-code compiler processing option - SuppressWhitespace=bool - to suppress extraneous whitespace (or all output) produced by the CFML within the tag's scope. </p>
+
+<h3>Nesting behavior</h3>
+<p>If a CFPROCESSINGDIRECTIVE tag's scope includes another CFPROCESSINGDIRECTIVE tag, then the inner tag's settings override the enclosing tag's settings within the body of the inner tag, where they differ.  If the enclosing tag specifies settings that the inner tag does not, those settings remain in effect within the inner tag's scope. </p>
+
+<h3>Usage</h3>
+<p>CFPROCESSINGDIRECTIVE settings do not apply to templates included via CFINCLUDE, CFMODULE, custom tag invocation, etc.</p>
+
+<h3>Example</h3>
+<p>This example shows the use of a nested &lt;CFPROCESSINGDIRECTIVE&gt; tag. The outer &lt;CFPROCESSINGDIRECTIVE&gt; tag will suppress unnecessary whitespace during computation of a large table while the inner &lt;CFPROCESSINGDIRECTIVE&gt; tag honors all whitespace to output the preformatted table.</p>
+
+<pre>
+&lt;CFPROCESSINGDIRECTIVE SUPPRESSWHITESPACE="yes"&gt;
+… any CFML tags here …
+&lt;CFPROCESSINGDIRECTIVE SUPPRESSWHITESPACE="no"&gt;
+&lt;cfoutput&gt;#interesting stuff#&lt;/cfoutput&gt;
+&lt;/CFPROCESSINGDIRECTIVE&gt;
+&lt;/CFPROCESSINGDIRECTIVE&gt;
+</pre>
+
+<hr>
+<a name="scope"></a>
+<h2>Variable Scope Enhancements</h2>
+<p>URL, CGI, FORM, and Cookie variables can now be accessed through structure objects with the same names. These names are now reserved for use by CFML. This enhancement makes these scopes behave the same as application, session, and request. </p>
+ 
+<p>This has not been done with the Server scope partially for security reasons - so that server variables whose names are unknown cannot be accessed. It has also not been done with the Client scope because of the performance implications of having to enumerate all persistent variable names. </p>
+ 
+<p>Note that customer applications using these variable names for other purposes will most likely break in 4.5. </p>
+
+<hr>
+<a name="mail"></a>
+<h2>CFMAIL Enhancements</h2>
+
+<h3>New BCC Attribute</h3>
+<p>BCC allows you to send a message to one or more email addresses without listing them in any message header. Contrast this with the CC attribute which displays "carbon copy" recipients in a message header.</p>
+
+<h3>New CFMAILPARAM Tag</h3>
+<p>The CFMAILPARAM tag can be used between the begin and end tags of CFMAIL. Zero or more CFMAILPARAM tags may appear inside CFMAIL. The CFMAILPARAM tag allows the CFML developer to do either one of two things: </p>
+<ol>
+	<li>Use the File attribute to attach files</LI>
+	<p>or</p>
+	<li>Use the Name and Value attribute to add headers.</LI>
+</ol>
+
+The File and Name attributes are mutually exclusive. 
+
+
+<h3>Attaching Files with CFMAILPARAM</h3>
+<p>To attach a file, use CFMAILPARAM with its File attribute. The File attribute must specify a valid file path. For example, this snippet sends a message with two attachments:</p>
+
+<pre>
+CFMAIL From="peter@domain.com" To="paul@domain.com" Subject="attachment test"&gt;
+    This message has two attachments.
+    &lt;CFMAILPARAM File="c:\work\readme.txt"&gt;
+    &lt;CFMAILPARAM File="c:\work\logo.gif"&gt;
+&lt;/CFMAIL&gt;
+</pre>
+
+<h3>Adding Headers with CFMAILPARAM</h3>
+<p>To add a message header, use CFMAILPARAM with its Name and Value attributes. The Name attribute cannot specify an empty string. Header names are case-insensitive (i.e., "Reply-To" is identical to "REPLY-to"). A header overwrites any previous entry with the same name. This snippet illustrates sending a message with a "Reply-To" header:</p>
+
+<pre>
+&lt;CFMAIL From="peter@domain.com" To="paul@domain.com" Subject="header test"&gt;
+    &lt;CFMAILPARAM Name="Reply-To" Value="mary@domain.com"&gt;
+    This message has a Reply-To header that is honored by many e-mail client applications.
+&lt;/CFMAIL&gt;
+</pre>
+
+<hr>
+<a name="pop"></a>
+<h2>New CFPOP attribute</h2>
+<p>CFPOP now has a new attribute called GenerateUniqueFilenames. This attribute can either be true or false and it indicates whether the user wants the files attached to an email to be saved using a generated filename to prevent name conflicts and overwrites if an email has an attachment with two files that are similarly named, or whether the user wants the file to be saved using the name specified in the mail header.</p>
+
+<p>For example, if this attribute is yes and a mail message has three files called foo.exe, bar.txt and bar.txt they will be saved to disk as 12.exe, 13.txt and 14.txt. The filenames are guaranteed to be unique within the specified directory.</p>
+
+<hr>
+<a name="curse"></a>
+<h2>Oracle Reference Cursor Support</h2>
+
+<p>This release supports the return of result sets via Oracle Reference Cursors through the Oracle 8 native driver and the ColdFusion stored procedure interface.</p>
+
+<p>The example below shows both the PL/SQL necessary for creating a procedure to return a result set and the CFML necessary for executing the procedure in ColdFusion. The example uses the Oracle SCOTT/TIGER login sample data. The final ColdFusion documentation for this release will contain additional information and examples.</p>
+
+<b>Example:</b> Return of all rows in the DEPT table entirely through a package.<br><br>
+
+
+PL/SQL<br><br>
+<pre>
+CREATE OR REPLACE PACKAGE dept_data AS<br>
+	TYPE DeptTyp IS REF CURSOR RETURN dept%ROWTYPE;<br>
+	PROCEDURE refcurproc(pParam1 in out DeptTyp);<br>
+END dept_data;<br>
+CREATE OR REPLACE PACKAGE BODY dept_data AS<br>
+	PROCEDURE refcurproc(pParam1 in out deptTyp) IS<br>
+	BEGIN<br>
+		OPEN pParam1 FOR select * from dept;<br>
+	END refcurproc;<br>
+end dept_data;<br>
+</pre>
+
+CFML<br><br>
+<pre>
+&lt;cfstoredproc	procedure="dept_data.refcurproc"
+				datasource="my_oracle80_test" 
+				username = scott
+				password = tiger
+				RETURNCODE="no"
+&gt;
+
+&lt;cfprocparam type="Out" cfsqltype="CF_SQL_REFCURSOR" variable="param1"&gt;
+
+&lt;cfprocresult 	name = rs1&gt;
+
+&lt;/cfstoredproc&gt;
+
+&lt;b&gt;The first result set:&lt;/b&gt;&lt;br&gt;
+&lt;hr>
+&lt;cfoutput query = rs1&gt;
+#dname#,#deptno#
+&lt;/cfoutput&gt;
+</pre>
+
+<HR>
+
+<A name="exception"</A>
+<H2>Expanded Exception Handling</H2>
+<H3>Organize custom exception types</H3>
+<P>ColdFusion 4.0.1 introduced custom exception types, such as &lt;CFTHROW 
+TYPE=&quot;MyApp.BusinessRuleException.InvalidAccount&quot;&gt;. ColdFusion 4.5 
+will find a catch handler using the custom type as a pattern. <BR>For 
+example,<BR><PRE>&lt;CFTHROW TYPE=&quot;MyApp.BusinessRuleException.InvalidAccount&quot;&gt;</PRE>would 
+try to find: <PRE>&lt;CFCATCH TYPE=&quot; MyApp.BusinessRuleException.InvalidAccount&quot;&gt;
+&lt;&quot;CFCATCH TYPE=&quot; MyApp.BusinessRuleException&quot;&gt;
+&lt;&quot;CFCATCH TYPE=&quot; MyApp&quot;&gt;</PRE>
+<P>The search always begins with the most specific type and proceeds to the 
+least specific type; the order in which the &lt;CFCATCH&gt; tags are coded 
+within a given page does not matter.</P><B>Compatibility considerations</B><BR>
+<P>This feature creates an incompatibility with CF 4.0.1, where 
+<CODE>&lt;CFTHROW TYPE=&quot;MyApp.foo&quot;&gt;</CODE> could only be caught by 
+<CODE>&lt;CFCATCH TYPE=&quot;MyApp.foo&quot;&gt;</CODE>, never by 
+<CODE>&lt;CFCATCH TYPE=&quot;MyApp&quot;&gt;</CODE>. The ColdFusion 
+Administrator will supply a setting to revert to 4.0.1 behavior and a request 
+can override this behavior by a new <CODE>&lt;CFSETTING&gt;</CODE> attribute: 
+<CODE>&lt;CFSETTING CATCHEXCEPTIONSBYPATTERN=yes/no&gt;</CODE>. 
+</P>
+
+
+<H3>Exception-Handling Templates</h3>
+<p>ColdFusion 4.5 supports extended &lt;CFERROR&gt; attributes that allow developers
+and site administrators to specify exception-handling templates.  Unlike previous
+&lt;CFERROR TYPE=&quot;REQUEST&quot;&gt; and lt;CFERROR TYPE=&quot;VALIDATE&quot;&gt; 
+templates, exception-handling templates can utilize all CFML tags and langauge features.
+
+<h4>Syntax</h4>
+<dir><code>&lt;CFERROR TYPE=&quot;EXCEPTION&quot; EXCEPTION=<em>exception type</em> TEMPLATE=<em>template</em>&gt;</code></dir>
+<ul>
+	<li><em>exception type</em><br>The type of exception(s) that the exception-handling template can handle.
+	These exception types use the same matching rules as &lt;CFTRY&gt; and &lt;CFCATCH&gt;.
+	<p>Specify TYPE=&quot;ALL&quot; to invoke the template in case of any otherwise unhandled exception.
+</ul>
+
+<h4>Access to error information</h4>
+<p>Exception-handling templates receive information about the triggering error or exception via the ERROR structure.
+Information that would have been transmitted via a CFCATCH structure to a CFCATCH exception-handling block is also
+present in the ERROR structure.
+
+<h4>Site-wide exception-handling templates</h4>
+<p>The ColdFusion Administrator's server settings page allows the site administrator to specify a default
+exception-handling template handler, and a &quot;missing base template&quot; handler.
+The default exception-handling template acts as if it were a &lt;CFERROR TYPE=&quot;EXCEPTION&quot; EXCEPTION=&quot;ANY&quot;&gt;
+tag prepended to every request's Application.cfm.
+
+<h5>Specifying exception-handling templates for missing templates</h5>
+<p>The site-wide missing template handler is only activated if the requested template cannot be found.
+If the requested template attempts to access a missing template, via &lt;CFINCLUDE&gt; or other means, 
+the CFML language processor will generate a TYPE=&quot;MISSINGINCLUDE&quot; exception.  This exception
+can be handled on an application-wide basis by inserting this tag into the Application.cfm file:
+
+<dir><code>&lt;CFERROR TYPE=&quot;EXCEPTION&quot; EXCEPTION=&quot;MISSINGINCLUDE&quot; TEMPLATE=<em>template</em>&gt;</code></dir>
+
+<p>Future ColdFusion 4.5 checks for a site-wide missing template handler and make it
+the default MISSINGINCLUDE exception-handling template.</p>
+
+<h3>New Error variable</H3>
+<p>The failed request’s generated content will be cached in the error variable Error.GeneratedContent, and the generated content buffers purged upon entry to the exception-handling template.</p>
+
+
+<HR>
+
+
+<a name="localdirector"></a>
+<h2>ClusterCATS Cisco Local Director integration</h2>
+<p>ClusterCATS is now able to provide the availability and load balancing to Cisco Local Director so that the Local Director can route inbound HTTP traffic to the most appropriate web server in your cluster.</p>
+
+<p>Combining ClusterCATS and Local Director provides a powerful load balancing solution that Local Director cannot provide without ClusterCATS. Local Director cannot detect how busy a ColdFusion Server is. It therefore would continue to send new requests to a web server even if ColdFusion is too busy to handle additional requests.</p>
+
+<p>ClusterCATS can detect if ColdFusion is to busy to handle additional requests because it can interpret the ColdFusion load metric.  Consequently, its built-in intelligence can override the regular distribution sequence of the router, and it can redirect new requests to other available servers in the cluster.  So, it not only load balances, but it also provides important ColdFusion Server availability data as well.
+
+
+<HR>
+
+
+
+
+<a name="raiseerror"></a>
+<h2>Sybase native driver enhancement</h2>
+<p>An enhancement has been added to the Sybase native driver which allows user-defined errors to be trapped. To activate it, there is a new checkbox in the Sybase native driver page in the ColdFusion Administrator:</p>
+
+<p>The check box looks like this:<br><BR>
+Enable RAISERROR - Check to obtain user-defined errors from stored procedures and triggers.</p>
+
+ 
+<hr>
+
+<P><A href="#top">Back to top</A></P>
+</body>
+</html>

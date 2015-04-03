@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Secure Sockets Layer (SSL) with CFHTTP</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1049504"></a>
+ <H1>Using Secure Sockets Layer (SSL) with CFHTTP</H1>
+
+
+
+<p>When using Secure Sockets Layer (SSL) to transmit secured transactions via CFHTTP, you need to be aware of limitations on its use caused by a bug in one of the components of Microsoft's InetSDK. The problem occurs on Windows NT and should not affect Windows 95/98 machines.</p><p>CFHTTP uses the InetSDK to conduct all HTTP and HTTPS transactions and relies on the WinInet DLL and Schannel DLL for its SSL implementation. The WinInet bug constrains storage of SSL certificate information to the user level. This means that WinInet does not interrogate the registry for certificate information if the client that loads the DLL is a service. As a result, a CFHTTP request to an <code>https:// url,</code> will fail if ColdFusion is running as a service.</p><p>While we strongly recommend that the ColdFusion Server be run as a service, a workaround for this SSL/WinInet problem is available. The workaround is to run ColdFusion as a desktop application when SSL is needed. In this way, WinInet will write to and read from the registry appropriately when negotiating certificate information.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run ColdFusion as a desktop application:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">From the Windows NT Start menu in, select Run.
+
+
+</li>
+<li>Type the following (assuming that your installation of CF is in the default location): <code>c:\cfusion\bin\cfserver -DESKTOP</code>
+
+</li>
+<li>The ColdFusion icon should appear in the Windows Task Bar.
+
+</li>
+</ol>
+<p>When running the ColdFusion server as a desktop application rather than as a service, keep the following in mind:</p><ul>
+<li>Access the server from the Window Control Panel Services dialog.
+
+</li>
+<li>The server must be cycled manually by loading and unloading the ColdFusion Application Server process.
+</li>
+<li>The server cannot be stopped or started from the ColdFusion Administrator.
+</li>
+<li>If the server goes down, the Executive will restart it as a service, not as a desktop application, and all subsequent SSL transactions will fail.
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To determine whether the encryption key size conforms to export laws:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Right mouse click on Schannel.dll.
+
+
+</li>
+<li>Select Properties.
+
+</li>
+<li>Click the Version tab.
+
+<p>If the Description field reads "PCT / SSL Security Provider (Export Version)", a 40-
+bit key was used.
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

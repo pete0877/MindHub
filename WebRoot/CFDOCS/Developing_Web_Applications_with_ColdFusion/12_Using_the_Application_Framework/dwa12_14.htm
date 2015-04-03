@@ -1,0 +1,215 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using CFLOCK for Exclusive Locking</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_13.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_15.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1027308"></a>
+ <H1>Using CFLOCK for Exclusive Locking</H1>
+
+
+
+<p>The CFLOCK tag provides a means of implementing exclusive locking in ColdFusion applications. The reasons you use CFLOCK include :</p><ul>
+<li>Protecting sections of code that manipulate shared data, such as session, application, and server variables.
+
+</li>
+<li>Ensuring that file updates do not fail because files are open for writing by other applications or ColdFusion tags.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Use anonymous locks to protect a portion of a template, for example a 
+non-thread safe CFX. Use named locks to prevent parallel access to data.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027311"></a>
+ 
+<H3>How CFLOCK works</H3>
+<p>The CFLOCK tag can single-thread access to the CFML constructs in its body, so that the body of the tag can be executed by at most one request at a time. By default, a request executing inside a CFLOCK tag has an "exclusive lock" on the tag. No other requests are allowed to start executing inside the tag while a request has an exclusive lock. ColdFusion issues exclusive locks on a first-come first-serve basis.</p><p>However, ColdFusion offers provisions for allowing read-only access to locked code. The CFLOCK tag offers two modes of locking: </p><ul>
+<li><strong>Exclusive locks</strong> allow only one request to process the locked code.
+
+</li>
+<li><strong>Read-only locks</strong> allow multiple requests to execute concurrently, provided that no exclusive locks are executing.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Unless you specify the TYPE attribute, the default lock is exclusive. You 
+should minimize the use of exclusive locks. If you have performance-
+sensitive code inside CFLOCK tags, consider adding the 
+TYPE="ReadOnly" attribute to CFLOCK tags that do not update shared 
+data.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027319"></a>
+ 
+<H2>Using CFLOCK</H2>
+<p>ColdFusion Server is a multi-threaded web application server that can process multiple page requests at any given time. Use CFLOCK to guarantee that multiple concurrently executing requests do not manipulate shared data structures, files, or CFXs in an inconsistent manner.</p><p>Note the following:</p><ul>
+<li>Using CFLOCK around CFML constructs that modify shared data ensures that the modifications occur one after the other and not all at the same time.
+
+</li>
+<li>Using CFLOCK around file manipulation constructs can guarantee that file updates do not fail due to files being open for writing by other applications or ColdFusion tags.
+</li>
+<li>Using CFLOCK around CFX invocations can guarantee that CFXs that are not implemented in a thread-safe manner can be safely invoked by ColdFusion. This usually only applies to CFXs developed in C++ using the CFAPI. Any C++ CFX that maintains and manipulates shared (global) data structures will have to be made thread-safe to safely work with ColdFusion. However, writing thread-safe C++ CFXs requires advanced knowledge. A CFML custom tag wrapper can be used around the CFX to make its invocation thread-safe.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>CFLOCK uses a kernel-level synchronization object that is released 
+automatically upon time-out and/or abnormal termination of the thread 
+that owns it. Therefore, ColdFusion will never deadlock for an infinite 
+period of time while processing a CFLOCK tag. However, very large time-
+outs can block request threads for long periods of time and thus radically 
+decrease throughput. Always use the minimum time-out value allowed.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027366"></a>
+ 
+<H2>Avoiding deadlocks</H2>
+<p>Be sure to nest CFLOCK tags consistently. A potential cause of blocked request threads is inconsistent nesting of CFLOCK tags and inconsistent naming of locks. If you are nesting locks, you and everyone accessing the locked variables must consistently nest CFLOCK tags in the same order and use the same lock name for each scope. If everyone accessing locked variables does not adhere to these conventions, a deadlock can occur.</p><p>A deadlock is a state in which no request can execute the locked section of the page. Thus, all requests to the protected section of the page are blocked until there is a time-out. The following table shows one scenario that would cause a deadlock.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Deadlock Scenario&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>User 1</strong>
+</th><th align="left">
+<strong>User 2</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Locks the session scope.
+</td><td valign="top">
+Locks the application scope.
+</td></tr>
+<tr valign="top"><td valign="top">
+<strong>Deadlock: </strong>Tries to lock application scope, but application scope is already locked by User 2.
+</td><td valign="top">
+<strong>Deadlock: </strong>Tries to lock session, but session is already locked by User 1.
+</td></tr>
+
+</table>
+</div>
+</p><p>Once a deadlock occurs neither of the users can do anything to break the deadlock, because the execution of their requests is blocked until the deadlock can be resolved by a lock time-out.</p><p>In addition, if you nest locks of different types, you can cause a deadlock. An example of this is nesting an exclusive lock inside a read lock of the same scope, or of the same name.</p><p>In order to avoid a deadlock, you and all who need to nest locks should do so in a well-specified order and name the locks consistently. In particular, if you need to lock access to the server, application, and session scopes, you must do so in the following order.</p><ol>
+</li>
+<li>Lock the session scope. In the CFLOCK tag, specify thescope as "session."
+
+</li>
+<li>Lock the application scope. In the CFLOCK tag, specify the scope as "application."
+
+</li>
+<li>Lock the server scope. In the CFLOCK tag, specify the scope as "server."
+
+</li>
+<li>Unlock the server scope.
+
+</li>
+<li>Unlock the application scope.
+
+</li>
+<li>Unlock the session scope.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can skip any pair of lock/unlock steps in the list above if you don't 
+need to lock a particular scope. For example, you can take out Steps 3 and 
+4 if you don't need to lock the server scope.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_13.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_15.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

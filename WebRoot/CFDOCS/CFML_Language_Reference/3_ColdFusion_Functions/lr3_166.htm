@@ -1,0 +1,187 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>LSDateFormat</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_165.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_167.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000420"></a>
+ <H1>LSDateFormat</H1>
+
+
+
+<p>Formats the date portion of a date/time value using the locale convention. Like DateFormat LSDateFormat returns a formatted date/time value. If no mask is specified, LSDateFormat returns a date value using the locale-specific format.</p><a name="1000422"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>LSDateFormat</strong>(<em>date</em> [, <em>mask</em> ])
+</PRE><a name="1000424"> </a>
+<h5 class="param"> date</h5>
+<p class="param">Date/time object in the period from 100 AD to 9999 AD.</p><a name="1042642"> </a>
+<h5 class="param"> mask</h5>
+<p class="param">Set of characters that are used to show how ColdFusion should display the date:</p><ul>
+<a name="1137409"> </a>
+<li><code>d</code> -- Day of the month as digits with no leading zero for single-digit days. 
+
+<a name="1137419"> </a>
+</li>
+<li><code>dd</code> -- Day of the month as digits with a leading zero for single-digit days. 
+<a name="1137566"> </a>
+</li>
+<li><code>ddd</code> -- Day of the week as a three-letter abbreviation. 
+<a name="1137701"> </a>
+</li>
+<li><code>dddd</code> -- Day of the week as its full name. 
+<a name="1137730"> </a>
+</li>
+<li><code>m</code> -- Month as digits with no leading zero for single-digit months. 
+<a name="1137731"> </a>
+</li>
+<li><code>mm</code> -- Month as digits with a leading zero for single-digit months. 
+<a name="1137732"> </a>
+</li>
+<li><code>mmm</code> -- Month as a three-letter abbreviation. 
+<a name="1137733"> </a>
+</li>
+<li><code>mmmm</code> -- Month as its full name. 
+<a name="1137734"> </a>
+</li>
+<li><code>y</code> -- Year as last two digits with no leading zero for years less than 10. 
+<a name="1137735"> </a>
+</li>
+<li><code>yy</code> -- Year as last two digits with a leading zero for years less than 10. 
+<a name="1137736"> </a>
+</li>
+<li><code>yyyy</code> -- Year represented by four digits. 
+<a name="1137737"> </a>
+</li>
+<li><code>gg</code> -- Period/era string. Currently ignored, but reserved for future use 
+</li>
+</ul>
+<a name="1000438"></a>
+ 
+<H3>Usage</H3>
+<p>When passing date/time value as a string, make sure it is enclosed in quotes. Otherwise, it is interpreted as a number representation of a date/time object returning undesired results.</p><a name="1804893"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSDateFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This shows LSDateFormat ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;LSDateFormat Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;LSDateFormat Example&lt;/H3&gt;
+
+&lt;P&gt;LSDateFormat formats the date portion of a date/time
+value using the locale convention. 
+
+
+&lt;!--- loop through a list of possible locales and
+show date values for Now()---&gt;
+&lt;CFLOOP LIST="#Server.Coldfusion.SupportedLocales#"
+INDEX="locale" DELIMITERS=","&gt;
+    &lt;CFSET oldlocale = SetLocale(locale)&gt;
+
+    &lt;CFOUTPUT&gt;&lt;P&gt;&lt;B&gt;&lt;I&gt;#locale#&lt;/I&gt;&lt;/B&gt;&lt;BR&gt;
+        #LSDateFormat(Now(), "mmm-dd-yyyy")#&lt;BR&gt;
+        #LSDateFormat(Now(), "mmmm d, yyyy")#&lt;BR&gt;
+        #LSDateFormat(Now(), "mm/dd/yyyy")#&lt;BR&gt;
+        #LSDateFormat(Now(), "d-mmm-yyyy")#&lt;BR&gt;
+        #LSDateFormat(Now(), "ddd, mmmm dd, yyyy")#&lt;BR&gt;
+        #LSDateFormat(Now(), "d/m/yy")#&lt;BR&gt;
+        #LSDateFormat(Now())#&lt;BR&gt;        
+        &lt;Hr noshade&gt;
+    &lt;/CFOUTPUT&gt;
+
+&lt;/CFLOOP&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSDateFormat
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_165.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_167.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

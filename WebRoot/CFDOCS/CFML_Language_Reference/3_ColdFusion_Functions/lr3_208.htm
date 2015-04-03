@@ -1,0 +1,150 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>REReplaceNoCase</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_207.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_209.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1223436"></a>
+ <H1>REReplaceNoCase</H1>
+
+
+
+<p>Returns <em>string</em> with a regular expression being replaced with <em>substring</em><em> </em>in the specified scope. The search is case-insensitive.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_200.htm#1001808">REFind</a>, <a href="../3_ColdFusion_Functions/lr3_201.htm#1670747">REFindNoCase</a>, <a href="../3_ColdFusion_Functions/lr3_204.htm#1001901">Replace</a>, and <a href="../3_ColdFusion_Functions/lr3_205.htm#1001938">ReplaceList</a>.
+</p>
+
+<a name="1223448"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>REReplaceNoCase</strong>(<em>string</em>, <em>reg_expression</em>, <em>substring</em> [, <em>scope</em> ])
+</PRE><a name="1223450"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string.</p><a name="1223452"> </a>
+<h5 class="param"> reg_expression</h5>
+<p class="param">Regular expression to be replaced. This regular expression can include POSIX-specified character classes (for example, [:alpha:], [:digit:], [:upper:], and [:lower:]).</p><a name="1223454"> </a>
+<h5 class="param"> substring</h5>
+<p class="param">String replacing <em>reg_expression</em>.</p><a name="1223456"> </a>
+<h5 class="param"> scope</h5>
+<p class="param">Defines how to complete the replace operation:</p><ul>
+<a name="1223458"> </a>
+<li><code>ONE</code> -- Replace only the first occurrence (default).
+
+<a name="1223459"> </a>
+</li>
+<li><code>ALL</code> -- Replace all occurrences.
+</li>
+</ul>
+<a name="2124114"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="REReplaceNoCase
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of REReplaceNoCase ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+REReplaceNoCase Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;REReplaceNoCase Example&lt;/H3&gt;
+&lt;P&gt;The REReplaceNoCase function returns &lt;i&gt;string&lt;/i&gt; with a regular
+expression being replaced with &lt;i&gt;substring&lt;/i&gt; in the specified scope.
+This is a case-insensitive search.
+&lt;P&gt;REReplaceNoCase("cabaret","C|B","G","ALL"):    
+&lt;CFOUTPUT&gt;#REReplaceNoCase("cabaret","C|B","G","ALL")#&lt;/CFOUTPUT&gt;
+&lt;P&gt;REReplaceNoCase("cabaret","[A-Z]","G","ALL"):    
+&lt;CFOUTPUT&gt;#REReplaceNoCase("cabaret","[A-Z]","G","ALL")#&lt;/CFOUTPUT&gt;
+&lt;P&gt;REReplaceNoCase("I LOVE JELLIES","jell(y|ies)","cookies"):    
+&lt;CFOUTPUT&gt;#REReplaceNoCase("I LOVE JELLIES","jell(y|ies)","cookies")#
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;REReplaceNoCase("I LOVE JELLY","jell(y|ies)","cookies"):    
+&lt;CFOUTPUT&gt;#REReplaceNoCase("I LOVE JELLY","jell(y|ies)","cookies")#
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="REReplaceNoCase
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_207.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_209.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

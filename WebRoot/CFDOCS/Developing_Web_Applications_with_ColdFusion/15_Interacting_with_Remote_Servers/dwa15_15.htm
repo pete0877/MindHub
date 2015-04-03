@@ -1,0 +1,177 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Transferring Data From Browser to Server</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_14.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 15	:&nbsp;&nbsp;Interacting with Remote Servers</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1043056"></a>
+ <H1>Transferring Data From Browser to Server</H1>
+
+
+
+<p>This example serializes form field data, posts it to the server, deserializes it, and outputs the data. For simplicity, only a small amount of data is collected. In applications where complex JavaScript data collections are generated, this basic approach can be extended very effectively.</p><pre>&lt;!--- Get WDDX JS utility objects ---&gt;
+&lt;SCRIPT LANGUAGE="JavaScript" 
+    SRC="/CFIDE/scripts/wddx.js"&gt;&lt;/SCRIPT&gt;
+
+&lt;!--- Add data binding code ---&gt;
+&lt;SCRIPT&gt;
+
+    // Generic serialization to a form field
+    function serializeData(data, formField)
+    {    
+        wddxSerializer = new WddxSerializer();
+        wddxPacket = wddxSerializer.serialize(data);
+        if (wddxPacket != null)
+        {
+            formField.value = wddxPacket;
+        }
+        else
+        {
+            alert("Couldn't serialize data");
+        }
+    }
+    
+    // Person info recordset with columns firstName and lastName
+    var personInfo = new WddxRecordset(new Array("firstName",
+    "lastName"));
+
+    // Add next record to end of personInfo recordset
+    function doNext()
+    {
+        nRows = personInfo.getRowCount();
+        personInfo.firstName[nRows] =
+        document.personForm.firstName.value;
+        personInfo.lastName[nRows] = document.personForm.lastName.value;
+        document.personForm.firstName.value = "";
+        document.personForm.lastName.value = "";
+    }
+
+&lt;/SCRIPT&gt;    
+
+&lt;!--- Data collection form ---&gt; 
+&lt;FORM ACTION="wddx_browser_2_server.cfm" METHOD="post"
+NAME="personForm"&gt;
+
+    &lt;!--- Input fields ---&gt;
+    Personal information&lt;p&gt;
+    First name: &lt;INPUT TYPE=text NAME=firstName&gt;&lt;BR&gt;
+    Last name: &lt;INPUT TYPE=text NAME=lastName&gt;&lt;BR&gt;
+    &lt;P&gt;
+    
+    &lt;!--- Navigation &amp; submission bar ---&gt;
+    &lt;INPUT TYPE="button" BALUE="Next" onclick="doNext()"&gt;
+    &lt;INPUT TYPE="button" BALUE="Serialize"
+    onclick="serializeData(personInfo, document.personForm.wddxPacket)"&gt;
+    &lt;INPUT TYPE="submit" BALUE="Submit"&gt;
+    &lt;P&gt;
+    
+    &lt;!--- This is where the WDDX packet will be stored ---&gt;
+    WDDX packet display:&lt;p&gt;
+    &lt;TEXTAREA NAME="wddxPacket" ROWS="10" COLS="80" WRAP="Virtual"&gt;&lt;
+    /TEXTAREA&gt;
+    
+&lt;/FORM&gt;
+
+&lt;!--- Server-side processing ---&gt;
+&lt;HR&gt;
+&lt;P&gt;&lt;B&gt;Server-side processing&lt;/B&gt;&lt;P&gt;
+&lt;CFIF isdefined("form.wddxPacket")&gt;
+    &lt;CFIF form.wddxPacket neq ""&gt;
+
+        &lt;!--- Deserialize the WDDX data ---&gt;
+        &lt;CFWDDX action="wddx2cfml" input=#form.wddxPacket#
+        output="personInfo"&gt;
+
+        &lt;!--- Display the query ---&gt;
+        The submitted personal information is:&lt;P&gt;
+        &lt;CFOUTPUT QUERY=personInfo&gt;
+            Person #CurrentRow#: #firstName# #lastName#&lt;BR&gt;
+        &lt;/CFOUTPUT&gt;
+    &lt;CFELSE&gt;
+        The client did not send a well-formed WDDX data packet!
+
+    &lt;/CFIF&gt;
+&lt;CFELSE&gt;
+    No WDDX data to process at this time.
+&lt;/CFIF&gt;
+
+
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../15_Interacting_with_Remote_Servers/dwa15_14.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../15_Interacting_with_Remote_Servers/dwa15.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../16_Connecting_to_LDAP_Directories/dwa16.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:58 -->
+</body>
+</html>

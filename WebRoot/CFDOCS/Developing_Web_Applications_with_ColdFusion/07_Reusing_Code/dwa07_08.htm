@@ -1,0 +1,140 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Nesting Custom Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Reusing Code</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1024422"></a>
+ <H1>Nesting Custom Tags</H1>
+
+
+
+<p>ColdFusion lets you turn a custom tag into a special kind of container that can enclose additional custom tags, which allows you to nest tags. Base tags are also know as ancestors or parent tags, while the tags that base tags call are known as sub tags, descendants, or child tags.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=3 rowspan=1>
+<strong>Terms to Describe the Relationship Between Nested Tags</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Calling tag</strong>
+</th><th align="left">
+<strong>Tag that is nested within the calling tag</strong>
+</th><th align="left">
+<strong>Notes</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+base tag
+</td><td valign="top">
+sub tag
+</td><td valign="top">
+A base tag is an ancestor that has been explicitly associated with a descendant with CFASSOCIATE.
+</td></tr>
+<tr valign="top"><td valign="top">
+ancestor
+</td><td valign="top">
+descendant
+</td><td valign="top">
+An ancestor is any tag that contains other tags between its start and end tags.
+</td></tr>
+<tr valign="top"><td valign="top">
+parent
+</td><td valign="top">
+child
+</td><td valign="top">
+"Parent" and "child" are synonyms for "ancestor" and "descendant."
+</td></tr>
+
+</table>
+</div>
+</p><p>You can create multiple levels of nesting by closing a sub tag. In this case, the sub tag becomes the base tag for its own sub tags. Any tag with an end tag present can be an ancestor to another tag.</p><p>Nested custom tags operate through three modes of processing, which are exposed to the base tags through the variable ThisTag.ExecutionMode:</p><ul>
+<li>The start mode, in which the base tag is processed for the first time.
+
+</li>
+<li>The inactive mode, in which sub tags and other code contained within the base tag are processed.
+<p>No processing occurs in the base tag during this phase.
+</p></li>
+<li>The end mode, in which the base tag is processed a second time.
+</li>
+</ul>
+<a name="1025750"></a>
+ 
+<H3>Associating sub tags with the base tag</H3>
+<p>While the ability to create nested custom tags is a tremendous productivity gain, keeping track of complex nested tag hierarchies can become a chore. A simple mechanism, the CFASSOCIATE tag, lets the parent know what the children are up to. By adding this tag to a sub tag, you enable communication of its attributes to the base tag.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_09.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:46 -->
+</body>
+</html>

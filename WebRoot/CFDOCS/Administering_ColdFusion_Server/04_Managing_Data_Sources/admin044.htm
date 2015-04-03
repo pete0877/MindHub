@@ -1,0 +1,234 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Adding Data Sources for ColdFusion</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin043.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin045.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 4	:&nbsp;&nbsp;Managing Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1098131"></a>
+ <H1>Adding Data Sources for ColdFusion</H1>
+
+
+
+<p>The process for adding a data source in the ColdFusion Administrator is the same, no matter what type of driver you're using (ODBC, Native, or OLE DB).</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To add a data source to ColdFusion
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator.
+
+
+<p>You see the Server Settings page of the ColdFusion Administrator.
+</p></li>
+<li>Under Data Sources, click the link that specifies the type of data source you want to add:
+
+<ul>
+<a name="1067363"> </a>
+<li>ODBC
+
+<a name="1067364"> </a>
+</li>
+<li>Native Drivers
+<a name="1067387"> </a>
+</li>
+<li>OLE DB (Available only on Windows NT)
+<p>The Data Sources page appears.
+</p><p><img src="../images/datasources.gif">
+
+
+
+</p></li>
+</ul>
+</li>
+<li>Enter a name for the new data source and select a driver from the drop down list. 
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Do not name a ColdFusion data source <strong>Registry</strong> or <strong>Cookie</strong>, as these 
+words are reserved for use by ColdFusion.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Click Add.
+
+<p>You see the Create Data Source page.
+</p></li>
+<li>Enter the appropriate information about the new data source.
+
+<p>The information you enter in this page depends on the platform on which 
+ColdFusion is installed and on the driver you specify. For detailed information 
+about options for your driver, see the section for your specific database later in 
+this chapter.
+</p></li>
+<li>Click CF Settings to set the following ColdFusion-specific options. See the following section, <a href="../04_Managing_Data_Sources/admin044.htm#1071681">&quot;ColdFusion Settings&quot;</a>, for detailed information about these settings.
+
+</li>
+<li>Click Create to create the new data source.
+
+<p>ColdFusion automatically verifies that it can connect to the data source. If the data 
+source is successfully verified, you see the Data Source page, with the new data 
+source listed. If ColdFusion could not verify the data source, you see an error 
+message. For more information about verifying data sources, see <a href="../04_Managing_Data_Sources/admin0417.htm#1091581">&quot;Connecting to 
+Sybase System 11 data sources&quot;</a>.
+</p></li>
+</ol>
+<p>If you are creating a UNIX data source, you may need to set environment variables for your database client library by editing the ColdFusion start script in <code>&lt;installdir&gt;/coldfusion/bin</code>. For detailed information about editing the ColdFusion start script for your particular database, see the section about your database in this chapter.</p><a name="1071681"></a>
+ 
+<H2>ColdFusion Settings</H2>
+<p>To define a number of advanced ODBC and ColdFusion options, select a data source and click the CF Settings button. These options apply to all platforms. The following table describes the ColdFusion data source options.</p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>ColdFusion Data Source Settings&nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Option</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Login Timeout
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+The amount of time in seconds before ColdFusion times out the connection login page.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Limit Connections
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Click to enable and then specify the number of simultaneous connections you want to allow for the current data source. 
+
+<strong>Note</strong>: If you enable Limit Connections without specifying a limit for simultaneous connections, ColdFusion defaults to unlimited connections.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ColdFusion Login
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Enter a username/password for accessing the ODBC data source. Any username and password specified in a CFQUERY or other data access tag overrides the values specified in the ColdFusion login. 
+
+Also, when creating a data source using a native database driver, you use the username and password options to pass login information to the database. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Maintain database connections
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Ordinarily, a connection to a data source is established for every operation that requires it. However, you can improve performance by caching the database connection. To do so, click to enable this check box.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Disable Database Connections
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Disables connections to the data source. This setting is useful if you need to perform administrative tasks to the database. ColdFusion no longer allows users to establish new connections to the disabled data source. In addition, any existing connections that are not in use are automatically disconnected and cleaned up, and any connections currently in use are automatically notified that they are to clean themselves up as soon as their current transaction is complete. Subsequent requests to disabled data sources return trapable database exceptions. 
+
+To restore the connection to the data source, uncheck this option.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Connection timeout
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Specify the maximum amount of time after the database connection is made (in minutes) you want ColdFusion to cache a connection after it is used. 
+
+This is different from the server setting to Limit database connection inactive time. This latter setting is server wide and only releases cached connections that have been inactive (not used) for the specified period of time. The Connection Timeout setting does not return a connection to the cache after a specified period of time no matter how frequently or infrequently it has been used. The default is "" or 0 which means the connection timeout is never enforced.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Restrict SQL Operations
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Select the SQL operations you want to restrict for the current data source. ColdFusion will not execute the SQL operations you select in this list. 
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Enable retrieval of long text 
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Retrieves all the data for a long text field. ColdFusion retrieves the column with the long text field and any subsequent columns in the select statement as unbound data. Unbound data takes longer to retrieve than bound data; therefore, enabling this setting can affect performance. If you use this setting, you should order the columns in your select statement with the long text fields referenced last.
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Long Text Buffer Size
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Specifies the number of characters to retrieve from a long text field if "Enable retrieval of long text" is not set. In this case, ColdFusion binds text columns to a buffer whose size you specify in this field. If you specify a size that is not supported by your database, an SQL execution error occurs when you try to retrieve the data. 
+</td></tr>
+
+</table>
+
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Managing_Data_Sources/admin043.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../04_Managing_Data_Sources/admin04.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../04_Managing_Data_Sources/admin045.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:32 -->
+</body>
+</html>

@@ -1,0 +1,168 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Building a SELECT Statement</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Accessing ColdFusion  Data Sources</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997441"></a>
+ <H1>Building a SELECT Statement</H1>
+
+
+
+<p>SQL SELECT statements let you specify the data from which to build a recordset. This procedure begins with SQL Builder open.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To create a SELECT statement:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select the first table you want to query.
+
+
+</li>
+<li>Right-click in the Table pane and choose Add Table or click the Add Table button in the tool bar to add additional tables to the query.
+
+</li>
+<li>Drag and drop column names between tables to create joins.
+
+</li>
+<li>Right-click on a join to delete the join or change it to an inner or outer join.
+
+</li>
+<li>Drag the columns you want to display onto the Column section of the Properties pane.
+
+</li>
+<li>Set additional query attributes in the Properties pane.
+
+</li>
+<li>Save or insert the query into your page.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To use a CFML variable in a SQL WHERE clause:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">In the Properties pane, click in the Criteria column for the column that you want use in the WHERE clause.
+
+
+</li>
+<li>Open the select box and choose the appropriate variable syntax.
+
+</li>
+<li>Double-click on the variable placeholder name and enter a value.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To save a query:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click the Save Query button on the Query toolbar.
+
+
+</li>
+<li>Enter a name for the query in the dialog.
+
+</li>
+<li>Click Save.
+
+</li>
+</ol>
+<p>Saved queries are stored on the ColdFusion Database Server. They can be edited and used by to everyone who has access to that server.</p><p>If you edit a SQL statement in the SQL pane and then save the query, the changes are saved. However, if you modify the Table pane or change any values in the Properties pane, a new SQL statement is generated, overwriting any edits you made in the SQL pane.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Accessing_ColdFusion_Data_Sources/data8.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:45 -->
+</body>
+</html>

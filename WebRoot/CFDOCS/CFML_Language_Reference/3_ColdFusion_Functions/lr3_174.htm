@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>LSParseEuroCurrency</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_173.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_175.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1702979"></a>
+ <H1>LSParseEuroCurrency</H1>
+
+
+
+<p>Converts a locale-specific currency string that contains the Euro symbol (&euro;) or sign (EUR) to a number. Attempts conversion through each of the three default currency formats (none, local, international). Returns the number matching the value of <em>string</em>.</p><p>See, also, <a href="../3_ColdFusion_Functions/lr3_172.htm#1000806">LSParseCurrency</a>, <a href="../3_ColdFusion_Functions/lr3_167.htm#1701708">LSEuroCurrencyFormat</a> and <a href="../3_ColdFusion_Functions/lr3_215.htm#1002208">SetLocale</a>.</p><a name="1702981"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>LSParseEuroCurrency</strong>(<em>currency-</em><em>string</em>)
+</PRE><a name="1702983"> </a>
+<h5 class="param"> currency-string</h5>
+<p class="param">The locale-specific string you want to convert to a number.</p><a name="1703840"></a>
+ 
+<H3>Usage</H3>
+<p>The LSParseEuroCurrency function can read the Euro symbol (&euro;) only on Euro-enabled computers, such as Windows NT 4.0 SP4, that have Euro-enabled fonts installed. </p><p>This function is similar to LSParseCurrency except that LSParseEuroCurrency parses only the Euro currency symbol (&euro;) or the international Euro sign (EUR), not other currency symbols such as the dollar sign ($) or the pound sign (&pound;).</p><a name="1805283"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSParseEuroCurrency
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows LSParseEuroCurrency ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;LSParseEuroCurrency Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;LSParseEuroCurrency Example&lt;/H3&gt;
+
+&lt;P&gt;LSParseEuroCurrency converts a locale-specific currency
+string to a number.  Attempts conversion through each of
+the three default currency formats.
+
+&lt;!--------------------------------------------------------- 
+Loop through a list of possible locales and
+show currency values for 123,456 units. 
+-----------------------------------------------------------&gt;
+
+&lt;CFLOOP LIST="#Server.Coldfusion.SupportedLocales#"
+INDEX="locale" DELIMITERS=","&gt;
+    &lt;CFSET oldlocale = SetLocale("#locale#")&gt;
+    &lt;CFOUTPUT&gt;&lt;P&gt;&lt;B&gt;&lt;I&gt;#locale#&lt;/I&gt;&lt;/B&gt;&lt;BR&gt;
+        Local: #LSEuroCurrencyFormat(123456, "local")#&lt;BR&gt;
+        Currency Number: 
+        #LSParseEuroCurrency(&quot;EUR123456&quot;)#&lt;BR&gt;
+        International: #LSEuroCurrencyFormat(123456, 
+"international")#&lt;BR&gt;
+
+        None: #LSEuroCurrencyFormat(123456, "none")#&lt;BR&gt;
+        &lt;Hr noshade&gt;
+    &lt;/CFOUTPUT&gt;
+&lt;/CFLOOP&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="LSParseEuroCurrency
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_173.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_175.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

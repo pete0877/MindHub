@@ -1,0 +1,160 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ReplaceList</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_204.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_206.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001938"></a>
+ <H1>ReplaceList</H1>
+
+
+
+<p>Returns <em>string</em> with all occurrences of the elements from the specified comma-delimited list being replaced with their corresponding elements from another comma-delimited list. The search is case-sensitive.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_092.htm#998560">Find</a>, <a href="../3_ColdFusion_Functions/lr3_204.htm#1001901">Replace</a>, and <a href="../3_ColdFusion_Functions/lr3_207.htm#1002007">REReplace</a>.
+</p>
+
+<a name="1001941"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ReplaceList</strong>(<em>string</em>, <em>list1</em>, <em>list2</em>)
+</PRE><a name="1001943"> </a>
+<h5 class="param"> string</h5>
+<p class="param">Any string.</p><a name="1001944"> </a>
+<h5 class="param"> list1</h5>
+<p class="param">Comma-delimited list of substrings to be replaced.</p><a name="1001945"> </a>
+<h5 class="param"> list2</h5>
+<p class="param">Comma-delimited list of replace substrings.</p><a name="1001946"></a>
+ 
+<H3>Usage</H3>
+<p>Note that the list of substrings to be replaced is processed one after another. In this way you may experience recursive replacement if one of your <em>list1</em><em> </em>elements is contained in <em>list2</em><em> </em>elements<em>. </em>The second example listed below demonstrates such replacement.</p><a name="1806910"></a>
+ 
+<H3>Examples</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ReplaceList
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of Replacelist ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+Replacelist Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY BGCOLOR=silver&gt;
+&lt;H3&gt;Replacelist Example&lt;/H3&gt;
+
+&lt;P&gt;The Replacelist function returns &lt;I&gt;string&lt;/I&gt; with 
+&lt;I&gt;substringlist1&lt;/I&gt; (e.g. "a,b") being replaced by &lt;I&gt;substringlist2
+  &lt;/I&gt; (e.g. "c,d") in the specified scope.
+
+&lt;CFIF IsDefined("FORM.MyString")&gt;
+
+&lt;P&gt;Your original string, &lt;CFOUTPUT&gt;#FORM.MyString#&lt;/CFOUTPUT&gt;
+&lt;P&gt;You wanted to replace the substring &lt;CFOUTPUT&gt;#FORM.MySubstring1#
+  &lt;/CFOUTPUT&gt;
+with the substring &lt;CFOUTPUT&gt;#FORM.MySubstring2#&lt;/CFOUTPUT&gt;.
+&lt;P&gt;The result: &lt;CFOUTPUT&gt;#Replacelist(FORM.myString,
+FORM.MySubstring1, FORM.mySubString2)#&lt;/CFOUTPUT&gt;
+&lt;/CFIF&gt;
+
+&lt;FORM ACTION="replacelist.cfm" METHOD="POST"&gt;
+&lt;P&gt;String 1
+&lt;BR&gt;&lt;INPUT TYPE="Text" VALUE="My Test String" NAME="MyString"&gt;
+
+&lt;P&gt;Substring 1 (find this list of substrings)
+&lt;BR&gt;&lt;INPUT TYPE="Text" VALUE="Test, String" NAME="MySubstring1"&gt;
+
+&lt;P&gt;Substring 2 (replace with this list of substrings)
+&lt;BR&gt;&lt;INPUT TYPE="Text" VALUE="Replaced, Sentence" NAME="MySubstring2"&gt;
+
+&lt;P&gt;&lt;INPUT TYPE="Submit" VALUE="Replace and display" NAME=""&gt; 
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ReplaceList
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_204.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_206.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,372 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Installing ClusterCATS</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1203339"></a>
+ <H1>Installing ClusterCATS</H1>
+
+
+
+<p>ClusterCATS is an embedded installation option in the ColdFusion Server installation program. To install the ClusterCATS load balancing and high availability capabilities on each of your servers, run the ColdFusion Server installation program on each server that will be part of your cluster and choose the Load Balancing and High Availability install option. Also, run the installation program to install ClusterCATS on a separate, non-clustered machine from which you will administer your clusters using the ClusterCATS Explorer.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install ClusterCATS on Windows NT servers:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Insert the ColdFusion Server v4.5 CD into your CD drive or access it from your network jukebox (Enterprise users).
+
+
+</li>
+<li>Click Start&gt;Run to display the Run dialog box.
+
+<p><img src="../images/Run_dialog.gif">
+
+
+
+</p></li>
+<li>Enter the path location for where the ColdFusion Setup.exe resides or click Browse to drill down to it.
+
+</li>
+<li>Click OK.
+
+<p>The ColdFusion v4.5 Setup program starts and displays the ColdFusion Setup 
+Welcome page.
+</p><p><img src="../images/CF_Install_Welcome.gif">
+
+
+
+</p></li>
+<li>Click Next in the Welcome and Software License Agreement dialog boxes.
+
+<p>The User Information dialog box appears after the Software License Agreement 
+dialog box.
+</p><p><img src="../images/CF_Install_UserInfo.gif">
+
+
+
+</p></li>
+<li>Enter your name, company, and ColdFusion serial number in the User Information dialog box and click Next.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You'll find your ColdFusion serial number on the product box.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Choose Destination Directory dialog box appears next.
+</p><p><img src="../images/CF_Install_Destination.gif">
+
+
+
+</p></li>
+<li>Accept or change the default destination folder and click Next.
+
+<p>The Select Web Server dialog box appears.
+</p><p><img src="../images/CF_Install_WS.gif">
+
+
+
+</p><p>If your Web server is already installed, the ColdFusion Setup program will 
+automatically detect it.
+</p></li>
+<li>If your Web server is not one of the ones listed, select the Other option and click Next. Otherwise, just click Next.
+
+<p>The Select Web Server Document Directory dialog box appears next.
+</p><p><img src="../images/CF_Install_WSDocDir.gif">
+
+
+
+</p></li>
+<li>Either accept the Web server's default document directory or enter a different location for the default directory and click Next.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ColdFusion documentation and example code are installed in a 
+subdirectory below the Web server's document directory.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The Select Install Options dialog box appears.
+</p><p><img src="../images/CF_Install_Options.gif">
+
+
+
+</p></li>
+<li>If you've already installed ColdFusion and just want to install ClusterCATS, deselect all of the options you don't want, leave the Load Balancing and High Availability check box selected, and click Next.
+
+<p>The Server High Availability dialog box appears.
+</p><p><img src="../images/High_Avail.gif">
+
+
+
+</p></li>
+<li>Leave the Yes option selected if you want ClusterCATS to provide transparent failover support for your clusters and click Next.
+
+<p>This option ensures that the server is able to assume both the IP address of a failed 
+server and any HTTP requests originally sent to the failed server.
+</p></li>
+<li>Click Next or OK in the remaining dialog boxes to begin copying the ClusterCATS files to the server.
+
+</li>
+<li>Click Finish to complete the installation.
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install ClusterCATS on Sun Solaris servers:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Log in as <code>root</code>.
+
+
+</li>
+<li>Load the ColdFusion CD-ROM into your CD drive.
+
+</li>
+<li>Mount the CD-ROM on <code>/cdrom/cdrom0</code> if necessary.
+
+<p>If the Solaris Volume Manager is active, you won't need to mount the CD.
+</p></li>
+<li>Type <code>pkgadd -d /cdrom/cdrom0</code> to start the installation process.
+
+</li>
+<li>Enter <code>cfusion</code> at the prompt and press Enter to select the ColdFusion package. Alternatively, you can just press Enter to accept the default (<code>All</code>), as ColdFusion is the only package available.
+
+</li>
+<li>Enter the ColdFusion registration ID (serial number) when prompted.
+
+<p>You'll find your ColdFusion registration ID on the product box.
+</p></li>
+<li>Enter the name of the directory in which you want to install ColdFusion or accept the default directory.
+
+<p><code>/opt</code> is the default installation directory.
+</p></li>
+<li>Enter the name of the Web server you are running and press Enter or just press Enter if you are running the default Web server (Netscape Enterprise Server).
+
+</li>
+<li>Press Enter to have the installation program automatically configure the Web server.
+
+<p>The program loads the necessary plug-in for Netscape or module for Apache 1.3.x 
+Web servers.
+</p></li>
+<li>When prompted with whether or not to install ClusterCATS, press Enter to do so.
+
+</li>
+<li>If you want the server on which you are installing ClusterCATS to be able to assume the IP address and HTTP traffic of a failed server in the cluster, press Enter to configure this server with failover services. Otherwise, enter <code>n</code> and press Enter.
+
+<p>Typically, you want all of the servers in your cluster to be configured for failover, 
+particularly if they have the same processing capacity. However, if you have a 
+mixed server environment with some high capacity servers and several lower 
+capacity servers, you may not want the less powerful machines to accept the 
+additional load of unavailable servers in the cluster.
+</p></li>
+<li>Enter your Web server's document root directory and press Enter.
+
+<p>The default document root directory is <code>/docroot</code>.
+</p></li>
+<li>Do not install Advanced Security at this time; enter n when prompted and press Enter.
+
+</li>
+<li>Enter the password you want to use to access the ColdFusion Administrator, which allows you to configure and modify settings for the ColdFusion Server.
+
+<p>You'll be asked to re-enter the password for verification purposes.
+</p></li>
+<li>Enter the password you want to use to access ColdFusion's Remote Development Services (RDS), which allows you to connect to ColdFusion Server when developing applications with ColdFusion Studio.
+
+<p>You'll be asked to re-enter the password for verification purposes.
+</p></li>
+<li>Install the ColdFusion documentation.
+
+<p>The documentation is installed in the /<code>cfdocs</code> directory, which resides under the 
+Web root directory (<code>/docroot</code>).
+</p></li>
+<li>Enter the user name under which ColdFusion will run or press Enter to run under the default user name (<code>nobody</code>).
+
+</li>
+<li>Press Enter to begin the installation.
+
+</li>
+</ol>
+<p>When the installation is complete, a shell script restarts the Web server and starts ColdFusion services.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To install ClusterCATS on Linux servers:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Log in as <code>root</code>.
+
+
+</li>
+<li>Load the ColdFusion CD-ROM into your CD drive.
+
+</li>
+<li>Mount the CD-ROM on <code>/mnt/cdrom </code>if necessary.
+
+</li>
+<li>Change directories to the <code>cf/linux</code> directory on the CD.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This procedure assumes you have already installed ColdFusion 
+Server and now want to install ClusterCATS. If you need to install 
+ColdFusion on Linux first before installing ClusterCATS, see 
+<a href="../01_Installing_and_Configuring_ColdFusion/admin014.htm#1025636">&quot;Installing ColdFusion on Linux&quot;</a>.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Run the ClusterCATS installation script by entering the following command:
+
+<p><code>./cluster_install
+</code></p><p>The ClusterCATS installation script starts.
+</p></li>
+<li>Enter the directory in which you want to install ClusterCATS and press Enter.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The default directory (/<code>opt/coldfusion/btcats</code>) assumes you've 
+already installed ColdFusion to the default directory (<code>/opt</code>). If you've 
+installed ColdFusion to a directory other than the default, be sure to 
+specify that directory path instead.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Either accept the default path for where your Web server resides or provide a different path and press Enter.
+
+<p>The default path is <code>/usr/sbin/httpd</code>.
+</p></li>
+<li>Either accept the default path for where your Web server's configuration file (<code>httpd.conf</code>) resides or provide a different location and press Enter.
+
+<p>The default location is<code> /etc/httpd/conf</code>.
+</p></li>
+<li>Press Enter to have ClusterCATS monitor all cluster members (servers) for failures.
+
+</li>
+<li>If you want ClusterCATS to monitor the Web server for failures as well, press Enter. Otherwise, enter <code>n</code> and press Enter.
+
+</li>
+<li>If you want the server on which you are installing ClusterCATS to be able to assume the IP address and HTTP traffic of a failed server in the cluster, press Enter to configure this server with failover services. Otherwise, enter <code>n</code> and press Enter.
+
+<p>Typically, you want all of the servers in your cluster to be configured for failover, 
+particularly if they have the same processing capacity. However, if you have a 
+mixed server environment with some high capacity servers and several lower 
+capacity servers, you may not want the less powerful machines to accept the 
+additional load of unavailable servers in the cluster.
+</p></li>
+<li>Press Enter to have the ClusterCATS installation script begin installing the necessary program files and making the configurations you specified.
+
+<p>Once the ClusterCATS installation script finishes, you are returned to the 
+command prompt. You are now ready to begin creating clusters.
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin068.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

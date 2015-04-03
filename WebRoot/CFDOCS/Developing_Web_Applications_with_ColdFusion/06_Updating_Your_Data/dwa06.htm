@@ -1,0 +1,109 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Updating Your Data</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="996797"></a>
+<H1>Chapter 6	<br>
+Updating Your Data</H1>
+
+<p>This chapter describes how to insert, update, and delete data in a database with ColdFusion.</p><a name="1012923"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../06_Updating_Your_Data/dwa06_02.htm#1012884">Inserting Data</a>
+
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_03.htm#1011961">Creating an HTML Insert Form</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_04.htm#1012013">Creating an Action Page to Insert Data</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_05.htm#1014961">Updating Data</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_06.htm#1012102">Creating an Update Form</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_07.htm#1012126">Creating an Action Page to Update Data</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_08.htm#1012189">Deleting Data</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_09.htm#1012253">Requiring Users to Enter Values in Form Fields</a>
+</li>
+<li><a href="../06_Updating_Your_Data/dwa06_10.htm#1012264">Validating the Data That Users Enter in Form Fields</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../05_Making_Variables_Dynamic/dwa05_07.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Updating_Your_Data/dwa06_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:45 -->
+</body>
+</html>

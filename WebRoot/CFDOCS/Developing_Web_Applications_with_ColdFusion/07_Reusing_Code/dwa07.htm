@@ -1,0 +1,113 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Reusing Code</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="996797"></a>
+<H1>Chapter 7	<br>
+Reusing Code</H1>
+
+<p>This chapter describes how to reuse common code with CFINCLUDE, and create custom CFML tags that encapsulate common code.</p><a name="1029823"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../07_Reusing_Code/dwa07_02.htm#1029826">Ways to Reuse Code</a>
+
+</li>
+<li><a href="../07_Reusing_Code/dwa07_03.htm#1023977">Reusing Common Code with CFINCLUDE</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_04.htm#1020584">About Custom Tags in CFML</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_05.htm#1022231">Using Existing Custom Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_06.htm#1020653">Writing Custom CFML Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_07.htm#1026379">Passing Attribute Values between Custom Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_08.htm#1024422">Nesting Custom Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_09.htm#1024525">Passing Data Between Nested Custom Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_10.htm#1030008">Executing Custom Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_11.htm#1028068">Installing Custom Tags</a>
+</li>
+<li><a href="../07_Reusing_Code/dwa07_12.htm#1020937">Managing Custom Tags</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Updating_Your_Data/dwa06_10.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../07_Reusing_Code/dwa07_02.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:46 -->
+</body>
+</html>

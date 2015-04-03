@@ -1,0 +1,99 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Setting Editing Options</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Editing Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015965"></a>
+ <H1>Setting Editing Options</H1>
+
+
+
+<p>The following features control the display of tags and text in the editor.</p><p><strong>Color-coding tags</strong> -- Studio installs a set of default color schemes. Use the Color Coding pane in the Settings dialog box (F8) to make any changes.</p><p><strong>Word wrap</strong> -- Controls line length of text in the Editor. Click the Word Wrap icon on the Editor toolbar.</p><p><img src="../images/word_wrap_button.gif">
+
+
+</p><p><strong>Gutter</strong> -- A space on the left side of the document used to keep track of bookmarks, line numbers, and debugger breakpoints. Click the Show Gutter button on the editor toolbar to open it. Press Ctrl + K to set and remove bookmarks and Ctrl + Shift + K to move to the next bookmark.</p><p><img src="../images/gutter_button.gif">
+
+
+</p><p><strong>Convert tag case</strong> -- Changes the case of all tags in the current document. Use the Edit &gt; Convert Tag Case menu command to globally change all tags in a document. You can also set global options for lowercase on the HTML pane in the Settings dialog box (F8).</p><p><strong>Use hexadecimal color values</strong> -- To insert colors as hex values instead of named values, set this option on the HTML pane of the Settings dialog box (F8).</p><p><strong>Indenting code --</strong> Use the left and right arrow keys on the Editor toolbar set indents. To automatically indent a line to the same level as the previous line, select Auto Indent on the Edit pane of the Settings dialog box (F8).</p><p><img src="../images/edit4a.gif" height="24" width="349">
+
+
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Editing_Pages/edit.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Editing_Pages/edit3.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:46 -->
+</body>
+</html>

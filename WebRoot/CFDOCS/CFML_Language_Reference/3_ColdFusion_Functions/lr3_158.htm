@@ -1,0 +1,191 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>ListSort</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_157.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_159.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1000175"></a>
+ <H1>ListSort</H1>
+
+
+
+<p>Sorts and delimits the items in a list according to the specified sort type and sort order.</p><a name="1000178"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>ListSort</strong>(<em>list, sort_type [, sort_order] </em>[, <em>delimiter</em> ])
+</PRE><a name="1000180"> </a>
+<h5 class="param"> list</h5>
+<p class="param">List to be sorted. The items in the list must be separated by commas or otherwise delimited.</p><a name="1000181"> </a>
+<h5 class="param"> sort_type</h5>
+<p class="param">The type of sort to be executed. You can specify any of the following sort types:</p><ul>
+<a name="1707087"> </a>
+<li>Numeric - sorts numbers.
+
+<a name="1707094"> </a>
+</li>
+<li>Text - sorts text alphabetically. 
+<a name="1707095"> </a>
+</li>
+<li>Textnocase - sorts text alphabetically. The case is ignored.
+</li>
+</ul>
+<a name="1707599"> </a>
+<h5 class="param"> sort_order</h5>
+<p class="param">The order to be followed. You can specify any of the following:</p><ul>
+<a name="1707601"> </a>
+<li>Asc - (Default) Ascending sort order.
+
+<a name="1707604"> </a>
+</li>
+<li>Desc - Descending sort order.
+</li>
+</ul>
+<a name="1707098"> </a>
+<h5 class="param"> delimiter</h5>
+<p class="param">Specify the character(s) used to delimit elements in the list. Default is comma ( , ). </p><a name="1804427"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListSort
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to use ListSort---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;ListSort Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;ListSort Example&lt;/H3&gt;
+
+&lt;!--- Find a list of users who wrote messages ---&gt;
+&lt;CFQUERY NAME="GetMessageUser" DATASOURCE="cfsnippets"&gt;
+SELECT         Username, Subject, Posted
+FROM         Messages
+&lt;/CFQUERY&gt;
+
+&lt;CFSET myList = ValueList(GetMessageUser.UserName)&gt;
+&lt;P&gt;Here is the unsorted list. &lt;/P&gt;
+
+&lt;CFOUTPUT&gt;
+#myList#
+&lt;/CFOUTPUT&gt;
+&lt;P&gt;Here is the list sorted alphabetically:&lt;/P&gt;
+&lt;CFSET sortedList = ListSort(myList, "Text")&gt;
+&lt;CFOUTPUT&gt;
+#sortedList#
+&lt;/CFOUTPUT&gt;
+
+&lt;P&gt;Here is a numeric list that is to be sorted in descending order.&lt;/P&gt;
+&lt;CFSET sortedNums = ListSort("12,23,107,19,1,65","Numeric", "Desc")&gt;
+&lt;CFOUTPUT&gt;
+#sortedNums#
+&lt;/CFOUTPUT&gt;
+
+&lt;P&gt;Here is a list that must be sorted numerically, since it contains both 
+negative and positive numbers, as well as decimal numbers. &lt;/P&gt;
+
+&lt;CFSET sortedNums2 = ListSort("23.75;-34,471:100,-9745","Numeric", 
+"ASC", ";,:")&gt;
+
+&lt;CFOUTPUT&gt;
+#sortedNums2#
+&lt;/CFOUTPUT&gt;
+
+&lt;P&gt;Here is a list that is to be sorted alphabetically without 
+consideration of case.&lt;/P&gt;
+
+&lt;CFSET sortedMix = ListSort("hello;123,HELLO:jeans,-
+345,887;ColdFusion:coldfusion", "TextNoCase", "ASC", ";,:")&gt;
+
+&lt;CFOUTPUT&gt;
+#sortedMix#
+&lt;/CFOUTPUT&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt; 
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="ListSort
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_157.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_159.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

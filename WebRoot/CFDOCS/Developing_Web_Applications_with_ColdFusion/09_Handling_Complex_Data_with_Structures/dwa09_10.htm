@@ -1,0 +1,160 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating and Using Structures</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1028694"></a>
+ <H1>Creating and Using Structures</H1>
+
+
+
+<p>This section explains how to use the structure functions to create and use structures in ColdFusion. The sample structure is called <em>employee,</em> and is used to add new employees to a corporate information system.</p><a name="1028696"></a>
+ 
+<H2>Creating structures</H2>
+<p>You create structures by assigning a variable name to the structure with the StructNew function:</p><pre>&lt;CFSET <em>mystructure</em>=StructNew()&gt;
+</pre><p>For example, to create a structure named <em>employee</em>, use this syntax:</p><pre>&lt;CFSET employee=StructNew()&gt;
+</pre><p>Now the structure exists and you can add data to it.</p><a name="1028702"></a>
+ 
+<H2>Adding data to structures</H2>
+<p>After you've created a structure, you add key-value pairs to the structure using the StructInsert function:</p><pre>&lt;CFSET value=StructInsert(<em>structure_name, key, value
+</em>    [<em>, AllowOverwrite</em>])&gt;
+</pre><p>The AllowOverwrite parameter is optional and can be either TRUE or FALSE. It can be used to specify whether an existing key should be overwritten or not. The default is FALSE.</p><p>When adding string values to a structure, enclose the string in quotation marks. For example, to add a key, <em>John</em>, with a value, <em>Sales</em>, to an existing structure called <em>Departments</em>, use this syntax:</p><pre>&lt;CFSET value=StructInsert(Departments, "John", "Sales")&gt;
+</pre><p>To change the value associated with a specific key, use the StructUpdate function. For example, if John moves from the Sales department to the Marketing department, you would use this syntax to update the Departments associative array:</p><pre>&lt;CFOUTPUT&gt;
+Personnel moves: #StructUpdate(Departments, "John", "Marketing")#
+&lt;/CFOUTPUT&gt;
+</pre><a name="1028710"></a>
+ 
+<H3>Example of adding data to a structure</H3>
+<p>The following example shows how to add content to a sample structure named <em>employee</em>, building the content of the value fields dynamically using form variables:</p><pre><code>&lt;CFSET rc=StructInsert(employee, "firstname", "#FORM.firstname#")&gt;
+&lt;CFSET rc=StructInsert(employee, "lastname", "#FORM.lastname#")&gt;
+&lt;CFSET rc=StructInsert(employee, "email", "#FORM.email#")&gt;
+&lt;CFSET rc=StructInsert(employee, "phone", "#FORM.phone#")&gt;
+&lt;CFSET rc=StructInsert(employee, "department", "#FORM.department#")&gt;
+</code></pre><a name="1028713"></a>
+ 
+<H2>Finding information in structures</H2>
+<p>To find the value associated with a specific key, use the StructFind function:</p><pre>StructFind(<em>structure_name, key</em>)
+</pre><a name="1028716"></a>
+ 
+<H3>Example</H3>
+<p>The following example shows how to generate a list of keys defined for a structure.</p><pre>&lt;CFLOOP COLLECTION=#department# ITEM="person"&gt;
+    &lt;CFOUTPUT&gt;
+    Key - #person#&lt;BR&gt;
+    Value - #StructFind(department,person)#&lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+</pre><p>Note that the StructFind function is case-insensitive. When you enumerate key-value pairs using a loop, the keys appear in uppercase.</p><a name="1028720"></a>
+ 
+<H2>Getting information about structures</H2>
+<p>To find out if a given value represents a structure, use the IsStruct function:</p><pre>IsStruct(<em>variable</em>)
+</pre><p>This function returns TRUE if <em>variable</em> is a structure.</p><p>Structures are not indexed numerically, so to find out how many name-value pairs exist in a structure, use the StructCount function, as in this example:</p><pre>StructCount(employee)
+</pre><p>To discover whether a specific Structure contains data, use the StructIsEmpty function:</p><pre>StructIsEmpty(<em>structure_name</em>)
+</pre><p>This function returns TRUE if the structure is empty and FALSE if it contains data.</p><a name="1028729"></a>
+ 
+<H3>Finding a specific key</H3>
+<p>To learn whether a specific key exists in a structure, use the StructKeyExists function.</p><pre>StructKeyExists(<em>structure_name, key</em>)
+</pre><p>If the name of the key is known in advance, you can use the ColdFusion function IsDefined, as in this example:</p><pre>&lt;CFSET temp=IsDefined("<em>structure_name</em>.<em>key</em>")&gt;
+</pre><p>But if the key is dynamic, or contains special characters, you must use the StructKeyExists function:</p><pre>&lt;CFSET temp=StructKeyExists(<em>structure_name, key</em>)&gt;
+</pre><a name="1028736"></a>
+ 
+<H3>Getting a list of keys in a structure</H3>
+<p>To get a list of the keys in a CFML structure, you use the StructKeyList function:</p><pre>&lt;CFSET temp=StructKeyList(<em>structure_name, </em>[<em>delimiter</em>] )&gt;
+</pre><p>The delimiter can be any delimiter, but the default is a comma ( , ).</p><p>The StructKeyArray function returns an array of keys in a structure:</p><pre>&lt;CFSET temp=StructKeyArray(<em>structure_name</em>)&gt;
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The StructKeyList and StructKeyArray functions do not return keys in any 
+particular order. Use the ListSort or ArraySort function to sort the results.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1028744"></a>
+ 
+<H2>Copying structures</H2>
+<p>To copy a structure, use the StructCopy function. This function takes the name of the structure you want to copy and returns a new structure with all the keys and values of the named structure.</p><pre>StructCopy(<em>structure</em>)
+</pre><p>This function throws an exception if <em>structure</em> doesn't exist.</p><p>Use the StructCopy function when you want to create a physical copy of a structure. You can also use assignment to create a copy by reference.</p><a name="1028749"></a>
+ 
+<H2>Deleting structures</H2>
+<p>To delete an individual name-value pair in a structure, use the StructDelete function:</p><pre>StructDelete(<em>structure_name, key </em>[<em>, indicatenotexisting</em> ])
+</pre><p>This deletes the named key and its associated value. Note that the <em>indicatenotexisting</em> parameter indicates whether the function returns FALSE if the named <em>key</em> does not exist. The default is FALSE, which means that the function returns Yes regardless of whether <em>key</em> exists. If you specify TRUE for this parameter, the function returns Yes if <em>key</em> exists and No if it does not.</p><p>You can also use the StructClear function to delete all the data in a structure but keep the structure instance itself:</p><pre>StructClear(<em>structure_name</em>)
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

@@ -1,0 +1,119 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating Pages</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em></td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Getting_the_Most_from_the_Help_System/help6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+</td>
+</tr>
+</table>
+</div> 
+
+<br>
+<a name="997347"></a>
+<H1>Chapter 5	<br>
+Creating Pages</H1>
+
+<p>Studio is designed to support many different development tasks, from writing simple HTML pages to designing, testing, and deploying complex, dynamic Web sites. </p><p>This chapter describes some basic techniques and offers pointers to features and settings that can help you build Web pages in the most productive way. </p><p>If you need to gain a basic understanding of HTML and Web page creation, see <a href="../03_Learning_HTML_and_CSS/tutorial.htm#484624">Chapter 3, &quot;Learning HTML and CSS&quot;</a>.</p><a name="1043468"></a>
+ 
+<H3>Contents</H3>
+<ul>
+<li><a href="../05_Creating_Pages/create2.htm#1042570">Entering Text and Other Content</a>
+
+</li>
+<li><a href="../05_Creating_Pages/create3.htm#1041403">Using Coding Tools</a>
+</li>
+<li><a href="../05_Creating_Pages/create4.htm#1018187">Document Basics</a>
+</li>
+<li><a href="../05_Creating_Pages/create5.htm#1042625">Best Practices in Coding</a>
+</li>
+<li><a href="../05_Creating_Pages/create6.htm#1042876">Printing Code, Browser Pages, and Help Topics</a>
+</li>
+<li><a href="../05_Creating_Pages/create7.htm#1027447">Getting Help Entering Content</a>
+</li>
+<li><a href="../05_Creating_Pages/create8.htm#1024161">Getting Started with Templates and Wizards</a>
+</li>
+<li><a href="../05_Creating_Pages/create9.htm#1023204">Working in Tag Chooser</a>
+</li>
+<li><a href="../05_Creating_Pages/create10.htm#1021611">Inserting Tags from the QuickBar</a>
+</li>
+<li><a href="../05_Creating_Pages/create11.htm#1043941">Using Keyboard Shortcuts</a>
+</li>
+<li><a href="../05_Creating_Pages/create12.htm#1043546">Saving Code Blocks as Snippets</a>
+</li>
+<li><a href="../05_Creating_Pages/create13.htm#1043579">Saving Keystrokes with Code Templates</a>
+</li>
+<li><a href="../05_Creating_Pages/create14.htm#1043264">Setting Colors for Page Elements</a>
+</li>
+<li><a href="../05_Creating_Pages/create15.htm#1043261">Adding Media Content</a>
+</li>
+</ul>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../04_Getting_the_Most_from_the_Help_System/help6.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../contents.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../05_Creating_Pages/create2.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm""><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:37 -->
+</body>
+</html>

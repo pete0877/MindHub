@@ -1,0 +1,147 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>QuotedValueList</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_195.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_197.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001724"></a>
+ <H1>QuotedValueList</H1>
+
+
+
+<p>Returns a comma-separated list of the values of each record returned from a previously executed query. Each value in the list is enclosed in single quotes.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_247.htm#1002693">ValueList</a>.
+</p>
+
+<a name="1001727"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>QuotedValueList</strong>(<em>query.column</em> [, <em>delimiter</em> ])
+</PRE><a name="1001729"> </a>
+<h5 class="param"> query.column</h5>
+<p class="param">Name of an already executed query and column. Separate query name and column name with a period ( . ).</p><a name="1001730"> </a>
+<h5 class="param"> delimiter</h5>
+<p class="param">A string delimiter to separate column data.</p><a name="1806381"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="QuotedValueList
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of QuotedValueList ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+QuotedValueList Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;QuotedValueList Example&lt;/H3&gt;
+
+&lt;!--- use the contents of one query to create another
+dynamically ---&gt;
+&lt;CFSET List = "`BIOL', `CHEM'"&gt;
+&lt;!--- first, get the department ids in our list ---&gt;
+&lt;CFQUERY NAME="GetDepartments" DATASOURCE="cfsnippets"&gt;
+SELECT Dept_ID FROM Departments
+WHERE Dept_ID IN (#PreserveSingleQuotes(List)#)
+&lt;/CFQUERY&gt;
+&lt;!--- now, select the courses for that department based
+on the quotedValueList produced from our previous query ---&gt;
+&lt;CFQUERY NAME="GetCourseList" DATASOURCE="cfsnippets"&gt;
+SELECT     *
+FROM     CourseList
+WHERE     Dept_ID IN (#QuotedValueList(GetDepartments.Dept_ID)#)
+&lt;/CFQUERY&gt;
+&lt;!--- now, output the results ---&gt;
+&lt;CFOUTPUT QUERY="GetCourseList" &gt;
+&lt;PRE&gt;#Course_ID#    #Dept_ID#    #CorNumber#    #CorName#&lt;/PRE&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="QuotedValueList
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_195.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_197.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

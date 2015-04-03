@@ -1,0 +1,139 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Setting File and Directory Attributes</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 14	:&nbsp;&nbsp;Managing Files on the Server</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997467"></a>
+ <H1>Setting File and Directory Attributes</H1>
+
+
+
+<p>File attributes in Windows are defined using the CFFILE ATTRIBUTES attribute. In UNIX, file and directory permissions are defined using the CFFILE and CFDIRECTORY MODE attribute.</p><a name="997470"></a>
+ 
+<H2>UNIX</H2>
+<p>In UNIX, you can set permissions on files and directories for owner, group, and other. Values for the MODE attribute correspond to octal values for the UNIX chmod command:</p><ul>
+<li>4 = Read only
+
+</li>
+<li>2 = Read/write
+</li>
+<li>1 = Read/write/execute
+</li>
+</ul>
+<p>You enter permissions values in the MODE attribute for each type of user: owner, group, other in that order. For example to assign read permissions for all:</p><pre>MODE=444
+</pre><p>To give a file or directory owner read/write/execute permissions and read only permissions for everyone else:</p><pre>MODE=744
+</pre><a name="997479"></a>
+ 
+<H2>Windows</H2>
+<p>In Windows, you can set the following file attributes:</p><ul>
+<li>ReadOnly
+
+</li>
+<li>Temporary
+</li>
+<li>Archive
+</li>
+<li>Hidden
+</li>
+<li>System
+</li>
+<li>Normal
+</li>
+</ul>
+<p>If ATTRIBUTES is not used, the file's existing attributes are maintained. If Normal is specified as well as any other attributes, Normal is overridden by whatever other attribute is specified.</p><a name="999674"></a>
+ 
+<H3>Example: Setting file attribute</H3>
+<p>This example sets the archive bit for the uploaded file:</p><pre>&lt;CFFILE ACTION="Copy"
+    SOURCE="c:\files\upload\keymemo.doc"
+    DESTINATION="c:\files\backup\"
+    ATTRIBUTES="Archive"&gt;
+</pre><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Be sure to include the traililng slash (\) in the source and destination file 
+names.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../14_Managing_Files_on_the_Server/dwa14_03.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../14_Managing_Files_on_the_Server/dwa14.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../14_Managing_Files_on_the_Server/dwa14_05.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:57 -->
+</body>
+</html>

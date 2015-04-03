@@ -1,0 +1,426 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Find and Replace</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Testing and Maintaining  Web Pages</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1010273"></a>
+ <H1>Using Find and Replace</H1>
+
+
+
+<p>In word processors, the Search feature is considered an editing tool. You can certainly use it just that way while writing in Studio, but the extended search capabilities make it a powerful tool to update site content. </p><p>You can find and replace alphanumeric strings (including regular expressions) across folders and projects and choose how tags are processed by the search engine.</p><a name="999316"></a>
+ 
+<H2>Search commands</H2>
+<p>Studio provides both basic and extended levels of search and replace to help you maintain your Web pages.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To search the current document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select Search &gt; Find (Ctrl + F) to open the Find dialog box. 
+
+
+</li>
+<li>Enter the text you want to locate in the Find what box.
+
+<p>If you highlight text in the editor, it displays in the Find what box.
+</p></li>
+<li>Set the Match case, Match whole words, and Direction options.
+
+</li>
+<li>Click the Find Next button to sequentially highlight each match.
+
+</li>
+<li>To resume the search from the current cursor position after the search dialog box is closed, press F3. 
+
+</li>
+</ol>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To replace text in the current document:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select Search &gt; Replace (Ctrl + R) to open the Replace dialog box.
+
+
+</li>
+<li>Enter the Find and Replace text in their boxes.
+
+</li>
+<li>Set the Match case and Match whole words options.
+
+<p>In addition to the Up and Down Direction options, you can restrict the search to 
+just a part of the document by highlighting a block of text in the editor and picking 
+Selection. 
+</p></li>
+<li>You can do a selective Replace or choose to Replace All matches.
+
+</li>
+</ol>
+<p>The last 10 items are saved in the Find what and Replace what dropdown lists.</p><a name="999322"></a>
+ 
+<H3>Using extended search and replace features</H3>
+<p>For more complex operations across multiple documents, use the Extended Find or Extended Replace commands. These commands offer a number of options to refine your search:</p><ul>
+<a name="999325"> </a>
+<li>You can run either command against the current document, all open documents, folders, or projects.
+
+<a name="999326"> </a>
+</li>
+<li>Click the arrow button next to the Find what box to selectively save and reuse entries.
+<a name="1010270"> </a>
+</li>
+<li>The In folders option let you restrict searches to files with specified extensions and to just the root folder. 
+<a name="1009221"> </a>
+</li>
+<li>Check the Match Case option for case-sensitive searches.
+<a name="999328"> </a>
+</li>
+<li>Check Regular expressions to enable parsing of regular expression entries. See <a href="../12_Testing_and_Maintaining_Web_Pages/test3.htm#999342">&quot;Searching with Regular Expressions&quot;</a> for details on Studio's implementation of RegExp syntax.
+<a name="999332"> </a>
+</li>
+<li>Select the Skip Tags While Searching option to search the page content only, excluding the tags themselves. This option is not available when the Regular expressions option is enabled.
+<a name="1009236"> </a>
+</li>
+<li>The Extended Replace dialog box lets you backup files before making replacements at the folder or project level.
+</li>
+</ul>
+<p>The Results pane displays a list of locations where the matched string was replaced. Double-click on a match in the list to highlight it in the document. Right-click in the Results pane to clear the pane or close it.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The Extended Replace command skips read-only files.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1010253"></a>
+ 
+<H3>Replacing special characters</H3>
+<p>Use the Search &gt; Replace Special Characters command to either replace extended characters with their HTML equivalents, or replace HTML tags with the equivalent extended characters. This command works only in the current document.</p><a name="999339"></a>
+ 
+<H3>Replacing double-spaced lines</H3>
+<p>Because of the way different operating systems treat carriage returns, text files saved on UNIX or Macintosh systems may become double-spaced when opened in Studio. Use the Search &gt; Replace Double Spacing with Single Spacing command to collapse double-spaced lines to single-spaced lines in the current document.</p><a name="999342"></a>
+ 
+<H2>Searching with Regular Expressions</H2>
+<p>Studio supports searching with <em>regular expressions</em> (or <em>RegExp</em>) to match patterns in character strings in the Extended Find and Replace commands. Regular expressions allow you to specify all the possible variants in a search and to precisely control replacements. Ordinary characters are combined with special characters to define the pattern for the search. The RegExp parser evaluates the selected files and returns each matching pattern. </p><p>In the Find command, the matching pattern is added to the find list. In the Replace operation, it triggers insertion of the replacement string. When replacing a string, it is just as important to ensure what is not found as what is. Simple regular expressions can be concatenated into complex search criteria. Note that enabling the Regular expressions option in the Extended dialog boxes disables the Skip tags while searching option.</p><p>Thanks to Team Allaire member Christopher Bradford for his ongoing support of RegExp issues in the ColdFusion Support Forum at <a href="http://forums.allaire.com/DevConf/index.cfm">http://forums.allaire.com/DevConf/index.cfm</a>.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The rules listed in this section are for creating regular expressions in 
+ColdFusion. The rules used by other RegExp parsers may differ. 
+</td>
+</tr>
+</table>
+</div>
+<br><p>Studio's RegExp engine processes the entire document, it does not parse on a line-by-line basis. This affects the way the characters such the asterisk (*), carat (^) and dollar sign ($) should be used. </p><a name="999347"></a>
+ 
+<H3>Special characters</H3>
+<p>Because special characters are the operators in regular expressions, in order to represent a special character as an ordinary one, you need to precede it with a backslash. To represent a backslash, for instance, use a double backslash (\\).</p><a name="999353"></a>
+ 
+<H3>Single-character regular expressions</H3>
+<p>This section describes the rules for creating regular expressions. You can use regular expressions in the Search &gt; Extended Find and Replace commands to match complex string patterns.</p><p>The following rules govern one-character RegExp that match a single character:</p><ul>
+<a name="999356"> </a>
+<li>Special characters are:<code> + * ? . [ ^ $ ( ) { | \ </code>
+
+<a name="999357"> </a>
+</li>
+<li>Any character that is not a special character matches itself.
+<a name="1011855"> </a>
+</li>
+<li>Use the keyboard (Tab, Enter) to match whitespace characters.
+<a name="1011902"> </a>
+</li>
+<li>The asterisk (*) matches the specified characters throughout the entire document.
+<a name="1011896"> </a>
+</li>
+<li>The carat (^) matches the beginning of the docuument.
+<a name="1011856"> </a>
+</li>
+<li>The dollar sign ($) matches the end of the document.
+<a name="999358"> </a>
+</li>
+<li>A backslash (\) followed by any special character matches the literal character itself, that is, the backslash escapes the special character.
+<a name="1011195"> </a>
+</li>
+<li>A period (.) matches any character, including newline. To match any character except a newline, use [^#chr(13)##chr(10)#], which excludes the ASCII carriage return and line feed codes.
+<a name="999360"> </a>
+</li>
+<li>A set of characters enclosed in brackets ([]) is a one-character RE that matches any of the characters in that set. For example, "[akm]" matches an "a", "k", or "m". Note that if you want to include ] (closing square bracket) in square brackets it must be the first character. Otherwise, it won't work even if you use \].
+<a name="999361"> </a>
+</li>
+<li>Any regular expression can be followed by one of the following suffixes: {m,n} forces a match of m through n (inclusive) occurrences of the preceding regular expression. The suffix {m,} forces a match of at least m occurrences of the preceding regular expression. The syntax {,n} is not allowed.
+<a name="999362"> </a>
+</li>
+<li>A range of characters can be indicated with a dash. For example, "[a-z]" matches any lowercase letter. However, if the first character of the set is the caret (^), the RegExp matches any character except those in the set. It does not match the empty string. For example: [^akm] matches any character except "a", "k", or "m". The caret loses its special meaning if it is not the first character of the set.
+<a name="999363"> </a>
+</li>
+<li>All regular expressions can be made case insensitive by substituting individual characters with character sets, for example, [Nn][Ii][Cc][Kk].
+</li>
+</ul>
+<a name="999364"></a>
+ 
+<H3>Character classes</H3>
+<p>You can specify a character by using one of the POSIX character classes. You enclose the character class name inside two square brackets, as in this Replace example:</p><pre>"Allaire's Web Site","[[:space:]]","*","ALL")
+</pre><p>This code replaces all the spaces with *, producing this string:</p><pre>Allaire's*Web*Site
+</pre><p>The following table shows the POSIX character classes that Studio supports.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Supported Character Classes&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Character Class</strong>
+</th><th align="left">
+<strong>Matches</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+alpha
+</td><td valign="top">
+Matches any letter. Same as [A-Za-z].
+</td></tr>
+<tr valign="top"><td valign="top">
+upper
+</td><td valign="top">
+Matches any upper-case letter. Same as [A-Z].
+</td></tr>
+<tr valign="top"><td valign="top">
+lower
+</td><td valign="top">
+Matches any lower-case letter. Same as [a-z].
+</td></tr>
+<tr valign="top"><td valign="top">
+digit
+</td><td valign="top">
+Matches any digit. Same as [0-9].
+</td></tr>
+<tr valign="top"><td valign="top">
+alnum
+</td><td valign="top">
+Matches any alphanumeric character. Same as [A-Za-z0-9].
+</td></tr>
+<tr valign="top"><td valign="top">
+xdigit
+</td><td valign="top">
+Matches any hexadecimal digit. Same as [0-9A-Fa-f].
+</td></tr>
+<tr valign="top"><td valign="top">
+space
+</td><td valign="top">
+Matches a tab, new line, vertical tab, form feed, carriage return, or space.
+</td></tr>
+<tr valign="top"><td valign="top">
+print
+</td><td valign="top">
+Matches any printable character.
+</td></tr>
+<tr valign="top"><td valign="top">
+punct
+</td><td valign="top">
+Matches any punctuation character, that is, one of ! ` # S % &amp; ` ( ) * + , - . / : ; &lt; = &gt; ? @ [ / ] ^ _ { | } ~
+</td></tr>
+<tr valign="top"><td valign="top">
+graph
+</td><td valign="top">
+Matches any of the characters defined as a printable character except those defined to be part of the <em>space</em> character class.
+</td></tr>
+<tr valign="top"><td valign="top">
+cntrl
+</td><td valign="top">
+Matches any character not part of the character classes [:upper:], [:lower:], [:alpha:], [:digit:], [:punct:], [:graph:], [:print:], or [:xdigit:].
+</td></tr>
+
+</table>
+</div>
+</p><a name="999423"></a>
+ 
+<H3>Multi-character regular expressions</H3>
+<p>You can use the following rules to build a multi-character regular expressions:</p><ul>
+<a name="999425"> </a>
+<li>Parentheses group parts of regular expressions together into grouped sub-expressions that can be treated as a single unit. For example, (ha)+ matches one or more instances of "ha".
+
+<a name="999426"> </a>
+</li>
+<li>A one-character regular expression or grouped sub-expressions followed by an asterisk (*) matches zero or more occurrences of the regular expression. For example, [a-z]* matches zero or more lower-case characters.
+<a name="999427"> </a>
+</li>
+<li>A one-character regular expression or grouped sub-expressions followed by a plus (+) matches one or more occurrences of the regular expression. For example, [a-z]+ matches one or more lower-case characters.
+<a name="999428"> </a>
+</li>
+<li>A one-character regular expression or grouped sub-expressions followed by a question mark (?) matches zero or one occurrences of the regular expression. For example, xy?z matches either "xyz" or "xz".
+<a name="999429"> </a>
+</li>
+<li>The concatenation of regular expressions creates a regular expression that matches the corresponding concatenation of strings. For example, [A-Z][a-z]* matches any capitalized word.
+<a name="999430"> </a>
+</li>
+<li>The OR character (|) allows a choice between two regular expressions. For example, jell(y|ies) matches either "jelly" or "jellies".
+<a name="999431"> </a>
+</li>
+<li>Braces ({}) are used to indicate a range of occurrences of a regular expression, in the form {m, n} where m is a positive integer equal to or greater than zero indicating the start of the range and n is equal to or greater than m, indicating the end of the range. For example, (ba){0,3} matches up to three pairs of the expression "ba".
+</li>
+</ul>
+<a name="999432"></a>
+ 
+<H3>Backreferences</H3>
+<p>Studio supports backreferencing, which allows you to match text in previously matched sets of parentheses. A slash followed by a digit n (\n) is used to refer to the nth parenthesized sub-expression.</p><p>One example of how backreferencing can be used is searching for doubled words -- for example, to find instances of `the the' or `is is' in text. The following example shows the syntax you use for backreferencing in regular expressions:</p><pre>("There is is coffee in the the kitchen",
+"([A-Za-z]+)[ ]+\1","*","ALL")
+</pre><p>This code searches for words that are all letters ([A-Za-z]+) followed by one or more spaces [ ]+ followed by the first matched sub-expression in parentheses. The parser detects the two occurrences of <em>is</em> as well as the two occurrences of <em>the</em> and replaces them with an asterisk, resulting in the following text:</p><pre>There * coffee in * kitchen
+</pre><a name="999439"></a>
+ 
+<H3>Anchoring a regular expression to a string</H3>
+<p>All or part of a regular expression can be anchored to either the beginning or end of the string being searched:</p><ul>
+<a name="999441"> </a>
+<li>If a caret (^) is at the beginning of a (sub)expression, the matched string must be at the beginning of the string being searched.
+
+<a name="999442"> </a>
+</li>
+<li>If a dollar sign ($) is at the end of a (sub)expression, the matched string must be at the end of the string being searched.
+</li>
+</ul>
+<a name="999443"></a>
+ 
+<H3>Expression examples</H3>
+<p>The following examples show some regular expressions and describe what they match.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Regular Expression Examples&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Expression</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>[\?&amp;]value=
+</PRE></td><td valign="top">
+A URL parameter value in a URL.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>[A-Z]:(\\[A-Z0-9_]+)+
+</PRE></td><td valign="top">
+An uppercase DOS/Windows full path that (a) is not the root of a drive, and (b) has only letters, numbers, and underscores in its text.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>[A-Za-z][A-Za-z0-9_]*
+</PRE></td><td valign="top">
+A ColdFusion variable with no qualifier.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>([A-Za-z][A-Za-z0-9_]*)(\.[A-Za-z][A-Za-
+z0-9_]*)?
+</PRE></td><td valign="top">
+A ColdFusion variable with no more than one qualifier, for example, Form.VarName, but not Form.Image.VarName.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>(\+|-)?[1-9][0-9]*
+</PRE></td><td valign="top">
+An integer that does not begin with a zero and has an optional sign.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>(\+|-)?[1-9][0-9]*(\.[0-9]*)?
+</PRE></td><td valign="top">
+A real number.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>(\+|-)?[1-9]\.[0-9]*E(\+|-)?[0-9]+
+</PRE></td><td valign="top">
+A real number in engineering notation.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>a{2,4}
+</PRE></td><td valign="top">
+Two to four occurrences of 'a': aa, aaa, aaaa.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>(ba){3,}
+</PRE></td><td valign="top">
+At least three 'ba' pairs: bababa, babababa, ...
+</td></tr>
+
+</table>
+</div>
+</p><a name="999493"></a>
+ 
+<H3>Resources</H3>
+<p>An excellent reference on regular expressions is <em>Mastering Regular Expressions </em>by Jeffrey E.F. Friedl, published by O'Reilly &amp; Associates, Inc.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test2.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Testing_and_Maintaining_Web_Pages/test4.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:54 -->
+</body>
+</html>

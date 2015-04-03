@@ -1,0 +1,239 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Embedding Java Applets</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 10	:&nbsp;&nbsp;Building Dynamic Forms</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1110107"></a>
+ <H1>Embedding Java Applets</H1>
+
+
+
+<p>The CFAPPLET tag allows you to embed Java applets in a CFFORM. To use CFAPPLET, you must first register your Java applet using the ColdFusion Administrator Applets page. In the Administrator, you define the interface to the applet, encapsulating it so that each invocation of the CFAPPLET tag is very simple.</p><p>CFAPPLET offers several advantages over using the HTML APPLET tag:</p><ul>
+<li>Return values -- Since CFAPPLET requires a form field name attribute, you can avoid having to code additional JavaScript to capture the applet's return values. You can reference return values like any other ColdFusion form variable: <code>form.variablename</code>.
+
+</li>
+<li>Ease of use -- Since the applet's interface is defined in the Administrator, each instance of the CFAPPLET tag in your pages only needs to reference the applet's name and specify a form variable name.
+</li>
+<li>Parameter options -- You can override parameter values you defined in the Administrator by specifying the parameter value pair in CFAPPLET. Unless overridden, ColdFusion uses the parameter value pairs you defined in the Administrator.
+</li>
+</ul>
+<p>When an applet is registered, enter just the applet source and the form variable name:</p><pre>&lt;CFAPPLET APPLETSOURCE="Calculator"
+    NAME="calc_value"&gt;
+</pre><p>By contrast, with the HTML APPLET tag, you'd have to invoke all the applet's parameters every time you wanted to use it in a ColdFusion page.</p><a name="998560"></a>
+ 
+<H2>Registering a Java applet</H2>
+<p>Before you can use a Java applet in your ColdFusion pages, you must first register the applet in the Administrator.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To register a Java applet:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ColdFusion Administrator by clicking on the Administrator icon in the ColdFusion Program group and entering the Administrator password (if required).
+
+
+</li>
+<li>Click the Applets button to open the Registered Applets page.
+
+</li>
+<li>Enter a name for the applet you want to register and click Register New Applet. Enter the information your applet requires, and choose the height, width, vertical and horizontal space, and alignment you want.
+
+</li>
+</ol>
+<p>Applet registration fields are explained in the following table. <div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Applet Registration Fields&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Field</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Codebase
+</td><td valign="top">
+Enter the base URL of the applet: the directory that contains the applet components. The applet class files must be located within the web browser root directory. Example:
+<PRE>http://<em>servername</em>/classes
+</PRE></td></tr>
+<tr valign="top"><td valign="top">
+Code
+</td><td valign="top">
+This is the name of the file that contains the applet subclass. The filename is relative to the codebase URL. The *.class file extension is not required.
+</td></tr>
+<tr valign="top"><td valign="top">
+Method
+</td><td valign="top">
+Enter the method name in the applet that returns a string value. You use this method name in the NAME attribute of the CFAPPLET tag to populate a form variable with the method's value. If the applet has no method, leave this field blank.
+</td></tr>
+<tr valign="top"><td valign="top">
+Height
+</td><td valign="top">
+Enter a measurement in pixels for the vertical space for the applet.
+</td></tr>
+<tr valign="top"><td valign="top">
+Width
+</td><td valign="top">
+Enter a measurement in pixels for the horizontal space for the applet.
+</td></tr>
+<tr valign="top"><td valign="top">
+Vspace
+</td><td valign="top">
+Enter a measurement in pixels for the space above and below the applet.
+</td></tr>
+<tr valign="top"><td valign="top">
+Hspace
+</td><td valign="top">
+Enter a measurement in pixels for the space on each side of the applet.
+</td></tr>
+<tr valign="top"><td valign="top">
+Align
+</td><td valign="top">
+Choose the alignment you want. 
+</td></tr>
+<tr valign="top"><td valign="top">
+Java Not Supported Message
+</td><td valign="top">
+This message is displayed by browsers that do not support Java applets. If you want to override this message, you specify a different message in the CFAPPLET NOTSUPPORTED attribute. 
+</td></tr>
+<tr valign="top"><td valign="top">
+Parameter Name
+</td><td valign="top">
+Enter a name for a required applet parameter. Your Java applet will typically provide the parameter name needed to use the applet. Enter each parameter in a separate parameter field.
+</td></tr>
+<tr valign="top"><td valign="top">
+Value
+</td><td valign="top">
+For every parameter you enter, define a default value. Your applet documentation will provide guidelines on valid entries. 
+</td></tr>
+
+</table>
+</div>
+</p><p>Click Create to complete the process.</p><a name="998628"></a>
+ 
+<H2>Using CFAPPLET to embed an applet</H2>
+<p>Once you've registered an applet, you can use the CFAPPLET tag to place the applet in a ColdFusion page. The CFAPPLET tag has two required attributes, APPLETSOURCE and NAME. Since the applet has been registered, and each applet parameter defined with a default value, you can invoke the applet with a very simple form of the CFAPPLET tag:</p><pre>&lt;CFAPPLET APPLETSOURCE="<em>appletname</em>" NAME="form_variable"&gt;
+</pre><a name="998632"></a>
+ 
+<H3>Overriding alignment and positioning values</H3>
+<p>To override any of the values defined in the Administrator for the applet, you can use the optional CFAPPLET parameters to specify custom values. For example, the following CFAPPLET tag specifies custom spacing and alignment values:</p><pre>&lt;CFAPPLET APPLETSOURCE="myapplet"
+    NAME="applet1_var"
+    HEIGHT=400
+    WIDTH=200
+    VSPACE=125
+    HSPACE=125
+    ALIGN="left"&gt;
+</pre><a name="998641"></a>
+ 
+<H3>Overriding parameter values</H3>
+<p>You can also override the values you assigned to applet parameters in the Administrator by providing new values for any parameter. Note that in order to override a parameter, you must have already defined the parameter and a default value for it in the ColdFusion Administrator Applets page.</p><pre>&lt;CFAPPLET APPLETSOURCE="myapplet"
+    NAME="applet1_var"
+    Param1="registered parameter"
+    Param2="registered parameter"&gt;
+</pre><a name="998647"></a>
+ 
+<H2>Handling form variables from an applet</H2>
+<p>The CFAPPLET tag requires you to specify a form variable name for the applet. This variable, referenced like other ColdFusion form variables, <code>form.</code><em>variable_name</em> holds the value the applet method provides when it is executed in the CFFORM.</p><p>Not all Java applets return values. Some, like many graphical widgets, do not return a specific value; they do their flipping, spinning, fading, exploding, and that's that. For this kind of applet, the method field in the Administrator remains empty. Other applets, however, do have a method that returns a value. You can only use one method for each applet you register. If an applet includes more than one method that you want to access, you can register the applet with a unique name an additional time for each method you want to use.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To reference a Java applet return value in your application page:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Specify the name of the method in the Register New Applet page of the ColdFusion Administrator.
+
+
+</li>
+<li>Specify the method name in the NAME attribute of the CFAPPLET tag when you code your CFFORM.
+
+</li>
+</ol>
+<p>When your page executes the applet, a form variable is created with the name you specified. If you don't specify a method, no form variable is created.</p><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../10_Building_Dynamic_Forms/dwa10_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../10_Building_Dynamic_Forms/dwa10.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:49 -->
+</body>
+</html>

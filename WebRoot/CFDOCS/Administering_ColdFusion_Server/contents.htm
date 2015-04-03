@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Administering the ColdFusion Server: Contents</title>
+<SCRIPT language="Javascript">
+<!--
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+//-->
+</SCRIPT>
+
+<script language="JavaScript1.1">
+<!--
+	blank = new Image();
+	blank.src = '../images/mouseovers/blank.gif';
+	
+	imgBack = new Image();
+	imgBack.src = '../images/mouseovers/back.gif';
+
+	imgSearch = new Image();
+	imgSearch.src = '../images/mouseovers/search.gif';
+
+	imgTop = new Image();
+	imgTop.src = '../images/mouseovers/toplevel.gif';
+
+	imgUp = new Image();
+	imgUp.src = '../images/mouseovers/uplevel.gif';
+
+	imgNext = new Image();
+	imgNext.src = '../images/mouseovers/next.gif';
+//-->
+</script>
+<script language="JavaScript">
+<!-- Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+</head>
+<body>
+<!-- Start navigation table -->
+	<table border="0" cellspacing="0" cellpadding="5" align="right">
+	<tr>
+		<td>
+			<img src="../images/mouseovers/blank.gif" name="DescText" border=0><br>
+		</td>
+		<td>
+			<a href="../dochome.htm" OnMouseOut="DescText.src=blank.src" OnMouseOver="DescText.src=imgBack.src"><img src="../images/icons/back.gif" border=0></a><br>
+		</td>
+		<td>
+			<a href="../dochome.htm" OnMouseOut="DescText.src=blank.src" OnMouseOver="DescText.src=imgUp.src"><img src="../images/icons/uplevel.gif" border=0></a><br>
+		</td>
+		<td><A HREF="00_Preface/admin_preface.htm" OnMouseOut="DescText.src=blank.src" OnMouseOver="DescText.src=imgNext.src"><img src="../images/icons/next.gif" border=0></a><br>
+		</td>
+		<td>
+			<a href="../dochome.htm" OnMouseOut="DescText.src=blank.src" OnMouseOver="DescText.src=imgTop.src"><img src="../images/icons/home.gif" border=0></a><br>
+		</td>		
+		<td>
+			<a href="javascript: makeRemote();" OnMouseOut="DescText.src=blank.src" OnMouseOver="DescText.src=imgSearch.src"><img src="../images/icons/search.gif" border=0></a><br>
+		</td>
+	</tr>
+	</table><br><br><br><br>
+<!-- End navigation table -->
+<div class="navigation">
+<IMG SRC="../images/400x105coldfusion45.gif" ALT="ColdFusion 4.5" BORDER=0>
+<br><br>
+<hr align="left">
+</DIV>
+<h1>Administering the ColdFusion Server</h1>
+<h3>Contents</h3>
+<dt>
+<dd><b><a href="00_Preface/admin_preface.htm">Welcome to ColdFusion</a></b></dd>
+<dd><b><a href="01_Installing_and_Configuring_ColdFusion/admin01.htm">Chapter 1:  Installing and Configuring ColdFusion</a></b></dd>
+<dd><b><a href="02_Introduction_to_ColdFusion_Server/admin02.htm">Chapter 2: Introduction to ColdFusion Server</a></b></dd>
+<dd><b><a href="03_Configuring_ColdFusion_Server/admin03.htm">Chapter 3: Configuring ColdFusion Server</a></b></dd>
+<dd><b><a href="04_Managing_Data_Sources/admin04.htm">Chapter 4: Managing Data Sources</a></b></dd>
+<dd><b><a href="05_Scheduling_and_Static_Page_Generation/admin05.htm">Chapter 5: Scheduling and Static Page Generation</a></b></dd>
+<dd><b><a href="06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm">Chapter 6: Creating Scalable and Highly Available Web Sites</a></b></dd>
+<dd><b><a href="07_Using_CGI_with_ColdFusion/admin07.htm">Chapter 7: Using CGI with ColdFusion</a></b></dd>
+<dd><b><a href="08_ColdFusion_Security/admin08.htm">Chapter 8: ColdFusion Security</a></b></dd>
+<dd><b><a href="09_Configuring_Basic_Security/admin09.htm">Chapter 9: Configuring Basic Security</a></b></dd>
+<dd><b><a href="10_Configuring_Advanced_Security/admin10.htm">Chapter 10: Configuring Advanced Security</a></b></dd>
+</dt>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>StructInsert</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_228.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_230.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1256537"></a>
+ <H1>StructInsert</H1>
+
+
+
+<p>Inserts the specified key-value pair into the specified structure. Returns Yes if the insert was successful and No if an error occurs.</p><p>
+ See also <a href="../3_ColdFusion_Functions/lr3_224.htm#1256440">StructClear</a>, <a href="../3_ColdFusion_Functions/lr3_227.htm#1256452">StructDelete</a>, <a href="../3_ColdFusion_Functions/lr3_228.htm#1256491">StructFind</a>, <a href="../3_ColdFusion_Functions/lr3_230.htm#1256583">StructIsEmpty</a>, <a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>, <a href="../3_ColdFusion_Functions/lr3_226.htm#1257560">StructCount</a>, <a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>, and <a href="../3_ColdFusion_Functions/lr3_235.htm#1256721">StructUpdate</a>.
+</p>
+
+<a name="1256540"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>StructInsert</strong>(<em>structure</em>, <em>key</em>, <em>value [, allowoverwrite ]</em>)
+</PRE><a name="1257229"> </a>
+<h5 class="param"> structure</h5>
+<p class="param">Structure to contain the new key-value pair.</p><a name="1257231"> </a>
+<h5 class="param"> key</h5>
+<p class="param">Key that contains the inserted value.</p><a name="1257249"> </a>
+<h5 class="param"> value</h5>
+<p class="param">Value to be added.</p><a name="1257254"> </a>
+<h5 class="param"> allowoverwrite</h5>
+<p class="param">Optionally indicates whether to allow overwriting an existing key. The default is FALSE.</p><a name="1397571"></a>
+ 
+<H3>Usage</H3>
+<p>This function throws an exception if <em>structure</em> does not exist or if <em>key</em> exists and <em>allowoverwrite</em> is set to FALSE.</p><a name="1808105"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="StructInsert
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows how to use the StructInsert
+      function. It calls the CF_ADDEMPLOYEE custom tag,
+      which uses the addemployee.cfm file. ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Add New Employees&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H1&gt;Add New Employees&lt;/H1&gt;
+&lt;!--- Establish parms for first time through  ---&gt;
+&lt;CFPARAM NAME="FORM.firstname" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.lastname" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.email" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.phone" DEFAULT=""&gt;
+&lt;CFPARAM NAME="FORM.department" DEFAULT=""&gt; 
+
+&lt;CFIF FORM.firstname EQ ""&gt;
+ &lt;P&gt;Please fill out the form.
+&lt;CFELSE&gt;
+  &lt;CFOUTPUT&gt;
+   &lt;CFScript&gt;
+     employee=StructNew();
+     StructInsert(employee, "firstname", FORM.firstname);
+     StructInsert(employee, "lastname", FORM.lastname);
+     StructInsert(employee, "email", FORM.email);
+     StructInsert(employee, "phone", FORM.phone);
+     StructInsert(employee, "department", FORM.department);
+  &lt;/CFScript&gt; 
+
+  &lt;P&gt;First name is #StructFind(employee, "firstname")#&lt;/P&gt;
+  &lt;P&gt;Last name is #StructFind(employee, "lastname")#&lt;/P&gt;
+  &lt;P&gt;EMail is #StructFind(employee, "email")#&lt;/P&gt;
+  &lt;P&gt;Phone is #StructFind(employee, "phone")#&lt;/P&gt;
+  &lt;P&gt;Department is #StructFind(employee, "department")#&lt;/P&gt;
+  &lt;/CFOUTPUT&gt;
+
+  &lt;!--- Call the custom tag that adds employees ---&gt;
+  &lt;CF_ADDEMPLOYEE EMPINFO="#employee#"&gt;
+&lt;/CFIF&gt;
+
+&lt;Hr&gt;
+&lt;FORM ACTION="structinsert.cfm" METHOD="post"&gt;
+&lt;P&gt;First Name:&amp;nbsp;
+&lt;INPUT NAME="firstname" TYPE="text" hspace="30" maxlength="30"&gt;
+&lt;P&gt;Last Name:&amp;nbsp;
+&lt;INPUT NAME="lastname" TYPE="text" hspace="30" maxlength="30"&gt;
+&lt;P&gt;EMail:&amp;nbsp;
+&lt;INPUT NAME="email" TYPE="text" hspace="30" maxlength="30"&gt;
+&lt;P&gt;Phone:&amp;nbsp;
+&lt;INPUT NAME="phone" TYPE="text" hspace="20" maxlength="20"&gt;
+&lt;P&gt;Department:&amp;nbsp;
+&lt;INPUT NAME="department" TYPE="text" hspace="30" maxlength="30"&gt;
+
+&lt;P&gt;
+&lt;INPUT TYPE="submit" VALUE="OK"&gt;
+&lt;/FORM&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="StructInsert
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_228.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_230.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

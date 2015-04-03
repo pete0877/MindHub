@@ -1,0 +1,217 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>CFSCHEDULE</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_081.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_083.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 1	:&nbsp;&nbsp;ColdFusion Tags</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2555996"></a>
+ <H1>CFSCHEDULE</H1>
+
+
+
+<p>CFSCHEDULE provides a programmatic interface to the ColdFusion scheduling engine. You can run a specified page at scheduled intervals with the option to write out static HTML pages. This allows you to offer users access to pages that publish data, such as reports, without forcing users to wait while a database transaction is performed in order to populate the data on the page. </p><p>ColdFusion scheduled events are registered using the ColdFusion Administrator. In addition, execution of CFSCHEDULE can be disabled in the Administrator. Information supplied by the user includes the scheduled ColdFusion page to execute, the time and frequency for executing the page, and if the output from the task should be published. If the output is to be published then a path and file is specified.</p><p>The event submission and its success or failure status is written to the <code>\cfusion\log\schedule.log</code> file.</p><a name="2556228"></a>
+ 
+<H3>Syntax</H3>
+<PRE>&lt;CFSCHEDULE ACTION="Update"
+    TASK="taskname"
+    OPERATION="HTTPRequest"
+    FILE="filename"
+    PATH="path_to_file"
+    STARTDATE="date"
+    STARTTIME="time"
+    URL="URL"
+    PUBLISH="Yes/No"
+    ENDDATE="date"
+    ENDTIME="time"
+    INTERVAL="seconds"
+    REQUESTTIMEOUT="seconds"
+    USERNAME="username"
+    PASSWORD="password"
+    RESOLVEURL="Yes/No"
+    PROXYSERVER="hostname"
+    PORT="port_number"
+    PROXYPORT="port_number"
+&gt;
+&nbsp;
+&lt;CFSCHEDULE ACTION="Delete" TASK="TaskName"&gt;
+&lt;CFSCHEDULE ACTION="Run" TASK="TaskName"&gt;
+</PRE><a name="2556230"></a>
+<h4> ACTION</h4>
+<p>Required. Valid entries are:</p><ul>
+<a name="2556232"> </a>
+<li>Delete - Deletes task specified by TASK.
+
+<a name="2556233"> </a>
+</li>
+<li>Update - Creates a new task if one does not exist.
+<a name="2556234"> </a>
+</li>
+<li>Run - Executes task specified by TASK.
+</li>
+</ul>
+<a name="2556235"></a>
+<h4> TASK</h4>
+<p>Required. The name of the task to delete, update, or run. </p><a name="2556238"></a>
+<h4> OPERATION</h4>
+<p>Required when creating tasks with ACTION="Update". Specify the type of operation the scheduler should perform when executing this task. For now only OPERATION="HTTPRequest" is supported for static page generation. </p><a name="2556240"></a>
+<h4> FILE</h4>
+<p>Required with PUBLISH="Yes." A valid filename for the published file. </p><a name="2556242"></a>
+<h4> PATH</h4>
+<p>Required with PUBLISH="Yes." The path location for the published file.</p><a name="2556244"></a>
+<h4> STARTDATE</h4>
+<p>Required when ACTION="Update". The date when scheduling of the task should start. </p><a name="2556246"></a>
+<h4> STARTTIME</h4>
+<p>Required when creating tasks with ACTION="Update". Enter a value in seconds. The time when scheduling of the task should start. </p><a name="2556248"></a>
+<h4> URL</h4>
+<p>Required when ACTION="Update". The URL to be executed. </p><a name="2556250"></a>
+<h4> PUBLISH</h4>
+<p>Optional. Yes or No. Specifies whether the result should be saved to a file. </p><a name="2556252"></a>
+<h4> ENDDATE</h4>
+<p>Optional. The date when the scheduled task should end. </p><a name="2556254"></a>
+<h4> ENDTIME</h4>
+<p>Optional. The time when the scheduled task should end. Enter a value in seconds.</p><a name="2556256"></a>
+<h4> INTERVAL</h4>
+<p>Required when creating tasks with ACTION="Update". Interval at which task should be scheduled. Can be set in seconds or as Once, Daily, Weekly, Monthly, and Execute. The default interval is one hour and the minimum interval is one minute.</p><a name="2556258"></a>
+<h4> REQUESTTIMEOUT</h4>
+<p>Optional. Customizes the REQUESTTIMEOUT for the task operation. Can be used to extend the default timeout for operations that require more time to execute.</p><a name="2556260"></a>
+<h4> USERNAME</h4>
+<p>Optional. Username if URL is protected.</p><a name="2556262"></a>
+<h4> PASSWORD</h4>
+<p>Optional. Password if URL is protected.</p><a name="2556264"></a>
+<h4> PROXYSERVER</h4>
+<p>Optional. Host name or IP address of a proxy server.</p><a name="2556266"></a>
+<h4> RESOLVEURL</h4>
+<p>Optional. Yes or No. Specifies whether to resolve links in the result page to absolute references. </p><a name="2564814"></a>
+<h4> PORT</h4>
+<p>Optional. The port number on the server from which the task is being scheduled. Default is 80. When used with RESOLVEURL, the URLs of retrieved documents that specify a port number are automatically resolved to preserve links in the retrieved document. </p><a name="2564792"></a>
+<h4> PROXYPORT</h4>
+<p>Optional. The port number on the proxy server from which the task is being requested. Default is 80. When used with RESOLVEURL, the URLs of retrieved documents that specify a port number are automatically resolved to preserve links in the retrieved document. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You cannot use CFSCHEDULE and apply the Secure Sockets Layer (SSL) 
+to your application.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="2571190"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfschedule
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows an example of CFSCHEDULE ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;CFSCHEDULE Example&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;H3&gt;CFSCHEDULE Example&lt;/H3&gt;
+&lt;P&gt;CFSCHEDULE provides a programmatic interface to
+the ColdFusion scheduling engine.  You can run a specified
+page at scheduled intervals with the option to write out
+static HTML pages.  This allows you to offer users access 
+to pages that publish data, such as reports, without
+forcing users to wait while a database transaction is performed
+to populate the data on the page.
+
+&lt;CFSCHEDULE ACTION="UPDATE"
+    TASK="TaskName" 
+    OPERATION="HTTPRequest"
+    URL="http://127.0.0.1/playpen/history.cfm"
+    STARTDATE="8/7/98"
+    STARTTIME="12:25 PM"
+    INTERVAL="3600"
+    RESOLVEURL="Yes"
+    PUBLISH="Yes"
+    FILE="sample.html"
+    PATH="c:\inetpub\wwwroot\playpen"
+    REQUESTTIMEOUT="600"&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;      
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="cfschedule
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../2_ColdFusion_Tags/lr2_081.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../2_ColdFusion_Tags/lr2.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../2_ColdFusion_Tags/lr2_083.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:45 -->
+</body>
+</html>

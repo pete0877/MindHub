@@ -1,0 +1,90 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Welcome to the ColdFusion 4.5 Web Application Server</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Preface/preface452.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Preface/preface45.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/preface454.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Preface 	:&nbsp;&nbsp;Welcome to ColdFusion</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1015613"></a>
+ <H1>Welcome to the ColdFusion 4.5 Web Application Server</H1>
+
+
+
+<p>The ColdFusion 4.5 release focuses on fundamentals -- the fundamentals of delivering your e-business: faster development, better reliability, enhanced scalability, expanded integration, and stronger security.</p><p>At the center of the ColdFusion 4.5 release is an application server platform that's been highly optimized with new functionality and native support for UNIX. As a result, your e-business systems will run better and do more. With this release we're launching a new edition of ColdFusion Server for Linux so you can take advantage of the reliability and performance of the hottest new Internet server operating system.</p><p>While optimizing the core server, we also enhanced fundamental features including email integration, server-side FTP and HTTP, advanced security, scheduling, and database connectivity -- again giving you more reliability and new functionality.</p><p>The focus on fundamentals extends to new features. As part of a broad new commitment to Java, ColdFusion 4.5 has a range of new Java integration options from Java CFXs to Java Servlet support to Java object and EJB connectivity. In ColdFusion Studio 4.5, we added new tools to make you more productive including a flexible new project architecture that makes managing and deploying complex Web applications a snap. On the server, we focused on reliability, performance and security with features such as service-level fail-over, Cisco Local Director integration, and OS security integration.</p><p>Whether you're revolutionizing your company's HR operations, building the next generation of your firm's global intranet, or launching the next killer .COM company, you'll find the speed, scalability, connectivity, and security you need in ColdFusion 4.5.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../00_Preface/preface452.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../00_Preface/preface45.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../00_Preface/preface454.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:39 -->
+</body>
+</html>

@@ -1,0 +1,224 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Exception Information in CFCATCH</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1023735"></a>
+ <H1>Exception Information in CFCATCH</H1>
+
+
+
+<p>Within a CFCATCH block, the active exception's properties can be accessed as variables:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Exception Property Variables&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Property variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.TYPE 
+</PRE></td><td valign="top">
+The exception's type, returned as a string:
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.MESSAGE
+</PRE></td><td valign="top">
+The exception's diagnostic message, if one was provided. If no diagnostic message is available, this is an empty string.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.DETAIL
+</PRE></td><td valign="top">
+ A detailed message from the CFML interpreter. This message, which contains HTML formatting, can help to determine which tag threw the exception.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.EXTENDEDINFO
+</PRE></td><td valign="top">
+A custom error message. This is returned only for CFCATCH tags where <code>TYPE="APPLICATION"</code> or a custom type.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.ERRORCODE 
+</PRE></td><td valign="top">
+Any exception that is a part of the CFML exception hierarchy supplies a value for this variable.
+
+For <code>TYPE="Application"</code> CFTHROW tags may supply a value for this code via the ERRORCODE attribute. For <code>Type="Database"</code>CFCATCH.ERRORCODE has the same value as CFCATCH.SQLSTATE. Otherwise, the value of CFCATCH.ERRORCODE is the empty string.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.TAGCONTEXT
+</PRE></td><td valign="top">
+Provides the name and position of each tag in the tag stack and the full path names of the files that contain the tags in the tag stack.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1027190"></a>
+ 
+<H2>Tag context information</H2>
+<p>The ColdFusion Administrator's debugging settings page allows you to"Enable CFML stack trace." When this setting is enabled, CFCATCH blocks make available an array of structures called CFCATCH.TagContext. Each structure represents one level of the ColdFusion runtime's active tag context at the time when the ColdFusion interpreter detected the exception.</p><p>The structure at position 1 of the array represents the outermost tag in the stack of tags that were executing when the interpreter detected the exception. The structure at position ArrayLen(CFCATCH.TAGCONTEXT) represents the currently executing tag at the time the interpreter detected the exception.</p><p>The TagContext structures have the following attributes:</p><p><strong>TEMPLATE</strong> -- The pathname of the application page that contains the tag.</p><p><strong>LINE and COLUMN</strong> -- The tag's line number and column number within the application page.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Turn off "Enable CFML stack trace" to avoid having production servers 
+expend resources creating a traceback stack by default. When this setting 
+is disabled, CFCATCH.TAGCONTEXT is a zero-length array.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1027180"></a>
+ 
+<H2>Database exceptions</H2>
+<p>For database exceptions, ColdFusion supplies some additional diagnostic information. The following variables are available whenever the exception type is database:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Property variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.NATIVEERRORCODE
+</PRE></td><td valign="top">
+The native error code associated with this exception. Database drivers typically provide error codes to assist in the diagnosis of failing database operations. The values assumed by CFCATCH.NATIVEERRORCODE are driver-dependent. If no error code is provided, the value of NativeErrorCode is -1.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.SQLSTATE
+</PRE></td><td valign="top">
+The SQLSTATE code associated with this exception. Database drivers typically provide error codes to assist in the diagnosis of failing database operations. The values assumed by CFCATCH.SQLSTATE are driver-dependent. If no SQLSTATE value was provided, the value of SQLSTATE is -1.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1023778"></a>
+ 
+<H2>Expression exceptions</H2>
+<p><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Property variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.ERRNUMBER
+</PRE></td><td valign="top">
+An internal expression error number, valid only when <code>TYPE="Expression"</code>
+</td></tr>
+
+</table>
+</div>
+</p><a name="1023789"></a>
+ 
+<H2>Locking exceptions</H2>
+<p>For exceptions related to CFLOCK sections, there is additional information available within the CFCATCH block:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Property variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.LOCKNAME
+</PRE></td><td valign="top">
+The name of the affected lock. This is set to "anonymous" if the lock name is not known.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.LOCKOPERATION
+</PRE></td><td valign="top">
+The operation that failed. This is set to "unknown" if the failed operation is unknown.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1023804"></a>
+ 
+<H2>MissingInclude exceptions</H2>
+<p>For exceptions related to missing files, where the type of exception is MissingInclude, the following variable is available:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>Property variable</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>CFCATCH.MISSINGFILENAME
+</PRE></td><td valign="top">
+The name of the file missing in an exception of type MissingInclude.
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

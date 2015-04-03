@@ -1,0 +1,135 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Debug Settings in the ColdFusion Administrator</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 8	:&nbsp;&nbsp;Debugging and Error Handling</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1020585"></a>
+ <H1>Debug Settings in the ColdFusion Administrator</H1>
+
+
+
+<p>ColdFusion can provide important debugging information for every application page requested by a browser. When enabled, debugging output is shown in a block following normal page output.</p><p>For detailed information on the debugging and logging settings in the ColdFusion Administrator, see <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a>.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>By default, when you enable any of these options, debug output becomes 
+visible to all users. You can, however, restrict debug output by using the 
+Restrict debug output to selected IP address form at the bottom of the 
+Debug Settings page.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1020635"></a>
+ 
+<H2>Generating debug information for an individual page</H2>
+<p>You can view the parameters and CGI environment variables for an individual application page without turning on the global debug settings in the ColdFusion Administrator. Simply append the parameter "mode=debug" to the end of the URL.</p><pre>www.myserver.com/cfdocs/test.cfm?mode=debug
+</pre><a name="1020641"></a>
+ 
+<H2>Generating debug information for an individual query</H2>
+<p>You can view debug information for an individual query by putting the DEBUG attribute into the opening CFQUERY tag:</p><pre>&lt;CFQUERY NAME="TestQuery" DATASOURCE="CompanyInfo" DEBUG&gt;
+    SELECT * FROM TestTable
+&lt;/CFQUERY&gt;
+</pre><p>When this query runs, it places the debug information into the output page where the query is placed.</p><a name="1020652"></a>
+ 
+<H2>Error messages</H2>
+<p>If ColdFusion is unable to fulfill a request because of an error, it returns a diagnostic message to the user. The message includes a link that allows the user to email a report of the error to the site administrator. You enable this feature in the Mail Logging page of the ColdFusion Administrator. Errors are written to a log file for later review.</p><p>ColdFusion returns:</p><ul>
+<li>Database errors, including the ODBC error code, the extended error message returned fromt the ODBC driver, the name of the data source, and the SQL statement submitted to the database.
+
+</li>
+<li>Syntax error, including the line of the application page file on which the error occurred.
+</li>
+<li>System-related errors, such as out of memory conditions, or file or disk access errors.
+</li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Tip	</strong></td>
+<td>If you get a message that does not explicitly identify the cause of the 
+error, check on key system parameters like available memory and disk 
+space.
+</td>
+</tr>
+</table>
+</div>
+<br><p>For information on using the Logging settings and Mail Logging settings, see <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08_03.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:47 -->
+</body>
+</html>

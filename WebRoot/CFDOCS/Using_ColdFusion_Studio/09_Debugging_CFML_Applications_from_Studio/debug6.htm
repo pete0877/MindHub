@@ -1,0 +1,268 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Running the Interactive Debugger</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Debugging CFML Applications from Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1022959"></a>
+ <H1>Running the Interactive Debugger</H1>
+
+
+
+<p>Running the debugger helps you find problems in code by tracing the way ColdFusion evaluates the page, step by step. You do this by placing breakpoints in the page to stop execution of the page, and then step through subsequent lines of code, checking the values of variables and expressions to make sure the code is behaving as you'd expect.</p><p>After you've set up remote development settings and file mappings, you can use the commands on the Debug menu and the Debug toolbar to run the debugger.</p><a name="1044562"></a>
+ 
+<H2>The Debugger toolbar</H2>
+<p><img src="../images/debugger_toolbar.gif">
+
+
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You cannot debug encrypted CFML templates.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To run the interactive debugger:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the first page in the application you want to debug.
+
+
+<p>The Debug toolbar appears at the bottom of the application window. You can 
+undock the toolbar by double-clicking on the undock bars on the left-hand side of 
+the toolbar, drop it into the QuickBar, or keep it docked.
+</p></li>
+<li>In your ColdFusion application page, set breakpoints in your code by clicking in the gutter on the left side of the editor window.
+
+<p>The breakpoint lines are colored red. Choose Debug &gt; Toggle Breakpoints to turn 
+breakpoints on and off. Use Debug &gt; Clear Breakpoints to delete all breakpoints in 
+the current document.
+</p></li>
+<li>In the Debug toolbar, hit the Start/Continue tool.
+
+<p>The Remote Development Settings dialog box appears. It shows the default local 
+server.
+</p></li>
+<li>Specify the Start URL, which is the URL you use to view the page, and click OK. The list box shows the pages currently open in ColdFusion Studio.
+
+<p>Enter a fully qualified file path relative to your local ColdFusion server -- for 
+example, http://127.0.0.1/SomeServerPath/index.cfm.
+</p><p>The Debug Start dialog box displays every time you press the Start button in the 
+Debugger. Use the check box on the Debug Start pane to disable the display of this 
+box the next time you hit the Run button.
+</p><p>Whenever possible, the Studio tries to calculate the URLs of open file using the 
+RDS development mappings, which you can set in the Mappings tab. These 
+mappings are also required to develop on remote servers.
+</p><p>Based on the RDS Security settings at your site, you'll see a login prompt to access 
+protected resources.
+</p></li>
+<li>Enter a user name and password if necessary to access remote servers.
+
+<p>The debugger starts, and it forwards your URL to the Browse view. When the 
+ColdFusion server encounters the breakpoint, a blue bar appears at the 
+breakpoint in the Edit view. At this point, the ColdFusion server has an open 
+session, and it waits for your reply from ColdFusion Studio.
+</p></li>
+<li>To continue, hit the Start/Continue button again, and the server moves to the next breakpoint.
+
+<p>The final time you hit the Start/Continue button, ColdFusion executes the page 
+and outputs it to the browser.
+</p></li>
+<li>To stop the debugging session, hit the End button.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The debugger is active until you hit the End button on the Debug toolbar 
+or choose Debug &gt; End. This allows you to debug across multiple pages.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1028318"></a>
+ 
+<H2>Debug windows</H2>
+<p>Choose View &gt; Debug Window to open the Debug window. There are several panes to this window:</p><ul>
+<a name="1028320"> </a>
+<li>Variables -- Displays all scopes of local variables.
+
+<a name="1028321"> </a>
+</li>
+<li>Watches -- Use this window to set watches and evaluate expressions and variables.
+<a name="1028322"> </a>
+</li>
+<li>Recordsets -- Displays the list of recordsets initialized in the current application page. This pane tracks both CFQUERY-based database recordsets and dynamic recordsets generated programmatically.
+<a name="1028323"> </a>
+</li>
+<li>Output -- Shows the output of the page as it is being generated.
+<a name="1028324"> </a>
+</li>
+<li>Breakpoints -- Shows all the breakpoints that you have set in all files. You can view, disable, and remove breakpoints from this window, and edit their conditions.
+<a name="1028325"> </a>
+</li>
+<li>Tag Stack -- Shows a hierarchy of tag and page attributes, and values.
+</li>
+</ul>
+<p>Each of these windows has an associated command button on the Debug toolbar. </p><p>You can undock these windows individually, so you can see breakpoints while you're looking at the Watches, for example.</p><a name="1023695"></a>
+ 
+<H2>Stepping through code</H2>
+<p>You can use the Step Into, Step Over, Step Out, and Run to Cursor tools on the Debug toolbar to step through your code.</p><ul>
+<a name="1024947"> </a>
+<li>Step Into proceeds to the next unit of execution in your code. Use this command to walk through code line-by-line.
+
+<p>If the next step is inside an included file or CFX, the debugger steps into the 
+next file.
+</p><a name="1024951"> </a>
+</li>
+<li>Step Over operates in the same way as Step Into, except that it does not step into included files (CFINCLUDE, CFMODULE, or CFLOCATION) or custom tags. It executes the included code but does not trace through the included code step-by-step.
+<a name="1024952"> </a>
+</li>
+<li>Step Out is used when you are inside a block of included code and want to step back to the point in your original page where you entered the included code.
+<a name="1024953"> </a>
+</li>
+<li>Use Run to Cursor to execute up to the cursor position, without having to set a breakpoint. Note that cursor location must be beyond you. If there are breakpoints between your location and the cursor, Run to Cursor will stop at these intervening breakpoints.
+</li>
+</ul>
+<a name="1023716"></a>
+ 
+<H2>Evaluating expressions and setting watches</H2>
+<p>You can use the evaluator box at the top of the Watches pane of the Debug window to evaluate arbitrary expressions when the debugger is suspended at a breakpoint. Use the evaluator when you want to know how an expression evaluates as you step through code, line by line.</p><p>Watches allow you to evaluate the same expression or variable every time you stop execution. When you set a watch, the debugger evaluates the watched expression. A hand pops up when the expression's value changes from one line to the next as you step through code.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To set watches:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Choose Debug &gt; Watches or click the Watches button on the Debug toolbar. The Watches pane appears.
+
+
+</li>
+<li>Cut and paste the expression or variable you want to watch into the list box at the top of the pane.
+
+</li>
+<li>Choose Evaluate to find the value of the expression at the next breakpoint or line where the Debugger stops.
+
+<p>The Evaluator window shows the results of the evaluation at the current point in 
+processing the page.
+</p></li>
+<li>Choose Watch to add the expression in the evaluator list box to the list of watched expressions.
+
+<p>The Watch area shows the values of watched expressions and any error messages 
+in resolving these parameters.
+</p></li>
+<li>Press the Start/Continue button to continue debugging.
+
+</li>
+<li>When you are finished debugging, press End.
+
+</li>
+</ol>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>You can use the evaluator to change values of variables, create new 
+variables, or to insert ColdFusion functions in your expressions.
+</td>
+</tr>
+</table>
+</div>
+<br><a name="1024396"></a>
+ 
+<H2>Debugging across multiple pages</H2>
+<p>The debugger is active even after a page is loaded, and until you press the End button on the Debug toolbar or choose Debug &gt; End.</p><p>This enables you to debug applications across multiple HTML and CFML pages. For example, you can test the submittal of an HTML form and its subsequent processing by a ColdFusion application page.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug5.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug7.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

@@ -1,0 +1,148 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>PreserveSingleQuotes</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_189.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_191.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1001621"></a>
+ <H1>PreserveSingleQuotes</H1>
+
+
+
+<p>Prevents ColdFusion from automatically &quot;escaping&quot; single quotes contained in <em>variable</em>.</p><a name="1001623"></a>
+ 
+<H3>Syntax</H3>
+<PRE><strong>PreserveSingleQuotes</strong>(<em>variable</em>)
+</PRE><a name="1001625"> </a>
+<h5 class="param"> variable</h5>
+<p class="param">Variable containing the string for which single quotes are preserved.</p><a name="1001626"></a>
+ 
+<H3>Usage</H3>
+<p>PreserveSingleQuotes is useful in SQL statements.</p><a name="1806035"></a>
+ 
+<H3>Example</H3>
+<FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="PreserveSingleQuotes
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM><pre>&lt;!--- This example shows the use of PreserveSingleQuotes ---&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;
+PreserveSingleQuotes Example
+&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+
+&lt;basefont face="Arial, Helvetica" size=2&gt;
+&lt;body  bgcolor="#FFFFD5"&gt;
+
+&lt;H3&gt;PreserveSingleQuotes Example&lt;/H3&gt;
+
+&lt;P&gt;This is a useful function for creating lists of 
+information to return from a query.  In the following
+example, we pick the list of Centers in Suisun, San Francisco,
+and San Diego, using the SQL grammar IN to modify a WHERE
+clause rather than looping through the result set after
+the query is run.
+
+&lt;CFSET List = "'Suisun', 'San Francisco', 'San Diego'"&gt;
+
+&lt;CFQUERY NAME="GetCenters" DATASOURCE="cfsnippets"&gt;
+    SELECT Name, Address1, Address2, City, Phone
+    FROM Centers
+    WHERE City IN (#PreserveSingleQuotes(List)#)
+&lt;/CFQUERY&gt;
+
+&lt;P&gt;We found &lt;CFOUTPUT&gt;#GetCenters.RecordCount#&lt;/CFOUTPUT&gt; records.
+&lt;CFOUTPUT query="GetCenters"&gt;
+&lt;P&gt;#Name#&lt;BR&gt;    
+#Address1#&lt;BR&gt;
+&lt;CFIF Address2 is not ""&gt;#Address2#&lt;/CFIF&gt;
+#City#&lt;BR&gt;
+#Phone#&lt;BR&gt;
+&lt;/CFOUTPUT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;       
+</pre><FORM ACTION="../../tagframe.cfm" TARGET="runcftag">
+<INPUT TYPE="Hidden" NAME="tagname" VALUE="PreserveSingleQuotes
+">
+<INPUT TYPE="Submit" VALUE="Example">
+</FORM>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_189.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_191.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

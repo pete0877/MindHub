@@ -1,0 +1,237 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Creating RDS Mappings</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Using ColdFusion Studio </em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Debugging CFML Applications from Studio</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1022710"></a>
+ <H1>Creating RDS Mappings</H1>
+
+
+
+<p>You need to specify file mappings for the application directory so that the debugger, the ColdFusion Server, and the browser can properly translate local paths into server paths and URLs. </p><ul>
+<a name="1023989"> </a>
+<li>Studio Path -- How does ColdFusion Studio see the directory?
+
+<a name="1023990"> </a>
+</li>
+<li>Server Path -- How does the Web server/ColdFusion server see the directory?
+<a name="1023991"> </a>
+</li>
+<li>Browser Path -- How does the browser see the directory?
+</li>
+</ul>
+<a name="1024065"></a>
+ 
+<H2>File mapping examples</H2>
+<p>The following scenarios show how file mappings work when you have local or remote files matched with either local or remote servers:</p><ul>
+<a name="1026475"> </a>
+<li>ColdFusion Studio and Server on the same machine
+
+<a name="1026476"> </a>
+</li>
+<li>ColdFusion Studio debugging on remote ColdFusion Server using drive mappings
+<a name="1026477"> </a>
+</li>
+<li>ColdFusion Studio debugging on remote ColdFusion Server using Network Neighborhood
+<a name="1026478"> </a>
+</li>
+<li>ColdFusion Studio debugging on remote ColdFusion Server using RDS file access
+</li>
+</ul>
+<a name="1026973"></a>
+ 
+<H3>Using local paths</H3>
+<p>Debugging against a local ColdFusion Server is the most common scenario. In most cases, this arrangement allows both the Server and Studio to see the directories in the same way.</p><p>For example, the local path <code>c:\inetpub\wwwroot</code> translates to an identical server path <code>C:\inetpub\wwwroot</code>, and a URL path of <code>http://215.180.21.1/</code>. The use of mappings in such a scenario is mainly for URL resolutions. The URL part of the mapping instructs ColdFusion Studio how a physical file can be viewed in a browser.</p><p>In this example, you would create a mapping as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>ColdFusion Server and Studio on same machine</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Studio Path
+</td><td valign="top">
+<code>C:\inetpub\wwwroot\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Server Path
+</td><td valign="top">
+<code>C:\inetpub\wwwroot\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Browser/URL Path
+</td><td valign="top">
+<code>http://215.180.21.1/</code>
+</td></tr>
+
+</table>
+</div>
+</p><a name="1026939"></a>
+ 
+<H3>Using drive mappings</H3>
+<p>Developers often debug against a remote ColdFusion server across an internal network. In many cases, they use a network drive mapping. </p><p>For example, a user may have a remote drive <code>X:\</code> mapped to a network shared directory <code>\\MYSERVER\WEBPROJECTS\</code> where <code>WEBPROJECTS</code> is the name of the shared directory in the network server <code>MYSERVER</code>.</p><p>In such a scenario, a file that appears to Studio as</p><pre>X:\App1\Index.cfm
+</pre><p>May be viewed by the CF server as</p><pre>C:\webprojects\App1\index.cfm
+</pre><p>The browser may view it using the URL path</p><pre>http://<code>215.180.21.1</code>/App1/index.cfm
+</pre><p>In order to resolve the communication between ColdFusion Studio and the Server, you need to create a mapping for the App1 directory as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Studio access to a remote server using drive mappings</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Studio Path
+</td><td valign="top">
+<code>X:\App1\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Server Path
+</td><td valign="top">
+<code>C:\webprojects\App1\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Browser/URL Path
+</td><td valign="top">
+<code>http://215.180.21.1/App1/</code>
+</td></tr>
+
+</table>
+</div>
+</p><a name="1027296"></a>
+ 
+<H3>Using UNC paths/Network Neighborhood</H3>
+<p>Developers can debug code against remote ColdFusion servers across an internal network. They often use the Network Neighborhood to access a file on a remote Cold Fusion server. For example, a developer may be accessing a file on <code>\\myserver\webprojects\</code> where <code>webprojects</code> is the name of the shared directory in the network server <code>myserver</code>.</p><p>In such a scenario, a file that appears to Studio as</p><pre>\\myserver\webprojects\App1\Index.cfm
+</pre><p>May be viewed by the ColdFusion server as</p><pre>c:\webprojects\App1\index.cfm
+</pre><p>The browser may view it using the URL path</p><pre>http://<code>215.180.21.1</code>/App1/index.cfm
+</pre><p>ColdFusion Studio and the Server need to understand how a file location appears to the parties involved. You therefore need to create a mapping for the App1 directory as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Studio accesses files on remote CF server using UNC paths/Network Neighborhood</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Studio Path
+</td><td valign="top">
+<code>\\MYSERVER\WEBPROJECTS\App1\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Server Path
+</td><td valign="top">
+<code>C:\webprojects\App1\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Browser/URL Path
+</td><td valign="top">
+<code>http://215.180.21.1/App1/</code>
+</td></tr>
+
+</table>
+</div>
+</p><a name="1026073"></a>
+ 
+<H3>Using Remote Development Services</H3>
+<p>When developing outside local area networks, many developers access files on a ColdFusion Server across the Internet using the RDS-based remote file access available from the Remote tab in ColdFusion Studio.</p><p>In such a scenario, a file that appears to Studio as</p><pre>RDS://MY_RDS_SERVER/C:/webprojects/App1/index.cfm
+</pre><p>May be viewed by the ColdFusion server as</p><pre>C:\webprojects\App1\index.cfm
+</pre><p>The browser may view it using the URL path</p><pre>http://<code>215.180.21.1</code>/App1/index.cfm
+</pre><p>Although the server path can be inferred from the local RDS path, you still need to create a mapping. In special scenarios, ColdFusion Server to Studio path resolution could become ambiguous. You therefore need to create a mapping for the App1 directory as follows:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>Studio accesses files on remote CF server using RDS remote file access</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Studio Path
+</td><td valign="top">
+<code>RDS://MY_RDS_SERVER/C:/WEBPROJECTS/App1/</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Server Path
+</td><td valign="top">
+<code>C:\webprojects\App1\</code>
+</td></tr>
+<tr valign="top"><td valign="top">
+Browser/URL Path
+</td><td valign="top">
+<code>http://215.180.21.1/App1/</code>
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug3.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Debugging_CFML_Applications_from_Studio/debug5.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:08:50 -->
+</body>
+</html>

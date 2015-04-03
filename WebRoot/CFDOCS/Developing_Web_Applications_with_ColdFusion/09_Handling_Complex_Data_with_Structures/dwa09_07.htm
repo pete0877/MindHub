@@ -1,0 +1,135 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Populating an Array from a Query</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 9	:&nbsp;&nbsp;Handling Complex Data with Structures</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="997599"></a>
+ <H1>Populating an Array from a Query</H1>
+
+
+
+<p>When populating an array from a query, keep the following things in mind:</p><ul>
+<li>Query data cannot be added to an array all at once. A looping structure is generally required to populate an array from a query.
+
+</li>
+<li>Query column data can be referenced using array-like syntax. For example, myquery.col_name[1] references data in the first row in the column col_name.
+</li>
+</ul>
+<p>You can use a CFSET tag to define values for array indexes, as in the following example:</p><pre>&lt;CFSET arrayname[<em>x</em>]=<em>queryname.column</em>[<em>row</em>]&gt;
+</pre><p>In the following example, a CFLOOP is used to place four columns of data from a sample data source into an array, "myarray."</p><pre>&lt;!--- Do the query ---&gt;
+
+&lt;CFQUERY NAME="test" DATASOURCE="cfsnippets"&gt;
+    SELECT EMPLOYEE_ID, LASTNAME,
+    FIRSTNAME, EMAIL
+    FROM EMPLOYEES
+&lt;/CFQUERY&gt;
+
+&lt;!--- Declare the array ---&gt;
+
+&lt;CFSET myarray=ArrayNew(2)&gt;
+
+&lt;!--- Populate the array row by row ---&gt;
+
+&lt;CFLOOP QUERY="TEST"&gt;
+
+&lt;CFSET myarray[CurrentRow][1]=test.employee_id[CurrentRow]&gt;
+&lt;CFSET myarray[CurrentRow][2]=test.LASTNAME[CurrentRow]&gt;
+&lt;CFSET myarray[CurrentRow][3]=test.FIRSTNAME[CurrentRow]&gt;
+&lt;CFSET myarray[CurrentRow][4]=test.EMAIL[CurrentRow]&gt;
+<pre>
+&lt;/CFLOOP&gt;
+
+&lt;!--- Now, create a loop to output the array contents ---&gt;
+
+&lt;CFSET Total_Records=Test.RecordCount&gt;
+
+&lt;CFLOOP INDEX="Counter" FROM=1 TO="#Total_Records#"&gt;
+
+    &lt;CFOUTPUT&gt;
+        ID: #MyArray[Counter][1]#,
+        LASTNAME: #MyArray[Counter][2]#,
+        FIRSTNAME: #MyArray[Counter][3]#,
+        EMAIL: #MyArray[Counter][4]# &lt;BR&gt;
+    &lt;/CFOUTPUT&gt;
+
+&lt;/CFLOOP&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_06.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../09_Handling_Complex_Data_with_Structures/dwa09_08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:48 -->
+</body>
+</html>

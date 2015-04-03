@@ -1,0 +1,169 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Getting Registry Values</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa212.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa214.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 21	:&nbsp;&nbsp;Accessing the Windows NT Registry</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1002568"></a>
+ <H1>Getting Registry Values</H1>
+
+
+
+<p>You can use CFREGISTRY with the GETaction to retrieve one entry, or the GETALL action to retrieve multiple keys and values from the registry.</p><a name="998299"></a>
+ 
+<H3>Getting all keys and values</H3>
+<p>Use CFREGISTRY with the GETALL action to return all registry keys and values defined in a branch. You can access these values as follows:</p><ul>
+<li>CFREGISTRY creates a record set that contains Entry, Type, and Value, which you can access through tags such as CFOUTPUT. To fully qualify these variables use the record set name, as specified in the NAME attribute of the CFREGISTRY tag.
+
+</li>
+<li>If #Type# is a key, #Value# is an empty string.
+</li>
+<li>If you specify Any for TYPE, GetAll also returns any binary registry values. For binary values, the #Type# variable contains UNSUPPORTED and #Value# is blank.
+<p>You can optionally specify the SORT attribute to sort the record set based on the 
+contents of the Entry, Type, and Value columns. Specify any combination of 
+columns in a comma separated list. ASC (ascending) or DESC (descending) can 
+be specified as qualifiers for column names. ASC is the default. For example:
+</p><p><code>Sort="type ASC, entry ASC"
+</code></p></li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To get all values for a specified registry key:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Code a CFREGISTRY tag with the GETALL action, specifying the branch, type, and record set name.
+
+
+<pre><code>&lt;CFREGISTRY ACTION="GetAll"
+    BRANCH="HKEY_LOCAL_MACHINE\Software\Microsoft\Java VM"
+    TYPE="Any" NAME="RegQuery"&gt;
+</code></pre></li>
+<li>Access the record set (this example uses the CFTABLE tag):
+
+<pre>&lt;H1&gt;CFREGISTRY ACTION="GetAll"&lt;/H1&gt;
+&lt;CFTABLE QUERY="RegQuery" COLHEADERS
+    HTMLTABLE BORDER="Yes"&gt;
+&lt;CFCOL HEADER="&lt;B&gt;Entry&lt;/B&gt;" WIDTH="35"
+    TEXT="#RegQuery.Entry#"&gt;
+&lt;CFCOL HEADER="&lt;B&gt;Type&lt;/B&gt;" WIDTH="10"
+    TEXT="#RegQuery.Type#"&gt;
+&lt;CFCOL HEADER="&lt;B&gt;Value&lt;/B&gt;" WIDTH="35"
+    TEXT="#RegQuery.Value#"&gt;
+&lt;/CFTABLE&gt;
+</pre></li>
+</ol>
+<a name="998334"></a>
+ 
+<H3>Getting a specific value</H3>
+<p>Use CFREGISTRY with the GET action to access a single registry value and store it in a ColdFusion variable.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To get a specific registry value:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Code a CFREGISTRY tag with the GET action, specifying the branch, the entry to be accessed, the type (optional), and a variable in which to return the value.
+
+
+<pre>&lt;CFREGISTRY ACTION="Get"
+    BRANCH="HKEY_LOCAL_MACHINE\Software\Microsoft\Java VM"
+    ENTRY="ClassPath" TYPE="String" Variable="RegValue"&gt;
+</pre></li>
+<li>Access the variable:
+
+<pre>&lt;H1&gt;CFREGISTRY ACTION="Get"&lt;/H1&gt;
+&lt;CFOUTPUT&gt;
+&lt;P&gt;
+Java ClassPath value is #RegValue#
+&lt;/CFOUTPUT&gt;
+</pre></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa212.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa21.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../21_Accessing_the_Windows_NT_Registry/dwa214.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:20:07 -->
+</body>
+</html>

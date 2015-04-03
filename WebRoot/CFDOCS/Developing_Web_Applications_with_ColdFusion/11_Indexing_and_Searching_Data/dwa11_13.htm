@@ -1,0 +1,122 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Composing Search Expressions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_14.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 11	:&nbsp;&nbsp;Indexing and Searching Data</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1215718"></a>
+ <H1>Composing Search Expressions</H1>
+
+
+
+<p>The following rules apply for composing search expressions.</p><a name="997972"></a>
+ 
+<H3>Precedence rules</H3>
+<p>Expressions are read from left to right. The AND operator takes precedence over OR operators. However, terms enclosed in parenteses are evaluated first. When the search engine encounters nested parentheses, it starts with the innermost term:</p><a name="997985"></a>
+ 
+<H3>Prefix and infix notation</H3>
+<p>Search strings that use any operator other than evidence operators can be defined in prefix notation or infix notation. This means that either of the following expressions is valid:</p><ul>
+<li>AND (a,b)
+
+<p>This is prefix notation
+</p></li>
+<li><code>a AND b</code>
+<p>This is infix notation
+</p></li>
+</ul>
+<p>When prefix notation is used, precedence is handled explicitly within the expression. The following example means: "Look for documents that contain b and c first, then documents that contain a":</p><pre>OR (a, AND (b,c))
+</pre><p>When infix notation is used, precedence is implicit in the expression. For example, the AND operator takes precedence over the OR operator.</p><a name="998000"></a>
+ 
+<H3>Commas in expressions</H3>
+<p>If an expression includes two or more search terms within parentheses, a comma is required as a separator between each element. The following example means: Look for documents that contain any combination of a and b together. Note that in this example, angle brackets are used with the OR operator.</p><pre>&lt;OR&gt; (a, b)
+</pre><a name="998005"></a>
+ 
+<H3>Delimiters in expressions</H3>
+<p>Angle brackets &lt; &gt;, double quotation marks " ", and backslashes \ are used to delimit various elements in a query expression.</p><a name="998012"></a>
+ 
+<H3>Angle brackets for operators</H3>
+<p>Left and right angle brackets &lt; &gt; are reserved for designating operators and modifiers. They are optional for the AND, OR, and NOT operators, but required for all other operators.</p><a name="998021"></a>
+ 
+<H3>Double quotation marks in expressions</H3>
+<p>You use double quotation marks to search for a word that is otherwise reserved as an operator, such as AND, OR, and NOT.</p><a name="998024"></a>
+ 
+<H3>Backslashes in expressions</H3>
+<p>To include a backslash \ in a search, insert two backslashes for each backslash character you want to search for, such as <code>C:\\CFUSION\\BIN</code>.</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../11_Indexing_and_Searching_Data/dwa11_12.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../11_Indexing_and_Searching_Data/dwa11.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../11_Indexing_and_Searching_Data/dwa11_14.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:51 -->
+</body>
+</html>

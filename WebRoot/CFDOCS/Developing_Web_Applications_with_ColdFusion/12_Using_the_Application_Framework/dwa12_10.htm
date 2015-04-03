@@ -1,0 +1,117 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Using Session Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 12	:&nbsp;&nbsp;Using the Application Framework</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1026304"></a>
+ <H1>Using Session Variables</H1>
+
+
+
+<p>Use session variables when the variables are needed for a single site visit or set of requests. For example, you might use session variables to store a user's selections in a shopping cart application. (Use client variables when the variable is needed for future visits.)</p><a name="1026306"></a>
+ 
+<H2>What is a session?</H2>
+<p>A session refers to all the connections that a <em>single client</em> might make to a server in the course of viewing any pages associated with a given application. Sessions are specific to individual users. As a result, every user has a separate session and has access to a separate set of session variables.</p><p>This logical view of a session begins with the first connection by a client and ends (after a specified time-out period) after that client's last connection. However, because of the stateless nature of the Web, it's not always possible to define a precise point at which a session ends. In the real world, a session ends when the user finishes using an application and goes off to do something else. In most cases, however, a Web application has no way of knowing if a user is finished or if he's just lingering over a page.</p><p>You can impose some structure on session variable duration by specifying a time-out period. If the user does not access a page of the application within this time-out period, ColdFusion interprets this as the end of the session and clears any variables associated with that session.</p><p>The default time-out for session variables is set to 20 minutes. In the Variables page of the ColdFusion Administrator, you can change this time-out value. See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a><em> </em>for more information.</p><p>You can also set the time-out period for session variables inside a specific application (thereby overruling the Administrator default setting) by using the SESSIONTIMEOUT attribute of the CFAPPLICATION tag.</p><a name="1026325"></a>
+ 
+<H2>Storing session data in session variables</H2>
+<p>Session variables are designed to store session-level data. They are a convenient place to store information that all pages of your application might need during a user session. Using session variables, an application could initialize itself with user-specific data the first time a user hit a page of that application. This information could then remain available while that user continues to use that application. For example, information about a specific user's preferences could be retrieved from a database once, the first time a user hits any page of an application. This information would remain available throughout that user's session, thereby avoiding the overhead of retrieving the preferences again and again.</p><p>Session variables work exactly as client variables do, in that they require a client name (client ID) and are always scoped within that client ID. Session variables also work within the scope of an application name if one is supplied, in which case their scope will be the combination of the client ID and the application name.</p><p>To enable session variables, set <code>SESSIONMANAGEMENT="Yes"</code> in the CFAPPLICATION tag in your <code>Application.cfm</code> file. Note that when you turn on session management in the CFAPPLICATION tag, you must specify the application's name. Following is an example of turning on session management:</p><pre>&lt;!--- This example illustrates CFAPPLICATION ---&gt;
+
+&lt;!--- Name the application, and turn on
+    session management ---&gt;
+&lt;CFAPPLICATION NAME="GetLeadApp" SESSIONMANAGEMENT="Yes"&gt;
+
+&lt;!--- set data source for this application ---&gt;
+&lt;CFSET dsn = "my_dsn"&gt;
+
+&lt;!--- set global error handling for this application ---&gt;
+&lt;CFERROR TYPE="REQUEST" TEMPLATE="request_err.cfm"
+    MAILTO="webmaster@mysite.com"&gt;
+&lt;CFERROR TYPE="VALIDATION" TEMPLATE="val_err.cfm"
+    MAILTO="webmaster@mysite.com"&gt;
+
+&lt;!--- set some global variables for this application
+to be triggered on every page ---&gt;
+&lt;CFSET MainPage = "default.cfm"&gt;
+&lt;CFSET session.current_location = "Davis, Porter, Alewife"&gt;
+&lt;CFSET sm_location = "dpa"&gt;
+&lt;CFSET current_page = "#cgi.path_info#?#cgi.query_string#"&gt;
+</pre>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../12_Using_the_Application_Framework/dwa12_09.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../12_Using_the_Application_Framework/dwa12.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../12_Using_the_Application_Framework/dwa12_11.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:53 -->
+</body>
+</html>

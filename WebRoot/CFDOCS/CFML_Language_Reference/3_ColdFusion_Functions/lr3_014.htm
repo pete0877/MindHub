@@ -1,0 +1,131 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Structure Functions</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>CFML Language Reference</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_013.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_015.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;ColdFusion Functions</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="2060420"></a>
+ <H1>Structure Functions<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_137.htm#1578384">IsStruct</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_230.htm#1256583">StructIsEmpty</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_224.htm#1256440">StructClear</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_231.htm#1647894">StructKeyArray</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_225.htm#1533945">StructCopy</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_232.htm#1667540">StructKeyExists</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_226.htm#1257560">StructCount</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_233.htm#1638010">StructKeyList</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_227.htm#1256452">StructDelete</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_234.htm#1639682">StructNew</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_228.htm#1256491">StructFind</a>
+</td><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_235.htm#1256721">StructUpdate</a>
+</td></tr>
+<tr valign="top"><td valign="top">
+<a href="../3_ColdFusion_Functions/lr3_229.htm#1256537">StructInsert</a>
+</td><td valign="top">
+&nbsp;
+</td></tr>
+
+</table>
+</div>
+</H1>
+
+
+
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../3_ColdFusion_Functions/lr3_013.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../3_ColdFusion_Functions/lr3.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../3_ColdFusion_Functions/lr3_015.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/29/99 10:39:56 -->
+</body>
+</html>

@@ -1,0 +1,123 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Variables</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 2	:&nbsp;&nbsp;Writing Your First ColdFusion Application</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1012642"></a>
+ <H1>Variables</H1>
+
+
+
+<p>A Web application page is different from a static Web page because it can publish data dynamically. This involves creating, manipulating, and outputting variables.</p><p>A variable stores data that can be used in applications. As with other programming languages, you'll set variables in ColdFusion to store data that you want to access later. And you'll reference a range of variables to perform different types of application processing.</p><p>There are a variety of variable types that you can create and reference in your ColdFusion applications. Also, ColdFusion variables are typeless, which means that you don't need to define whether or not the variable value is numeric, text, or time-date. See the <a href="../../CFML_Language_Reference/contents.htm"><em>CFML Language Reference</em></a> for a complete list of variable types</p><p>The primary differences between variable types are where they exist, how long they exist, and where their values are stored. These considerations are referred to as a variable's scope. </p><p>You will learn more about scope as needed throughout this book.</p><p>For example, you would store a user's preferences in a variable in order to use that data to customize the page that's returned to the browser. </p><p>You don't use pound signs when you create the variable. However, when you want to display the value that a variable is set to, enclose the variable name in pound signs (#). The following table illustrates the use of pound signs and variable names.<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th align="left">
+<strong>CFML Code</strong>
+</th><th align="left">
+<strong>Results</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFSET Department="Sales"&gt;
+</PRE></td><td valign="top">
+The variable named Department is created and the value is set to Sales.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFOUTPUT&gt;
+I'd like to talk to someone in 
+Department.
+&lt;/CFOUTPUT&gt;
+</PRE></td><td valign="top">
+ColdFusion doesn't treat Department as a variable because it isn't surrounded by pound signs. The HTML page will display:
+
+I'd like to talk to someone in Department.
+</td></tr>
+<tr valign="top"><td valign="top"><PRE>&lt;CFOUTPUT&gt;
+I'd like to talk to someone in 
+#Department#.
+&lt;/CFOUTPUT&gt;
+</PRE></td><td valign="top">
+ColdFusion replaces the variable Department with its value. The HTML page will display:
+
+I'd like to talk to someone in Sales.
+</td></tr>
+
+</table>
+</div>
+</p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_05.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../02_Writing_Your_First_ColdFusion_Application/dwa02_07.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:41 -->
+</body>
+</html>

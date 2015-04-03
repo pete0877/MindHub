@@ -1,0 +1,977 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Configuring Load Balancing &amp; High Availability Features</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Administering the ColdFusion Server</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 6	:&nbsp;&nbsp;Creating Scalable and Highly Available Web Sites</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1080561"></a>
+ <H1>Configuring Load Balancing &amp; High Availability Features</H1>
+
+
+
+<p>If you created your clusters manually, you now need to configure each server member with appropriate load balancing and high availability features. You use the ClusterCATS Explorer to configure these features. </p><p>To manually configure or modify your clusters' load balancing and high availability features, perform the following tasks before activating them:</p><ul>
+<a name="1087332"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1088348">&quot;Configuring server load thresholds&quot;</a>
+
+<a name="1087340"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1118461">&quot;Configuring session-aware load balancing&quot;</a>
+<a name="1087333"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1174146">&quot;Configuring ColdFusion probes&quot;</a>
+<a name="1155741"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1200328">&quot;Integrating ClusterCATS with load balancing devices&quot;</a>
+<a name="1087328"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1088330">&quot;Configuring administrator alarm notifications&quot;</a>
+<a name="1122607"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1025657">&quot;Configuring administration e-mail support&quot;</a>
+<a name="1123005"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1168806">&quot;Configuring cluster administration security&quot;</a>
+</li>
+</ul>
+<a name="1088348"></a>
+ 
+<H2>Configuring server load thresholds</H2>
+<p>ClusterCATS makes certain that your ColdFusion Web applications remain available and running at optimum performance by intelligently managing the amount of HTTP traffic hitting your clustered servers. By setting load thresholds on each server in your cluster, you can control and manage your site's availability and performance. Many of your threshold configuration decisions hinge on your site's architecture and where the bulk of your processing resources need to be allocated.</p><p>During an HTTP redirection, ClusterCATS evaluates the cluster's state according to HTTP server state first, and then ColdFusion server load. This policy is the same in both centralized and distributed ClusterCATS configurations. In a centralized ClusterCATS cluster with all Web servers at one site, ClusterCATS only redirects if the server is busy or restricted.</p><a name="1088412"></a>
+ 
+<H3>Configuring Peak and Gradual redirection load thresholds</H3>
+<p>For each cluster member, you configure a Peak load threshold and a Gradual Redirection threshold. The Peak load threshold represents the maximum load the server can handle before its performance degrades significantly or becomes unavailable. The Gradual Redirection threshold represents the point at which HTTP requests begin to be redirected to other less loaded members in a cluster so that the server's performance does not degrade or become unavailable. </p><p>By default, the Peak load threshold is 90% and the Gradual Redirection threshold is 70%. These default settings adequately handle HTTP traffic going across most Web sites. However, if your Web site is particularly processing intensive, you should lower both threshold settings to better accommodate the increased load. For high traffic sites, lower your Peak and Gradual Redirection thresholds to 80/60 or 75/55, respectively.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To adjust load thresholds for a cluster member:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select one of the servers contained in your cluster.
+
+
+</li>
+<li>Choose Properties from the Server menu. Alternatively, you can right mouse click the server you've selected and select Properties.
+
+<p>The server's Properties dialog box appears.
+</p><p><img src="../images/Server_general_tab.gif">
+
+
+
+</p></li>
+<li>Click the Load tab.
+
+<p><img src="../images/Server_load_tab.gif">
+
+
+
+</p></li>
+<li>Enter a new numeric value (less than 100%) in the Peak load field.
+
+</li>
+<li>Enable the Gradual Redirection checkbox and enter a new numeric value in the Gradual Redirection field.
+
+<p>If you want the server to be able to handle as much load as possible, set both 
+threshold values close to one another. However, if you want redirection to occur 
+well in advance of the server nearing its Peak threshold, set the values farther 
+apart so that there is a differential of at least 10% between the two threshold 
+values.
+</p></li>
+<li>Click OK to apply your new threshold settings.
+
+</li>
+</ol>
+<a name="1167534"></a>
+ 
+<H3>Viewing a cluster's load status</H3>
+<p>ColdFusion reports its load data directly to ClusterCATS. Consequently, you can view the load on the ColdFusion Server at any time using the Server Load Monitor. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To view your cluster's current load levels:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select the cluster you want to monitor in the ClusterCATS Explorer.
+
+
+</li>
+<li>Choose Load from the Monitor menu. Alternatively, you can right mouse click the cluster you've selected and select Monitor&gt;Load.
+
+<p>The Server Load dialog box appears and displays the current load status for the 
+cluster you selected.
+</p><p><img src="../images/loadmonitor.gif">
+
+
+
+</p><p>The load monitor shows three lines:
+</p><ul>
+<a name="1167548"> </a>
+<li>Top line (red): Peak Load Threshold
+
+<a name="1167549"> </a>
+</li>
+<li>Middle line (yellow): Gradual Redirection Threshold
+<a name="1167550"> </a>
+</li>
+<li>Bottom line (green): ColdFusion Server Load
+</li>
+</ul>
+</li>
+</ol>
+<a name="1088413"></a>
+ 
+<H3>Adjusting load threshold settings graphically</H3>
+<p>You can view and set threshold settings relative to one another using the Server Load dialog's visual display. To set or change threshold settings using this method, you use your mouse to drag the Peak and Gradual Redirection threshold lines to their desired settings instead of entering numeric values in fields, as you do in the server Properties dialog box. </p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure load threshold settings using the Server Load dialog box:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Select one of the servers in your cluster and choose Load from the Monitor menu. Alternatively, you can right mouse click the server you've selected and select Monitor&gt;Load.
+
+
+<p>The Server Load dialog box appears.
+</p><p><img src="../images/Server_load_dialog.gif">
+
+
+
+</p></li>
+<li>Use your mouse to drag the Peak load threshold line (Red) up or down to reset the server's Peak load threshold. 
+
+<p>As you move the line, the load threshold percentage changes.
+</p></li>
+<li>Enable gradual redirection by selecting the Gradual Redirection checkbox.
+
+</li>
+<li>Drag the Gradual Redirection load threshold line (Yellow) to adjust it accordingly.
+
+</li>
+<li>Close the dialog box.
+
+<p>The load threshold settings you configured are now in effect.
+</p></li>
+</ol>
+<a name="1118461"></a>
+ 
+<H2>Configuring session-aware load balancing</H2>
+<p>Managing your Web application's state in a clustered environment can be challenging. ColdFusion application, session, and server variables that get stored in memory or a repository during a user session are not persisted by default during a server redirection. Consequently, the Web server cannot maintain the application's state correctly. </p><p>To overcome this problem, ClusterCATS provides a session-aware load balancing feature that lets you maintain application state in a clustered environment. </p><a name="1169726"></a>
+ 
+<H3>Using session variables and session-aware load balancing</H3>
+<p>One method for maintaining your ColdFusion Web application's state is to create session variables that get stored on the Web server. For an e-commerce Web site that is clustered, it's vital that users do not get redirected to another server in the middle of their session. If they would, their online transactions would be interrupted, making for an unsuccessful and frustrating user experience. </p><p>To ensure that users are not redirected from the server on which they start their session, ClusterCATS provides a built-in feature for enabling session-aware load balancing. Sometimes referred to as &quot;sticky&quot; server, session-aware load balancing guarantees that users won't get bumped from the server on which they start their session until the session is complete, regardless of the load thresholds that have been defined for that server.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Session-aware load balancing may not work if you've used absolute 
+hyperlinks in an applicati. Absolute hyperlinks route the HTTP 
+request back to the cluster entry point and redirect according to the 
+current load threshold without regard to the state of the requesting client. 
+To avoid this inadvertent loss of state, be sure to use only relative linking 
+in your applicati.
+</td>
+</tr>
+</table>
+</div>
+<br>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure session-aware load balancing:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer.
+
+
+</li>
+<li>Select the cluster for which you want to enable session-aware load balancing and choose Administration from the Configure menu. Alternatively, you can right click on the cluster and select Configure &gt; Administration. 
+
+<p>The Cluster Properties dialog box appears.
+</p><p><img src="../images/Server_admin_tab.gif">
+
+
+
+</p></li>
+<li>Select the Session State Management check box.
+
+</li>
+<li>Click OK to apply this configuration.
+
+</li>
+</ol>
+<a name="1174146"></a>
+ 
+<H2>Configuring ColdFusion probes</H2>
+<p>ClusterCATS load balances and provides failover support for your ColdFusion applications in two ways. First, it automatically interprets and reacts to the load metric that the ColdFusion Server generates. Second, ClusterCATS lets you create ColdFusion application probes that periodically test the health and operation of the sites that the ColdFusion Server processes. </p><p>The probe is a high availability feature that verifies that the ColdFusion Server is running properly on your clustered servers. It periodically tests a specific ColdFusion URL over periodic intervals and verifies its validity against a user-defined string contained in the returned page.</p><p>If the validation test succeeds, inbound HTTP requests will continue to be sent to the server for which a probe exists. However, if the test fails (the URL fails, times out, or does not return the user-specified string in the page accessed), ClusterCATS restricts the server and redirects requests to other available servers in the cluster. The restricted server will become available as soon as the probe returns a valid value.</p><p>Additionally, if the ColdFusion Server ever hangs or fails, ClusterCATS automatically attempts to recover the failed service. Once the ColdFusion service is recovered, the probe will automatically restart the ColdFusion Server and send HTTP traffic to the server.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure a ColdFusion probe:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select the server for which you want to create a ColdFusion probe.
+
+
+</li>
+<li>Choose New Monitor from the Server menu. Alternatively, you can right-click the server and select New Monitor. 
+
+<p>The New Monitor dialog box appears in front of the Probe Properties dialog box.
+</p><p><img src="../images/Probe_new_monitor.gif">
+
+
+
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>The ColdFusion service must be running on your server in order for 
+the probe you are creating to work.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Enter a name you want to assign to this probe's monitor in the Name field on the New Monitor dialog box and click OK.
+
+</li>
+<li>Click the New Probe button <img src="../images/Probe_create_button.gif">
+
+
+on the Probe Properties dialog box.
+
+<p>The New Probe dialog box appears.
+</p><p><img src="../images/New_cfprobe.gif">
+
+
+
+</p></li>
+<li>Click OK.
+
+<p>The ColdFusion Application Probe settings dialog box appears.
+</p><p><img src="../images/Probe_properties_60.gif">
+
+
+
+</p></li>
+<li>Leave the Web Server, Pathname, and Working Directory fields as they are unless you installed ColdFusion to a directory other than the default installation directory.
+
+</li>
+<li>In the Startup Parameters field, replace <code>&lt;URL&gt;</code> with the actual URL of the site you want the probe to access, and replace <code>&lt;success string&gt;</code> with a text string that appears on a page on the site you are probing.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Be sure to include a space between the URL and the success string 
+that you specify. The success string must be enclosed in quotation 
+marks.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Also in the Startup Parameter field, do not modify the RESTART explicit parameter if you want the probe to automatically restart the ColdFusion Server on detecting a failure. However, remove it if you do not want ClusterCATS to be able to automatically restart the ColdFusion Server upon detecting a failure.
+
+</li>
+<li>If you want longer intervals for how often the probe checks the ColdFusion Server and for how much time can pass without a response from the ColdFusion Server before a failure is registered, change the Timeout and Frequency values to longer durations.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>Don't set the Timeout and Frequency interval values too low (below 
+60 seconds) because if the intervals are extremely narrow, they may 
+cause the ColdFusion Server to reboot inadvertently (due to network 
+congestion, for example) rather than detecting an actual failure on 
+the ColdFusion Server. Allaire recommends you set your Timeout 
+and Frequency intervals to 120 seconds.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Click Register to create the probe.
+
+</li>
+<li>Click Close on all open dialog boxes.
+
+<p>Icons for the monitor and probe appear under the Monitor Manager in the 
+ClusterCATS Explorer.
+</p><p><img src="../images/Probe_created.gif">
+
+
+
+</p></li>
+</ol>
+<a name="1200328"></a>
+ 
+<H2>Integrating ClusterCATS with load balancing devices</H2>
+<p>You can configure ClusterCATS to work in conjunction with a third-party hardware load balancing device or load balancing software product to provide comprehensive load balancing and failover support for your server clusters. Allaire has worked closely with Cisco to enable ClusterCATS integration with LocalDirector.</p><p>Combining ClusterCATS and LocalDirector provides a powerful ColdFusion-aware load balancing solution that LocalDirector cannot provide without ClusterCATS. LocalDirector by itself cannot accurately detect how busy a ColdFusion Server is nor can it redirect load from failed or busy servers to available servers. It, therefore, would continue to send new requests to a server even if ColdFusion is too busy to handle additional requests or if the server has failed.</p><p>ClusterCATS can detect if a ColdFusion Server is too busy to handle additional requests because it can interpret the ColdFusion load metric. It can also monitor the operation of the ColdFusion Server on a periodic basis using ColdFusion probes. Consequently, its built-in intelligence can override the regular distribution sequence of the router, and it can redirect new requests to other available servers in the cluster. So, it not only load balances, but it also provides important ColdFusion Server availability data as well.</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>When using ClusterCATS and LocalDirector together, do not use round-
+robin DNS. Also, it's best to turn off the Gradual Redirection load 
+threshold when using these two load balancing technologies together. 
+See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1088348">&quot;Configuring server load thresholds&quot;</a> for turning off 
+gradual redirection.
+</td>
+</tr>
+</table>
+</div>
+<br><p>This section describes the following procedures:</p><ul>
+<a name="1204341"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1185788">&quot;To integrate ClusterCATS with Cisco LocalDirector&quot;</a>
+
+<a name="1204346"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1185550">&quot;To integrate ClusterCATS with a load balancing device other than LocalDirector&quot;</a>
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To integrate ClusterCATS with Cisco LocalDirector
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Make sure you are using LocalDirector version 3.1.3 or later.
+
+
+<p>LocalDirector versions prior to version 3.1.3 don't support Dynamic Feedback 
+Protocol.
+</p></li>
+<li>Create a virtual server (www.website.com) in LocalDirector that corresponds to the cluster.
+
+</li>
+<li>In LocalDirector, bind explicit (real) servers participating in the cluster with the virtual server.
+
+</li>
+<li>Use the Predictor command in LocalDirector to configure the virtual server to use the Weighted load balancing option.
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>See the Cisco LocalDirector documentation that came with the 
+product for detailed procedures about configuring Cisco 
+LocalDirector.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Use LocalDirector's Dynamic Feedback Protocol (DFP) command to specify the IP addresses of each explicit server (cluster member) and the port number each server will use to listen for DFP requests from the LocalDirector.
+
+</li>
+<li>Open the ClusterCATS Explorer and select the cluster that you want to integrate with LocalDirector.
+
+</li>
+<li>Choose Properties from the Cluster menu or choose Administration from the Configure menu. Both menu selections display the Properties dialog box.
+
+<p>The Properties dialog box appears.
+</p><p><img src="../images/Properties_general_tab.gif">
+
+
+
+</p></li>
+<li>Select the Load Balance tab and choose Cisco LocalDirector from the Load Balancing Product drop-down list.
+
+<p><img src="../images/Load_balance_tab.gif">
+
+
+
+</p></li>
+<li>Enter the name of the virtual server (www.website.com) you created in step 2 in the Website Alias field.
+
+</li>
+<li>Enter the IP address of the LocalDirector box in the LocalDirector IP Address field.
+
+</li>
+<li>Enter the port number on which each cluster member's agents should listen for incoming LocalDirector connection requests in the DFP Agent Listen Port field.
+
+<p>Be sure to configure each cluster member to listen on the same port.
+</p></li>
+<li>Enter how frequently you want ClusterCATS to update the LocalDirector with availability data in the Update Frequency field.
+
+<p>The default interval is 30 seconds. You can lengthen it to 120 seconds, but do not 
+reduce the interval below 30 seconds.
+</p></li>
+<li>Enter the port number on which each cluster member listens for HTTP requests in the HTTP Port field. (Enter 0 if not applicable.)
+
+</li>
+<li>Enter the port number on which each cluster member listens for secured HTTP requests in the HTTPS Port field. (Enter 0 if not applicable.)
+
+</li>
+<li>Enter the same Bind ID specified for the explicit (real) servers on the LocalDirector box in the Bind ID field.
+
+<p>In order for the ClusterCATS/LocalDirector integration to work as intended, the 
+server name, port number, and bind ID combination must be the same on this 
+ClusterCATS Load Balance tab as it is on the LocalDirector box.
+</p></li>
+<li>Click OK.
+
+</li>
+</ol>
+<p>Once configured, ClusterCATS automatically sets the state of each cluster member to Passive and provides the load balancing and high availability data it acquires to the LocalDirector. The LocalDirector then actively manages HTTP traffic across the cluster. If you want ClusterCATS to load balance as well, you must go into each cluster member's Properties page and reset its state to Active. See <a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm#1184859">&quot;Changing a server's state&quot;</a>.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To integrate ClusterCATS with a load balancing device other than LocalDirector
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Configure the load balancing device or software product as recommended by the manufacturer.
+
+
+</li>
+<li>Open the ClusterCATS Explorer and select the cluster that you want to integrate with the load balancing device or software product.
+
+</li>
+<li>Choose Load from the Configure menu. Alternatively, you can right-click the cluster and select Configure&gt;Load.
+
+<p>The Properties dialog box appears with the Load Balance tab active.
+</p><p><img src="../images/Load_balance_tab_BT.gif">
+
+
+
+</p><p>The Bright Tiger selection that appears in the Load Balancing Product drop-down 
+list indicates that ClusterCATS will actively load balance HTTP traffic across the 
+cluster rather than the third-party device or software. 
+</p></li>
+<li>Enter the name of the Web site in the Site Alias field and click OK.
+
+<p>The load balancing device will now actively distribute load to the Web servers 
+based on packet flow while ClusterCATS monitors ColdFusion load and 
+availability. If ClusterCATS detects that the ColdFusion Server is becoming 
+overloaded, it will supersede the load balancing device and redirect traffic 
+accordingly.
+</p></li>
+</ol>
+<a name="1088330"></a>
+ 
+<H2>Configuring administrator alarm notifications</H2>
+<p>The ClusterCATS alarm notification feature provides instant feedback about critical events that take place within a cluster. Once an event triggers an alarm, ClusterCATS notifies you by e-mail. </p><p>You can configure alarm notifications to warn you about:</p><ul>
+<a name="1120514"> </a>
+<li>Disk Failure
+
+<a name="1120515"> </a>
+</li>
+<li>HTTP Server Failure
+<a name="1120516"> </a>
+</li>
+<li>Server Busy Warning
+<a name="1120517"> </a>
+</li>
+<li>Server Unreachable
+<a name="1120518"> </a>
+</li>
+<li>Web Server Failover
+<a name="1179252"> </a>
+</li>
+<li>ColdFusion Probe Failure
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure an alarm notification
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select the cluster to which you want to add an alarm. 
+
+
+</li>
+<li>Choose Alarm Notification from the Configure menu. Alternatively, you can right-click the cluster and select Configure &gt; Alarm Notification.
+
+<p>The Alarm Notification dialog box appears.
+</p><p><img src="../images/Alarm_notification_2.gif">
+
+
+
+</p></li>
+<li>Select the event for which you want to trigger an alarm and enter the e-mail address of the person you want to receive e-mail notification of the event.
+
+</li>
+<li>Repeat step 3 for each event you want to be notified about. 
+
+<p>Click Propagate to send all notifications to the same e-mail address.
+</p></li>
+<li>Enter the name of the default SMTP mail server to which your mail is delivered in the Default SMTP Host field.
+
+</li>
+<li>Click OK.
+
+<p><strong></strong>If an event you chose occurs, ClusterCATS sends an e-mail message to the 
+designated person. The following table explains the notification schedule for each 
+event. </p><p>
+<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr align="left"><th bgcolor=ccCCcc colspan=2 rowspan=1><font face="arial,helvetica" size=-1>
+<strong>Alarm Event Notification Schedule &nbsp;</strong>
+</th></tr>
+<tr align="left"><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Event type</strong>
+</th><th bgcolor=ccCCcc align="left"><font face="arial,helvetica" size=-1>
+<strong>Notification occurs...</strong>
+</th></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Disk Failure
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Immediately
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+HTTP Server Failure
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Immediately
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server Busy Warning
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Every 24 hours
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Server Unreachable
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Immediately
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+Web Server Failover
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Immediately
+</td></tr>
+<tr valign="top"><td valign="top"><font face="arial,helvetica" size=-1>
+ColdFusion Probe Failure
+</td><td valign="top"><font face="arial,helvetica" size=-1>
+Immediately
+</td></tr>
+
+</table>
+
+</div>
+
+</p></li>
+</ol>
+<a name="1025657"></a>
+ 
+<H2>Configuring administration e-mail support </H2>
+<p>The ClusterCATS administration e-mail support feature sends vital statistics about your cluster to designated e-mail accounts in your organization. You can set up the following types of administration e-mail support:</p><ul>
+<a name="1122527"> </a>
+<li>Report e-mail<strong></strong>
+
+<p>Lets you know each day how your server clusters are functioning. Daily e-mail 
+reports include the following information:
+</p><ul>
+<a name="1167980"> </a>
+<li>Cluster name and name and IP address of each server in the cluster
+
+<a name="1167981"> </a>
+</li>
+<li>Files -- total number of files in the Web servers root directory
+<a name="1167982"> </a>
+</li>
+<li>Disk space -- total amount of disk space used and remaining on the system drive that contains the Web server's root directory
+<a name="1167983"> </a>
+</li>
+<li>Log files -- size of the log files
+</li>
+</ul>
+<a name="1122528"> </a>
+</li>
+<li>Support e-mail
+<p>Sends an automatic e-mail nightly to Allaire's Technical Support team that 
+contains basic configuration information about your cluster. This information 
+enables Allaire to provide optimal support by understanding your environment 
+when you call a Technical Support representative. Support e-mail contains the 
+following information:
+</p><ul>
+<a name="1025664"> </a>
+<li>Cluster name and the number of servers the cluster contains
+
+<a name="1025665"> </a>
+</li>
+<li>Statistics for each server, including failover, redirection, and database statistics
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To configure administration e-mail support options:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select a cluster icon in the ClusterCATS Explorer window. 
+
+
+</li>
+<li>Choose Support from the Configure menu. Alternatively, you can right-click the cluster and choose Configure &gt; Support. 
+
+<p>The Support dialog box appears.
+</p><p><img src="../images/Email_support_dialog.gif">
+
+
+
+</p></li>
+<li>Enter the name of the server through which outgoing e-mail will be sent in the SMTP Gateway field.
+
+</li>
+<li>Enter in the Support E-mail field the e-mail address of the person at your organization that should receive a copy of the e-mail that is sent nightly to Allaire's Technical Support.
+
+<p>If more than one person should receive the e-mail, separate the e-mail addresses 
+with commas.
+</p></li>
+<li>Enter in the Report e-mail field the e-mail address of the person at your organization that should receive daily reports about your clusters.
+
+<p>Again, if more than one person should receive the e-mail, separate the e-mail 
+addresses with commas.
+</p></li>
+<li>Click OK.
+
+</li>
+</ol>
+<a name="1168806"></a>
+ 
+<H2>Configuring cluster administration security</H2>
+<p>When you enable the ClusterCATS administration security for a specific cluster, only authorized users are able to access and administer that cluster using their ClusterCATS Explorer. ClusterCATS provides three administration security settings for securing your server cluster environment:</p><ul>
+<a name="1168784"> </a>
+<li>Disabled Authentication
+
+<p>This is the default setting. It does not provide any security challenge, and 
+therefore anyone can access the server cluster with a ClusterCATS Explorer and 
+modify your cluster environment.
+</p><a name="1168680"> </a>
+</li>
+<li>Local User Authentication
+<p>This is the recommended security setting for most clusters residing in small to 
+mid-sized organizations that have only one or few administrators. This setting 
+provides a security challenge for anyone accessing the server. The 
+authentication is based on administrative privileges that have been defined for 
+specific users on each server in the cluster.
+</p><a name="1168682"> </a>
+</li>
+<li>Windows NT Domain Authentication (Windows NT Only)
+<p>You may want to use this security setting if your organization is fairly large and 
+contains many distributed administrator groups that need to access your server 
+clusters. To use this setting, you must define your global administrators' group 
+in the form &quot;BT_<em>clustername</em>&quot;, where clustername is the exact name of the 
+cluster you created with the ClusterCATS Explorer. The global administrators 
+group must exist within the same domain as the clustered servers.
+</p></li>
+</ul>
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>On UNIX platforms, ClusterCATS provides only two administration 
+security modes -- Disabled and Local User authentication. See 
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0613.htm#1153884">&quot;Configuring administrator authentication&quot;</a> to configure 
+administration security using the ClusterCATS Web Explorer.
+</td>
+</tr>
+</table>
+</div>
+<br><p>The following sections describe how to enable the type of authentication most appropriate for your environment.</p><ul>
+<a name="1125241"> </a>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1125248">&quot;Configuring local-user authentication&quot;</a>
+
+<a name="1125245"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1123252">&quot;Configuring Windows NT domain authentication&quot;</a>
+<a name="1125274"> </a>
+</li>
+<li><a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0611.htm#1125148">&quot;Disabling authentication&quot;</a>
+</li>
+</ul>
+<a name="1125248"></a>
+ 
+<H3>Configuring local-user authentication</H3>
+<p>Local-User authentication lets ClusterCATS authenticate specific users on a per-server basis. Local users of a server must have an account on the server where the Web server resides. </p><p>For example, if a cluster includes several Web servers and you only have an account on one, then you can only administer that server.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable local-user authentication:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Create a user account on each server within your cluster for each administrator that you want to be able to administer the servers using the ClusterCATS Explorer. 
+
+
+<p>If your cluster members are NT servers, use the Windows User Manager utility to 
+create your user accounts.
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>If only one person will administer all cluster members in the cluster, 
+be sure to create the same user account (identical user name and 
+password) on each cluster member. The ClusterCATS Explorer will 
+consequently prompt you only once for a user name and password. 
+However, if multiple, different administrator accounts are created on 
+each server, ClusterCATS Explorer will display user name and 
+password prompts upon each attempt to access the servers from the 
+ClusterCATS Explorer.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+<li>Open the ClusterCATS Explorer and select a cluster icon.
+
+</li>
+<li>Choose Administration from the Configure menu or choose Properties from the Cluster menu. Both menu selections display the Properties dialog box. Alternatively, you can right-click the cluster and select Configure&gt;Administration.
+
+<p>The Properties dialog box appears.
+</p><p><img src="../images/Server_admin_tab.gif">
+
+
+
+</p></li>
+<li>Within the Authentication area, select Local User from the Mode drop-down box.
+
+</li>
+<li>Enter a user name and password defined for a valid account and click OK. 
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ClusterCATS requires you to enter a valid user name and password 
+after selecting the type of authentication you are using so that you 
+don't inadvertently lock yourself out of the cluster.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<p>Local User Authentication for the selected cluster is enabled. Only administrators who have accounts on each secured server can access and administer the cluster members using their ClusterCATS Explorer.</p><a name="1123252"></a>
+ 
+<H3>Configuring Windows NT domain authentication</H3>
+<p>Windows NT Domain authentication lets ClusterCATS authenticate administrators that have been added to a Windows NT domain user group. </p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>This authentication mode can only be used on NT servers.
+</td>
+</tr>
+</table>
+</div>
+<br><p>Before you can enable NT domain authentication on any specific cluster, you must create an NT global user group within the domain you want to secure. You can do this using the standard Windows NT User Manager for Domains utility. After you create a user group, add users to it, and enable the NT Domain authentication mode from the ClusterCATS Explorer, all users you add to that group are automatically authenticated to view and change the cluster. All servers in the cluster must reside in the same Windows NT domain unless a trusted relationship is set up between two or more domains.</p><p>A global group must exist in the domain from which the ClusterCATS Explorer is executed. Cluster members in other domains need only the trust relationship. ClusterCATS Explorer determines what servers exist in which NT domain by communicating with any Windows NT domain controller for the domain. The list of servers that exist in the Windows NT domain can be viewed by looking at the Network Neighborhood Windows NT utility. If no trust relationship exists, then cluster members must be from the same Windows NT domain.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To enable Windows NT domain authentication:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Click Start&gt;Programs &gt; Administrative Tools &gt; User Manager for Domains to open the User Manager for Domains utility. 
+
+
+</li>
+<li>Choose New Global Group from the User menu. 
+
+<p>The New Global Group dialog box appears.
+</p></li>
+<li>Enter a name and description for the group in the applicable fields. 
+
+<p>Your global group name must be BT_<em>clustername</em>, where <em>clustername</em> is the name 
+of your ClusterCATS cluster.
+</p></li>
+<li>Click Add to add the administrators you want to have privileges to your global group.
+
+<p>The Add Users and Groups dialog box appears.
+</p></li>
+<li>Select the domain from the List Names drop-down box. 
+
+</li>
+<li>Select the users you want to add to the group and click Add.
+
+</li>
+<li>Click OK in all open dialog boxes to apply your additions and to close the User Manager for Domains utility.
+
+</li>
+<li>Open the ClusterCATS Explorer and select the cluster for which you want to configure authentication.
+
+</li>
+<li>Choose Administration from the Configure menu or choose Properties from the Cluster menu. Both menu selections display the Properties dialog box. Alternatively, you can right-click the cluster and select Configure&gt;Administration.
+
+<p>The Properties dialog box appears.
+</p><p><img src="../images/Server_admin_tab.gif">
+
+
+
+</p></li>
+<li>Within the Authentication area, select NT Domain from the Mode drop-down box.
+
+</li>
+<li>Enter a valid user name and password that participates in the domain and click OK. 
+
+<div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>ClusterCATS requires you to enter a valid user name and password 
+after selecting the type of authentication you are using so that you 
+don't inadvertently lock yourself out of the cluster.
+</td>
+</tr>
+</table>
+</div>
+<br></li>
+</ol>
+<p>Windows NT Domain authentication for the selected cluster is now enabled. Only users who you added to the Global User Group of the domain can use ClusterCATS Explorer to view and administer clusters using the ClusterCATS Explorer.</p><a name="1125148"></a>
+ 
+<H3>Disabling authentication</H3>
+<p>Disabled authentication lets any user use the ClusterCATS Explorer to create, configure, or administer clusters. Once the cluster is added, administrators have unrestricted access to the content in that cluster. Therefore, you should only choose this mode if security is not a significant concern in your environment.</p><p>By default, ClusterCATS administrator security is disabled. However, if you've previously configured one of the other security modes for your cluster and now want to turn it off, perform the following procedure.</p>
+<div class="proc">
+<table>
+<tr valign="top">
+<td width="25"><img src="../../images/icons/doit.gif" WIDTH=25 HEIGHT=28  
+align="middle" border="0" alt="Note"></td>
+<td class="proc">To disable authentication:
+</td>
+</tr>
+</table>
+</div><ol>
+<li class="first">Open the ClusterCATS Explorer and select a cluster icon in the left pane.
+
+
+</li>
+<li>Choose Administration from the Configure menu or choose Properties from the Cluster menu. Both menu selections display the Properties dialog box. Alternatively, you can right-click the cluster and select Configure&gt;Administration.
+
+<p>The Properties dialog box appears.
+</p><p><img src="../images/Server_admin_tab.gif">
+
+
+
+</p></li>
+<li>Within the Authentication area, select Disabled from the Mode drop-down box.
+
+</li>
+<li>Click OK.
+
+<p>ClusterCATS administrator authentication is now disabled for the selected cluster.
+</p></li>
+</ol>
+
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0610.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin06.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../06_Creating_Scalable_and_Highly_Available_Web_Sites/admin0612.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 14:02:36 -->
+</body>
+</html>

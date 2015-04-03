@@ -1,0 +1,198 @@
+<html>
+<head>
+<SCRIPT language="Javascript">
+
+var DocRemote = 0;
+
+function makeRemote(){
+
+	if(DocRemote){
+		if(DocRemote.closed){
+			DocRemote = 0;
+			makeRemote();
+		}else{
+			DocRemote.focus();
+		}
+	}else{
+		DocRemote = window.open('../../search.cfm', 
+					    'Search', 
+					    'scrollbars,resizable,width=510,height=300');
+    	}
+}
+
+</SCRIPT>
+<script language="JavaScript">
+<!--Hide JavaScript
+
+   if (navigator.appName == "Netscape"){
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ns.css" TYPE="text/css">');
+      }
+   else{
+      document.write('<LINK REL=STYLESHEET HREF="../../allaire_ie.css" TYPE="text/css">');
+   }
+//-->
+</script>
+<title>Managing Custom Tags</title>
+</head>
+<body>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td width="90%" align="left" valign="bottom" nowrap><em>Developing Web Applications with ColdFusion</em>
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up One Level" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+<tr align="left" valign="top">
+<td colspan="2">
+<hr>
+<b>Chapter 7	:&nbsp;&nbsp;Reusing Code</b>
+</td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+
+<br>
+<a name="1020937"></a>
+ <H1>Managing Custom Tags</H1>
+
+
+
+<p>If you deploy custom tags in a multi-developer environment or distribute your tags publicly, you may want to make use of additional ColdFusion capabilities:</p><ul>
+<li>An advanced invocation syntax to resolve possible name conflicts
+
+</li>
+<li>Advanced security
+</li>
+<li>Template encoding
+</li>
+</ul>
+<a name="1033079"></a>
+ 
+<H2>Resolving file name conflicts</H2>
+<p>To avoid errors caused by duplicate custom tag file names, use the CFMODULE tag in the calling template. Note that only one of the required attributes can be used in a given instance of the tag.</p><p><div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>CFMODULE Attributes&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Attribute</strong>
+</th><th align="left">
+<strong>Description &nbsp;</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+Template
+</td><td valign="top">
+Required if the NAME attribute is not used. Specifies a relative path to the cfm file. Same as TEMPLATE attribute in CFINCLUDE. Note that the directory must have a mapping defined in ColdFusion Administrator
+
+Example: <code>&lt;CFMODULE TEMPLATE="../MyTag.cfm"&gt;</code> identifies a custom tag file in the parent directory.
+</td></tr>
+<tr valign="top"><td valign="top">
+Name 
+</td><td valign="top">
+Required if Template attribute is not used. Use period -separated names to uniquely identify a sub-directory under the Custom Tags root directory.
+
+Example: <code>&lt;CFMODULE NAME="Allaire.Alive.GetUserOptions"&gt;</code> identifies the file <code>GetUserOptions.cfm</code> in <code>Custom Tags\Allaire.Alive</code> directory under the ColdFusion root directory.
+</td></tr>
+<tr valign="top"><td valign="top">
+Attributes
+</td><td valign="top">
+Optional. You can list the custom tag's attributes.
+</td></tr>
+
+</table>
+</div>
+</p><a name="1020981"></a>
+ 
+<H2>Securing Custom Tags</H2>
+<p>ColdFusion's security framework enables you to selectively restrict access to individual tags or to tag directories. This can be an important safeguard in team development.</p><p>To avoid name conflicts, you can register custom tags as a security resource on the ColdFusion Administrator Advanced Security page. See <a href="../../Administering_ColdFusion_Server/contents.htm"><em>Administering ColdFusion Server</em></a> for details.</p><a name="1020995"></a>
+ 
+<H2>Encoding Custom Tags</H2>
+<p>You can use the command-line utility <code>cfencode</code> to encode any ColdFusion application template. By default, the utility is installed in the <code>/cfusion/bin</code> directory. It is especially useful for securing custom tag code before distributing it.</p><p><code>cfencode</code> uses the following syntax:</p><pre>cfencode <em>infile outfile </em>[/r /q] [/h "message"] /v"2"
+</pre><p>The following options are supported:<div> 
+<table border="1" cellpadding="3" cellspacing="0">
+<caption></caption>
+<tr valign="top"><th colspan=2 rowspan=1>
+<strong>cfencode Command Line Options&nbsp;</strong>
+</th></tr>
+<tr valign="top"><th align="left">
+<strong>Option</strong>
+</th><th align="left">
+<strong>Description</strong>
+</th></tr>
+<tr valign="top"><td valign="top">
+input file
+</td><td valign="top">
+Name of the file you want to encode. cfencode will not process an encoded file.
+</td></tr>
+<tr valign="top"><td valign="top">
+output file
+</td><td valign="top">
+Path and filename of the output file. 
+
+<strong>Warning</strong>: If you don't specify an output file name, a warning message asks if you want to continue, in which case the encoded file will overwrite the source file.
+</td></tr>
+<tr valign="top"><td valign="top">
+/r
+</td><td valign="top">
+Recursive, when used with wildcards, recurses through subdirectories to encode files. 
+</td></tr>
+<tr valign="top"><td valign="top">
+/q
+</td><td valign="top">
+Suppresses warning messages.
+</td></tr>
+<tr valign="top"><td valign="top">
+/h
+</td><td valign="top">
+Header, allows custom header to be written to the top of the encoded file(s). 
+</td></tr>
+<tr valign="top"><td valign="top">
+/v
+</td><td valign="top">
+Required parameter that allows encoding using a specified version number. Use "1" for pages you want to be able to run on ColdFusion 3.x. Use "2" for pages you want to run strictly on ColdFusion 4.0 and later. 
+</td></tr>
+
+</table>
+</div>
+</p><div>
+<table>
+<tr valign="top">
+<td width="30"><strong>Note	</strong></td>
+<td>While it is possible to encode binary files with <code>cfencode</code>, it is not 
+recommended.
+</td>
+</tr>
+</table>
+</div>
+<br><p></p>
+<br>
+
+<div class="navigation">
+<table>
+<tr valign="bottom">
+<td class="copy" width="90%" align="left" valign="bottom" nowrap>
+Copyright &#169; 1999, Allaire Corporation. All rights reserved.
+</td>
+<td align="right" width="10%" valign="bottom" nowrap>
+<a href="../07_Reusing_Code/dwa07_11.htm"><IMG alt="Previous" border="0" height="16" src="../../images/icons/back.gif" width="16"></a>
+<a href="../07_Reusing_Code/dwa07.htm"><IMG alt="Up" border="0" height="16" src="../../images/icons/uplevel.gif" width="16"></A>
+<a href="../08_Debugging_and_Error_Handling/dwa08.htm"><IMG alt="Next" border="0" height="16" src="../../images/icons/next.gif" width="16"></a>
+<a href="../../dochome.htm"><IMG alt="Home" border="0" height="16" src="../../images/icons/home.gif" width="16"></a>
+<a href="javascript: makeRemote();"><IMG alt="Search" border="0" height="16" src="../../images/icons/search.gif" width="16"></a>
+</td>
+</tr>
+</table>
+</div>
+<!-- Last updated: 10/27/99 18:19:46 -->
+</body>
+</html>
